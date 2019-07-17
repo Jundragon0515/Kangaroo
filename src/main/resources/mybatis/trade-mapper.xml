@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="GoodsTradeDAO">
+
+<!-- 	<resultMap type="kh.spring.dto.TempDTO" id="TempDTO">
+		<result property="num" column="seq"/>
+		<result property="id" column="name"/>
+		<result property="contents" column="message"/>
+	</resultMap> -->
+
+<!-- 	<insert id="insert">
+		insert into message values(message_seq.nextval,#{name},#{message}) getter로    getName, getMessage를 호출 
+	</insert> -->
+	
+<!-- 	<delete id="delete">
+		delete from message where seq=#{seq}
+	</delete> -->
+	
+	<select id="selectList" parameterType="map" resultType="kh.spring.dto.GoodsTradeDTO">
+		select * from (select row_number() over(order by no desc) as rown, used_transaction_board.* from used_transaction_board) where rown between #{start} and #{end}
+	</select>
+	
+	<select id="selectListPrice" parameterType="map" resultType="kh.spring.dto.GoodsTradeDTO">
+		select * from (select row_number() over(order by price #{order}) as rown, used_transaction_board.* from used_transaction_board) where rown between #{start} and #{end}
+	</select>
+	
+	<select id="selectListLowPrice" parameterType="map" resultType="kh.spring.dto.GoodsTradeDTO">
+		select * from (select row_number() over(order by price) as rown, used_transaction_board.* from used_transaction_board) where rown between #{start} and #{end}
+	</select>
+	
+	<select id="selectListHighPrice" parameterType="map" resultType="kh.spring.dto.GoodsTradeDTO">
+		select * from (select row_number() over(order by price desc) as rown, used_transaction_board.* from used_transaction_board) where rown between #{start} and #{end}
+	</select>
+	
+	<select id="recordTotalCount" resultType="int">
+		select count(*) from used_transaction_board
+	</select>
+	
+	<delete id="delete">
+		delete from used_transaction_board
+	</delete>
+
+<!-- 	<select id="select" resultType="kh.spring.dto.GoodsTradeDTO">
+		select * from message where seq=#{seq}
+	</select> -->
+	
+	
+<!-- 	<select id="selectBySeq" resultMap="TempDTO">
+		select * from message where seq=#{num}
+	</select> -->
+	
+<!-- 	<update id="update">  
+		update message set name=#{name} where seq= 61
+	</update> -->
+	
+
+
+
+
+</mapper>
