@@ -46,17 +46,14 @@
 .owl-nav {
 	top: 430px;
 }
-
 .nav_b {
 	border: 0px;
 	background: 000000;
 	width: 100%;
 }
-
 .nav_b:hover {
 	cursor: pointer;
 }
-
 .nav_ul * {
 	text-align: center;
 }
@@ -86,7 +83,7 @@
 			client.send("/app/time", {}, JSON.stringify({
 				end_dates : list
 			}));
-		}, 800);
+		}, 400);
 		
 		
 		$("#logout_na").on("click", function() {

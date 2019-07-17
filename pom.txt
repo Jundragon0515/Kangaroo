@@ -129,8 +129,8 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>com.oracle</groupId><!-- í´ë” -->
-			<artifactId>ojdbc6</artifactId><!-- ëŒ€ìƒì•„ì´ë”” -->
+			<groupId>com.oracle</groupId><!-- Æú´õ -->
+			<artifactId>ojdbc6</artifactId><!-- ´ë»ó¾ÆÀÌµð -->
 			<version>12.1.0.2</version>
 		</dependency>
 		<dependency>
@@ -201,7 +201,7 @@
 			<version>2.4</version>
 			<classifier>jdk15</classifier>
 		</dependency>
-		<!--smtp ì´ë©”ì¼ì¸ì¦ -->
+		<!--smtp ÀÌ¸ÞÀÏÀÎÁõ -->
 		<dependency>
 			<groupId>com.sun.mail</groupId>
 			<artifactId>smtp</artifactId>
