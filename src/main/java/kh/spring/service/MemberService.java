@@ -49,6 +49,8 @@ public class MemberService {
 			se.setAttribute("address2", m_info.getAddress2());
 			se.setAttribute("info",m_info);
 			se.setAttribute("logintype", m_info.getLogintype());
+			se.setAttribute("point", m_info.getPoint());
+			se.setAttribute("member_class", m_info.getMember_class());
 			return "Y";
 		}else {
 			return "N";
@@ -189,8 +191,10 @@ public class MemberService {
 			se.setAttribute("zipcode",m_info.getZipcode());
 			se.setAttribute("address1", m_info.getAddress1());
 			se.setAttribute("address2", m_info.getAddress2());
+			se.setAttribute("point", m_info.getPoint());
 			se.setAttribute("info",m_info);
 			se.setAttribute("logintype", m_info.getLogintype());
+			se.setAttribute("member_class", m_info.getMember_class());
 			mav.setViewName("redirect:/infoInsert");
 		}else {
 			MemberDTO m_info=me.selectById(email);
@@ -203,8 +207,10 @@ public class MemberService {
 				se.setAttribute("zipcode",m_info.getZipcode());
 				se.setAttribute("address1", m_info.getAddress1());
 				se.setAttribute("address2", m_info.getAddress2());
+				se.setAttribute("point", m_info.getPoint());
 				se.setAttribute("info",m_info);
 				se.setAttribute("logintype", m_info.getLogintype());
+				se.setAttribute("member_class", m_info.getMember_class());
 				mav.setViewName("redirect:/");							
 			}
 		}
@@ -248,6 +254,8 @@ public class MemberService {
 			se.setAttribute("address2", m_info.getAddress2());
 			se.setAttribute("info",m_info);
 			se.setAttribute("logintype", m_info.getLogintype());
+			se.setAttribute("point", m_info.getPoint());
+			se.setAttribute("member_class", m_info.getMember_class());
 			mav.setViewName("redirect:/infoInsert");
 		}else {
 			MemberDTO m_info=me.selectById(email);
@@ -260,8 +268,10 @@ public class MemberService {
 				se.setAttribute("zipcode",m_info.getZipcode());
 				se.setAttribute("address1", m_info.getAddress1());
 				se.setAttribute("address2", m_info.getAddress2());
+				se.setAttribute("point", m_info.getPoint());
 				se.setAttribute("info",m_info);
 				se.setAttribute("logintype", m_info.getLogintype());
+				se.setAttribute("member_class", m_info.getMember_class());
 				mav.setViewName("redirect:/");				
 			}
 		}

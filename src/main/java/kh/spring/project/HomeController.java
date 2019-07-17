@@ -101,17 +101,17 @@ public class HomeController {
 		return mes.idcheck(id);
 	}
 	@RequestMapping("/infoInsert")
-	public String sInsert() {
+	public String sInsert() {  // 정보입력으로
 		return "infoInsert";
 	}
 	@RequestMapping("/logout")
-	public String logout(HttpServletRequest request) {
+	public String logout(HttpServletRequest request) { //로그아웃
 		String old_url = request.getHeader("referer");
 		se.invalidate();
 		return "redirect:"+old_url;
 	}
 	@RequestMapping("/updateProc")
-	public String updateProc(MemberDTO dto) {
+	public String updateProc(MemberDTO dto) { //멤버 정보 업데이트
 		dto.setId(se.getAttribute("email").toString());
 		mes.updateProc(dto);
 		se.setAttribute("email", dto.getId());
@@ -123,5 +123,9 @@ public class HomeController {
 		se.setAttribute("info",dto);
 		se.setAttribute("logintype", dto.getLogintype());
 		return "redirect:/";
+	}
+	@RequestMapping("/goMyPage")
+	public String goMyPage() {
+		return "myPage";
 	}
 }
