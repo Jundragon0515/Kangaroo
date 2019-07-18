@@ -283,7 +283,8 @@
 										<ul class="dropdown-menu nav_ul">
 											<li class="nav-item "><a class="nav-link" href="/">쪽지</a></li>
 											<li class="nav-item "><a class="nav-link" href="/">장바구니</a></li>
-											<li class="nav-item"><a class="nav-link" href="/">마이페이지</a></li>
+											<li class="nav-item active"><a class="nav-link"
+												href="/goMyPage">마이페이지</a></li>
 											<li class="nav-item "><a class="nav-link"
 												href="/toPoint">포인트충전</a></li>
 											<li class="nav-item "><input type="button"
@@ -298,7 +299,8 @@
 										<ul class="dropdown-menu nav_ul">
 											<li class="nav-item "><a class="nav-link" href="/">쪽지</a></li>
 											<li class="nav-item "><a class="nav-link" href="/">장바구니</a></li>
-											<li class="nav-item"><a class="nav-link" href="/">마이페이지</a></li>
+											<li class="nav-item active"><a class="nav-link"
+												href="/goMyPage">마이페이지</a></li>
 											<li class="nav-item "><a class="nav-link"
 												href="/toPoint">포인트충전</a></li>
 											<li class="nav-item "><input type="button"
@@ -313,7 +315,8 @@
 										<ul class="dropdown-menu nav_ul">
 											<li class="nav-item "><a class="nav-link" href="/">쪽지</a></li>
 											<li class="nav-item "><a class="nav-link" href="/">장바구니</a></li>
-											<li class="nav-item"><a class="nav-link" href="/">마이페이지</a></li>
+											<li class="nav-item active"><a class="nav-link"
+												href="/goMyPage">마이페이지</a></li>
 											<li class="nav-item "><a class="nav-link"
 												href="/toPoint">포인트충전</a></li>
 											<li class="nav-item "><a class="nav-link" href="/logout">로그아웃</a></li>

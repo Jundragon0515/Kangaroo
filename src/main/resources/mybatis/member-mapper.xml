@@ -31,4 +31,7 @@ select point from members where id=#{value}
 <update id="setPoint"  > 
    UPDATE members SET point=${point} WHERE id=#{id}
 </update>
+<select id="getPw" resultType="String">
+select pw from members where id=#{value}
+</select>
 </mapper>

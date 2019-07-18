@@ -32,7 +32,7 @@ public class MemberDAO {
      }
      public int loginProc(String id,String pw) { // 로그인
         String shapw = encryptSHA256(pw);
-        HashMap<String,String> hash = new HashMap();
+        HashMap<String,String> hash = new HashMap<>();
         hash.put("id",id);
         hash.put("pw",shapw);
         System.out.println(shapw);
@@ -44,12 +44,12 @@ public class MemberDAO {
      }
      public int pwchange(String id,String pw) { // 비밀번호 변경
         String shapw = encryptSHA256(pw);
-        HashMap<String,String> hash = new HashMap();
+        HashMap<String,String> hash = new HashMap<>();
         hash.put("id", id);
         hash.put("pw", shapw);
         return sst.update("MemberDAO.updatePwChange", hash);
      }
- 	public String encryptSHA256(String str){
+ 	public static String encryptSHA256(String str){
 	       String sha = ""; 
 	       try{
 	          MessageDigest sh = MessageDigest.getInstance("SHA-256"); 
@@ -79,5 +79,8 @@ public class MemberDAO {
 		map.put("id", id);
 		map.put("point", Integer.toString(money));
  		return sst.update("MemberDAO.setPoint",map);
+ 	}
+ 	public String getPw(String id) {
+ 		return sst.selectOne("MemberDAO.getPw", id);
  	}
 }

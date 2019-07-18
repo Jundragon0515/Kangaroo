@@ -283,4 +283,12 @@ public class MemberService {
 	public void setPoint() {
 		se.setAttribute("point", me.getPoint((String)se.getAttribute("email")));
 	}
+	public int pwCk(String pw) {
+		String realPw=me.getPw((String)se.getAttribute("email"));
+		if(realPw.equals(MemberDAO.encryptSHA256(pw))) {
+			return 1; 
+		}else {
+			return -1;
+		}
+	}
 }

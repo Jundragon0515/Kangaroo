@@ -27,7 +27,9 @@ public class HomeController {
 	}
 	@RequestMapping("/toPoint")
 	public String toPoint() { //포인트 충전
-		mes.setPoint();
+		if(se.getAttribute("email")!=null) {
+			mes.setPoint();
+		}
 		return "point";
 	}
 	@RequestMapping("/login_main")
@@ -121,11 +123,20 @@ public class HomeController {
 		se.setAttribute("address1", dto.getAddress1());
 		se.setAttribute("address2", dto.getAddress2());
 		se.setAttribute("info",dto);
-		se.setAttribute("logintype", dto.getLogintype());
-		return "redirect:/";
+
+		return "redirect:/goMyPage";
 	}
 	@RequestMapping("/goMyPage")
-	public String goMyPage() {
+	public String goMyPage() { // 마이페이지로
 		return "myPage";
+	}
+	@RequestMapping("/pwCk")
+	@ResponseBody
+	public String pwCk(String pw) {
+		return Integer.toString(mes.pwCk(pw));
+	}
+	@RequestMapping("/change_Pw")
+	public String changePw() {
+		return "changePw";
 	}
 }

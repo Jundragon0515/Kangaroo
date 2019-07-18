@@ -90,29 +90,23 @@ loge {
 	width: 100%;
 	height: 100%;
 }
-
 select {
 	padding: 0px;
 }
-
 .btn-warning {
 	margin-top: 30px;
 	cursor: pointer;
 }
-
 .ui-datepicker-trigger {
 	cursor: pointer;
 }
-
 .hasDatepicker {
 	cursor: pointer;
 }
-
 #email, #adress {
 	margin: 0px;
 	padding: 0px;
 }
-
 #email>.btn {
 	margin: 0px;
 }
@@ -121,11 +115,9 @@ select {
 	background: 000000;
 	width: 100%;
 }
-
 .nav_b:hover {
 	cursor: pointer;
 }
-
 .nav_ul * {
 	text-align: center;
 }
@@ -138,6 +130,8 @@ select {
 			$(location).attr("href","login_main");
 		</c:when>
 		</c:choose>
+		
+		$("#phone").focus();
 		$("#phone").on("focusout", function() {
 			$("phonecheckvar").val("");
 			var phonetext = $("#phone").val();
@@ -186,7 +180,7 @@ select {
 		$("#back_btn").on("click", function() {
 			var back = confirm("마이페이지로 돌아갑니다.");
 			if (back) {
-				location.href = "/";/////////////////////////////////////////////////////////////////////////////////여기 차후 변경
+				location.href = "/goMyPage";/////////////////////////////////////////////////////////////////////////////////여기 차후 변경
 			}
 		});
 		$(document).submit(function() {
@@ -347,7 +341,8 @@ select {
 										<ul class="dropdown-menu nav_ul">
 											<li class="nav-item "><a class="nav-link" href="/">쪽지</a></li>
 											<li class="nav-item "><a class="nav-link" href="/">장바구니</a></li>
-											<li class="nav-item"><a class="nav-link" href="/">마이페이지</a></li>
+											<li class="nav-item active"><a class="nav-link"
+												href="/goMyPage">마이페이지</a></li>
 											<li class="nav-item "><a class="nav-link"
 												href="/toPoint">포인트충전</a></li>
 											<li class="nav-item "><input type="button"
@@ -362,7 +357,8 @@ select {
 										<ul class="dropdown-menu nav_ul">
 											<li class="nav-item "><a class="nav-link" href="/">쪽지</a></li>
 											<li class="nav-item "><a class="nav-link" href="/">장바구니</a></li>
-											<li class="nav-item"><a class="nav-link" href="/">마이페이지</a></li>
+											<li class="nav-item active"><a class="nav-link"
+												href="/goMyPage">마이페이지</a></li>
 											<li class="nav-item "><a class="nav-link"
 												href="/toPoint">포인트충전</a></li>
 											<li class="nav-item "><input type="button"
@@ -377,7 +373,8 @@ select {
 										<ul class="dropdown-menu nav_ul">
 											<li class="nav-item "><a class="nav-link" href="/">쪽지</a></li>
 											<li class="nav-item "><a class="nav-link" href="/">장바구니</a></li>
-											<li class="nav-item"><a class="nav-link" href="/">마이페이지</a></li>
+											<li class="nav-item active"><a class="nav-link"
+												href="/goMyPage">마이페이지</a></li>
 											<li class="nav-item "><a class="nav-link"
 												href="/toPoint">포인트충전</a></li>
 											<li class="nav-item "><a class="nav-link" href="/logout">로그아웃</a></li>
@@ -427,34 +424,7 @@ select {
 				</div>
 			</div>
 			<form id="login" action="updateProc" method="post">
-				<div class="row" id="main">
-					<div class="col-lg-1 col-md-1 col-sm-1"></div>
-					<div class="col-lg-9 col-md-9 col-sm-9 text_label ">
-						<label for="" class="mt-2 mb-1 mr-3"><strong>이 름</strong></label><span
-							id="namecheck"></span><input type="hidden"  id="namecheckvar"
-							name="namecheckvar">
-					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2"></div>
-				</div>
-				<div class="row" id="main">
-					<div class="col-lg-1 col-md-1 col-sm-1"></div>
-					<div class="col-lg-9 col-md-9 col-sm-9 text_label">
-						<input type="text" class="form-control" placeholder="6자 이내"
-							value="${name }"
-							name="name" id="name" required onkeyup="noSpaceForm(this);"
-							onchange="noSpaceForm(this);">
-					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2"></div>
-				</div>
-				<div class="row" id="main">
-					<div class="col-1"></div>
-
-					<div class="col-3"></div>
-				</div>
-
-				<div class="row" id="main">
-					<div class="col-1"></div>
-				</div>
+				
 				<div class="row" id="main">
 					<div class="col-lg-1 col-md-1 col-sm-1"></div>
 					<div class="col-lg-9 col-md-9 col-sm-9 text_label">
@@ -469,7 +439,7 @@ select {
 					<div class="col-lg-9 col-md-9 col-sm-9 text_label">
 						<input type="text" class="form-control"
 							placeholder="ex)010-9890-2814" value="${phone }" name="phone" id="phone" required
-							onkeyup="noSpaceForm(this);" onchange="noSpaceForm(this);">
+							onkeyup="noSpaceForm(this);"  onchange="noSpaceForm(this);">
 					</div>
 					<div class="col-lg-2 col-md-2 col-sm-2"></div>
 				</div>

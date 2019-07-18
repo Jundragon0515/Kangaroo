@@ -66,12 +66,12 @@
 		$(location).attr("href", "/login_main");
 		</c:when>
 		</c:choose>
+		$("#on").hide();
 		$("#logout_na").on("click",function() {
 							$.ajax({
 										url : "logout",
 										type : "get"
-									})
-									.done(
+									}).done(
 											function() {
 												var naver = open(
 														"https://nid.naver.com/nidlogin.logout?returl=https://www.naver.com/",
@@ -98,6 +98,33 @@
 								}, 1000);
 							});
 				});
+		$("#pwT").on("click",function(){
+			$("#off").hide();
+			$("#on").toggle();	
+		});
+		$("#infoInsert").on("click",function(){
+			$(location).attr("href","/infoInsert");
+		});
+		$("#pwCk").on("click",function(){
+			var pw = $("#pw").val();
+			$.ajax({
+				url:"pwCk",
+				data: {
+					pw:pw
+				}
+			}).done(function(resp){
+				if(resp=='1'){
+					alert("인증완료");
+					open("/change_Pw","_blank", "width=500,height=500");
+				}else {
+					alert("비밀번호가 틀렸습니다");
+					$("#pw").val("");
+					$("#on").hide();
+					$("#off").toggle();
+				}
+			})
+		});
+		
 	});
 </script>
 </head>
@@ -222,9 +249,9 @@
 					<div class="card-header">
 						<ul class="nav nav-tabs card-header-tabs">
 							<li class="nav-item"><a class="nav-link active"
-								href="/goMyPage">내 정보</a></li>
-							<li class="nav-item"><a class="nav-link" href="#">주문 조회</a></li>
-							<li class="nav-item"><a class="nav-link " href="#">판매 조회</a></li>
+								href="/goMyPage"><b>내 정보</b></a></li>
+							<li class="nav-item"><a class="nav-link" href="#"><b>주문 조회</b></a></li>
+							<li class="nav-item"><a class="nav-link " href="#"><b>판매 조회</b></a></li>
 						</ul>
 					</div>
 					<div class="card-body">
@@ -235,11 +262,17 @@
 									<td colspan="2">${email }</td>
 								</tr>
 								<c:choose>
-									<c:when test="logintype='email'">
-										<tr>
+									<c:when test="${logintype=='email'}">
+										<tr id="off">
 											<th scope="row">PW</th>
-											<td colspan="2">button</td>
+											<td colspan="2"><input type="button" id="pwT" class="genric-btn primary-border circle" value="비밀번호 변경하기"></td>
+										</tr >
+										<tr id="on">
+											<th scope="row">PW</th>
+											<td ><input type="password" id ="pw" placeholder="비밀번호를 입력하세요"></td>
+											<td ><input type="button" id="pwCk" class="genric-btn primary-border circle" value="입력"></td>
 										</tr>
+										
 									</c:when>
 								</c:choose>
 								<tr>
@@ -266,6 +299,9 @@
 								<tr>
 									<th scope="row">회원등급</th>
 									<td colspan="2">${member_class}</td>
+								</tr>
+								<tr>
+									<th scope="row" colspan="3"><input type="button" id="infoInsert" class="genric-btn primary circle" value="정보 수정 하기"></th>
 								</tr>
 							</tbody>
 						</table>
