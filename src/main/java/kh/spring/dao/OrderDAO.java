@@ -8,39 +8,43 @@ import javax.servlet.http.HttpSession;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Component;
 
-import kh.spring.dto.Auction_boardDTO;
-import kh.spring.dto.Auction_img_boardDTO;
-import kh.spring.dto.Used_transaction_boardDTO;
-import kh.spring.dto.Used_transaction_img_boardDTO;
+import kh.spring.dto.OrderDTO;
 
-@Repository
-public class BoardDAO {
-	
+@Component
+public class OrderDAO {
 	@Autowired
 	private SqlSessionTemplate sst;
 	@Autowired
 	private HttpSession se;
 	static int recordCountPerPage = 10;// 한 페이지에 보여줄 글 개수
 	static int naviCountPerPage = 10;// 한페이지에 보여줄 페이지 번호 수
-	public List<Auction_boardDTO> selectById_au(int currentPage,String id){
+	public List<OrderDTO> selectByBuyer(int currentPage,String buyer){
 		int endNum = currentPage * recordCountPerPage;
 		int startNum = endNum - 9;
 		Map<String,String> map = new HashMap<>();
 		map.put("startNum", Integer.toString(startNum));
 		map.put("endNum", Integer.toString(endNum));
-		map.put("id", id);
-		return sst.selectList("BoardDAO.selectById_au", map);
+		map.put("buyer", buyer);
+		return sst.selectList("OrderDAO.selectByBuyer", map);
 	}
-	public int recordCount_au(String id) { // 글 갯수
-		return sst.selectOne("BoardDAO.recordCount_au",id);
+	public List<OrderDTO> selectBySeller(int currentPage,String seller){
+		int endNum = currentPage * recordCountPerPage;
+		int startNum = endNum - 9;
+		Map<String,String> map = new HashMap<>();
+		map.put("startNum", Integer.toString(startNum));
+		map.put("endNum", Integer.toString(endNum));
+		map.put("seller", seller);
+		return sst.selectList("OrderDAO.selectBySeller", map);
 	}
-	public String getNavi_au(int currentPage,String id) {
-		int recordTotalCount = this.recordCount_au(id); // 전체 글 갯수
+	public int recordCount(String buyer) { // 글 갯수
+		return sst.selectOne("OrderDAO.recordCount",buyer);
+	}
+	public String getNavi(int currentPage,String buyer) {
+		int recordTotalCount = this.recordCount(buyer); // 전체 글 갯수
 		int pageTotalCount = 0;
-		int or2_currentPage=(int)se.getAttribute("or2_currentPage");
-		int used_currentPage=(int)se.getAttribute("used_currentPage");
+		int te_currentPage=(int)se.getAttribute("te_currentPage");
 		if (recordTotalCount % recordCountPerPage > 0) { // 전체 글 갯수 % 한 페이지에 보여줄 글 갯수 -> 나머지 잇으면 한페이지 더 필요
 			pageTotalCount = recordTotalCount / recordCountPerPage + 1;
 		} else if (recordTotalCount % recordCountPerPage == 0) {
@@ -66,32 +70,29 @@ public class BoardDAO {
 		}
 		StringBuilder sb = new StringBuilder();
 		if (needPrev) {
-			sb.append("<a href='goMyPage_sold?auc_currentPage=" + (startNavi - 1) + "&used_currentPage="+used_currentPage+"&or2_currentPage="+or2_currentPage+"'> <이전 </a>");
+			sb.append("<a href='goMyPage_delivery?or_currentPage=" + (startNavi - 1) + "&te_currentPage="+te_currentPage+ "'> <이전 </a>");
 		}
 		for (int i = startNavi; i <= endNavi; i++) {
-			sb.append("<a class='pageNum' href='goMyPage_sold?auc_currentPage=" + i + "&used_currentPage="+used_currentPage+"&or2_currentPage="+or2_currentPage+"'>  " + i + "  </a>");
+			sb.append("<a class='pageNum' href='goMyPage_delivery?or_currentPage=" + i + "&te_currentPage="+te_currentPage+  "'>  " + i + "  </a>");
 		}
 		if (needNext) {
-			sb.append("<a href='goMyPage_sold?auc_currentPage=" + (endNavi + 1) + "&used_currentPage="+used_currentPage+"&or2_currentPage="+or2_currentPage+"'> 다음> </a>");
+			sb.append("<a href='goMyPage_delivery?or_currentPage=" + (endNavi + 1) + "&te_currentPage="+te_currentPage+  "'> 다음> </a>");
 		}
 		return sb.toString();
 	}
-	public List<Used_transaction_boardDTO> selectById_us(int currentPage,String id){
-		int endNum = currentPage * recordCountPerPage;
-		int startNum = endNum - 9;
+	public OrderDTO selectBySeq(int seq) {
+		return sst.selectOne("OrderDAO.selectBySeq", seq);
+	}
+	public int update_situation(int seq,String situation) {
 		Map<String,String> map = new HashMap<>();
-		map.put("startNum", Integer.toString(startNum));
-		map.put("endNum", Integer.toString(endNum));
-		map.put("id", id);
-		return sst.selectList("BoardDAO.selectById_us", map);
+		map.put("seq", Integer.toString(seq));
+		map.put("situation", situation);
+		return sst.update("OrderDAO.update_situation",map);
 	}
-	public int recordCount_us(String id) { // 글 갯수
-		return sst.selectOne("BoardDAO.recordCount_us",id);
-	}
-	public String getNavi_us(int currentPage,String id) {
-		int recordTotalCount = this.recordCount_au(id); // 전체 글 갯수
+	public String getNavi2(int currentPage,String seller) {
+		int recordTotalCount = this.recordCount2(seller); // 전체 글 갯수
 		int pageTotalCount = 0;
-		int or2_currentPage=(int)se.getAttribute("or2_currentPage");
+		int used_currentPage=(int)se.getAttribute("used_currentPage");
 		int auc_currentPage=(int)se.getAttribute("auc_currentPage");
 		if (recordTotalCount % recordCountPerPage > 0) { // 전체 글 갯수 % 한 페이지에 보여줄 글 갯수 -> 나머지 잇으면 한페이지 더 필요
 			pageTotalCount = recordTotalCount / recordCountPerPage + 1;
@@ -118,34 +119,17 @@ public class BoardDAO {
 		}
 		StringBuilder sb = new StringBuilder();
 		if (needPrev) {
-			sb.append("<a href='goMyPage_sold?used_currentPage=" + (startNavi - 1) + "&auc_currentPage="+auc_currentPage+"&or2_currentPage="+or2_currentPage+"'> <이전 </a>");
+			sb.append("<a href='goMyPage_sold?or2_currentPage=" + (startNavi - 1) + "&used_currentPage="+used_currentPage+"&auc_currentPage="+auc_currentPage+"'> <이전 </a>");
 		}
 		for (int i = startNavi; i <= endNavi; i++) {
-			sb.append("<a class='pageNum' href='goMyPage_sold?used_currentPage=" + i + "&auc_currentPage="+auc_currentPage+"&or2_currentPage="+or2_currentPage+"'>  " + i + "  </a>");
+			sb.append("<a class='pageNum' href='goMyPage_sold?or2_currentPage=" + i + "&used_currentPage="+used_currentPage+"&auc_currentPage="+auc_currentPage+"'>  " + i + "  </a>");
 		}
 		if (needNext) {
-			sb.append("<a href='goMyPage_sold?used_currentPage=" + (endNavi + 1) + "&auc_currentPage="+auc_currentPage+"&or2_currentPage="+or2_currentPage+"'> 다음> </a>");
+			sb.append("<a href='goMyPage_sold?or2_currentPage=" + (endNavi + 1) + "&used_currentPage="+used_currentPage+"&auc_currentPage="+auc_currentPage+"'> 다음> </a>");
 		}
 		return sb.toString();
 	}
-	public int writeInsert(Used_transaction_boardDTO dto) {
-		return sst.insert("BoardDAO.writeInsert",dto);
+	public int recordCount2(String seller) { // 글 갯수
+		return sst.selectOne("OrderDAO.recordCount2",seller);
 	}
-	
-	public int imgInsert(Used_transaction_img_boardDTO dto) {
-		return sst.insert("BoardDAO.imgInsert",dto);
-	}
-	
-	public int actionWriteInsert(Auction_boardDTO dto) {
-		return sst.insert("BoardDAO.actionWriteInsert",dto);
-	}
-	
-	public int actionImgInsert(Auction_img_boardDTO dto) {
-		return sst.insert("BoardDAO.actionImgInsert",dto);
-	}
-	public int used_onGoing_n(int no) {
-		return sst.update("BoardDAO.used_onGoing_n",no);
-	}
-	
 }
-

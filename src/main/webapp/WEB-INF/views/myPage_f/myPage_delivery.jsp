@@ -52,27 +52,25 @@
 .nav_b:hover {
 	cursor: pointer;
 }
-
 .nav_ul * {
 	text-align: center;
 }
 </style>
 <script>
 	$(function() {
-
 		<c:choose>
 		<c:when test="${logintype==null}">
 		alert("로그인후 이용 가능합니다");
 		$(location).attr("href", "/login_main");
 		</c:when>
 		</c:choose>
-		$("#on").hide();
-		$("#logout_na").on("click",function() {
+		$("#logout_na")
+				.on("click",function() {
 							$.ajax({
 										url : "logout",
 										type : "get"
-									}).done(
-											function() {
+									})
+									.done(function() {
 												var naver = open(
 														"https://nid.naver.com/nidlogin.logout?returl=https://www.naver.com/",
 														"_blank",
@@ -83,12 +81,11 @@
 												}, 1000);
 											});
 						});
-		$("#logout_ka").on("click", function() {
+		$("#logout_ka").on("click",function() {
 					$.ajax({
 						url : "logout",
 						type : "get"
-					}).done(
-							function() {
+					}).done(function() {
 								var kakao = open(
 										"https://developers.kakao.com/logout",
 										"_blank", "width=100,height=100");
@@ -98,33 +95,40 @@
 								}, 1000);
 							});
 				});
-		$("#pwT").on("click",function(){
-			$("#off").hide();
-			$("#on").toggle();	
-		});
-		$("#infoInsert").on("click",function(){
-			$(location).attr("href","/infoInsert");
-		});
-		$("#pwCk").on("click",function(){
-			var pw = $("#pw").val();
+		$("#confirme").on("click",function(){
+			var anwser=confirm("정말 구매 확정 하시겠습니까?");
+			if(anwser==true){
+				var seq = $("#confirme").attr("seq");
+				$(location).attr("href","/confirme?seq="+seq);
+			}
+		})
+		$("#refund").on("click",function(){
+			var anwser=confirm("정말 환불 요청 하시겠습니까?");
+			if(anwser==true){
+				var seq = $("#refund").attr("seq");
+				open("/refund?seq="+seq, "_blank", "width=100,height=100");
+			}
+		})
+		$(".lookup").on("click",function(){
 			$.ajax({
-				url:"pwCk",
-				data: {
-					pw:pw
+				url:"lookup",
+				data:{
+					seq:$(this).attr("seq")
 				}
 			}).done(function(resp){
-				if(resp=='1'){
-					alert("인증완료");
-					open("/change_Pw","_blank", "width=500,height=500");
-				}else {
-					alert("비밀번호가 틀렸습니다");
-					$("#pw").val("");
-					$("#on").hide();
-					$("#off").toggle();
-				}
-			})
+				open(
+						"/golookup?resp="+resp,
+						"_blank", "width=500,height=500");
+			});
+			//대기
 		});
-		
+		$(".start").on("click",function(){
+			var seq =$(this).attr("seq");
+			var reci=$(this).attr("buyer");
+			open(
+					"/delivert_insert?seq="+seq+"&reci="+reci,
+					"_blank", "width=500,height=500");
+		});
 	});
 </script>
 </head>
@@ -237,7 +241,8 @@
 					<nav class="d-flex align-items-center">
 						<a href="/">메인페이지<span class="lnr lnr-arrow-right"></span></a> <a
 							href="/goMyPage">마이페이지<span class="lnr lnr-arrow-right"></span></a>
-						<a href="/goMyPage">내 정보<span class="lnr"></span></a>
+						<a href="/goMyPage_delivery?or_currentPage=1&te_currentPage=1">주문 조회<span class="lnr"></span></a>
+						</nav>
 				</div>
 			</div>
 		</div>
@@ -248,66 +253,211 @@
 				<div class="card text-center">
 					<div class="card-header">
 						<ul class="nav nav-tabs card-header-tabs">
+							<li class="nav-item"><a class="nav-link " href="/goMyPage"><b>내
+										정보</b></a></li>
 							<li class="nav-item"><a class="nav-link active"
-								href="/goMyPage"><b>내 정보</b></a></li>
-							<li class="nav-item"><a class="nav-link" href="#"><b>주문 조회</b></a></li>
-							<li class="nav-item"><a class="nav-link " href="#"><b>판매 조회</b></a></li>
+								href="/goMyPage_delivery?or_currentPage=1&te_currentPage=1"><b>주문 조회</b></a></li>
+							<li class="nav-item"><a class="nav-link " href="/goMyPage_sold?or2_currentPage=1&used_currentPage=1&auc_currentPage=1"><b>판매
+										조회</b></a></li>
 						</ul>
 					</div>
 					<div class="card-body">
-						<table class="table table-bordered">
-							<tbody>
-								<tr>
-									<th scope="row">ID</th>
-									<td colspan="2">${email }</td>
-								</tr>
-								<c:choose>
-									<c:when test="${logintype=='email'}">
-										<tr id="off">
-											<th scope="row">PW</th>
-											<td colspan="2"><input type="button" id="pwT" class="genric-btn primary-border circle" value="비밀번호 변경하기"></td>
-										</tr >
-										<tr id="on">
-											<th scope="row">PW</th>
-											<td ><input type="password" id ="pw" placeholder="비밀번호를 입력하세요"></td>
-											<td ><input type="button" id="pwCk" class="genric-btn primary-border circle" value="입력"></td>
-										</tr>
-										
-									</c:when>
-								</c:choose>
-								<tr>
-									<th scope="row">성함</th>
-									<td colspan="2">${name }</td>
-								</tr>
-								<tr>
-									<th scope="row">전화번호</th>
-									<td colspan="2">${phone }</td>
-								</tr>
-								<tr>
-									<th scope="row">보유 포인트</th>
-									<td colspan="2">${point }</td>
-								</tr>
-								<tr>
-									<th scope="row">우편번호</th>
-									<td colspan="2">${zipcode }</td>
-								</tr>
-								<tr>
-									<th scope="row">주소(배송지)</th>
-									<td >${address1 }</td>
-									<td >${address2 }</td>
-								</tr>
-								<tr>
-									<th scope="row">회원등급</th>
-									<td colspan="2">${member_class}</td>
-								</tr>
-								<tr>
-									<th scope="row" colspan="3"><input type="button" id="infoInsert" class="genric-btn primary circle" value="정보 수정 하기"></th>
-								</tr>
-							</tbody>
-						</table>
+						<section class="cart_area">
+        <div class="container">
+            <div class="cart_inner">
+                <div class="table-responsive">
+                <h1>배송 조회</h1>
+                <hr>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">주문번호</th>
+                                <th scope="col">물품</th>
+                                <th scope="col">가격</th>
+                                <th scope="col">판매자</th>
+                                <th scope="col">거래종류</th>
+                                <th scope="col">구입(낙찰)일</th>
+                                <th scope="col">주문상태</th>
+                                <th scope="col">구매확정</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                           <c:choose>
+                           <c:when test="${order_list==null}">
+                           <tr>
+                           <td colspan="8">
+                           <div class="media">
+                                        <div class="media-body">
+                                            <p>구매 하신 물품이 없습니다.</p>
+                                        </div>
+                                    </div>
+                           </td>
+                           </tr>
+                           </c:when>
+                           <c:otherwise>
+                           		<c:forEach items="${order_list}" var="i">
+                           			<tr>
+                           			<td>
+                           			<h5>${i.seq }</h5>
+                           			</td>
+                           			<td>
+                           			<div class="media">
+                           			<c:choose>
+                           			<c:when test="${i.type=='거래' }">
+                                        <div class="d-flex">
+                                        	<a href="/user_detailPage?no=${i.product_num }">
+                                            	<img src="${i.product_img}" alt="">
+                                            </a>
+                                        </div>
+                                        <div class="media-body">
+                                        	<a href="/user_detailPage?no=${i.product_num }">
+                                            <p>${i.product_title }</p>
+                                            </a>
+                                        </div>
+                                        </c:when>
+                                        <c:when test="${i.type=='경매' }">
+                                        <div class="d-flex">
+                                        	<a href="#">
+                                            	<img src="${i.product_img}" alt="">
+                                            </a>
+                                        </div>
+                                        <div class="media-body">
+                                        	<a href="#">
+                                            <p>${i.product_title }</p>
+                                            </a>
+                                        </div>
+                                        </c:when>
+                                        </c:choose>
+                                    </div>
+                                    </td>
+                                    <td>
+                                    <h5>${i.price }</h5>
+                                    </td>
+                                    <td>
+                                    <h5>${i.seller }</h5>
+                                    </td>
+                                    <td>
+                                    <h5>${i.type}</h5>
+                                    </td>
+                                    <td>
+                                    <h5>${i.join_date }</h5>
+                                    </td>
+                                    <td>
+                                    <h5>${i.situation }</h5>
+                                    </td>
+                                    <td>
+                                    <c:choose>
+                                    <c:when test="${i.situation=='배송중'}">
+                                     <h5><input type=button class="lookup" seq="${i.seq }" value="배송조회"></h5>
+                                    </c:when>
+                                    <c:when test="${i.situation=='배송완료'}">
+                                    <h5><input type=button class="confirme" seq="${i.seq }" value="구매확정"></h5>
+                                    <h5><input type=button class="refund" seq="${i.seq }" value="환불요청"></h5>
+                                    </c:when>
+                                     <c:when test="${i.situation=='구매확정'}">
+                                    <h5>구매확정</h5>
+                                    </c:when>
+                                     <c:when test="${i.situation=='환불요청'}">
+                                    <h5>환불처리 중</h5>
+                                    </c:when>
+                                    <c:when test="${i.situation=='환불처리완료'}">
+                                    <h5>환불처리 완료</h5>
+                                    </c:when>
+                                    </c:choose>
+                                    </td>
+                           			</tr>
+                           		</c:forEach>
+                           			<tr>
+                           <td colspan="8">
+                           <div class="media">
+                                        <div class="media-body">
+                                            <p>${order_navi}</p>
+                                        </div>
+                                    </div>
+                           </td>
+                           </tr>
+                           </c:otherwise>
+                           </c:choose>
+                       </tbody>
+                     </table>
+                     <h1 class="mt-5">내가 입찰 중인 상품</h1><hr>
+                     <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">번호</th>
+                                <th scope="col">물품</th>
+                                <th scope="col">현재 입찰가</th>
+                                <th scope="col">현재 입찰자</th>
+                                <th scope="col">입찰</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                         <c:choose>
+                           <c:when test="${tender_list==null}">
+                            <tr>
+                           <td colspan="5">
+                           <div class="media">
+                                        <div class="media-body">
+                                            <p>입찰 하신 물품이 없습니다.</p>
+                                        </div>
+                                    </div>
+                           </td>
+                           </tr>
+                           </c:when>
+                           <c:otherwise>
+                           <c:forEach items="${tender_list}" var="i">
+                           <tr>
+                           			<td>
+                           			<h5>${i.seq }</h5>
+                           			</td>
+                           			<td>
+                           			<div class="media">
+                                        <div class="d-flex">
+                                        	<a href="/auction_detailPage?no=${i.board_num }">
+                                            	<img src="${i.board_img}" alt="">
+                                            </a>
+                                        </div>
+                                        <div class="media-body">
+                                        	<a href="/auction_detailPage?no=${i.board_num }">
+                                            <p>${i.board_title }</p>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    </td>
+                                    <td>
+                                    <h5>${i.point }</h5>
+                                    </td>
+                                    <td>
+                                    <h5>${i.id }</h5>
+                                    </td>
+                                    <td>
+                                    <c:choose>
+                                    <c:when test="${i.id!=email}">
+                                    <h5><a href="/auction_detailPage?no=${i.board_num }"><input type=button class="tender" value="입찰 하러가기"></a></h5>
+                                    </c:when>
+                                    </c:choose>
+                                    </td>
+                           			</tr>
+                           </c:forEach>
+                            <tr>
+                           <td colspan="5">
+                           <div class="media">
+                                        <div class="media-body">
+                                            <p>${tender_navi }</p>
+                                        </div>
+                                    </div>
+                           </td>
+                           </tr>
+                           </c:otherwise>
+                           </c:choose>
+                        </tbody>
+					</table>                        
+                   </div>
+                 </div>
+               </div>
+              </section>
 					</div>
 				</div>
-				
 			</div>
 		</div>
 	</div>
@@ -397,10 +547,8 @@
 			</div>
 		</div>
 	</footer>
-	<!-- End footer Area -->
-	<!-- End footer Area -->
+	
 	<script src="../resources/js/vendor/jquery-2.2.4.min.js"></script>
-
 	<script src="../resources/js/vendor/bootstrap.min.js"></script>
 	<script src="../resources/js/jquery.ajaxchimp.min.js"></script>
 	<script src="../resources/js/jquery.nice-select.min.js"></script>

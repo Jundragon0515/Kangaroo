@@ -20,7 +20,6 @@ public class MailDAO {
 		Properties props = new Properties();
 		props.put("mail.smtp.host", host);
 		props.put("mail.smtp.auth", "true");
-		System.out.println(to);
 		String certi=this.randomWord();
 		Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
 			protected PasswordAuthentication getPasswordAuthentication() {
@@ -31,7 +30,7 @@ public class MailDAO {
 			MimeMessage message = new MimeMessage(session);
 			message.setFrom(new InternetAddress(user));
 			message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
-			message.setSubject("Assembly 인증번호");
+			message.setSubject("[Kangaroo] 인증번호");
 			// Text
 			message.setText("인증번호 : "+certi);
 			Transport.send(message);
@@ -60,5 +59,29 @@ public class MailDAO {
 			}
 		}
 		return result;
+	}
+	public void send_confirme(String to,String title) {
+		String host     = "smtp.naver.com";
+		final String user   = "cwg94";
+		final String password  = "1q2w3e4r%T";
+		Properties props = new Properties();
+		props.put("mail.smtp.host", host);
+		props.put("mail.smtp.auth", "true");
+		Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
+			protected PasswordAuthentication getPasswordAuthentication() {
+				return new PasswordAuthentication(user, password);
+			}
+		});
+		try {
+			MimeMessage message = new MimeMessage(session);
+			message.setFrom(new InternetAddress(user));
+			message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+			message.setSubject("[Kangaroo] 구매 확정!");
+			// Text
+			message.setText("판매자 분께서 등록하신 {"+title+"} 상품이 구매 확정 되었습니다!");
+			Transport.send(message);
+		} catch (MessagingException e) {
+			e.printStackTrace();
+		}
 	}
 }
