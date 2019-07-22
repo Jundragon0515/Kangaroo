@@ -136,6 +136,20 @@
 			})
 		});
 		$(".lookup").on("click",function(){
+			$.ajax({
+				url:"lookup",
+				data:{
+					seq:$(this).attr("seq")
+				}
+			}).done(function(resp){
+				if(resp!=""){
+				open(
+						"/golookup",
+						"_blank", "width=500,height=500");
+				}else{
+					alert("아직 배송정보가 등록 되어있지 않습니다.");
+				}
+			});
 			//대기
 		});
 		$(".start").on("click",function(){
@@ -143,7 +157,7 @@
 			var reci=$(this).attr("buyer");
 			open(
 					"/delivert_insert?seq="+seq+"&reci="+reci,
-					"_blank", "width=100,height=100");
+					"_blank", "width=500,height=500");
 		});
 	});
 </script>
@@ -178,7 +192,7 @@
 											직거래</a></li>
 									<li class="nav-item"><a class="nav-link" href="/trade">중고
 											안전거래</a></li>
-									<li class="nav-item"><a class="nav-link" href="/">중고
+									<li class="nav-item"><a class="nav-link" href="/auction">중고
 											경매</a></li>
 								</ul></li>
 							<li class="nav-item "><a class="nav-link" href="/">고객센터</a></li>
@@ -186,7 +200,7 @@
 
 							<c:choose>
 								<c:when test="${logintype=='admin'}">
-									<li class="nav-item "><a class="nav-link" href="/">관리자페이지</a></li>
+									<li class="nav-item "><a class="nav-link" href="/admin">관리자페이지</a></li>
 									<li class="nav-item "><a class="nav-link" href="/logout">로그아웃</a></li>
 								</c:when>
 								<c:when test="${logintype=='naver'}">
@@ -195,8 +209,7 @@
 										role="button" aria-haspopup="true" aria-expanded="false"><img
 											src="../resources/img/account.png" width="35px"></a>
 										<ul class="dropdown-menu nav_ul">
-											<li class="nav-item "><a class="nav-link" href="/">쪽지</a></li>
-											<li class="nav-item "><a class="nav-link" href="/">장바구니</a></li>
+											<li class="nav-item "><a class="nav-link" href="/">찜목록</a></li>
 											<li class="nav-item active"><a class="nav-link"
 												href="/goMyPage">마이페이지</a></li>
 											<li class="nav-item "><a class="nav-link"
@@ -211,8 +224,7 @@
 										role="button" aria-haspopup="true" aria-expanded="false"><img
 											src="../resources/img/account.png" width="40px"></a>
 										<ul class="dropdown-menu nav_ul">
-											<li class="nav-item "><a class="nav-link" href="/">쪽지</a></li>
-											<li class="nav-item "><a class="nav-link" href="/">장바구니</a></li>
+											<li class="nav-item "><a class="nav-link" href="/">찜목록</a></li>
 											<li class="nav-item active"><a class="nav-link"
 												href="/goMyPage">마이페이지</a></li>
 											<li class="nav-item "><a class="nav-link"
@@ -227,9 +239,8 @@
 										role="button" aria-haspopup="true" aria-expanded="false"><img
 											src="../resources/img/account.png" width="40px"></a>
 										<ul class="dropdown-menu nav_ul">
-											<li class="nav-item "><a class="nav-link" href="/">쪽지</a></li>
-											<li class="nav-item "><a class="nav-link" href="/">장바구니</a></li>
-											<li class="nav-item active"><a class="nav-link"
+											<li class="nav-item "><a class="nav-link" href="/">찜목록</a></li>
+											<li class="nav-item "><a class="nav-link"
 												href="/goMyPage">마이페이지</a></li>
 											<li class="nav-item "><a class="nav-link"
 												href="/toPoint">포인트충전</a></li>
@@ -406,14 +417,13 @@
                                 <th scope="col">번호</th>
                                 <th scope="col">물품</th>
                                 <th scope="col">현재 입찰가</th>
-                                <th scope="col">현재 입찰자</th>
                             </tr>
                         </thead>
                         <tbody>
                          <c:choose>
                            <c:when test="${auction_list==null}">
                             <tr>
-                           <td colspan="4">
+                           <td colspan="3">
                            <div class="media">
                                         <div class="media-body">
                                             <p>등록 하신 물품이 없습니다.</p>
@@ -426,33 +436,30 @@
                            <c:forEach items="${auction_list}" var="i">
                            <tr>
                            			<td>
-                           			<h5>${i.seq }</h5>
+                           			<h5>${i.no }</h5>
                            			</td>
                            			<td>
                            			<div class="media">
                                         <div class="d-flex">
-                                        	<a href="/auction_detailPage?no=${i.board_num }">
-                                            	<img src="${i.board_img}" alt="">
+                                        	<a href="/auction_detailPage?no=${i.no }">
+                                            	<img src="${i.title_img}" alt="">
                                             </a>
                                         </div>
                                         <div class="media-body">
-                                        	<a href="/auction_detailPage?no=${i.board_num }">
-                                            <p>${i.board_title }</p>
+                                        	<a href="/auction_detailPage?no=${i.no }">
+                                            <p>${i.title }</p>
                                             </a>
                                         </div>
                                     </div>
                                     </td>
                                     <td>
-                                    <h5>${i.point }</h5>
-                                    </td>
-                                    <td>
-                                    <h5>${i.id }</h5>
+                                    <h5>${i.present_price }</h5>
                                     </td>
                                     <td>
                            			</tr>
                            </c:forEach>
                             <tr>
-                           <td colspan="4">
+                           <td colspan="3">
                            <div class="media">
                                         <div class="media-body">
                                             <p>${auction_navi }</p>
@@ -489,18 +496,18 @@
                            <c:forEach items="${used_list}" var="i">
                            <tr>
                            			<td>
-                           			<h5>${i.seq }</h5>
+                           			<h5>${i.no }</h5>
                            			</td>
                            			<td>
                            			<div class="media">
                                         <div class="d-flex">
                                         	<a href="/auction_detailPage?no=${i.board_num }">
-                                            	<img src="${i.board_img}" alt="">
+                                            	<img src="${i.title_img}" alt="">
                                             </a>
                                         </div>
                                         <div class="media-body">
                                         	<a href="/auction_detailPage?no=${i.board_num }">
-                                            <p>${i.board_title }</p>
+                                            <p>${i.title }</p>
                                             </a>
                                         </div>
                                     </div>

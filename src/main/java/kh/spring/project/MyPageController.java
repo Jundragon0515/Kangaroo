@@ -1,5 +1,7 @@
 package kh.spring.project;
 
+import java.io.IOException;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +9,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 import kh.spring.dto.DeliveryDTO;
 import kh.spring.dto.MemberDTO;
@@ -114,13 +121,55 @@ public class MyPageController {
 		String email=(String)se.getAttribute("email");
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("order_list", mps.selectBySeller(or2_currentPage, email));
-		mav.addObject("order_navi", mps.getNavi_or(or2_currentPage, email));
-		mav.addObject("auction_list", mps.selectBySeller(auc_currentPage, email));
-		mav.addObject("auction_navi",mps.getNavi_ten(auc_currentPage, email));
-		mav.addObject("used_list", mps.selectBySeller(auc_currentPage, email));
-		mav.addObject("used_navi",mps.getNavi_ten(auc_currentPage, email));
-		mav.setViewName("myPage_f/myPage_delivery");
+		mav.addObject("order_navi", mps.getNavi_or2(or2_currentPage, email));
+		mav.addObject("auction_list", mps.selectById_au(auc_currentPage, email));
+		mav.addObject("auction_navi",mps.getNavi_au(auc_currentPage, email));
+		mav.addObject("used_list", mps.selectById_us(auc_currentPage, email));
+		mav.addObject("used_navi",mps.getNavi_us(auc_currentPage, email));
+		mav.setViewName("myPage_f/myPage_sold");
 //		"myPage_f/myPage_delivery"
+		return mav;
+	}
+	@RequestMapping("/lookup")
+	@ResponseBody
+	public String lookup(int seq) {
+		String result=null;
+		try {
+			result = mps.lookup(seq);
+			System.out.println(result);
+		}  catch (IOException e) {
+			e.printStackTrace();
+		}
+		if(result!=null) {
+			se.setAttribute("result", result);
+		}
+		return result;
+	}
+	@RequestMapping("/golookup")
+	public ModelAndView golookup() {
+		ModelAndView mav = new ModelAndView();
+		Gson g =new Gson();
+		JsonParser parse= new JsonParser();
+		JsonObject jo=parse.parse((String)se.getAttribute("result")).getAsJsonObject();
+		String invoiceNo=jo.get("invoiceNo").getAsString();
+		String receiverName=jo.get("receiverName").getAsString();
+		String senderName=jo.get("senderName").getAsString();
+		String receiverAddr=jo.get("receiverAddr").getAsString();
+		JsonArray ja=jo.get("trackingDetails").getAsJsonArray();
+		mav.addObject("invoiceNo", invoiceNo);
+		mav.addObject("receiverName", receiverName);
+		mav.addObject("senderName", senderName);
+		mav.addObject("receiverAddr", receiverAddr);
+		mav.addObject("ja", ja);
+		mav.setViewName("myPage_f/lookup");
+		return mav;
+	}
+	@RequestMapping("/delivert_insert")
+	public ModelAndView delivert_insert(int seq, String reci) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("seq", seq);
+		mav.addObject("reci", reci);
+		mav.setViewName("myPage_f/delivery_insert");
 		return mav;
 	}
 }

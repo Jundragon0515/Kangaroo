@@ -89,4 +89,47 @@ public class OrderDAO {
 		map.put("situation", situation);
 		return sst.update("OrderDAO.update_situation",map);
 	}
+	public String getNavi2(int currentPage,String seller) {
+		int recordTotalCount = this.recordCount2(seller); // 전체 글 갯수
+		int pageTotalCount = 0;
+		int used_currentPage=(int)se.getAttribute("used_currentPage");
+		int auc_currentPage=(int)se.getAttribute("auc_currentPage");
+		if (recordTotalCount % recordCountPerPage > 0) { // 전체 글 갯수 % 한 페이지에 보여줄 글 갯수 -> 나머지 잇으면 한페이지 더 필요
+			pageTotalCount = recordTotalCount / recordCountPerPage + 1;
+		} else if (recordTotalCount % recordCountPerPage == 0) {
+			pageTotalCount = recordTotalCount / recordCountPerPage;
+		}
+		if (currentPage < 1) {// 최소 페이지 보다 작으면 최소페이지로
+			currentPage = 1;
+		} else if (currentPage > pageTotalCount) { // 현재페이지 번호가 전체페이지보다 크면 최대 페이지로
+			currentPage = pageTotalCount;
+		} // 보안코드
+		int startNavi = (currentPage - 1) / naviCountPerPage * naviCountPerPage + 1;
+		int endNavi = startNavi + (naviCountPerPage - 1);
+		if (endNavi > pageTotalCount) {
+			endNavi = pageTotalCount;
+		}
+		boolean needPrev = true; // 이전버튼
+		boolean needNext = true; // 다음버튼
+		if (startNavi == 1) {
+			needPrev = false;
+		}
+		if (endNavi == pageTotalCount) {
+			needNext = false;
+		}
+		StringBuilder sb = new StringBuilder();
+		if (needPrev) {
+			sb.append("<a href='goMyPage_sold?or2_currentPage=" + (startNavi - 1) + "&used_currentPage="+used_currentPage+"&auc_currentPage="+auc_currentPage+"'> <이전 </a>");
+		}
+		for (int i = startNavi; i <= endNavi; i++) {
+			sb.append("<a class='pageNum' href='goMyPage_sold?or2_currentPage=" + i + "&used_currentPage="+used_currentPage+"&auc_currentPage="+auc_currentPage+"'>  " + i + "  </a>");
+		}
+		if (needNext) {
+			sb.append("<a href='goMyPage_sold?or2_currentPage=" + (endNavi + 1) + "&used_currentPage="+used_currentPage+"&auc_currentPage="+auc_currentPage+"'> 다음> </a>");
+		}
+		return sb.toString();
+	}
+	public int recordCount2(String seller) { // 글 갯수
+		return sst.selectOne("OrderDAO.recordCount2",seller);
+	}
 }

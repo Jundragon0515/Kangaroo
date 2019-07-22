@@ -11,12 +11,12 @@ public class Used_transaction_boardDTO {
 	private int viewCount;		
 	private int price;
 	private String member_class;
-	private String account;					// 계좌
+	private String account;					// 怨꾩쥖
 	private String category;
 	private String trade_type;
-	private String delivery_type;		// 배송 유형
-	private int delivery_cost;			// 배송비용
-	private String joinDate;				// 등록일시
+	private String delivery_type;		// 諛곗넚 �쑀�삎
+	private int delivery_cost;			// 諛곗넚鍮꾩슜
+	private String joinDate;				// �벑濡앹씪�떆
 	private String onGoing;
 	
 	public Used_transaction_boardDTO(int no, String id, String title, String title_img, String phone, String contents,

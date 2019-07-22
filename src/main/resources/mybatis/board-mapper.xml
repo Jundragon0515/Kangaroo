@@ -20,7 +20,18 @@
 <update id="used_onGoing_n">
 update used_transaction_board set ongoing='n' where no=#{value}
 </update>
-
+<select id="recordCount_au" resultType="Integer">
+select count(*) from auction_board where id=#{value} 
+</select>
+<select id = "selectById_au" parameterType="Map" resultType="kh.spring.dto.Auction_boardDTO">
+select * from (select row_number()over(order by no desc) as rown, auction_board.* from auction_board) where (rown between #{startNum} and #{endNum})and id=#{id}
+</select>
+<select id="recordCount_us" resultType="Integer">
+select count(*) from used_transaction_board where id=#{value} 
+</select>
+<select id = "selectById_us" parameterType="Map" resultType="kh.spring.dto.Used_transaction_boardDTO">
+select * from (select row_number()over(order by no desc) as rown, used_transaction_board.* from used_transaction_board) where (rown between #{startNum} and #{endNum})and id=#{id}
+</select>
 </mapper>
 
 

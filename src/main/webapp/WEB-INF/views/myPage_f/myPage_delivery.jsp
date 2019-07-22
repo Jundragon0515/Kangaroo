@@ -109,6 +109,26 @@
 				open("/refund?seq="+seq, "_blank", "width=100,height=100");
 			}
 		})
+		$(".lookup").on("click",function(){
+			$.ajax({
+				url:"lookup",
+				data:{
+					seq:$(this).attr("seq")
+				}
+			}).done(function(resp){
+				open(
+						"/golookup?resp="+resp,
+						"_blank", "width=500,height=500");
+			});
+			//대기
+		});
+		$(".start").on("click",function(){
+			var seq =$(this).attr("seq");
+			var reci=$(this).attr("buyer");
+			open(
+					"/delivert_insert?seq="+seq+"&reci="+reci,
+					"_blank", "width=500,height=500");
+		});
 	});
 </script>
 </head>
@@ -142,7 +162,7 @@
 											직거래</a></li>
 									<li class="nav-item"><a class="nav-link" href="/trade">중고
 											안전거래</a></li>
-									<li class="nav-item"><a class="nav-link" href="/">중고
+									<li class="nav-item"><a class="nav-link" href="/auction">중고
 											경매</a></li>
 								</ul></li>
 							<li class="nav-item "><a class="nav-link" href="/">고객센터</a></li>
@@ -150,7 +170,7 @@
 
 							<c:choose>
 								<c:when test="${logintype=='admin'}">
-									<li class="nav-item "><a class="nav-link" href="/">관리자페이지</a></li>
+									<li class="nav-item "><a class="nav-link" href="/admin">관리자페이지</a></li>
 									<li class="nav-item "><a class="nav-link" href="/logout">로그아웃</a></li>
 								</c:when>
 								<c:when test="${logintype=='naver'}">
@@ -159,8 +179,7 @@
 										role="button" aria-haspopup="true" aria-expanded="false"><img
 											src="../resources/img/account.png" width="35px"></a>
 										<ul class="dropdown-menu nav_ul">
-											<li class="nav-item "><a class="nav-link" href="/">쪽지</a></li>
-											<li class="nav-item "><a class="nav-link" href="/">장바구니</a></li>
+											<li class="nav-item "><a class="nav-link" href="/">찜목록</a></li>
 											<li class="nav-item active"><a class="nav-link"
 												href="/goMyPage">마이페이지</a></li>
 											<li class="nav-item "><a class="nav-link"
@@ -175,8 +194,7 @@
 										role="button" aria-haspopup="true" aria-expanded="false"><img
 											src="../resources/img/account.png" width="40px"></a>
 										<ul class="dropdown-menu nav_ul">
-											<li class="nav-item "><a class="nav-link" href="/">쪽지</a></li>
-											<li class="nav-item "><a class="nav-link" href="/">장바구니</a></li>
+											<li class="nav-item "><a class="nav-link" href="/">찜목록</a></li>
 											<li class="nav-item active"><a class="nav-link"
 												href="/goMyPage">마이페이지</a></li>
 											<li class="nav-item "><a class="nav-link"
@@ -191,9 +209,8 @@
 										role="button" aria-haspopup="true" aria-expanded="false"><img
 											src="../resources/img/account.png" width="40px"></a>
 										<ul class="dropdown-menu nav_ul">
-											<li class="nav-item "><a class="nav-link" href="/">쪽지</a></li>
-											<li class="nav-item "><a class="nav-link" href="/">장바구니</a></li>
-											<li class="nav-item active"><a class="nav-link"
+											<li class="nav-item "><a class="nav-link" href="/">찜목록</a></li>
+											<li class="nav-item "><a class="nav-link"
 												href="/goMyPage">마이페이지</a></li>
 											<li class="nav-item "><a class="nav-link"
 												href="/toPoint">포인트충전</a></li>

@@ -53,7 +53,7 @@
     		 url:"deli_insert",
     		 data:{
     			 product_num:"${seq}",
-    			 company_num:company,
+    			 company_code:company,
     			 waybill_num:waybill_num,
     			 sender:"${email}",
     			 recipient:"${reci}"  
@@ -115,7 +115,35 @@ h1 {
 			<h1>배송등록</h1>
 		</div>
 		<div class="form-group mb-3">
-			택배사company
+			<div class="txc-textbox">
+                        <select id="company" name="company">
+                             <option value="18">건영택배</option>
+                              <option value="23">경동택배</option>
+                             <option value="54">홈픽택배</option>
+                              <option value="40">굿투럭</option>
+                              <option value="53">농협택배</option>
+                              <option value="22">대신택배</option>
+                              <option value="06">로젠택배</option>
+                              <option value="08">롯데택배</option>
+                              <option value="52">세방</option>
+                              <option value="43">애니트랙</option>
+                              <option value="01">우체국택배</option>
+                              <option value="11">일양로지스</option>
+                              <option value="17">천일택배</option>
+                              <option value="20">한덱스</option>
+                              <option value="16">한의사랑택배</option>
+                              <option value="05">한진택배</option>
+                              <option value="32">합동택배</option>
+                              <option value="45">호남택배</option>
+                              <option value="04">CJ대한통운</option>
+                              <option value="46">CU편의점택배</option>
+                              <option value="24">CVSnet 편의점택배</option>
+                              <option value="56">KGB택배</option>
+                              <option value="30">KGL네트윅스</option>
+                              <option value="44">SLX</option>
+                              <option value="58">하이택배</option>
+                        </select>
+            </div>
          <div class="input-group-append">
             	<input type="text" id="waybill_num" name="waybill_num" placeholder="운송장 번호">
          </div>

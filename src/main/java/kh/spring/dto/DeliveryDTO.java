@@ -3,7 +3,7 @@ package kh.spring.dto;
 public class DeliveryDTO {
 	private int seq;
 	private int product_num;
-	private int company_num;
+	private int company_code;
 	private String waybill_num;
 	private String sender;
 	private String recipient;
@@ -11,11 +11,12 @@ public class DeliveryDTO {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public DeliveryDTO(int seq, int product_num, int company_num, String waybill_num, String sender, String recipient) {
+	public DeliveryDTO(int seq, int product_num, int company_code, String waybill_num, String sender,
+			String recipient) {
 		super();
 		this.seq = seq;
 		this.product_num = product_num;
-		this.company_num = company_num;
+		this.company_code = company_code;
 		this.waybill_num = waybill_num;
 		this.sender = sender;
 		this.recipient = recipient;
@@ -32,11 +33,11 @@ public class DeliveryDTO {
 	public void setProduct_num(int product_num) {
 		this.product_num = product_num;
 	}
-	public int getCompany_num() {
-		return company_num;
+	public int getCompany_code() {
+		return company_code;
 	}
-	public void setCompany_num(int company_num) {
-		this.company_num = company_num;
+	public void setCompany_code(int company_code) {
+		this.company_code = company_code;
 	}
 	public String getWaybill_num() {
 		return waybill_num;

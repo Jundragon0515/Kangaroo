@@ -17,7 +17,9 @@ update order_t set situation=#{situation} where seq=${seq}
 <select id = "selectBySeller" parameterType="Map" resultType="kh.spring.dto.OrderDTO">
 select * from (select row_number()over(order by seq desc) as rown, order_t.* from order_t) where (rown between #{startNum} and #{endNum})and seller=#{seller}
 </select>
-
+<select id="recordCount2" resultType="Integer">
+select count(*) from order_t where seller=#{value} 
+</select>
 </mapper>
 
 

@@ -25,56 +25,45 @@
 <!--
       CSS
       ============================================= -->
+<link rel="stylesheet" href="../resources/css/linearicons.css">
+<link rel="stylesheet" href="../resources/css/font-awesome.min.css">
+<link rel="stylesheet" href="../resources/css/themify-icons.css">
+<link rel="stylesheet" href="../resources/css/bootstrap.css">
+<link rel="stylesheet" href="../resources/css/owl.carousel.css">
+<link rel="stylesheet" href="../resources/css/nice-select.css">
+<link rel="stylesheet" href="../resources/css/nouislider.min.css">
+<link rel="stylesheet" href="../resources/css/ion.rangeSlider.css" />
 <link rel="stylesheet"
-   href="${pageContext.request.contextPath}/resources/css/linearicons.css">
-<link rel="stylesheet"
-   href="${pageContext.request.contextPath}/resources/css/font-awesome.min.css">
-<link rel="stylesheet"
-   href="${pageContext.request.contextPath}/resources/css/themify-icons.css">
-<link rel="stylesheet"
-   href="${pageContext.request.contextPath}/resources/css/bootstrap.css">
-<link rel="stylesheet"
-   href="${pageContext.request.contextPath}/resources/css/owl.carousel.css">
-<link rel="stylesheet"
-   href="${pageContext.request.contextPath}/resources/css/nice-select.css">
-<link rel="stylesheet"
-   href="${pageContext.request.contextPath}/resources/css/nouislider.min.css">
-<link rel="stylesheet"
-   href="${pageContext.request.contextPath}/resources/css/ion.rangeSlider.css" />
-<link rel="stylesheet"
-   href="${pageContext.request.contextPath}/resources/css/ion.rangeSlider.skinFlat.css" />
-<link rel="stylesheet"
-   href="${pageContext.request.contextPath}/resources/css/magnific-popup.css">
-<link rel="stylesheet"
-   href="${pageContext.request.contextPath}/resources/css/main.css">
-<link rel="stylesheet"
-   href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+   href="../resources/css/ion.rangeSlider.skinFlat.css" />
+<link rel="stylesheet" href="../resources/css/main.css">
+<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"> -->
 
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script
-   src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
-<script src="../resources/js/vendor/bootstrap.min.js"></script>
-<script src="../resources/js/jquery.ajaxchimp.min.js"></script>
-<script src="../resources/js/jquery.nice-select.min.js"></script>
-<script src="../resources/js/jquery.sticky.js"></script>
-<script src="../resources/js/nouislider.min.js"></script>
-<!-- <script src="../resources/js/countdown.js"></script> -->
-<script src="../resources/js/jquery.magnific-popup.min.js"></script>
-<script
-   src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<script
-   src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-
-<!--gmaps Js-->
-<script
-   src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
-<script src="../resources/js/gmaps.min.js"></script>
 
 <style>
-/* * {
+
+/*     * {
    box-sizing: border-box;
    border: 1px solid black;
-} */
+}   */
+
+.nav_b {
+   border: 0px;
+   background: 000000;
+   width: 100%;
+}
+
+.nav_b:hover {
+   cursor: pointer;
+}
+
+.nav_ul * {
+   text-align: center;
+}
+
+.btn-navi : hover {
+   background-color: #F2F2F2;
+}
+
 .header-nav {
    position: fixed;
    width: 100%;
@@ -113,6 +102,7 @@
    margin-bottom: 10px;
 }
 
+/* 선택된 물건의 총 개수  */
 .list-nav-total {
    font-size: 20px;
    position: relative;
@@ -140,16 +130,15 @@
 /* 등록상품 메인 이미지  */
 .product-img-size {
    width: 330px;
-   height: 250px;
-   margin-bottom: 20px;
+   height: 230px;
 }
 /*카드리스트 마우스 오버*/
 .card:hover {
-   cursor: pointer;
    border: solid 1px #ffba00;
-   margin: -1px;
+   margin: 1px;
 }
 
+/*텍스트 가운데 정렬  */
 .text-center {
    text-align: center;
 }
@@ -157,34 +146,51 @@
 /* 게시판 페이징  */
 .paging {
    position: relative;
-   left: 50%;
+   left: 45%;
 }
 
-.nav_b {
-   border: 0px;
-   background: 000000;
-   width: 100%;
+
+/* 네비버튼 영역 */
+.naviArea {
+   margin-bottom: 30px;
 }
 
-.nav_b:hover {
-   cursor: pointer;
+/* 검색창 크기  */
+.searchArea {
+   position: relative;
+   left: 10%;
+   width: 70%;
 }
 
-.nav_ul * {
-   text-align: center;
+/* 오른쪽 TOP 버튼 */
+.btn-fixed {
+   position: fixed;
+   top: 540px;
 }
 
-.btn-navi : hover{
-   background-color: #F2F2F2;
+/* 왼쪽 Category 영역  */
+.category-area{
+   position: relative;
+   top: 100px;
 }
+
+/* .boardViewer{
+   width:100%;
+}
+
+.boardViewer>*{
+   position: relative;
+   left: 40%;
+} */
 </style>
+
 
 </head>
 
 <body>
-   <div class="container">
-      <!-- Start Header Area -->
-      <header class="header_area sticky-header">
+
+   <!-- Start Header Area -->
+   <header class="header_area sticky-header">
 		<div class="main_menu">
 			<nav class="navbar navbar-expand-lg navbar-light main_box">
 				<div class="container">
@@ -213,7 +219,7 @@
 											직거래</a></li>
 									<li class="nav-item"><a class="nav-link" href="/trade">중고
 											안전거래</a></li>
-									<li class="nav-item"><a class="nav-link" href="/">중고
+									<li class="nav-item"><a class="nav-link" href="/auction">중고
 											경매</a></li>
 								</ul></li>
 							<li class="nav-item "><a class="nav-link" href="/">고객센터</a></li>
@@ -221,7 +227,7 @@
 
 							<c:choose>
 								<c:when test="${logintype=='admin'}">
-									<li class="nav-item "><a class="nav-link" href="/">관리자페이지</a></li>
+									<li class="nav-item "><a class="nav-link" href="/admin">관리자페이지</a></li>
 									<li class="nav-item "><a class="nav-link" href="/logout">로그아웃</a></li>
 								</c:when>
 								<c:when test="${logintype=='naver'}">
@@ -230,8 +236,7 @@
 										role="button" aria-haspopup="true" aria-expanded="false"><img
 											src="../resources/img/account.png" width="35px"></a>
 										<ul class="dropdown-menu nav_ul">
-											<li class="nav-item "><a class="nav-link" href="/">쪽지</a></li>
-											<li class="nav-item "><a class="nav-link" href="/">장바구니</a></li>
+											<li class="nav-item "><a class="nav-link" href="/">찜목록</a></li>
 											<li class="nav-item active"><a class="nav-link"
 												href="/goMyPage">마이페이지</a></li>
 											<li class="nav-item "><a class="nav-link"
@@ -246,8 +251,7 @@
 										role="button" aria-haspopup="true" aria-expanded="false"><img
 											src="../resources/img/account.png" width="40px"></a>
 										<ul class="dropdown-menu nav_ul">
-											<li class="nav-item "><a class="nav-link" href="/">쪽지</a></li>
-											<li class="nav-item "><a class="nav-link" href="/">장바구니</a></li>
+											<li class="nav-item "><a class="nav-link" href="/">찜목록</a></li>
 											<li class="nav-item active"><a class="nav-link"
 												href="/goMyPage">마이페이지</a></li>
 											<li class="nav-item "><a class="nav-link"
@@ -262,9 +266,8 @@
 										role="button" aria-haspopup="true" aria-expanded="false"><img
 											src="../resources/img/account.png" width="40px"></a>
 										<ul class="dropdown-menu nav_ul">
-											<li class="nav-item "><a class="nav-link" href="/">쪽지</a></li>
-											<li class="nav-item "><a class="nav-link" href="/">장바구니</a></li>
-											<li class="nav-item active"><a class="nav-link"
+											<li class="nav-item "><a class="nav-link" href="/">찜목록</a></li>
+											<li class="nav-item "><a class="nav-link"
 												href="/goMyPage">마이페이지</a></li>
 											<li class="nav-item "><a class="nav-link"
 												href="/toPoint">포인트충전</a></li>
@@ -283,221 +286,285 @@
 			</nav>
 		</div>
 	</header>
-      <!-- End Header Area -->
+   <!-- End Header Area -->
 
-      <!-- start banner Area -->
-      <div class="bd-example">
-         <div id="carouselExampleCaptions"
-            class="carousel slide carousel-size" data-ride="carousel">
-            <ol class="carousel-indicators">
-               <li data-target="#carouselExampleCaptions" data-slide-to="0"
-                  class="active"></li>
-               <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
-               <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
-            </ol>
-            <div class="carousel-inner">
-               <div class="carousel-item active">
-                  <img src="/../resources/img/sample/buy-3692440_1920.jpg"
-                     class="d-block w-100 jumbo" alt="...">
-                  <div class="carousel-caption d-none d-md-block">
-                     <p>당신의 애장품을 등록해주세요.</p>
-                     <button type="button" class="btn">
-                        <h5>물품등록하기</h5>
-                     </button>
-                  </div>
-               </div>
-               <div class="carousel-item">
-                  <img src="/../resources/img/sample/sample2.jpg"
-                     class="d-block w-100 jumbo" alt="...">
-                  <div class="carousel-caption d-none d-md-block">
-                     <h5>Second slide label</h5>
-                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                  </div>
-               </div>
-               <div class="carousel-item">
-                  <img src="/../resources/img/sample/sample1.jpg"
-                     class="d-block w-100 jumbo" alt="...">
-                  <div class="carousel-caption d-none d-md-block">
-                     <h5>Third slide label</h5>
-                     <p>Praesent commodo cursus magna, vel scelerisque nisl
-                        consectetur.</p>
-                  </div>
-               </div>
-            </div>
-            <a class="carousel-control-prev" href="#carouselExampleCaptions"
-               role="button" data-slide="prev"> </a> <a
-               class="carousel-control-next" href="#carouselExampleCaptions"
-               role="button" data-slide="next"> </a>
+   <!-- Start Banner Area -->
+   <section class="banner-area organic-breadcrumb">
+   <div class="container">
+      <div
+         class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+         <div class="col-first">
+            <h1>Product Page</h1>
+            <nav class="d-flex align-items-center"> <a href="index.html"><span
+               class="lnr lnr-arrow-right">Home</span></a> <a href="#"><span
+               class="lnr lnr-arrow-right">Shop</span></a> </nav>
          </div>
       </div>
-      <!-- End banner Area -->
-      <!--Start search  -->
-      <br>
-      <div class="input-group mb-3">
-         <input type="text" class="form-control"
-            placeholder="검색어를 입력해주세요" aria-label="Recipient's username"
-            aria-describedby="button-addon2">
-         <div class="input-group-append">
-            <button class="btn btn-outline-secondary" type="button"
-               id="button-addon2">Search</button>
-         </div>
-      </div>
-      <!--End search  -->
-      
-      <!-- Start category -->
-      <br>
-      <hr>
-      <nav>
-      <div class="nav nav-tabs" id="nav-tab" role="tablist">
-         <a class="nav-item nav-link active" id="nav-home-tab"
-            data-toggle="tab" href="#nav-home" role="tab"
-            aria-controls="nav-home" aria-selected="true">전체거래</a> <a
-            class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab"
-            href="#nav-profile" role="tab" aria-controls="nav-profile"
-            aria-selected="false">안전거래</a> <a class="nav-item nav-link"
-            id="nav-contact-tab" data-toggle="tab" href="#nav-contact"
-            role="tab" aria-controls="nav-contact" aria-selected="false">직거래</a>
-      </div>
-      </nav>
-      <div class="tab-content" id="nav-tabContent">
-         <div class="tab-pane fade show active" id="nav-home" role="tabpanel"
-            aria-labelledby="nav-home-tab">
-            <br>
-            <div class="list-group">
-               <ul>
-                  <li><a href="#"
-                     class="list-group-item list-group-item-action list-group-item-light">미술품</a></li>
-                  <li><a href="#"
-                     class="list-group-item list-group-item-action list-group-item-light">도서</a></li>
-                  <li><a href="#"
-                     class="list-group-item list-group-item-action list-group-item-light">가전제품</a></li>
-                  <li><a href="#"
-                     class="list-group-item list-group-item-action list-group-item-light">취미/수집</a></li>
-                  <li><a href="#"
-                     class="list-group-item list-group-item-action list-group-item-light">생활용품</a></li>
-                  <li><a href="#"
-                     class="list-group-item list-group-item-action list-group-item-light">스포츠/레저</a></li>
-                  <li><a href="#"
-                     class="list-group-item list-group-item-action list-group-item-light">기타</a></li>
-               </ul>
-            </div>
-         </div>
-         <div class="tab-pane fade" id="nav-profile" role="tabpanel"
-            aria-labelledby="nav-profile-tab">
-            <br>
-            <div class="list-group">
-               <ul>
-                  <li><a href="#"
-                     class="list-group-item list-group-item-action list-group-item-light">미술품</a></li>
-                  <li><a href="#"
-                     class="list-group-item list-group-item-action list-group-item-light">도서</a></li>
-                  <li><a href="#"
-                     class="list-group-item list-group-item-action list-group-item-light">가전제품</a></li>
-                  <li><a href="#"
-                     class="list-group-item list-group-item-action list-group-item-light">취미/수집</a></li>
-                  <li><a href="#"
-                     class="list-group-item list-group-item-action list-group-item-light">생활용품</a></li>
-                  <li><a href="#"
-                     class="list-group-item list-group-item-action list-group-item-light">스포츠/레저</a></li>
-                  <li><a href="#"
-                     class="list-group-item list-group-item-action list-group-item-light">기타</a></li>
-               </ul>
-            </div>
-         </div>
-         <div class="tab-pane fade" id="nav-contact" role="tabpanel"
-            aria-labelledby="nav-contact-tab">
-            <br>
-            <div class="list-group">
-               <ul>
-                  <li><a href="#"
-                     class="list-group-item list-group-item-action list-group-item-light">미술품</a></li>
-                  <li><a href="#"
-                     class="list-group-item list-group-item-action list-group-item-light">도서</a></li>
-                  <li><a href="#"
-                     class="list-group-item list-group-item-action list-group-item-light">가전제품</a></li>
-                  <li><a href="#"
-                     class="list-group-item list-group-item-action list-group-item-light">취미/수집</a></li>
-                  <li><a href="#"
-                     class="list-group-item list-group-item-action list-group-item-light">생활용품</a></li>
-                  <li><a href="#"
-                     class="list-group-item list-group-item-action list-group-item-light">스포츠/레저</a></li>
-                  <li><a href="#"
-                     class="list-group-item list-group-item-action list-group-item-light">기타</a></li>
-               </ul>
-            </div>
-         </div>
-      </div>
-      <!-- End category -->
+   </div>
+   </section>
+   <!-- End Banner Area -->
 
-      <!-- start product Area -->
-      <section class="owl-carousel active-product-area section_gap">
-      <!-- single product slide -->
-      <div class="single-product-slider">
-         <div class="row list-nav">
-            <div class="col-lg-5 col-md-5">
-               <span class="list-nav-total">모두 ${recordTotalCount}개의 물품이 검색
-                  되었습니다.</span>
-            </div>
-            <div class="col-lg-2 col-md-2"></div>
-            <div class="col-lg-5 col-md-5">
-               <nav class="nav"> <a class="nav-link" href="trade?price=low">낮은가격순</a>
-               <a class="nav-link" href="trade?price=high">높은가격순</a> <select
-                  id="viewCount" name="viewCount">
-                  <option value="16">16개씩 보기</option>
-                  <option value="24">24개씩 보기</option>
-                  <option value="36">36개씩 보기</option>
-               </select> </nav>
-            </div>
-         </div>
+   <!-- start banner Area -->
+   <div class="container-fluid">
+      <div class="row">
 
-         <div class="row">
-            <c:forEach var="temp" items="${list }">
-               <div class="col-lg-3 col-md-6">
-                  <div class="single-product">
-                     <div class="card" style="width: 15rem;">
-                        <img class="img-fluid product-img-size"
-                           src="../resources/img/product/p5.jpg" alt="">
-                        <div class="card-body">
+         <!-- start menu -->
+         <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+            <div class="sidebar-categories category-area">
+               <div class="head">제품 카테고리</div>
+               <ul class="main-categories">
+                  <li class="main-nav-list"><a data-toggle="collapse"
+                     href="#fruitsVegetable" aria-expanded="false"
+                     aria-controls="fruitsVegetable">
+                     <span class="lnr lnr-arrow-right">
+                        </span>전체보기
+                        <span class="number">(53)</span></a>
+                     <ul class="collapse" id="fruitsVegetable" data-toggle="collapse"
+                        aria-expanded="false" aria-controls="fruitsVegetable">
+                        <li class="main-nav-list child"><a href="#">Frozen Fish<span
+                              class="number">(13)</span></a></li>
+                        <li class="main-nav-list child"><a href="#">Dried Fish<span
+                              class="number">(09)</span></a></li>
+                        <li class="main-nav-list child"><a href="#">Fresh Fish<span
+                              class="number">(17)</span></a></li>
+                        <li class="main-nav-list child"><a href="#">Meat
+                              Alternatives<span class="number">(01)</span>
+                        </a></li>
+                        <li class="main-nav-list child"><a href="#">Meat<span
+                              class="number">(11)</span></a></li>
+                     </ul></li>
+
+                  <li class="main-nav-list"><a data-toggle="collapse"
+                     href="#meatFish" aria-expanded="false" aria-controls="meatFish"><span
+                        class="lnr lnr-arrow-right"></span>Meat and Fish<span
+                        class="number">(53)</span></a>
+                     <ul class="collapse" id="meatFish" data-toggle="collapse"
+                        aria-expanded="false" aria-controls="meatFish">
+                        <li class="main-nav-list child"><a href="#">Frozen Fish<span
+                              class="number">(13)</span></a></li>
+                        <li class="main-nav-list child"><a href="#">Dried Fish<span
+                              class="number">(09)</span></a></li>
+                        <li class="main-nav-list child"><a href="#">Fresh Fish<span
+                              class="number">(17)</span></a></li>
+                        <li class="main-nav-list child"><a href="#">Meat
+                              Alternatives<span class="number">(01)</span>
+                        </a></li>
+                        <li class="main-nav-list child"><a href="#">Meat<span
+                              class="number">(11)</span></a></li>
+                     </ul></li>
+                  <li class="main-nav-list"><a data-toggle="collapse"
+                     href="#cooking" aria-expanded="false" aria-controls="cooking"><span
+                        class="lnr lnr-arrow-right"></span>Cooking<span class="number">(53)</span></a>
+                     <ul class="collapse" id="cooking" data-toggle="collapse"
+                        aria-expanded="false" aria-controls="cooking">
+                        <li class="main-nav-list child"><a href="#">Frozen Fish<span
+                              class="number">(13)</span></a></li>
+                        <li class="main-nav-list child"><a href="#">Dried Fish<span
+                              class="number">(09)</span></a></li>
+                        <li class="main-nav-list child"><a href="#">Fresh Fish<span
+                              class="number">(17)</span></a></li>
+                        <li class="main-nav-list child"><a href="#">Meat
+                              Alternatives<span class="number">(01)</span>
+                        </a></li>
+                        <li class="main-nav-list child"><a href="#">Meat<span
+                              class="number">(11)</span></a></li>
+                     </ul></li>
+                  <li class="main-nav-list"><a data-toggle="collapse"
+                     href="#beverages" aria-expanded="false" aria-controls="beverages"><span
+                        class="lnr lnr-arrow-right"></span>Beverages<span class="number">(24)</span></a>
+                     <ul class="collapse" id="beverages" data-toggle="collapse"
+                        aria-expanded="false" aria-controls="beverages">
+                        <li class="main-nav-list child"><a href="#">Frozen Fish<span
+                              class="number">(13)</span></a></li>
+                        <li class="main-nav-list child"><a href="#">Dried Fish<span
+                              class="number">(09)</span></a></li>
+                        <li class="main-nav-list child"><a href="#">Fresh Fish<span
+                              class="number">(17)</span></a></li>
+                        <li class="main-nav-list child"><a href="#">Meat
+                              Alternatives<span class="number">(01)</span>
+                        </a></li>
+                        <li class="main-nav-list child"><a href="#">Meat<span
+                              class="number">(11)</span></a></li>
+                     </ul></li>
+                  <li class="main-nav-list"><a data-toggle="collapse"
+                     href="#homeClean" aria-expanded="false" aria-controls="homeClean"><span
+                        class="lnr lnr-arrow-right"></span>Home and Cleaning<span
+                        class="number">(53)</span></a>
+                     <ul class="collapse" id="homeClean" data-toggle="collapse"
+                        aria-expanded="false" aria-controls="homeClean">
+                        <li class="main-nav-list child"><a href="#">Frozen Fish<span
+                              class="number">(13)</span></a></li>
+                        <li class="main-nav-list child"><a href="#">Dried Fish<span
+                              class="number">(09)</span></a></li>
+                        <li class="main-nav-list child"><a href="#">Fresh Fish<span
+                              class="number">(17)</span></a></li>
+                        <li class="main-nav-list child"><a href="#">Meat
+                              Alternatives<span class="number">(01)</span>
+                        </a></li>
+                        <li class="main-nav-list child"><a href="#">Meat<span
+                              class="number">(11)</span></a></li>
+                     </ul></li>
+                  <li class="main-nav-list"><a href="#">Pest Control<span
+                        class="number">(24)</span></a></li>
+                  <li class="main-nav-list"><a data-toggle="collapse"
+                     href="#officeProduct" aria-expanded="false"
+                     aria-controls="officeProduct"><span
+                        class="lnr lnr-arrow-right"></span>Office Products<span
+                        class="number">(77)</span></a>
+                     <ul class="collapse" id="officeProduct" data-toggle="collapse"
+                        aria-expanded="false" aria-controls="officeProduct">
+                        <li class="main-nav-list child"><a href="#">Frozen Fish<span
+                              class="number">(13)</span></a></li>
+                        <li class="main-nav-list child"><a href="#">Dried Fish<span
+                              class="number">(09)</span></a></li>
+                        <li class="main-nav-list child"><a href="#">Fresh Fish<span
+                              class="number">(17)</span></a></li>
+                        <li class="main-nav-list child"><a href="#">Meat
+                              Alternatives<span class="number">(01)</span>
+                        </a></li>
+                        <li class="main-nav-list child"><a href="#">Meat<span
+                              class="number">(11)</span></a></li>
+                     </ul></li>
+                  <li class="main-nav-list"><a data-toggle="collapse"
+                     href="#beauttyProduct" aria-expanded="false"
+                     aria-controls="beauttyProduct"><span
+                        class="lnr lnr-arrow-right"></span>Beauty Products<span
+                        class="number">(65)</span></a>
+                     <ul class="collapse" id="beauttyProduct" data-toggle="collapse"
+                        aria-expanded="false" aria-controls="beauttyProduct">
+                        <li class="main-nav-list child"><a href="#">Frozen Fish<span
+                              class="number">(13)</span></a></li>
+                        <li class="main-nav-list child"><a href="#">Dried Fish<span
+                              class="number">(09)</span></a></li>
+                        <li class="main-nav-list child"><a href="#">Fresh Fish<span
+                              class="number">(17)</span></a></li>
+                        <li class="main-nav-list child"><a href="#">Meat
+                              Alternatives<span class="number">(01)</span>
+                        </a></li>
+                        <li class="main-nav-list child"><a href="#">Meat<span
+                              class="number">(11)</span></a></li>
+                     </ul></li>
+               </ul>
+               <div class="head "><a href="tradeGoodsWrite" style="color: white">제품등록</a></div>
+            </div>
+
+
+         </div>
+         <!-- end menu  -->
+
+         <!-- start center  -->
+         <div class="col-xs-12 col-sm-12 col-md-10 col-lg-9">
+            <!--Start search  -->
+            <br>
+            <div class="input-group mb-3 searchArea">
+               <input type="text" class="form-control" placeholder="검색어를 입력해주세요"
+                  aria-label="Recipient's username" aria-describedby="button-addon2">
+               <div class="input-group-append">
+                  <button class="btn btn-outline-secondary" type="button"
+                     id="button-addon2">Search</button>
+               </div>
+            </div>
+            <!--End search  -->
+            
+            <section class="owl-carousel active-product-area section_gap" style=padding:20px>
+            <div class="single-product-slider">
+            <!-- Start boardInfo  -->
+               <div class="row list-nav">
+                  <div class="col-lg-6 col-md-6 col-sm-6">
+                     <span class="list-nav-total">모두 ${recordTotalCount}개의 물품이 검색 되었습니다.</span>
+                  </div>
+
+                  <div class="col-lg-6 col-md-6 col-sm-6">
+                     <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-6">
                            <div class="row">
-                              <div class="col-12">[${temp.getCategory()}]</div>
-                           </div>
-                           <div class="row">
-                              <div class="col-12">
-                                 <h5 class="card-title">${temp.getTitle()}</h5>
+                              <div class="col-lg-6 col-md-6 col-sm-6">
+                                 <a class="nav-link" href="trade?price=low">낮은가격순</a> 
+                              </div>
+                              <div class="col-lg-6 col-md-6 col-sm-6">      
+                                 <a class="nav-link" href="trade?price=high">높은가격순</a> 
                               </div>
                            </div>
-                           <div class="row">
-                              <div class="col-12">
-                                 <p class="card-text">${temp.getPrice()}</p>
-                              </div>
-                           </div>
-                           <div class="row">
-                              <div class="col-6">${temp.getJoindate()}</div>
-                              <div class="col-6">${temp.getViewcount()}</div>
-                           </div>
-                           <div class="row">
-                              <div class="col-5">${temp.getMember_class()}</div>
-                              <div class="col-7">${temp.getId()}</div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                              <div class="row">
+                              <select id="viewCount" name="viewCount">
+                                 <option value="16">16개씩 보기</option>
+                                 <option value="24">24개씩 보기</option>
+                                 <option value="36">36개씩 보기</option>
+                              </select>
                            </div>
                         </div>
                      </div>
                   </div>
                </div>
-            </c:forEach>
-         </div>
-         <div class="row">
-            <div class="col-10">
-               <b class="paging">${navi }</b>
+               <!-- End boardInfo  -->
+               <div class="row list-nav">
+                  <c:forEach var="temp" items="${list }">
+                     <div class="col-lg-3 col-md-6">
+
+                        <div class="single-product" style="margin-bottom: 15px;">
+                           <div class="card">
+                              <a href="/used_detailPage?no=${temp.no}" class="social-info"><img class="img-fluid product-img-size"
+                                 style="margin-bottom: 5px;"
+                                 src="../resources/img/title/${temp.getTitle_img()}" alt=""></a>
+                              <div class="card-body" style="padding: 12px;">
+                                 <div class="row">
+                                    <div class="d-none d-lg-block col-lg-12">[${temp.getCategory()}]</div>
+                                 </div>
+                                 <div class="row">
+                                    <div class="col-lg-12">
+                                       <h4>${temp.getTitle()}</h4>
+                                    </div>
+                                 </div>
+                                 <div class="row">
+                                    <div class="col-lg-12">${temp.getPrice()}</div>
+                                 </div>
+                                 <div class="row">
+                                    <div class="col-sm-12 col-md-10 col-lg-8">${temp.getJoindate()}</div>
+                                    <div class="d-none d-xl-block col-lg-2">|</div>
+                                    <div class="col-sm-12 col-md-2 col-lg-2">${temp.getViewcount()}</div>
+                                 </div>
+                                 <div class="row product-details" style="padding-left: 10px;">
+                                    <div class="prd-bottom" style="margin-top: 5px;">
+                                       <a href="" class="social-info"> <span class="ti-bag"></span>
+                                          <p class="hover-text">add to bag</p>
+                                       </a>                            
+                                       <a href="/used_detailPage?no=${temp.no}" class="social-info"> 
+                                          <span class="lnr lnr-move"></span>                            
+                                             <p class="hover-text">view more</p>
+                                       </a>
+                                    </div>
+                                 </div>
+
+                                 <!-- <div class="col-3">[1]</div>
+                                    <div class="col-9">[이름]</div> -->
+
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </c:forEach>
+               </div>
             </div>
-            <div class="col-2">
-               <button type="button"  class="btn btn-outline-warning" id="goodsRegister">제품등록</button>
+            </section>
+            <div class="row">
+               <div class="col-12 naviArea">
+                  <b class="paging">${navi }</b>
+               </div>
             </div>
+
+
          </div>
+         <!-- end center  -->
+
+         <!-- start fixbutton -->
+         <div class="d-none d-lg-block col-lg-1">
+            <button type="button" class="btn btn-warning btn-fixed">TOP</button>
+         </div>
+         <!-- end fixbutton -->
       </div>
    </div>
-   </section>
-   <!-- end product Area -->
-
    <!-- start footer Area -->
    <footer class="footer-area section_gap">
    <div class="container">
@@ -595,14 +662,20 @@
             "change",
             function() {
                var view = $(this).val();
-               $(location).attr('href','tradeList?view=' + view + "&currentPage=1");
+               $(location).attr('href',
+                     'tradeList?view=' + view + "&currentPage=1");
             });
       $("#logout_na")
-            .on("click", function() {
-                     $.ajax({
+            .on(
+                  "click",
+                  function() {
+                     $
+                           .ajax({
                               url : "logout",
                               type : "get"
-                           }).done(function() {
+                           })
+                           .done(
+                                 function() {
                                     var naver = open(
                                           "https://nid.naver.com/nidlogin.logout?returl=https://www.naver.com/",
                                           "_blank",
@@ -631,10 +704,27 @@
                         }, 1000);
                      });
             });
-      $("#goodsRegister").on("click",function(){
-    	 $(location).attr("href","/tradeGoodsWrite") ;
-      });
    </script>
 
+   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+   <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+   <script src="../resources/js/vendor/bootstrap.min.js"></script>
+   <script src="../resources/js/jquery.ajaxchimp.min.js"></script>
+   <script src="../resources/js/jquery.nice-select.min.js"></script>
+   <script src="../resources/js/jquery.sticky.js"></script>
+   <script src="../resources/js/nouislider.min.js"></script>
+   <!-- <script src="../resources/js/countdown.js"></script> -->
+   <script src="../resources/js/jquery.magnific-popup.min.js"></script>
+   <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+   <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+   <!--gmaps Js-->
+   <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
+   <script src="../resources/js/gmaps.min.js"></script>
+   <script src="../resources/js/main.js"></script>
 </body>
 </html>

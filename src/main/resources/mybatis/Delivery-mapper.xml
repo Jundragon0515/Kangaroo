@@ -2,6 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="DeliveryDAO">
 <insert id="deli_insert" parameterType="kh.spring.dto.DeliveryDTO">
-insert delivery into values(delivery_seq.nextval,#{product_num},#{company_code},#{waybill_num},#{sender},#{recipient})
+insert into delivery values(delivery_seq.nextval,${product_num},${company_code},#{waybill_num},#{sender},#{recipient})
 </insert>
+<select id="selectByNum" resultType="kh.spring.dto.DeliveryDTO">
+select * from delivery where product_num=${value}
+</select>
 </mapper>

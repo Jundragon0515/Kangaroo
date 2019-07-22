@@ -20,9 +20,16 @@ public class HomeController {
 	HttpSession se;
 	@Autowired
 	MemberService mes;
-
+	public static int visitCount = 0;
 	@RequestMapping("/")
-	public String home() { //홈
+	public String visit() { 	// 첫 방문
+		System.out.println("반갑습니다.");
+		visitCount++;
+		System.out.println(visitCount);
+		return "index";
+	}
+	@RequestMapping("/index")
+	public String home() { 		//홈
 		return "index";
 	}
 	@RequestMapping("/toPoint")
@@ -112,5 +119,4 @@ public class HomeController {
 		se.invalidate();
 		return "redirect:"+old_url;
 	}
-	
 }

@@ -1,5 +1,7 @@
 package kh.spring.service;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,11 @@ import kh.spring.dao.TenderDAO;
 import kh.spring.dto.DeliveryDTO;
 import kh.spring.dto.OrderDTO;
 import kh.spring.dto.TenderDTO;
+import kh.spring.dto.Auction_boardDTO;
+import kh.spring.dto.DeliveryDTO;
+import kh.spring.dto.OrderDTO;
+import kh.spring.dto.TenderDTO;
+import kh.spring.dto.Used_transaction_boardDTO;
 
 @Component
 public class MyPageService {
@@ -73,7 +80,26 @@ public class MyPageService {
 		or.update_situation(dto.getProduct_num(), "배송출발");
 		de.deli_insert(dto);
 	}
+	public List<Auction_boardDTO> selectById_au(int currentPage,String id){//구매 리스트
+		return bo.selectById_au(currentPage, id);
+	}
+	public String getNavi_au(int currentPage,String id) {
+		return bo.getNavi_au(currentPage, id);
+	}
+	public List<Used_transaction_boardDTO> selectById_us(int currentPage,String id){//구매 리스트
+		return bo.selectById_us(currentPage, id);
+	}
+	public String getNavi_us(int currentPage,String id) {
+		return bo.getNavi_us(currentPage, id);
+	}
 	public List<OrderDTO> selectBySeller(int currentPage,String seller){//구매 리스트
 		return or.selectBySeller(currentPage, seller);
+	}
+	public String getNavi_or2(int currentPage,String seller) {
+		return or.getNavi2(currentPage, seller);
+	}
+	public String lookup(int seq) throws IOException {
+		DeliveryDTO dto=de.selectByNum(seq);
+		return de.lookup(Integer.toString(dto.getCompany_code()), Integer.toString(dto.getProduct_num()));
 	}
 }
