@@ -250,8 +250,8 @@
 						<ul class="nav nav-tabs card-header-tabs">
 							<li class="nav-item"><a class="nav-link active"
 								href="/goMyPage"><b>내 정보</b></a></li>
-							<li class="nav-item"><a class="nav-link" href="#"><b>주문 조회</b></a></li>
-							<li class="nav-item"><a class="nav-link " href="#"><b>판매 조회</b></a></li>
+							<li class="nav-item"><a class="nav-link" href="/goMyPage_delivery?or_currentPage=1&te_currentPage=1"><b>주문 조회</b></a></li>
+							<li class="nav-item"><a class="nav-link " href="/goMyPage_sold?or2_currentPage=1&used_currentPage=1&auc_currentPage=1"><b>판매 조회</b></a></li>
 						</ul>
 					</div>
 					<div class="card-body">

@@ -112,31 +112,5 @@ public class HomeController {
 		se.invalidate();
 		return "redirect:"+old_url;
 	}
-	@RequestMapping("/updateProc")
-	public String updateProc(MemberDTO dto) { //멤버 정보 업데이트
-		dto.setId(se.getAttribute("email").toString());
-		mes.updateProc(dto);
-		se.setAttribute("email", dto.getId());
-		se.setAttribute("name",dto.getName());
-		se.setAttribute("phone",dto.getPhone());
-		se.setAttribute("zipcode",dto.getZipcode());
-		se.setAttribute("address1", dto.getAddress1());
-		se.setAttribute("address2", dto.getAddress2());
-		se.setAttribute("info",dto);
-
-		return "redirect:/goMyPage";
-	}
-	@RequestMapping("/goMyPage")
-	public String goMyPage() { // 마이페이지로
-		return "myPage";
-	}
-	@RequestMapping("/pwCk")
-	@ResponseBody
-	public String pwCk(String pw) {
-		return Integer.toString(mes.pwCk(pw));
-	}
-	@RequestMapping("/change_Pw")
-	public String changePw() {
-		return "changePw";
-	}
+	
 }

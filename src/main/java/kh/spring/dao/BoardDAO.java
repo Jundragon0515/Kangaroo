@@ -30,6 +30,9 @@ public class BoardDAO {
 	public int actionImgInsert(Auction_img_boardDTO dto) {
 		return sst.insert("BoardDAO.actionImgInsert",dto);
 	}
+	public int used_onGoing_n(int no) {
+		return sst.update("BoardDAO.used_onGoing_n",no);
+	}
 	
 }
 

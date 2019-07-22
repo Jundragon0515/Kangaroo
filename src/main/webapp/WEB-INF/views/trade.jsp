@@ -595,20 +595,14 @@
             "change",
             function() {
                var view = $(this).val();
-               $(location).attr('href',
-                     'tradeList?view=' + view + "&currentPage=1");
+               $(location).attr('href','tradeList?view=' + view + "&currentPage=1");
             });
       $("#logout_na")
-            .on(
-                  "click",
-                  function() {
-                     $
-                           .ajax({
+            .on("click", function() {
+                     $.ajax({
                               url : "logout",
                               type : "get"
-                           })
-                           .done(
-                                 function() {
+                           }).done(function() {
                                     var naver = open(
                                           "https://nid.naver.com/nidlogin.logout?returl=https://www.naver.com/",
                                           "_blank",
