@@ -36,7 +36,6 @@ public class MyPageService {
 	MailDAO ma;
 	@Autowired
 	DeliveryDAO de;
-	
 	public List<OrderDTO> selectByBuyer(int currentPage,String buyer){//구매 리스트
 		return or.selectByBuyer(currentPage, buyer);
 	}

@@ -66,20 +66,17 @@
 			client.subscribe("/response", function(list) {
 				var result = JSON.parse(list.body);
 				var z = 0;
-				$(".asd").text(result[0]);
-				$(".asd2").text(result[1]);
-				// 	 			<c:forEach var="i" items="${main_option_list}">
-				// 				$("."+"${i.no}").text(result[z++]);
-				// 				</c:forEach>
+					 			<c:forEach var="i" items="${main_option_list}">
+								$("."+"${i.no}").text(result[z++]);
+								</c:forEach>
 			});
 		})
 		setInterval(function() {//시간 보내 달라는 요청
 			var list = new Array();
-			list[0] = "2019-07-29 23:59:59";
-			list[1] = "2019-07-18 11:52:00";
-			// 			<c:forEach var="i" items="${main_option_list}">
-			// 				list.add("${i.end_date}");
-			// 			</c:forEach>
+			
+						<c:forEach var="i" items="${main_option_list}">
+							list.add("${i.end_date}");
+						</c:forEach>
 			client.send("/app/time", {}, JSON.stringify({
 				end_dates : list
 			}));
