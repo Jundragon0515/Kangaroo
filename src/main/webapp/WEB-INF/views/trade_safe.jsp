@@ -539,7 +539,7 @@ function viewCount(){
 							
                         <div class="single-product" style="margin-bottom: 15px;">
                            <div class="card">
-                              <a href="tradeOption_safe">
+                              <a href="/used_detailPage?no=${temp.no}">
                               <img class="img-fluid product-img-size" style="margin-bottom: 5px;"
                                  src="/img/title/${temp.title_img}" alt=""></a>
                               <div class="card-body" style="padding: 12px;">

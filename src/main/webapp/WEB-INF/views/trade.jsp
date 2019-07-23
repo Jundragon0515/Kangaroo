@@ -166,10 +166,7 @@
 .btn-fixed {
    position: fixed;
    top: 540px;
-<<<<<<< HEAD
    cursor:pointer;
-=======
->>>>>>> b3bfccaf8403ed795dab7c5f83ef481ad2838408
 }
 
 /* 왼쪽 Category 영역  */
@@ -539,7 +536,7 @@ function viewCount(){
                			</c:choose>
                         <div class="single-product" style="margin-bottom: 15px;">
                            <div class="card">
-                              <a href="tradeOption">
+                              <a href="/used_detailPage?no=${temp.no}">
                               <img class="img-fluid product-img-size" style="margin-bottom: 5px;"
                                  src="/img/title/${temp.title_img}" alt=""></a>
                               <div class="card-body" style="padding: 12px;">

@@ -536,7 +536,7 @@ function viewCount(){
                			</c:choose>
                         <div class="single-product" style="margin-bottom: 15px;">
                            <div class="card">
-                              <a href="auctionOption"><img class="img-fluid product-img-size"
+                              <a href="/auction_detailPage?no=${temp.no}"><img class="img-fluid product-img-size"
                                  style="margin-bottom: 5px;"
                                  src="../resources/img/title/${temp.getTitle_img()}" alt=""></a>
                               <div class="card-body" style="padding: 12px;">

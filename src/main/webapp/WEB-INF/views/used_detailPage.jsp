@@ -227,16 +227,16 @@ $("#logout_na").on("click", function() {
                   </ol>
                   <div class="carousel-inner">
                      <div class="carousel-item active">
-                        <img src="img/title/${i_dto.title_img }" class="d-block w-100" onerror="this.style.display='none'" alt=''>
+                        <img src="img/title/${i_dto.title_img }" class="d-block w-100" onerror="this.style.display='none'" alt='' height=350px; width=auto;>
                      </div>
                      <div class="carousel-item">
-                        <img src="img/middle/${i_dto.middle1_img }" class="d-block w-100" onerror="this.style.display='none'" alt=''>
+                        <img src="img/middle/${i_dto.middle1_img }" class="d-block w-100" onerror="this.style.display='none'" alt='' height=350px; width=auto;>
                      </div>
                      <div class="carousel-item">
-                        <img src="img/middle/${i_dto.middle2_img }" class="d-block w-100" onerror="this.style.display='none'" alt=''>
+                        <img src="img/middle/${i_dto.middle2_img }" class="d-block w-100" onerror="this.style.display='none'" alt='' height=350px; width=auto;>
                      </div>
                      <div class="carousel-item">
-                        <img src="img/middle/${i_dto.middle3_img }" class="d-block w-100" onerror="this.style.display='none'" alt=''>
+                        <img src="img/middle/${i_dto.middle3_img }" class="d-block w-100" onerror="this.style.display='none'" alt='' height=350px; width=auto;>
                      </div>
                   </div>
                   <a class="carousel-control-prev" href="#carouselExampleIndicators"
@@ -377,36 +377,34 @@ $("#logout_na").on("click", function() {
    <!--================End Single Product Area =================-->
 
    <!--================Product Description Area =================-->
-   <section class="product_description_area p-0 m-0">
-      <div class="container">
-         <ul class="nav nav-tabs" id="myTab" role="tablist">
-            <li class="nav-item"><a class="nav-link" id="home-tab"
-               data-toggle="tab" href="#home" role="tab" aria-controls="home"
-               aria-selected="true">물품정보</a></li>
-            <li class="nav-item"><a class="nav-link" id="profile-tab"
-               data-toggle="tab" href="#profile" role="tab"
-               aria-controls="profile" aria-selected="false">판매자 정보</a></li>
-            <li class="nav-item"><a class="nav-link" id="contact-tab"
-               data-toggle="tab" href="#contact" role="tab"
-               aria-controls="contact" aria-selected="false">배송/반품</a></li>
-            <li class="nav-item"><a class="nav-link active" id="review-tab"
-               data-toggle="tab" href="#review" role="tab" aria-controls="review"
-               aria-selected="false">문의 및 댓글</a></li>
-         </ul>
-         <div class="tab-content" id="myTabContent">
-            <div class="tab-pane fade" id="home" role="tabpanel"
-               aria-labelledby="home-tab" style="text-align: center;">
-               
-               
-               
+<<<<<<< HEAD
+	<section class="product_description_area">
+		<div class="container">
+			<ul class="nav nav-tabs" id="myTab" role="tablist">
+				<li class="nav-item"><a class="nav-link active" id="home-tab"
+					data-toggle="tab" href="#home" role="tab" aria-controls="home"
+					aria-selected="true">물품정보</a></li>
+				<li class="nav-item"><a class="nav-link" id="profile-tab"
+					data-toggle="tab" href="#profile" role="tab"
+					aria-controls="profile" aria-selected="false">판매자 정보</a></li>
+				<li class="nav-item"><a class="nav-link" id="contact-tab"
+					data-toggle="tab" href="#contact" role="tab"
+					aria-controls="contact" aria-selected="false">배송/반품</a></li>
+				<li class="nav-item"><a class="nav-link" id="review-tab"
+					data-toggle="tab" href="#review" role="tab" aria-controls="review"
+					aria-selected="false" onclick="fnMove()">문의 및 댓글</a></li>
+			</ul>
+			<div class="tab-content" id="myTabContent">
+				<div class="tab-pane fade active show" id="home" role="tabpanel"
+					aria-labelledby="home-tab" style="text-align: center;">
+				
+				<!-- 물품정보 -->                                      
+
                <div class="col-md-62">
                      <p style=text-align:left;font-size:25px;line-height:40px;padding-left:60px;padding-right:60px;padding-top:30px;>
                         ${dto.contents }   
                      </p>
                </div><br><br><br>                                           
-               
-               
-               
                <!-- 상세 이미지  -->
                <div class="selector">
                   <img src="img/title/${i_dto.title_img }"" onerror="this.style.display='none'"
@@ -588,6 +586,13 @@ $("#logout_na").on("click", function() {
       </div>
    </section>
    
+   	<script>
+	  function fnMove(){
+	        var offset = $("#MovingPoint").offset();
+	        $('html, body').animate({scrollTop : offset.top}, 500);
+	    }
+   </script>
+   
    <!-- 댓글 area -->
 
 	<!--================Blog Area =================-->
@@ -628,6 +633,7 @@ $("#logout_na").on("click", function() {
 							</div>
 						</c:forEach>
 					</div>
+					   <div id=MovingPoint></div>	<!-- 댓글 이동 탭 -->
 					<div class="row p-0 m-0 numBox">
 						<div class="col-12 d-flex justify-content-center navi mt-1">
 							<nav aria-label="Page navigation example">
