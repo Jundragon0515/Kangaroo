@@ -56,7 +56,14 @@
 	text-align: center;
 }
 a{
-	font-size: 15px;
+	font-size: 18px;
+	color: black;
+}
+.cart_inner .table tbody tr td {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    vertical-align: middle;
+    align-self: center;
 }
 </style>
 <script>
@@ -504,12 +511,12 @@ a{
                            			<td>
                            			<div class="media">
                                         <div class="d-flex">
-                                        	<a href="/auction_detailPage?no=${i.no }">
+                                        	<a href="/used_detailPage?no=${i.no }">
                                             	<img src="/img/title/${i.title_img}" width="150px" height="100px"  alt="">
                                             </a>
                                         </div>
                                         <div class="media-body">
-                                        	<a href="/auction_detailPage?no=${i.no }">
+                                        	<a href="/used_detailPage?no=${i.no }">
                                             <p>${i.title }</p>
                                             </a>
                                         </div>
