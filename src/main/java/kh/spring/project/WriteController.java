@@ -31,7 +31,10 @@ public class WriteController {
    private HttpSession session;
    @Autowired
    private TradeController tc;
-   
+   @Autowired
+   private AuctionController ac;
+   @Autowired
+   HttpSession se;
    
    @RequestMapping("tradeGoodsWrite")
    public String write() {
@@ -60,15 +63,16 @@ public class WriteController {
    @RequestMapping("goodsRegister")
    public String goodsRegisterProc(HttpServletRequest request,MultipartHttpServletRequest mtfRequest,Used_transaction_boardDTO dto,Used_transaction_img_boardDTO udto) {
          try {
-            System.out.println("가격:"+dto.getDelivery_cost());
-            dto.setId("asd");
-            dto.setMember_class("보통");            
+            dto.setId((String) se.getAttribute("email"));
+            dto.setMember_class((String) se.getAttribute("member_class"));            
             sv.goodsInsert(mtfRequest,dto,udto);
          } catch (Exception e) {
             e.printStackTrace();
          }
-      
-      return "redirect:"+tc.index(request);
+      if(dto.getTrade_type().equals("직거래")) {
+    	  return "redirect:"+tc.direct(request);
+      }
+      return "redirect:"+tc.safe(request);
    }  //중고 거래 등록하는 것
 
    @RequestMapping("auctionWrite")
@@ -77,18 +81,21 @@ public class WriteController {
    } //경매 글쓰기로 가는 것
 
    @RequestMapping("auctionWriteComplete")
-   public String ActionWriteCompleteProc(MultipartHttpServletRequest mtfRequest,Auction_boardDTO adto,Auction_img_boardDTO idto) {
+   public String ActionWriteCompleteProc(HttpServletRequest request,MultipartHttpServletRequest mtfRequest,Auction_boardDTO adto,Auction_img_boardDTO idto) {
       
       SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
       Date time = new Date();
       String time1 = sdf.format(time);
       try {
          //sv.addDate(time1,adto.getPeriod());
-         adto.setId("asd");
-         adto.setMember_class("보통");
+         adto.setId((String) se.getAttribute("email"));
+         adto.setMember_class((String) se.getAttribute("member_class"));
          sv.actionInsert(mtfRequest,adto, idto,time1,adto.getPeriod());
       } catch (Exception e) {
          e.printStackTrace();
+      }
+      if(adto.getTrade_type().equals("직거래")) {
+    	  return "redirect:"+ac.index(request);
       }
       return "redirect:/";
    } //경매 글쓰기 완성 등록하면 홈으로가는 것

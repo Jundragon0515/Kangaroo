@@ -1,3 +1,4 @@
+
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
@@ -19,7 +20,7 @@
 <!-- meta character set -->
 <meta charset="UTF-8">
 <!-- Site Title -->
-<title>중고경매 게시판</title>
+<title>중고거래 게시판</title>
 
 <!--
       CSS
@@ -195,7 +196,7 @@ function viewCount(){
    var viewSelect = document.getElementById("viewCount");
     // select element에서 선택된 option의 value가 저장된다.
     var selectValue = viewSelect.value;
-    location.href="auctionOption?view=" + selectValue;
+    location.href="tradeOption_safe?view=" + selectValue;
 
 }
 
@@ -205,7 +206,7 @@ function viewCount(){
 /*       $("#category").on("click", function(){
          var category = $(this).text();
          console.log(category);
-          $(location).attr("href", "auctionOption");
+          $(location).attr("href", "tradeOption_safe");
          
       }); */
    
@@ -239,7 +240,7 @@ function viewCount(){
        /* 검색기능 */
       $("#btn-search").on("click", function(){
          var text_search =  $("#text-search").val();
-         $(location).attr("href", "auctionOption?search="+text_search);
+         $(location).attr("href", "tradeOption_safe?search="+text_search);
       });
       
       /* 페이지 정렬 개수 */
@@ -318,10 +319,9 @@ function viewCount(){
                   class="nav-link dropdown-toggle" data-toggle="dropdown"
                   role="button" aria-haspopup="true" aria-expanded="false">중고 거래</a>
                   <ul class="dropdown-menu">
-                     <li class="nav-item"><a class="nav-link" href="/">중고 직거래</a></li>
-                     <li class="nav-item"><a class="nav-link" href="/">중고
-                           안전거래</a></li>
-                     <li class="nav-item"><a class="nav-link" href="/">중고 경매</a></li>
+                     <li class="nav-item"><a class="nav-link" href="trade">중고 직거래</a></li>
+                     <li class="nav-item"><a class="nav-link" href="trade">중고 안전거래</a></li>
+                     <li class="nav-item"><a class="nav-link" href="auction">중고 경매</a></li>
                   </ul></li>
                <li class="nav-item "><a class="nav-link" href="/">고객센터</a></li>
                <li class="nav-item "><a class="nav-link" href="/">공지사항</a></li>
@@ -386,13 +386,12 @@ function viewCount(){
    <!-- End Header Area -->
 
    <!-- Start Banner Area -->
-   
    <section class="banner-area organic-breadcrumb">
    <div class="container">
       <div
          class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
          <div class="col-first">
-            <h1>중고경매</h1>
+            <h1>중고거래</h1>
             <nav class="d-flex align-items-center"> <a href="index.html"><span
                class="lnr lnr-arrow-right">Home</span></a> <a href="#"><span
                class="lnr lnr-arrow-right">Shop</span></a> </nav>
@@ -401,7 +400,7 @@ function viewCount(){
    </div>
    </section>
    <!-- End Banner Area -->
-	<form action="auctionBoardDelete">
+<form action="boardWriteDelete">
    <!-- start banner Area -->
    <div class="container-fluid">
       <div class="row">
@@ -415,7 +414,7 @@ function viewCount(){
                      href="#" aria-expanded="false"
                      aria-controls="fruitsVegetable">
                      <span class="lnr lnr-arrow-right">
-                        </span><a href="auctionOption?category=all">전체보기</a></a>
+                        </span><a href="tradeOption_safe?category=all">전체보기</a></a>
                      </li>
 
 
@@ -423,54 +422,56 @@ function viewCount(){
                   <li class="main-nav-list"><a data-toggle="collapse"
                      href="#meatFish" aria-expanded="false" aria-controls="meatFish"><span
                         class="lnr lnr-arrow-right">
-                        </span><a href="auctionOption?category=art">미술품</a></a>
+                        </span><a href="tradeOption_safe?category=art">미술품</a></a>
                   </li>
                      
                   <li class="main-nav-list"><a data-toggle="collapse"
                      href="#meatFish" aria-expanded="false" aria-controls="meatFish"><span
                         class="lnr lnr-arrow-right">
-                        </span><a href="auctionOption?category=book">도서</a></a>
+                        </span><a href="tradeOption_safe?category=book">도서</a></a>
                   </li>
                   
                   <li class="main-nav-list"><a data-toggle="collapse"
                      href="#meatFish" aria-expanded="false" aria-controls="meatFish"><span
                         class="lnr lnr-arrow-right">
-                        </span><a href="auctionOption?category=electric">가전제품</a></a>
+                        </span><a href="tradeOption_safe?category=electric">가전제품</a></a>
                   </li>
                   
                   <li class="main-nav-list"><a data-toggle="collapse"
                      href="#meatFish" aria-expanded="false" aria-controls="meatFish"><span
                         class="lnr lnr-arrow-right">
-                        </span><a href="auctionOption?category=hobby">취미/수집</a></a>
+                        </span><a href="tradeOption_safe?category=hobby">취미/수집</a></a>
                   </li>
                   
 
                   <li class="main-nav-list"><a data-toggle="collapse"
                      href="#meatFish" aria-expanded="false" aria-controls="meatFish"><span
                         class="lnr lnr-arrow-right">
-                        </span><a href="auctionOption?category=life">생활용품</a></a>
+                        </span><a href="tradeOption_safe?category=life">생활용품</a></a>
                   </li>
                   
                   <li class="main-nav-list"><a data-toggle="collapse"
                      href="#meatFish" aria-expanded="false" aria-controls="meatFish"><span
                         class="lnr lnr-arrow-right">
-                        </span><a href="auctionOption?category=sports">스포츠/레저</a></a>
+                        </span><a href="tradeOption_safe?category=sports">스포츠/레저</a></a>
                   </li>
 
                   <li class="main-nav-list"><a data-toggle="collapse"
                      href="#meatFish" aria-expanded="false" aria-controls="meatFish"><span
                         class="lnr lnr-arrow-right">
-                        </span><a href="auctionOption?category=etc">기타</a></a>
+                        </span><a href="tradeOption_safe?category=etc">기타</a></a>
                   </li>
                </ul>
-              <c:choose>
+               
+               <c:choose>
                	<c:when test="${logintype=='admin'}">
                		<div class="head "><input type="submit" value="삭제하기" id="send"></div>
                	</c:when>
                <c:when test="${logintype!='admin' }">
-               <div class="head "><a href="auctionWrite" style="color: white">경매등록</a></div>
+               <div class="head "><a href="tradeGoodsWrite" style="color: white">제품등록</a></div>
                </c:when>
                </c:choose>
+               
             </div>
 
 
@@ -504,10 +505,10 @@ function viewCount(){
                         <div class="col-lg-8 col-md-8 col-sm-8">
                            <div class="row">
                               <div class="col-lg-6 col-md-6 col-sm-6 pl-5">
-                                 <a class="nav-link" href="auctionOption?price=low">낮은가격순</a> 
+                                 <a class="nav-link" href="tradeOption_safe?price=low">낮은가격순</a> 
                               </div>
                               <div class="col-lg-6 col-md-6 col-sm-6 pl-5">      
-                                 <a class="nav-link" href="auctionOption?price=high">높은가격순</a> 
+                                 <a class="nav-link" href="tradeOption_safe?price=high">높은가격순</a> 
                               </div>
                            </div>
                         </div>
@@ -533,26 +534,27 @@ function viewCount(){
                				<c:when test="${logintype=='admin'}">
                					<input type="checkbox" name="checkDelete" value="${temp.no }">
                				</c:when>
-               			</c:choose>
+               			</c:choose>	
+							
                         <div class="single-product" style="margin-bottom: 15px;">
                            <div class="card">
-                              <a href="auctionOption"><img class="img-fluid product-img-size"
-                                 style="margin-bottom: 5px;"
-                                 src="../resources/img/title/${temp.getTitle_img()}" alt=""></a>
+                              <a href="tradeOption_safe">
+                              <img class="img-fluid product-img-size" style="margin-bottom: 5px;"
+                                 src="/img/title/${temp.title_img}" alt=""></a>
                               <div class="card-body" style="padding: 12px;">
                                  <div class="row">
                                     <div class="d-none d-lg-block col-lg-12">[${temp.category}]</div>
                                  </div>
                                  <div class="row">
                                     <div class="col-lg-12">
-                                       <h4>${temp.getTitle()}</h4>
+                                       <h4>${temp.title}</h4>
                                     </div>
                                  </div>
                                  <div class="row">
-                                    <div class="col-lg-12">현재가격:${temp.present_price}</div>
+                                    <div class="col-lg-12">${temp.price}</div>
                                  </div>
                                  <div class="row">
-                                    <div class="col-sm-12 col-md-10 col-lg-8">남은시간</div>
+                                    <div class="col-sm-12 col-md-10 col-lg-8">${temp.joinDate}</div>
                                     <div class="d-none d-xl-block col-lg-2"><i class="fas fa-eye fa-2x"></i></div>
                                     <div class="col-sm-12 col-md-2 col-lg-2">${temp.viewCount}</div>
                                  </div>
@@ -560,7 +562,7 @@ function viewCount(){
                                     <div class="prd-bottom" style="margin-top: 5px;">
                                        <a href="" class="social-info"> <span class="ti-bag"></span>
                                           <p class="hover-text">add to bag</p>
-                                       </a> <a href="/auction_detailPage?no=${temp.no}" class="social-info">
+                                       </a> <a href="/used_detailPage?no=${temp.no}" class="social-info">
                                         <span class="lnr lnr-move"></span>
                                           <p class="hover-text">view more</p>
                                        </a>
@@ -577,7 +579,7 @@ function viewCount(){
                      </div>
                   </c:forEach>
                </div>
-               </form>
+              </form> 
             </div>
             </section>
             <div class="row">
