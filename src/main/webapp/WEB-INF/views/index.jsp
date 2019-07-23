@@ -43,6 +43,7 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
 </head>
 <style>
+
 .owl-nav {
 	top: 430px;
 }
@@ -57,6 +58,7 @@
 .nav_ul * {
 	text-align: center;
 }
+
 </style>
 <script>
 	$(function() {
@@ -447,6 +449,7 @@
 		</div>
 	</footer>
 	<!-- End footer Area -->
+	
 	<script src="../resources/js/vendor/jquery-2.2.4.min.js"></script>
 	<script src="../resources/js/vendor/bootstrap.min.js"></script>
 	<script src="../resources/js/jquery.ajaxchimp.min.js"></script>

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -280,7 +280,7 @@ $(function(){
 					</div>
 					<div class=" col-lg-8 col-md-8 col-sm-8">
 						<input type="text" class="form-control" 
-							 value="${point}" readonly>
+							 value="<fmt:formatNumber value="${point}" pattern="#,###" />" readonly>
 					</div>
 
 				</div>

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="zxx" class="no-js">
 
@@ -158,7 +159,7 @@ a{
 				if(resp!=""){
 				open(
 						"/golookup",
-						"_blank", "width=500,height=500");
+						"_blank", "width=1000,height=600");
 				}else{
 					alert("등록된 배송정보가 잘못되어 있습니다. ");
 				}
@@ -367,7 +368,7 @@ a{
                                     </div>
                                     </td>
                                     <td>
-                                    <h5>${i.price }</h5>
+                                    <h5><fmt:formatNumber value="${i.price}" pattern="#,###" /></h5>
                                     </td>
                                     <td>
                                     <h5>${i.buyer }</h5>
@@ -463,7 +464,7 @@ a{
                                     </div>
                                     </td>
                                     <td>
-                                    <h5>${i.present_price }</h5>
+                                    <h5><fmt:formatNumber value="${i.present_price }" pattern="#,###" /></h5>
                                     </td>
                                     <td>
                                     <c:choose>

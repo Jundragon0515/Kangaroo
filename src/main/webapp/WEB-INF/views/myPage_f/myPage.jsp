@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="zxx" class="no-js">
 
@@ -274,7 +275,7 @@
 								</tr>
 								<tr>
 									<th scope="row">보유 포인트</th>
-									<td colspan="2">${point }</td>
+									<td colspan="2"><fmt:formatNumber value="${point}" pattern="#,###" /></td>
 								</tr>
 								<tr>
 									<th scope="row">우편번호</th>

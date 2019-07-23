@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="zxx" class="no-js">
 
@@ -128,7 +129,7 @@ a{
 			}).done(function(resp){
 				open(
 						"/golookup?resp="+resp,
-						"_blank", "width=500,height=500");
+						"_blank", "width=1000,height=600");
 			});
 			//대기
 		});
@@ -304,12 +305,12 @@ a{
                            			<c:choose>
                            			<c:when test="${i.type=='거래' }">
                                         <div class="d-flex">
-                                        	<a href="/user_detailPage?no=${i.product_num }">
+                                        	<a href="/used_detailPage?no=${i.product_num }">
                                             	<img src="/img/title/${i.product_img}" width="150px" height="100px"  alt="">
                                             </a>
                                         </div>
                                         <div class="media-body">
-                                        	<a href="/user_detailPage?no=${i.product_num }">
+                                        	<a href="/used_detailPage?no=${i.product_num }">
                                             <p>${i.product_title }</p>
                                             </a>
                                         </div>
@@ -330,7 +331,7 @@ a{
                                     </div>
                                     </td>
                                     <td>
-                                    <h5>${i.price }</h5>
+                                    <h5><fmt:formatNumber value="${i.price}" pattern="#,###" /></h5>
                                     </td>
                                     <td>
                                     <h5>${i.seller }</h5>
@@ -425,7 +426,7 @@ a{
                                     </div>
                                     </td>
                                     <td>
-                                    <h5>${i.point }</h5>
+                                    <h5><fmt:formatNumber value="${i.price}" pattern="#,###" /></h5>
                                     </td>
                                     <td>
                                     <h5>${i.id }</h5>
