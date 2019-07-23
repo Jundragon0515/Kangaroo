@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 
+import kh.spring.dao.AuctionDAO;
 import kh.spring.dao.DetailPageDAO;
+import kh.spring.dao.GoodsTradeDAO;
 import kh.spring.dao.MemberDAO;
 import kh.spring.dto.Auction_boardDTO;
 import kh.spring.dto.Auction_img_boardDTO;
@@ -33,6 +35,12 @@ public class DetailPageController {
 	
 	@Autowired
 	private MemberService sdao;
+	
+	@Autowired
+	private GoodsTradeDAO gtdao;
+	
+	@Autowired
+	private AuctionDAO acdao;
 	
 	@Autowired
 	HttpSession session;
@@ -77,7 +85,9 @@ public class DetailPageController {
 		int no = Integer.parseInt(request.getParameter("no"));
 		Used_transaction_img_boardDTO i_dto = dao.u_i_selectByNo(no);	
 		Used_transaction_boardDTO dto = dao.u_selectByNo(no);
-
+		//조회수 올리기
+		gtdao.viewCountUpdate(no);
+		
 		int currentPage = 1;
 
 		String id = (String) session.getAttribute("email");
@@ -113,7 +123,8 @@ public class DetailPageController {
 		int no = Integer.parseInt(request.getParameter("no"));
 		Auction_img_boardDTO i_dto = dao.a_i_selectByNo(no);	
 		Auction_boardDTO dto = dao.a_selectByNo(no);
-		
+		//조회수 올리기
+		acdao.viewCountUpdate(no);
 		int currentMoney = 0;
 		int currentPage = 1;
 		
