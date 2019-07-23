@@ -296,19 +296,96 @@ $("#logout_na").on("click", function() {
                         </tbody>
                      </table>
                   </div>
-
                   <div style=text-align:right;padding-right:10px;>
-                     <a class="primary-btn" href="#">Add to Cart</a>
+                  <c:choose>
+                  <c:when test="${dto.onGoing=='y' }">
+                     <input type="button" class="genric-btn primary radius" id="buy" value="구매 하기"/>
+                     </c:when>
+                     <c:when test="${dto.onGoing=='n' }">
+                     <input type="button" class="genric-btn primary radius" id="soldOut" value="판매 완료"/>
+                     </c:when>
+                     </c:choose>
                   </div>
                </div>
             </div>
          </div>
       </div>
    </div>
+   
+<!--   	구매 script -->
+   <script>
+   
+   
+   $("#soldOut").on("click",function(){
+	 
+	   alert("판매 완료된 상품 입니다.");
+   })
+   
+   $("#buy").on("click",function(){
+	  
+	   if(${email==null}){
+		   alert("로그인 하세요.");
+		   return false;
+	   }
+	   
+	   var result = confirm("정말로 구매하시겠습니까?");
+	   
+	   if(result==false){
+		   return false;
+	   }
+	   
+	   
+	   
+	   
+	   var boardNum = "${dto.no }";
+	   var price = Number(${dto.price });
+	   var d_price = Number(${dto.delivery_cost });
+	   var img = "${i_dto.title_img }";
+	   var title = "${dto.title }";
+	   var s_id = "${dto.id }";
+	   var b_id = "${email}";
+	   
+	   var myMoney = Number(${myMoney});
+	   var price_p = price+d_price;
+	   
+	   if(myMoney<price_p){
+		   alert("보유 잔액이 부족합니다.");
+		   return false;
+	   }
+	   console.log(boardNum + " : " + price + " : " + d_price + " : " + img + " :"  + title + " : " + s_id + " : " + b_id);
+	   
+	   $.ajax({
+		  
+		   url:"/buy",
+		   data:{
+			   "boardNum":boardNum,
+			   "price":price+d_price,
+			   "img":img,
+			   "title":title,
+			   "s_id":s_id,
+			   "b_id":b_id
+		   },
+	   }).done(function(resp){
+		   
+		   if(resp==1){
+			   alert("구매 성공!");
+			   location.reload();
+			   
+		   }else{
+			   alert("구매 실패!");
+			   location.reload();
+		   }
+		   
+	   });
+	   
+   });
+   
+   
+   </script>
    <!--================End Single Product Area =================-->
 
    <!--================Product Description Area =================-->
-   <section class="product_description_area">
+   <section class="product_description_area p-0 m-0">
       <div class="container">
          <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item"><a class="nav-link" id="home-tab"

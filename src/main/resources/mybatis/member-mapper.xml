@@ -45,7 +45,12 @@ select pw from members where id=#{value}
 		update members set point = point-#{point} where
 		id = #{id}
 	</update>
-
+	
+	<update id="buy_minus">
+		update members set point = point-#{price} where
+		id = #{buyer}
+	</update>
+	
 	<!-- 입찰2) 입찰 금액 기준으로 2번째 입찰자를 찾는 쿼리다 -->
 	<select id="moneyBack" resultType="kh.spring.dto.TenderDTO">
 		select * from (select

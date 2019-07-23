@@ -17,6 +17,7 @@ import kh.spring.dao.MemberDAO;
 import kh.spring.dto.Auction_boardDTO;
 import kh.spring.dto.Auction_img_boardDTO;
 import kh.spring.dto.CommentDTO;
+import kh.spring.dto.OrderDTO;
 import kh.spring.dto.TenderDTO;
 import kh.spring.dto.Used_transaction_boardDTO;
 import kh.spring.dto.Used_transaction_img_boardDTO;
@@ -36,6 +37,41 @@ public class DetailPageController {
 	@Autowired
 	HttpSession session;
 	
+	
+	@RequestMapping("/buy")
+	@ResponseBody
+	public int buy(HttpServletRequest request) {
+		int boardNum = Integer.parseInt(request.getParameter("boardNum"));
+		int price = Integer.parseInt(request.getParameter("price"));
+		String img = request.getParameter("img");
+		String title = request.getParameter("title");
+		String s_id = request.getParameter("s_id");
+		String b_id = request.getParameter("b_id");
+		String type = "거래";
+		OrderDTO dto = new OrderDTO();
+		
+		dto.setProduct_num(boardNum);
+		dto.setProduct_title(title);
+		dto.setProduct_img(img);
+		dto.setSeller(s_id);
+		dto.setBuyer(b_id);
+		dto.setPrice(price);
+		dto.setType(type);
+		
+		int result = sdao.buy(dto);
+		
+		if(result>0) {
+			
+			return 1;
+			
+		}else {
+			
+			return 0;
+		}
+		
+	}
+	
+	
 	@RequestMapping("/used_detailPage")								// 중고 거래_상세 페이지
 	public String used_detailPage(HttpServletRequest request) {
 		int no = Integer.parseInt(request.getParameter("no"));
@@ -43,6 +79,14 @@ public class DetailPageController {
 		Used_transaction_boardDTO dto = dao.u_selectByNo(no);
 
 		int currentPage = 1;
+
+		String id = (String) session.getAttribute("email");
+		if(id!=null) {
+			request.setAttribute("myMoney", mdao.myMoney(id));
+			}else {
+				request.setAttribute("myMoney", 0);
+			}
+		
 		
 		if(request.getParameter("currentPage")!=null) {
 			currentPage=Integer.parseInt(request.getParameter("currentPage"));
