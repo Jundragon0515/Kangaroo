@@ -377,7 +377,6 @@ $("#logout_na").on("click", function() {
    <!--================End Single Product Area =================-->
 
    <!--================Product Description Area =================-->
-<<<<<<< HEAD
 	<section class="product_description_area">
 		<div class="container">
 			<ul class="nav nav-tabs" id="myTab" role="tablist">
