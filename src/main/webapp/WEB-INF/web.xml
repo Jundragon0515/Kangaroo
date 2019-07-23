@@ -39,5 +39,5 @@
 		<filter-name>encodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
->>>>>>> 74990c5fbf2e8724bfe7caba84924b9e1fc67f26
+
 </web-app>

@@ -22,7 +22,7 @@ public class ScheduleTask {
 	//@Scheduled(fixedDelay=5000)	// 첫 번째 동작이 안 끝나면 설정된 초가 지나도 실행이 안 됨.
 	
 	// @Scheduled(cron="30 59 23 * * * *")	
-	@Scheduled(cron="1/10 * * * * *")		// "/" : 매 타임 마다    "A,B" : A와 B에 	"A-B" : A~B까지
+	@Scheduled(cron="0 */2 * * * *")		// "/" : 매 타임 마다    "A,B" : A와 B에 	"A-B" : A~B까지
 	public void everyMidNight() {
 		dao.insertVisitCount();
 		HomeController.visitCount = 0;

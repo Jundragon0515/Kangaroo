@@ -8,7 +8,7 @@
 <head>
 <!-- Mobile Specific Meta -->
 <meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+   content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <!-- Favicon-->
 <link rel="shortcut icon" href="img/fav.png">
 <!-- Author Meta -->
@@ -47,7 +47,7 @@
 <link rel="stylesheet" href="../resources/css/nouislider.min.css">
 <link rel="stylesheet" href="../resources/css/ion.rangeSlider.css" />
 <link rel="stylesheet"
-	href="../resources/css/ion.rangeSlider.skinFlat.css" />
+   href="../resources/css/ion.rangeSlider.skinFlat.css" />
 <link rel="stylesheet" href="../resources/css/main.css">
 
 <style>
@@ -76,34 +76,32 @@ body {
 }
 
 .detail-info {
-	text-align: right;
+   text-align: right;
 }
 
 #dotted_line {
-	border-bottom: 1.3px dotted gray;
-	padding-top: 10px;
-	padding-bottom: 10px;
+   border-bottom: 1.3px dotted gray;
+   padding-top: 10px;
+   padding-bottom: 10px;
 }
 
 .selector img {
-	width: 50%;
-	height: 50%;
+   width: 50%;
+   height: 50%;
 }
-
 .nav_b {
-	border: 0px;
-	background: 000000;
-	width: 100%;
+   border: 0px;
+   background: 000000;
+   width: 100%;
 }
 
 .nav_b:hover {
-	cursor: pointer;
+   cursor: pointer;
 }
 
 .nav_ul * {
-	text-align: center;
+   text-align: center;
 }
-
 </style>
 <script>
 $("#logout_na").on("click", function() {
@@ -222,6 +220,7 @@ $("#logout_na").on("click", function() {
 			</nav>
 		</div>
 	</header>
+<<<<<<< HEAD
 	<!-- End Header Area -->
 
 	<!-- Start Banner Area -->
@@ -369,14 +368,14 @@ $("#logout_na").on("click", function() {
 						</div>
 
 						<!-- 				입찰창 end -->
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!--================End Single Product Area =================-->
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   <!--================End Single Product Area =================-->
 
-	<table class="table" id="rank">
+<table class="table" id="rank">
 		<thead>
 			<tr>
 				<th scope="col" class="choi">RANK5</th>
@@ -391,7 +390,6 @@ $("#logout_na").on("click", function() {
 
 
 
-	<!-- tender 웹 소켓 -->
 
 
 	<script>
@@ -890,6 +888,7 @@ $("#logout_na").on("click", function() {
 
 	<!-- 댓글 area -->
 
+
 	<!--================Blog Area =================-->
 	<section class="blog_area single-post-area section_gap p-0">
 		<div class="container">
@@ -924,13 +923,13 @@ $("#logout_na").on("click", function() {
 											</c:when>
 											<c:otherwise>
 											</c:otherwise>
+
 										</c:choose>
 									</div>
 								</div>
 							</div>
 						</c:forEach>
 					</div>
-						<div id=MovingPoint></div>	<!-- 댓글 이동 탭 -->
 					<div class="row p-0 m-0 numBox">
 						<div class="col-12 d-flex justify-content-center navi mt-1">
 							<nav aria-label="Page navigation example">
@@ -938,9 +937,6 @@ $("#logout_na").on("click", function() {
 							</nav>
 						</div>
 					</div>
-					
-									<!-- 댓글 -->
-									
 					<div class="comment-form m-3 p-4">
 						<form>
 							<div class="form-group">
@@ -1383,6 +1379,7 @@ $("#logout_na").on("click", function() {
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
 	<script src="../resources/js/gmaps.min.js"></script>
 	<script src="../resources/js/main.js"></script>
+
 
 </body>
 

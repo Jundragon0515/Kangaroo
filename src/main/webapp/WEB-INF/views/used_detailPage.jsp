@@ -377,6 +377,7 @@ $("#logout_na").on("click", function() {
    <!--================End Single Product Area =================-->
 
    <!--================Product Description Area =================-->
+<<<<<<< HEAD
 	<section class="product_description_area">
 		<div class="container">
 			<ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -398,12 +399,12 @@ $("#logout_na").on("click", function() {
 					aria-labelledby="home-tab" style="text-align: center;">
 				
 				<!-- 물품정보 -->                                      
+
                <div class="col-md-62">
                      <p style=text-align:left;font-size:25px;line-height:40px;padding-left:60px;padding-right:60px;padding-top:30px;>
                         ${dto.contents }   
                      </p>
                </div><br><br><br>                                           
-                         
                <!-- 상세 이미지  -->
                <div class="selector">
                   <img src="img/title/${i_dto.title_img }"" onerror="this.style.display='none'"
@@ -591,8 +592,6 @@ $("#logout_na").on("click", function() {
 	        $('html, body').animate({scrollTop : offset.top}, 500);
 	    }
    </script>
-   
-   <div id=MovingPoint></div>
    
    <!-- 댓글 area -->
 
