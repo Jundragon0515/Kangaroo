@@ -178,7 +178,14 @@
 
 .back-to-top:hover {color: #818bb0}
 
-
+#send{
+	border: 1px solid #828bb3;
+	background-color:#828bb3;
+	color:white;
+}
+#send:hover {
+	cursor: pointer;
+}
 </style>
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -289,104 +296,97 @@ function viewCount(){
 
    <!-- Start Header Area -->
    <header class="header_area sticky-header">
-		<div class="main_menu">
-			<nav class="navbar navbar-expand-lg navbar-light main_box">
-				<div class="container">
-					<!-- Brand and toggle get grouped for better mobile display logo_h -->
-					<a class="navbar-brand logo_h" href="/"><img
-						src="../resources/img/logo.png" width="60px" alt="">
-						Kangaroo</a>
-					<button class="navbar-toggler" type="button" data-toggle="collapse"
-						data-target="#navbarSupportedContent"
-						aria-controls="navbarSupportedContent" aria-expanded="false"
-						aria-label="Toggle navigation">
-						<span class="icon-bar"></span> <span class="icon-bar"></span> <span
-							class="icon-bar"></span>
-					</button>
-					<!-- Collect the nav links, forms, and other content for toggling -->
-					<div class="collapse navbar-collapse offset"
-						id="navbarSupportedContent">
-						<ul class="nav navbar-nav menu_nav ml-auto">
-							<!-- 							<li class="nav-item active"><a class="nav-link" href="/">Home</a></li> -->
-							<li class="nav-item submenu dropdown"><a href="#"
-								class="nav-link dropdown-toggle" data-toggle="dropdown"
-								role="button" aria-haspopup="true" aria-expanded="false">중고
-									거래</a>
-								<ul class="dropdown-menu">
-									<li class="nav-item"><a class="nav-link" href="/trade">중고
-											직거래</a></li>
-									<li class="nav-item"><a class="nav-link" href="/trade">중고
-											안전거래</a></li>
-									<li class="nav-item"><a class="nav-link" href="/auction">중고
-											경매</a></li>
-								</ul></li>
-							<li class="nav-item "><a class="nav-link" href="/">고객센터</a></li>
-							<li class="nav-item "><a class="nav-link" href="/">공지사항</a></li>
+   <div class="main_menu">
+      <nav class="navbar navbar-expand-lg navbar-light main_box">
+      <div class="container">
+         <!-- Brand and toggle get grouped for better mobile display logo_h -->
+         <a class="navbar-brand logo_h" href="/"><img
+            src="../resources/img/logo.png" width="60px" alt=""> Kangaroo</a>
+         <button class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="icon-bar"></span> <span class="icon-bar"></span> <span
+               class="icon-bar"></span>
+         </button>
+         <!-- Collect the nav links, forms, and other content for toggling -->
+         <div class="collapse navbar-collapse offset"
+            id="navbarSupportedContent">
+            <ul class="nav navbar-nav menu_nav ml-auto">
+               <!--                      <li class="nav-item active"><a class="nav-link" href="/">Home</a></li> -->
+               <li class="nav-item submenu dropdown"><a href="#"
+                  class="nav-link dropdown-toggle" data-toggle="dropdown"
+                  role="button" aria-haspopup="true" aria-expanded="false">중고 거래</a>
+                  <ul class="dropdown-menu">
+                     <li class="nav-item"><a class="nav-link" href="/">중고 직거래</a></li>
+                     <li class="nav-item"><a class="nav-link" href="/">중고
+                           안전거래</a></li>
+                     <li class="nav-item"><a class="nav-link" href="/">중고 경매</a></li>
+                  </ul></li>
+               <li class="nav-item "><a class="nav-link" href="/">고객센터</a></li>
+               <li class="nav-item "><a class="nav-link" href="/">공지사항</a></li>
 
-							<c:choose>
-								<c:when test="${logintype=='admin'}">
-									<li class="nav-item "><a class="nav-link" href="/admin">관리자페이지</a></li>
-									<li class="nav-item "><a class="nav-link" href="/logout">로그아웃</a></li>
-								</c:when>
-								<c:when test="${logintype=='naver'}">
-									<li class="nav-item submenu dropdown"><a href="#"
-										class="nav-link dropdown-toggle" data-toggle="dropdown"
-										role="button" aria-haspopup="true" aria-expanded="false"><img
-											src="../resources/img/account.png" width="35px"></a>
-										<ul class="dropdown-menu nav_ul">
-											<li class="nav-item "><a class="nav-link" href="/">찜목록</a></li>
-											<li class="nav-item active"><a class="nav-link"
-												href="/goMyPage">마이페이지</a></li>
-											<li class="nav-item "><a class="nav-link"
-												href="/toPoint">포인트충전</a></li>
-											<li class="nav-item "><input type="button"
-												class="nav-link nav_b" id="logout_na" value="로그아웃"></li>
-										</ul></li>
-								</c:when>
-								<c:when test="${logintype=='kakao'}">
-									<li class="nav-item submenu dropdown"><a href="#"
-										class="nav-link dropdown-toggle" data-toggle="dropdown"
-										role="button" aria-haspopup="true" aria-expanded="false"><img
-											src="../resources/img/account.png" width="40px"></a>
-										<ul class="dropdown-menu nav_ul">
-											<li class="nav-item "><a class="nav-link" href="/">찜목록</a></li>
-											<li class="nav-item active"><a class="nav-link"
-												href="/goMyPage">마이페이지</a></li>
-											<li class="nav-item "><a class="nav-link"
-												href="/toPoint">포인트충전</a></li>
-											<li class="nav-item "><input type="button"
-												class="nav-link nav_b" id="logout_ka" value="로그아웃"></li>
-										</ul></li>
-								</c:when>
-								<c:when test="${logintype=='email'}">
-									<li class="nav-item submenu dropdown"><a href="#"
-										class="nav-link dropdown-toggle" data-toggle="dropdown"
-										role="button" aria-haspopup="true" aria-expanded="false"><img
-											src="../resources/img/account.png" width="40px"></a>
-										<ul class="dropdown-menu nav_ul">
-											<li class="nav-item "><a class="nav-link" href="/">찜목록</a></li>
-											<li class="nav-item "><a class="nav-link"
-												href="/goMyPage">마이페이지</a></li>
-											<li class="nav-item "><a class="nav-link"
-												href="/toPoint">포인트충전</a></li>
-											<li class="nav-item "><a class="nav-link" href="/logout">로그아웃</a></li>
-										</ul></li>
-								</c:when>
-								<c:otherwise>
-									<li class="nav-item "><a class="nav-link"
-										href="/login_main">로그인</a></li>
-									<li class="nav-item "><a class="nav-link" href="/insert">회원가입</a></li>
-								</c:otherwise>
-							</c:choose>
-						</ul>
-					</div>
-				</div>
-			</nav>
-		</div>
-	</header>
+               <c:choose>
+                  <c:when test="${logintype=='admin'}">
+                     <li class="nav-item "><a class="nav-link" href="/">관리자페이지</a></li>
+                     <li class="nav-item "><a class="nav-link" href="/logout">로그아웃</a></li>
+                  </c:when>
+                  <c:when test="${logintype=='naver'}">
+                     <li class="nav-item submenu dropdown"><a href="#"
+                        class="nav-link dropdown-toggle" data-toggle="dropdown"
+                        role="button" aria-haspopup="true" aria-expanded="false"><img
+                           src="../resources/img/account.png" width="35px"></a>
+                        <ul class="dropdown-menu nav_ul">
+                           <li class="nav-item "><a class="nav-link" href="/">쪽지</a></li>
+                           <li class="nav-item "><a class="nav-link" href="/">장바구니</a></li>
+                           <li class="nav-item"><a class="nav-link" href="/">마이페이지</a></li>
+                           <li class="nav-item "><a class="nav-link" href="/toPoint">포인트충전</a></li>
+                           <li class="nav-item "><input type="button"
+                              class="nav-link nav_b" id="logout_na" value="로그아웃"></li>
+                        </ul></li>
+                  </c:when>
+                  <c:when test="${logintype=='kakao'}">
+                     <li class="nav-item submenu dropdown"><a href="#"
+                        class="nav-link dropdown-toggle" data-toggle="dropdown"
+                        role="button" aria-haspopup="true" aria-expanded="false"><img
+                           src="../resources/img/account.png" width="40px"></a>
+                        <ul class="dropdown-menu nav_ul">
+                           <li class="nav-item "><a class="nav-link" href="/">쪽지</a></li>
+                           <li class="nav-item "><a class="nav-link" href="/">장바구니</a></li>
+                           <li class="nav-item"><a class="nav-link" href="/">마이페이지</a></li>
+                           <li class="nav-item "><a class="nav-link" href="/toPoint">포인트충전</a></li>
+                           <li class="nav-item "><input type="button"
+                              class="nav-link nav_b" id="logout_ka" value="로그아웃"></li>
+                        </ul></li>
+                  </c:when>
+                  <c:when test="${logintype=='email'}">
+                     <li class="nav-item submenu dropdown"><a href="#"
+                        class="nav-link dropdown-toggle" data-toggle="dropdown"
+                        role="button" aria-haspopup="true" aria-expanded="false"><img
+                           src="../resources/img/account.png" width="40px"></a>
+                        <ul class="dropdown-menu nav_ul">
+                           <li class="nav-item "><a class="nav-link" href="/">쪽지</a></li>
+                           <li class="nav-item "><a class="nav-link" href="/">장바구니</a></li>
+                           <li class="nav-item"><a class="nav-link" href="/">마이페이지</a></li>
+                           <li class="nav-item "><a class="nav-link" href="/toPoint">포인트충전</a></li>
+                           <li class="nav-item "><a class="nav-link" href="/logout">로그아웃</a></li>
+                        </ul></li>
+                  </c:when>
+                  <c:otherwise>
+                     <li class="nav-item "><a class="nav-link" href="/login_main">로그인</a></li>
+                     <li class="nav-item "><a class="nav-link" href="/insert">회원가입</a></li>
+                  </c:otherwise>
+               </c:choose>
+            </ul>
+         </div>
+      </div>
+      </nav>
+   </div>
+   </header>
    <!-- End Header Area -->
 
    <!-- Start Banner Area -->
+   
    <section class="banner-area organic-breadcrumb">
    <div class="container">
       <div
@@ -401,7 +401,7 @@ function viewCount(){
    </div>
    </section>
    <!-- End Banner Area -->
-
+	<form action="auctionBoardDelete">
    <!-- start banner Area -->
    <div class="container-fluid">
       <div class="row">
@@ -463,7 +463,14 @@ function viewCount(){
                         </span><a href="auctionOption?category=etc">기타</a></a>
                   </li>
                </ul>
+              <c:choose>
+               	<c:when test="${logintype=='admin'}">
+               		<div class="head "><input type="submit" value="삭제하기" id="send"></div>
+               	</c:when>
+               <c:when test="${logintype!='admin' }">
                <div class="head "><a href="auctionWrite" style="color: white">경매등록</a></div>
+               </c:when>
+               </c:choose>
             </div>
 
 
@@ -522,10 +529,14 @@ function viewCount(){
                <div class="row list-nav">
                   <c:forEach var="temp" items="${list }">
                      <div class="col-lg-3 col-md-6">
-
+						<c:choose>
+               				<c:when test="${logintype=='admin'}">
+               					<input type="checkbox" name="checkDelete" value="${temp.no }">
+               				</c:when>
+               			</c:choose>
                         <div class="single-product" style="margin-bottom: 15px;">
                            <div class="card">
-                              <a href="/auction_detailPage?no=${temp.no}" class="social-info"><img class="img-fluid product-img-size"
+                              <a href="auctionOption"><img class="img-fluid product-img-size"
                                  style="margin-bottom: 5px;"
                                  src="../resources/img/title/${temp.getTitle_img()}" alt=""></a>
                               <div class="card-body" style="padding: 12px;">
@@ -566,6 +577,7 @@ function viewCount(){
                      </div>
                   </c:forEach>
                </div>
+               </form>
             </div>
             </section>
             <div class="row">
