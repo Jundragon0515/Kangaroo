@@ -23,16 +23,16 @@ public class GoodsTradeService {
    
    //카테고리 설정
    public void checkCategory(HttpSession session) {
-	   gdao.checkCategory(session);
+      gdao.checkCategory(session);
    }
    
    //가격 낮은순 OR 높은순 정렬
    public void checkPrice(HttpSession session) {
-	   gdao.checkPrice(session);
+      gdao.checkPrice(session);
    }
    
    public void checkView(HttpSession session) {
-	   gdao.checkView(session);
+      gdao.checkView(session);
    }
    
    //직거래 게시판 처음 화면
@@ -42,7 +42,7 @@ public class GoodsTradeService {
    
    //직거래 게시판 옵션 설정
    public List<Used_transaction_boardDTO> directOption(HttpSession session, int start, int end){
-	   return gdao.directOption(session, start, end);
+      return gdao.directOption(session, start, end);
    }
    
    //직거래 게시판 일반 화면  네비
@@ -52,7 +52,7 @@ public class GoodsTradeService {
    
    //직거래 게시판 옵션선택 후 네비
    public String directBoardNaviOption(HttpSession session, int currentPage, int recordCountPerPage) {
-	   return gdao.getNaviOption_direct(session, currentPage, recordCountPerPage);
+      return gdao.getNaviOption_direct(session, currentPage, recordCountPerPage);
    }
    
    //---------------------------------------------------------------------------------------------------------------------------
@@ -64,7 +64,7 @@ public class GoodsTradeService {
   
    //안전거래 게시판 옵션 설정
    public List<Used_transaction_boardDTO> safeOption(HttpSession session, int start, int end){
-	   return gdao.safeOption(session, start, end);
+      return gdao.safeOption(session, start, end);
    }
    
    //안전거래 게시판 일반 화면  네비
@@ -84,7 +84,7 @@ public class GoodsTradeService {
 	      return gdao.directList_search(session, start, end);
 	   }
   //직거래 검색어 네비
-   public String directBoardNavi_search(HttpSession session, int currentPage, int recordCountPerPage) {
+   public String directBoardNavi_search(HttpSession session, int currentPage, int recordCountPerPage){
 	   return gdao.getNavi_direct_search(session, currentPage, recordCountPerPage);
    }
 

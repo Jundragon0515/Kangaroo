@@ -20,14 +20,23 @@ public class HomeController {
 	HttpSession se;
 	@Autowired
 	MemberService mes;
-
+	public static int visitCount = 0;
 	@RequestMapping("/")
-	public String home() { //홈
+	public String visit() { 	// 첫 방문
+		System.out.println("반갑습니다.");
+		visitCount++;
+		System.out.println(visitCount);
+		return "index";
+	}
+	@RequestMapping("/index")
+	public String home() { 		//홈
 		return "index";
 	}
 	@RequestMapping("/toPoint")
 	public String toPoint() { //포인트 충전
-		mes.setPoint();
+		if(se.getAttribute("email")!=null) {
+			mes.setPoint();
+		}
 		return "point";
 	}
 	@RequestMapping("/login_main")
@@ -101,27 +110,13 @@ public class HomeController {
 		return mes.idcheck(id);
 	}
 	@RequestMapping("/infoInsert")
-	public String sInsert() {
+	public String sInsert() {  // 정보입력으로
 		return "infoInsert";
 	}
 	@RequestMapping("/logout")
-	public String logout(HttpServletRequest request) {
+	public String logout(HttpServletRequest request) { //로그아웃
 		String old_url = request.getHeader("referer");
 		se.invalidate();
 		return "redirect:"+old_url;
-	}
-	@RequestMapping("/updateProc")
-	public String updateProc(MemberDTO dto) {
-		dto.setId(se.getAttribute("email").toString());
-		mes.updateProc(dto);
-		se.setAttribute("email", dto.getId());
-		se.setAttribute("name",dto.getName());
-		se.setAttribute("phone",dto.getPhone());
-		se.setAttribute("zipcode",dto.getZipcode());
-		se.setAttribute("address1", dto.getAddress1());
-		se.setAttribute("address2", dto.getAddress2());
-		se.setAttribute("info",dto);
-		se.setAttribute("logintype", dto.getLogintype());
-		return "redirect:/";
 	}
 }

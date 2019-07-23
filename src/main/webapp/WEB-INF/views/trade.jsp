@@ -180,20 +180,19 @@
 .back-to-top:hover {color: #818bb0}
 
 #send{
-   border: 1px solid #828bb3;
-   background-color:#828bb3;
-   color:white;
+	border: 1px solid #828bb3;
+	background-color:#828bb3;
+	color:white;
 }
 #send:hover {
-   cursor: pointer;
+	cursor: pointer;
 }
 </style>
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script>
-   $(function(){
-      
-       
+
+     $(function(){  
        var offset = 50;   // 수직으로 어느정도 움직여야 버튼이 나올까?
        var duration = 600;   // top으로 이동할때까지의 animate 시간 (밀리세컨드, default는 400. 예제의 기본은 500)
        $(window).scroll(function() {
@@ -210,20 +209,23 @@
            return false;
        })
        
-       /* n개씩 보기 선택 */
-       $("#viewCount").on("change", function(){
-    	   var viewCount = $(this).val();
-    	   $(location).attr("href", "tradeOption?viewCount=" + viewCount);
-       });
-       
        
        /* 검색기능 */
       $("#btn-search").on("click", function(){
          var text_search =  $("#text-search").val();
-          $(location).attr("href", "tradeOption?search="+text_search);
+         $(location).attr("href", "tradeOption?search="+text_search);
       });
       
+      /* 페이지 정렬 개수 */
+      $("select option[value=" + '${view}' + "]").attr("selected", true);
+      
+      /* 페이지 정렬 개수 컨트롤  */
+       $("#viewCount").on("click", function(){
+         var view = $(this).val();
+         alert(view);
+      });
        
+
       /*네이버 로그아웃  */
       $("#logout_na").on("click",function() {
                $.ajax({
@@ -256,10 +258,7 @@
                         }, 1000);
                });
       });
-      
-      
-   });
-
+     });
 </script>
 
 
@@ -434,19 +433,16 @@
                         </span><a href="tradeOption?category=etc">기타</a></a>
                   </li>
                </ul>
-               
                <c:choose>
-                  <c:when test="${logintype=='admin'}">
-                     <div class="head "><input type="submit" value="삭제하기" id="send"></div>
-                  </c:when>
+               	<c:when test="${logintype=='admin'}">
+               		<div class="head "><input type="submit" value="삭제하기" id="send"></div>
+               	</c:when>
+
                <c:when test="${logintype!='admin' }">
                <div class="head "><a href="tradeGoodsWrite" style="color: white">제품등록</a></div>
                </c:when>
                </c:choose>
-               
             </div>
-
-
          </div>
          <!-- end menu  -->
 
@@ -499,16 +495,15 @@
                   </div>
                </div>
                <!-- End boardInfo  -->
-                ${resultNull }
+               ${resultNull }
                <div class="row list-nav">
                   <c:forEach var="temp" items="${list }">
                      <div class="col-lg-3 col-md-6">
-                  <c:choose>
-                           <c:when test="${logintype=='admin'}">
-                              <input type="checkbox" name="checkDelete" value="${temp.no }">
-                           </c:when>
-                        </c:choose>   
-                     
+						<c:choose>
+               				<c:when test="${logintype=='admin'}">
+               					<input type="checkbox" name="checkDelete" value="${temp.no }">
+               				</c:when>
+               			</c:choose>
                         <div class="single-product" style="margin-bottom: 15px;">
                            <div class="card">
                               <a href="tradeOption">
@@ -535,7 +530,7 @@
                                     <div class="prd-bottom" style="margin-top: 5px;">
                                        <a href="" class="social-info"> <span class="ti-bag"></span>
                                           <p class="hover-text">add to bag</p>
-                                       </a> <a href="" class="social-info">
+                                       </a> <a href="/used_detailPage?no=${temp.no}" class="social-info">
                                         <span class="lnr lnr-move"></span>
                                           <p class="hover-text">view more</p>
                                        </a>
@@ -547,7 +542,7 @@
                      </div>
                   </c:forEach>
                </div>
-              </form> 
+              </form>
             </div>
             </section>
             <div class="row">

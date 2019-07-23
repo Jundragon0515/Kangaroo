@@ -46,17 +46,14 @@
 .owl-nav {
 	top: 430px;
 }
-
 .nav_b {
 	border: 0px;
 	background: 000000;
 	width: 100%;
 }
-
 .nav_b:hover {
 	cursor: pointer;
 }
-
 .nav_ul * {
 	text-align: center;
 }
@@ -69,24 +66,21 @@
 			client.subscribe("/response", function(list) {
 				var result = JSON.parse(list.body);
 				var z = 0;
-				$(".asd").text(result[0]);
-				$(".asd2").text(result[1]);
-				// 	 			<c:forEach var="i" items="${main_option_list}">
-				// 				$("."+"${i.no}").text(result[z++]);
-				// 				</c:forEach>
+					 			<c:forEach var="i" items="${main_option_list}">
+								$("."+"${i.no}").text(result[z++]);
+								</c:forEach>
 			});
 		})
 		setInterval(function() {//시간 보내 달라는 요청
 			var list = new Array();
-			list[0] = "2019-07-29 23:59:59";
-			list[1] = "2019-07-18 11:52:00";
-			// 			<c:forEach var="i" items="${main_option_list}">
-			// 				list.add("${i.end_date}");
-			// 			</c:forEach>
+			
+						<c:forEach var="i" items="${main_option_list}">
+							list.add("${i.end_date}");
+						</c:forEach>
 			client.send("/app/time", {}, JSON.stringify({
 				end_dates : list
 			}));
-		}, 800);
+		}, 400);
 		
 		
 		$("#logout_na").on("click", function() {
@@ -155,7 +149,7 @@
 
 							<c:choose>
 								<c:when test="${logintype=='admin'}">
-									<li class="nav-item "><a class="nav-link" href="/">관리자페이지</a></li>
+									<li class="nav-item "><a class="nav-link" href="/admin">관리자페이지</a></li>
 									<li class="nav-item "><a class="nav-link" href="/logout">로그아웃</a></li>
 								</c:when>
 								<c:when test="${logintype=='naver'}">
@@ -164,9 +158,9 @@
 										role="button" aria-haspopup="true" aria-expanded="false"><img
 											src="../resources/img/account.png" width="35px"></a>
 										<ul class="dropdown-menu nav_ul">
-											<li class="nav-item "><a class="nav-link" href="/">쪽지</a></li>
-											<li class="nav-item "><a class="nav-link" href="/">장바구니</a></li>
-											<li class="nav-item"><a class="nav-link" href="/">마이페이지</a></li>
+											<li class="nav-item "><a class="nav-link" href="/">찜목록</a></li>
+											<li class="nav-item active"><a class="nav-link"
+												href="/goMyPage">마이페이지</a></li>
 											<li class="nav-item "><a class="nav-link"
 												href="/toPoint">포인트충전</a></li>
 											<li class="nav-item "><input type="button"
@@ -179,9 +173,9 @@
 										role="button" aria-haspopup="true" aria-expanded="false"><img
 											src="../resources/img/account.png" width="40px"></a>
 										<ul class="dropdown-menu nav_ul">
-											<li class="nav-item "><a class="nav-link" href="/">쪽지</a></li>
-											<li class="nav-item "><a class="nav-link" href="/">장바구니</a></li>
-											<li class="nav-item"><a class="nav-link" href="/">마이페이지</a></li>
+											<li class="nav-item "><a class="nav-link" href="/">찜목록</a></li>
+											<li class="nav-item active"><a class="nav-link"
+												href="/goMyPage">마이페이지</a></li>
 											<li class="nav-item "><a class="nav-link"
 												href="/toPoint">포인트충전</a></li>
 											<li class="nav-item "><input type="button"
@@ -194,9 +188,9 @@
 										role="button" aria-haspopup="true" aria-expanded="false"><img
 											src="../resources/img/account.png" width="40px"></a>
 										<ul class="dropdown-menu nav_ul">
-											<li class="nav-item "><a class="nav-link" href="/">쪽지</a></li>
-											<li class="nav-item "><a class="nav-link" href="/">장바구니</a></li>
-											<li class="nav-item"><a class="nav-link" href="/">마이페이지</a></li>
+											<li class="nav-item "><a class="nav-link" href="/">찜목록</a></li>
+											<li class="nav-item "><a class="nav-link"
+												href="/goMyPage">마이페이지</a></li>
 											<li class="nav-item "><a class="nav-link"
 												href="/toPoint">포인트충전</a></li>
 											<li class="nav-item "><a class="nav-link" href="/logout">로그아웃</a></li>
@@ -303,7 +297,7 @@
 								<div class="prd-bottom">
 									<a href="" class="social-info"> <span class="ti-bag"></span>
 										<p class="hover-text">add to bag</p>
-									</a> <a href="" class="social-info"> <span class="lnr lnr-move"></span>
+									</a> <a href="/auction_detailPage" class="social-info"> <span class="lnr lnr-move"></span>
 										<p class="hover-text">view more</p>
 									</a>
 								</div>
@@ -323,7 +317,7 @@
 								<div class="prd-bottom">
 									<a href="" class="social-info"> <span class="ti-bag"></span>
 										<p class="hover-text">add to bag</p>
-									</a> <a href="/detailPage" class="social-info"> <span class="lnr lnr-move"></span>
+									</a> <a href="/used_detailPage" class="social-info"> <span class="lnr lnr-move"></span>
 										<p class="hover-text">view more</p>
 									</a>
 								</div>

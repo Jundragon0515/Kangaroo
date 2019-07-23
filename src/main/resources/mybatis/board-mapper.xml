@@ -17,8 +17,21 @@
 
 <insert id="actionImgInsert">insert into auction_img_board values(a_i_seq.nextval,#{title_img},#{middle1_img},#{middle2_img,jdbcType=VARCHAR},#{middle3_img,jdbcType=VARCHAR},#{middle4_img,jdbcType=VARCHAR},#{middle5_img,jdbcType=VARCHAR},#{middle6_img,jdbcType=VARCHAR},#{middle7_img,jdbcType=VARCHAR},#{middle8_img,jdbcType=VARCHAR},#{middle9_img,jdbcType=VARCHAR},#{middle10_img,jdbcType=VARCHAR}) 
 </insert>
-
-
+<update id="used_onGoing_n">
+update used_transaction_board set ongoing='n' where no=#{value}
+</update>
+<select id="recordCount_au" resultType="Integer">
+select count(*) from auction_board where id=#{value} 
+</select>
+<select id = "selectById_au" parameterType="Map" resultType="kh.spring.dto.Auction_boardDTO">
+select * from (select row_number()over(order by no desc) as rown, auction_board.* from auction_board) where (rown between #{startNum} and #{endNum})and id=#{id}
+</select>
+<select id="recordCount_us" resultType="Integer">
+select count(*) from used_transaction_board where id=#{value} 
+</select>
+<select id = "selectById_us" parameterType="Map" resultType="kh.spring.dto.Used_transaction_boardDTO">
+select * from (select row_number()over(order by no desc) as rown, used_transaction_board.* from used_transaction_board) where (rown between #{startNum} and #{endNum})and id=#{id}
+</select>
 </mapper>
 
 

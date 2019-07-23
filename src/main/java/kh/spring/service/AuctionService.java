@@ -27,21 +27,21 @@ public class AuctionService {
    
    //카테고리 설정
    public void checkCategory(HttpSession session) {
-	   adao.checkCategory(session);
+      adao.checkCategory(session);
    }
    
    //가격 낮은순 OR 높은순 정렬
    public void checkPrice(HttpSession session) {
-	   adao.checkPrice(session);
+      adao.checkPrice(session);
    }
    
    public void checkView(HttpSession session) {
-	   adao.checkView(session);
+      adao.checkView(session);
    }
    
    //게시판 옵션 설정
    public List<Auction_boardDTO> selectOption(HttpSession session, int start, int end){
-	   return adao.selectOption(session, start, end);
+      return adao.selectOption(session, start, end);
    }
    
    //일반 화면 게시판 네비
@@ -51,7 +51,7 @@ public class AuctionService {
    
    //옵션선택 후 게시판 네비
    public String tradeBoardNaviOption(HttpSession session, int currentPage, int recordCountPerPage) {
-	   return adao.getNaviOption(session, currentPage, recordCountPerPage);
+      return adao.getNaviOption(session, currentPage, recordCountPerPage);
    }
   
 

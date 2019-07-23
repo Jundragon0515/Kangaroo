@@ -10,4 +10,44 @@
 	select * from Auction_board where no=#{value}
 </select>
 
+<select id="u_i_selectByNo" resultType="kh.spring.dto.Used_transaction_img_boardDTO">
+	select * from Used_transaction_img_board where no=#{value}
+</select>
+
+<select id="u_selectByNo" resultType="kh.spring.dto.Used_transaction_boardDTO">
+	select * from Used_transaction_board where no=#{value}
+</select>
+
+<update id="a_updatePrice">
+	update auction_board set present_price = #{present_price}  where no = #{no}
+</update>
+
+<select id="a_presentMoney" resultType="integer">
+	select present_price from auction_board where no = #{value} 
+</select>
+
+<select id="tenderCount" resultType="integer">
+	select count(*) from tender where board_num=#{value}
+</select>
+
+<delete id="deleteComment">
+	delete from comments where id = #{id} and seq = #{seq}
+</delete>
+
+<delete id="deleteComment2">
+	delete from comments2 where id = #{id} and seq = #{seq}
+</delete>
+
+<insert id="buy">
+	insert into order_t values(order_seq.nextval,#{product_num},#{product_title},#{product_img},#{seller},#{buyer},#{price},#{type},default,default)
+</insert>
+
+<update id="soldOut">
+	update USED_TRANSACTION_BOARD set ongoing = 'n' where no = #{value}
+</update>
+
+<insert id="pointUsing">
+	insert into point_using values(p_u_no_seq.nextval,#{buyer},#{product_title},#{price},default)
+</insert>
+
 </mapper>

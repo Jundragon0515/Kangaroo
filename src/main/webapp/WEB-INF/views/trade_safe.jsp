@@ -180,12 +180,12 @@
 .back-to-top:hover {color: #818bb0}
 
 #send{
-   border: 1px solid #828bb3;
-   background-color:#828bb3;
-   color:white;
+	border: 1px solid #828bb3;
+	background-color:#828bb3;
+	color:white;
 }
 #send:hover {
-   cursor: pointer;
+	cursor: pointer;
 }
 </style>
 
@@ -464,9 +464,9 @@ function viewCount(){
                </ul>
                
                <c:choose>
-                  <c:when test="${logintype=='admin'}">
-                     <div class="head "><input type="submit" value="삭제하기" id="send"></div>
-                  </c:when>
+               	<c:when test="${logintype=='admin'}">
+               		<div class="head "><input type="submit" value="삭제하기" id="send"></div>
+               	</c:when>
                <c:when test="${logintype!='admin' }">
                <div class="head "><a href="tradeGoodsWrite" style="color: white">제품등록</a></div>
                </c:when>
@@ -530,12 +530,11 @@ function viewCount(){
                <div class="row list-nav">
                   <c:forEach var="temp" items="${list }">
                      <div class="col-lg-3 col-md-6">
-                  <c:choose>
-                           <c:when test="${logintype=='admin'}">
-                              <input type="checkbox" name="checkDelete" value="${temp.no }">
-                           </c:when>
-                        </c:choose>   
-                     
+						<c:choose>
+               				<c:when test="${logintype=='admin'}">
+               					<input type="checkbox" name="checkDelete" value="${temp.no }">
+               				</c:when>
+               			</c:choose>	
                         <div class="single-product" style="margin-bottom: 15px;">
                            <div class="card">
                               <a href="tradeOption_safe">
@@ -562,7 +561,7 @@ function viewCount(){
                                     <div class="prd-bottom" style="margin-top: 5px;">
                                        <a href="" class="social-info"> <span class="ti-bag"></span>
                                           <p class="hover-text">add to bag</p>
-                                       </a> <a href="" class="social-info">
+                                       </a> <a href="/used_detailPage?no=${temp.no}" class="social-info">
                                         <span class="lnr lnr-move"></span>
                                           <p class="hover-text">view more</p>
                                        </a>

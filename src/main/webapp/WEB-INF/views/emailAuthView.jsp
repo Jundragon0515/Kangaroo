@@ -56,6 +56,8 @@
             $("#emailAuth_btn", opener.document).toggle();
             $("#emailAuth_btn", opener.document).attr("flag", "true");
             $("#idcheckin", opener.document).text("");
+            $("#id", opener.document).attr("readonly","true");
+            $("#idcheckvar", opener.document).val("사용 가능한 아이디 입니다.");
             close();
          } else {
             alert("인증실패 : " + (++count) + "회실패/3회");
@@ -68,6 +70,7 @@
       });
    })
 </script>
+
 <style>
 #wrapper {
    width: 480px;
@@ -100,12 +103,9 @@
 <body>
    <div id="wrapper">
       <div id="logoWrapper">
-         <img src="../resources/img/logo.png" id="logo">
+         <img src="../resources/img/logo.png" id="img" width="150px">
       </div>
-      <div class="banner">
-      	<h3>Kangaroo</h3>
-      </div>
-      <div class="input-group mb-3 mt-5">
+      <div class="input-group mb-3">
          <input id="email" type="text" class="form-control" value="${email }" readonly>
          <div class="input-group-append">
             <button id="auth_num_btn" class="btn btn-outline-warning"
@@ -122,4 +122,5 @@
       </div>
    </div>
 </body>
+
 </html>

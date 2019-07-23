@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
@@ -17,11 +18,15 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.Gson;
 import com.google.gson.JsonParser;
 
+import kh.spring.dao.DetailPageDAO;
 import kh.spring.dao.KakaoDAO;
 import kh.spring.dao.MailDAO;
 import kh.spring.dao.MemberDAO;
 import kh.spring.dao.NaverDAO;
+import kh.spring.dto.Auction_boardDTO;
 import kh.spring.dto.MemberDTO;
+import kh.spring.dto.OrderDTO;
+import kh.spring.dto.TenderDTO;
 
 @Component
 public class MemberService {
@@ -35,7 +40,39 @@ public class MemberService {
 	NaverDAO na;
 	@Autowired
 	KakaoDAO ka;
-
+	@Autowired
+	DetailPageDAO ddao;
+	
+	@Transactional("txManager")
+	public int buy(OrderDTO dto) {
+		
+		ddao.buy_minus(dto);
+		ddao.buy(dto);
+		ddao.soldOut(dto.getProduct_num());
+		ddao.pointUsing(dto);
+		
+		return 1;
+	}
+	
+	@Transactional("txManager")
+	public void tender(TenderDTO dto, int Board_num) {
+		me.minus(dto);
+		me.tender(dto);
+		try {
+		me.plus(me.moneyBack(1));//1고정
+		}catch(Exception e) {
+			System.out.println("첫번째 입찰 발생");
+		}
+		
+		System.out.println(dto.getPoint());
+		System.out.println(Board_num);
+		
+		Auction_boardDTO a_dto = new Auction_boardDTO();
+		a_dto.setPresent_price(dto.getPoint());
+		a_dto.setNo(Board_num);
+		ddao.a_updatePrice(a_dto);
+		
+	}
 	public String loginProc(String id , String pw) { //로그인 
 		if(me.loginProc(id,pw) > 0) {
 			if(id.equals("admin@admin.com"))
@@ -49,6 +86,8 @@ public class MemberService {
 			se.setAttribute("address2", m_info.getAddress2());
 			se.setAttribute("info",m_info);
 			se.setAttribute("logintype", m_info.getLogintype());
+			se.setAttribute("point", m_info.getPoint());
+			se.setAttribute("member_class", m_info.getMember_class());
 			return "Y";
 		}else {
 			return "N";
@@ -189,8 +228,10 @@ public class MemberService {
 			se.setAttribute("zipcode",m_info.getZipcode());
 			se.setAttribute("address1", m_info.getAddress1());
 			se.setAttribute("address2", m_info.getAddress2());
+			se.setAttribute("point", m_info.getPoint());
 			se.setAttribute("info",m_info);
 			se.setAttribute("logintype", m_info.getLogintype());
+			se.setAttribute("member_class", m_info.getMember_class());
 			mav.setViewName("redirect:/infoInsert");
 		}else {
 			MemberDTO m_info=me.selectById(email);
@@ -203,8 +244,10 @@ public class MemberService {
 				se.setAttribute("zipcode",m_info.getZipcode());
 				se.setAttribute("address1", m_info.getAddress1());
 				se.setAttribute("address2", m_info.getAddress2());
+				se.setAttribute("point", m_info.getPoint());
 				se.setAttribute("info",m_info);
 				se.setAttribute("logintype", m_info.getLogintype());
+				se.setAttribute("member_class", m_info.getMember_class());
 				mav.setViewName("redirect:/");							
 			}
 		}
@@ -248,6 +291,8 @@ public class MemberService {
 			se.setAttribute("address2", m_info.getAddress2());
 			se.setAttribute("info",m_info);
 			se.setAttribute("logintype", m_info.getLogintype());
+			se.setAttribute("point", m_info.getPoint());
+			se.setAttribute("member_class", m_info.getMember_class());
 			mav.setViewName("redirect:/infoInsert");
 		}else {
 			MemberDTO m_info=me.selectById(email);
@@ -260,8 +305,10 @@ public class MemberService {
 				se.setAttribute("zipcode",m_info.getZipcode());
 				se.setAttribute("address1", m_info.getAddress1());
 				se.setAttribute("address2", m_info.getAddress2());
+				se.setAttribute("point", m_info.getPoint());
 				se.setAttribute("info",m_info);
 				se.setAttribute("logintype", m_info.getLogintype());
+				se.setAttribute("member_class", m_info.getMember_class());
 				mav.setViewName("redirect:/");				
 			}
 		}
@@ -272,5 +319,13 @@ public class MemberService {
 	}
 	public void setPoint() {
 		se.setAttribute("point", me.getPoint((String)se.getAttribute("email")));
+	}
+	public int pwCk(String pw) {
+		String realPw=me.getPw((String)se.getAttribute("email"));
+		if(realPw.equals(MemberDAO.encryptSHA256(pw))) {
+			return 1; 
+		}else {
+			return -1;
+		}
 	}
 }

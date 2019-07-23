@@ -97,12 +97,12 @@
         top: 85px;
     }
     [type="text"]{
-       background-color:#fafff2;
-       color:#ffba00;
-       border : 1px solid #ffebb3;
+    	background-color:#fafff2;
+    	color:#ffba00;
+    	border : 1px solid #ffebb3;
     }
     [type="text"]:hover{
-       cursor: pointer;
+    	cursor: pointer;
     }
     #titleImg{
         border: 5px solid #ffebb3;
@@ -113,11 +113,11 @@
         height: 502px;
     }
     #middle {
-       width: 525px;
-       height: 473px;
-          border-radius: 30px 30px 30px 30px;
-          margin: 10px 10px 10px 10px;
-   }
+    	width: 510px;
+    	height: 473px;
+   	 	border-radius: 30px 30px 30px 30px;
+   	 	margin: 10px 10px 10px 10px;
+	}
 
     #contents{
         border: 1px solid black;
@@ -129,7 +129,7 @@
         top: 85px;
     }
     #writting{
-       border-radius:30px 30px 30px 30px;
+    	border-radius:30px 30px 30px 30px;
         position: relative;
         top: 85px;
         padding-left: 6px;
@@ -163,201 +163,200 @@
        height:50px;
     }
     .nice-select{
-       position:relative;
+    	position:relative;
         padding-left: 0px;
-       padding-right: 20px;
-       color : white;
-       background-color: #ffce47;
-       border : 1px solid ffce47;
-       
+    	padding-right: 20px;
+    	color : white;
+    	background-color: #ffce47;
+    	border : 1px solid ffce47;
+    	
     }
     .nice-select:hover{
-       background-color:#ffd45e;
+    	background-color:#ffd45e;
     }
     .nice-select .list{
-       color: #ffba00;
-       background-color : white;
-       overflow-y:scroll;
-       height:200px;
+    	color: #ffba00;
+    	background-color : white;
+    	overflow-y:scroll;
+    	height:200px;
     }
     #preview {
-       border: 3px solid #ffebb3;
-       border-radius: 10px 10px 10px 10px;
-       width: 460px;
-       height: 384px;
-       overflow: auto;
-       position: relative;
-       bottom: 19px;
-   }
-    .thumbnail{
+    	border: 3px solid #ffebb3;
+    	border-radius: 10px 10px 10px 10px;
+    	width: 460px;
+    	height: 384px;
+    	overflow: auto;
+    	position: relative;
+    	bottom: 19px;
+	}
        width: 100px;
        height: 100px;
     
     }/* 상세이미지 크기 */
-    .preview-box{       
-       width: 200px;
-       height: 100px;
-       display: inline;
+    .preview-box{    	
+    	width: 200px;
+    	height: 100px;
+    	display: inline;
     }
     #detailImg {
-       position:relative;
-       bottom:21px;
-       background-color: #ffce47;
-       color: white;
-       border-radius: 3px 3px 3px 3px;
-       font-size: 29px;
-          height: 40px;
-       padding-top: 10px;
-   }
+    	position:relative;
+    	bottom:21px;
+    	background-color: #ffce47;
+    	color: white;
+    	border-radius: 3px 3px 3px 3px;
+    	font-size: 29px;
+   	 	height: 40px;
+    	padding-top: 10px;
+	}
     #detailImg:hover {
-       background-color:#ffd45e;
-       color:white;
-      cursor: pointer;
-   }
-   #register{
-      position:relative;
-      bottom:10px;
-      left:20px;
-   }
-   #sel,#sel1,#sel2{
-      float:left;
-   }
-   .trade{
-      position:relative;
-      top:10px;
-   }
+    	background-color:#ffd45e;
+    	color:white;
+		cursor: pointer;
+	}
+	#register{
+		position:relative;
+		bottom:10px;
+		left:20px;
+	}
+	#sel,#sel1,#sel2{
+		float:left;
+	}
+	.trade{
+		position:relative;
+		top:10px;
+	}
 
-   #image:hover{
-      cursor: pointer;
-   }
-   #pay{
-      width:50px;
-      height:25px;
-      color: black;
-      padding-left: 5px;
-   }
-   .nav_b {
-      border: 0px;
-      background: 000000;
-      width: 100%;
-   }
+	#image:hover{
+		cursor: pointer;
+	}
+	#pay{
+		width:50px;
+		height:25px;
+		color: black;
+		padding-left: 5px;
+	}
+	.nav_b {
+		border: 0px;
+		background: 000000;
+		width: 100%;
+	}
 
    .nav_b:hover {
       cursor: pointer;
    }
+	.nav_ul * {
+		text-align: center;
+	}
+	#sang{
+		position:relative;
+		bottom:20px;
+	}
+	.middleName {
+    	color: darkgoldenrod;
+    	font-size: 18px;
+	}
 
-   .nav_ul * {
-      text-align: center;
-   }
-   #sang{
-      position:relative;
-      bottom:20px;
-   }
-   .middleName {
-       color: darkgoldenrod;
-       font-size: 18px;
-   }
 </style>
 <body>
 
    <!-- Start Header Area -->
 <header class="header_area sticky-header">
-      <div class="main_menu">
-         <nav class="navbar navbar-expand-lg navbar-light main_box">
-            <div class="container">
-               <!-- Brand and toggle get grouped for better mobile display logo_h -->
-               <a class="navbar-brand logo_h" href="/"><img
-                  src="../resources/img/logo.png" width="60px" alt="">
-                  Kangaroo</a>
-               <button class="navbar-toggler" type="button" data-toggle="collapse"
-                  data-target="#navbarSupportedContent"
-                  aria-controls="navbarSupportedContent" aria-expanded="false"
-                  aria-label="Toggle navigation">
-                  <span class="icon-bar"></span> <span class="icon-bar"></span> <span
-                     class="icon-bar"></span>
-               </button>
-               <!-- Collect the nav links, forms, and other content for toggling -->
-               <div class="collapse navbar-collapse offset"
-                  id="navbarSupportedContent">
-                  <ul class="nav navbar-nav menu_nav ml-auto">
-                     <!--                      <li class="nav-item active"><a class="nav-link" href="/">Home</a></li> -->
-                     <li class="nav-item submenu dropdown"><a href="#"
-                        class="nav-link dropdown-toggle" data-toggle="dropdown"
-                        role="button" aria-haspopup="true" aria-expanded="false">중고
-                           거래</a>
-                        <ul class="dropdown-menu">
-                           <li class="nav-item"><a class="nav-link" href="/trade">중고
-                                 직거래</a></li>
-                           <li class="nav-item"><a class="nav-link" href="/trade">중고
-                                 안전거래</a></li>
-                           <li class="nav-item"><a class="nav-link" href="/">중고
-                                 경매</a></li>
-                        </ul></li>
-                     <li class="nav-item "><a class="nav-link" href="/">고객센터</a></li>
-                     <li class="nav-item "><a class="nav-link" href="/">공지사항</a></li>
+		<div class="main_menu">
+			<nav class="navbar navbar-expand-lg navbar-light main_box">
+				<div class="container">
+					<!-- Brand and toggle get grouped for better mobile display logo_h -->
+					<a class="navbar-brand logo_h" href="/"><img
+						src="../resources/img/logo.png" width="60px" alt="">
+						Kangaroo</a>
+					<button class="navbar-toggler" type="button" data-toggle="collapse"
+						data-target="#navbarSupportedContent"
+						aria-controls="navbarSupportedContent" aria-expanded="false"
+						aria-label="Toggle navigation">
+						<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+							class="icon-bar"></span>
+					</button>
+					<!-- Collect the nav links, forms, and other content for toggling -->
+					<div class="collapse navbar-collapse offset"
+						id="navbarSupportedContent">
+						<ul class="nav navbar-nav menu_nav ml-auto">
+							<!-- 							<li class="nav-item active"><a class="nav-link" href="/">Home</a></li> -->
+							<li class="nav-item submenu dropdown"><a href="#"
+								class="nav-link dropdown-toggle" data-toggle="dropdown"
+								role="button" aria-haspopup="true" aria-expanded="false">중고
+									거래</a>
+								<ul class="dropdown-menu">
+									<li class="nav-item"><a class="nav-link" href="/trade">중고
+											직거래</a></li>
+									<li class="nav-item"><a class="nav-link" href="/trade">중고
+											안전거래</a></li>
+									<li class="nav-item"><a class="nav-link" href="/auction">중고
+											경매</a></li>
+								</ul></li>
+							<li class="nav-item "><a class="nav-link" href="/">고객센터</a></li>
+							<li class="nav-item "><a class="nav-link" href="/">공지사항</a></li>
 
-                     <c:choose>
-                        <c:when test="${logintype=='admin'}">
-                           <li class="nav-item "><a class="nav-link" href="/">관리자페이지</a></li>
-                           <li class="nav-item "><a class="nav-link" href="/logout">로그아웃</a></li>
-                        </c:when>
-                        <c:when test="${logintype=='naver'}">
-                           <li class="nav-item submenu dropdown"><a href="#"
-                              class="nav-link dropdown-toggle" data-toggle="dropdown"
-                              role="button" aria-haspopup="true" aria-expanded="false"><img
-                                 src="../resources/img/account.png" width="35px"></a>
-                              <ul class="dropdown-menu nav_ul">
-                                 <li class="nav-item "><a class="nav-link" href="/">쪽지</a></li>
-                                 <li class="nav-item "><a class="nav-link" href="/">장바구니</a></li>
-                                 <li class="nav-item"><a class="nav-link" href="/">마이페이지</a></li>
-                                 <li class="nav-item "><a class="nav-link"
-                                    href="/toPoint">포인트충전</a></li>
-                                 <li class="nav-item "><input type="button"
-                                    class="nav-link nav_b" id="logout_na" value="로그아웃"></li>
-                              </ul></li>
-                        </c:when>
-                        <c:when test="${logintype=='kakao'}">
-                           <li class="nav-item submenu dropdown"><a href="#"
-                              class="nav-link dropdown-toggle" data-toggle="dropdown"
-                              role="button" aria-haspopup="true" aria-expanded="false"><img
-                                 src="../resources/img/account.png" width="40px"></a>
-                              <ul class="dropdown-menu nav_ul">
-                                 <li class="nav-item "><a class="nav-link" href="/">쪽지</a></li>
-                                 <li class="nav-item "><a class="nav-link" href="/">장바구니</a></li>
-                                 <li class="nav-item"><a class="nav-link" href="/">마이페이지</a></li>
-                                 <li class="nav-item "><a class="nav-link"
-                                    href="/toPoint">포인트충전</a></li>
-                                 <li class="nav-item "><input type="button"
-                                    class="nav-link nav_b" id="logout_ka" value="로그아웃"></li>
-                              </ul></li>
-                        </c:when>
-                        <c:when test="${logintype=='email'}">
-                           <li class="nav-item submenu dropdown"><a href="#"
-                              class="nav-link dropdown-toggle" data-toggle="dropdown"
-                              role="button" aria-haspopup="true" aria-expanded="false"><img
-                                 src="../resources/img/account.png" width="40px"></a>
-                              <ul class="dropdown-menu nav_ul">
-                                 <li class="nav-item "><a class="nav-link" href="/">쪽지</a></li>
-                                 <li class="nav-item "><a class="nav-link" href="/">장바구니</a></li>
-                                 <li class="nav-item"><a class="nav-link" href="/">마이페이지</a></li>
-                                 <li class="nav-item "><a class="nav-link"
-                                    href="/toPoint">포인트충전</a></li>
-                                 <li class="nav-item "><a class="nav-link" href="/logout">로그아웃</a></li>
-                              </ul></li>
-                        </c:when>
-                        <c:otherwise>
-                           <li class="nav-item "><a class="nav-link"
-                              href="/login_main">로그인</a></li>
-                           <li class="nav-item "><a class="nav-link" href="/insert">회원가입</a></li>
-                        </c:otherwise>
-                     </c:choose>
-                  </ul>
-               </div>
-            </div>
-         </nav>
-      </div>
-   </header>
-   <!-- End Header Area -->
+							<c:choose>
+								<c:when test="${logintype=='admin'}">
+									<li class="nav-item "><a class="nav-link" href="/admin">관리자페이지</a></li>
+									<li class="nav-item "><a class="nav-link" href="/logout">로그아웃</a></li>
+								</c:when>
+								<c:when test="${logintype=='naver'}">
+									<li class="nav-item submenu dropdown"><a href="#"
+										class="nav-link dropdown-toggle" data-toggle="dropdown"
+										role="button" aria-haspopup="true" aria-expanded="false"><img
+											src="../resources/img/account.png" width="35px"></a>
+										<ul class="dropdown-menu nav_ul">
+											<li class="nav-item "><a class="nav-link" href="/">찜목록</a></li>
+											<li class="nav-item active"><a class="nav-link"
+												href="/goMyPage">마이페이지</a></li>
+											<li class="nav-item "><a class="nav-link"
+												href="/toPoint">포인트충전</a></li>
+											<li class="nav-item "><input type="button"
+												class="nav-link nav_b" id="logout_na" value="로그아웃"></li>
+										</ul></li>
+								</c:when>
+								<c:when test="${logintype=='kakao'}">
+									<li class="nav-item submenu dropdown"><a href="#"
+										class="nav-link dropdown-toggle" data-toggle="dropdown"
+										role="button" aria-haspopup="true" aria-expanded="false"><img
+											src="../resources/img/account.png" width="40px"></a>
+										<ul class="dropdown-menu nav_ul">
+											<li class="nav-item "><a class="nav-link" href="/">찜목록</a></li>
+											<li class="nav-item active"><a class="nav-link"
+												href="/goMyPage">마이페이지</a></li>
+											<li class="nav-item "><a class="nav-link"
+												href="/toPoint">포인트충전</a></li>
+											<li class="nav-item "><input type="button"
+												class="nav-link nav_b" id="logout_ka" value="로그아웃"></li>
+										</ul></li>
+								</c:when>
+								<c:when test="${logintype=='email'}">
+									<li class="nav-item submenu dropdown"><a href="#"
+										class="nav-link dropdown-toggle" data-toggle="dropdown"
+										role="button" aria-haspopup="true" aria-expanded="false"><img
+											src="../resources/img/account.png" width="40px"></a>
+										<ul class="dropdown-menu nav_ul">
+											<li class="nav-item "><a class="nav-link" href="/">찜목록</a></li>
+											<li class="nav-item "><a class="nav-link"
+												href="/goMyPage">마이페이지</a></li>
+											<li class="nav-item "><a class="nav-link"
+												href="/toPoint">포인트충전</a></li>
+											<li class="nav-item "><a class="nav-link" href="/logout">로그아웃</a></li>
+										</ul></li>
+								</c:when>
+								<c:otherwise>
+									<li class="nav-item "><a class="nav-link"
+										href="/login_main">로그인</a></li>
+									<li class="nav-item "><a class="nav-link" href="/insert">회원가입</a></li>
+								</c:otherwise>
+							</c:choose>
+						</ul>
+					</div>
+				</div>
+			</nav>
+		</div>
+	</header>
+	<!-- End Header Area -->
 
       <!-- Start Banner Area -->
    <section class="banner-area organic-breadcrumb">
@@ -374,78 +373,78 @@
       </div>
    </div>
    </section>
-
-   <form action="goodsRegister" method="post" enctype="multipart/form-data" id="send">
-   <div class="product_image_area">
-      <div class="container">
-          <div class="name">중고 물품등록</div>
-         <div class="row s_product_inner">
-            <div class="col-lg-6 col-md-12 col-sm-12">
+	<form action="goodsRegister" method="post" enctype="multipart/form-data" id="send">
+	<div class="product_image_area">
+		<div class="container">
+		    <div class="name">중고 물품등록</div>
+			<div class="row s_product_inner">
+				<div class="col-lg-6 col-md-12 col-sm-12">
                     <div id="titleName" class="middleName">타이틀 이미지</div>
-             
-                       <input type="hidden" name="title_img" id="imgTitle">
-                    <div id="titleImg" contenteditable="false"></div>
-            
-                  <div id="writtingContents" class="middleName">물품 설명</div>
-                     
-                  <textarea id="writting" placeholder="물품설명을 해주세요." name="contents"></textarea>   
-            </div>         
-            <div class="col-lg-5 offset-lg-1 col-md-12 col-sm-12">
-               <div class="s_product_text">
-                  <ul class="list">
+ 				
+                    	<input type="hidden" name="title_img" id="imgTitle">
+				        <div id="titleImg" contenteditable="false"></div>
+				
+						<div id="writtingContents" class="middleName">물품 설명</div>
+							
+						<textarea id="writting" placeholder="물품설명을 해주세요." name="contents"></textarea>	
+				</div>			
+				<div class="col-lg-5 offset-lg-1 col-md-12 col-sm-12">
+					<div class="s_product_text">
+						<ul class="list">
                         <br>                        
-                      <li><a><span class="middleName">물품제목</span></a><input type="text" class="form-control goodsContents" id="goodsTitle" name="title" placeholder="물품제목을 입력하세요."></li>
-                     <li><a><span class="middleName">물품가격</span></a><input type="text" priceOnly  class="form-control goodsContents" id="goodsPrice" name="price" placeholder="물품가격을 입력하세요." onkeydown="javascript: return event.keyCode == 69 ? false : true"></li>
-                     <li><a><span class="middleName">핸드폰번호</span></a><input type="text" phoneOnly  class="form-control goodsContents" id="phone" name="phone" placeholder="-없이 핸드폰 번호를 입력해주세요." onkeydown="javascript: return event.keyCode == 69 ? false : true"></li>
-                     <li><a><span class="middleName">계좌번호</span></a><input type="text" acountOnly  class="form-control goodsContents" id="account" name="account" placeholder="반드시 본인의 계좌번호를 입력해주세요." onkeydown="javascript: return event.keyCode == 69 ? false : true"></li>   
-                     
-                     
-            <div id="sel">      
-               <div id="sel1">               
-                     <li>
-                     <div class="middleName">카테고리</div>
-                     <div class="txc-textbox">
-                        <select id="category" name="category">
-                             <option value="미술품">미술품</option>
-                              <option value="도서">도서</option>
-                             <option value="가전제품">가전제품</option>
-                              <option value="취미/수집">취미/수집</option>
-                              <option value="생활용품">생활용품</option>
-                              <option value="스포츠/레저">스포츠/레저</option>
-                              <option value="기타">기타</option>
-                        </select>
-                     </div>
-                     </li>
-               </div>      
-               
-               <div id="sel2">   
-                     <li>
-                        <div class="middleName">거래유형</div>
+						    <li><a><span class="middleName">물품제목</span></a><input type="text" class="form-control goodsContents" id="goodsTitle" name="title" placeholder="물품제목을 입력하세요."></li>
+							<li><a><span class="middleName">물품가격</span></a><input type="text" priceOnly  class="form-control goodsContents" id="goodsPrice" name="price" placeholder="물품가격을 입력하세요." onkeydown="javascript: return event.keyCode == 69 ? false : true"></li>
+							<li><a><span class="middleName">핸드폰번호</span></a><input type="text" phoneOnly  class="form-control goodsContents" id="phone" name="phone" placeholder="-없이 핸드폰 번호를 입력해주세요." onkeydown="javascript: return event.keyCode == 69 ? false : true"></li>
+							<li><a><span class="middleName">계좌번호</span></a><input type="text" acountOnly  class="form-control goodsContents" id="account" name="account" placeholder="반드시 본인의 계좌번호를 입력해주세요." onkeydown="javascript: return event.keyCode == 69 ? false : true"></li>	
+							
+							
+				<div id="sel">		
+					<div id="sel1">					
+							<li>
+							<div class="middleName">카테고리</div>
+							<div class="txc-textbox">
+								<select id="category" name="category">
+ 									 <option value="미술품">미술품</option>
+  									 <option value="도서">도서</option>
+ 									 <option value="가전제품">가전제품</option>
+  									 <option value="취미/수집">취미/수집</option>
+  									 <option value="생활용품">생활용품</option>
+  									 <option value="스포츠/레저">스포츠/레저</option>
+  									 <option value="기타">기타</option>
+								</select>
+							</div>
+							</li>
+					</div>		
+					
+					<div id="sel2">	
+							<li>
+								<div class="middleName">거래유형</div>
                                 <input type="radio" id="test1" class="trade" name="trade_type" value="직거래" checked>
                                 <label for="test1" class="trade">직거래</label>
                                 <input type="radio" id="test2" class="trade" name="trade_type" value="안전거래">
                                 <label for="test2" class="trade">안전거래</label>
-                     </li>
-               </div>      
-            </div>
-                     <li>
-                        <div class="middleName">택배</div>
+							</li>
+					</div>		
+				</div>
+							<li>
+								<div class="middleName">택배</div>
                                 <input type="radio" id="test3" class="delivery" name="delivery_type" value="선불" disabled="disabled">
                                 <label for="test3" class="trade" id="payInside">선불(구매자 부담)</label>
                                 <input type="radio" id="test4" class="delivery" name="delivery_type" value="착불" disabled="disabled">
                                 <label for="test4" class="trade">착불(구매자 부담)</label>
                                 <input type="radio" id="test5" class="delivery" name="delivery_type" value="무료배송" disabled="disabled">
                                 <label for="test5" class="trade">무료(판매자 부담)</label>
-                     </li>
-                     <div id="mainImg" class="middleName">메인 이미지</div>
+							</li>
+							<div id="mainImg" class="middleName">메인 이미지</div>
                             <input type="file" id="image" class="imgRegister1" accept=".jpg, .png">
                          
-            <div id="a"><br>        
+				<div id="a"><br>		  
                           <div id="sang" class="middleName">상세 이미지</div>                                        
-                           <!--  <input type="file" id="image1" class="imgRegister" accept=".gif, .jpg, .png">                           
-                            <button type=button class="filePlus">+</button>
-                            <div class="imgUploade" contenteditable="false"></div>  옆으로 상세 이미지 보여주게!!! 안됨... 
-                            <input type="hidden" name="middle1_img" id="middle1"> -->
+                       	 <!--  <input type="file" id="image1" class="imgRegister" accept=".gif, .jpg, .png">                       	 
+                       	  <button type=button class="filePlus">+</button>
+                       	  <div class="imgUploade" contenteditable="false"></div>  옆으로 상세 이미지 보여주게!!! 안됨... 
+                       	  <input type="hidden" name="middle1_img" id="middle1"> -->
+
 
                            <div class="body">
                               <!-- 첨부 버튼 -->
@@ -459,17 +458,17 @@
 
                               <!-- 미리보기 영역 -->
 
-                              <div id="preview" class="content col-md-12 col-sm-12">상세 이미지 최소1장부터 최대 10장까지 넣을 수 있습니다.</div>
+										<div id="preview" class="content col-md-12 col-sm-12">상세 이미지 최소1장부터 최대 10장까지 넣을 수 있습니다.</div>
 
-                              <!-- multipart 업로드시 영역 -->
-                           </div>
-                        </div>       
+										<!-- multipart 업로드시 영역 -->
+									</div>
+								</div>       
                           <div class="text-right">
-                        <button type="button" id="register" class="primary-btn">등록하기</button>                        
-                    </div>                 
-                  </ul>
-                  <br>      
-                        <br>
+								<button type="button" id="register" class="primary-btn">등록하기</button>								
+				        </div>                 
+						</ul>
+						<br>		
+                     <br>
                </div>
             </div>
          </div>
@@ -620,22 +619,22 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
         }); 
 
         $("#image").on("input",function(){
-         var formData = new FormData();
-         formData.append("formData",$(this)[0].files[0]);
-         $.ajax({
-            url:"imageUpdate",
-            type:"post",
-            processData:false,
-            contentType:false,
-            data:formData
-         }).done(function(resp){
-            $("#image").attr("disabled",true);
-            $("#titleImg").append("<img src='/image/title/"+resp+"' id='middle'>");
-            $("#imgTitle").val(resp);
-         })
-      })//메인 이미지 바로 띄우는 것
-         
-      //임의의 file object영역
+			var formData = new FormData();
+			formData.append("formData",$(this)[0].files[0]);
+			$.ajax({
+				url:"imageUpdate",
+				type:"post",
+				processData:false,
+				contentType:false,
+				data:formData
+			}).done(function(resp){
+				$("#image").attr("disabled",true);
+				$("#titleImg").append("<img src='/img/title/"+resp+"' id='middle'>");
+				$("#imgTitle").val(resp);
+			})
+		})//메인 이미지 바로 띄우는 것
+			
+		//임의의 file object영역
         var files = {};
         var previewIndex = 0;
         // image preview 기능 구현
@@ -785,96 +784,96 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
        }
 
 
-         $("#register").on("click", function() {
-            var trade = document.getElementById("test1");
-            var deli = document.getElementsByName("delivery_type");
-            if ($("#writting").val() == "") {
-               alert("물품 설명을 입력해주세요.");
-            } else if ($("#goodsTitle").val() == "") {
-               alert("제목을 입력하세요.");
-            } else if ($("#goodsPrice").val() == "") {
-               alert("가격을 입력하세요.");
-            } else if ($("#phone").val() == "") {
-               alert("핸드폰 번호를 입력하세요.");
-            } else if ($("#account").val() == "") {
-               alert("계좌를 입력하세요.");
-            } else if ($("#titleImg").html() == "") {
-               alert("메인 이미지를 입력하세요.");
-            } else if ($("#preview").text() == "") {
-               alert("상세 이미지 1개 이상 입력하세요.");
-            } else if(deli[0].checked==false && deli[1].checked==false && deli[2].checked==false && trade.checked==false){
-               alert("택배 방법을 입력하세요.");
-            } else {
-               //var contents = $("#writting").val();
-               //contents = contents.replace(/(&nbsp;)+/ig, "");// 맨 앞 공백, 공백연속으로 쳤을때 &nbsp;
-               //contents = contents.replace(/^[ ]+/ig, "");   // &nbsp;자르고나서 또 맨앞에 오는 공백 자르기
-               //contents = contents.replace(/(<div><br><\/div>)+/ig, "");// 내용없이 엔터쳤을때
-               //contents = contents.replace("/(<div>[ ]*?<\/div>)/ig", "");// 공백만 넣고 엔터쳤을때
-               var contentsText = $("#writting").val();
-               var regContents = /^[가-힣 .,:;()!^?~0-9a-zA-Z\n]{1,150}$/g;    //레직스 바꾸기      
-               var titleText = $("#goodsTitle").val();
-               var regTitle = /^[가-힣 .,:;()!^?~0-9a-zA-Z]{1,22}$/g;
-               var price = parseInt($("#goodsPrice").val());
-               var phoneText = $("#phone").val();         
-               var regPhone = /(01[0|1|6|9|7])[-](\d{3}|\d{4})[-](\d{4}$)/g;   
-               var accountText = $("#account").val();
-               var regAccount = /^[\d]{12,15}$/g;
-               
-               if(!regContents.test(contentsText)){
-                  alert('잘못된 내용 입니다.');
-                     $('#writting').val("");
-               }else if(!regTitle.test(titleText)){
-                  alert('잘못된 제목 입니다.');
-                     $('#goodsTitle').val("");
-               }else if(!regPhone.test(phoneText)){
-                  alert('잘못된 휴대폰 번호입니다.');
-                     $('#phone').val("");   
-               }else if(!regAccount.test(accountText)){
-                  alert('잘못된 계좌 번호입니다.');
-                     $('#account').val("");
-               }else if(price !=0){
-                  if(price<1000){
-                     alert("1000원 이상 가격을 입력하세요.");
-                     $("#goodsPrice").val("");
-                     }else if(price>1000000){
-                        alert("1,000,000원 이하 가격을 입력하세요.");
-                        $("#goodsPrice").val("");
-                     }else{
-                        var contents = $("#writting").val();
-                        
-                        $("#send").submit();
-                  }
-               }
-            }
-         })
-         
-         $("#logout_na").on("click", function() {
-          $.ajax({
-                   url:"logout",
-                   type:"get"
-                }).done(function(){
-                   var naver=open("https://nid.naver.com/nidlogin.logout?returl=https://www.naver.com/", "_blank", "width=100,height=100");
-                   setTimeout(function(){
-                      naver.close();
-                      location.reload(true);
-                   },1000);
-                });
-      });
-      $("#logout_ka").on("click", function() {
-          $.ajax({
-                url:"logout",
-                type:"get"
-             }).done(function(){
-                var kakao=open("https://developers.kakao.com/logout", "_blank", "width=100,height=100");
-                setTimeout(function(){
-                   kakao.close();
-                   location.reload(true);
-                },1000);
-             });
-      });
-         
-         
-      </script>
+
+			$("#register").on("click", function() {
+				var trade = document.getElementById("test1");
+				var deli = document.getElementsByName("delivery_type");
+				if ($("#writting").val() == "") {
+					alert("물품 설명을 입력해주세요.");
+				} else if ($("#goodsTitle").val() == "") {
+					alert("제목을 입력하세요.");
+				} else if ($("#goodsPrice").val() == "") {
+					alert("가격을 입력하세요.");
+				} else if ($("#phone").val() == "") {
+					alert("핸드폰 번호를 입력하세요.");
+				} else if ($("#account").val() == "") {
+					alert("계좌를 입력하세요.");
+				} else if ($("#titleImg").html() == "") {
+					alert("메인 이미지를 입력하세요.");
+				} else if ($("#preview").text() == "") {
+					alert("상세 이미지 1개 이상 입력하세요.");
+				} else if(deli[0].checked==false && deli[1].checked==false && deli[2].checked==false && trade.checked==false){
+					alert("택배 방법을 입력하세요.");
+				} else {
+					//var contents = $("#writting").val();
+					//contents = contents.replace(/(&nbsp;)+/ig, "");// 맨 앞 공백, 공백연속으로 쳤을때 &nbsp;
+					//contents = contents.replace(/^[ ]+/ig, "");	// &nbsp;자르고나서 또 맨앞에 오는 공백 자르기
+					//contents = contents.replace(/(<div><br><\/div>)+/ig, "");// 내용없이 엔터쳤을때
+					//contents = contents.replace("/(<div>[ ]*?<\/div>)/ig", "");// 공백만 넣고 엔터쳤을때
+					var contentsText = $("#writting").val();
+					var regContents = /^[가-힣 .,:;()!^?~0-9a-zA-Z\n]{1,150}$/g;	 //레직스 바꾸기		
+					var titleText = $("#goodsTitle").val();
+					var regTitle = /^[가-힣 .,:;()!^?~0-9a-zA-Z]{1,22}$/g;
+					var price = parseInt($("#goodsPrice").val());
+					var phoneText = $("#phone").val();			
+					var regPhone = /(01[0|1|6|9|7])[-](\d{3}|\d{4})[-](\d{4}$)/g;	
+					var accountText = $("#account").val();
+					var regAccount = /^[\d]{12,15}$/g;
+					
+					if(!regContents.test(contentsText)){
+						alert('잘못된 내용 입니다.');
+			            $('#writting').val("");
+					}else if(!regTitle.test(titleText)){
+						alert('잘못된 제목 입니다.');
+			            $('#goodsTitle').val("");
+					}else if(!regPhone.test(phoneText)){
+						alert('잘못된 휴대폰 번호입니다.');
+			            $('#phone').val("");	
+					}else if(!regAccount.test(accountText)){
+						alert('잘못된 계좌 번호입니다.');
+			            $('#account').val("");
+					}else if(price !=0){
+						if(price<1000){
+							alert("1000원 이상 가격을 입력하세요.");
+							$("#goodsPrice").val("");
+							}else if(price>1000000){
+								alert("1,000,000원 이하 가격을 입력하세요.");
+								$("#goodsPrice").val("");
+							}else{
+								var contents = $("#writting").val();
+								
+								$("#send").submit();
+						}
+					}
+				}
+			})
+			
+			$("#logout_na").on("click", function() {
+			 $.ajax({
+	                url:"logout",
+	                type:"get"
+	             }).done(function(){
+	                var naver=open("https://nid.naver.com/nidlogin.logout?returl=https://www.naver.com/", "_blank", "width=100,height=100");
+	                setTimeout(function(){
+	                   naver.close();
+	                   location.reload(true);
+	                },1000);
+	             });
+		});
+		$("#logout_ka").on("click", function() {
+			 $.ajax({
+	             url:"logout",
+	             type:"get"
+	          }).done(function(){
+	             var kakao=open("https://developers.kakao.com/logout", "_blank", "width=100,height=100");
+	             setTimeout(function(){
+	                kakao.close();
+	                location.reload(true);
+	             },1000);
+	          });
+		});
+			
+		</script>
 
    <script src="../resources/js/vendor/jquery-2.2.4.min.js"></script>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.../resources/js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"

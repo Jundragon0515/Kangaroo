@@ -15,84 +15,86 @@ import kh.spring.dto.Auction_boardDTO;
 
 @Repository
 public class AuctionDAO {
-	
-	@Autowired
-	private HttpSession session;
+   
+   @Autowired
+   private HttpSession session;
 
    @Autowired
    private SqlSessionTemplate sst;
    
    // 카테고리 설정값
    public void checkCategory(HttpSession session) {
-	   String category = (String)session.getAttribute("selectCategory");
-	   System.out.println("DAO설정값" + category);
-	   
-	   if(category.equals("art") || category.equals("where category='미술품'")) {
-		   session.setAttribute("selectCategory", "where category='미술품'");
-	   }else if(category.equals("book") || category.equals("where category='도서'")) {
-		   session.setAttribute("selectCategory", "where category='도서'");
-	   }else if(category.equals("electric")|| category.equals("where category='가전제품'")) {
-		   session.setAttribute("selectCategory", "where category='가전제품'");
-	   }else if(category.equals("hobby")|| category.equals("where category='취미/수집'")) {
-		   session.setAttribute("selectCategory", "where category='취미/수집'");
-	   }else if(category.equals("life")|| category.equals("where category='생활용품'")) {
-		   session.setAttribute("selectCategory", "where category='생활용품'");
-	   }else if(category.equals("sports")|| category.equals("where category='스포츠/레저'")) {
-		   session.setAttribute("selectCategory", "where category='스포츠/레저'");
-	   }else if(category.equals("etc")|| category.equals("where category='기타'")) {
-		   session.setAttribute("selectCategory", "where category='기타'");
-	   }else {
-		   session.setAttribute("selectCategory", " ");
-	   }
+
+      String category = (String)session.getAttribute("selectCategory");
+      System.out.println("DAO설정값" + category);
+      
+      if(category.equals("art") || category.equals("where category='미술품'")) {
+         session.setAttribute("selectCategory", "where category='미술품'");
+      }else if(category.equals("book") || category.equals("where category='도서'")) {
+         session.setAttribute("selectCategory", "where category='도서'");
+      }else if(category.equals("electric")|| category.equals("where category='가전제품'")) {
+         session.setAttribute("selectCategory", "where category='가전제품'");
+      }else if(category.equals("hobby")|| category.equals("where category='취미/수집'")) {
+         session.setAttribute("selectCategory", "where category='취미/수집'");
+      }else if(category.equals("life")|| category.equals("where category='생활용품'")) {
+         session.setAttribute("selectCategory", "where category='생활용품'");
+      }else if(category.equals("sports")|| category.equals("where category='스포츠/레저'")) {
+         session.setAttribute("selectCategory", "where category='스포츠/레저'");
+      }else if(category.equals("etc")|| category.equals("where category='기타'")) {
+         session.setAttribute("selectCategory", "where category='기타'");
+      }else {
+         session.setAttribute("selectCategory", " ");
+      }
+
    }
    
    
    
    // n개씩 보기 개수 설정
    public void checkView(HttpSession session) {
-	   String view =(String)session.getAttribute("selectView");
-	   if(view.equals("16")) {
-		   session.setAttribute("selectView", "16");
-	   }else if(view.equals("24")) {
-		   session.setAttribute("selectView", "24");
-	   }else if(view.equals("32")) {
-		   session.setAttribute("selectView", "32");
-	   }else {
-		   session.setAttribute("selectView", "16");
-	   }
+      String view =(String)session.getAttribute("selectView");
+      if(view.equals("16")) {
+         session.setAttribute("selectView", "16");
+      }else if(view.equals("24")) {
+         session.setAttribute("selectView", "24");
+      }else if(view.equals("32")) {
+         session.setAttribute("selectView", "32");
+      }else {
+         session.setAttribute("selectView", "16");
+      }
    }
    
    // 낮은가격순 OR 높은가격순 설정
    public void checkPrice(HttpSession session) {
-	   String price = (String)session.getAttribute("selectPrice");
-	   if(price.equals("low")) {
-		   session.setAttribute("selectPrice", "asc");
-	   }else if(price.equals("high")){
-		   session.setAttribute("selectPrice", "desc");
-	   }else {
-		   session.setAttribute("selectPrice", " ");
-	   }
+      String price = (String)session.getAttribute("selectPrice");
+      if(price.equals("low")) {
+         session.setAttribute("selectPrice", "asc");
+      }else if(price.equals("high")){
+         session.setAttribute("selectPrice", "desc");
+      }else {
+         session.setAttribute("selectPrice", " ");
+      }
    }
    //옵션선택
    public List<Auction_boardDTO> selectOption(HttpSession session, int start, int end){
-	   HashMap<String, String> param = new HashMap<>();
-	   String startNum = Integer.toString(start);
-	   String endNum = Integer.toString(end);
-	   String selectCategory = (String)session.getAttribute("selectCategory");
-	   String selectPrice = (String)session.getAttribute("selectPrice");
-	   
-	   System.out.println("category " + selectCategory);
-	   System.out.println("price " + selectPrice);
-	   System.out.println("start" + startNum);
-	   System.out.println("end" + endNum);
-	   
-		   param.put("category", selectCategory);
-		   param.put("price", selectPrice);
-		   param.put("start", startNum);
-		   param.put("end", endNum);
-		   
-	return sst.selectList("AuctionDAO.selectPrice", param);
-	   
+      HashMap<String, String> param = new HashMap<>();
+      String startNum = Integer.toString(start);
+      String endNum = Integer.toString(end);
+      String selectCategory = (String)session.getAttribute("selectCategory");
+      String selectPrice = (String)session.getAttribute("selectPrice");
+      
+      System.out.println("category " + selectCategory);
+      System.out.println("price " + selectPrice);
+      System.out.println("start" + startNum);
+      System.out.println("end" + endNum);
+      
+         param.put("category", selectCategory);
+         param.put("price", selectPrice);
+         param.put("start", startNum);
+         param.put("end", endNum);
+         
+   return sst.selectList("AuctionDAO.selectPrice", param);
+
    }
    
    //처음 화면
@@ -118,12 +120,12 @@ public class AuctionDAO {
    }
    
    public int recordTotalCountOption(HttpSession session) {
-	   String selectCategory = (String)session.getAttribute("selectCategory");
-	   HashMap<String, String> param = new HashMap<>();
-	   param.put("category", selectCategory);
-	   return sst.selectOne("AuctionDAO.recordTotalCountOption");
-	   }
-   
+
+      String selectCategory = (String)session.getAttribute("selectCategory");
+      HashMap<String, String> param = new HashMap<>();
+      param.put("category", selectCategory);
+      return sst.selectOne("AuctionDAO.recordTotalCountOption");
+      }
    
    //첫화면 네비메뉴
    public String getNavi(int currentPage, int recordCountPerPage) {

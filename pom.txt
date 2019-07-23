@@ -20,10 +20,10 @@
 			<url>http://maven.jahia.org/maven2</url>
 		</repository>
 		 <repository>
-         	<id>tobesoft</id>
-         	<name>tobesoft-nexacro</name>
-         	<url>http://mangosteen.tobesoft.co.kr/nexus/repository/maven-public/</url>
-      	</repository>
+         <id>tobesoft</id>
+         <name>tobesoft-nexacro</name>
+         <url>http://mangosteen.tobesoft.co.kr/nexus/repository/maven-public/</url>
+      </repository>
 	</repositories>
 	<dependencies>
 		<!-- Spring -->
@@ -141,8 +141,8 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>com.oracle</groupId><!-- 폴더 -->
-			<artifactId>ojdbc6</artifactId><!-- 대상아이디 -->
+			<groupId>com.oracle</groupId><!-- ���� -->
+			<artifactId>ojdbc6</artifactId><!-- �����̵� -->
 			<version>12.1.0.2</version>
 		</dependency>
 		<dependency>
@@ -213,12 +213,22 @@
 			<version>2.4</version>
 			<classifier>jdk15</classifier>
 		</dependency>
-		<!--smtp 이메일인증 -->
+		<!--smtp �̸������� -->
 		<dependency>
 			<groupId>com.sun.mail</groupId>
 			<artifactId>smtp</artifactId>
 			<version>1.6.3</version>
 		</dependency>
+		<!-- nexacro -->
+     
+   
+   
+      <!-- nexacro -->
+         <dependency>
+            <groupId>com.nexacro.spring</groupId>
+            <artifactId>nexacro-core</artifactId>
+            <version>1.0.0</version>
+         </dependency>
 	</dependencies>
 	<build>
 		<plugins>

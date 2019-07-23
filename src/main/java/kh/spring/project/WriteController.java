@@ -32,6 +32,9 @@ public class WriteController {
    @Autowired
    private TradeController tc;
    @Autowired
+
+   private AuctionController ac;
+   @Autowired
    HttpSession se;
    
    @RequestMapping("tradeGoodsWrite")
@@ -67,8 +70,10 @@ public class WriteController {
          } catch (Exception e) {
             e.printStackTrace();
          }
-      
-      return "redirect:"+tc.directList(request);
+      if(dto.getTrade_type().equals("직거래")) {
+    	  return "redirect:"+tc.direct(request);
+      }
+      return "redirect:"+tc.safe(request);
    }  //중고 거래 등록하는 것
 
    @RequestMapping("auctionWrite")
@@ -77,7 +82,7 @@ public class WriteController {
    } //경매 글쓰기로 가는 것
 
    @RequestMapping("auctionWriteComplete")
-   public String ActionWriteCompleteProc(MultipartHttpServletRequest mtfRequest,Auction_boardDTO adto,Auction_img_boardDTO idto) {
+   public String ActionWriteCompleteProc(HttpServletRequest request,MultipartHttpServletRequest mtfRequest,Auction_boardDTO adto,Auction_img_boardDTO idto) {
       
       SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
       Date time = new Date();
@@ -90,6 +95,11 @@ public class WriteController {
       } catch (Exception e) {
          e.printStackTrace();
       }
+
+      if(adto.getTrade_type().equals("직거래")) {
+    	  return "redirect:"+ac.index(request);
+      }
+
       return "redirect:/";
    } //경매 글쓰기 완성 등록하면 홈으로가는 것
 

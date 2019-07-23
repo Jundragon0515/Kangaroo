@@ -390,7 +390,7 @@ public class GoodsTradeDAO {
    
    //직거래 게시판 검색 네비메뉴
    public String getNavi_direct_search(HttpSession session, int currentPage, int recordCountPerPage) {
-      int recordTotalCount = this.recordTotalCount_direct_search(session); //전체 개수
+      int recordTotalCount = this.recordTotalCount_direct_search(session); //
       System.out.println("검색 토탈 카운트" + recordTotalCount);
       int naviCountPerPage = 5; // 한 페이지 네비 개수
       int pageTotalCount=0;
