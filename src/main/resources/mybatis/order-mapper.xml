@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="OrderDAO">
+
+<select id="recordCount" resultType="Integer">
+select count(*) from order_t where buyer=#{value} 
+</select>
+<select id = "selectByBuyer" parameterType="Map" resultType="kh.spring.dto.OrderDTO">
+select * from (select row_number()over(order by seq desc) as rown, order_t.* from order_t) where (rown between #{startNum} and #{endNum})and buyer=#{buyer}
+</select>
+<select id="selectBySeq" resultType="kh.spring.dto.OrderDTO">
+select * from order_t where seq=#{value}
+</select>
+<update id="update_situation" parameterType="Map">
+update order_t set situation=#{situation} where seq=${seq}
+</update>
+<select id = "selectBySeller" parameterType="Map" resultType="kh.spring.dto.OrderDTO">
+select * from (select row_number()over(order by seq desc) as rown, order_t.* from order_t) where (rown between #{startNum} and #{endNum})and seller=#{seller}
+</select>
+<select id="recordCount2" resultType="Integer">
+select count(*) from order_t where seller=#{value} 
+</select>
+</mapper>
+
+
