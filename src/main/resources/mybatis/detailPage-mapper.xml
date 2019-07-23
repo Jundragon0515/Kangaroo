@@ -37,4 +37,17 @@
 <delete id="deleteComment2">
 	delete from comments2 where id = #{id} and seq = #{seq}
 </delete>
+
+<insert id="buy">
+	insert into order_t values(order_seq.nextval,#{product_num},#{product_title},#{product_img},#{seller},#{buyer},#{price},#{type},default,default)
+</insert>
+
+<update id="soldOut">
+	update USED_TRANSACTION_BOARD set ongoing = 'n' where no = #{value}
+</update>
+
+<insert id="pointUsing">
+	insert into point_using values(p_u_no_seq.nextval,#{buyer},#{product_title},#{price},default)
+</insert>
+
 </mapper>

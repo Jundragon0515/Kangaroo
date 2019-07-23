@@ -25,6 +25,7 @@ import kh.spring.dao.MemberDAO;
 import kh.spring.dao.NaverDAO;
 import kh.spring.dto.Auction_boardDTO;
 import kh.spring.dto.MemberDTO;
+import kh.spring.dto.OrderDTO;
 import kh.spring.dto.TenderDTO;
 
 @Component
@@ -41,6 +42,17 @@ public class MemberService {
 	KakaoDAO ka;
 	@Autowired
 	DetailPageDAO ddao;
+	
+	@Transactional("txManager")
+	public int buy(OrderDTO dto) {
+		
+		ddao.buy_minus(dto);
+		ddao.buy(dto);
+		ddao.soldOut(dto.getProduct_num());
+		ddao.pointUsing(dto);
+		
+		return 1;
+	}
 	
 	@Transactional("txManager")
 	public void tender(TenderDTO dto, int Board_num) {
