@@ -36,7 +36,11 @@
    href="../resources/css/ion.rangeSlider.skinFlat.css" />
 <link rel="stylesheet" href="../resources/css/main.css">
 <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"> -->
-
+<script
+	src=https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.3.0/sockjs.min.js></script>
+<!-- 모든 브라우저 호완성을 위해 추가  -->
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
 
 <style>
 
@@ -188,7 +192,7 @@
 }
 </style>
 
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script>
 
 function viewCount(){
@@ -201,7 +205,27 @@ function viewCount(){
 
 
    $(function(){
-      
+	   var socket = new SockJS("/gettime"); //불특정 다수의 브라우저일 경우를 위해 endpoint url 넣어야 한다
+		var client = Stomp.over(socket);//연결 이후의 작업 지원 
+		client.connect({}, function(resp) {
+			client.subscribe("/response", function(list) {
+				var result = JSON.parse(list.body);
+				var z = 0;
+					 			<c:forEach var="i" items="${list}">
+								$("."+"${i.no}").text("남은시간 : "+result[z++]);
+								</c:forEach>
+			});
+		})
+		setInterval(function() {//시간 보내 달라는 요청
+			var list = new Array();
+			var z = 0;
+						<c:forEach var="i" items="${list}">
+							list.push("${i.end_date}");
+						</c:forEach>
+			client.send("/app/time", {}, JSON.stringify({
+				end_dates : list
+			}));
+		}, 900);
 /*       $("#category").on("click", function(){
          var category = $(this).text();
          console.log(category);
@@ -552,7 +576,7 @@ function viewCount(){
                                     <div class="col-lg-12">현재가격:${temp.present_price}</div>
                                  </div>
                                  <div class="row">
-                                    <div class="col-sm-12 col-md-10 col-lg-8">남은시간</div>
+                                    <div class="col-sm-12 col-md-10 col-lg-8 ${temp.no}"></div>
                                     <div class="d-none d-xl-block col-lg-2"><i class="fas fa-eye fa-2x"></i></div>
                                     <div class="col-sm-12 col-md-2 col-lg-2">${temp.viewCount}</div>
                                  </div>

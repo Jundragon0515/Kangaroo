@@ -73,14 +73,13 @@
 		})
 		setInterval(function() {//시간 보내 달라는 요청
 			var list = new Array();
-			
 						<c:forEach var="i" items="${main_option_list}">
-							list.add("${i.end_date}");
+							list.push("${i.end_date}");
 						</c:forEach>
 			client.send("/app/time", {}, JSON.stringify({
 				end_dates : list
 			}));
-		}, 400);
+		}, 900);
 		
 		
 		$("#logout_na").on("click", function() {

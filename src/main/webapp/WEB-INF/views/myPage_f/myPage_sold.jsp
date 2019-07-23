@@ -136,6 +136,8 @@ a{
 			})
 		});
 		$(".refund").on("click",function(){
+			var anwser=confirm("정말 환불 확정 하시겠습니까?");
+			if(anwser==true){
 			$.ajax({
 				url : "refund_comp",
 				data:{
@@ -144,6 +146,7 @@ a{
 		}).done(function(){
 			location.reload(true);
 			})
+			}
 		});
 		$(".lookup").on("click",function(){
 			$.ajax({
@@ -157,7 +160,7 @@ a{
 						"/golookup",
 						"_blank", "width=500,height=500");
 				}else{
-					alert("아직 배송정보가 등록 되어있지 않습니다.");
+					alert("등록된 배송정보가 잘못되어 있습니다. ");
 				}
 			});
 			//대기
@@ -165,10 +168,14 @@ a{
 		$(".start").on("click",function(){
 			var seq =$(this).attr("seq");
 			var reci=$(this).attr("buyer");
+			var anwser=confirm("배송 정보를 입력해주세요 ");
+			if(anwser==true){
 			open(
 					"/delivert_insert?seq="+seq+"&reci="+reci,
 					"_blank", "width=500,height=500");
+			}
 		});
+		
 	});
 </script>
 </head>
