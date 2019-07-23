@@ -19,6 +19,11 @@
 			<id>oracle</id>
 			<url>http://maven.jahia.org/maven2</url>
 		</repository>
+		 <repository>
+         	<id>tobesoft</id>
+         	<name>tobesoft-nexacro</name>
+         	<url>http://mangosteen.tobesoft.co.kr/nexus/repository/maven-public/</url>
+      	</repository>
 	</repositories>
 	<dependencies>
 		<!-- Spring -->
@@ -39,6 +44,13 @@
 			<artifactId>spring-webmvc</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
+		
+		<!-- nexacro -->
+         <dependency>
+            <groupId>com.nexacro.spring</groupId>
+            <artifactId>nexacro-core</artifactId>
+            <version>1.0.0</version>
+         </dependency>
 
 		<!-- AspectJ -->
 		<dependency>

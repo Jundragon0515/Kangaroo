@@ -145,9 +145,9 @@
 								<ul class="dropdown-menu">
 									<li class="nav-item"><a class="nav-link" href="/trade">중고
 											직거래</a></li>
-									<li class="nav-item"><a class="nav-link" href="/trade">중고
+									<li class="nav-item"><a class="nav-link" href="/trade_safe">중고
 											안전거래</a></li>
-									<li class="nav-item"><a class="nav-link" href="/">중고
+									<li class="nav-item"><a class="nav-link" href="/auction">중고
 											경매</a></li>
 								</ul></li>
 							<li class="nav-item "><a class="nav-link" href="/">고객센터</a></li>
