@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import kh.spring.dto.Auction_boardDTO;
 import kh.spring.dto.Auction_img_boardDTO;
 import kh.spring.dto.CommentDTO;
+import kh.spring.dto.OrderDTO;
 import kh.spring.dto.Used_transaction_boardDTO;
 import kh.spring.dto.Used_transaction_img_boardDTO;
 
@@ -42,5 +43,17 @@ public class DetailPageDAO {
 	}
 	public int deleteComment2(CommentDTO dto) {
 		return sst.delete("DetailPageDAO.deleteComment2",dto);
+	}
+	public int buy(OrderDTO dto) {
+		return sst.insert("DetailPageDAO.buy", dto);
+	};
+	public int buy_minus(OrderDTO dto) {
+		return sst.update("MemberDAO.buy_minus", dto);
+	}
+	public int soldOut(int boardNum) {
+		return sst.update("DetailPageDAO.soldOut",boardNum);
+	}
+	public int pointUsing(OrderDTO dto) {
+		return sst.insert("DetailPageDAO.pointUsing", dto);
 	}
 }

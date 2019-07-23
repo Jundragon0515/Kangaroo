@@ -19,6 +19,7 @@ import org.springframework.stereotype.Component;
 
 import kh.spring.dto.CommentDTO;
 import kh.spring.dto.MemberDTO;
+import kh.spring.dto.OrderDTO;
 import kh.spring.dto.TenderDTO;
 
 @Component
@@ -108,7 +109,6 @@ return sst.selectOne("MemberDAO.selectMoney", dto);
 public int minus(TenderDTO dto) {
 return sst.update("MemberDAO.minus", dto);
 }
-
 // 현재 입찰가
 public int currentMoney(int Board_num){
 return sst.selectOne("MemberDAO.currentMoney", Board_num);
