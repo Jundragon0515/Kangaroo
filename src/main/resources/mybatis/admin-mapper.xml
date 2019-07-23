@@ -14,4 +14,11 @@
 	delete from used_transaction_img_board where no=#{value}
 </delete>
 
+<delete id="auctionBoardDelete">
+	delete from auction_board where no=#{value}
+</delete>
+
+<delete id="auctionBoardImgDelete">
+	delete from auction_img_board where no=#{value}
+</delete>
 </mapper>

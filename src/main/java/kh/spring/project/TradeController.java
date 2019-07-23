@@ -8,6 +8,8 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import kh.spring.dto.Used_transaction_boardDTO;
 import org.springframework.web.servlet.ModelAndView;
 
 import kh.spring.dto.GoodsTradeDTO;
@@ -22,118 +24,228 @@ public class TradeController {
 
    @Autowired
    private HttpSession session;
+
+   //직거래 게시판 처음
    @RequestMapping("/trade")
-   public String index(HttpServletRequest request) {
+   public String direct(HttpServletRequest request) {
+      
+      session.setAttribute("selectCategory", "all");
+      session.setAttribute("selectPrice", " ");
+      session.setAttribute("selectView", "16");
 
-         int currentPage = 0;
-         int recordCountPerPage=0;
-         
-         if(session.getAttribute("view")==null) {
-            recordCountPerPage = 16; // 한 페이지에 보여줄 개수
-         }else {
-            recordCountPerPage=Integer.parseInt(session.getAttribute("view").toString());
-         }
-         
-         List<GoodsTradeDTO> list = null;
-         String price = request.getParameter("price");
+      int currentPage = 0;
+      int recordCountPerPage=16;
+      List<Used_transaction_boardDTO> list = null;
 
-         if (price != null) {
-            session.setAttribute("price", price);
-         }
+      String currentPageResult = request.getParameter("currentPage");
 
-         String currentPageResult = request.getParameter("currentPage");
-
-         if (currentPageResult != null) {
-            currentPage = Integer.parseInt(currentPageResult);
-         } else {
-            currentPage = 1;
-         }
-         int end = currentPage * recordCountPerPage;
-         int start = end - (recordCountPerPage - 1);
-
-         System.out.println("start" + start);
-         System.out.println("end" + end);
-
-         // 낮은가격순 or 높은가격순
-         if (session.getAttribute("price") == null) {
-            list = tradeService.tradeList(start, end);
-         } else {
-            list = tradeService.tradeListPrice(start, end, (String)session.getAttribute("price"));
-         }
-
-         // 페이징 버튼
-         String resultNavi = tradeService.tradeBoardNavi(currentPage, recordCountPerPage);
-         request.setAttribute("recordTotalCount", list.size()); // 전체개수
-         request.setAttribute("list", list);
-         request.setAttribute("navi", resultNavi);
-         request.setAttribute("price", price);
-         return "trade";
+      if (currentPageResult != null) {
+         currentPage = Integer.parseInt(currentPageResult);
+      } else {
+         currentPage = 1;
       }
+      int end = currentPage * recordCountPerPage;
+      int start = end - (recordCountPerPage - 1);
 
-   @RequestMapping("/tradeList")
-   public String indexList(HttpServletRequest request) {
+      System.out.println("start" + start);
+      System.out.println("end" + end);
 
-         int currentPage = 0;
-         int recordCountPerPage = 0; // 한 페이지에 보여줄 개수
-         List<GoodsTradeDTO> list = null;
-         String view = request.getParameter("view");
+      list = tradeService.directList(start, end);
+      
 
-         if (view != null) {
-            session.setAttribute("view", view);
-         }
-
-         String price = (String) session.getAttribute("price");
-         String currentPageResult = request.getParameter("currentPage");
-
-         recordCountPerPage = Integer.parseInt(view);
-
-         if (currentPageResult != null) {
-            currentPage = Integer.parseInt(currentPageResult);
-         } else {
-            currentPage = 1;
-         }
-         int end = currentPage * recordCountPerPage;
-         int start = end - (recordCountPerPage - 1);
-
-         if (price == null) {
-
-            list = tradeService.tradeList(start, end);
-         } else {
-            list = tradeService.tradeListPrice(start, end, price);
-         }
-         // 페이징 버튼
-         if (price == null) {
-
-            if (session.getAttribute("view") != null) {
-               String resultNavi = tradeService.tradeBoardNaviView(currentPage, Integer.parseInt(session.getAttribute("view").toString()),
-                     Integer.parseInt(session.getAttribute("view").toString()));
-               request.setAttribute("navi", resultNavi);
-            } else {
-               String resultNavi = tradeService.tradeBoardNaviView(currentPage, recordCountPerPage,
-                     recordCountPerPage);
-               request.setAttribute("navi", resultNavi);
-            }
-
-         } else {
-            
-            if (session.getAttribute("view") != null) {
-               String resultNavi = tradeService.tradeBoardNaviView(currentPage, Integer.parseInt(session.getAttribute("view").toString()), Integer.parseInt(session.getAttribute("view").toString()), price);
-               request.setAttribute("navi", resultNavi);
-            } else {
-               String resultNavi = tradeService.tradeBoardNaviView(currentPage, recordCountPerPage, recordCountPerPage,
-                     price);
-               request.setAttribute("navi", resultNavi);
-            }
-
-         }
-
-         request.setAttribute("view", view);
-         request.setAttribute("recordTotalCount", list.size());
-         request.setAttribute("list", list);
-
-         return "trade";
-      }
+      // 페이징 버튼
+      String resultNavi = tradeService.directBoardNavi(currentPage, recordCountPerPage);
+      /*request.setAttribute("recordTotalCount", list.size()); // 전체개수 */
+        request.setAttribute("list", list);
+       request.setAttribute("navi", resultNavi);
+       return "trade";
+   }
    
+   //직거래 게시판 옵션선택
+   @RequestMapping("/tradeOption")
+   public String directList(HttpServletRequest request) {
+      List<Used_transaction_boardDTO> list = null;
+      int currentPage = 0;
+      String category = request.getParameter("category");
+      String price = request.getParameter("price");
+      String view = request.getParameter("view");
+      
+      String selectCategory = (String)session.getAttribute("selectCategory");
+      String selectPrice = (String)session.getAttribute("selectPrice");
+      String selectView = (String)session.getAttribute("selectView");
+      
+      
+      if(category!=null) {
+         session.setAttribute("selectCategory", category);
+      }
+      
+      if(price!=null) {
+         session.setAttribute("selectPrice", price);
+      }
+      if(view!=null) {
+         session.setAttribute("selectView", view);
+      }
+      
+      
+      if(selectCategory==null) {
+         session.setAttribute("selectCategory", " ");  
+      }else {
+         tradeService.checkCategory(session);
+      }
+      
+      if(selectPrice==null) {
+         session.setAttribute("selectPrice"," "); 
+      }else {
+         tradeService.checkPrice(session);
+      }
+      if(selectView==null) {
+         session.setAttribute("selectView", "16");
+      }else {
+         tradeService.checkView(session);
+      }
+      
+      System.out.println("카테고리값 :" + selectCategory);
+      System.out.println("가격 :" + selectPrice);
+      System.out.println("정렬 : " + selectView);
+      
+      String currentPageResult = request.getParameter("currentPage");
+      
+      String count =(String)session.getAttribute("selectView");
+      int recordCountPerPage= Integer.parseInt(count);
+      
+      if (currentPageResult != null) {
+         currentPage = Integer.parseInt(currentPageResult);
+      } else {
+         currentPage = 1;
+      }
+      int end = currentPage * recordCountPerPage;
+      int start = end - (recordCountPerPage - 1);
+      
+      System.out.println("컨트롤 start" + start);
+      System.out.println("컨트롤 end" + end);
+      list = tradeService.directOption(session, start, end);
+
+
+
+
+      String resultNavi = tradeService.directBoardNaviOption(session, currentPage, recordCountPerPage);
+      /* request.setAttribute("recordTotalCount", list.size()); // 전체개수 */
+      request.setAttribute("navi", resultNavi);
+      request.setAttribute("list", list);
+
+      return "trade";
+   }
+   
+//   -------------------------------------------------------------------------------------------------------------------------------------------------
+   
+   //안전거래 게시판 처음
+   @RequestMapping("/trade_safe")
+   public String safe(HttpServletRequest request) {
+      
+      session.setAttribute("selectCategory", "all");
+      session.setAttribute("selectPrice", " ");
+      session.setAttribute("selectView", "16");
+
+      int currentPage = 0;
+      int recordCountPerPage=16;
+      List<Used_transaction_boardDTO> list = null;
+
+      String currentPageResult = request.getParameter("currentPage");
+
+      if (currentPageResult != null) {
+         currentPage = Integer.parseInt(currentPageResult);
+      } else {
+         currentPage = 1;
+      }
+      int end = currentPage * recordCountPerPage;
+      int start = end - (recordCountPerPage - 1);
+
+      System.out.println("start" + start);
+      System.out.println("end" + end);
+
+      list = tradeService.safeList(start, end);
+      
+      // 페이징 버튼
+      String resultNavi = tradeService.safeBoardNavi(currentPage, recordCountPerPage);
+      /*request.setAttribute("recordTotalCount", list.size()); // 전체개수 */
+        request.setAttribute("list", list);
+       request.setAttribute("navi", resultNavi);
+       return "trade_safe";
+   }
+   
+   //직거래 게시판 옵션선택
+   @RequestMapping("/tradeOption_safe")
+   public String safeList(HttpServletRequest request) {
+      List<Used_transaction_boardDTO> list = null;
+      int currentPage = 0;
+      String category = request.getParameter("category");
+      String price = request.getParameter("price");
+      String view = request.getParameter("view");
+
+      String selectCategory = (String)session.getAttribute("selectCategory");
+      String selectPrice = (String)session.getAttribute("selectPrice");
+      String selectView = (String)session.getAttribute("selectView");
+      
+      
+      if(category!=null) {
+         session.setAttribute("selectCategory", category);
+      }
+      
+      if(price!=null) {
+         session.setAttribute("selectPrice", price);
+      }
+      if(view!=null) {
+         session.setAttribute("selectView", view);
+      }
+      
+      
+      if(selectCategory==null) {
+         session.setAttribute("selectCategory", " ");  
+      }else {
+         tradeService.checkCategory(session);
+      }
+      
+      if(selectPrice==null) {
+         session.setAttribute("selectPrice"," "); 
+      }else {
+         tradeService.checkPrice(session);
+      }
+      if(selectView==null) {
+         session.setAttribute("selectView", "16");
+      }else {
+         tradeService.checkView(session);
+      }
+      
+      System.out.println("카테고리값 :" + selectCategory);
+      System.out.println("가격 :" + selectPrice);
+      System.out.println("정렬 : " + selectView);
+      
+      String currentPageResult = request.getParameter("currentPage");
+      
+      String count =(String)session.getAttribute("selectView");
+      int recordCountPerPage= Integer.parseInt(count);
+      
+      if (currentPageResult != null) {
+         currentPage = Integer.parseInt(currentPageResult);
+      } else {
+         currentPage = 1;
+      }
+      int end = currentPage * recordCountPerPage;
+      int start = end - (recordCountPerPage - 1);
+      
+      System.out.println("컨트롤 start" + start);
+      System.out.println("컨트롤 end" + end);
+      list = tradeService.safeOption(session, start, end);
+
+
+      String resultNavi = tradeService.safeBoardNaviOption(session, currentPage, recordCountPerPage);
+      /* request.setAttribute("recordTotalCount", list.size()); // 전체개수 */
+      request.setAttribute("navi", resultNavi);
+      request.setAttribute("list", list);
+
+      return "trade_safe";
+   }
+
    @RequestMapping("/goodsTradeWrite")
    public String goodsTradeWrite() {
       return "goodsTradeWrite";

@@ -27,4 +27,17 @@ public class AdminService {
             }
       }
    }
+   
+   @Transactional("txManager")
+   public void auctionBoardDelete(String value[]) {
+         for(int i=0; i<value.length; i++) {
+            try {
+               dao.auctionBoardDelete(value[i]);
+               dao.auctionBoardImgDelete(value[i]);
+            } catch (Exception e) {
+               e.printStackTrace();
+            }
+      }
+   }
+   
 }

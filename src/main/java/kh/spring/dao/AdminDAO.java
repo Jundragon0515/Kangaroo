@@ -22,6 +22,11 @@ public class AdminDAO {
 	public int boardImgDelete(String no) {
 		return sst.delete("AdminDAO.boardImgDelete",no);
 	}
-
+	public int auctionBoardDelete(String no) {
+		return sst.delete("AdminDAO.auctionBoardDelete",no);
+	}
+	public int auctionBoardImgDelete(String no) {
+		return sst.delete("AdminDAO.auctionBoardImgDelete",no);
+	}
 }
 

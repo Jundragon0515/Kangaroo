@@ -18,6 +18,8 @@ public class AdminController {
 	private AdminService sv;
 	@Autowired
 	private TradeController tc;
+	@Autowired
+	private AuctionController ac;
 
 	@RequestMapping("/admin")
 	public String admin() {
@@ -35,8 +37,16 @@ public class AdminController {
 		if(value!=null) {
 			sv.boardDelete(value);
 		}
-		return tc.index(request);
-
+		return tc.direct(request);
+	}
+	
+	@RequestMapping("auctionBoardDelete")
+	public String acutionWriteDelete(HttpServletRequest request) {
+		String[] value =  request.getParameterValues("checkDelete");
+		if(value!=null) {
+			sv.auctionBoardDelete(value);
+		}
+		return ac.index(request);
 	}
 
 }
