@@ -103,7 +103,7 @@ $("#logout_na").on("click", function() {
 </script>
 </head>
 <body>
-   <header class="header_area sticky-header">
+  <header class="header_area sticky-header">
 		<div class="main_menu">
 			<nav class="navbar navbar-expand-lg navbar-light main_box">
 				<div class="container">
@@ -123,21 +123,13 @@ $("#logout_na").on("click", function() {
 						id="navbarSupportedContent">
 						<ul class="nav navbar-nav menu_nav ml-auto">
 							<!-- 							<li class="nav-item active"><a class="nav-link" href="/">Home</a></li> -->
-							<li class="nav-item submenu dropdown"><a href="#"
-								class="nav-link dropdown-toggle" data-toggle="dropdown"
-								role="button" aria-haspopup="true" aria-expanded="false">중고
-									거래</a>
-								<ul class="dropdown-menu">
 									<li class="nav-item"><a class="nav-link" href="/trade">중고
 											직거래</a></li>
-									<li class="nav-item"><a class="nav-link" href="/trade">중고
+									<li class="nav-item"><a class="nav-link" href="/trade_safe">중고
 											안전거래</a></li>
 									<li class="nav-item"><a class="nav-link" href="/auction">중고
 											경매</a></li>
-								</ul></li>
-							<li class="nav-item "><a class="nav-link" href="/">고객센터</a></li>
 							<li class="nav-item "><a class="nav-link" href="/">공지사항</a></li>
-
 							<c:choose>
 								<c:when test="${logintype=='admin'}">
 									<li class="nav-item "><a class="nav-link" href="/admin">관리자페이지</a></li>
@@ -149,8 +141,8 @@ $("#logout_na").on("click", function() {
 										role="button" aria-haspopup="true" aria-expanded="false"><img
 											src="../resources/img/account.png" width="35px"></a>
 										<ul class="dropdown-menu nav_ul">
-											<li class="nav-item "><a class="nav-link" href="/">찜목록</a></li>
-											<li class="nav-item active"><a class="nav-link"
+											<li class="nav-item "><a class="nav-link" href="/goCart">찜목록</a></li>
+											<li class="nav-item "><a class="nav-link"
 												href="/goMyPage">마이페이지</a></li>
 											<li class="nav-item "><a class="nav-link"
 												href="/toPoint">포인트충전</a></li>
@@ -164,8 +156,8 @@ $("#logout_na").on("click", function() {
 										role="button" aria-haspopup="true" aria-expanded="false"><img
 											src="../resources/img/account.png" width="40px"></a>
 										<ul class="dropdown-menu nav_ul">
-											<li class="nav-item "><a class="nav-link" href="/">찜목록</a></li>
-											<li class="nav-item active"><a class="nav-link"
+											<li class="nav-item "><a class="nav-link" href="/goCart">찜목록</a></li>
+											<li class="nav-item "><a class="nav-link"
 												href="/goMyPage">마이페이지</a></li>
 											<li class="nav-item "><a class="nav-link"
 												href="/toPoint">포인트충전</a></li>
@@ -179,7 +171,7 @@ $("#logout_na").on("click", function() {
 										role="button" aria-haspopup="true" aria-expanded="false"><img
 											src="../resources/img/account.png" width="40px"></a>
 										<ul class="dropdown-menu nav_ul">
-											<li class="nav-item "><a class="nav-link" href="/">찜목록</a></li>
+											<li class="nav-item "><a class="nav-link" href="/goCart">찜목록</a></li>
 											<li class="nav-item "><a class="nav-link"
 												href="/goMyPage">마이페이지</a></li>
 											<li class="nav-item "><a class="nav-link"
@@ -235,16 +227,16 @@ $("#logout_na").on("click", function() {
                   </ol>
                   <div class="carousel-inner">
                      <div class="carousel-item active">
-                        <img src="img/title/${i_dto.title_img }" class="d-block w-100" onerror="this.style.display='none'" alt=''>
+                        <img src="img/title/${i_dto.title_img }" class="d-block w-100" onerror="this.style.display='none'" alt='' height=350px; width=auto;>
                      </div>
                      <div class="carousel-item">
-                        <img src="img/middle/${i_dto.middle1_img }" class="d-block w-100" onerror="this.style.display='none'" alt=''>
+                        <img src="img/middle/${i_dto.middle1_img }" class="d-block w-100" onerror="this.style.display='none'" alt='' height=350px; width=auto;>
                      </div>
                      <div class="carousel-item">
-                        <img src="img/middle/${i_dto.middle2_img }" class="d-block w-100" onerror="this.style.display='none'" alt=''>
+                        <img src="img/middle/${i_dto.middle2_img }" class="d-block w-100" onerror="this.style.display='none'" alt='' height=350px; width=auto;>
                      </div>
                      <div class="carousel-item">
-                        <img src="img/middle/${i_dto.middle3_img }" class="d-block w-100" onerror="this.style.display='none'" alt=''>
+                        <img src="img/middle/${i_dto.middle3_img }" class="d-block w-100" onerror="this.style.display='none'" alt='' height=350px; width=auto;>
                      </div>
                   </div>
                   <a class="carousel-control-prev" href="#carouselExampleIndicators"
@@ -385,36 +377,34 @@ $("#logout_na").on("click", function() {
    <!--================End Single Product Area =================-->
 
    <!--================Product Description Area =================-->
-   <section class="product_description_area p-0 m-0">
-      <div class="container">
-         <ul class="nav nav-tabs" id="myTab" role="tablist">
-            <li class="nav-item"><a class="nav-link" id="home-tab"
-               data-toggle="tab" href="#home" role="tab" aria-controls="home"
-               aria-selected="true">물품정보</a></li>
-            <li class="nav-item"><a class="nav-link" id="profile-tab"
-               data-toggle="tab" href="#profile" role="tab"
-               aria-controls="profile" aria-selected="false">판매자 정보</a></li>
-            <li class="nav-item"><a class="nav-link" id="contact-tab"
-               data-toggle="tab" href="#contact" role="tab"
-               aria-controls="contact" aria-selected="false">배송/반품</a></li>
-            <li class="nav-item"><a class="nav-link active" id="review-tab"
-               data-toggle="tab" href="#review" role="tab" aria-controls="review"
-               aria-selected="false">문의 및 댓글</a></li>
-         </ul>
-         <div class="tab-content" id="myTabContent">
-            <div class="tab-pane fade" id="home" role="tabpanel"
-               aria-labelledby="home-tab" style="text-align: center;">
-               
-               
-               
+
+	<section class="product_description_area">
+		<div class="container">
+			<ul class="nav nav-tabs" id="myTab" role="tablist">
+				<li class="nav-item"><a class="nav-link active" id="home-tab"
+					data-toggle="tab" href="#home" role="tab" aria-controls="home"
+					aria-selected="true">물품정보</a></li>
+				<li class="nav-item"><a class="nav-link" id="profile-tab"
+					data-toggle="tab" href="#profile" role="tab"
+					aria-controls="profile" aria-selected="false">판매자 정보</a></li>
+				<li class="nav-item"><a class="nav-link" id="contact-tab"
+					data-toggle="tab" href="#contact" role="tab"
+					aria-controls="contact" aria-selected="false">배송/반품</a></li>
+				<li class="nav-item"><a class="nav-link" id="review-tab"
+					data-toggle="tab" href="#review" role="tab" aria-controls="review"
+					aria-selected="false" onclick="fnMove()">문의 및 댓글</a></li>
+			</ul>
+			<div class="tab-content" id="myTabContent">
+				<div class="tab-pane fade active show" id="home" role="tabpanel"
+					aria-labelledby="home-tab" style="text-align: center;">
+				
+				<!-- 물품정보 -->                                      
+
                <div class="col-md-62">
                      <p style=text-align:left;font-size:25px;line-height:40px;padding-left:60px;padding-right:60px;padding-top:30px;>
                         ${dto.contents }   
                      </p>
                </div><br><br><br>                                           
-               
-               
-               
                <!-- 상세 이미지  -->
                <div class="selector">
                   <img src="img/title/${i_dto.title_img }"" onerror="this.style.display='none'"
@@ -596,6 +586,13 @@ $("#logout_na").on("click", function() {
       </div>
    </section>
    
+   	<script>
+	  function fnMove(){
+	        var offset = $("#MovingPoint").offset();
+	        $('html, body').animate({scrollTop : offset.top}, 500);
+	    }
+   </script>
+   
    <!-- 댓글 area -->
 
 	<!--================Blog Area =================-->
@@ -636,6 +633,7 @@ $("#logout_na").on("click", function() {
 							</div>
 						</c:forEach>
 					</div>
+					   <div id=MovingPoint></div>	<!-- 댓글 이동 탭 -->
 					<div class="row p-0 m-0 numBox">
 						<div class="col-12 d-flex justify-content-center navi mt-1">
 							<nav aria-label="Page navigation example">

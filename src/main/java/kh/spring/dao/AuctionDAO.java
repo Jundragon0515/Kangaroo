@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kh.spring.dto.Auction_boardDTO;
+import kh.spring.dto.Used_transaction_boardDTO;
 
 
 
@@ -21,6 +22,125 @@ public class AuctionDAO {
 
    @Autowired
    private SqlSessionTemplate sst;
+   
+   //경매 기본 네비코드
+   public String naviAuctionCode(int currentPage, int recordCountPerPage, int recordTotalCount) {
+	      int naviCountPerPage = 5; // 한 페이지 네비 개수
+	      int pageTotalCount=0;
+
+	      if(recordTotalCount % recordCountPerPage > 0) {
+	         pageTotalCount = recordTotalCount / recordCountPerPage + 1;
+	      }else {
+	         pageTotalCount = recordTotalCount / recordCountPerPage;
+	      }
+
+	      if(currentPage < 1) {
+	         currentPage = 1;
+	      }else if(currentPage > pageTotalCount) {
+	         currentPage = pageTotalCount;
+	      }
+
+
+	      int startNavi = (currentPage -1) / naviCountPerPage * naviCountPerPage + 1;
+	      int endNavi = startNavi + (naviCountPerPage-1);
+	      // 현재 위치에 따른 네비 시작과 끝을 구하기
+
+	      if(endNavi > pageTotalCount) {
+	         endNavi = pageTotalCount;
+	      }
+	      //네비 끝값이 최대 페이지 번호를 넘어가면 최대 페이지번호로 네비 끝값을 설정한다.
+	      boolean needPrev = true;
+	      boolean needNext = true;
+
+	      if(startNavi == 1) {
+	         needPrev=false;
+	      }
+
+	      if(endNavi == pageTotalCount) {
+	         needNext = false;
+	      }
+	      
+	      
+	      StringBuilder sb = new StringBuilder();
+	      String bootTag = "<button type='button' class='btn btn-outline-secondary'>";
+	      String link = "<a href='auction?currentPage=";
+	      
+	      if(needPrev) {
+	         int prev = startNavi -1;
+	         sb.append(link + prev + "'" + ">" + bootTag + "<< Prev " + "</button></a>");
+	      }
+
+	      for(int i = startNavi; i <= endNavi; i++) {
+	         sb.append(link + i + "'" + ">" + bootTag + i + "</button></a>");
+	      }
+	      
+	      if(needNext) {
+	         int next = endNavi + 1;
+	         sb.append(link + next + "'" + ">" + bootTag + " Next >> " + "</button></a>");
+	      }
+	      return sb.toString();
+   }
+   
+   //경매 옵션선택 네비코드
+   public String naviAuctionOptionCode(int currentPage, int recordCountPerPage, int recordTotalCount) {
+	      int naviCountPerPage = 5; // 한 페이지 네비 개수
+	      int pageTotalCount=0;
+
+	      if(recordTotalCount % recordCountPerPage > 0) {
+	         pageTotalCount = recordTotalCount / recordCountPerPage + 1;
+	      }else {
+	         pageTotalCount = recordTotalCount / recordCountPerPage;
+	      }
+
+	      if(currentPage < 1) {
+	         currentPage = 1;
+	      }else if(currentPage > pageTotalCount) {
+	         currentPage = pageTotalCount;
+	      }
+
+
+	      int startNavi = (currentPage -1) / naviCountPerPage * naviCountPerPage + 1;
+	      int endNavi = startNavi + (naviCountPerPage-1);
+	      // 현재 위치에 따른 네비 시작과 끝을 구하기
+
+	      if(endNavi > pageTotalCount) {
+	         endNavi = pageTotalCount;
+	      }
+	      //네비 끝값이 최대 페이지 번호를 넘어가면 최대 페이지번호로 네비 끝값을 설정한다.
+	      boolean needPrev = true;
+	      boolean needNext = true;
+
+	      if(startNavi == 1) {
+	         needPrev=false;
+	      }
+
+	      if(endNavi == pageTotalCount) {
+	         needNext = false;
+	      }
+	      
+	      
+	      StringBuilder sb = new StringBuilder();
+	      String bootTag = "<button type='button' class='btn btn-outline-secondary'>";
+	      String link = "<a href='auctionOption?currentPage=";
+	      
+	      if(needPrev) {
+	         int prev = startNavi -1;
+	         sb.append(link + prev + "'" + ">" + bootTag + "<< Prev " + "</button></a>");
+	      }
+
+	      for(int i = startNavi; i <= endNavi; i++) {
+	         sb.append(link + i + "'" + ">" + bootTag + i + "</button></a>");
+	      }
+	      
+	      if(needNext) {
+	         int next = endNavi + 1;
+	         sb.append(link + next + "'" + ">" + bootTag + " Next >> " + "</button></a>");
+	      }
+	      return sb.toString();
+   }
+   
+   
+   
    
    // 카테고리 설정값
    public void checkCategory(HttpSession session) {
@@ -76,7 +196,7 @@ public class AuctionDAO {
       }
    }
    //옵션선택
-   public List<Auction_boardDTO> selectOption(HttpSession session, int start, int end){
+   public List<Auction_boardDTO> auctionOption(HttpSession session, int start, int end){
       HashMap<String, String> param = new HashMap<>();
       String startNum = Integer.toString(start);
       String endNum = Integer.toString(end);
@@ -88,21 +208,22 @@ public class AuctionDAO {
       System.out.println("start" + startNum);
       System.out.println("end" + endNum);
       
+      
          param.put("category", selectCategory);
          param.put("price", selectPrice);
          param.put("start", startNum);
          param.put("end", endNum);
          
-   return sst.selectList("AuctionDAO.selectPrice", param);
+   return sst.selectList("AuctionDAO.auctionPrice", param);
 
    }
    
    //처음 화면
-   public List<Auction_boardDTO> selectList(int start, int end){
+   public List<Auction_boardDTO> auctionList(int start, int end){
       HashMap<String, Object> param = new HashMap<>();
       param.put("start", start);
       param.put("end", end);
-      return sst.selectList("AuctionDAO.selectList",param);
+      return sst.selectList("AuctionDAO.auctionList",param);
    }
    
    
@@ -114,136 +235,61 @@ public class AuctionDAO {
       return sst.delete("AuctionDAO.delete");
    }
    
-   //경매게시판 전체 리스트 
+   //경매게시판 전체 카운트
    public int recordTotalCount() {
       return sst.selectOne("AuctionDAO.recordTotalCount");
    }
-   
+   //경매게시판 옵션 카운트
    public int recordTotalCountOption(HttpSession session) {
-
       String selectCategory = (String)session.getAttribute("selectCategory");
       HashMap<String, String> param = new HashMap<>();
       param.put("category", selectCategory);
       return sst.selectOne("AuctionDAO.recordTotalCountOption");
       }
    
-   //첫화면 네비메뉴
+   //경매 게시판 첫화면 네비메뉴
    public String getNavi(int currentPage, int recordCountPerPage) {
       int recordTotalCount = this.recordTotalCount(); //레코드 수
-      int naviCountPerPage = 5; // 한 페이지 네비 개수
-      int pageTotalCount=0;
-
-      if(recordTotalCount % recordCountPerPage > 0) {
-         pageTotalCount = recordTotalCount / recordCountPerPage + 1;
-      }else {
-         pageTotalCount = recordTotalCount / recordCountPerPage;
-      }
-
-      if(currentPage < 1) {
-         currentPage = 1;
-      }else if(currentPage > pageTotalCount) {
-         currentPage = pageTotalCount;
-      }
-
-
-      int startNavi = (currentPage -1) / naviCountPerPage * naviCountPerPage + 1;
-      int endNavi = startNavi + (naviCountPerPage-1);
-      // 현재 위치에 따른 네비 시작과 끝을 구하기
-
-      if(endNavi > pageTotalCount) {
-         endNavi = pageTotalCount;
-      }
-      //네비 끝값이 최대 페이지 번호를 넘어가면 최대 페이지번호로 네비 끝값을 설정한다.
-      boolean needPrev = true;
-      boolean needNext = true;
-
-      if(startNavi == 1) {
-         needPrev=false;
-      }
-
-      if(endNavi == pageTotalCount) {
-         needNext = false;
-      }
-      
-      
-      StringBuilder sb = new StringBuilder();
-      String bootTag = "<button type='button' class='btn btn-outline-secondary'>";
-      String link = "<a href='trade?currentPage=";
-      
-      if(needPrev) {
-         int prev = startNavi -1;
-         sb.append(link + prev + "'" + ">" + bootTag + "<< Prev " + "</button></a>");
-      }
-
-      for(int i = startNavi; i <= endNavi; i++) {
-         sb.append(link + i + "'" + ">" + bootTag + i + "</button></a>");
-      }
-      
-      if(needNext) {
-         int next = endNavi + 1;
-         sb.append(link + next + "'" + ">" + bootTag + " Next >> " + "</button></a>");
-      }
-      return sb.toString();
+     String result =  this.naviAuctionCode(currentPage, recordCountPerPage, recordTotalCount);
+     return result;
    }
    
-   //게시판 옵션 선택 후 네비메뉴
+   //경매 게시판 옵션 선택 후 네비메뉴
    public String getNaviOption(HttpSession session, int currentPage, int recordCountPerPage) {
       int recordTotalCount = this.recordTotalCountOption(session); //레코드 수
-      int naviCountPerPage = 5; // 한 페이지 네비 개수
-      int pageTotalCount=0;
-
-      if(recordTotalCount % recordCountPerPage > 0) {
-         pageTotalCount = recordTotalCount / recordCountPerPage + 1;
-      }else {
-         pageTotalCount = recordTotalCount / recordCountPerPage;
-      }
-
-      if(currentPage < 1) {
-         currentPage = 1;
-      }else if(currentPage > pageTotalCount) {
-         currentPage = pageTotalCount;
-      }
-
-
-      int startNavi = (currentPage -1) / naviCountPerPage * naviCountPerPage + 1;
-      int endNavi = startNavi + (naviCountPerPage-1);
-      // 현재 위치에 따른 네비 시작과 끝을 구하기
-
-      if(endNavi > pageTotalCount) {
-         endNavi = pageTotalCount;
-      }
-      //네비 끝값이 최대 페이지 번호를 넘어가면 최대 페이지번호로 네비 끝값을 설정한다.
-      boolean needPrev = true;
-      boolean needNext = true;
-
-      if(startNavi == 1) {
-         needPrev=false;
-      }
-
-      if(endNavi == pageTotalCount) {
-         needNext = false;
-      }
-      
-      
-      StringBuilder sb = new StringBuilder();
-      String bootTag = "<button type='button' class='btn btn-outline-secondary'>";
-      String link = "<a href='tradeOption?currentPage=";
-      
-      if(needPrev) {
-         int prev = startNavi -1;
-         sb.append(link + prev + "'" + ">" + bootTag + "<< Prev " + "</button></a>");
-      }
-
-      for(int i = startNavi; i <= endNavi; i++) {
-         sb.append(link + i + "'" + ">" + bootTag + i + "</button></a>");
-      }
-      
-      if(needNext) {
-         int next = endNavi + 1;
-         sb.append(link + next + "'" + ">" + bootTag + " Next >> " + "</button></a>");
-      }
-      return sb.toString();
+      String result = this.naviAuctionOptionCode(currentPage, recordCountPerPage, recordTotalCount);
+      return result;
    }
+   
+   
+   //경매게시판 검색 전체개수
+   public int recordTotalCount_auction_search(HttpSession session) {
+	   		String selectSearch = (String)session.getAttribute("selectSearch");
+	   		HashMap<String, String> param = new HashMap<>();
+	   		param.put("search", selectSearch);
+	      return sst.selectOne("AuctionDAO.recordTotalCount_auction_search", param);
+	   }
+   
+   //경매게시판 검색어
+   public List<Auction_boardDTO> auctionList_search(HttpSession session, int start, int end){
+	   HashMap<String, String> param = new HashMap<>();
+	   String search = (String)session.getAttribute("selectSearch");
+	   String startNum = Integer.toString(start);
+	   String endNum = Integer.toString(end);
 
+	   param.put("search", search);
+	   param.put("start", startNum);
+	   param.put("end", endNum);
+	   return sst.selectList("AuctionDAO.auctionList_search", param);
+   }
+   
+   //경매 게시판 검색 네비메뉴
+   public String getNavi_auction_search(HttpSession session, int currentPage, int recordCountPerPage) {
+      int recordTotalCount = this.recordTotalCount_auction_search(session);
+      System.out.println("검색 토탈 카운트" + recordTotalCount);
+      String result = this.naviAuctionOptionCode(currentPage, recordCountPerPage, recordTotalCount);
+      return result;
+   }
+   
    
 }

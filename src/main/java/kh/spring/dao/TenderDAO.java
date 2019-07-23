@@ -18,11 +18,11 @@ public class TenderDAO {
 	private SqlSessionTemplate sst;
 	@Autowired
 	private HttpSession se;
-	static int recordCountPerPage = 10;// 한 페이지에 보여줄 글 개수
+	static int recordCountPerPage = 5;// 한 페이지에 보여줄 글 개수
 	static int naviCountPerPage = 10;// 한페이지에 보여줄 페이지 번호 수
 	public List<TenderDTO> selectById(int currentPage,String id){
 		int endNum = currentPage * recordCountPerPage;
-		int startNum = endNum - 9;
+		int startNum = endNum - 4;
 		Map<String,String> map = new HashMap<>();
 		map.put("startNum", Integer.toString(startNum));
 		map.put("endNum", Integer.toString(endNum));

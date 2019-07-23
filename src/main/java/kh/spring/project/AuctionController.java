@@ -28,9 +28,9 @@ public class AuctionController {
    @RequestMapping("/auction")
    public String index(HttpServletRequest request) {
 
-      session.removeAttribute("selectCategory");
-      session.removeAttribute("selectPrice");
-      session.removeAttribute("selectView");
+      session.setAttribute("selectCategory", "all");
+      session.setAttribute("selectPrice", " ");
+      session.setAttribute("selectView", "16");
 
 
       int currentPage = 0;
@@ -53,7 +53,7 @@ public class AuctionController {
       list = auctionService.auctionList(start, end);
 
       // 페이징 버튼
-      String resultNavi = auctionService.tradeBoardNavi(currentPage, recordCountPerPage);
+      String resultNavi = auctionService.auctionBoardNavi(currentPage, recordCountPerPage);
       /*request.setAttribute("recordTotalCount", list.size()); // 전체개수 */
         request.setAttribute("list", list);
        request.setAttribute("navi", resultNavi);
@@ -63,15 +63,17 @@ public class AuctionController {
    @RequestMapping("/auctionOption")
    public String indexList(HttpServletRequest request) {
       List<Auction_boardDTO> list = null;
+      String resultNavi = null;
       int currentPage = 0;
       String category = request.getParameter("category");
       String price = request.getParameter("price");
       String view = request.getParameter("view");
+      String search = request.getParameter("search"); 
 
       String selectCategory = (String)session.getAttribute("selectCategory");
       String selectPrice = (String)session.getAttribute("selectPrice");
       String selectView = (String)session.getAttribute("selectView");
-      
+      String selectSearch = (String)session.getAttribute("selectSearch");
       
       if(category!=null) {
          session.setAttribute("selectCategory", category);
@@ -83,7 +85,11 @@ public class AuctionController {
       if(view!=null) {
          session.setAttribute("selectView", view);
       }
-      
+      if(search!=null) {
+    	  System.out.println("검색어 :" +search);
+    	  session.setAttribute("selectSearch", "where title like" + "'%" + search + "%'");
+    	  String searchtext = (String)session.getAttribute("selectSearch");
+      }
       
       if(selectCategory==null) {
          session.setAttribute("selectCategory", " ");  
@@ -121,17 +127,25 @@ public class AuctionController {
       
       System.out.println("컨트롤 start" + start);
       System.out.println("컨트롤 end" + end);
-      list = auctionService.selectOption(session, start, end);
+      
 
-
-
-
-      String resultNavi = auctionService.tradeBoardNaviOption(session, currentPage, recordCountPerPage);
+		if(search!=null) {
+			list = auctionService.auctionList_search(session, start, end);
+			resultNavi = auctionService.auctionBoardNavi_search(session, currentPage, recordCountPerPage);
+			int listSize = list.size();
+			
+			if(listSize==0) {
+				request.setAttribute("rsearch_result_null", "검색결과가 없습니다.");
+			}
+		}else {
+			list = auctionService.auctionOption(session, start, end);
+			resultNavi = auctionService.auctionBoardNaviOption(session, currentPage, recordCountPerPage);
+		}
       /* request.setAttribute("recordTotalCount", list.size()); // 전체개수 */
       request.setAttribute("navi", resultNavi);
       request.setAttribute("list", list);
 
-      return "trade";
+      return "auction";
    }
 
 /*   @RequestMapping("/auctionWrite")

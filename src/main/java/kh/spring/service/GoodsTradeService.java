@@ -87,5 +87,14 @@ public class GoodsTradeService {
    public String directBoardNavi_search(HttpSession session, int currentPage, int recordCountPerPage){
 	   return gdao.getNavi_direct_search(session, currentPage, recordCountPerPage);
    }
+   
+   //안전거래 검색어
+   public List<Used_transaction_boardDTO> safeList_search(HttpSession session, int start, int end){
+	      return gdao.safeList_search(session, start, end);
+	   }
+  //안전거래 검색어 네비
+   public String safeBoardNavi_search(HttpSession session, int currentPage, int recordCountPerPage){
+	   return gdao.getNavi_safe_search(session, currentPage, recordCountPerPage);
+   }
 
 }

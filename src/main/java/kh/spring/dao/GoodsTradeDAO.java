@@ -312,17 +312,14 @@ public class GoodsTradeDAO {
 	   String search = (String)session.getAttribute("selectSearch");
 	   String startNum = Integer.toString(start);
 	   String endNum = Integer.toString(end);
-	   
-	   System.out.println("search" + search);
+
 	   param.put("search", search);
 	   param.put("start", startNum);
 	   param.put("end", endNum);
 	   return sst.selectList("GoodsTradeDAO.directList_search", param);
    }
    
-
-
-   
+  
    //직거래 게시판 옵션 list
    public List<Used_transaction_boardDTO> directOption(HttpSession session, int start, int end){
 	   HashMap<String, String> param = new HashMap<>();
@@ -392,60 +389,29 @@ public class GoodsTradeDAO {
    public String getNavi_direct_search(HttpSession session, int currentPage, int recordCountPerPage) {
       int recordTotalCount = this.recordTotalCount_direct_search(session); //
       System.out.println("검색 토탈 카운트" + recordTotalCount);
-      int naviCountPerPage = 5; // 한 페이지 네비 개수
-      int pageTotalCount=0;
-
-      if(recordTotalCount % recordCountPerPage > 0) {
-         pageTotalCount = recordTotalCount / recordCountPerPage + 1;
-      }else {
-         pageTotalCount = recordTotalCount / recordCountPerPage;
-      }
-
-      if(currentPage < 1) {
-         currentPage = 1;
-      }else if(currentPage > pageTotalCount) {
-         currentPage = pageTotalCount;
-      }
-
-
-      int startNavi = (currentPage -1) / naviCountPerPage * naviCountPerPage + 1;
-      int endNavi = startNavi + (naviCountPerPage-1);
-      // 현재 위치에 따른 네비 시작과 끝을 구하기
-
-      if(endNavi > pageTotalCount) {
-         endNavi = pageTotalCount;
-      }
-      //네비 끝값이 최대 페이지 번호를 넘어가면 최대 페이지번호로 네비 끝값을 설정한다.
-      boolean needPrev = true;
-      boolean needNext = true;
-
-      if(startNavi == 1) {
-         needPrev=false;
-      }
-
-      if(endNavi == pageTotalCount) {
-         needNext = false;
-      }
-      
-      
-      StringBuilder sb = new StringBuilder();
-      String bootTag = "<button type='button' class='btn btn-outline-secondary'>";
-      String link = "<a href='tradeOption?currentPage=";
-      
-      if(needPrev) {
-         int prev = startNavi -1;
-         sb.append(link + prev + "'" + ">" + bootTag + "<< Prev " + "</button></a>");
-      }
-
-      for(int i = startNavi; i <= endNavi; i++) {
-         sb.append(link + i + "'" + ">" + bootTag + i + "</button></a>");
-      }
-      
-      if(needNext) {
-         int next = endNavi + 1;
-         sb.append(link + next + "'" + ">" + bootTag + " Next >> " + "</button></a>");
-      }
-      return sb.toString();
+      String result = this.naviDirectOptionCode(currentPage, recordCountPerPage, recordTotalCount);
+      return result;
+   }
+   
+   //안전거래 게시판 검색 전체개수
+   public int recordTotalCount_safe_search(HttpSession session) {
+	   		String selectSearch = (String)session.getAttribute("selectSearch");
+	   		HashMap<String, String> param = new HashMap<>();
+	   		param.put("search", selectSearch);
+	      return sst.selectOne("GoodsTradeDAO.recordTotalCount_safe_search", param);
+	   }
+   
+   //안전거래 게시판 검색어
+   public List<Used_transaction_boardDTO> safeList_search(HttpSession session, int start, int end){
+	   HashMap<String, String> param = new HashMap<>();
+	   String search = (String)session.getAttribute("selectSearch");
+	   String startNum = Integer.toString(start);
+	   String endNum = Integer.toString(end);
+	   
+	   param.put("search", search);
+	   param.put("start", startNum);
+	   param.put("end", endNum);
+	   return sst.selectList("GoodsTradeDAO.safeList_search", param);
    }
    
    //안전거래 게시판 옵션 list
@@ -503,5 +469,13 @@ public class GoodsTradeDAO {
       int recordTotalCount = this.recordTotalCountOption_safe(session); //레코드 수
       String navi = this.naviSafeOptionCode(currentPage, recordCountPerPage, recordTotalCount);
       return navi;
+   }
+   
+   //안전거래 게시판 검색 네비메뉴
+   public String getNavi_safe_search(HttpSession session, int currentPage, int recordCountPerPage) {
+      int recordTotalCount = this.recordTotalCount_safe_search(session); //
+      System.out.println("검색 토탈 카운트" + recordTotalCount);
+      String result = this.naviSafeOptionCode(currentPage, recordCountPerPage, recordTotalCount);
+      return result;
    }
 }
