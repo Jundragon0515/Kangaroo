@@ -171,21 +171,13 @@ $(function(){
 						id="navbarSupportedContent">
 						<ul class="nav navbar-nav menu_nav ml-auto">
 							<!-- 							<li class="nav-item active"><a class="nav-link" href="/">Home</a></li> -->
-							<li class="nav-item submenu dropdown"><a href="#"
-								class="nav-link dropdown-toggle" data-toggle="dropdown"
-								role="button" aria-haspopup="true" aria-expanded="false">중고
-									거래</a>
-								<ul class="dropdown-menu">
 									<li class="nav-item"><a class="nav-link" href="/trade">중고
 											직거래</a></li>
-									<li class="nav-item"><a class="nav-link" href="/trade">중고
+									<li class="nav-item"><a class="nav-link" href="/trade_safe">중고
 											안전거래</a></li>
 									<li class="nav-item"><a class="nav-link" href="/auction">중고
 											경매</a></li>
-								</ul></li>
-							<li class="nav-item "><a class="nav-link" href="/">고객센터</a></li>
 							<li class="nav-item "><a class="nav-link" href="/">공지사항</a></li>
-
 							<c:choose>
 								<c:when test="${logintype=='admin'}">
 									<li class="nav-item "><a class="nav-link" href="/admin">관리자페이지</a></li>
@@ -197,8 +189,8 @@ $(function(){
 										role="button" aria-haspopup="true" aria-expanded="false"><img
 											src="../resources/img/account.png" width="35px"></a>
 										<ul class="dropdown-menu nav_ul">
-											<li class="nav-item "><a class="nav-link" href="/">찜목록</a></li>
-											<li class="nav-item active"><a class="nav-link"
+											<li class="nav-item "><a class="nav-link" href="/goCart">찜목록</a></li>
+											<li class="nav-item "><a class="nav-link"
 												href="/goMyPage">마이페이지</a></li>
 											<li class="nav-item "><a class="nav-link"
 												href="/toPoint">포인트충전</a></li>
@@ -212,8 +204,8 @@ $(function(){
 										role="button" aria-haspopup="true" aria-expanded="false"><img
 											src="../resources/img/account.png" width="40px"></a>
 										<ul class="dropdown-menu nav_ul">
-											<li class="nav-item "><a class="nav-link" href="/">찜목록</a></li>
-											<li class="nav-item active"><a class="nav-link"
+											<li class="nav-item "><a class="nav-link" href="/goCart">찜목록</a></li>
+											<li class="nav-item "><a class="nav-link"
 												href="/goMyPage">마이페이지</a></li>
 											<li class="nav-item "><a class="nav-link"
 												href="/toPoint">포인트충전</a></li>
@@ -227,7 +219,7 @@ $(function(){
 										role="button" aria-haspopup="true" aria-expanded="false"><img
 											src="../resources/img/account.png" width="40px"></a>
 										<ul class="dropdown-menu nav_ul">
-											<li class="nav-item "><a class="nav-link" href="/">찜목록</a></li>
+											<li class="nav-item "><a class="nav-link" href="/goCart">찜목록</a></li>
 											<li class="nav-item "><a class="nav-link"
 												href="/goMyPage">마이페이지</a></li>
 											<li class="nav-item "><a class="nav-link"

@@ -44,6 +44,9 @@ public class MyPageController {
 	}
 	@RequestMapping("/goMyPage")
 	public String goMyPage() { // 마이페이지로
+		if(se.getAttribute("email")!=null) {
+			mes.setPoint();
+		}
 		return "myPage_f/myPage";
 	}
 	@RequestMapping("/goMyPage_delivery")
@@ -69,12 +72,21 @@ public class MyPageController {
 	public String changePw() { //비밀번호 변경으로 
 		return "changePw";
 	}
+	
 	@RequestMapping("/confirme")
 	public String confirme(int seq) {
+		System.out.println("asdssssssssssssssssssssssssssss");
 		mps.confirme(seq);
 		int or_currentPage=(int)se.getAttribute("or_currentPage");
 		int te_currentPage=(int)se.getAttribute("te_currentPage");
-		return "/goMyPage_delivery?or_currentPage="+or_currentPage+"&te_currentPage="+te_currentPage+"";
+		return "myPage_f/goMyPage_delivery?or_currentPage="+or_currentPage+"&te_currentPage="+te_currentPage+"";
+	}
+	@RequestMapping("/goRefund")
+	public ModelAndView goRefund(int seq) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("seq", seq);
+		mav.setViewName("myPage_f/refund");
+		return mav;
 	}
 	@RequestMapping("/refund")
 	@ResponseBody
@@ -124,8 +136,8 @@ public class MyPageController {
 		mav.addObject("order_navi", mps.getNavi_or2(or2_currentPage, email));
 		mav.addObject("auction_list", mps.selectById_au(auc_currentPage, email));
 		mav.addObject("auction_navi",mps.getNavi_au(auc_currentPage, email));
-		mav.addObject("used_list", mps.selectById_us(auc_currentPage, email));
-		mav.addObject("used_navi",mps.getNavi_us(auc_currentPage, email));
+		mav.addObject("used_list", mps.selectById_us(used_currentPage, email));
+		mav.addObject("used_navi",mps.getNavi_us(used_currentPage, email));
 		mav.setViewName("myPage_f/myPage_sold");
 //		"myPage_f/myPage_delivery"
 		return mav;
