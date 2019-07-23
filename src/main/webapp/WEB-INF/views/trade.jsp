@@ -192,33 +192,7 @@
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script>
 
-function viewCount(){
-   var viewSelect = document.getElementById("viewCount");
-    // select element에서 선택된 option의 value가 저장된다.
-    var selectValue = viewSelect.value;
-    location.href="tradeOption?view=" + selectValue;
-
-}
-
-
-   $(function(){
-      
-/*       $("#category").on("click", function(){
-         var category = $(this).text();
-         console.log(category);
-          $(location).attr("href", "tradeOption");
-         
-      }); */
-   
-      
-/*       위로가기 버튼  
-       var speed = 600; // 스크롤속도
-       $(".gotop").css("cursor", "pointer").click(function()
-       {
-           $('body, html').animate({scrollTop:0}, speed);
-       }); */
-       
-       
+     $(function(){  
        var offset = 50;   // 수직으로 어느정도 움직여야 버튼이 나올까?
        var duration = 600;   // top으로 이동할때까지의 animate 시간 (밀리세컨드, default는 400. 예제의 기본은 500)
        $(window).scroll(function() {
@@ -236,22 +210,20 @@ function viewCount(){
        })
        
        
-       
        /* 검색기능 */
       $("#btn-search").on("click", function(){
          var text_search =  $("#text-search").val();
          $(location).attr("href", "tradeOption?search="+text_search);
       });
       
-      /* 페이지 정렬 개수 */
-      $("select option[value=" + '${view}' + "]").attr("selected", true);
       
       /* 페이지 정렬 개수 컨트롤  */
-/*       $("#viewCount").on("click", function(){
-         var view = $(this).val();
-         alert(view);
-      });
-       */
+      $("#viewCount").on("change", function(){
+        var view = $(this).val();
+        $(location).attr("href","tradeOption?view=" + view);
+     });
+       
+
       /*네이버 로그아웃  */
       $("#logout_na").on("click",function() {
                $.ajax({
@@ -284,10 +256,7 @@ function viewCount(){
                         }, 1000);
                });
       });
-      
-      
-   });
-
+     });
 </script>
 
 
@@ -467,13 +436,12 @@ function viewCount(){
                	<c:when test="${logintype=='admin'}">
                		<div class="head "><input type="submit" value="삭제하기" id="send"></div>
                	</c:when>
+
                <c:when test="${logintype!='admin' }">
                <div class="head "><a href="tradeGoodsWrite" style="color: white">제품등록</a></div>
                </c:when>
                </c:choose>
             </div>
-
-
          </div>
          <!-- end menu  -->
 
@@ -526,6 +494,7 @@ function viewCount(){
                   </div>
                </div>
                <!-- End boardInfo  -->
+               ${rsearch_result_null }
                <div class="row list-nav">
                   <c:forEach var="temp" items="${list }">
                      <div class="col-lg-3 col-md-6">
@@ -566,10 +535,6 @@ function viewCount(){
                                        </a>
                                     </div>
                                  </div>
-
-                                 <!-- <div class="col-3">[1]</div>
-                                    <div class="col-9">[이름]</div> -->
-
                               </div>
                            </div>
                         </div>

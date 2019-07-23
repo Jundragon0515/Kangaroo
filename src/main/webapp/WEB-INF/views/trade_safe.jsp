@@ -41,10 +41,10 @@
 
 <style>
 
-/*    * {
+/*     * {
    box-sizing: border-box;
    border: 1px solid black;
-}     */
+}   */   
 
 .nav_b {
    border: 0px;
@@ -192,33 +192,8 @@
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script>
 
-function viewCount(){
-   var viewSelect = document.getElementById("viewCount");
-    // select element에서 선택된 option의 value가 저장된다.
-    var selectValue = viewSelect.value;
-    location.href="tradeOption_safe?view=" + selectValue;
-
-}
-
-
    $(function(){
-      
-/*       $("#category").on("click", function(){
-         var category = $(this).text();
-         console.log(category);
-          $(location).attr("href", "tradeOption_safe");
-         
-      }); */
-   
-      
-/*       위로가기 버튼  
-       var speed = 600; // 스크롤속도
-       $(".gotop").css("cursor", "pointer").click(function()
-       {
-           $('body, html').animate({scrollTop:0}, speed);
-       }); */
-       
-       
+     
        var offset = 50;   // 수직으로 어느정도 움직여야 버튼이 나올까?
        var duration = 600;   // top으로 이동할때까지의 animate 시간 (밀리세컨드, default는 400. 예제의 기본은 500)
        $(window).scroll(function() {
@@ -236,22 +211,19 @@ function viewCount(){
        })
        
        
-       
        /* 검색기능 */
       $("#btn-search").on("click", function(){
          var text_search =  $("#text-search").val();
          $(location).attr("href", "tradeOption_safe?search="+text_search);
       });
       
-      /* 페이지 정렬 개수 */
-      $("select option[value=" + '${view}' + "]").attr("selected", true);
       
       /* 페이지 정렬 개수 컨트롤  */
-/*       $("#viewCount").on("click", function(){
+       $("#viewCount").on("change", function(){
          var view = $(this).val();
-         alert(view);
+         $(location).attr("href","tradeOption_safe?view=" + view);
       });
-       */
+       
       /*네이버 로그아웃  */
       $("#logout_na").on("click",function() {
                $.ajax({
@@ -516,7 +488,7 @@ function viewCount(){
                         <div class="col-lg-4 col-md-4 col-sm-4">
                            <div class="row">
                               <div class="col-lg-12 col-md-12 col-sm-12">
-                                 <select id="viewCount" name="viewCount" onchange="viewCount()">
+                                 <select id="viewCount" name="viewCount">
                                     <option value="16">16개씩 보기</option>
                                     <option value="24">24개씩 보기</option>
                                     <option value="32">32개씩 보기</option>
@@ -528,6 +500,7 @@ function viewCount(){
                   </div>
                </div>
                <!-- End boardInfo  -->
+               ${rsearch_result_null }
                <div class="row list-nav">
                   <c:forEach var="temp" items="${list }">
                      <div class="col-lg-3 col-md-6">
@@ -536,7 +509,6 @@ function viewCount(){
                					<input type="checkbox" name="checkDelete" value="${temp.no }">
                				</c:when>
                			</c:choose>	
-							
                         <div class="single-product" style="margin-bottom: 15px;">
                            <div class="card">
                               <a href="/used_detailPage?no=${temp.no}">

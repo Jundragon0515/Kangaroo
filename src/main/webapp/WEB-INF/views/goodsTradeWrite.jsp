@@ -6,33 +6,33 @@
 <html>
 
 <head>
-	<!-- Mobile Specific Meta -->
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<!-- Favicon-->
-	<link rel="shortcut icon" href="../resources/img/fav.png">
-	<!-- Author Meta -->
-	<meta name="author" content="CodePixar">
-	<!-- Meta Description -->
-	<meta name="description" content="">
-	<!-- Meta Keyword -->
-	<meta name="keywords" content="">
-	<!-- meta character set -->
-	<meta charset="UTF-8">
-	<!-- Site Title -->
-	<title>Karma Shop</title>
-	<!--
-			CSS
-			============================================= -->
-	<link rel="stylesheet" href="../resources/css/linearicons.css">
-	<link rel="stylesheet" href="../resources/css/font-awesome.min.css">
-	<link rel="stylesheet" href="../resources/css/themify-icons.css">
-	<link rel="stylesheet" href="../resources/css/bootstrap.css">
-	<link rel="stylesheet" href="../resources/css/owl.carousel.css">
-	<link rel="stylesheet" href="../resources/css/nice-select.css">
-	<link rel="stylesheet" href="../resources/css/nouislider.min.css">
-	<link rel="stylesheet" href="../resources/css/ion.rangeSlider.css" />
-	<link rel="stylesheet" href="../resources/css/ion.rangeSlider.skinFlat.css" />
-	<link rel="stylesheet" href="../resources/css/main.css">
+   <!-- Mobile Specific Meta -->
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+   <!-- Favicon-->
+   <link rel="shortcut icon" href="../resources/img/fav.png">
+   <!-- Author Meta -->
+   <meta name="author" content="CodePixar">
+   <!-- Meta Description -->
+   <meta name="description" content="">
+   <!-- Meta Keyword -->
+   <meta name="keywords" content="">
+   <!-- meta character set -->
+   <meta charset="UTF-8">
+   <!-- Site Title -->
+   <title>Karma Shop</title>
+   <!--
+         CSS
+         ============================================= -->
+   <link rel="stylesheet" href="../resources/css/linearicons.css">
+   <link rel="stylesheet" href="../resources/css/font-awesome.min.css">
+   <link rel="stylesheet" href="../resources/css/themify-icons.css">
+   <link rel="stylesheet" href="../resources/css/bootstrap.css">
+   <link rel="stylesheet" href="../resources/css/owl.carousel.css">
+   <link rel="stylesheet" href="../resources/css/nice-select.css">
+   <link rel="stylesheet" href="../resources/css/nouislider.min.css">
+   <link rel="stylesheet" href="../resources/css/ion.rangeSlider.css" />
+   <link rel="stylesheet" href="../resources/css/ion.rangeSlider.skinFlat.css" />
+   <link rel="stylesheet" href="../resources/css/main.css">
   <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 </head>
 <style>
@@ -142,8 +142,8 @@
         border :5px solid #ffebb3;
     }
     #writting:hover{
-    	cursor:pointer;
-    	color:#ffba00;
+       cursor:pointer;
+       color:#ffba00;
     }
 
     .input{
@@ -159,8 +159,8 @@
         color: #ffba00;
     }
     .txc-textbox{
-    	width:100px;
-    	height:50px;
+       width:100px;
+       height:50px;
     }
     .nice-select{
     	position:relative;
@@ -189,9 +189,8 @@
     	position: relative;
     	bottom: 19px;
 	}
-    .thumbnail{
-    	width: 100px;
-    	height: 100px;
+       width: 100px;
+       height: 100px;
     
     }/* 상세이미지 크기 */
     .preview-box{    	
@@ -242,10 +241,9 @@
 		width: 100%;
 	}
 
-	.nav_b:hover {
-		cursor: pointer;
-	}
-
+   .nav_b:hover {
+      cursor: pointer;
+   }
 	.nav_ul * {
 		text-align: center;
 	}
@@ -257,10 +255,11 @@
     	color: darkgoldenrod;
     	font-size: 18px;
 	}
+
 </style>
 <body>
 
-	<!-- Start Header Area -->
+   <!-- Start Header Area -->
 <header class="header_area sticky-header">
 		<div class="main_menu">
 			<nav class="navbar navbar-expand-lg navbar-light main_box">
@@ -351,22 +350,21 @@
 	</header>
 	<!-- End Header Area -->
 
-	   <!-- Start Banner Area -->
-	<section class="banner-area organic-breadcrumb">
-	<div class="container">
-		<div
-			class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
-			<div class="col-first">
-				<h1>중고물품 글쓰기</h1>
-				<nav class="d-flex align-items-center"> <a href="/">메인페이지<span
-					class="lnr lnr-arrow-right"></span></a> <a href="/#">중고거래
-					<span class="lnr lnr-arrow-right"></span>
-				</a> <a href="/tradeGoodsWrite">중고거래 물품 등록<span class="lnr "></span></a></nav>
-			</div>
-		</div>
-	</div>
-	</section>
-
+      <!-- Start Banner Area -->
+   <section class="banner-area organic-breadcrumb">
+   <div class="container">
+      <div
+         class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+         <div class="col-first">
+            <h1>중고물품 글쓰기</h1>
+            <nav class="d-flex align-items-center"> <a href="/">메인페이지<span
+               class="lnr lnr-arrow-right"></span></a> <a href="/#">중고거래
+               <span class="lnr lnr-arrow-right"></span>
+            </a> <a href="/tradeGoodsWrite">중고거래 물품 등록<span class="lnr "></span></a></nav>
+         </div>
+      </div>
+   </div>
+   </section>
 	<form action="goodsRegister" method="post" enctype="multipart/form-data" id="send">
 	<div class="product_image_area">
 		<div class="container">
@@ -439,17 +437,18 @@
                        	  <div class="imgUploade" contenteditable="false"></div>  옆으로 상세 이미지 보여주게!!! 안됨... 
                        	  <input type="hidden" name="middle1_img" id="middle1"> -->
 
-									<div class="body">
-										<!-- 첨부 버튼 -->
-										<div id="attach">
-											<label class="waves-effect waves-teal btn-flat"
-												for="uploadInputBox" id="detailImg">파일선택</label> 
-												<input id="uploadInputBox" accept=".jpg, .png"
-												style="display: none" type="file" name="file" multiple
-												class="z" /> <input type="hidden" name="middle1_img" id="d">
-										</div>
 
-										<!-- 미리보기 영역 -->
+                           <div class="body">
+                              <!-- 첨부 버튼 -->
+                              <div id="attach">
+                                 <label class="waves-effect waves-teal btn-flat"
+                                    for="uploadInputBox" id="detailImg">파일선택</label> 
+                                    <input id="uploadInputBox" accept=".jpg, .png"
+                                    style="display: none" type="file" name="file" multiple
+                                    class="z" /> <input type="hidden" name="middle1_img" id="d">
+                              </div>
+
+                              <!-- 미리보기 영역 -->
 
 										<div id="preview" class="content col-md-12 col-sm-12">상세 이미지 최소1장부터 최대 10장까지 넣을 수 있습니다.</div>
 
@@ -461,17 +460,17 @@
 				        </div>                 
 						</ul>
 						<br>		
-                        <br>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+                     <br>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
 
 <br><br><br><br>
 
-	<!-- start footer Area -->
-	<footer class="footer-area section_gap">
+   <!-- start footer Area -->
+   <footer class="footer-area section_gap">
       <div class="container">
          <div class="row">
             <div class="col-lg-3  col-md-6 col-sm-6">
@@ -551,8 +550,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
          </div>
       </div>
    </footer>
-
-
+   
 	 <script> 
 	 <c:choose>
 		<c:when test="${logintype==null}">
@@ -601,16 +599,15 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	 		$("#payInside").append("<input type='hidden' id='free' value='0' name='delivery_cost'>");
 	 	})
 	 	
-	 	
         $("input:text[priceOnly]").on("keyup", function() {
-   			 $(this).val(($(this).val().replace(/[^0-9]/g,"")));
-		});
+             $(this).val(($(this).val().replace(/[^0-9]/g,"")));
+      });
         $("input:text[phoneOnly]").on("keyup", function() {
-   			 $(this).val($(this).val().replace(/[^0-9]/g,""));
-		});
+             $(this).val($(this).val().replace(/[^0-9]/g,""));
+      });
         $("input:text[acountOnly]").on("keyup", function() {
-   			 $(this).val($(this).val().replace(/[^0-9]/g,""));
-		});
+             $(this).val($(this).val().replace(/[^0-9]/g,""));
+      });
         //핸드폰 가격 계좌 숫자만 입력받게하기
 
         $('#example .dropdown-menu li > a').bind('click', function (e) {
@@ -650,7 +647,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
              
                     var reader = new FileReader();
                     reader.onload = function(img) {               
-     		
+           
                         //div id="preview" 내에 동적코드추가.
                         //이 부분을 수정해서 이미지 링크 외 파일명, 사이즈 등의 부가설명을 할 수 있을 것이다.
                         var imgNum = ++previewIndex;                                             
@@ -665,13 +662,13 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
                                                 + "삭제" + "</a>" + "</div>");
                                                                       
                         files[imgNum] = file;
-                    	
+                       
                     };
                     reader.readAsDataURL(file);
                 }
                 $(".preview-box").remove();
             }else{
-            	alert("상세 이미지는 10개 까지 됩니다.");
+               alert("상세 이미지는 10개 까지 됩니다.");
             }
                 
             } else{
@@ -748,40 +745,41 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
                 addPreview($(this)); //preview form 추가하기
             });
         });
-		
-			 function autoHypenPhone(str){
-				str = str.replace(/[^0-9]/g, '');
-				var tmp = '';
-				if (str.length < 4) {
-					return str;
-				} else if (str.length < 7) {
-					tmp += str.substr(0, 3);
-					tmp += '-';
-					tmp += str.substr(3);
-					return tmp;
-				} else if (str.length < 11) {
-					tmp += str.substr(0, 3);
-					tmp += '-';
-					tmp += str.substr(3, 3);
-					tmp += '-';
-					tmp += str.substr(6);
-					return tmp;
-				} else {
-					tmp += str.substr(0, 3);
-					tmp += '-';
-					tmp += str.substr(3, 4);
-					tmp += '-';
-					tmp += str.substr(7);
-					return tmp;
-				}
-				return str;
-			}
+      
+          function autoHypenPhone(str){
+            str = str.replace(/[^0-9]/g, '');
+            var tmp = '';
+            if (str.length < 4) {
+               return str;
+            } else if (str.length < 7) {
+               tmp += str.substr(0, 3);
+               tmp += '-';
+               tmp += str.substr(3);
+               return tmp;
+            } else if (str.length < 11) {
+               tmp += str.substr(0, 3);
+               tmp += '-';
+               tmp += str.substr(3, 3);
+               tmp += '-';
+               tmp += str.substr(6);
+               return tmp;
+            } else {
+               tmp += str.substr(0, 3);
+               tmp += '-';
+               tmp += str.substr(3, 4);
+               tmp += '-';
+               tmp += str.substr(7);
+               return tmp;
+            }
+            return str;
+         }
         var cellPhone = document.getElementById('phone');
-    	cellPhone.onkeyup = function(event){
-    	    event = event || window.event;
-    	    var _val = this.value.trim();
-    	    this.value = autoHypenPhone(_val) ;
-    	}
+       cellPhone.onkeyup = function(event){
+           event = event || window.event;
+           var _val = this.value.trim();
+           this.value = autoHypenPhone(_val) ;
+       }
+
 
 
 			$("#register").on("click", function() {
@@ -872,23 +870,22 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	          });
 		});
 			
-			
 		</script>
 
-	<script src="../resources/js/vendor/jquery-2.2.4.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.../resources/js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
-	 crossorigin="anonymous"></script>
-	<script src="../resources/js/vendor/bootstrap.min.js"></script>
-	<script src="../resources/js/jquery.ajaxchimp.min.js"></script>
-	<script src="../resources/js/jquery.nice-select.min.js"></script>
-	<script src="../resources/js/jquery.sticky.js"></script>
-	<script src="../resources/js/nouislider.min.js"></script>
-	<script src="../resources/js/jquery.magnific-popup.min.js"></script>
-	<script src="../resources/js/owl.carousel.min.js"></script>
-	<!--gmaps Js-->
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
-	<script src="../resources/js/gmaps.min.js"></script>
-	<script src="../resources/js/main.js"></script>
+   <script src="../resources/js/vendor/jquery-2.2.4.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.../resources/js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
+    crossorigin="anonymous"></script>
+   <script src="../resources/js/vendor/bootstrap.min.js"></script>
+   <script src="../resources/js/jquery.ajaxchimp.min.js"></script>
+   <script src="../resources/js/jquery.nice-select.min.js"></script>
+   <script src="../resources/js/jquery.sticky.js"></script>
+   <script src="../resources/js/nouislider.min.js"></script>
+   <script src="../resources/js/jquery.magnific-popup.min.js"></script>
+   <script src="../resources/js/owl.carousel.min.js"></script>
+   <!--gmaps Js-->
+   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
+   <script src="../resources/js/gmaps.min.js"></script>
+   <script src="../resources/js/main.js"></script>
     
 </body>
 

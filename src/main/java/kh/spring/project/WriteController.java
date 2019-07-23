@@ -32,6 +32,7 @@ public class WriteController {
    @Autowired
    private TradeController tc;
    @Autowired
+
    private AuctionController ac;
    @Autowired
    HttpSession se;
@@ -94,9 +95,11 @@ public class WriteController {
       } catch (Exception e) {
          e.printStackTrace();
       }
+
       if(adto.getTrade_type().equals("직거래")) {
     	  return "redirect:"+ac.index(request);
       }
+
       return "redirect:/";
    } //경매 글쓰기 완성 등록하면 홈으로가는 것
 

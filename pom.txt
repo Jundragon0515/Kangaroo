@@ -44,6 +44,13 @@
 			<artifactId>spring-webmvc</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
+		
+		<!-- nexacro -->
+         <dependency>
+            <groupId>com.nexacro.spring</groupId>
+            <artifactId>nexacro-core</artifactId>
+            <version>1.0.0</version>
+         </dependency>
 
 		<!-- AspectJ -->
 		<dependency>

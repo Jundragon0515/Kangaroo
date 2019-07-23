@@ -1,6 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-   pageEncoding="UTF-8"%>
+pageEncoding="UTF-8"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="zxx" class="no-js">
 
@@ -32,8 +33,7 @@
 <link rel="stylesheet" href="../resources/css/nice-select.css">
 <link rel="stylesheet" href="../resources/css/nouislider.min.css">
 <link rel="stylesheet" href="../resources/css/ion.rangeSlider.css" />
-<link rel="stylesheet"
-   href="../resources/css/ion.rangeSlider.skinFlat.css" />
+<link rel="stylesheet" href="../resources/css/ion.rangeSlider.skinFlat.css"/>
 <link rel="stylesheet" href="../resources/css/main.css">
 <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"> -->
 <script
@@ -195,15 +195,6 @@
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script>
 
-function viewCount(){
-   var viewSelect = document.getElementById("viewCount");
-    // select element에서 선택된 option의 value가 저장된다.
-    var selectValue = viewSelect.value;
-    location.href="auctionOption?view=" + selectValue;
-
-}
-
-
    $(function(){
 	   var socket = new SockJS("/gettime"); //불특정 다수의 브라우저일 경우를 위해 endpoint url 넣어야 한다
 		var client = Stomp.over(socket);//연결 이후의 작업 지원 
@@ -266,15 +257,13 @@ function viewCount(){
          $(location).attr("href", "auctionOption?search="+text_search);
       });
       
-      /* 페이지 정렬 개수 */
-      $("select option[value=" + '${view}' + "]").attr("selected", true);
       
       /* 페이지 정렬 개수 컨트롤  */
-/*       $("#viewCount").on("click", function(){
+       $("#viewCount").on("change", function(){
          var view = $(this).val();
-         alert(view);
+         $(location).attr("href","auctionOption?view=" + view);
       });
-       */
+
       /*네이버 로그아웃  */
       $("#logout_na").on("click",function() {
                $.ajax({
@@ -310,14 +299,12 @@ function viewCount(){
       
       
    });
-
 </script>
 
 
 </head>
 
 <body>
-
    <!-- Start Header Area -->
   <header class="header_area sticky-header">
 		<div class="main_menu">
@@ -538,7 +525,7 @@ function viewCount(){
                         <div class="col-lg-4 col-md-4 col-sm-4">
                            <div class="row">
                               <div class="col-lg-12 col-md-12 col-sm-12">
-                                 <select id="viewCount" name="viewCount" onchange="viewCount()">
+                                 <select id="viewCount" name="viewCount">
                                     <option value="16">16개씩 보기</option>
                                     <option value="24">24개씩 보기</option>
                                     <option value="32">32개씩 보기</option>
@@ -550,6 +537,7 @@ function viewCount(){
                   </div>
                </div>
                <!-- End boardInfo  -->
+               ${rsearch_result_null }
                <div class="row list-nav">
                   <c:forEach var="temp" items="${list }">
                      <div class="col-lg-3 col-md-6">
