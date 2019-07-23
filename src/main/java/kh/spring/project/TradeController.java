@@ -10,6 +10,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import kh.spring.dto.Used_transaction_boardDTO;
+import org.springframework.web.servlet.ModelAndView;
+
+import kh.spring.dto.GoodsTradeDTO;
 import kh.spring.service.GoodsTradeService;
 
 

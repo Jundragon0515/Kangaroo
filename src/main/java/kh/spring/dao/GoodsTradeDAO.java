@@ -5,11 +5,16 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kh.spring.dto.Used_transaction_boardDTO;
+import kh.spring.dto.GoodsTradeDTO;
 
 
 @Repository
@@ -20,7 +25,6 @@ public class GoodsTradeDAO {
 
    @Autowired
    private SqlSessionTemplate sst;
-   
    // 카테고리 설정값
    public void checkCategory(HttpSession session) {
       String category = (String)session.getAttribute("selectCategory");
@@ -396,6 +400,68 @@ public class GoodsTradeDAO {
       return sb.toString();
    }
    
+//   public String getNaviView(int currentPage, int recordCountPerPage, String price) {
+//      int recordTotalCount = this.recordTotalCount(); //레코드 수
+//      int naviCountPerPage = 5; // 한 페이지 네비 개수
+//      int pageTotalCount=0;
+//
+//      if(recordTotalCount % recordCountPerPage > 0) {
+//         pageTotalCount = recordTotalCount / recordCountPerPage + 1;
+//      }else {
+//         pageTotalCount = recordTotalCount / recordCountPerPage;
+//      }
+//
+//      if(currentPage < 1) {
+//         currentPage = 1;
+//      }else if(currentPage > pageTotalCount) {
+//         currentPage = pageTotalCount;
+//      }
+//
+//
+//      int startNavi = (currentPage -1) / naviCountPerPage * naviCountPerPage + 1;
+//      int endNavi = startNavi + (naviCountPerPage-1);
+//      // 현재 위치에 따른 네비 시작과 끝을 구하기
+//
+//      if(endNavi > pageTotalCount) {
+//         endNavi = pageTotalCount;
+//      }
+//      //네비 끝값이 최대 페이지 번호를 넘어가면 최대 페이지번호로 네비 끝값을 설정한다.
+//
+//
+//      boolean needPrev = true;
+//      boolean needNext = true;
+//
+//      if(startNavi == 1) {
+//         needPrev=false;
+//      }
+//
+//      if(endNavi == pageTotalCount) {
+//         needNext = false;
+//      }
+//      
+//      
+//      StringBuilder sb = new StringBuilder();
+//      String bootTag = "<button type='button' class='btn btn-outline-secondary'>";
+//      String link = "<a href='index?currentPage=";
+//      
+//      if(needPrev) {
+//         int prev = startNavi -1;
+//         sb.append(link + prev + "&price=" + price + "'" + ">" + bootTag + "<< Prev " + "</button></a>");
+//      }
+//
+//      for(int i = startNavi; i <= endNavi; i++) {
+//         sb.append(link + i + "&price=" + price + "'" + ">" + bootTag + i + "</button></a>");
+//      }
+//      
+//      if(needNext) {
+//         int next = endNavi + 1;
+//         sb.append(link + next + "'" + "&price=" + price + ">" + bootTag + " Next >> " + "</button></a>");
+//      }
+//      return sb.toString();
+//   }
    
-
+   
+   
+   
+   
 }

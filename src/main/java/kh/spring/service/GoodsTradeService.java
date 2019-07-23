@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import kh.spring.dao.GoodsTradeDAO;
 import kh.spring.dto.Used_transaction_boardDTO;
+import kh.spring.dto.GoodsTradeDTO;
 
 @Service
 public class GoodsTradeService {

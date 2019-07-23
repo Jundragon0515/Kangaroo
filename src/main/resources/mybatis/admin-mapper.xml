@@ -21,5 +21,4 @@
 <delete id="auctionBoardImgDelete">
 	delete from auction_img_board where no=#{value}
 </delete>
-
 </mapper>
