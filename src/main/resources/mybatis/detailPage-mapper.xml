@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="DetailPageDAO">
+
+<select id="a_i_selectByNo" resultType="kh.spring.dto.Auction_img_boardDTO">
+	select * from Auction_img_board where no=#{value}
+</select>
+
+<select id="a_selectByNo" resultType="kh.spring.dto.Auction_boardDTO">
+	select * from Auction_board where no=#{value}
+</select>
+
+<select id="u_i_selectByNo" resultType="kh.spring.dto.Used_transaction_img_boardDTO">
+	select * from Used_transaction_img_board where no=#{value}
+</select>
+
+<select id="u_selectByNo" resultType="kh.spring.dto.Used_transaction_boardDTO">
+	select * from Used_transaction_board where no=#{value}
+</select>
+
+<update id="a_updatePrice">
+	update auction_board set present_price = #{present_price}  where no = #{no}
+</update>
+
+<select id="a_presentMoney" resultType="integer">
+	select present_price from auction_board where no = #{value} 
+</select>
+
+<select id="tenderCount" resultType="integer">
+	select count(*) from tender where board_num=#{value}
+</select>
+
+<delete id="deleteComment">
+	delete from comments where id = #{id} and seq = #{seq}
+</delete>
+
+<delete id="deleteComment2">
+	delete from comments2 where id = #{id} and seq = #{seq}
+</delete>
+</mapper>

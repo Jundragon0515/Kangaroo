@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="MemberDAO">
+<select id ="getPoint" resultType="Integer">
+select point from members where id=#{value}
+</select>
+<insert id="insertProc">
+   insert into Members(id,pw,name,phone,zipcode,address1,address2,ipaddress,logintype) values(#{id},#{pw},#{name},#{phone},#{zipcode},#{address1},#{address2},#{ipaddress},#{logintype}) 
+</insert>
+<insert id="insertSocial">
+   insert into Members values (#{id},null,null,null,default,null,null,null,default,#{ipaddress},#{logintype},default,default,default) 
+</insert>
+<select id="selectIdCheck" resultType="int">
+   select count(*) from members where id=#{id}
+</select>
+<select id="selectloginProc" parameterType="HashMap" resultType="int">
+   select count(*) from members where id=#{id} and pw=#{pw}
+</select>
+<select id="selectPwcheck" resultType="int">
+   select count(*) from members where id=#{email}
+</select>
+<update id="updatePwChange">
+   UPDATE members SET pw=#{pw} WHERE id=#{id}
+</update>
+<select id="selectById" resultType="kh.spring.dto.MemberDTO">
+   select * from members where id=#{value}
+</select>
+<update id="updateProc"  parameterType="kh.spring.dto.MemberDTO"> 
+   UPDATE members SET name=#{name} , phone=#{phone} , zipcode=#{zipcode},address1=#{address1},address2=#{address2} WHERE id=#{id}
+</update>
+<update id="setPoint"  > 
+   UPDATE members SET point=${point} WHERE id=#{id}
+</update>
+<select id="getPw" resultType="String">
+select pw from members where id=#{value}
+</select>
+<!-- 지민추가!!!!!!!! -->
+<!-- 보유 금액이 입찰할 금액보다 큰지 확인 -->
+	<select id="selectMoney" resultType="integer">
+		select count(*) from members where id = #{id} and point >= #{point}
+	</select>
+
+	<!-- 입찰 1) 입찰금액만큼 포인트 차감 -->
+	<update id="minus">
+		update members set point = point-#{point} where
+		id = #{id}
+	</update>
+
+	<!-- 입찰2) 입찰 금액 기준으로 2번째 입찰자를 찾는 쿼리다 -->
+	<select id="moneyBack" resultType="kh.spring.dto.TenderDTO">
+		select * from (select
+		row_number() over(order by point desc) as first ,id,point from tender
+		where BOARD_NUM=#{value}) where first=2
+	</select>
+
+	<!-- 입찰 3) 다른입찰자 발생으로 입찰2)에서 발생한 / 2번째 입찰자에게 입찰한 금액만큼 포인트를 돌려준다 -->
+	<update id="plus">
+		update members set point = point+#{point} where
+		id = #{id}
+	</update>
+	<!-- 입찰 테이블 SEQ, BOARD_NUM, POINT, 시간, 아이피 INSERT 문 -->
+	<insert id="tender">
+		insert into tender
+		values(tender_seq.nextval,#{board_num},#{board_title},#{board_img},#{id},#{point},default,#{ipaddress},default)
+	</insert>
+	<!-- 최고입찰가 검색 -->
+	<select id="currentMoney" resultType="integer">
+		select point from (select *
+		from tender order by point desc) where BOARD_NUM=#{value} and rownum=1
+	</select>
+
+	<!-- 현재 보유 금액 -->
+	<select id="myMoney" resultType="integer">
+		select point from members
+		where id = #{value}
+	</select>
+
+
+	<!-- 입찰 랭킹 5 -->
+	<select id="tenderRank" resultType="kh.spring.dto.TenderDTO">
+		select * from (select
+		row_number() over (order by point desc) rank,seq,BOARD_NUM , id, point,
+		to_char(time,'mm"-"dd hh24":"mi":"ss') time from tender where board_Num=#{value}) where
+		rank between 1 and 5
+	</select>
+
+<!-- 	댓글insert -->
+	<insert id="commentInsert">
+		insert into comments values(comments_seq.nextval,#{boardNum},#{id},#{contents},default,#{ipaddress})
+	</insert>
+
+<!-- 	댓글 최근 5 -->
+
+	<select id="commentTop5" resultType="kh.spring.dto.CommentDTO">
+	select * from (select row_number() over (order by seq desc)rank,seq, id, contents,time,ipaddress,boardNum from comments where boardNum=#{value}) where rank between 1 and 5 
+	</select>
+	
+	<insert id="commentInsert2">
+		insert into comments2 values(comments_seq2.nextval,#{boardNum},#{id},#{contents},default,#{ipaddress})
+	</insert>
+
+	<select id="commentTop52" resultType="kh.spring.dto.CommentDTO">
+	select * from (select row_number() over (order by seq desc)rank,seq, id, contents,time,ipaddress,boardNum from comments2 where boardNum=#{value}) where rank between 1 and 5
+	</select>
+
+</mapper>
