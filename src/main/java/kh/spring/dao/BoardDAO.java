@@ -22,11 +22,11 @@ public class BoardDAO {
 	private SqlSessionTemplate sst;
 	@Autowired
 	private HttpSession se;
-	static int recordCountPerPage = 10;// 한 페이지에 보여줄 글 개수
+	static int recordCountPerPage = 5;// 한 페이지에 보여줄 글 개수
 	static int naviCountPerPage = 10;// 한페이지에 보여줄 페이지 번호 수
 	public List<Auction_boardDTO> selectById_au(int currentPage,String id){
 		int endNum = currentPage * recordCountPerPage;
-		int startNum = endNum - 9;
+		int startNum = endNum - 4;
 		Map<String,String> map = new HashMap<>();
 		map.put("startNum", Integer.toString(startNum));
 		map.put("endNum", Integer.toString(endNum));
@@ -78,7 +78,7 @@ public class BoardDAO {
 	}
 	public List<Used_transaction_boardDTO> selectById_us(int currentPage,String id){
 		int endNum = currentPage * recordCountPerPage;
-		int startNum = endNum - 9;
+		int startNum = endNum - 4;
 		Map<String,String> map = new HashMap<>();
 		map.put("startNum", Integer.toString(startNum));
 		map.put("endNum", Integer.toString(endNum));
@@ -89,7 +89,7 @@ public class BoardDAO {
 		return sst.selectOne("BoardDAO.recordCount_us",id);
 	}
 	public String getNavi_us(int currentPage,String id) {
-		int recordTotalCount = this.recordCount_au(id); // 전체 글 갯수
+		int recordTotalCount = this.recordCount_us(id); // 전체 글 갯수
 		int pageTotalCount = 0;
 		int or2_currentPage=(int)se.getAttribute("or2_currentPage");
 		int auc_currentPage=(int)se.getAttribute("auc_currentPage");

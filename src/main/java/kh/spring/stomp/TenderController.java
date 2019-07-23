@@ -21,7 +21,7 @@ public class TenderController {
 	private MemberDAO dao;
 
 	@MessageMapping("/chat2") // 1
-	@SendTo("/response") // 3 response를 구독하고 있는 사람에게 send!
+	@SendTo("/response2") // 3 response를 구독하고 있는 사람에게 send!
 	public List<TenderDTO> messageProc(StompHeaderAccessor sha,String boardNum) {// 2
 		
 		String b = boardNum;

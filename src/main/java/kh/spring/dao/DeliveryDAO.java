@@ -22,7 +22,7 @@ public class DeliveryDAO {
         return sst.insert("DeliveryDAO.deli_insert",dto);
      }
 	public String lookup(String t_code,String t_invoice) throws IOException  {
-		String apiURL = "http://info.sweettracker.co.kr/api/v1/trackingInfo?";
+		String apiURL = "http://info.sweettracker.co.kr/api/v1/trackingInfo?";//맨뒤에 ? 제거함 ? 붙이면 정상 동작
 		apiURL += "t_key=Cmkzno9RMqEun5CbgAvSgA"  ;
 		apiURL += "&t_code=" + t_code;
 		apiURL += "&t_invoice=" + t_invoice;
@@ -43,7 +43,6 @@ public class DeliveryDAO {
 			res.append(inputLine);
 		}
 		br.close();
-		System.out.println(responseCode);
 		if(responseCode==200) {
 			return res.toString();
 		}

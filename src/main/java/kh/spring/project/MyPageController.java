@@ -1,6 +1,8 @@
 package kh.spring.project;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -11,12 +13,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import kh.spring.dto.DeliveryDTO;
 import kh.spring.dto.MemberDTO;
+import kh.spring.dto.TrackingDTO;
 import kh.spring.service.MemberService;
 import kh.spring.service.MyPageService;
 
@@ -72,12 +74,21 @@ public class MyPageController {
 	public String changePw() { //비밀번호 변경으로 
 		return "changePw";
 	}
+	
 	@RequestMapping("/confirme")
 	public String confirme(int seq) {
+		System.out.println("asdssssssssssssssssssssssssssss");
 		mps.confirme(seq);
 		int or_currentPage=(int)se.getAttribute("or_currentPage");
 		int te_currentPage=(int)se.getAttribute("te_currentPage");
-		return "/goMyPage_delivery?or_currentPage="+or_currentPage+"&te_currentPage="+te_currentPage+"";
+		return "myPage_f/goMyPage_delivery?or_currentPage="+or_currentPage+"&te_currentPage="+te_currentPage+"";
+	}
+	@RequestMapping("/goRefund")
+	public ModelAndView goRefund(int seq) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("seq", seq);
+		mav.setViewName("myPage_f/refund");
+		return mav;
 	}
 	@RequestMapping("/refund")
 	@ResponseBody
@@ -127,8 +138,8 @@ public class MyPageController {
 		mav.addObject("order_navi", mps.getNavi_or2(or2_currentPage, email));
 		mav.addObject("auction_list", mps.selectById_au(auc_currentPage, email));
 		mav.addObject("auction_navi",mps.getNavi_au(auc_currentPage, email));
-		mav.addObject("used_list", mps.selectById_us(auc_currentPage, email));
-		mav.addObject("used_navi",mps.getNavi_us(auc_currentPage, email));
+		mav.addObject("used_list", mps.selectById_us(used_currentPage, email));
+		mav.addObject("used_navi",mps.getNavi_us(used_currentPage, email));
 		mav.setViewName("myPage_f/myPage_sold");
 //		"myPage_f/myPage_delivery"
 		return mav;
@@ -136,13 +147,12 @@ public class MyPageController {
 	@RequestMapping("/lookup")
 	@ResponseBody
 	public String lookup(int seq) {
-		String result=null;
-		try {
-			result = mps.lookup(seq);
-			System.out.println(result);
-		}  catch (IOException e) {
-			e.printStackTrace();
-		}
+		String result="a";
+//		try {
+//			result = mps.lookup(seq);
+//		}  catch (IOException e) {
+//			e.printStackTrace();
+//		}
 		if(result!=null) {
 			se.setAttribute("result", result);
 		}
@@ -153,17 +163,34 @@ public class MyPageController {
 		ModelAndView mav = new ModelAndView();
 		Gson g =new Gson();
 		JsonParser parse= new JsonParser();
-		JsonObject jo=parse.parse((String)se.getAttribute("result")).getAsJsonObject();
-		String invoiceNo=jo.get("invoiceNo").getAsString();
-		String receiverName=jo.get("receiverName").getAsString();
-		String senderName=jo.get("senderName").getAsString();
-		String receiverAddr=jo.get("receiverAddr").getAsString();
-		JsonArray ja=jo.get("trackingDetails").getAsJsonArray();
-		mav.addObject("invoiceNo", invoiceNo);
-		mav.addObject("receiverName", receiverName);
-		mav.addObject("senderName", senderName);
-		mav.addObject("receiverAddr", receiverAddr);
-		mav.addObject("ja", ja);
+//		JsonObject jo=parse.parse((String)se.getAttribute("result")).getAsJsonObject();
+//		String invoiceNo=jo.get("invoiceNo").getAsString();
+//		String receiverName=jo.get("receiverName").getAsString();
+//		String senderName=jo.get("senderName").getAsString();
+//		String receiverAddr=jo.get("receiverAddr").getAsString();
+//		JsonArray ja=jo.get("trackingDetails").getAsJsonArray(); //이거 넣으면 정상 동작 
+		
+		List <TrackingDTO> list=new ArrayList<>();
+		TrackingDTO dto = new TrackingDTO();
+		dto.setTimeString("2019-07-23 19:27:55");
+		dto.setWhere("러시아 합스부르크");
+		dto.setCode("배송출발");
+		TrackingDTO dto2 = new TrackingDTO();
+		dto2.setTimeString("2019-07-23 22:00:00");
+		dto2.setWhere("Nasa 우주 정거장");
+		dto2.setCode("게이트 도착");
+		TrackingDTO dto3 = new TrackingDTO();
+		dto3.setTimeString("2019-07-25 12:05:10");
+		dto3.setWhere("북한 평양");
+		dto3.setCode("배송 완료");
+		list.add(dto);
+		list.add(dto2);
+		list.add(dto3);
+		mav.addObject("invoiceNo", "임시 운송장 번호");
+		mav.addObject("receiverName", "김정은");
+		mav.addObject("senderName", "최윤성");
+		mav.addObject("receiverAddr", "서울시 용산구 후암동 150-7");
+		mav.addObject("ja", list);
 		mav.setViewName("myPage_f/lookup");
 		return mav;
 	}

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="zxx" class="no-js">
 
@@ -56,7 +57,14 @@
 	text-align: center;
 }
 a{
-	font-size: 15px;
+	font-size: 18px;
+	color: black;
+}
+.cart_inner .table tbody tr td {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    vertical-align: middle;
+    align-self: center;
 }
 </style>
 <script>
@@ -129,6 +137,8 @@ a{
 			})
 		});
 		$(".refund").on("click",function(){
+			var anwser=confirm("정말 환불 확정 하시겠습니까?");
+			if(anwser==true){
 			$.ajax({
 				url : "refund_comp",
 				data:{
@@ -137,6 +147,7 @@ a{
 		}).done(function(){
 			location.reload(true);
 			})
+			}
 		});
 		$(".lookup").on("click",function(){
 			$.ajax({
@@ -148,9 +159,9 @@ a{
 				if(resp!=""){
 				open(
 						"/golookup",
-						"_blank", "width=500,height=500");
+						"_blank", "width=1000,height=600");
 				}else{
-					alert("아직 배송정보가 등록 되어있지 않습니다.");
+					alert("등록된 배송정보가 잘못되어 있습니다. ");
 				}
 			});
 			//대기
@@ -158,10 +169,14 @@ a{
 		$(".start").on("click",function(){
 			var seq =$(this).attr("seq");
 			var reci=$(this).attr("buyer");
+			var anwser=confirm("배송 정보를 입력해주세요 ");
+			if(anwser==true){
 			open(
 					"/delivert_insert?seq="+seq+"&reci="+reci,
 					"_blank", "width=500,height=500");
+			}
 		});
+		
 	});
 </script>
 </head>
@@ -186,21 +201,13 @@ a{
 						id="navbarSupportedContent">
 						<ul class="nav navbar-nav menu_nav ml-auto">
 							<!-- 							<li class="nav-item active"><a class="nav-link" href="/">Home</a></li> -->
-							<li class="nav-item submenu dropdown"><a href="#"
-								class="nav-link dropdown-toggle" data-toggle="dropdown"
-								role="button" aria-haspopup="true" aria-expanded="false">중고
-									거래</a>
-								<ul class="dropdown-menu">
 									<li class="nav-item"><a class="nav-link" href="/trade">중고
 											직거래</a></li>
-									<li class="nav-item"><a class="nav-link" href="/trade">중고
+									<li class="nav-item"><a class="nav-link" href="/trade_safe">중고
 											안전거래</a></li>
 									<li class="nav-item"><a class="nav-link" href="/auction">중고
 											경매</a></li>
-								</ul></li>
-							<li class="nav-item "><a class="nav-link" href="/">고객센터</a></li>
 							<li class="nav-item "><a class="nav-link" href="/">공지사항</a></li>
-
 							<c:choose>
 								<c:when test="${logintype=='admin'}">
 									<li class="nav-item "><a class="nav-link" href="/admin">관리자페이지</a></li>
@@ -212,8 +219,8 @@ a{
 										role="button" aria-haspopup="true" aria-expanded="false"><img
 											src="../resources/img/account.png" width="35px"></a>
 										<ul class="dropdown-menu nav_ul">
-											<li class="nav-item "><a class="nav-link" href="/">찜목록</a></li>
-											<li class="nav-item active"><a class="nav-link"
+											<li class="nav-item "><a class="nav-link" href="/goCart">찜목록</a></li>
+											<li class="nav-item "><a class="nav-link"
 												href="/goMyPage">마이페이지</a></li>
 											<li class="nav-item "><a class="nav-link"
 												href="/toPoint">포인트충전</a></li>
@@ -227,8 +234,8 @@ a{
 										role="button" aria-haspopup="true" aria-expanded="false"><img
 											src="../resources/img/account.png" width="40px"></a>
 										<ul class="dropdown-menu nav_ul">
-											<li class="nav-item "><a class="nav-link" href="/">찜목록</a></li>
-											<li class="nav-item active"><a class="nav-link"
+											<li class="nav-item "><a class="nav-link" href="/goCart">찜목록</a></li>
+											<li class="nav-item "><a class="nav-link"
 												href="/goMyPage">마이페이지</a></li>
 											<li class="nav-item "><a class="nav-link"
 												href="/toPoint">포인트충전</a></li>
@@ -242,7 +249,7 @@ a{
 										role="button" aria-haspopup="true" aria-expanded="false"><img
 											src="../resources/img/account.png" width="40px"></a>
 										<ul class="dropdown-menu nav_ul">
-											<li class="nav-item "><a class="nav-link" href="/">찜목록</a></li>
+											<li class="nav-item "><a class="nav-link" href="/goCart">찜목록</a></li>
 											<li class="nav-item "><a class="nav-link"
 												href="/goMyPage">마이페이지</a></li>
 											<li class="nav-item "><a class="nav-link"
@@ -335,24 +342,24 @@ a{
                            			<c:choose>
                            			<c:when test="${i.type=='거래' }">
                                         <div class="d-flex">
-                                        	<a href="/user_detailPage?no=${i.product_num }">
+                                        	<a href="/used_detailPage?no=${i.product_num }">
                                             	<img src="/img/title/${i.product_img}" width="150px" height="100px" alt="">
                                             </a>
                                         </div>
                                         <div class="media-body">
-                                        	<a href="/user_detailPage?no=${i.product_num }">
+                                        	<a href="/used_detailPage?no=${i.product_num }">
                                             <p>${i.product_title }</p>
                                             </a>
                                         </div>
                                         </c:when>
                                         <c:when test="${i.type=='경매' }">
                                         <div class="d-flex">
-                                        	<a href="#">
+                                        	<a href="/auction_detailPage?no=${i.product_num }">
                                             	<img src="${i.product_img}" width="150px" height="100px"  alt="">
                                             </a>
                                         </div>
                                         <div class="media-body">
-                                        	<a href="#">
+                                        	<a href="/auction_detailPage?no=${i.product_num }">
                                             <p>${i.product_title }</p>
                                             </a>
                                         </div>
@@ -361,7 +368,7 @@ a{
                                     </div>
                                     </td>
                                     <td>
-                                    <h5>${i.price }</h5>
+                                    <h5><fmt:formatNumber value="${i.price}" pattern="#,###" /></h5>
                                     </td>
                                     <td>
                                     <h5>${i.buyer }</h5>
@@ -391,7 +398,7 @@ a{
                                     <h5><input type=button class="comp" seq="${i.seq }" value="배송완료 로 변경"></h5>
                                     </c:when>
                                     <c:when test="${i.situation=='구매확정'}">
-                                    <h5>구매확장</h5>
+                                    <h5>구매확정</h5>
                                     </c:when>
                                     <c:when test="${i.situation=='환불요청'}">
                                     <h5><input type=button class="refund" seq="${i.seq }" value="환불처리완료 로 변경"></h5>
@@ -420,13 +427,14 @@ a{
                                 <th scope="col">번호</th>
                                 <th scope="col">물품</th>
                                 <th scope="col">현재 입찰가</th>
+                                <th scope="col">판매 진행 상황</th>
                             </tr>
                         </thead>
                         <tbody>
                          <c:choose>
                            <c:when test="${auction_list==null}">
                             <tr>
-                           <td colspan="3">
+                           <td colspan="4">
                            <div class="media">
                                         <div class="media-body">
                                             <p>등록 하신 물품이 없습니다.</p>
@@ -456,13 +464,22 @@ a{
                                     </div>
                                     </td>
                                     <td>
-                                    <h5>${i.present_price }</h5>
+                                    <h5><fmt:formatNumber value="${i.present_price }" pattern="#,###" /></h5>
                                     </td>
                                     <td>
+                                    <c:choose>
+                                    <c:when test="${i.onGoing=='Y' }">
+                                   	판매 진행 중
+                                    </c:when>
+                                    <c:otherwise>
+                                    	판매완료
+                                    </c:otherwise>
+                                    </c:choose>
+                                    </td>
                            			</tr>
                            </c:forEach>
                             <tr>
-                           <td colspan="3">
+                           <td colspan="4">
                            <div class="media">
                                         <div class="media-body">
                                             <p>${auction_navi }</p>
@@ -480,13 +497,14 @@ a{
                             <tr>
                                 <th scope="col">번호</th>
                                 <th scope="col">물품</th>
+                                <th scope="col">판매 진행 상황</th>
                             </tr>
                         </thead>
                         <tbody>
                          <c:choose>
                            <c:when test="${used_list==null}">
                             <tr>
-                           <td colspan="2">
+                           <td colspan="3">
                            <div class="media">
                                         <div class="media-body">
                                             <p>등록 하신 물품이 없습니다.</p>
@@ -504,26 +522,36 @@ a{
                            			<td>
                            			<div class="media">
                                         <div class="d-flex">
-                                        	<a href="/auction_detailPage?no=${i.no }">
+                                        	<a href="/used_detailPage?no=${i.no }">
                                             	<img src="/img/title/${i.title_img}" width="150px" height="100px"  alt="">
                                             </a>
                                         </div>
                                         <div class="media-body">
-                                        	<a href="/auction_detailPage?no=${i.no }">
+                                        	<a href="/used_detailPage?no=${i.no }">
                                             <p>${i.title }</p>
                                             </a>
                                         </div>
                                     </div>
                                     </td>
+                                    <td>
+                                    <c:choose>
+                                    <c:when test="${i.onGoing=='Y' }">
+                                   	판매 진행 중
+                                    </c:when>
+                                    <c:otherwise>
+                                    	판매완료
+                                    </c:otherwise>
+                                    </c:choose>
+                                    </td>
                            			</tr>
                            </c:forEach>
                             <tr>
-                           <td colspan="2">
+                           <td colspan="3">
                            <div class="media">
                                         <div class="media-body">
                                             <p>${used_navi }</p>
                                         </div>
-                                    </div>
+                                    </div>	
                            </td>
                            </tr>
                            </c:otherwise>

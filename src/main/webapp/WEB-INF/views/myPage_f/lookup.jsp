@@ -1,4 +1,4 @@
-00000000000022........................................................................................................................................................................................................................................................................................................2<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -26,32 +26,41 @@
 <link rel="stylesheet" href="../resources/css/magnific-popup.css">
 <link rel="stylesheet" href="../resources/css/main.css">
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<style>
+	*{
+		text-align:center;
+	}
+</style>
 </head>
 <body>
 <div class="container-fluid">
     <div class="panel-body">
-        <div class="col-md-12 header-title">스마트택배 배송조회</div>
+        <div class="col-md-12 header-title mt-3 mb-3"><h1>스마트택배 배송조회</h1></div>
         <div class="col-md-12">
-            <div class="form-group row">
-                <label for="invoice" class="col-xs-2 label-style">운송장번호</label>
-                <div id="invoice" class="col-xs-8 info-style">${invoiceNo }</div>
-            </div>
-            <div class="form-group row">
-                <label for="to" class="col-xs-2 label-style">받는 사람</label>
-                <div id="to" class="col-xs-8 info-style">${receiverName }</div>
-            </div>
-            <div class="form-group row">
-                <label for="from" class="col-xs-2 label-style">보낸 사람</label>
-                <div id="from" class="col-xs-8 info-style">${senderName }</div>
-            </div>
-            <div class="form-group row">
-                <label for="adress" class="col-xs-2 label-style">수령 주소</label>
-                <div id="adress" class="col-xs-8 info-style">${receiverAddr}</div>
-            </div>
+        <table class ="table table-borderless">
+        <tbody>
+        <tr>
+        <td>운송장 번호</td>
+        <td>${invoiceNo }</td>
+        </tr>
+        <tr>
+        <td>받는 사람</td>
+        <td>${receiverName }</td>
+        </tr>
+        <tr>
+        <td>보낸 사람</td>
+        <td>${senderName }</td>
+        </tr>
+        <tr>
+        <td>수령 주소</td>
+        <td>${receiverAddr}</td>
+        </tr>
+        </tbody>
+        </table>
         </div>
     </div>
 
-    <div class="col-sm-12">
+    <div class="col-sm-12 mt-2">
         <table class="table table-striped">
             <thead>
             <tr>
