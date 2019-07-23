@@ -22,11 +22,8 @@
 <meta charset="UTF-8">
 <!-- Site Title -->
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-<!-- 웹 소켓 cdn -->
-<script
-   src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.3.0/sockjs.min.js"></script>
-<script
-   src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.3.0/sockjs.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
 
 <link rel="stylesheet"
    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -58,10 +55,10 @@ body {
 }
 
 #rank {
-   width: 58%;
-   margin: auto;
-   margin-top: 50px;
-   text-align: center;
+	width: 100%;
+	margin: auto;
+	margin-top: 50px;
+	text-align: center;
 }
 
 .choi {
@@ -103,6 +100,20 @@ body {
 
 .nav_ul * {
    text-align: center;
+}
+
+
+/* #presentMoney{ */
+
+/* "font-size: 25px; font-weight: 700; color: #ffba00; */
+/* } */
+
+#pp{
+	font-size: 25px; font-weight: 700; color: #ffba00;
+	margin: 0px;
+}
+#pt{
+	line-height: 33px;
 }
 
 /* 오른쪽 TOP 버튼 */
@@ -347,65 +358,67 @@ $("#logout_na").on("click", function() {
 				<div class="col-lg-5 offset-lg-1">
 					<div class="s_product_text1">
 
-
-						<div class="container">
-							<table class="table">
-								<tr>
-									<h3 style="text-align: right; padding-right: 30px;">${dto.title }</h3>
-								</tr>
-								<tbody>
-									<tr id="presentMoney">
-										<td id=pt>현재가</td>
-										<td id="presentMoney" colspan=2 class=detail-info
-											style="font-size: 25px; font-weight: 700; color: #ffba00;">
-											<fmt:formatNumber value="${dto.present_price }"
-												pattern="#,###" />원
-										</td>
-									</tr>
-									<tr>
-										<td>남은 시간</td>
-										<th id=rt class="detail-info time"></th>
-									</tr>
-									<tr>
-										<td>물품번호</td>
-										<td colspan=2 class=detail-info><fmt:formatNumber
-												value="${dto.no }" pattern="#,###" /></td>
-									</tr>
-									<tr>
-										<td>물품 카테고리</td>
-										<td colspan=2 class=detail-info>${dto.category }</td>
-									</tr>
-									<tr>
-										<td>경매기간</td>
-										<td colspan=2 class=detail-info>${dto.start_date }~
-											${dto.end_date }</td>
-									</tr>
-									<tr>
-										<td>시작가</td>
-										<td colspan=2 class=detail-info><fmt:formatNumber
-												value="${dto.starting_price }" pattern="#,###" />원</td>
-									</tr>
-									<tr>
-										<td>최소 입찰 단위</td>
-										<td colspan=2 class=detail-info><fmt:formatNumber
-												value="${dto.min_price }" pattern="#,###" />원</td>
-									</tr>
-									<tr>
-										<td>입찰 수</td>
-										<td colspan=2 class=detail-info id="tenderCount">${tenderCount }</td>
-									</tr>
-									<tr>
-										<td>배송방법</td>
-										<td colspan=2 class=detail-info>${dto.delivery_type }</td>
-									</tr>
-									<tr>
-										<td>배송비용</td>
-										<td colspan=2 class=detail-info><fmt:formatNumber
-												value="${dto.delivery_cost }" pattern="#,###" />원</td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
+                  <div class="container">
+                     <table class="table">
+                        <tr>
+                           <h3 style="text-align: right; padding-right: 30px;">${dto.title }</h3>
+                        </tr>
+                        <tbody>
+                           <tr>
+                              <td id=pt style=padding-bottom:0px;>현재가</td>
+										<th id="presentMoney">
+											<h2 id=pp class=detail-info>
+												<fmt:formatNumber value="${dto.present_price }"
+													pattern="#,###" />
+												원
+											</h2>
+										</th>
+                           </tr>
+                           <tr>
+                              <td>남은 시간</td>
+                              <th id=rt class="detail-info time"></th>
+                           </tr>
+                           <tr>
+                              <td>물품번호</td>
+                              <td colspan=2 class=detail-info><fmt:formatNumber
+                                    value="${dto.no }" pattern="#,###" /></td>
+                           </tr>
+                           <tr>
+                              <td>물품 카테고리</td>
+                              <td colspan=2 class=detail-info>${dto.category }</td>
+                           </tr>
+                           <tr>
+                              <td>경매기간</td>
+                               <td colspan=2 class=detail-info>${dto.start_date }~
+                                 ${dto.end_date }</td>
+                           </tr>
+                           <tr>
+                              <td>시작가</td>
+                               <td colspan=2 class=detail-info><fmt:formatNumber
+                                    value="${dto.starting_price }" pattern="#,###" />원</td>
+                           </tr>
+                           <tr>
+                              <td>최소 입찰 단위</td>
+                               <td colspan=2 class=detail-info><fmt:formatNumber
+                                    value="${dto.min_price }" pattern="#,###" />원</td> 
+                           </tr>
+                           <tr>
+                              <td>입찰 수</td>
+                               <td colspan=2 class=detail-info id="tenderCount">${tenderCount }</td>
+                           </tr>
+                           <tr>
+                              <td>배송방법</td>
+                              <td colspan=2 class=detail-info>${dto.delivery_type }</td>
+                           </tr>
+                           <tr>
+                              <td>배송비용</td>
+                              <td colspan=2 class=detail-info><fmt:formatNumber
+                                    value="${dto.delivery_cost }" pattern="#,###" />원</td>
+                           </tr>
+                        </tbody>
+                     </table>
+                  </div>
+						
 
 						<!--                   <div class="card_area d-flex align-items-center"> -->
 						<!--                      <a class="primary-btn" href="#">Add to Cart</a> <a -->
@@ -431,35 +444,102 @@ $("#logout_na").on("click", function() {
    </div>
    <!--================End Single Product Area =================-->
 
+<section class="product_description_area p-0">
+      <div class="container">
+
 <table class="table" id="rank">
-      <thead>
-         <tr>
-            <th scope="col" class="choi">RANK5</th>
-            <th scope="col" class="">아이디</th>
-            <th scope="col" class="">입찰가</th>
-            <th scope="col" class="">입찰 시간</th>
-         </tr>
-      </thead>
-      <tbody id="rankContents">
-      </tbody>
-   </table>
-
-
+		<thead>
+			<tr>
+				<th scope="col" class="choi">RANK5</th>
+				<th scope="col" class="">아이디</th>
+				<th scope="col" class="">입찰가</th>
+				<th scope="col" class="">입찰 시간</th>
+			</tr>
+		</thead>
+		<tbody id="rankContents">
+		</tbody>
+	</table>
+</div></section>
 
 
 
    <script>
    
-// //    var socket = new SockJS("/webchat2");
-// //    var client = Stomp.over(socket);
-   
-// //    client.connect({},function(resp){
-// //       console.log(resp);
-// //       client.subscribe("/response2",function(msg){
-// //          alert("여");
-// //       });
-// //    });
+		var lastPrice = 0;
+	      var current = ${currentMoney};
 
+	      var tenderCount = Number($("#tenderCount").html());
+    	var socket = new SockJS("/gettime");
+		var client = Stomp.over(socket);
+		
+		client.connect({},function(resp){
+			
+			client.subscribe("/response2",function(msg){
+				var result=  JSON.parse(msg.body);
+				var a ="";
+                
+				console.log(result[4]);
+				
+                if(result[4]!=undefined){
+                   a+='<tr>';
+                   a+='<th scope="row" class="choi"></th>';
+                   a+='<td>'+result[4].id+'</td>'
+                   a+='<td>'+addCom(Number(result[4].point))+" 원"+'</td>'
+                   a+='<td>'+result[4].time+'</td>'
+                   a+='</tr>'
+                }
+                if(result[3]!=undefined){
+                   a+='<tr>';
+                   a+='<th scope="row" class="choi"></th>';
+                   a+='<td>'+result[3].id+'</td>'
+                   a+='<td>'+addCom(Number(result[3].point))+" 원"+'</td>'
+                   a+='<td>'+result[3].time+'</td>'
+                   a+='</tr>'
+                }
+                if(result[2]!=undefined){
+                   a+='<tr>';
+                   a+='<th scope="row" class="choi"></th>';
+                   a+='<td>'+result[2].id+'</td>'
+                   a+='<td>'+addCom(Number(result[2].point))+" 원"+'</td>'
+                   a+='<td>'+result[2].time+'</td>'
+                   a+='</tr>'
+                }
+                if(result[1]!=undefined){
+                   a+='<tr>';
+                   a+='<th scope="row" class="choi"></th>';
+                   a+='<td>'+result[1].id+'</td>'
+                   a+='<td>'+addCom(Number(result[1].point))+" 원"+'</td>'
+                   a+='<td>'+result[1].time+'</td>'
+                   a+='</tr>'
+                }
+                if(result[0]!=undefined){
+                   a+='<tr>';
+                   a+='<th scope="row" class="choi">최고 입찰</th>';
+                   a+='<td>'+result[0].id+'</td>'
+                   a+='<td>'+addCom(Number(result[0].point))+" 원"+'</td>'
+                   a+='<td>'+result[0].time+'</td>'
+                   a+='</tr>'
+                }
+                
+                $("#rankContents").html(a);
+                
+                
+                var m = "";
+                m+='<h2 id=pp class=detail-info>'+addCom(Number(result[0].point))+' 원</h2></th>';
+           	   
+					
+				   $("#presentMoney").html(m);
+				
+				   tenderCount++;
+				   $("#tenderCount").html(tenderCount);
+				   
+				   
+				   lastPrice=Number(result[0].point);
+				   console.log("lastp" + " : "  + lastPrice + "current" + " : " + current);
+				   
+			});
+		});
+		
    if(${dto.present_price ==0}){
       
       var m = "";
@@ -542,8 +622,7 @@ $("#logout_na").on("click", function() {
    
    $("#rankContents").html(s);
    
-      var current = "${currentMoney}";
-      var myMoney = "${myMoney}"";
+      var myMoney = ${myMoney};
       
       $("#tend").on("click",function(){
          
@@ -568,31 +647,39 @@ $("#logout_na").on("click", function() {
              
           }
 
-         var number = $("#money").val().replace(/,/gi,"");
-         var money = Number(number);
-         var min = Number(${dto.min_price });
-         
-         var currentMoney = 0;
-         
-         if(${dto.present_price }==0){
-            currentMoney=${dto.starting_price };
-         }else{
-            currentMoney=Number(${dto.present_price });
-         }
-         
-         
-         var firstPrice =Number(${dto.starting_price });
-         if(money<=firstPrice){
-            alert("최소 입찰 금액은  "+ addCom(currentMoney+min) +" 원 입니다.");
-              $("#money").val(addCom(currentMoney+min));
+    	  var number = $("#money").val().replace(/,/gi,"");
+    	  var money = Number(number);//입찰하려는 가격
+    	  var min = Number(${dto.min_price });//최소입찰단위
+    	  
+    	  var currentMoney = 0;
+    	  
+    	  if(${dto.present_price }==0){//현재가가 0원일때
+    		  currentMoney=${dto.starting_price };//시작가로 대체한다.
+    		  lastPrice=Number(${dto.starting_price });
+    		  if(money<currentMoney+min){
+    			  alert("최소 입찰 금액은 " + addCom(currentMoney+min) + " 원 입니다.");
+    			  $("#money").val(addCom(Number(currentMoney+min)));
+    			  return false
+    		  }
+    	  }else{
+    		  currentMoney=Number(${dto.present_price });//현재가가 0원이 아니라면 현재가로 가겠다
+    		  lastPrice=Number(${dto.present_price });
+    		  if(money<currentMoney+min){
+    			  alert("최소 입찰 금액은 " + addCom(current+min) + " 원 입니다.");
+    			  $("#money").val(addCom(Number(current+min)));
+    			  return false;
+    		  }
+    	  }
+    	  
+    	  
+    	  var firstPrice =Number(${dto.starting_price });//시작가
+    	  if(money<=firstPrice){
+    		  alert("최소 입찰 금액은 "+ addCom(current+min) +" 원 입니다.");
+    		  console.log("여기서도 확인" + " : " + lastPrice + " : " + min);
+              $("#money").val(addCom(Number(current+min)));
               return false;
-         }
-         
-         if(money<current+min){
-            alert("최소 입찰 금액은  "+ addCom(currentMoney+min) +" 원 입니다.");
-            $("#money").val(addCom(currentMoney+min));
-            return false;
-         }else{
+    	  }else{
+    		  
             if(myMoney<money){
                alert("보유 잔액이 부족 합니다.");
                $("#money").val("");
@@ -612,53 +699,55 @@ $("#logout_na").on("click", function() {
                   dataType:"JSON"
                }).done(function(resp){
                   
+
+            	   
                   if(resp!=null){
                      
                      console.log(resp);
                      
-                     var s ="";
+//                      var s ="";
                      
-                     if(resp[4]!=null){
-                        s+='<tr>';
-                        s+='<th scope="row" class="choi"></th>';
-                        s+='<td>'+resp[4].id+'</td>'
-                        s+='<td>'+addCom(resp[4].point)+" 원"+'</td>'
-                        s+='<td>'+resp[4].time+'</td>'
-                        s+='</tr>'
-                     }
-                     if(resp[3]!=null){
-                        s+='<tr>';
-                        s+='<th scope="row" class="choi"></th>';
-                        s+='<td>'+resp[3].id+'</td>'
-                        s+='<td>'+addCom(resp[3].point)+" 원"+'</td>'
-                        s+='<td>'+resp[3].time+'</td>'
-                        s+='</tr>'
-                     }
-                     if(resp[2]!=null){
-                        s+='<tr>';
-                        s+='<th scope="row" class="choi"></th>';
-                        s+='<td>'+resp[2].id+'</td>'
-                        s+='<td>'+addCom(resp[2].point)+" 원"+'</td>'
-                        s+='<td>'+resp[2].time+'</td>'
-                        s+='</tr>'
-                     }
-                     if(resp[1]!=null){
-                        s+='<tr>';
-                        s+='<th scope="row" class="choi"></th>';
-                        s+='<td>'+resp[1].id+'</td>'
-                        s+='<td>'+addCom(resp[1].point)+" 원"+'</td>'
-                        s+='<td>'+resp[1].time+'</td>'
-                        s+='</tr>'
-                     }
-                     if(resp[0]!=null){
-                        s+='<tr>';
-                        s+='<th scope="row" class="choi">최고 입찰</th>';
-                        s+='<td>'+resp[0].id+'</td>'
-                        s+='<td>'+addCom(resp[0].point)+" 원"+'</td>'
-                        s+='<td>'+resp[0].time+'</td>'
-                        s+='</tr>'
-                     }
-                     $("#rankContents").html(s);
+//                      if(resp[4]!=null){
+//                         s+='<tr>';
+//                         s+='<th scope="row" class="choi"></th>';
+//                         s+='<td>'+resp[4].id+'</td>'
+//                         s+='<td>'+addCom(resp[4].point)+" 원"+'</td>'
+//                         s+='<td>'+resp[4].time+'</td>'
+//                         s+='</tr>'
+//                      }
+//                      if(resp[3]!=null){
+//                         s+='<tr>';
+//                         s+='<th scope="row" class="choi"></th>';
+//                         s+='<td>'+resp[3].id+'</td>'
+//                         s+='<td>'+addCom(resp[3].point)+" 원"+'</td>'
+//                         s+='<td>'+resp[3].time+'</td>'
+//                         s+='</tr>'
+//                      }
+//                      if(resp[2]!=null){
+//                         s+='<tr>';
+//                         s+='<th scope="row" class="choi"></th>';
+//                         s+='<td>'+resp[2].id+'</td>'
+//                         s+='<td>'+addCom(resp[2].point)+" 원"+'</td>'
+//                         s+='<td>'+resp[2].time+'</td>'
+//                         s+='</tr>'
+//                      }
+//                      if(resp[1]!=null){
+//                         s+='<tr>';
+//                         s+='<th scope="row" class="choi"></th>';
+//                         s+='<td>'+resp[1].id+'</td>'
+//                         s+='<td>'+addCom(resp[1].point)+" 원"+'</td>'
+//                         s+='<td>'+resp[1].time+'</td>'
+//                         s+='</tr>'
+//                      }
+//                      if(resp[0]!=null){
+//                         s+='<tr>';
+//                         s+='<th scope="row" class="choi">최고 입찰</th>';
+//                         s+='<td>'+resp[0].id+'</td>'
+//                         s+='<td>'+addCom(resp[0].point)+" 원"+'</td>'
+//                         s+='<td>'+resp[0].time+'</td>'
+//                         s+='</tr>'
+//                      }
+//                      $("#rankContents").html(s);
                      current=resp[0].point;
                      
                      alert("입찰 되었습니다");
@@ -668,18 +757,15 @@ $("#logout_na").on("click", function() {
                         url:"/currentPrice",
                         data:{"boardNum":${dto.no }}
                      }).done(function(resp){
-                      
-                        console.log(addCom(resp))
-                        
-                        var m = "";
-                        
-                        m+='<h2 id=pp class=detail-info>'+addCom(resp)+' 원</h2></th>';
-                     
-                     $("#presentMoney").html(m);
+                  	 
+                  	   console.log(addCom(resp))
+                  	   
+                  	   var m = "";
+                  	   
+//                   	   m+='<h2 id=pp class=detail-info>'+addCom(resp)+' 원</h2></th>';
+      					
+//       				   $("#presentMoney").html(m);
                      }); 
-                     
-//                   client.send("/app2/chat2",{}, JSON.stringify({boardNum : ${dto.no }}));
-                     
                   }else{
                      alert("입찰 실패");
                   }
@@ -688,9 +774,10 @@ $("#logout_na").on("click", function() {
                      url:"/tenderCount",
                      data:{"boardNum":${dto.no }}
                   }).done(function(resp){
-                     $("#tenderCount").html(resp);
+//                 	  $("#tenderCount").html(resp);
                   });
                   
+                  client.send("/app/chat2",{}, JSON.stringify({boardNum:${dto.no }}));
                   
                }).fail(function(resp){
 
@@ -700,6 +787,8 @@ $("#logout_na").on("click", function() {
                  
                })
    
+				//////////////////////////////////웹 소켓
+              
             }
          }
       });
@@ -1408,34 +1497,30 @@ $("#logout_na").on("click", function() {
 					<script>
                   document.write(new Date().getFullYear());
                </script>
-					All rights reserved | This template is made with <i
-						class="fa fa-heart-o" aria-hidden="true"></i> by <a
-						href="https://colorlib.com" target="_blank">Colorlib</a>
-					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-				</p>
-			</div>
-		</div>
-	</footer>
-	<!-- End footer Area -->
-	<script src="https://use.fontawesome.com/releases/v5.0.0/js/all.js"></script>
-	<script src="../resources/js/vendor/jquery-2.2.4.min.js"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/popper.../resources/js/1.11.0/umd/popper.min.js"
-		integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
-		crossorigin="anonymous"></script>
-	<script src="../resources/js/vendor/bootstrap.min.js"></script>
-	<script src="../resources/js/jquery.ajaxchimp.min.js"></script>
-	<script src="../resources/js/jquery.nice-select.min.js"></script>
-	<script src="../resources/js/jquery.sticky.js"></script>
-	<script src="../resources/js/nouislider.min.js"></script>
-	<script src="../resources/js/jquery.magnific-popup.min.js"></script>
-	<script src="../resources/js/owl.carousel.min.js"></script>
-	<!--gmaps Js-->
-	<script
-		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
-	<script src="../resources/js/gmaps.min.js"></script>
-	<script src="../resources/js/main.js"></script>
-</div>
+               All rights reserved | This template is made with <i
+                  class="fa fa-heart-o" aria-hidden="true"></i> by <a
+                  href="https://colorlib.com" target="_blank">Colorlib</a>
+               <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+            </p>
+         </div>
+      </div>
+   </footer>
+   <!-- End footer Area -->
+
+   <script src="../resources/js/vendor/jquery-2.2.4.min.js"></script>
+   <script src="../resources/js/vendor/bootstrap.min.js"></script>
+   <script src="../resources/js/jquery.ajaxchimp.min.js"></script>
+   <script src="../resources/js/jquery.nice-select.min.js"></script>
+   <script src="../resources/js/jquery.sticky.js"></script>
+   <script src="../resources/js/nouislider.min.js"></script>
+   <script src="../resources/js/jquery.magnific-popup.min.js"></script>
+   <script src="../resources/js/owl.carousel.min.js"></script>
+   <!--gmaps Js-->
+   <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
+   <script src="../resources/js/gmaps.min.js"></script>
+   <script src="../resources/js/main.js"></script>
+
 </body>
 
 </html>
