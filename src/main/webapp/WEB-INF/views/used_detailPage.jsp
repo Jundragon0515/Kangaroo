@@ -74,8 +74,38 @@
 .nav_ul * {
    text-align: center;
 }
+
+/* 오른쪽 TOP 버튼 */
+.btn-fixed {
+   position: fixed;
+   top: 540px;
+   cursor:pointer;
+}
+
+.back-to-top {text-decoration: none; display: none; color:#fe912b; }
+
+.back-to-top:hover {color: #818bb0}
+
 </style>
 <script>
+$(function(){
+    var offset = 500;   // 수직으로 어느정도 움직여야 버튼이 나올까?
+    var duration = 600;   // top으로 이동할때까지의 animate 시간 (밀리세컨드, default는 400. 예제의 기본은 500)
+    $(window).scroll(function() {
+        if ($(this).scrollTop() > offset) {
+            $('.back-to-top').fadeIn(duration);
+        } else {
+            $('.back-to-top').fadeOut(duration);
+        }
+    });
+    
+    $('.back-to-top').click(function(event) {
+        event.preventDefault();
+        $('html, body').animate({scrollTop: 0}, duration);
+        return false;
+    })
+}) 
+
 $("#logout_na").on("click", function() {
           $.ajax({
                    url:"logout",
@@ -103,6 +133,12 @@ $("#logout_na").on("click", function() {
 </script>
 </head>
 <body>
+<div>
+<!-- start fixbutton -->
+     <div class="d-none d-lg-block col-lg-1" style=padding-left:90%;>
+        <i class="fas fa-chevron-circle-up btn-fixed back-to-top fa-3x"></i>
+     </div>
+<!-- end fixbutton -->
   <header class="header_area sticky-header">
 		<div class="main_menu">
 			<nav class="navbar navbar-expand-lg navbar-light main_box">
@@ -369,15 +405,13 @@ $("#logout_na").on("click", function() {
 		   }
 		   
 	   });
-	   
+   }
    });
    
    
    </script>
    <!--================End Single Product Area =================-->
 
-   <!--================Product Description Area =================-->
-<<<<<<< HEAD
 	<section class="product_description_area">
 		<div class="container">
 			<ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -404,7 +438,8 @@ $("#logout_na").on("click", function() {
                      <p style=text-align:left;font-size:25px;line-height:40px;padding-left:60px;padding-right:60px;padding-top:30px;>
                         ${dto.contents }   
                      </p>
-               </div><br><br><br>                                           
+               </div><br><br><br>               
+                                                       
                <!-- 상세 이미지  -->
                <div class="selector">
                   <img src="img/title/${i_dto.title_img }"" onerror="this.style.display='none'"
@@ -1070,7 +1105,7 @@ $("#logout_na").on("click", function() {
       </div>
    </footer>
    <!-- End footer Area -->
-
+   <script src="https://use.fontawesome.com/releases/v5.0.0/js/all.js"></script>
    <script src="../resources/js/vendor/jquery-2.2.4.min.js"></script>
    <script
       src="https://cdnjs.cloudflare.com/ajax/libs/popper.../resources/js/1.11.0/umd/popper.min.js"
@@ -1088,5 +1123,6 @@ $("#logout_na").on("click", function() {
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
    <script src="../resources/js/gmaps.min.js"></script>
    <script src="../resources/js/main.js"></script>
+   </div>
    </body>
    </html>
