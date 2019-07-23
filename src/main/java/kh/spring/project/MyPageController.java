@@ -44,6 +44,9 @@ public class MyPageController {
 	}
 	@RequestMapping("/goMyPage")
 	public String goMyPage() { // 마이페이지로
+		if(se.getAttribute("email")!=null) {
+	         mes.setPoint();
+	      }
 		return "myPage_f/myPage";
 	}
 	@RequestMapping("/goMyPage_delivery")

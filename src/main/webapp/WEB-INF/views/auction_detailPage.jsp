@@ -21,11 +21,8 @@
 <meta charset="UTF-8">
 <!-- Site Title -->
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-<!-- 웹 소켓 cdn -->
-<script
-   src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.3.0/sockjs.min.js"></script>
-<script
-   src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.3.0/sockjs.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
 
  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -52,7 +49,7 @@ body {
 }
 
 #rank {
-	width: 58%;
+	width: 100%;
 	margin: auto;
 	margin-top: 50px;
 	text-align: center;
@@ -294,7 +291,7 @@ $("#logout_na").on("click", function() {
                            <h3 style="text-align: right; padding-right: 30px;">${dto.title }</h3>
                         </tr>
                         <tbody>
-                           <tr id="presentMoney">
+                           <tr>
                               <td id=pt>현재가</td>
 										<th id="presentMoney">
 											<h2 id=pp class=detail-info>
@@ -373,6 +370,9 @@ $("#logout_na").on("click", function() {
    </div>
    <!--================End Single Product Area =================-->
 
+<section class="product_description_area p-0">
+      <div class="container">
+
 <table class="table" id="rank">
 		<thead>
 			<tr>
@@ -385,7 +385,7 @@ $("#logout_na").on("click", function() {
 		<tbody id="rankContents">
 		</tbody>
 	</table>
-
+</div></section>
 
 
 <!-- tender 웹 소켓 -->
@@ -393,15 +393,80 @@ $("#logout_na").on("click", function() {
 
 	<script>
    
-// // 	var socket = new SockJS("/webchat2");
-// // 	var client = Stomp.over(socket);
-	
-// // 	client.connect({},function(resp){
-// // 		console.log(resp);
-// // 		client.subscribe("/response2",function(msg){
-// // 			alert("여");
-// // 		});
-// // 	});
+		var lastPrice = 0;
+	      var current = ${currentMoney};
+
+	      var tenderCount = Number($("#tenderCount").html());
+    	var socket = new SockJS("/gettime");
+		var client = Stomp.over(socket);
+		
+		client.connect({},function(resp){
+			
+			client.subscribe("/response",function(msg){
+				var result=  JSON.parse(msg.body);
+				var a ="";
+                
+				console.log(result[4]);
+				
+                if(result[4]!=undefined){
+                   a+='<tr>';
+                   a+='<th scope="row" class="choi"></th>';
+                   a+='<td>'+result[4].id+'</td>'
+                   a+='<td>'+addCom(Number(result[4].point))+" 원"+'</td>'
+                   a+='<td>'+result[4].time+'</td>'
+                   a+='</tr>'
+                }
+                if(result[3]!=undefined){
+                   a+='<tr>';
+                   a+='<th scope="row" class="choi"></th>';
+                   a+='<td>'+result[3].id+'</td>'
+                   a+='<td>'+addCom(Number(result[3].point))+" 원"+'</td>'
+                   a+='<td>'+result[3].time+'</td>'
+                   a+='</tr>'
+                }
+                if(result[2]!=undefined){
+                   a+='<tr>';
+                   a+='<th scope="row" class="choi"></th>';
+                   a+='<td>'+result[2].id+'</td>'
+                   a+='<td>'+addCom(Number(result[2].point))+" 원"+'</td>'
+                   a+='<td>'+result[2].time+'</td>'
+                   a+='</tr>'
+                }
+                if(result[1]!=undefined){
+                   a+='<tr>';
+                   a+='<th scope="row" class="choi"></th>';
+                   a+='<td>'+result[1].id+'</td>'
+                   a+='<td>'+addCom(Number(result[1].point))+" 원"+'</td>'
+                   a+='<td>'+result[1].time+'</td>'
+                   a+='</tr>'
+                }
+                if(result[0]!=undefined){
+                   a+='<tr>';
+                   a+='<th scope="row" class="choi">최고 입찰</th>';
+                   a+='<td>'+result[0].id+'</td>'
+                   a+='<td>'+addCom(Number(result[0].point))+" 원"+'</td>'
+                   a+='<td>'+result[0].time+'</td>'
+                   a+='</tr>'
+                }
+                
+                $("#rankContents").html(a);
+                
+                
+                var m = "";
+                m+='<h2 id=pp class=detail-info>'+addCom(Number(result[0].point))+' 원</h2></th>';
+           	   
+					
+				   $("#presentMoney").html(m);
+				
+				   tenderCount++;
+				   $("#tenderCount").html(tenderCount);
+				   
+				   
+				   lastPrice=Number(result[0].point);
+				   console.log("lastp" + " : "  + lastPrice + "current" + " : " + current);
+				   
+			});
+		});
 
 	if(${dto.present_price ==0}){
 		
@@ -484,8 +549,7 @@ $("#logout_na").on("click", function() {
    }
    
    $("#rankContents").html(s);
-   
-      var current = ${currentMoney};
+
       var myMoney = ${myMoney};
       
       $("#tend").on("click",function(){
@@ -512,30 +576,37 @@ $("#logout_na").on("click", function() {
     		}
 
     	  var number = $("#money").val().replace(/,/gi,"");
-    	  var money = Number(number);
-    	  var min = Number(${dto.min_price });
+    	  var money = Number(number);//입찰하려는 가격
+    	  var min = Number(${dto.min_price });//최소입찰단위
     	  
     	  var currentMoney = 0;
     	  
-    	  if(${dto.present_price }==0){
-    		  currentMoney=${dto.starting_price };
+    	  if(${dto.present_price }==0){//현재가가 0원일때
+    		  currentMoney=${dto.starting_price };//시작가로 대체한다.
+    		  lastPrice=Number(${dto.starting_price });
+    		  if(money<currentMoney+min){
+    			  alert("최소 입찰 금액은 " + addCom(currentMoney+min) + " 원 입니다.");
+    			  $("#money").val(addCom(Number(currentMoney+min)));
+    			  return false
+    		  }
     	  }else{
-    		  currentMoney=Number(${dto.present_price });
+    		  currentMoney=Number(${dto.present_price });//현재가가 0원이 아니라면 현재가로 가겠다
+    		  lastPrice=Number(${dto.present_price });
+    		  if(money<currentMoney+min){
+    			  alert("최소 입찰 금액은 " + addCom(current+min) + " 원 입니다.");
+    			  $("#money").val(addCom(Number(current+min)));
+    			  return false;
+    		  }
     	  }
     	  
     	  
-    	  var firstPrice =Number(${dto.starting_price });
+    	  var firstPrice =Number(${dto.starting_price });//시작가
     	  if(money<=firstPrice){
-    		  alert("최소 입찰 금액은  "+ addCom(currentMoney+min) +" 원 입니다.");
-              $("#money").val(addCom(currentMoney+min));
+    		  alert("최소 입찰 금액은 "+ addCom(current+min) +" 원 입니다.");
+    		  console.log("여기서도 확인" + " : " + lastPrice + " : " + min);
+              $("#money").val(addCom(Number(current+min)));
               return false;
-    	  }
-    	  
-         if(money<current+min){
-            alert("최소 입찰 금액은  "+ addCom(currentMoney+min) +" 원 입니다.");
-            $("#money").val(addCom(currentMoney+min));
-            return false;
-         }else{
+    	  }else{
             if(myMoney<money){
                alert("보유 잔액이 부족 합니다.");
                $("#money").val("");
@@ -555,53 +626,55 @@ $("#logout_na").on("click", function() {
                   dataType:"JSON"
                }).done(function(resp){
                   
+
+            	   
                   if(resp!=null){
                      
                      console.log(resp);
                      
-                     var s ="";
+//                      var s ="";
                      
-                     if(resp[4]!=null){
-                        s+='<tr>';
-                        s+='<th scope="row" class="choi"></th>';
-                        s+='<td>'+resp[4].id+'</td>'
-                        s+='<td>'+addCom(resp[4].point)+" 원"+'</td>'
-                        s+='<td>'+resp[4].time+'</td>'
-                        s+='</tr>'
-                     }
-                     if(resp[3]!=null){
-                        s+='<tr>';
-                        s+='<th scope="row" class="choi"></th>';
-                        s+='<td>'+resp[3].id+'</td>'
-                        s+='<td>'+addCom(resp[3].point)+" 원"+'</td>'
-                        s+='<td>'+resp[3].time+'</td>'
-                        s+='</tr>'
-                     }
-                     if(resp[2]!=null){
-                        s+='<tr>';
-                        s+='<th scope="row" class="choi"></th>';
-                        s+='<td>'+resp[2].id+'</td>'
-                        s+='<td>'+addCom(resp[2].point)+" 원"+'</td>'
-                        s+='<td>'+resp[2].time+'</td>'
-                        s+='</tr>'
-                     }
-                     if(resp[1]!=null){
-                        s+='<tr>';
-                        s+='<th scope="row" class="choi"></th>';
-                        s+='<td>'+resp[1].id+'</td>'
-                        s+='<td>'+addCom(resp[1].point)+" 원"+'</td>'
-                        s+='<td>'+resp[1].time+'</td>'
-                        s+='</tr>'
-                     }
-                     if(resp[0]!=null){
-                        s+='<tr>';
-                        s+='<th scope="row" class="choi">최고 입찰</th>';
-                        s+='<td>'+resp[0].id+'</td>'
-                        s+='<td>'+addCom(resp[0].point)+" 원"+'</td>'
-                        s+='<td>'+resp[0].time+'</td>'
-                        s+='</tr>'
-                     }
-                     $("#rankContents").html(s);
+//                      if(resp[4]!=null){
+//                         s+='<tr>';
+//                         s+='<th scope="row" class="choi"></th>';
+//                         s+='<td>'+resp[4].id+'</td>'
+//                         s+='<td>'+addCom(resp[4].point)+" 원"+'</td>'
+//                         s+='<td>'+resp[4].time+'</td>'
+//                         s+='</tr>'
+//                      }
+//                      if(resp[3]!=null){
+//                         s+='<tr>';
+//                         s+='<th scope="row" class="choi"></th>';
+//                         s+='<td>'+resp[3].id+'</td>'
+//                         s+='<td>'+addCom(resp[3].point)+" 원"+'</td>'
+//                         s+='<td>'+resp[3].time+'</td>'
+//                         s+='</tr>'
+//                      }
+//                      if(resp[2]!=null){
+//                         s+='<tr>';
+//                         s+='<th scope="row" class="choi"></th>';
+//                         s+='<td>'+resp[2].id+'</td>'
+//                         s+='<td>'+addCom(resp[2].point)+" 원"+'</td>'
+//                         s+='<td>'+resp[2].time+'</td>'
+//                         s+='</tr>'
+//                      }
+//                      if(resp[1]!=null){
+//                         s+='<tr>';
+//                         s+='<th scope="row" class="choi"></th>';
+//                         s+='<td>'+resp[1].id+'</td>'
+//                         s+='<td>'+addCom(resp[1].point)+" 원"+'</td>'
+//                         s+='<td>'+resp[1].time+'</td>'
+//                         s+='</tr>'
+//                      }
+//                      if(resp[0]!=null){
+//                         s+='<tr>';
+//                         s+='<th scope="row" class="choi">최고 입찰</th>';
+//                         s+='<td>'+resp[0].id+'</td>'
+//                         s+='<td>'+addCom(resp[0].point)+" 원"+'</td>'
+//                         s+='<td>'+resp[0].time+'</td>'
+//                         s+='</tr>'
+//                      }
+//                      $("#rankContents").html(s);
                      current=resp[0].point;
                      
                      alert("입찰 되었습니다");
@@ -616,13 +689,11 @@ $("#logout_na").on("click", function() {
                   	   
                   	   var m = "";
                   	   
-                  	   m+='<h2 id=pp class=detail-info>'+addCom(resp)+' 원</h2></th>';
+//                   	   m+='<h2 id=pp class=detail-info>'+addCom(resp)+' 원</h2></th>';
       					
-      				   $("#presentMoney").html(m);
+//       				   $("#presentMoney").html(m);
                      }); 
-                     
-//          			client.send("/app2/chat2",{}, JSON.stringify({boardNum : ${dto.no }}));
-                     
+                   
                   }else{
                      alert("입찰 실패");
                   }
@@ -631,9 +702,10 @@ $("#logout_na").on("click", function() {
                 	  url:"/tenderCount",
                 	  data:{"boardNum":${dto.no }}
                   }).done(function(resp){
-                	  $("#tenderCount").html(resp);
+//                 	  $("#tenderCount").html(resp);
                   });
                   
+                  client.send("/app/chat2",{}, JSON.stringify({boardNum:${dto.no }}));
                   
                }).fail(function(resp){
 
@@ -643,6 +715,8 @@ $("#logout_na").on("click", function() {
                  
                })
    
+				//////////////////////////////////웹 소켓
+              
             }
          }
       });
@@ -1339,10 +1413,6 @@ $("#logout_na").on("click", function() {
    <!-- End footer Area -->
 
    <script src="../resources/js/vendor/jquery-2.2.4.min.js"></script>
-   <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/popper.../resources/js/1.11.0/umd/popper.min.js"
-      integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
-      crossorigin="anonymous"></script>
    <script src="../resources/js/vendor/bootstrap.min.js"></script>
    <script src="../resources/js/jquery.ajaxchimp.min.js"></script>
    <script src="../resources/js/jquery.nice-select.min.js"></script>
