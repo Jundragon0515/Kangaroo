@@ -104,6 +104,14 @@ h1 {
 .banner {
 	text-align: center;
 }
+.nice-select .list{
+	overflow-y:scroll;
+	height:200px;
+}
+#waybill_num{
+	width:300px;
+	height:40px;
+}
 </style>
 </head>
 <body>
@@ -149,7 +157,7 @@ h1 {
          </div>
 		</div>
 		<div class="text-right">
-			<button id="sub" class="btn btn-outline-warning" type="button"
+			<button id="sub" class="btn btn-outline-warning mr-5" type="button"
                id="button-addon2">입력</button>
 		</div>
 	</div>

@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+   pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
@@ -8,6 +8,7 @@
 <head>
 <!-- Mobile Specific Meta -->
 <meta name="viewport"
+
    content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <!-- Favicon-->
 <link rel="shortcut icon" href="img/fav.png">
@@ -23,18 +24,18 @@
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <!-- 웹 소켓 cdn -->
 <script
-	src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.3.0/sockjs.min.js"></script>
+   src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.3.0/sockjs.min.js"></script>
 <script
-	src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+   src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
 
 <link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+   href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+   src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+   src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+   src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 <title>상세 페이지</title>
 <!-- CSS ============================================= -->
@@ -46,33 +47,34 @@
 <link rel="stylesheet" href="../resources/css/nice-select.css">
 <link rel="stylesheet" href="../resources/css/nouislider.min.css">
 <link rel="stylesheet" href="../resources/css/ion.rangeSlider.css" />
+<link rel="stylesheet" href="../resources/css/font-awesome.min.css">
 <link rel="stylesheet"
    href="../resources/css/ion.rangeSlider.skinFlat.css" />
 <link rel="stylesheet" href="../resources/css/main.css">
 
 <style>
 body {
-	overflow-x: hidden;
+   overflow-x: hidden;
 }
 
 #rank {
-	width: 58%;
-	margin: auto;
-	margin-top: 50px;
-	text-align: center;
+   width: 58%;
+   margin: auto;
+   margin-top: 50px;
+   text-align: center;
 }
 
 .choi {
-	color: black;
-	text-align: center;
-	width: 150px;
+   color: black;
+   text-align: center;
+   width: 150px;
 }
 
 #money {
-	margin-top: 10px;
-	margin-left: 1em;
-	width: 300px;
-	text-align: center;
+   margin-top: 10px;
+   margin-left: 1em;
+   width: 300px;
+   text-align: center;
 }
 
 .detail-info {
@@ -102,8 +104,56 @@ body {
 .nav_ul * {
    text-align: center;
 }
+
+/* 오른쪽 TOP 버튼 */
+.btn-fixed {
+   position: fixed;
+   top: 540px;
+   cursor:pointer;
+}
+
+.back-to-top {text-decoration: none; display: none; color:#fe912b;}
+
+.back-to-top:hover {color: #818bb0}
+
 </style>
 <script>
+$(function(){
+
+	
+	var socket = new SockJS("/gettime"); //불특정 다수의 브라우저일 경우를 위해 endpoint url 넣어야 한다
+	var client = Stomp.over(socket);//연결 이후의 작업 지원 
+	client.connect({}, function(resp) {
+		client.subscribe("/response", function(list) {
+			var result = JSON.parse(list.body);
+							$(".time").text(result[0]);
+		});
+	})
+	setInterval(function() {//시간 보내 달라는 요청
+		var list = new Array();
+		list.push("${dto.end_date}");
+		client.send("/app/time", {}, JSON.stringify({
+			end_dates : list
+		}));
+	}, 900);
+    var offset = 500;   // 수직으로 어느정도 움직여야 버튼이 나올까?
+    var duration = 600;   // top으로 이동할때까지의 animate 시간 (밀리세컨드, default는 400. 예제의 기본은 500)
+    $(window).scroll(function() {
+        if ($(this).scrollTop() > offset) {
+            $('.back-to-top').fadeIn(duration);
+        } else {
+            $('.back-to-top').fadeOut(duration);
+        }
+    });
+    
+    $('.back-to-top').click(function(event) {
+        event.preventDefault();
+        $('html, body').animate({scrollTop: 0}, duration);
+        return false;
+    })
+})    
+
+
 $("#logout_na").on("click", function() {
           $.ajax({
                    url:"logout",
@@ -131,6 +181,12 @@ $("#logout_na").on("click", function() {
 </script>
 </head>
 <body>
+<div>
+	<!-- start fixbutton -->
+       <div class="d-none d-lg-block col-lg-1" style=padding-left:90%;>
+          <i class="fas fa-chevron-circle-up btn-fixed back-to-top fa-3x"></i>
+       </div>
+   	<!-- end fixbutton -->
 	<!-- Start Header Area -->
 	<header class="header_area sticky-header">
 		<div class="main_menu">
@@ -220,7 +276,7 @@ $("#logout_na").on("click", function() {
 			</nav>
 		</div>
 	</header>
-<<<<<<< HEAD
+
 	<!-- End Header Area -->
 
 	<!-- Start Banner Area -->
@@ -308,7 +364,7 @@ $("#logout_na").on("click", function() {
 									</tr>
 									<tr>
 										<td>남은 시간</td>
-										<th id=rt class=detail-info></th>
+										<th id=rt class="detail-info time"></th>
 									</tr>
 									<tr>
 										<td>물품번호</td>
@@ -376,50 +432,50 @@ $("#logout_na").on("click", function() {
    <!--================End Single Product Area =================-->
 
 <table class="table" id="rank">
-		<thead>
-			<tr>
-				<th scope="col" class="choi">RANK5</th>
-				<th scope="col" class="">아이디</th>
-				<th scope="col" class="">입찰가</th>
-				<th scope="col" class="">입찰 시간</th>
-			</tr>
-		</thead>
-		<tbody id="rankContents">
-		</tbody>
-	</table>
+      <thead>
+         <tr>
+            <th scope="col" class="choi">RANK5</th>
+            <th scope="col" class="">아이디</th>
+            <th scope="col" class="">입찰가</th>
+            <th scope="col" class="">입찰 시간</th>
+         </tr>
+      </thead>
+      <tbody id="rankContents">
+      </tbody>
+   </table>
 
 
 
 
 
-	<script>
+   <script>
    
-// // 	var socket = new SockJS("/webchat2");
-// // 	var client = Stomp.over(socket);
-	
-// // 	client.connect({},function(resp){
-// // 		console.log(resp);
-// // 		client.subscribe("/response2",function(msg){
-// // 			alert("여");
-// // 		});
-// // 	});
+// //    var socket = new SockJS("/webchat2");
+// //    var client = Stomp.over(socket);
+   
+// //    client.connect({},function(resp){
+// //       console.log(resp);
+// //       client.subscribe("/response2",function(msg){
+// //          alert("여");
+// //       });
+// //    });
 
-	if(${dto.present_price ==0}){
-		
-		var m = "";
-   	   
-   	   m+='<h2 id=pp class=detail-info>'+addCom(${dto.starting_price })+' 원</h2></th>';
-			
-		   $("#presentMoney").html(m);
-		
-	}
-	
-			function addCom(num) {
-				  var regexp = /\B(?=(\d{3})+(?!\d))/g;
-				  return num.toString().replace(regexp, ',');
-				}
-			
-			
+   if(${dto.present_price ==0}){
+      
+      var m = "";
+         
+         m+='<h2 id=pp class=detail-info>'+addCom(${dto.starting_price })+' 원</h2></th>';
+         
+         $("#presentMoney").html(m);
+      
+   }
+   
+         function addCom(num) {
+              var regexp = /\B(?=(\d{3})+(?!\d))/g;
+              return num.toString().replace(regexp, ',');
+            }
+         
+         
          var rgx1 = /\D/g;  // /[^0-9]/g 와 같은 표현
          var rgx2 = /(\d+)(\d{3})/; 
 
@@ -490,48 +546,48 @@ $("#logout_na").on("click", function() {
       var myMoney = "${myMoney}"";
       
       $("#tend").on("click",function(){
-    	  
-	  
-    	  if(${email==null}){
-    		  alert("로그인 하세요");
-    		  return false;
-    	  }
-    	  
-    	  if($("#money").val()==""){
-    		  alert("입찰 금액을 입력해주세요.");
-    		  return false;
-    	  }
-    	  
-    		if(${dto.present_price ==0}){
-    			
-    			var m = "";
-    	   	   
-    	   	   m+='<h2 id=pp class=detail-info>'+addCom(${dto.starting_price })+' 원</h2></th>';
-    				
-    			   $("#presentMoney").html(m);
-    			
-    		}
+         
+     
+         if(${email==null}){
+            alert("로그인 하세요");
+            return false;
+         }
+         
+         if($("#money").val()==""){
+            alert("입찰 금액을 입력해주세요.");
+            return false;
+         }
+         
+          if(${dto.present_price ==0}){
+             
+             var m = "";
+                
+                m+='<h2 id=pp class=detail-info>'+addCom(${dto.starting_price })+' 원</h2></th>';
+                
+                $("#presentMoney").html(m);
+             
+          }
 
-    	  var number = $("#money").val().replace(/,/gi,"");
-    	  var money = Number(number);
-    	  var min = Number(${dto.min_price });
-    	  
-    	  var currentMoney = 0;
-    	  
-    	  if(${dto.present_price }==0){
-    		  currentMoney=${dto.starting_price };
-    	  }else{
-    		  currentMoney=Number(${dto.present_price });
-    	  }
-    	  
-    	  
-    	  var firstPrice =Number(${dto.starting_price });
-    	  if(money<=firstPrice){
-    		  alert("최소 입찰 금액은  "+ addCom(currentMoney+min) +" 원 입니다.");
+         var number = $("#money").val().replace(/,/gi,"");
+         var money = Number(number);
+         var min = Number(${dto.min_price });
+         
+         var currentMoney = 0;
+         
+         if(${dto.present_price }==0){
+            currentMoney=${dto.starting_price };
+         }else{
+            currentMoney=Number(${dto.present_price });
+         }
+         
+         
+         var firstPrice =Number(${dto.starting_price });
+         if(money<=firstPrice){
+            alert("최소 입찰 금액은  "+ addCom(currentMoney+min) +" 원 입니다.");
               $("#money").val(addCom(currentMoney+min));
               return false;
-    	  }
-    	  
+         }
+         
          if(money<current+min){
             alert("최소 입찰 금액은  "+ addCom(currentMoney+min) +" 원 입니다.");
             $("#money").val(addCom(currentMoney+min));
@@ -543,13 +599,13 @@ $("#logout_na").on("click", function() {
                return false;
             }else{
                
-          	  var result = confirm("정말 입찰하시겠습니까?");
-        	  
-        	  if(result==false){
-        		  $("#money").val("");
-        		  return false;
-        	  }
-            	
+               var result = confirm("정말 입찰하시겠습니까?");
+             
+             if(result==false){
+                $("#money").val("");
+                return false;
+             }
+               
                $.ajax({
                   url:"/tender",
                   data:{"money":money,"boardNum":${dto.no },"title":"${dto.title }","img":"${i_dto.title_img }"},
@@ -609,30 +665,30 @@ $("#logout_na").on("click", function() {
                      $("#money").val("");
                      
                      $.ajax({
-                  	   url:"/currentPrice",
-                  		data:{"boardNum":${dto.no }}
+                        url:"/currentPrice",
+                        data:{"boardNum":${dto.no }}
                      }).done(function(resp){
-                  	 
-                  	   console.log(addCom(resp))
-                  	   
-                  	   var m = "";
-                  	   
-                  	   m+='<h2 id=pp class=detail-info>'+addCom(resp)+' 원</h2></th>';
-      					
-      				   $("#presentMoney").html(m);
+                      
+                        console.log(addCom(resp))
+                        
+                        var m = "";
+                        
+                        m+='<h2 id=pp class=detail-info>'+addCom(resp)+' 원</h2></th>';
+                     
+                     $("#presentMoney").html(m);
                      }); 
                      
-//          			client.send("/app2/chat2",{}, JSON.stringify({boardNum : ${dto.no }}));
+//                   client.send("/app2/chat2",{}, JSON.stringify({boardNum : ${dto.no }}));
                      
                   }else{
                      alert("입찰 실패");
                   }
                   
                   $.ajax({
-                	  url:"/tenderCount",
-                	  data:{"boardNum":${dto.no }}
+                     url:"/tenderCount",
+                     data:{"boardNum":${dto.no }}
                   }).done(function(resp){
-                	  $("#tenderCount").html(resp);
+                     $("#tenderCount").html(resp);
                   });
                   
                   
@@ -650,7 +706,6 @@ $("#logout_na").on("click", function() {
       
       
    </script>
-
 
 	<!--================Product Description Area =================-->
 	<section class="product_description_area">
@@ -678,7 +733,7 @@ $("#logout_na").on("click", function() {
 							${dto.contents }</p>
 					</div>
 					<br> <br> <br>
-
+         
 					<!-- 상세 이미지  -->
 					<div class="selector">
 						<img src="img/title/${i_dto.title_img }"
@@ -930,6 +985,8 @@ $("#logout_na").on("click", function() {
 							</div>
 						</c:forEach>
 					</div>
+					<div id=MovingPoint></div>	<!-- 댓글 이동 탭 -->
+					
 					<div class="row p-0 m-0 numBox">
 						<div class="col-12 d-flex justify-content-center navi mt-1">
 							<nav aria-label="Page navigation example">
@@ -1131,8 +1188,7 @@ $("#logout_na").on("click", function() {
 				
 			});
 			
-			}
-			}
+			}			
 		});
 	</script>
 
@@ -1361,7 +1417,7 @@ $("#logout_na").on("click", function() {
 		</div>
 	</footer>
 	<!-- End footer Area -->
-
+	<script src="https://use.fontawesome.com/releases/v5.0.0/js/all.js"></script>
 	<script src="../resources/js/vendor/jquery-2.2.4.min.js"></script>
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/popper.../resources/js/1.11.0/umd/popper.min.js"
@@ -1379,8 +1435,7 @@ $("#logout_na").on("click", function() {
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
 	<script src="../resources/js/gmaps.min.js"></script>
 	<script src="../resources/js/main.js"></script>
-
-
+</div>
 </body>
 
 </html>

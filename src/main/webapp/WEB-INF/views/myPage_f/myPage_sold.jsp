@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="zxx" class="no-js">
 
@@ -136,6 +137,8 @@ a{
 			})
 		});
 		$(".refund").on("click",function(){
+			var anwser=confirm("정말 환불 확정 하시겠습니까?");
+			if(anwser==true){
 			$.ajax({
 				url : "refund_comp",
 				data:{
@@ -144,6 +147,7 @@ a{
 		}).done(function(){
 			location.reload(true);
 			})
+			}
 		});
 		$(".lookup").on("click",function(){
 			$.ajax({
@@ -155,9 +159,9 @@ a{
 				if(resp!=""){
 				open(
 						"/golookup",
-						"_blank", "width=500,height=500");
+						"_blank", "width=1000,height=600");
 				}else{
-					alert("아직 배송정보가 등록 되어있지 않습니다.");
+					alert("등록된 배송정보가 잘못되어 있습니다. ");
 				}
 			});
 			//대기
@@ -165,10 +169,14 @@ a{
 		$(".start").on("click",function(){
 			var seq =$(this).attr("seq");
 			var reci=$(this).attr("buyer");
+			var anwser=confirm("배송 정보를 입력해주세요 ");
+			if(anwser==true){
 			open(
 					"/delivert_insert?seq="+seq+"&reci="+reci,
 					"_blank", "width=500,height=500");
+			}
 		});
+		
 	});
 </script>
 </head>
@@ -360,7 +368,7 @@ a{
                                     </div>
                                     </td>
                                     <td>
-                                    <h5>${i.price }</h5>
+                                    <h5><fmt:formatNumber value="${i.price}" pattern="#,###" /></h5>
                                     </td>
                                     <td>
                                     <h5>${i.buyer }</h5>
@@ -456,7 +464,7 @@ a{
                                     </div>
                                     </td>
                                     <td>
-                                    <h5>${i.present_price }</h5>
+                                    <h5><fmt:formatNumber value="${i.present_price }" pattern="#,###" /></h5>
                                     </td>
                                     <td>
                                     <c:choose>

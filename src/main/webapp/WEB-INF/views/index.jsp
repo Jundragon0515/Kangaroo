@@ -43,6 +43,7 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
 </head>
 <style>
+
 .owl-nav {
 	top: 430px;
 }
@@ -57,6 +58,7 @@
 .nav_ul * {
 	text-align: center;
 }
+
 </style>
 <script>
 	$(function() {
@@ -73,14 +75,13 @@
 		})
 		setInterval(function() {//시간 보내 달라는 요청
 			var list = new Array();
-			
 						<c:forEach var="i" items="${main_option_list}">
-							list.add("${i.end_date}");
+							list.push("${i.end_date}");
 						</c:forEach>
 			client.send("/app/time", {}, JSON.stringify({
 				end_dates : list
 			}));
-		}, 400);
+		}, 900);
 		
 		
 		$("#logout_na").on("click", function() {
@@ -448,6 +449,7 @@
 		</div>
 	</footer>
 	<!-- End footer Area -->
+	
 	<script src="../resources/js/vendor/jquery-2.2.4.min.js"></script>
 	<script src="../resources/js/vendor/bootstrap.min.js"></script>
 	<script src="../resources/js/jquery.ajaxchimp.min.js"></script>
