@@ -303,7 +303,7 @@
                            			<c:when test="${i.type=='거래' }">
                                         <div class="d-flex">
                                         	<a href="/user_detailPage?no=${i.product_num }">
-                                            	<img src="${i.product_img}" alt="">
+                                            	<img src="/img/title/${i.product_img}" width="150px" height="100px"  alt="">
                                             </a>
                                         </div>
                                         <div class="media-body">
@@ -315,7 +315,7 @@
                                         <c:when test="${i.type=='경매' }">
                                         <div class="d-flex">
                                         	<a href="#">
-                                            	<img src="${i.product_img}" alt="">
+                                            	<img src="/img/title/${i.product_img}" width="150px" height="100px"  alt="">
                                             </a>
                                         </div>
                                         <div class="media-body">
@@ -411,7 +411,7 @@
                            			<div class="media">
                                         <div class="d-flex">
                                         	<a href="/auction_detailPage?no=${i.board_num }">
-                                            	<img src="${i.board_img}" alt="">
+                                            	<img src="/img/title/${i.board_img}" width="150px" height="100px"  alt="">
                                             </a>
                                         </div>
                                         <div class="media-body">

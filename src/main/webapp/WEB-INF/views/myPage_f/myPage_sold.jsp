@@ -55,6 +55,9 @@
 .nav_ul * {
 	text-align: center;
 }
+a{
+	font-size: 15px;
+}
 </style>
 <script>
 	$(function() {
@@ -333,7 +336,7 @@
                            			<c:when test="${i.type=='거래' }">
                                         <div class="d-flex">
                                         	<a href="/user_detailPage?no=${i.product_num }">
-                                            	<img src="${i.product_img}" alt="">
+                                            	<img src="/img/title/${i.product_img}" width="150px" height="100px" alt="">
                                             </a>
                                         </div>
                                         <div class="media-body">
@@ -345,7 +348,7 @@
                                         <c:when test="${i.type=='경매' }">
                                         <div class="d-flex">
                                         	<a href="#">
-                                            	<img src="${i.product_img}" alt="">
+                                            	<img src="${i.product_img}" width="150px" height="100px"  alt="">
                                             </a>
                                         </div>
                                         <div class="media-body">
@@ -442,7 +445,7 @@
                            			<div class="media">
                                         <div class="d-flex">
                                         	<a href="/auction_detailPage?no=${i.no }">
-                                            	<img src="${i.title_img}" alt="">
+                                            	<img src="/img/title/${i.title_img}" width="150px" height="100px"  alt="">
                                             </a>
                                         </div>
                                         <div class="media-body">
@@ -501,12 +504,12 @@
                            			<td>
                            			<div class="media">
                                         <div class="d-flex">
-                                        	<a href="/auction_detailPage?no=${i.board_num }">
-                                            	<img src="${i.title_img}" alt="">
+                                        	<a href="/auction_detailPage?no=${i.no }">
+                                            	<img src="/img/title/${i.title_img}" width="150px" height="100px"  alt="">
                                             </a>
                                         </div>
                                         <div class="media-body">
-                                        	<a href="/auction_detailPage?no=${i.board_num }">
+                                        	<a href="/auction_detailPage?no=${i.no }">
                                             <p>${i.title }</p>
                                             </a>
                                         </div>

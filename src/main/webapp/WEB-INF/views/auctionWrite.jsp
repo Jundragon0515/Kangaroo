@@ -720,7 +720,7 @@
 												//var time = new Date().getTime();
 												$("#image").attr("disabled",true);
 												$("#titleImg")
-														.append("<img src='/image/title/"+resp+"' id='middle'>");
+														.append("<img src='/img/title/"+resp+"' id='middle'>");
 												$("#imgTitle").val(resp);		
 												
 											})
