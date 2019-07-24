@@ -42,7 +42,7 @@ public class MyPageController {
 		se.setAttribute("address2", dto.getAddress2());
 		se.setAttribute("info",dto);
 
-		return "redirect:myPage_f/goMyPage";
+		return "redirect:/goMyPage";
 	}
 	@RequestMapping("/goMyPage")
 	public String goMyPage() { // 마이페이지로

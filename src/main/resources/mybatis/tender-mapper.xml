@@ -5,6 +5,6 @@
 select count(*) from tender where id=#{value} 
 </select>
 <select id = "selectById" parameterType="Map" resultType="kh.spring.dto.TenderDTO">
-select * from (select row_number()over(order by seq desc) as rown, tender.* from tender) where (rown between #{startNum} and #{endNum})and id=#{id} and ongoing='Y'
+select * from (select row_number()over(order by seq desc) as rown , tender.* from tender where ROWID IN (SELECT MAX(ROWID)from tender GROUP BY BOARD_NUM)) where (rown between #{startNum} and #{endNum})and id=#{id} 
 </select>
 </mapper>

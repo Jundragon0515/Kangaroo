@@ -325,6 +325,7 @@ $("#logout_na").on("click", function() {
                      </table>
                   </div>
                   <div style=text-align:right;padding-right:10px;>
+                     <input type="button" id="cart" class="primary-btn" value="찜하기">
                   <c:choose>
                   <c:when test="${dto.onGoing=='y' }">
                      <input type="button" class="genric-btn primary radius" id="buy" value="구매 하기"/>
@@ -699,7 +700,6 @@ $("#logout_na").on("click", function() {
 <!-- 댓글 스크 -->
 
 	<script>
-	
 	$(".commentDelete").on("click",function(){
 		
 		
@@ -875,7 +875,7 @@ $("#logout_na").on("click", function() {
 			
 			}
 			}
-		});
+		});		
 	</script>
    
    <!--================End Product Description Area =================-->
@@ -1106,6 +1106,24 @@ $("#logout_na").on("click", function() {
       </div>
    </footer>
    <!-- End footer Area -->
+	
+	<script>
+	
+	$("#cart").on("click",function(){
+		$.ajax({
+			url : "/steaming",
+			data : {"no":"${dto.no}","title_img":"${i_dto.title_img}",
+				"title":"${dto.title}","trade_type":"${dto.trade_type}",
+				"delivery":"무료","price":"${dto.price}"}
+		}).done(function(resp){
+			alert(resp);
+		})
+	});
+	
+	
+	</script>
+	
+	
    <script src="https://use.fontawesome.com/releases/v5.0.0/js/all.js"></script>
    <script src="../resources/js/vendor/jquery-2.2.4.min.js"></script>
    <script src="../resources/js/vendor/bootstrap.min.js"></script>
