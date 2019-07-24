@@ -426,7 +426,7 @@ a{
                                     </div>
                                     </td>
                                     <td>
-                                    <h5><fmt:formatNumber value="${i.price}" pattern="#,###" /></h5>
+                                    <h5><fmt:formatNumber value="${i.point}" pattern="#,###" /></h5>
                                     </td>
                                     <td>
                                     <h5>${i.id }</h5>
@@ -440,8 +440,8 @@ a{
                                     </td>
                                     <td>
                                     <c:choose>
-                                    <c:when test="${i.onGoing=='Y' }">
-                                   	판매 진행 중
+                                    <c:when test="${i.onGoing=='y' }">
+                                   	경매 진행 중
                                     </c:when>
                                     <c:otherwise>
                                     	판매완료

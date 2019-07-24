@@ -140,6 +140,7 @@ select {
 				$("#phonecheck").text("사용가능한 핸드폰 번호입니다.");
 				$("#phonecheck").css("color", "blue");
 				$("#phonecheckvar").val("올바른 양식 입니다.");
+				$("#name").focus();
 			} else {
 				$("#phonecheck").text("양식에 맞지 않습니다.");
 				$("#phonecheck").css("color", "red");
@@ -432,7 +433,24 @@ select {
 					</div>
 					<div class="col-lg-2 col-md-2 col-sm-2"></div>
 				</div>
-
+				<div class="row" id="main">
+               <div class="col-lg-1 col-md-1 col-sm-1"></div>
+               <div class="col-lg-9 col-md-9 col-sm-9 text_label ">
+                  <label for="" class="mt-2 mb-1 mr-3"><strong>이 름</strong></label><span
+                     id="namecheck"></span><input type="hidden" id="namecheckvar"
+                     name="namecheckvar">
+               </div>
+               <div class="col-lg-2 col-md-2 col-sm-2"></div>
+            </div>
+            <div class="row" id="main">
+               <div class="col-lg-1 col-md-1 col-sm-1"></div>
+               <div class="col-lg-9 col-md-9 col-sm-9 text_label">
+                  <input type="text" class="form-control" placeholder="6자 이내"
+                     name="name" id="name" required onkeyup="noSpaceForm(this);"
+                     onchange="noSpaceForm(this);">
+               </div>
+               <div class="col-lg-2 col-md-2 col-sm-2"></div>
+            </div>
 				<div class="row" id="main">
 					<div class="col-lg-1 col-md-1 col-sm-1"></div>
 					<div class="col-lg-9 col-md-9 col-sm-9 text_label">

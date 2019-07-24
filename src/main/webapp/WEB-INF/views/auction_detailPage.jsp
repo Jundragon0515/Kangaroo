@@ -44,7 +44,6 @@
 <link rel="stylesheet" href="../resources/css/nice-select.css">
 <link rel="stylesheet" href="../resources/css/nouislider.min.css">
 <link rel="stylesheet" href="../resources/css/ion.rangeSlider.css" />
-<link rel="stylesheet" href="../resources/css/font-awesome.min.css">
 <link rel="stylesheet"
    href="../resources/css/ion.rangeSlider.skinFlat.css" />
 <link rel="stylesheet" href="../resources/css/main.css">
@@ -622,7 +621,7 @@ $("#logout_na").on("click", function() {
    
    $("#rankContents").html(s);
    
-      var myMoney = ${myMoney};
+      var myMoney = "${myMoney}";
       
       $("#tend").on("click",function(){
          
@@ -1508,6 +1507,7 @@ $("#logout_na").on("click", function() {
    <!-- End footer Area -->
 
    <script src="../resources/js/vendor/jquery-2.2.4.min.js"></script>
+   <script src="https://use.fontawesome.com/releases/v5.0.0/js/all.js"></script>
    <script src="../resources/js/vendor/bootstrap.min.js"></script>
    <script src="../resources/js/jquery.ajaxchimp.min.js"></script>
    <script src="../resources/js/jquery.nice-select.min.js"></script>
