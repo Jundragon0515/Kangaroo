@@ -41,4 +41,9 @@ public class PointController {
 		}
 		return "point_f/point_exc";
 	}
+	@RequestMapping(value="p_exc" , produces="application/String;charset=UTF-8")
+	@ResponseBody
+	public String p_exc(int money) { //포인트 환급
+		return ps.minus(money);
+	}
 }

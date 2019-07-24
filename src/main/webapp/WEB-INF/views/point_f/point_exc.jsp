@@ -38,8 +38,35 @@
 <link rel="stylesheet" href="../resources/css/magnific-popup.css">
 <link rel="stylesheet" href="../resources/css/main.css">
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-
+<script src="https://unpkg.com/popper.js"></script>
 <script>
+
+var rgx1 = /\D/g;  // /[^0-9]/g 와 같은 표현
+var rgx2 = /(\d+)(\d{3})/; 
+var regAccount = /^[\d]{9,20}$/g;
+function getNumber(obj){
+    var num01;
+    var num02;
+    num01 = obj.value;
+    num02 = num01.replace(rgx1,"");
+    num01 = setComma(num02);
+    obj.value =  num01;
+}
+function getNumber2(obj){
+    var num01;
+    var num02;
+    num01 = obj.value;
+    num02 = num01.replace(rgx1,"");
+    obj.value =  num02;
+}
+function setComma(inNum){
+    var outNum;
+    outNum = inNum; 
+    while (rgx2.test(outNum)) {
+         outNum = outNum.replace(rgx2, '$1' + ',' + '$2');
+     }
+    return outNum;
+}
 $(function(){
 	<c:choose>
 	<c:when test="${logintype==null}">
@@ -47,44 +74,65 @@ $(function(){
 		$(location).attr("href","login_main");
 	</c:when>
 	</c:choose>
+	$("#logout_na").on("click", function() {
+		 $.ajax({
+              url:"logout",
+              type:"get"
+           }).done(function(){
+              var naver=open("https://nid.naver.com/nidlogin.logout?returl=https://www.naver.com/", "_blank", "width=100,height=100");
+              setTimeout(function(){
+                 naver.close();
+                 location.reload(true);
+              },1000);
+           });
+	});
+	$("#logout_ka").on("click", function() {
+		 $.ajax({
+           url:"logout",
+           type:"get"
+        }).done(function(){
+           var kakao=open("https://developers.kakao.com/logout", "_blank", "width=100,height=100");
+           setTimeout(function(){
+              kakao.close();
+              location.reload(true);
+           },1000);
+        });
+	});
+	$('[data-toggle="tooltip"]').tooltip();
 	
     if("${id==null}"==true){
     	alert("로그인이 필요 합니다.");
     	$(location).attr("href","/");
     }else{
     	var email="${email}";
-    	var name ="${name}";
-    	var tel ="${phone}";
-    	var postcode="${zipcode}";
     }
-	$("#payment_btn").on("click",function(){
-		var  amount = $("#donaMoney").val();
-		
+	$("#btn").on("click",function(){
+		var  money = Number($("#money").val().replace(/,/gi,""));
+		if($("#money").val()=="" || $("#account").val()=="" ){
+			alert("입력 되지 않은 값이 있습니다");
+		}else{
+			if(money > 999999999 || 1000 > money){
+				alert("금액이 너무 크거나 작습니다");
+			}else{
+				$.ajax({
+					url:"p_exc",
+					data:{
+						money:money
+					},
+				}).done(function(resp){
+					alert(resp);
+					$(location).attr("href","/toPoint_exc");
+				});
+			}
+		}
 	});
-	$("#logout_na").on("click", function() {
-		 $.ajax({
-               url:"logout",
-               type:"get"
-            }).done(function(){
-               var naver=open("https://nid.naver.com/nidlogin.logout?returl=https://www.naver.com/", "_blank", "width=100,height=100");
-               setTimeout(function(){
-                  naver.close();
-                  location.reload(true);
-               },1000);
-            });
-	});
-	$("#logout_ka").on("click", function() {
-		 $.ajax({
-            url:"logout",
-            type:"get"
-         }).done(function(){
-            var kakao=open("https://developers.kakao.com/logout", "_blank", "width=100,height=100");
-            setTimeout(function(){
-               kakao.close();
-               location.reload(true);
-            },1000);
-         });
-	});
+	$("#account").on("focusout",function(){
+		var account=$("#account").val();
+		if(!regAccount.test(account)){
+			alert('잘못된 계좌 번호입니다.(9자 이상)');
+            $("#account").val("");
+		}
+	})
 
 });
 </script>
@@ -108,6 +156,10 @@ $(function(){
 
 .nav_ul * {
 	text-align: center;
+}
+.nice-select .list{
+	overflow-y:scroll;
+	height:200px;
 }
 </style>
 </head>
@@ -278,15 +330,25 @@ $(function(){
 				</div>
 				<div class=" main2 row mt-5">
 					<div class=" col-lg-4 col-md-4 col-sm-4">
+						<h3>계좌번호</h3>
+					</div>
+					<div class=" col-lg-8 col-md-8 col-sm-8">
+						<input type="text" class="form-control" 
+							id="account" placeholder="환급하실 은행의 계좌번호를 (-)를 제외하고 입력해 주세요." onchange="getNumber2(this);" onkeyup="getNumber2(this);">
+					</div>
+					
+				</div>
+				<div class=" main2 row mt-5">
+					<div class=" col-lg-4 col-md-4 col-sm-4">
 						<h3>환급 금액</h3>
 					</div>
 					<div class=" col-lg-8 col-md-8 col-sm-8">
 						<input type="text" class="form-control" 
-							id="donaMoney" placeholder="환급하실 금액을 입력해 주세요." data-toggle="tooltip" data-placement="top" title="1 Point = 1 원 ">
+							id="money" placeholder="환급하실 금액을 입력해 주세요." requierd onchange="getNumber(this);" onkeyup="getNumber(this);" data-toggle="tooltip" data-placement="top" title="1 Point = 1 원 ">
 					</div>
 					<div class="col-lg-12 col-md-12 col-sm-12 mt-5 payment mb-5">
 						<input type="button" class="genric-btn primary-border circle"
-							id="payment_btn" style="font-size: 1.5em" value="결제 하기">
+							id="btn" style="font-size: 1.5em" value="환급 하기" requierd>
 					</div>
 				</div>
 			</div>
