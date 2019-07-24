@@ -630,7 +630,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 				data:formData
 			}).done(function(resp){
 				$("#image").attr("disabled",true);
-				$("#titleImg").append("<img src='/image/title/"+resp+"' id='middle'>");
+				$("#titleImg").append("<img src='/img/title/"+resp+"' id='middle'>");
 				$("#imgTitle").val(resp);
 			})
 		})//메인 이미지 바로 띄우는 것

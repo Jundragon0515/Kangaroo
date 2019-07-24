@@ -161,7 +161,7 @@
 										role="button" aria-haspopup="true" aria-expanded="false"><img
 											src="../resources/img/account.png" width="35px"></a>
 										<ul class="dropdown-menu nav_ul">
-											<li class="nav-item "><a class="nav-link" href="/">찜목록</a></li>
+											<li class="nav-item "><a class="nav-link" href="/goCart">찜목록</a></li>
 											<li class="nav-item active"><a class="nav-link"
 												href="/goMyPage">마이페이지</a></li>
 											<li class="nav-item "><a class="nav-link"
@@ -176,7 +176,7 @@
 										role="button" aria-haspopup="true" aria-expanded="false"><img
 											src="../resources/img/account.png" width="40px"></a>
 										<ul class="dropdown-menu nav_ul">
-											<li class="nav-item "><a class="nav-link" href="/">찜목록</a></li>
+											<li class="nav-item "><a class="nav-link" href="/goCart">찜목록</a></li>
 											<li class="nav-item active"><a class="nav-link"
 												href="/goMyPage">마이페이지</a></li>
 											<li class="nav-item "><a class="nav-link"
@@ -191,7 +191,7 @@
 										role="button" aria-haspopup="true" aria-expanded="false"><img
 											src="../resources/img/account.png" width="40px"></a>
 										<ul class="dropdown-menu nav_ul">
-											<li class="nav-item "><a class="nav-link" href="/">찜목록</a></li>
+											<li class="nav-item "><a class="nav-link" href="/goCart">찜목록</a></li>
 											<li class="nav-item "><a class="nav-link"
 												href="/goMyPage">마이페이지</a></li>
 											<li class="nav-item "><a class="nav-link"

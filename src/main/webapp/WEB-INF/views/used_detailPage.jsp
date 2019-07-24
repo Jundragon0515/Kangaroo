@@ -298,7 +298,7 @@ $("#logout_na").on("click", function() {
                   </div>
 
                   <div style=text-align:right;padding-right:10px;>
-                     <a class="primary-btn" href="#">Add to Cart</a>
+                     <input type="button" id="cart" class="primary-btn" value="찜하기">
                   </div>
                </div>
             </div>
@@ -588,7 +588,6 @@ $("#logout_na").on("click", function() {
 <!-- 댓글 스크 -->
 
 	<script>
-	
 	$(".commentDelete").on("click",function(){
 		
 		
@@ -764,7 +763,7 @@ $("#logout_na").on("click", function() {
 			
 			}
 			}
-		});
+		});		
 	</script>
    
    <!--================End Product Description Area =================-->
@@ -995,7 +994,24 @@ $("#logout_na").on("click", function() {
       </div>
    </footer>
    <!-- End footer Area -->
-
+	
+	<script>
+	
+	$("#cart").on("click",function(){
+		$.ajax({
+			url : "/steaming",
+			data : {"no":"${dto.no}","title_img":"${i_dto.title_img}",
+				"title":"${dto.title}","trade_type":"${dto.trade_type}",
+				"delivery":"무료","price":"${dto.price}"}
+		}).done(function(resp){
+			alert(resp);
+		})
+	});
+	
+	
+	</script>
+	
+	
    <script src="../resources/js/vendor/jquery-2.2.4.min.js"></script>
    <script
       src="https://cdnjs.cloudflare.com/ajax/libs/popper.../resources/js/1.11.0/umd/popper.min.js"
