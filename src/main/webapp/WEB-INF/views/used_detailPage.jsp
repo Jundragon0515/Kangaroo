@@ -332,13 +332,26 @@ $("#logout_na").on("click", function() {
                   </div>
                   <div style=text-align:right;padding-right:10px;>
                      <input type="button" id="cart" class="primary-btn" value="찜하기">
-                  <c:choose>
+                  	<c:choose>
                   <c:when test="${dto.onGoing=='y' }">
-                     <input type="button" class="genric-btn primary radius" id="buy" value="구매 하기"/>
+                  
+                  	<c:choose>
+                  			<c:when test="${dto.id==email}">
+                  		
+                  			</c:when>
+                  	
+                  			<c:otherwise>
+                     				<input type="button" class="genric-btn primary radius" id="buy" value="구매 하기"/>
+							</c:otherwise>
+							
+					</c:choose>
+							
                      </c:when>
+                     
                      <c:when test="${dto.onGoing=='n' }">
                      <input type="button" class="genric-btn primary radius" id="soldOut" value="판매 완료"/>
                      </c:when>
+                     
                      </c:choose>
                   </div>
                </div>
@@ -420,7 +433,7 @@ $("#logout_na").on("click", function() {
    <!--================End Single Product Area =================-->
 
    <!--================Product Description Area =================-->
-	<section class="product_description_area">
+	<section class="product_description_area mb-0 pb-0">
 		<div class="container">
 			<ul class="nav nav-tabs" id="myTab" role="tablist">
 				<li class="nav-item"><a class="nav-link active" id="home-tab"
@@ -639,7 +652,7 @@ $("#logout_na").on("click", function() {
    <!-- 댓글 area -->
 
 	<!--================Blog Area =================-->
-	<section class="blog_area single-post-area section_gap p-0">
+	<section class="blog_area single-post-area section_gap pt-0 mt-0">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12 posts-list">

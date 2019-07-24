@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -44,6 +45,43 @@ public class DetailPageController {
 	
 	@Autowired
 	HttpSession session;
+	
+	
+	@RequestMapping("/topTender")
+	@ResponseBody
+	@Transactional("txManager")
+	public void topTender(String boardNum, String seller) {
+		
+		TenderDTO dto = dao.topTender(Integer.parseInt(boardNum));
+		
+		int num = dto.getBoard_num();
+		String title = dto.getBoard_title();
+		String img = dto.getBoard_img();
+		String buyer = dto.getId();
+		int price = dto.getPoint();
+		String type = "경매";
+		
+		OrderDTO odto = new OrderDTO();
+		odto.setProduct_num(num);
+		odto.setProduct_title(title);
+		odto.setProduct_img(img);
+		odto.setBuyer(buyer);
+		odto.setPrice(price);
+		odto.setType(type);
+		odto.setSeller(seller);
+		
+		dao.buy(odto);
+		
+	}
+	
+	@RequestMapping("/timeStop")
+	@ResponseBody
+	public int stop(String boardNum) {
+		
+		System.out.println("2 테스트" + " : " + boardNum);
+		return dao.soldOut_Auction(Integer.parseInt(boardNum));
+		
+	}
 	
 	
 	@RequestMapping("/buy")
