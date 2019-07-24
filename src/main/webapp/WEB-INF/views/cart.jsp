@@ -190,14 +190,23 @@
 #send:hover {
 	cursor: pointer;
 }
-#ggym{
-	text-align: center;
-}
+
 .tImg{
 	height: 100px;
 	width: 100px;
 }
-
+#allCheckTrade,#allCheckAuction{
+    position: relative;
+    left: 81%;
+}
+#delete, #deleteAuction {
+    position: relative;
+    left: 81%;
+}
+.tradeCheck,.auctionCheck{
+    top: 42px;
+    position: relative;
+}
 </style>
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -350,8 +359,10 @@ function viewCount(){
 												href="/goMyPage">마이페이지</a></li>
 											<li class="nav-item "><a class="nav-link"
 												href="/toPoint">포인트충전</a></li>
+
 											<li class="nav-item "><a class="nav-link"
 												href="/toPoint_exc">포인트환급</a></li>
+
 											<li class="nav-item "><input type="button"
 												class="nav-link nav_b" id="logout_na" value="로그아웃"></li>
 										</ul></li>
@@ -365,6 +376,7 @@ function viewCount(){
 											<li class="nav-item "><a class="nav-link" href="/goCart">찜목록</a></li>
 											<li class="nav-item "><a class="nav-link"
 												href="/goMyPage">마이페이지</a></li>
+
 												<li class="nav-item "><a class="nav-link"
 												href="/toPoint">포인트충전</a></li>
 											<li class="nav-item "><a class="nav-link"
@@ -384,8 +396,10 @@ function viewCount(){
 												href="/goMyPage">마이페이지</a></li>
 											<li class="nav-item "><a class="nav-link"
 												href="/toPoint">포인트충전</a></li>
+
 												<li class="nav-item "><a class="nav-link"
 												href="/toPoint_exc">포인트환급</a></li>
+
 											<li class="nav-item "><a class="nav-link" href="/logout">로그아웃</a></li>
 										</ul></li>
 								</c:when>
@@ -423,23 +437,25 @@ function viewCount(){
     <section class="cart_area">
 	   <div class="container">
             <div class="cart_inner">
-                <div class="table-responsive">            
+                <div class="table-responsive">  
+                <form action="ggymDelete">          
                     <table class="table">
                     <h1 id="ggym">찜 목록(중고거래)</h1>                   
                         <thead>
                             <tr>
                                 <th scope="col">Product</th>
                                 <th scope="col">Type</th>
-                                <th scope="col">delivery</th>
+                                <th scope="col">category</th>
                                 <th scope="col">Price</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody>                       
                            <c:forEach items="${tList }" var="trade">
                             <tr>
                                 <td>
                                     <div class="media">
                                         <div class="d-flex">
+                                        	<input type="checkbox" class="tradeCheck" name="checkDelete" value="${trade.no}">
                                             <img src="img/title/${trade.title_img }" class="tImg" alt="">
                                         </div>
                                         <div class="media-body">
@@ -451,30 +467,32 @@ function viewCount(){
                                     <h5>${trade.trade_type}</h5>
                                 </td>
                                 <td>
-                                    <h5>${trade.delivery}</h5>
+                                    <h5>${trade.category}</h5>
                                 </td>
                                 <td>
                                     <h5><fmt:formatNumber value="${trade.price}" pattern="#,###"/></h5>
                                 </td>
                             </tr>                        
                           </c:forEach>                        
-                        </tbody> 
-                                                                       
+                        </tbody>                                                                 
                     </table>
+                    <input type="button" value="전체선택" id="allCheckTrade" class="genric-btn primary radius"> 
+                    <input type="submit" value="삭제" id="delete" class="genric-btn primary radius">       
                     <div class="row">
                					<div class="col-12 naviArea">
                  				<b class="paging">${navi}</b>
                					</div>
             			   </div>
-                    
+                    </form>
                     <br>
+                    <form action="ggymDeleteAuction">
                      <table class="table">
                      	<h1 id="ggym">찜 목록(경매거래)</h1>
                         <thead>
                             <tr>
                                 <th scope="col">Product</th>
                                 <th scope="col">End Date</th>
-                                <th scope="col">delivery</th>
+                                <th scope="col">category</th>
                                 <th scope="col">Price</th>
                             </tr>
                         </thead>
@@ -484,10 +502,11 @@ function viewCount(){
                                 <td>
                                     <div class="media">
                                         <div class="d-flex">
+                                        <input type="checkbox" class="auctionCheck" name="checkDeleteAuction" value="${auction.no}">
                                             <img src="img/title/${auction.title_img}" class="tImg" alt="">
                                         </div>
                                         <div class="media-body">
-                                            <a href="#"><p>${auction.title}</p></a>
+                                            <a href="/auction_detailPage?no=${auction.no}"><p>${auction.title}</p></a>
                                         </div>
                                     </div>
                                 </td>
@@ -496,7 +515,7 @@ function viewCount(){
                                 </td>
                                                                
                                 <td>
-                                    <h5>${auction.delivery}</h5>
+                                    <h5>${auction.category}</h5>
                                 </td>
                                 <td>
                                     <h5><fmt:formatNumber value="${auction.price}" pattern="#,###"/></h5>
@@ -505,12 +524,15 @@ function viewCount(){
                           </c:forEach>                         
                           
                         </tbody>
-                    </table>
+                    </table>   
+                   	 <input type="button" value="전체선택" id="allCheckAuction" class="genric-btn primary radius">
+                     <input type="submit" value="삭제" id="deleteAuction" class="genric-btn primary radius">                 		
                     		<div class="row">
                					<div class="col-12 naviArea">
                  				<b class="paging">${navi1}</b>
                				</div>
             		</div>
+            		</form>
                     
                 </div>
             </div>
@@ -518,6 +540,18 @@ function viewCount(){
     </section>
     <!--================End Cart Area =================-->
    </footer>
+   
+   <script>
+   	$("#allCheckTrade").on("click",function(){
+   		$(".tradeCheck").attr("checked",true);
+   	})
+   	$("#allCheckAuction").on("click",function(){
+   		$(".auctionCheck").attr("checked",true);
+   	})
+   	
+   
+   </script>
+
    <!-- End footer Area -->
    <script src="https://use.fontawesome.com/releases/v5.0.0/js/all.js"></script>
    <script

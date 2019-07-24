@@ -6,14 +6,14 @@ public class CartTradeDTO {
 	private String title_img;
 	private String title;
 	private String trade_type;
-	private String delivery;
+	private String category;
 	private int price;
 	
 	public CartTradeDTO() {
 		super();
 	}
 
-	public CartTradeDTO(String id, int no, String title_img, String title, String trade_type, String delivery,
+	public CartTradeDTO(String id, int no, String title_img, String title, String trade_type, String category,
 			int price) {
 		super();
 		this.id = id;
@@ -21,7 +21,7 @@ public class CartTradeDTO {
 		this.title_img = title_img;
 		this.title = title;
 		this.trade_type = trade_type;
-		this.delivery = delivery;
+		this.category = category;
 		this.price = price;
 	}
 
@@ -65,12 +65,12 @@ public class CartTradeDTO {
 		this.trade_type = trade_type;
 	}
 
-	public String getDelivery() {
-		return delivery;
+	public String getCategory() {
+		return category;
 	}
 
-	public void setDelivery(String delivery) {
-		this.delivery = delivery;
+	public void setCategory(String category) {
+		this.category = category;
 	}
 
 	public int getPrice() {
@@ -81,7 +81,6 @@ public class CartTradeDTO {
 		this.price = price;
 	}
 
-	
 	
 	
 }

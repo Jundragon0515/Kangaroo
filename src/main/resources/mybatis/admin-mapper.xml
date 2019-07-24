@@ -21,4 +21,13 @@
 <delete id="auctionBoardImgDelete">
 	delete from auction_img_board where no=#{value}
 </delete>
+
+<delete id="deleteCart">
+	delete from trade_cart where no=#{value}
+</delete>
+
+<delete id="deleteCartAuction">
+	delete from auction_cart where no=#{value}
+</delete>
+
 </mapper>

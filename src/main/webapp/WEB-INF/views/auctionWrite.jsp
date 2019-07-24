@@ -123,10 +123,10 @@
         position: relative;
         top:83px;
     }
-    #sang{
-    	position:relative;
-    	bottom:40px;
-    }
+    #sang {
+    	position: relative;
+    	top: 10px;
+	}
     [type="text"]{
     	background-color:#fafff2;
     	color:#ffba00;
@@ -217,9 +217,9 @@
     	border: 3px solid #ffebb3;
     	border-radius: 10px 10px 10px 10px;
     	width: 460px;
-    	height: 333px;
+    	height: 315px;
     	overflow: auto;
-    	bottom: 39px;
+    	top: 17px;
 	}
     .thumbnail{
     	width: 100px;
@@ -233,7 +233,7 @@
     }
     #detailImg {
     	position:relative;
-    	bottom:40px;
+    	top:13px;
     	background-color: #ffce47;
     	color: white;
     	border-radius: 3px 3px 3px 3px;
@@ -248,7 +248,7 @@
 	}
 	#register{
 		position:relative;
-		bottom:30px;
+		top:23px;
 		left:20px;
 	}
 	#sel,#sel1,#sel2{
@@ -262,9 +262,9 @@
 		position: relative;
     	top:20px;
 	}
-	#image{
-		position: relative;
-		bottom:20px;
+	#image {
+    	position: relative;
+    	top: 27px;
 	}
 	#image:hover{
 		cursor: pointer;
@@ -292,14 +292,23 @@
 		position:relative;
 		top:10px;
 	}
-	#man{
-		position:relative;
-		bottom:20px;
+	#man {
+    	position: relative;
+    	top: 30px;
+    	right: 260px;
 	}
 	.middleName {
     	color: darkgoldenrod;
     	font-size: 15px;
 	}
+	#tack {
+   		position: relative;
+   		top: 0px;
+	}
+	.s_product_text .list li a span {
+    width: 130px;
+    display: inline-block;
+}
 </style>
 
 <body>
@@ -433,10 +442,9 @@
 					<div class="s_product_text">
 						<ul class="list">
                         <br>                        
-						    <li><a><span class="middleName">물품제목</span></a><input type="text" class="form-control goodsContents" id="goodsTitle" name="title" placeholder="물품제목을 입력하세요."></li>
-							<li><a><span class="middleName">시작가</span></a><input type="text" priceOnly  class="form-control goodsContents" id="goodsPrice" name="starting_price" placeholder="시작가 입력하세요." onkeydown="javascript: return event.keyCode == 69 ? false : true"></li>
-							<li><a><span class="middleName">핸드폰번호</span></a><input type="text" phoneOnly  class="form-control goodsContents" id="phone" name="phone" placeholder="-없이 핸드폰 번호를 입력해주세요." onkeydown="javascript: return event.keyCode == 69 ? false : true"></li>
-							<li><a><span class="middleName">계좌번호</span></a><input type="text" acountOnly  class="form-control goodsContents" id="account" name="account" placeholder="반드시 본인의 계좌번호를 입력해주세요." onkeydown="javascript: return event.keyCode == 69 ? false : true"></li>	
+						    <li><a><span class="middleName">물품제목</span></a><input type="text" class="form-control goodsContents" id="goodsTitle" name="title" placeholder="물품제목을 입력하세요."></li><br>
+							<li><a><span class="middleName">시작가</span></a><input type="text" priceOnly  class="form-control goodsContents" id="goodsPrice" name="starting_price" placeholder="시작가 입력하세요." onkeydown="javascript: return event.keyCode == 69 ? false : true"></li><br>
+							<li><a><span class="middleName">핸드폰번호</span></a><input type="text" phoneOnly  class="form-control goodsContents" id="phone" name="phone" placeholder="-없이 핸드폰 번호를 입력해주세요." onkeydown="javascript: return event.keyCode == 69 ? false : true"></li><br>
 							
 							
 						<div id="sel">
@@ -489,24 +497,17 @@
 						</div>	
 														
 						</div>	
-						
-							<li>
-								<div class="middleName">거래유형</div>
-                                <input type="radio" id="test1" class="trade" name="trade_type" value="직거래" checked>
-                                <label for="test1" class="trade">직거래</label>
-                                <input type="radio" id="test2" class="trade" name="trade_type" value="안전거래">
-                                <label for="test2" class="trade">안전거래</label>
-							</li>
+
 							
 							
 						<div>
 							<li>						
 								<div id="tack" class="middleName">택배</div>
-                                <input type="radio" id="test3" class="delivery_type" name="delivery_type" value="선불" disabled="disabled">
+                                <input type="radio" id="test3" class="delivery_type" name="delivery_type" value="선불">
                                 <label for="test3" class="trade" id="payInside">선불(구매자 부담)</label>
-                                <input type="radio" id="test4" class="delivery_type" name="delivery_type" value="착불" disabled="disabled">
+                                <input type="radio" id="test4" class="delivery_type" name="delivery_type" value="착불">
                                 <label for="test4" class="trade">착불(구매자 부담)</label>
-                                <input type="radio" id="test5" class="delivery_type" name="delivery_type" value="무료배송" disabled="disabled">
+                                <input type="radio" id="test5" class="delivery_type" name="delivery_type" value="무료배송">
                                 <label for="test5" class="trade">무료배송(판매자 부담)</label>
 							</li>
 						</div>
@@ -651,27 +652,7 @@
 	$(location).attr("href", "/login_main");
 	</c:when>
 	</c:choose>
-	
-	$("#test1").on("click",function(){
- 		$("#test3").attr("checked",false);
- 		$("#test4").attr("checked",false);
- 		$("#test5").attr("checked",false);
- 		$("#test3").attr("disabled",true);
- 		$("#test4").attr("disabled",true);
- 		$("#test5").attr("disabled",true);
- 		$("#pay").remove();
- 		$("#collectible").remove();
- 		$("#free").remove();
- 	})	
- 
- 	$("#test2").on("click",function(){
- 		$("#test3").attr("disabled",false);
- 		$("#test4").attr("disabled",false);
- 		$("#test5").attr("disabled",false);
- 		$("#pay").remove();
- 		$("#collectible").remove();
- 		$("#free").remove();
- 	})
+
  	$("#test3").on("click",function(){
  		$("#pay").remove();
  		$("#collectible").remove();
@@ -894,8 +875,8 @@
 	}
 				
 	$("#register").on("click", function() {
-		var trade = document.getElementById("test1");
 		var deli = document.getElementsByName("delivery_type");
+		console.log(deli[0].checked);
 		if ($("#writting").val() == "") {
 			alert("물품 설명을 입력해주세요.");
 		} else if ($("#goodsTitle").val() == "") {
@@ -904,13 +885,11 @@
 			alert("가격을 입력하세요.");
 		} else if ($("#phone").val() == "") {
 			alert("핸드폰 번호를 입력하세요.");
-		} else if ($("#account").val() == "") {
-			alert("계좌를 입력하세요.");
 		} else if ($("#titleImg").html() == "") {
 			alert("메인 이미지를 입력하세요.");
 		} else if ($("#preview").text() == "") {
 			alert("상세 이미지 1개 이상 입력하세요.");
-		} else if(deli[0].checked==false && deli[1].checked==false && deli[2].checked==false && trade.checked==false){
+		} else if(deli[0].checked==false && deli[1].checked==false && deli[2].checked==false){
 			alert("택배 방법을 입력하세요.");
 		} else {
 			//var contents = $("#writting").val();
@@ -925,8 +904,6 @@
 			var price = parseInt($("#goodsPrice").val());
 			var phoneText = $("#phone").val();			
 			var regPhone = /(01[0|1|6|9|7])[-](\d{3}|\d{4})[-](\d{4}$)/g;	
-			var accountText = $("#account").val();
-			var regAccount = /^[\d]{12,15}$/g;
 			
 			if(!regContents.test(contentsText)){
 				alert('잘못된 내용 입니다.');
@@ -937,9 +914,6 @@
 			}else if(!regPhone.test(phoneText)){
 				alert('잘못된 휴대폰 번호입니다.');
 	            $('#phone').val("");	
-			}else if(!regAccount.test(accountText)){
-				alert('잘못된 계좌 번호입니다.');
-	            $('#account').val("");
 			}else if(price !=0){
 				if(price<1000){
 					alert("1000원 이상 가격을 입력하세요.");
@@ -984,8 +958,6 @@
  
 
 	<script src="../resources/js/vendor/jquery-2.2.4.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.../resources/js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
-	 crossorigin="anonymous"></script>
 	<script src="../resources/js/vendor/bootstrap.min.js"></script>
 	<script src="../resources/js/jquery.ajaxchimp.min.js"></script>
 	<script src="../resources/js/jquery.nice-select.min.js"></script>

@@ -134,7 +134,6 @@ body {
 <script>
 $(function(){
 
-<<<<<<< HEAD
 	var socket = new SockJS("/gettime"); //불특정 다수의 브라우저일 경우를 위해 endpoint url 넣어야 한다
 	var client = Stomp.over(socket);//연결 이후의 작업 지원 
 	client.connect({}, function(resp) {
@@ -470,6 +469,9 @@ $("#logout_na").on("click", function() {
 						<!--                   </div> -->
 
 						<!--                   입찰창 -->
+						<div style=text-align:right;padding-right:10px;>
+						<input type="button" id="cartAuction" class="genric-btn primary radius" value="찜하기">
+						</div>
 						<div class="card_area d-flex align-items-center">
 						
 						<c:choose>
@@ -1091,7 +1093,6 @@ $("#logout_na").on("click", function() {
            $('html, body').animate({scrollTop : offset.top}, 500);
        }
    </script>
-<<<<<<< HEAD
 	
 	<!--================End Product Description Area =================-->
 
@@ -1571,6 +1572,18 @@ $("#logout_na").on("click", function() {
       </div>
    </footer>
    <!-- End footer Area -->
+   
+   <script>
+   		$("#cartAuction").on("click",function(){
+			$.ajax({
+				url : "/steamingAuction",
+				data : {"no":"${dto.no}","title_img":"${i_dto.title_img}","title":"${dto.title}","end_date":"${dto.end_date}","category":"${dto.category}","price":"${dto.present_price}"}				
+				}).done(function(resp){
+					alert(resp);
+			})
+		});
+   
+   </script>
 
    <script src="../resources/js/vendor/jquery-2.2.4.min.js"></script>
    <script src="https://use.fontawesome.com/releases/v5.0.0/js/all.js"></script>

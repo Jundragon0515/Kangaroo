@@ -1,25 +1,36 @@
 package kh.spring.dto;
 
 public class CartAuctionDTO {
+	private String id;
 	private int no;
 	private String title_img;
 	private String title;
 	private String end_date;
-	private String delivery;
+	private String category;
 	private int price;
 	
 	public CartAuctionDTO() {
 		super();
 	}
 
-	public CartAuctionDTO(int no, String title_img, String title, String end_date, String delivery, int price) {
+	public CartAuctionDTO(String id, int no, String title_img, String title, String end_date, String category,
+			int price) {
 		super();
+		this.id = id;
 		this.no = no;
 		this.title_img = title_img;
 		this.title = title;
 		this.end_date = end_date;
-		this.delivery = delivery;
+		this.category = category;
 		this.price = price;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public int getNo() {
@@ -54,12 +65,12 @@ public class CartAuctionDTO {
 		this.end_date = end_date;
 	}
 
-	public String getDelivery() {
-		return delivery;
+	public String getCategory() {
+		return category;
 	}
 
-	public void setDelivery(String delivery) {
-		this.delivery = delivery;
+	public void setCategory(String category) {
+		this.category = category;
 	}
 
 	public int getPrice() {
@@ -69,6 +80,9 @@ public class CartAuctionDTO {
 	public void setPrice(int price) {
 		this.price = price;
 	}
+
+	
+
 
 	
 	
