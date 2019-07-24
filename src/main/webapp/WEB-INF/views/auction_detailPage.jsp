@@ -465,7 +465,7 @@ $("#logout_na").on("click", function() {
    <script>
    
       var lastPrice = 0;
-         var current = "${currentMoney}";
+         var current = ${currentMoney};
 
          var tenderCount = Number($("#tenderCount").html());
        var socket = new SockJS("/gettime");
@@ -621,7 +621,7 @@ $("#logout_na").on("click", function() {
    
    $("#rankContents").html(s);
    
-      var myMoney = "${myMoney}";
+      var myMoney = ${myMoney};
       
       $("#tend").on("click",function(){
          

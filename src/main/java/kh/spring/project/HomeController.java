@@ -37,7 +37,7 @@ public class HomeController {
 		if(se.getAttribute("email")!=null) {
 			mes.setPoint();
 		}
-		return "point";
+		return "point_f/point";
 	}
 	@RequestMapping("/login_main")
 	public String login_main() { // 로그인 메인페이지
