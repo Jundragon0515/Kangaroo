@@ -190,14 +190,23 @@
 #send:hover {
 	cursor: pointer;
 }
-#ggym{
-	text-align: center;
-}
+
 .tImg{
 	height: 100px;
 	width: 100px;
 }
-
+#allCheckTrade,#allCheckAuction{
+    position: relative;
+    left: 82%;
+}
+#delete, #deleteAuction {
+    position: relative;
+    left: 82%;
+}
+.tradeCheck,.auctionCheck{
+    top: 42px;
+    position: relative;
+}
 </style>
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -308,93 +317,93 @@ function viewCount(){
 
    <!-- Start Header Area -->
    <header class="header_area sticky-header">
-   <div class="main_menu">
-      <nav class="navbar navbar-expand-lg navbar-light main_box">
-      <div class="container">
-         <!-- Brand and toggle get grouped for better mobile display logo_h -->
-         <a class="navbar-brand logo_h" href="/"><img
-            src="../resources/img/logo.png" width="60px" alt=""> Kangaroo</a>
-         <button class="navbar-toggler" type="button" data-toggle="collapse"
-            data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false"
-            aria-label="Toggle navigation">
-            <span class="icon-bar"></span> <span class="icon-bar"></span> <span
-               class="icon-bar"></span>
-         </button>
-         <!-- Collect the nav links, forms, and other content for toggling -->
-         <div class="collapse navbar-collapse offset"
-            id="navbarSupportedContent">
-            <ul class="nav navbar-nav menu_nav ml-auto">
-               <!--                      <li class="nav-item active"><a class="nav-link" href="/">Home</a></li> -->
-               <li class="nav-item submenu dropdown"><a href="#"
-                  class="nav-link dropdown-toggle" data-toggle="dropdown"
-                  role="button" aria-haspopup="true" aria-expanded="false">중고 거래</a>
-                  <ul class="dropdown-menu">
-                     <li class="nav-item"><a class="nav-link" href="/">중고 직거래</a></li>
-                     <li class="nav-item"><a class="nav-link" href="/">중고
-                           안전거래</a></li>
-                     <li class="nav-item"><a class="nav-link" href="/">중고 경매</a></li>
-                  </ul></li>
-               <li class="nav-item "><a class="nav-link" href="/">고객센터</a></li>
-               <li class="nav-item "><a class="nav-link" href="/">공지사항</a></li>
-
-               <c:choose>
-                  <c:when test="${logintype=='admin'}">
-                     <li class="nav-item "><a class="nav-link" href="/">관리자페이지</a></li>
-                     <li class="nav-item "><a class="nav-link" href="/logout">로그아웃</a></li>
-                  </c:when>
-                  <c:when test="${logintype=='naver'}">
-                     <li class="nav-item submenu dropdown"><a href="#"
-                        class="nav-link dropdown-toggle" data-toggle="dropdown"
-                        role="button" aria-haspopup="true" aria-expanded="false"><img
-                           src="../resources/img/account.png" width="35px"></a>
-                        <ul class="dropdown-menu nav_ul">
-                           <li class="nav-item "><a class="nav-link" href="/">쪽지</a></li>
-                           <li class="nav-item "><a class="nav-link" href="/">장바구니</a></li>
-                           <li class="nav-item"><a class="nav-link" href="/">마이페이지</a></li>
-                           <li class="nav-item "><a class="nav-link" href="/toPoint">포인트충전</a></li>
-                           <li class="nav-item "><input type="button"
-                              class="nav-link nav_b" id="logout_na" value="로그아웃"></li>
-                        </ul></li>
-                  </c:when>
-                  <c:when test="${logintype=='kakao'}">
-                     <li class="nav-item submenu dropdown"><a href="#"
-                        class="nav-link dropdown-toggle" data-toggle="dropdown"
-                        role="button" aria-haspopup="true" aria-expanded="false"><img
-                           src="../resources/img/account.png" width="40px"></a>
-                        <ul class="dropdown-menu nav_ul">
-                           <li class="nav-item "><a class="nav-link" href="/">쪽지</a></li>
-                           <li class="nav-item "><a class="nav-link" href="/">장바구니</a></li>
-                           <li class="nav-item"><a class="nav-link" href="/">마이페이지</a></li>
-                           <li class="nav-item "><a class="nav-link" href="/toPoint">포인트충전</a></li>
-                           <li class="nav-item "><input type="button"
-                              class="nav-link nav_b" id="logout_ka" value="로그아웃"></li>
-                        </ul></li>
-                  </c:when>
-                  <c:when test="${logintype=='email'}">
-                     <li class="nav-item submenu dropdown"><a href="#"
-                        class="nav-link dropdown-toggle" data-toggle="dropdown"
-                        role="button" aria-haspopup="true" aria-expanded="false"><img
-                           src="../resources/img/account.png" width="40px"></a>
-                        <ul class="dropdown-menu nav_ul">
-                           <li class="nav-item "><a class="nav-link" href="/">쪽지</a></li>
-                           <li class="nav-item "><a class="nav-link" href="/">장바구니</a></li>
-                           <li class="nav-item"><a class="nav-link" href="/">마이페이지</a></li>
-                           <li class="nav-item "><a class="nav-link" href="/toPoint">포인트충전</a></li>
-                           <li class="nav-item "><a class="nav-link" href="/logout">로그아웃</a></li>
-                        </ul></li>
-                  </c:when>
-                  <c:otherwise>
-                     <li class="nav-item "><a class="nav-link" href="/login_main">로그인</a></li>
-                     <li class="nav-item "><a class="nav-link" href="/insert">회원가입</a></li>
-                  </c:otherwise>
-               </c:choose>
-            </ul>
-         </div>
-      </div>
-      </nav>
-   </div>
-   </header>
+		<div class="main_menu">
+			<nav class="navbar navbar-expand-lg navbar-light main_box">
+				<div class="container">
+					<!-- Brand and toggle get grouped for better mobile display logo_h -->
+					<a class="navbar-brand logo_h" href="/"><img
+						src="../resources/img/logo.png" width="60px" alt="">
+						Kangaroo</a>
+					<button class="navbar-toggler" type="button" data-toggle="collapse"
+						data-target="#navbarSupportedContent"
+						aria-controls="navbarSupportedContent" aria-expanded="false"
+						aria-label="Toggle navigation">
+						<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+							class="icon-bar"></span>
+					</button>
+					<!-- Collect the nav links, forms, and other content for toggling -->
+					<div class="collapse navbar-collapse offset"
+						id="navbarSupportedContent">
+						<ul class="nav navbar-nav menu_nav ml-auto">
+							<!-- 							<li class="nav-item active"><a class="nav-link" href="/">Home</a></li> -->
+									<li class="nav-item"><a class="nav-link" href="/trade">중고
+											직거래</a></li>
+									<li class="nav-item"><a class="nav-link" href="/trade_safe">중고
+											안전거래</a></li>
+									<li class="nav-item"><a class="nav-link" href="/auction">중고
+											경매</a></li>
+							<li class="nav-item "><a class="nav-link" href="/">공지사항</a></li>
+							<c:choose>
+								<c:when test="${logintype=='admin'}">
+									<li class="nav-item "><a class="nav-link" href="/admin">관리자페이지</a></li>
+									<li class="nav-item "><a class="nav-link" href="/logout">로그아웃</a></li>
+								</c:when>
+								<c:when test="${logintype=='naver'}">
+									<li class="nav-item submenu dropdown"><a href="#"
+										class="nav-link dropdown-toggle" data-toggle="dropdown"
+										role="button" aria-haspopup="true" aria-expanded="false"><img
+											src="../resources/img/account.png" width="35px"></a>
+										<ul class="dropdown-menu nav_ul">
+											<li class="nav-item "><a class="nav-link" href="/goCart">찜목록</a></li>
+											<li class="nav-item "><a class="nav-link"
+												href="/goMyPage">마이페이지</a></li>
+											<li class="nav-item "><a class="nav-link"
+												href="/toPoint">포인트충전</a></li>
+											<li class="nav-item "><input type="button"
+												class="nav-link nav_b" id="logout_na" value="로그아웃"></li>
+										</ul></li>
+								</c:when>
+								<c:when test="${logintype=='kakao'}">
+									<li class="nav-item submenu dropdown"><a href="#"
+										class="nav-link dropdown-toggle" data-toggle="dropdown"
+										role="button" aria-haspopup="true" aria-expanded="false"><img
+											src="../resources/img/account.png" width="40px"></a>
+										<ul class="dropdown-menu nav_ul">
+											<li class="nav-item "><a class="nav-link" href="/goCart">찜목록</a></li>
+											<li class="nav-item "><a class="nav-link"
+												href="/goMyPage">마이페이지</a></li>
+											<li class="nav-item "><a class="nav-link"
+												href="/toPoint">포인트충전</a></li>
+											<li class="nav-item "><input type="button"
+												class="nav-link nav_b" id="logout_ka" value="로그아웃"></li>
+										</ul></li>
+								</c:when>
+								<c:when test="${logintype=='email'}">
+									<li class="nav-item submenu dropdown"><a href="#"
+										class="nav-link dropdown-toggle" data-toggle="dropdown"
+										role="button" aria-haspopup="true" aria-expanded="false"><img
+											src="../resources/img/account.png" width="40px"></a>
+										<ul class="dropdown-menu nav_ul">
+											<li class="nav-item "><a class="nav-link" href="/goCart">찜목록</a></li>
+											<li class="nav-item "><a class="nav-link"
+												href="/goMyPage">마이페이지</a></li>
+											<li class="nav-item "><a class="nav-link"
+												href="/toPoint">포인트충전</a></li>
+											<li class="nav-item "><a class="nav-link" href="/logout">로그아웃</a></li>
+										</ul></li>
+								</c:when>
+								<c:otherwise>
+									<li class="nav-item "><a class="nav-link"
+										href="/login_main">로그인</a></li>
+									<li class="nav-item "><a class="nav-link" href="/insert">회원가입</a></li>
+								</c:otherwise>
+							</c:choose>
+						</ul>
+					</div>
+				</div>
+			</nav>
+		</div>
+	</header>
    <!-- End Header Area -->
    
    <!-- Start Banner Area -->
@@ -417,23 +426,25 @@ function viewCount(){
     <section class="cart_area">
 	   <div class="container">
             <div class="cart_inner">
-                <div class="table-responsive">            
+                <div class="table-responsive">  
+                <form action="ggymDelete">          
                     <table class="table">
                     <h1 id="ggym">찜 목록(중고거래)</h1>                   
                         <thead>
                             <tr>
                                 <th scope="col">Product</th>
                                 <th scope="col">Type</th>
-                                <th scope="col">delivery</th>
+                                <th scope="col">category</th>
                                 <th scope="col">Price</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody>                       
                            <c:forEach items="${tList }" var="trade">
                             <tr>
                                 <td>
                                     <div class="media">
                                         <div class="d-flex">
+                                        	<input type="checkbox" class="tradeCheck" name="checkDelete" value="${trade.no}">
                                             <img src="img/title/${trade.title_img }" class="tImg" alt="">
                                         </div>
                                         <div class="media-body">
@@ -445,30 +456,32 @@ function viewCount(){
                                     <h5>${trade.trade_type}</h5>
                                 </td>
                                 <td>
-                                    <h5>${trade.delivery}</h5>
+                                    <h5>${trade.category}</h5>
                                 </td>
                                 <td>
                                     <h5><fmt:formatNumber value="${trade.price}" pattern="#,###"/></h5>
                                 </td>
                             </tr>                        
                           </c:forEach>                        
-                        </tbody> 
-                                                                       
+                        </tbody>                                                                 
                     </table>
+                    <input type="button" value="전체선택" id="allCheckTrade" class="genric-btn primary radius"> 
+                    <input type="submit" value="삭제" id="delete" class="genric-btn primary radius">       
                     <div class="row">
                					<div class="col-12 naviArea">
                  				<b class="paging">${navi}</b>
                					</div>
             			   </div>
-                    
+                    </form>
                     <br>
+                    <form action="ggymDeleteAuction">
                      <table class="table">
                      	<h1 id="ggym">찜 목록(경매거래)</h1>
                         <thead>
                             <tr>
                                 <th scope="col">Product</th>
                                 <th scope="col">End Date</th>
-                                <th scope="col">delivery</th>
+                                <th scope="col">category</th>
                                 <th scope="col">Price</th>
                             </tr>
                         </thead>
@@ -478,10 +491,11 @@ function viewCount(){
                                 <td>
                                     <div class="media">
                                         <div class="d-flex">
+                                        <input type="checkbox" class="auctionCheck" name="checkDeleteAuction" value="${auction.no}">
                                             <img src="img/title/${auction.title_img}" class="tImg" alt="">
                                         </div>
                                         <div class="media-body">
-                                            <a href="#"><p>${auction.title}</p></a>
+                                            <a href="/auction_detailPage?no=${auction.no}"><p>${auction.title}</p></a>
                                         </div>
                                     </div>
                                 </td>
@@ -490,7 +504,7 @@ function viewCount(){
                                 </td>
                                                                
                                 <td>
-                                    <h5>${auction.delivery}</h5>
+                                    <h5>${auction.category}</h5>
                                 </td>
                                 <td>
                                     <h5><fmt:formatNumber value="${auction.price}" pattern="#,###"/></h5>
@@ -499,12 +513,15 @@ function viewCount(){
                           </c:forEach>                         
                           
                         </tbody>
-                    </table>
+                    </table>   
+                   	 <input type="button" value="전체선택" id="allCheckAuction" class="genric-btn primary radius">
+                     <input type="submit" value="삭제" id="deleteAuction" class="genric-btn primary radius">                 		
                     		<div class="row">
                					<div class="col-12 naviArea">
                  				<b class="paging">${navi1}</b>
                				</div>
             		</div>
+            		</form>
                     
                 </div>
             </div>
@@ -512,6 +529,18 @@ function viewCount(){
     </section>
     <!--================End Cart Area =================-->
    </footer>
+   
+   <script>
+   	$("#allCheckTrade").on("click",function(){
+   		$(".tradeCheck").attr("checked",true);
+   	})
+   	$("#allCheckAuction").on("click",function(){
+   		$(".auctionCheck").attr("checked",true);
+   	})
+   	
+   
+   </script>
+
    <!-- End footer Area -->
    <script src="https://use.fontawesome.com/releases/v5.0.0/js/all.js"></script>
    <script
@@ -523,8 +552,6 @@ function viewCount(){
    <script src="../resources/js/nouislider.min.js"></script>
    <!-- <script src="../resources/js/countdown.js"></script> -->
    <script src="../resources/js/jquery.magnific-popup.min.js"></script>
-   <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
    <script
       src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 

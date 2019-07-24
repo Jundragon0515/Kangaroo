@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import kh.spring.dto.CartAuctionDTO;
 import kh.spring.dto.CartTradeDTO;
+import kh.spring.dto.Used_transaction_boardDTO;
 
 @Repository
 public class CartDAO {
@@ -34,7 +35,15 @@ public class CartDAO {
 		param.put("email",email);
 		return sst.selectList("CartDAO.selectList",param);
 	}
-
+	
+	public int cartTradeDelete(String no) {
+		return sst.delete("CartDAO.cartTradeDelete",no);
+	}
+	
+	public int cartAuctionDelete(String no) {
+		return sst.delete("CartDAO.cartAuctionDelete",no);
+	}
+	
 	public String getNavi(int currentPage, int recordCountPerPage) {
 		int recordTotalCount = this.recordTotalCount(); //레코드 수
 		int naviCountPerPage = 5; // 한 페이지 네비 개수
@@ -94,23 +103,23 @@ public class CartDAO {
 	}
 
 
-	public List<CartAuctionDTO> selectListA(int start, int end,String email){
+	public List<CartAuctionDTO> selectListA(int start1, int end1,String email){
 		HashMap<String, Object> param = new HashMap<>();
-		param.put("start", start);
-		param.put("end", end);
+		param.put("start", start1);
+		param.put("end", end1);
 		param.put("email",email);
 		return sst.selectList("CartDAO.selectListA",param);
 	}
 
-	public String getNaviA(int currentPage1, int recordCountPerPage) {
-		int recordTotalCount = this.recordTotalCount(); //레코드 수
+	public String getNaviA(int currentPage1, int recordCountPerPage1) {
+		int recordTotalCountA = this.recordTotalCountA(); //레코드 수
 		int naviCountPerPage = 5; // 한 페이지 네비 개수
 		int pageTotalCount=0;
 
-		if(recordTotalCount % recordCountPerPage > 0) {
-			pageTotalCount = recordTotalCount / recordCountPerPage + 1;
+		if(recordTotalCountA % recordCountPerPage1 > 0) {
+			pageTotalCount = recordTotalCountA / recordCountPerPage1 + 1;
 		}else {
-			pageTotalCount = recordTotalCount / recordCountPerPage;
+			pageTotalCount = recordTotalCountA / recordCountPerPage1;
 		}
 
 		if(currentPage1 < 1) {
@@ -170,9 +179,14 @@ public class CartDAO {
 
 	public int overlap(int no) {
 		return sst.selectOne("CartDAO.overlapCheck", no);
+	} 
+	
+	public int streamimgAuction(CartAuctionDTO dto) {
+		return sst.insert("CartDAO.streamAuction",dto);
 	}
-
-
-
+	
+	public int overlapAuction(int no) {
+		return sst.selectOne("CartDAO.overlapCheckAuction",no);
+	}
 
 }

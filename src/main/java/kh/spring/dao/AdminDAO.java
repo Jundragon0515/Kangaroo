@@ -28,5 +28,11 @@ public class AdminDAO {
 	public int auctionBoardImgDelete(String no) {
 		return sst.delete("AdminDAO.auctionBoardImgDelete",no);
 	}
+	public int cartDelete(String no) {
+		return sst.delete("AdminDAO.deleteCart", no);
+	}
+	public int cartAuctionDelete(String no) {
+		return sst.delete("AdminDAO.deleteCartAuction",no);
+	}
 }
 

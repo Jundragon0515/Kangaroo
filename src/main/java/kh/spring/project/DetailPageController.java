@@ -127,7 +127,7 @@ public class DetailPageController {
 			
 			try {
 			currentMoney = mdao.currentMoney(no);
-			System.out.println(currentMoney);
+			System.out.println("보드넘버 : " + no + "커런트머니" + " : " + currentMoney);
 			}catch(Exception e) {
 			}
 			

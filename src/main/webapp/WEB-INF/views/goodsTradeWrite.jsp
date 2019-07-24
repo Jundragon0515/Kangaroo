@@ -34,7 +34,6 @@
    <link rel="stylesheet" href="../resources/css/ion.rangeSlider.skinFlat.css" />
    <link rel="stylesheet" href="../resources/css/main.css">
   <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-</head>
 <style>
     .category,.dropdown-menu{
         background-color: #ffba00;
@@ -180,19 +179,16 @@
     	overflow-y:scroll;
     	height:200px;
     }
-    #preview {
+    #preview{
     	border: 3px solid #ffebb3;
     	border-radius: 10px 10px 10px 10px;
     	width: 460px;
-    	height: 384px;
+    	height: 376px;
     	overflow: auto;
     	position: relative;
     	bottom: 19px;
-	}
-       width: 100px;
-       height: 100px;
-    
-    }/* 상세이미지 크기 */
+	}  
+    /* 상세이미지 크기 */
     .preview-box{    	
     	width: 200px;
     	height: 100px;
@@ -255,8 +251,14 @@
     	color: darkgoldenrod;
     	font-size: 18px;
 	}
+	.thumbnail{
+		width: 100px;
+    	height: 100px;
+	}
 
-</style>
+</style>  
+
+</head>
 <body>
 
    <!-- Start Header Area -->
@@ -384,11 +386,9 @@
 					<div class="s_product_text">
 						<ul class="list">
                         <br>                        
-						    <li><a><span class="middleName">물품제목</span></a><input type="text" class="form-control goodsContents" id="goodsTitle" name="title" placeholder="물품제목을 입력하세요."></li>
-							<li><a><span class="middleName">물품가격</span></a><input type="text" priceOnly  class="form-control goodsContents" id="goodsPrice" name="price" placeholder="물품가격을 입력하세요." onkeydown="javascript: return event.keyCode == 69 ? false : true"></li>
-							<li><a><span class="middleName">핸드폰번호</span></a><input type="text" phoneOnly  class="form-control goodsContents" id="phone" name="phone" placeholder="-없이 핸드폰 번호를 입력해주세요." onkeydown="javascript: return event.keyCode == 69 ? false : true"></li>
-							<li><a><span class="middleName">계좌번호</span></a><input type="text" acountOnly  class="form-control goodsContents" id="account" name="account" placeholder="반드시 본인의 계좌번호를 입력해주세요." onkeydown="javascript: return event.keyCode == 69 ? false : true"></li>	
-							
+						    <li><a><span class="middleName">물품제목</span></a><input type="text" class="form-control goodsContents" id="goodsTitle" name="title" placeholder="물품제목을 입력하세요."></li><br>
+							<li><a><span class="middleName">물품가격</span></a><input type="text"  class="form-control goodsContents" id="goodsPrice" name="price" placeholder="물품가격을 입력하세요."></li><br>
+							<li><a><span class="middleName">핸드폰번호</span></a><input type="text" phoneOnly  class="form-control goodsContents" id="phone" name="phone" placeholder="-없이 핸드폰 번호를 입력해주세요." onkeydown="javascript: return event.keyCode == 69 ? false : true"></li><br>
 							
 				<div id="sel">		
 					<div id="sel1">					
@@ -428,7 +428,7 @@
                                 <label for="test5" class="trade">무료(판매자 부담)</label>
 							</li>
 							<div id="mainImg" class="middleName">메인 이미지</div>
-                            <input type="file" id="image" class="imgRegister1" accept=".jpg, .png">
+                            <input type="file" id="image" class="imgRegister1" accept=".jpg, .png"><br>
                          
 				<div id="a"><br>		  
                           <div id="sang" class="middleName">상세 이미지</div>                                        
@@ -598,6 +598,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	 		$("#free").remove();
 	 		$("#payInside").append("<input type='hidden' id='free' value='0' name='delivery_cost'>");
 	 	})
+	 	
 	 	
         $("input:text[priceOnly]").on("keyup", function() {
              $(this).val(($(this).val().replace(/[^0-9]/g,"")));
@@ -793,8 +794,6 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 					alert("가격을 입력하세요.");
 				} else if ($("#phone").val() == "") {
 					alert("핸드폰 번호를 입력하세요.");
-				} else if ($("#account").val() == "") {
-					alert("계좌를 입력하세요.");
 				} else if ($("#titleImg").html() == "") {
 					alert("메인 이미지를 입력하세요.");
 				} else if ($("#preview").text() == "") {
@@ -814,8 +813,6 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 					var price = parseInt($("#goodsPrice").val());
 					var phoneText = $("#phone").val();			
 					var regPhone = /(01[0|1|6|9|7])[-](\d{3}|\d{4})[-](\d{4}$)/g;	
-					var accountText = $("#account").val();
-					var regAccount = /^[\d]{12,15}$/g;
 					
 					if(!regContents.test(contentsText)){
 						alert('잘못된 내용 입니다.');
@@ -826,9 +823,6 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 					}else if(!regPhone.test(phoneText)){
 						alert('잘못된 휴대폰 번호입니다.');
 			            $('#phone').val("");	
-					}else if(!regAccount.test(accountText)){
-						alert('잘못된 계좌 번호입니다.');
-			            $('#account').val("");
 					}else if(price !=0){
 						if(price<1000){
 							alert("1000원 이상 가격을 입력하세요.");
@@ -869,12 +863,30 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	             },1000);
 	          });
 		});
-			
+		
+		var rgx1 = /\D/g;  // /[^0-9]/g 와 같은 표현
+		var rgx2 = /(\d+)(\d{3})/; 
+
+		function getNumber(obj){
+		     var num01;
+		     var num02;
+		     num01 = obj.value;
+		     num02 = num01.replace(rgx1,"");
+		     num01 = setComma(num02);
+		     obj.value =  num01;
+		}
+		function setComma(inNum){
+		     var outNum;
+		     outNum = inNum; 
+		     while (rgx2.test(outNum)) {
+		          outNum = outNum.replace(rgx2, '$1' + ',' + '$2');
+		      }
+		     return outNum;
+		}
+
 		</script>
 
    <script src="../resources/js/vendor/jquery-2.2.4.min.js"></script>
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.../resources/js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
-    crossorigin="anonymous"></script>
    <script src="../resources/js/vendor/bootstrap.min.js"></script>
    <script src="../resources/js/jquery.ajaxchimp.min.js"></script>
    <script src="../resources/js/jquery.nice-select.min.js"></script>
