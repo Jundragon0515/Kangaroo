@@ -38,8 +38,7 @@
 <link rel="stylesheet" href="../resources/css/magnific-popup.css">
 <link rel="stylesheet" href="../resources/css/main.css">
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script type="text/javascript"
-	src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+
 <script>
 $(function(){
 	<c:choose>
@@ -48,8 +47,7 @@ $(function(){
 		$(location).attr("href","login_main");
 	</c:when>
 	</c:choose>
-	var IMP = window.IMP; // 생략가능
-	IMP.init('imp81233823');
+	
     if("${id==null}"==true){
     	alert("로그인이 필요 합니다.");
     	$(location).attr("href","/");
@@ -61,44 +59,7 @@ $(function(){
     }
 	$("#payment_btn").on("click",function(){
 		var  amount = $("#donaMoney").val();
-		IMP.request_pay({
-		    pg : 'html5_inicis', // version 1.1.0부터 지원.
-		    pay_method : $("#donaMethod option:selected").val(),
-		    merchant_uid : 'merchant_' + new Date().getTime(),
-		    name : '포인트 충전',
-		    amount : amount,
-		    buyer_email : email,
-		    buyer_name : name,
-		    buyer_tel : tel,
-		    buyer_addr : '0',
-		    buyer_postcode : postcode,
-		    m_redirect_url : 'http://localhost/callback.su'
-		}, function(rsp) {
-		    if ( rsp.success ) {
-		        var msg = '결제가 완료되었습니다.';
-		        msg += '고유ID : ' + rsp.imp_uid;
-		        msg += '상점 거래ID : ' + rsp.merchant_uid;
-		        msg += '결제 금액 : ' + rsp.paid_amount;
-		        msg += '카드 승인번호 : ' + rsp.apply_num;
-		        msg += '감사합니다!';
-		        if(alert(msg)==null){
-		        	console.log("asd");
-				    	$.ajax({
-				    		url:"insert.po",
-				    		data:{
-				    			amount : $("#donaMoney").val()
-				    		},
-				    		type:"post"
-				    	}).done(function(resp){
-				    		$(location).attr("href","/toPoint");
-				    	});
-				}
-		    } else {
-		        var msg = '결제에 실패하였습니다.';
-		        msg += '에러내용 : ' + rsp.error_msg;   
-		        alert(msg);
-		    }
-		});
+		
 	});
 	$("#logout_na").on("click", function() {
 		 $.ajax({
@@ -194,6 +155,8 @@ $(function(){
 												href="/goMyPage">마이페이지</a></li>
 											<li class="nav-item "><a class="nav-link"
 												href="/toPoint">포인트충전</a></li>
+											<li class="nav-item "><a class="nav-link"
+												href="/toPoint_exc">포인트환급</a></li>
 											<li class="nav-item "><input type="button"
 												class="nav-link nav_b" id="logout_na" value="로그아웃"></li>
 										</ul></li>
@@ -207,8 +170,10 @@ $(function(){
 											<li class="nav-item "><a class="nav-link" href="/goCart">찜목록</a></li>
 											<li class="nav-item "><a class="nav-link"
 												href="/goMyPage">마이페이지</a></li>
-											<li class="nav-item "><a class="nav-link"
+												<li class="nav-item "><a class="nav-link"
 												href="/toPoint">포인트충전</a></li>
+											<li class="nav-item "><a class="nav-link"
+												href="/toPoint_exc">포인트환급</a></li>
 											<li class="nav-item "><input type="button"
 												class="nav-link nav_b" id="logout_ka" value="로그아웃"></li>
 										</ul></li>
@@ -224,6 +189,8 @@ $(function(){
 												href="/goMyPage">마이페이지</a></li>
 											<li class="nav-item "><a class="nav-link"
 												href="/toPoint">포인트충전</a></li>
+												<li class="nav-item "><a class="nav-link"
+												href="/toPoint_exc">포인트환급</a></li>
 											<li class="nav-item "><a class="nav-link" href="/logout">로그아웃</a></li>
 										</ul></li>
 								</c:when>
@@ -247,19 +214,19 @@ $(function(){
 			<div class="col-first">
 				<h1>포인트 충전</h1>
 				<nav class="d-flex align-items-center"> <a href="/">메인페이지<span
-					class="lnr lnr-arrow-right"></span></a> <a href="/topoint">포인트충전<span
+					class="lnr lnr-arrow-right"></span></a> <a href="/topoint_exc">포인트환급<span
 					class="lnr "></span></a> </nav>
 			</div>
 		</div>
 	</div>
 	</section>
 	<c:choose>
-		<c:when test="${logintype==null}">
+		<c:when test="${logintype==''}">
 			<div class="card text-center">
 				<div class="card-header">실패!</div>
 				<div class="card-body">
 					<h5 class="card-title">해당 서비스는 로그인이 필요합니다!</h5>
-					<p class="card-text">로그인 이후 포인트 충전을 이용 해주시기 바랍니다!</p>
+					<p class="card-text">로그인 이후 포인트 환급을 이용 해주시기 바랍니다!</p>
 					<a href="/login_main" class="btn btn-primary">로그인 하러 가기</a>
 				</div>
 				<div class="card-footer text-muted"></div>
@@ -269,7 +236,7 @@ $(function(){
 			<div class="header mt-5">
 				<div class="row ">
 					<div class="header col-lg-12 ">
-						<h1 style="color: #f7b825;" class="h1">충전하기</h1>
+						<h1 style="color: #f7b825;" class="h1">환급하기</h1>
 					</div>
 				</div>
 			</div>
@@ -286,23 +253,36 @@ $(function(){
 				</div>
 				<div class="main1 row pt-3 mt-4">
 					<div class="  col-lg-4 col-md-4 col-sm-4 ">
-						<h3 style="margin-top: 8px;">결제 방식</h3>
+						<h3 style="margin-top: 8px;">은행</h3>
 					</div>
-					<div class="  col-lg-8 col-md-8 col-sm-8 float-left">
-						<select id="donaMethod">
-							<option value="card">카드</option>
-							<option value="trans">실시간 계좌이체</option>
-							<option value="phone">휴대폰 소액결제</option>
+					<div class="col-lg-8 col-md-8 col-sm-8 float-left">
+						<select id="bank">
+							<option value="001">한국은행</option>
+							<option value="004">KB국민은행</option>
+							<option value="088">신한은행</option>
+							<option value="020">우리은행</option>
+							<option value="081">KEB하나은행</option>
+							<option value="089">케이뱅크</option>
+							<option value="090">카카오뱅크</option>
+							<option value="002">KDB산업은행</option>
+							<option value="003">IBK기업은행</option>
+							<option value="008">한국수출입은행</option>
+							<option value="011">NH농협은행</option>
+							<option value="023">SC제일은행</option>
+							<option value="027">한국시티은행</option>
+							<option value="045">새마을금고</option>
+							<option value="088">신한은행</option>
+							<option value="000">기타</option>
 						</select>
 					</div>
 				</div>
 				<div class=" main2 row mt-5">
 					<div class=" col-lg-4 col-md-4 col-sm-4">
-						<h3>결제 금액</h3>
+						<h3>환급 금액</h3>
 					</div>
 					<div class=" col-lg-8 col-md-8 col-sm-8">
-						<input type="text" class="form-control" name="donaMoney"
-							id="donaMoney" placeholder="충전하실 금액을 입력해 주세요.">
+						<input type="text" class="form-control" 
+							id="donaMoney" placeholder="환급하실 금액을 입력해 주세요." data-toggle="tooltip" data-placement="top" title="1 Point = 1 원 ">
 					</div>
 					<div class="col-lg-12 col-md-12 col-sm-12 mt-5 payment mb-5">
 						<input type="button" class="genric-btn primary-border circle"
