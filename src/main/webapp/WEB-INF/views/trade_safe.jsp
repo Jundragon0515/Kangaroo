@@ -175,6 +175,24 @@
    top: 100px;
 }
 
+/* 판매완료 표시 */
+.ongoing {
+   position: absolute;
+   width: 100%;
+   height: 100%;
+   margin-left:-1px;
+   background-color: gray;
+   opacity:0.5;
+   z-index:2;
+}
+
+.onging-img {
+    position: absolute;
+    width: 100%;
+    top: 30%;
+    z-index:100;
+}
+
 .back-to-top {text-decoration: none; display: none; color:#fe912b;}
 
 .back-to-top:hover {color: #818bb0}
@@ -509,7 +527,48 @@
                					<input type="checkbox" name="checkDelete" value="${temp.no }">
                				</c:when>
                			</c:choose>	
-                        <div class="single-product" style="margin-bottom: 15px;">
+                		<c:choose>
+               			<c:when test="${temp.onGoing=='n'}">
+               			<div class="single-product" style="margin-bottom: 15px;">
+                           <div class="card">
+                           	<img class="onging-img" src="../resources/img/banner/soldout.png">
+                             <button class="ongoing"></button>
+                              <a href="/used_detailPage?no=${temp.no}">
+                              <img class="img-fluid product-img-size" style="margin-bottom: 5px;"
+                                 src="/img/title/${temp.title_img}" alt=""></a>
+                              <div class="card-body" style="padding: 12px;">
+                                 <div class="row">
+                                    <div class="d-none d-lg-block col-lg-12">[${temp.category}]</div>
+                                 </div>
+                                 <div class="row">
+                                    <div class="col-lg-12">
+                                       <h4>${temp.title}</h4>
+                                    </div>
+                                 </div>
+                                 <div class="row">
+                                    <div class="col-lg-12">${temp.price}</div>
+                                 </div>
+                                 <div class="row">
+                                    <div class="col-sm-12 col-md-10 col-lg-8">${temp.joinDate}</div>
+                                    <div class="d-none d-xl-block col-lg-2"><i class="fas fa-eye fa-2x"></i></div>
+                                    <div class="col-sm-12 col-md-2 col-lg-2">${temp.viewCount}</div>
+                                 </div>
+                                 <div class="row product-details" style="padding-left: 10px;">
+                                    <div class="prd-bottom" style="margin-top: 5px;">
+                                       <a href="" class="social-info"> <span class="lnr lnr-heart"></span>
+                                          <p class="hover-text">Wishlist</p>
+                                       </a> <a href="/used_detailPage?no=${temp.no}" class="social-info">
+                                        <span class="lnr lnr-move"></span>
+                                          <p class="hover-text">view more</p>
+                                       </a>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+               		</c:when>
+               		<c:otherwise>
+               			<div class="single-product" style="margin-bottom: 15px;">
                            <div class="card">
                               <a href="/used_detailPage?no=${temp.no}">
                               <img class="img-fluid product-img-size" style="margin-bottom: 5px;"
@@ -533,23 +592,20 @@
                                  </div>
                                  <div class="row product-details" style="padding-left: 10px;">
                                     <div class="prd-bottom" style="margin-top: 5px;">
-                                       <a href="" class="social-info"> <span class="ti-bag"></span>
-                                          <p class="hover-text">add to bag</p>
+                                       <a href="" class="social-info"> <span class="lnr lnr-heart"></span>
+                                          <p class="hover-text">Wishlist</p>
                                        </a> <a href="/used_detailPage?no=${temp.no}" class="social-info">
                                         <span class="lnr lnr-move"></span>
                                           <p class="hover-text">view more</p>
                                        </a>
                                     </div>
                                  </div>
-
-
-                                 <!-- <div class="col-3">[1]</div>
-                                    <div class="col-9">[이름]</div> -->
-
                               </div>
                            </div>
                         </div>
-                     </div>
+               		</c:otherwise>
+               		</c:choose>
+               		</div>
                   </c:forEach>
                </div>
               </form> 
