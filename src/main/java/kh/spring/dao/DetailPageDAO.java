@@ -8,6 +8,7 @@ import kh.spring.dto.Auction_boardDTO;
 import kh.spring.dto.Auction_img_boardDTO;
 import kh.spring.dto.CommentDTO;
 import kh.spring.dto.OrderDTO;
+import kh.spring.dto.TenderDTO;
 import kh.spring.dto.Used_transaction_boardDTO;
 import kh.spring.dto.Used_transaction_img_boardDTO;
 
@@ -53,7 +54,13 @@ public class DetailPageDAO {
 	public int soldOut(int boardNum) {
 		return sst.update("DetailPageDAO.soldOut",boardNum);
 	}
+	public int soldOut_Auction(int boardNum) {
+		return sst.update("DetailPageDAO.soldOut_auction", boardNum);
+	}
 	public int pointUsing(OrderDTO dto) {
 		return sst.insert("DetailPageDAO.pointUsing", dto);
+	}
+	public TenderDTO topTender(int boardNum) {
+		return sst.selectOne("MemberDAO.topTender", boardNum);
 	}
 }
