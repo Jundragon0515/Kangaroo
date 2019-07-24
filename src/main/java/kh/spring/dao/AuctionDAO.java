@@ -291,5 +291,10 @@ public class AuctionDAO {
       return result;
    }
    
+   //조회수 업데이트
+   public void viewCountUpdate(int no) {
+	   sst.update("AuctionDAO.viewCountUpdate", no);
+   }
+   
    
 }

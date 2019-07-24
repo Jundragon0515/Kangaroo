@@ -478,4 +478,10 @@ public class GoodsTradeDAO {
       String result = this.naviSafeOptionCode(currentPage, recordCountPerPage, recordTotalCount);
       return result;
    }
+   
+   //조회수 업데이트
+   public void viewCountUpdate(int no) {
+	   sst.update("GoodsTradeDAO.viewCountUpdate", no);
+   }
+   
 }
