@@ -100,7 +100,7 @@ public class WriteController {
     	  return "redirect:"+ac.index(request);
       }
 
-      return "redirect:/";
+      return "redirect:"+ac.index(request);
    } //경매 글쓰기 완성 등록하면 홈으로가는 것
 
 
