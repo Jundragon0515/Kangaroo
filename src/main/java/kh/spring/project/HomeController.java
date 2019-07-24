@@ -32,13 +32,6 @@ public class HomeController {
 	public String home() { 		//홈
 		return "index";
 	}
-	@RequestMapping("/toPoint")
-	public String toPoint() { //포인트 충전
-		if(se.getAttribute("email")!=null) {
-			mes.setPoint();
-		}
-		return "point";
-	}
 	@RequestMapping("/login_main")
 	public String login_main() { // 로그인 메인페이지
 

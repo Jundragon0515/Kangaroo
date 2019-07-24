@@ -187,6 +187,8 @@ a{
 												href="/goMyPage">마이페이지</a></li>
 											<li class="nav-item "><a class="nav-link"
 												href="/toPoint">포인트충전</a></li>
+											<li class="nav-item "><a class="nav-link"
+												href="/toPoint_exc">포인트환급</a></li>
 											<li class="nav-item "><input type="button"
 												class="nav-link nav_b" id="logout_na" value="로그아웃"></li>
 										</ul></li>
@@ -200,8 +202,10 @@ a{
 											<li class="nav-item "><a class="nav-link" href="/goCart">찜목록</a></li>
 											<li class="nav-item "><a class="nav-link"
 												href="/goMyPage">마이페이지</a></li>
-											<li class="nav-item "><a class="nav-link"
+												<li class="nav-item "><a class="nav-link"
 												href="/toPoint">포인트충전</a></li>
+											<li class="nav-item "><a class="nav-link"
+												href="/toPoint_exc">포인트환급</a></li>
 											<li class="nav-item "><input type="button"
 												class="nav-link nav_b" id="logout_ka" value="로그아웃"></li>
 										</ul></li>
@@ -217,6 +221,8 @@ a{
 												href="/goMyPage">마이페이지</a></li>
 											<li class="nav-item "><a class="nav-link"
 												href="/toPoint">포인트충전</a></li>
+												<li class="nav-item "><a class="nav-link"
+												href="/toPoint_exc">포인트환급</a></li>
 											<li class="nav-item "><a class="nav-link" href="/logout">로그아웃</a></li>
 										</ul></li>
 								</c:when>
@@ -426,7 +432,7 @@ a{
                                     </div>
                                     </td>
                                     <td>
-                                    <h5><fmt:formatNumber value="${i.price}" pattern="#,###" /></h5>
+                                    <h5><fmt:formatNumber value="${i.point}" pattern="#,###" /></h5>
                                     </td>
                                     <td>
                                     <h5>${i.id }</h5>
@@ -440,8 +446,8 @@ a{
                                     </td>
                                     <td>
                                     <c:choose>
-                                    <c:when test="${i.onGoing=='Y' }">
-                                   	판매 진행 중
+                                    <c:when test="${i.onGoing=='y' }">
+                                   	경매 진행 중
                                     </c:when>
                                     <c:otherwise>
                                     	판매완료

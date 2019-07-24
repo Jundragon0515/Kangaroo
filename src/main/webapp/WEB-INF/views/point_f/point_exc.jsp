@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -20,8 +22,9 @@
 <meta charset="UTF-8">
 <!-- Site Title -->
 <title>Kangaroo Shop</title>
-<link rel="icon" type="image/png" sizes="32x32"
-	href="/favicon-32x32.png">
+<!--
+		CSS
+		============================================= -->
 <link rel="stylesheet" href="../resources/css/linearicons.css">
 <link rel="stylesheet" href="../resources/css/font-awesome.min.css">
 <link rel="stylesheet" href="../resources/css/themify-icons.css">
@@ -35,48 +38,111 @@
 <link rel="stylesheet" href="../resources/css/magnific-popup.css">
 <link rel="stylesheet" href="../resources/css/main.css">
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://unpkg.com/popper.js"></script>
+<script>
+
+var rgx1 = /\D/g;  // /[^0-9]/g 와 같은 표현
+var rgx2 = /(\d+)(\d{3})/; 
+var regAccount = /^[\d]{9,20}$/g;
+function getNumber(obj){
+    var num01;
+    var num02;
+    num01 = obj.value;
+    num02 = num01.replace(rgx1,"");
+    num01 = setComma(num02);
+    obj.value =  num01;
+}
+function getNumber2(obj){
+    var num01;
+    var num02;
+    num01 = obj.value;
+    num02 = num01.replace(rgx1,"");
+    obj.value =  num02;
+}
+function setComma(inNum){
+    var outNum;
+    outNum = inNum; 
+    while (rgx2.test(outNum)) {
+         outNum = outNum.replace(rgx2, '$1' + ',' + '$2');
+     }
+    return outNum;
+}
+$(function(){
+	<c:choose>
+	<c:when test="${logintype==null}">
+		alert("로그인이 필요합니다");
+		$(location).attr("href","login_main");
+	</c:when>
+	</c:choose>
+	$("#logout_na").on("click", function() {
+		 $.ajax({
+              url:"logout",
+              type:"get"
+           }).done(function(){
+              var naver=open("https://nid.naver.com/nidlogin.logout?returl=https://www.naver.com/", "_blank", "width=100,height=100");
+              setTimeout(function(){
+                 naver.close();
+                 location.reload(true);
+              },1000);
+           });
+	});
+	$("#logout_ka").on("click", function() {
+		 $.ajax({
+           url:"logout",
+           type:"get"
+        }).done(function(){
+           var kakao=open("https://developers.kakao.com/logout", "_blank", "width=100,height=100");
+           setTimeout(function(){
+              kakao.close();
+              location.reload(true);
+           },1000);
+        });
+	});
+	$('[data-toggle="tooltip"]').tooltip();
+	
+    if("${id==null}"==true){
+    	alert("로그인이 필요 합니다.");
+    	$(location).attr("href","/");
+    }else{
+    	var email="${email}";
+    }
+	$("#btn").on("click",function(){
+		var  money = Number($("#money").val().replace(/,/gi,""));
+		if($("#money").val()=="" || $("#account").val()=="" ){
+			alert("입력 되지 않은 값이 있습니다");
+		}else{
+			if(money > 999999999 || 1000 > money){
+				alert("금액이 너무 크거나 작습니다");
+			}else{
+				$.ajax({
+					url:"p_exc",
+					data:{
+						money:money
+					},
+				}).done(function(resp){
+					alert(resp);
+					$(location).attr("href","/toPoint_exc");
+				});
+			}
+		}
+	});
+	$("#account").on("focusout",function(){
+		var account=$("#account").val();
+		if(!regAccount.test(account)){
+			alert('잘못된 계좌 번호입니다.(9자 이상)');
+            $("#account").val("");
+		}
+	})
+
+});
+</script>
 <style>
-#layer {
-	top: 0;
-	right: 0;
-	bottom: 0;
-	left: 0;
-	height: 50%;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	display: -webkit-flex; -webkit-align-item; center;
-	-webkit-justify-content: center;
-}
-
-#row {
-	margin-top: 80px;
-	margin-bottom: 80px;
-	background-color: #ffffff95;
-	width: 300px;
-	height: 400px;
-	border-radius: 10px;
-}
-
-.row>div {
+.h1 {
 	text-align: center;
 }
 
-#login_btn, #kakao_login_btn, #sign_up_btn, #toMain_btn {
-	width: 222px;
-	height: 49px;
-}
-
-#naver_login_btn {
-	width: 222px;
-	height: 49px;
-	background-color: transparent;
-	border: none;
-	cursor: pointer;
-}
-
-b, sup, sub, u, del {
-	color: black;
+.payment {
+	text-align: center;
 }
 .nav_b {
 	border: 0px;
@@ -91,33 +157,14 @@ b, sup, sub, u, del {
 .nav_ul * {
 	text-align: center;
 }
+.nice-select .list{
+	overflow-y:scroll;
+	height:200px;
+}
 </style>
-<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
-<script>
-	$(function() {
-		<c:choose>
-		<c:when test="${logintype!=null}">
-			alert("로그아웃후 이용 가능합니다");
-			$(location).attr("href","/");
-		</c:when>
-		</c:choose>
-		$("#login_btn").on("click", function() {
-			location.href = "login";
-		});
-
-		$("#sign_up_btn").on("click", function() {
-			location.href = "insert";
-		});
-		$("#toMain_btn").on("click", function() {
-			location.href = "/";
-		});
-	});
-	onload = function() {
-	};
-</script>
 </head>
 <body>
-<header class="header_area sticky-header">
+	<header class="header_area sticky-header">
 		<div class="main_menu">
 			<nav class="navbar navbar-expand-lg navbar-light main_box">
 				<div class="container">
@@ -217,45 +264,96 @@ b, sup, sub, u, del {
 		<div
 			class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
 			<div class="col-first">
-				<h1>로그인 메인</h1>
+				<h1>포인트 충전</h1>
 				<nav class="d-flex align-items-center"> <a href="/">메인페이지<span
-					class="lnr lnr-arrow-right"></span></a> <a href="/login_main">로그인
-					메인<span class="lnr "></span>
-				</a> </nav>
+					class="lnr lnr-arrow-right"></span></a> <a href="/topoint_exc">포인트환급<span
+					class="lnr "></span></a> </nav>
 			</div>
 		</div>
 	</div>
 	</section>
-	<div class="mt-5 mb-5">
-		<span hidden="none">sad</span>
-	</div>
-	<div id="layer" class="my-5">
-		<div class="row" id="row">
-			<div class="col-12 my-1 mt-3">
-				<button id="login_btn" class="btn btn-primary">
-					<b>일반 로그인</b>
-				</button>
+	<c:choose>
+		<c:when test="${logintype==''}">
+			<div class="card text-center">
+				<div class="card-header">실패!</div>
+				<div class="card-body">
+					<h5 class="card-title">해당 서비스는 로그인이 필요합니다!</h5>
+					<p class="card-text">로그인 이후 포인트 환급을 이용 해주시기 바랍니다!</p>
+					<a href="/login_main" class="btn btn-primary">로그인 하러 가기</a>
+				</div>
+				<div class="card-footer text-muted"></div>
 			</div>
-			<div class="col-12 my-1">
-				<a id="kakao-login-btn"></a><a
-                        href="http://developers.kakao.com/logout"></a>
+		</c:when>
+		<c:otherwise>
+			<div class="header mt-5">
+				<div class="row ">
+					<div class="header col-lg-12 ">
+						<h1 style="color: #f7b825;" class="h1">환급하기</h1>
+					</div>
+				</div>
 			</div>
-			<div class="col-12 my-1">
-				<a href="login.na"><img height="49" width="222" src="../resources/img/naver.PNG" /></a>
+			<div class="container mt-5">
+				<div class=" main2 row mt-5">
+					<div class=" col-lg-4 col-md-4 col-sm-4">
+						<h3>현재 보유 포인트</h3>
+					</div>
+					<div class=" col-lg-8 col-md-8 col-sm-8">
+						<input type="text" class="form-control" 
+							 value="<fmt:formatNumber value="${point}" pattern="#,###" />" readonly>
+					</div>
+
+				</div>
+				<div class="main1 row pt-3 mt-4">
+					<div class="  col-lg-4 col-md-4 col-sm-4 ">
+						<h3 style="margin-top: 8px;">은행</h3>
+					</div>
+					<div class="col-lg-8 col-md-8 col-sm-8 float-left">
+						<select id="bank">
+							<option value="001">한국은행</option>
+							<option value="004">KB국민은행</option>
+							<option value="088">신한은행</option>
+							<option value="020">우리은행</option>
+							<option value="081">KEB하나은행</option>
+							<option value="089">케이뱅크</option>
+							<option value="090">카카오뱅크</option>
+							<option value="002">KDB산업은행</option>
+							<option value="003">IBK기업은행</option>
+							<option value="008">한국수출입은행</option>
+							<option value="011">NH농협은행</option>
+							<option value="023">SC제일은행</option>
+							<option value="027">한국시티은행</option>
+							<option value="045">새마을금고</option>
+							<option value="088">신한은행</option>
+							<option value="000">기타</option>
+						</select>
+					</div>
+				</div>
+				<div class=" main2 row mt-5">
+					<div class=" col-lg-4 col-md-4 col-sm-4">
+						<h3>계좌번호</h3>
+					</div>
+					<div class=" col-lg-8 col-md-8 col-sm-8">
+						<input type="text" class="form-control" 
+							id="account" placeholder="환급하실 은행의 계좌번호를 (-)를 제외하고 입력해 주세요." onchange="getNumber2(this);" onkeyup="getNumber2(this);">
+					</div>
+					
+				</div>
+				<div class=" main2 row mt-5">
+					<div class=" col-lg-4 col-md-4 col-sm-4">
+						<h3>환급 금액</h3>
+					</div>
+					<div class=" col-lg-8 col-md-8 col-sm-8">
+						<input type="text" class="form-control" 
+							id="money" placeholder="환급하실 금액을 입력해 주세요." requierd onchange="getNumber(this);" onkeyup="getNumber(this);" data-toggle="tooltip" data-placement="top" title="1 Point = 1 원 ">
+					</div>
+					<div class="col-lg-12 col-md-12 col-sm-12 mt-5 payment mb-5">
+						<input type="button" class="genric-btn primary-border circle"
+							id="btn" style="font-size: 1.5em" value="환급 하기" requierd>
+					</div>
+				</div>
 			</div>
-			<div class="col-12 mt-5">
-				<button id="sign_up_btn" class="btn btn-warning">
-					<b>회원가입</b>
-				</button>
-			</div>
-			<div class="col-12 my-2">
-				<button id="toMain_btn" class="btn btn-warning">
-					<b>메인화면으로 돌아가기</b>
-				</button>
-			</div>
-		</div>
-	</div>
-	<div class="mt-5 mb-5"></div>
+		</c:otherwise>
+	</c:choose>
 	<footer class="footer-area section_gap">
 	<div class="container">
 		<div class="row">
@@ -330,9 +428,7 @@ b, sup, sub, u, del {
 			<p class="footer-text m-0">
 				<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 				Copyright &copy;
-				<script>
-					document.write(new Date().getFullYear());
-				</script>
+				<script>document.write(new Date().getFullYear());</script>
 				All rights reserved | This template is made with <i
 					class="fa fa-heart-o" aria-hidden="true"></i> by <a
 					href="https://colorlib.com" target="_blank">Colorlib</a>
@@ -357,17 +453,5 @@ b, sup, sub, u, del {
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
 	<script src="../resources/js/gmaps.min.js"></script>
 	<script src="../resources/js/main.js"></script>
-	<script type='text/javascript'>
-		Kakao.init('473f4afca91d6d42fb0364e90c3df475');
-		Kakao.Auth.createLoginButton({
-			container : '#kakao-login-btn',
-			success : function(authObj) {
-				location.href = "login.ka";
-			},
-			fail : function(err) {
-				alert(JSON.stringify(err));
-			}
-		});
-	</script>
 </body>
 </html>

@@ -18,6 +18,9 @@ drop table tender;
 drop table comments;
 drop table order_t;
 drop table delivery;
+drop table trade_cart;
+drop table auction_cart;
+drop table comments2;
 drop sequence tender_seq;
 drop sequence comments_seq;
 drop sequence t_no_seq;
@@ -33,6 +36,7 @@ drop sequence p_u_no_seq;
 drop sequence p_c_no_seq;
 drop sequence order_seq;
 drop sequence delivery_seq;
+drop sequence comments_seq2;
 create table members( --회원가입 테이블
     id varchar(30) primary key,
     pw varchar(100) ,
@@ -188,7 +192,7 @@ create table auction_board( --경매 게시판
     trade_type varchar(30) not null, --어떤 종류 거래인지
     delivery varchar(30) default '무료배송', -- 선불/ 착불/ 무료배송
     delivery_cost number default 0 ,-- 택배비용
-    onGoing char(1) default 'Y' --진행중인지?
+    onGoing char(1) default 'y' --진행중인지?
 );
 
 create sequence a_no_seq
@@ -324,7 +328,7 @@ nomaxvalue;
 
 create table admin(		      -- 관리자(방문자 수) 테이블
 no number primary key,
-visitDay varchar2(50) default to_char(sysdate,'YY-MM-DD HH:mi:ss'),
+visitDate varchar2(50) default to_char(sysdate,'YY-MM-DD HH:mi:ss'),
 visitCount number not null
 );
 
@@ -351,5 +355,42 @@ nomaxvalue
 nominvalue
 nocycle
 nocache;
+
+create table trade_cart(   --찜 목록
+    id varchar(50),
+    no number not null,
+    title_img varchar(300) not null,
+    title varchar(100) not null,
+    trade_type varchar(30) not null,       -- 직거래? 안심거래?
+    delivery varchar(30) not null, -- 선불/ 착불/ 무료배송
+    price number not null
+);
+
+create table auction_cart(
+    id varchar(50),
+    no number not null,
+    title_img varchar(300) not null,
+    title varchar(100) not null,
+    end_date varchar(50) not null,
+    delivery varchar(30) not null,
+    price number not null
+);  
+create table comments2(-- 댓글
+    seq number primary key,
+    boardNum number not null,
+    id varchar(30) not null,
+    contents VARCHAR(500) not null,
+    time timestamp default sysdate,
+    ipaddress varchar(30) not null
+);
+
+create sequence comments_seq2
+start with 1
+increment by 1
+nocache
+nomaxvalue;
+
+
+update members set point = 1000000;
 insert into members values('admin@admin.com','13a95c75b44f95ead23f47f0bf10667e57b44ec5150180c8a39a39361cf56169','admin',null,default,null,null,null,default,'a','admin','우수','n','y');
 commit;
