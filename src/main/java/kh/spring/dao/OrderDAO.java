@@ -18,11 +18,11 @@ public class OrderDAO {
 	private SqlSessionTemplate sst;
 	@Autowired
 	private HttpSession se;
-	static int recordCountPerPage = 10;// 한 페이지에 보여줄 글 개수
+	static int recordCountPerPage = 5;// 한 페이지에 보여줄 글 개수
 	static int naviCountPerPage = 10;// 한페이지에 보여줄 페이지 번호 수
 	public List<OrderDTO> selectByBuyer(int currentPage,String buyer){
 		int endNum = currentPage * recordCountPerPage;
-		int startNum = endNum - 9;
+		int startNum = endNum - 4;
 		Map<String,String> map = new HashMap<>();
 		map.put("startNum", Integer.toString(startNum));
 		map.put("endNum", Integer.toString(endNum));
@@ -31,7 +31,7 @@ public class OrderDAO {
 	}
 	public List<OrderDTO> selectBySeller(int currentPage,String seller){
 		int endNum = currentPage * recordCountPerPage;
-		int startNum = endNum - 9;
+		int startNum = endNum - 4;
 		Map<String,String> map = new HashMap<>();
 		map.put("startNum", Integer.toString(startNum));
 		map.put("endNum", Integer.toString(endNum));

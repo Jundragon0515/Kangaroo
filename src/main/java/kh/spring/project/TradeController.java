@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import kh.spring.dto.Used_transaction_boardDTO;
 import org.springframework.web.servlet.ModelAndView;
 
-import kh.spring.dto.GoodsTradeDTO;
+import kh.spring.dto.Used_transaction_boardDTO;
 import kh.spring.service.GoodsTradeService;
 
 
@@ -65,15 +65,17 @@ public class TradeController {
    @RequestMapping("/tradeOption")
    public String directList(HttpServletRequest request) {
       List<Used_transaction_boardDTO> list = null;
+      String resultNavi = null;
       int currentPage = 0;
       String category = request.getParameter("category");
       String price = request.getParameter("price");
       String view = request.getParameter("view");
+      String search = request.getParameter("search");
       
       String selectCategory = (String)session.getAttribute("selectCategory");
       String selectPrice = (String)session.getAttribute("selectPrice");
       String selectView = (String)session.getAttribute("selectView");
-      
+      String selectSearch = (String)session.getAttribute("selectSearch");
       
       if(category!=null) {
          session.setAttribute("selectCategory", category);
@@ -85,7 +87,11 @@ public class TradeController {
       if(view!=null) {
          session.setAttribute("selectView", view);
       }
-      
+	  if(search!=null) {
+			System.out.println("검색어 :" +search);
+			session.setAttribute("selectSearch", "and title like" + "'%" + search + "%'");
+			String searchtext = (String)session.getAttribute("selectSearch");
+		}
       
       if(selectCategory==null) {
          session.setAttribute("selectCategory", " ");  
@@ -123,12 +129,20 @@ public class TradeController {
       
       System.out.println("컨트롤 start" + start);
       System.out.println("컨트롤 end" + end);
-      list = tradeService.directOption(session, start, end);
+      
+		if(search!=null) {
+			list = tradeService.directList_search(session, start, end);
+			resultNavi = tradeService.directBoardNavi_search(session, currentPage, recordCountPerPage);
+			int listSize = list.size();
+			
+			if(listSize==0) {
+				request.setAttribute("rsearch_result_null", "검색결과가 없습니다.");
+			}
+		}else {
+			list = tradeService.directOption(session, start, end);
+			resultNavi = tradeService.directBoardNaviOption(session, currentPage, recordCountPerPage);
+		}
 
-
-
-
-      String resultNavi = tradeService.directBoardNaviOption(session, currentPage, recordCountPerPage);
       /* request.setAttribute("recordTotalCount", list.size()); // 전체개수 */
       request.setAttribute("navi", resultNavi);
       request.setAttribute("list", list);
@@ -177,15 +191,17 @@ public class TradeController {
    @RequestMapping("/tradeOption_safe")
    public String safeList(HttpServletRequest request) {
       List<Used_transaction_boardDTO> list = null;
+      String resultNavi = null;
       int currentPage = 0;
       String category = request.getParameter("category");
       String price = request.getParameter("price");
       String view = request.getParameter("view");
+      String search = request.getParameter("search");
 
       String selectCategory = (String)session.getAttribute("selectCategory");
       String selectPrice = (String)session.getAttribute("selectPrice");
       String selectView = (String)session.getAttribute("selectView");
-      
+      String selectSearch = (String)session.getAttribute("selectSearch");
       
       if(category!=null) {
          session.setAttribute("selectCategory", category);
@@ -197,7 +213,11 @@ public class TradeController {
       if(view!=null) {
          session.setAttribute("selectView", view);
       }
-      
+      if(search!=null) {
+    	  System.out.println("검색어 :" +search);
+    	  session.setAttribute("selectSearch", "and title like" + "'%" + search + "%'");
+    	  String searchtext = (String)session.getAttribute("selectSearch");
+      }
       
       if(selectCategory==null) {
          session.setAttribute("selectCategory", " ");  
@@ -235,10 +255,20 @@ public class TradeController {
       
       System.out.println("컨트롤 start" + start);
       System.out.println("컨트롤 end" + end);
-      list = tradeService.safeOption(session, start, end);
-
-
-      String resultNavi = tradeService.safeBoardNaviOption(session, currentPage, recordCountPerPage);
+      
+		if(search!=null) {
+			list = tradeService.safeList_search(session, start, end);
+			resultNavi = tradeService.safeBoardNavi_search(session, currentPage, recordCountPerPage);
+			int listSize = list.size();
+			
+			if(listSize==0) {
+				request.setAttribute("rsearch_result_null", "검색결과가 없습니다.");
+			}
+		}else {
+			list = tradeService.safeOption(session, start, end);
+			resultNavi = tradeService.safeBoardNaviOption(session, currentPage, recordCountPerPage);
+		}
+		
       /* request.setAttribute("recordTotalCount", list.size()); // 전체개수 */
       request.setAttribute("navi", resultNavi);
       request.setAttribute("list", list);
@@ -250,6 +280,5 @@ public class TradeController {
    public String goodsTradeWrite() {
       return "goodsTradeWrite";
    }
-
 
 }

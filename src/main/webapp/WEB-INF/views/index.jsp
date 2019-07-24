@@ -43,6 +43,7 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
 </head>
 <style>
+
 .owl-nav {
 	top: 430px;
 }
@@ -57,6 +58,7 @@
 .nav_ul * {
 	text-align: center;
 }
+
 </style>
 <script>
 	$(function() {
@@ -66,24 +68,20 @@
 			client.subscribe("/response", function(list) {
 				var result = JSON.parse(list.body);
 				var z = 0;
-				$(".asd").text(result[0]);
-				$(".asd2").text(result[1]);
-				// 	 			<c:forEach var="i" items="${main_option_list}">
-				// 				$("."+"${i.no}").text(result[z++]);
-				// 				</c:forEach>
+					 			<c:forEach var="i" items="${main_option_list}">
+								$("."+"${i.no}").text(result[z++]);
+								</c:forEach>
 			});
 		})
 		setInterval(function() {//시간 보내 달라는 요청
 			var list = new Array();
-			list[0] = "2019-07-29 23:59:59";
-			list[1] = "2019-07-18 11:52:00";
-			// 			<c:forEach var="i" items="${main_option_list}">
-			// 				list.add("${i.end_date}");
-			// 			</c:forEach>
+						<c:forEach var="i" items="${main_option_list}">
+							list.push("${i.end_date}");
+						</c:forEach>
 			client.send("/app/time", {}, JSON.stringify({
 				end_dates : list
 			}));
-		}, 400);
+		}, 900);
 		
 		
 		$("#logout_na").on("click", function() {
@@ -135,21 +133,13 @@
 						id="navbarSupportedContent">
 						<ul class="nav navbar-nav menu_nav ml-auto">
 							<!-- 							<li class="nav-item active"><a class="nav-link" href="/">Home</a></li> -->
-							<li class="nav-item submenu dropdown"><a href="#"
-								class="nav-link dropdown-toggle" data-toggle="dropdown"
-								role="button" aria-haspopup="true" aria-expanded="false">중고
-									거래</a>
-								<ul class="dropdown-menu">
 									<li class="nav-item"><a class="nav-link" href="/trade">중고
 											직거래</a></li>
-									<li class="nav-item"><a class="nav-link" href="/trade">중고
+									<li class="nav-item"><a class="nav-link" href="/trade_safe">중고
 											안전거래</a></li>
 									<li class="nav-item"><a class="nav-link" href="/auction">중고
 											경매</a></li>
-								</ul></li>
-							<li class="nav-item "><a class="nav-link" href="/">고객센터</a></li>
 							<li class="nav-item "><a class="nav-link" href="/">공지사항</a></li>
-
 							<c:choose>
 								<c:when test="${logintype=='admin'}">
 									<li class="nav-item "><a class="nav-link" href="/admin">관리자페이지</a></li>
@@ -162,7 +152,7 @@
 											src="../resources/img/account.png" width="35px"></a>
 										<ul class="dropdown-menu nav_ul">
 											<li class="nav-item "><a class="nav-link" href="/goCart">찜목록</a></li>
-											<li class="nav-item active"><a class="nav-link"
+											<li class="nav-item "><a class="nav-link"
 												href="/goMyPage">마이페이지</a></li>
 											<li class="nav-item "><a class="nav-link"
 												href="/toPoint">포인트충전</a></li>
@@ -177,7 +167,7 @@
 											src="../resources/img/account.png" width="40px"></a>
 										<ul class="dropdown-menu nav_ul">
 											<li class="nav-item "><a class="nav-link" href="/goCart">찜목록</a></li>
-											<li class="nav-item active"><a class="nav-link"
+											<li class="nav-item "><a class="nav-link"
 												href="/goMyPage">마이페이지</a></li>
 											<li class="nav-item "><a class="nav-link"
 												href="/toPoint">포인트충전</a></li>
@@ -459,6 +449,7 @@
 		</div>
 	</footer>
 	<!-- End footer Area -->
+	
 	<script src="../resources/js/vendor/jquery-2.2.4.min.js"></script>
 	<script src="../resources/js/vendor/bootstrap.min.js"></script>
 	<script src="../resources/js/jquery.ajaxchimp.min.js"></script>

@@ -8,6 +8,7 @@
 <head>
 <!-- Mobile Specific Meta -->
 <meta name="viewport"
+
    content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <!-- Favicon-->
 <link rel="shortcut icon" href="img/fav.png">
@@ -21,16 +22,17 @@
 <meta charset="UTF-8">
 <!-- Site Title -->
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-<!-- 웹 소켓 cdn -->
-<script
-   src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.3.0/sockjs.min.js"></script>
-<script
-   src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.3.0/sockjs.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
 
- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet"
+   href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<script
+   src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script
+   src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script
+   src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 <title>상세 페이지</title>
 <!-- CSS ============================================= -->
@@ -42,33 +44,34 @@
 <link rel="stylesheet" href="../resources/css/nice-select.css">
 <link rel="stylesheet" href="../resources/css/nouislider.min.css">
 <link rel="stylesheet" href="../resources/css/ion.rangeSlider.css" />
+<link rel="stylesheet" href="../resources/css/font-awesome.min.css">
 <link rel="stylesheet"
    href="../resources/css/ion.rangeSlider.skinFlat.css" />
 <link rel="stylesheet" href="../resources/css/main.css">
 
 <style>
 body {
-	overflow-x: hidden;
+   overflow-x: hidden;
 }
 
 #rank {
-	width: 58%;
+	width: 100%;
 	margin: auto;
 	margin-top: 50px;
 	text-align: center;
 }
 
 .choi {
-	color: black;
-	text-align: center;
-	width: 150px;
+   color: black;
+   text-align: center;
+   width: 150px;
 }
 
 #money {
-	margin-top: 10px;
-	margin-left: 1em;
-	width: 300px;
-	text-align: center;
+   margin-top: 10px;
+   margin-left: 1em;
+   width: 300px;
+   text-align: center;
 }
 
 .detail-info {
@@ -98,8 +101,70 @@ body {
 .nav_ul * {
    text-align: center;
 }
+
+
+/* #presentMoney{ */
+
+/* "font-size: 25px; font-weight: 700; color: #ffba00; */
+/* } */
+
+#pp{
+	font-size: 25px; font-weight: 700; color: #ffba00;
+	margin: 0px;
+}
+#pt{
+	line-height: 33px;
+}
+
+/* 오른쪽 TOP 버튼 */
+.btn-fixed {
+   position: fixed;
+   top: 540px;
+   cursor:pointer;
+}
+
+.back-to-top {text-decoration: none; display: none; color:#fe912b;}
+
+.back-to-top:hover {color: #818bb0}
+
 </style>
 <script>
+$(function(){
+
+	
+	var socket = new SockJS("/gettime"); //불특정 다수의 브라우저일 경우를 위해 endpoint url 넣어야 한다
+	var client = Stomp.over(socket);//연결 이후의 작업 지원 
+	client.connect({}, function(resp) {
+		client.subscribe("/response", function(list) {
+			var result = JSON.parse(list.body);
+							$(".time").text(result[0]);
+		});
+	})
+	setInterval(function() {//시간 보내 달라는 요청
+		var list = new Array();
+		list.push("${dto.end_date}");
+		client.send("/app/time", {}, JSON.stringify({
+			end_dates : list
+		}));
+	}, 900);
+    var offset = 500;   // 수직으로 어느정도 움직여야 버튼이 나올까?
+    var duration = 600;   // top으로 이동할때까지의 animate 시간 (밀리세컨드, default는 400. 예제의 기본은 500)
+    $(window).scroll(function() {
+        if ($(this).scrollTop() > offset) {
+            $('.back-to-top').fadeIn(duration);
+        } else {
+            $('.back-to-top').fadeOut(duration);
+        }
+    });
+    
+    $('.back-to-top').click(function(event) {
+        event.preventDefault();
+        $('html, body').animate({scrollTop: 0}, duration);
+        return false;
+    })
+})    
+
+
 $("#logout_na").on("click", function() {
           $.ajax({
                    url:"logout",
@@ -127,8 +192,14 @@ $("#logout_na").on("click", function() {
 </script>
 </head>
 <body>
-   <!-- Start Header Area -->
-  <header class="header_area sticky-header">
+<div>
+	<!-- start fixbutton -->
+       <div class="d-none d-lg-block col-lg-1" style=padding-left:90%;>
+          <i class="fas fa-chevron-circle-up btn-fixed back-to-top fa-3x"></i>
+       </div>
+   	<!-- end fixbutton -->
+	<!-- Start Header Area -->
+	<header class="header_area sticky-header">
 		<div class="main_menu">
 			<nav class="navbar navbar-expand-lg navbar-light main_box">
 				<div class="container">
@@ -148,21 +219,13 @@ $("#logout_na").on("click", function() {
 						id="navbarSupportedContent">
 						<ul class="nav navbar-nav menu_nav ml-auto">
 							<!-- 							<li class="nav-item active"><a class="nav-link" href="/">Home</a></li> -->
-							<li class="nav-item submenu dropdown"><a href="#"
-								class="nav-link dropdown-toggle" data-toggle="dropdown"
-								role="button" aria-haspopup="true" aria-expanded="false">중고
-									거래</a>
-								<ul class="dropdown-menu">
 									<li class="nav-item"><a class="nav-link" href="/trade">중고
 											직거래</a></li>
-									<li class="nav-item"><a class="nav-link" href="/trade">중고
+									<li class="nav-item"><a class="nav-link" href="/trade_safe">중고
 											안전거래</a></li>
 									<li class="nav-item"><a class="nav-link" href="/auction">중고
 											경매</a></li>
-								</ul></li>
-							<li class="nav-item "><a class="nav-link" href="/">고객센터</a></li>
 							<li class="nav-item "><a class="nav-link" href="/">공지사항</a></li>
-
 							<c:choose>
 								<c:when test="${logintype=='admin'}">
 									<li class="nav-item "><a class="nav-link" href="/admin">관리자페이지</a></li>
@@ -174,8 +237,8 @@ $("#logout_na").on("click", function() {
 										role="button" aria-haspopup="true" aria-expanded="false"><img
 											src="../resources/img/account.png" width="35px"></a>
 										<ul class="dropdown-menu nav_ul">
-											<li class="nav-item "><a class="nav-link" href="/">찜목록</a></li>
-											<li class="nav-item active"><a class="nav-link"
+											<li class="nav-item "><a class="nav-link" href="/goCart">찜목록</a></li>
+											<li class="nav-item "><a class="nav-link"
 												href="/goMyPage">마이페이지</a></li>
 											<li class="nav-item "><a class="nav-link"
 												href="/toPoint">포인트충전</a></li>
@@ -189,8 +252,8 @@ $("#logout_na").on("click", function() {
 										role="button" aria-haspopup="true" aria-expanded="false"><img
 											src="../resources/img/account.png" width="40px"></a>
 										<ul class="dropdown-menu nav_ul">
-											<li class="nav-item "><a class="nav-link" href="/">찜목록</a></li>
-											<li class="nav-item active"><a class="nav-link"
+											<li class="nav-item "><a class="nav-link" href="/goCart">찜목록</a></li>
+											<li class="nav-item "><a class="nav-link"
 												href="/goMyPage">마이페이지</a></li>
 											<li class="nav-item "><a class="nav-link"
 												href="/toPoint">포인트충전</a></li>
@@ -204,7 +267,7 @@ $("#logout_na").on("click", function() {
 										role="button" aria-haspopup="true" aria-expanded="false"><img
 											src="../resources/img/account.png" width="40px"></a>
 										<ul class="dropdown-menu nav_ul">
-											<li class="nav-item "><a class="nav-link" href="/">찜목록</a></li>
+											<li class="nav-item "><a class="nav-link" href="/goCart">찜목록</a></li>
 											<li class="nav-item "><a class="nav-link"
 												href="/goMyPage">마이페이지</a></li>
 											<li class="nav-item "><a class="nav-link"
@@ -224,69 +287,76 @@ $("#logout_na").on("click", function() {
 			</nav>
 		</div>
 	</header>
-   <!-- End Header Area -->
 
-   <!-- Start Banner Area -->
-   <section class="banner-area organic-breadcrumb">
-      <div class="container">
-         <div
-            class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
-            <div class="col-first">
-               <h1>Product Details Page</h1>
-               <nav class="d-flex align-items-center">
-                  <a href="index.html">Home<span class="lnr lnr-arrow-right"></span></a>
-                  <a href="#">Shop<span class="lnr lnr-arrow-right"></span></a> <a
-                     href="single-product.html">product-details</a>
-               </nav>
-            </div>
-         </div>
-      </div>
-   </section>
-   <!-- End Banner Area -->
+	<!-- End Header Area -->
 
-   <!--================Single Product Area =================-->
-   <div class="product_image_area">
-      <div class="container">
-         <div class="row s_product_inner">
-            <div class="col-lg-6">
-            <!--이미지 미리보기 -->
-               <div id="carouselExampleIndicators" class="carousel slide"
-                  data-ride="carousel">
-                  <ol class="carousel-indicators">
-                     <li data-target="#carouselExampleIndicators" data-slide-to="0"
-                        class="active"></li>
-                     <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                     <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                  </ol>
-                  <div class="carousel-inner">
-                     <div class="carousel-item active">
-                        <img src="img/title/${i_dto.title_img }" class="d-block w-100" onerror="this.style.display='none'" alt=''>
-                     </div>
-                     <div class="carousel-item">
-                        <img src="img/middle/${i_dto.middle1_img }" class="d-block w-100" onerror="this.style.display='none'" alt=''>
-                     </div>
-                     <div class="carousel-item">
-                        <img src="img/middle/${i_dto.middle2_img }" class="d-block w-100" onerror="this.style.display='none'" alt=''>
-                     </div>
-                     <div class="carousel-item">
-                        <img src="img/middle/${i_dto.middle3_img }" class="d-block w-100" onerror="this.style.display='none'" alt=''>
-                     </div>
-                  </div>
-                  <a class="carousel-control-prev" href="#carouselExampleIndicators"
-                     role="button" data-slide="prev"> <span
-                     class="carousel-control-prev-icon" aria-hidden="true"></span> <span
-                     class="sr-only">Previous</span>
-                  </a> <a class="carousel-control-next"
-                     href="#carouselExampleIndicators" role="button" data-slide="next">
-                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                     <span class="sr-only">Next</span>
-                  </a>
-               </div>
+	<!-- Start Banner Area -->
+	<section class="banner-area organic-breadcrumb">
+		<div class="container">
+			<div
+				class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+				<div class="col-first">
+					<h1>Product Details Page</h1>
+					<nav class="d-flex align-items-center">
+						<a href="index.html">Home<span class="lnr lnr-arrow-right"></span></a>
+						<a href="#">Shop<span class="lnr lnr-arrow-right"></span></a> <a
+							href="single-product.html">product-details</a>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- End Banner Area -->
 
-            </div>
-            <div class="col-lg-5 offset-lg-1">
-               <div class="s_product_text1">
+	<!--================Single Product Area =================-->
+	<div class="product_image_area">
+		<div class="container">
+			<div class="row s_product_inner">
+				<div class="col-lg-6">
+					<!--이미지 미리보기 -->
+					<div id="carouselExampleIndicators" class="carousel slide"
+						data-ride="carousel">
+						<ol class="carousel-indicators">
+							<li data-target="#carouselExampleIndicators" data-slide-to="0"
+								class="active"></li>
+							<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+							<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+						</ol>
+						<div class="carousel-inner">
+							<div class="carousel-item active">
+								<img src="img/title/${i_dto.title_img }" class="d-block w-100"
+									onerror="this.style.display='none'" alt='' height=400px; width=auto;>
+							</div>
+							<div class="carousel-item">
+								<img src="img/middle/${i_dto.middle1_img }"
+									class="d-block w-100" onerror="this.style.display='none'"
+									alt='' height=400px; width=auto;>
+							</div>
+							<div class="carousel-item">
+								<img src="img/middle/${i_dto.middle2_img }"
+									class="d-block w-100" onerror="this.style.display='none'"
+									alt='' height=400px; width=auto;>
+							</div>
+							<div class="carousel-item">
+								<img src="img/middle/${i_dto.middle3_img }"
+									class="d-block w-100" onerror="this.style.display='none'"
+									alt='' height=400px; width=auto;>
+							</div>
+						</div>
+						<a class="carousel-control-prev" href="#carouselExampleIndicators"
+							role="button" data-slide="prev"> <span
+							class="carousel-control-prev-icon" aria-hidden="true"></span> <span
+							class="sr-only">Previous</span>
+						</a> <a class="carousel-control-next"
+							href="#carouselExampleIndicators" role="button" data-slide="next">
+							<span class="carousel-control-next-icon" aria-hidden="true"></span>
+							<span class="sr-only">Next</span>
+						</a>
+					</div>
 
+				</div>
+				<div class="col-lg-5 offset-lg-1">
+					<div class="s_product_text1">
 
                   <div class="container">
                      <table class="table">
@@ -294,8 +364,8 @@ $("#logout_na").on("click", function() {
                            <h3 style="text-align: right; padding-right: 30px;">${dto.title }</h3>
                         </tr>
                         <tbody>
-                           <tr id="presentMoney">
-                              <td id=pt>현재가</td>
+                           <tr>
+                              <td id=pt style=padding-bottom:0px;>현재가</td>
 										<th id="presentMoney">
 											<h2 id=pp class=detail-info>
 												<fmt:formatNumber value="${dto.present_price }"
@@ -306,7 +376,7 @@ $("#logout_na").on("click", function() {
                            </tr>
                            <tr>
                               <td>남은 시간</td>
-                              <th id=rt class=detail-info></th>
+                              <th id=rt class="detail-info time"></th>
                            </tr>
                            <tr>
                               <td>물품번호</td>
@@ -348,14 +418,15 @@ $("#logout_na").on("click", function() {
                         </tbody>
                      </table>
                   </div>
+						
 
-<!--                   <div class="card_area d-flex align-items-center"> -->
-<!--                      <a class="primary-btn" href="#">Add to Cart</a> <a -->
-<!--                         class="icon_btn" href="#"><i class="lnr lnr lnr-diamond"></i></a> -->
-<!--                      <a class="icon_btn" href="#"><i class="lnr lnr lnr-heart"></i></a> -->
-<!--                   </div> -->
+						<!--                   <div class="card_area d-flex align-items-center"> -->
+						<!--                      <a class="primary-btn" href="#">Add to Cart</a> <a -->
+						<!--                         class="icon_btn" href="#"><i class="lnr lnr lnr-diamond"></i></a> -->
+						<!--                      <a class="icon_btn" href="#"><i class="lnr lnr lnr-heart"></i></a> -->
+						<!--                   </div> -->
 
-<!--                   입찰창 -->
+						<!--                   입찰창 -->
 						<div class="card_area d-flex align-items-center">
 							<form class="form-inline" id="tender">
 								<input type="text" class="form-control mb-2 mr-sm-2" id="money"
@@ -373,6 +444,9 @@ $("#logout_na").on("click", function() {
    </div>
    <!--================End Single Product Area =================-->
 
+<section class="product_description_area p-0">
+      <div class="container">
+
 <table class="table" id="rank">
 		<thead>
 			<tr>
@@ -385,40 +459,103 @@ $("#logout_na").on("click", function() {
 		<tbody id="rankContents">
 		</tbody>
 	</table>
+</div></section>
 
 
 
-<!-- tender 웹 소켓 -->
-
-
-	<script>
+   <script>
    
-// // 	var socket = new SockJS("/webchat2");
-// // 	var client = Stomp.over(socket);
-	
-// // 	client.connect({},function(resp){
-// // 		console.log(resp);
-// // 		client.subscribe("/response2",function(msg){
-// // 			alert("여");
-// // 		});
-// // 	});
+		var lastPrice = 0;
+	      var current = ${currentMoney};
 
-	if(${dto.present_price ==0}){
+	      var tenderCount = Number($("#tenderCount").html());
+    	var socket = new SockJS("/gettime");
+		var client = Stomp.over(socket);
 		
-		var m = "";
-   	   
-   	   m+='<h2 id=pp class=detail-info>'+addCom(${dto.starting_price })+' 원</h2></th>';
+		client.connect({},function(resp){
 			
-		   $("#presentMoney").html(m);
+			client.subscribe("/response2",function(msg){
+				var result=  JSON.parse(msg.body);
+				var a ="";
+                
+				console.log(result[4]);
+				
+                if(result[4]!=undefined){
+                   a+='<tr>';
+                   a+='<th scope="row" class="choi"></th>';
+                   a+='<td>'+result[4].id+'</td>'
+                   a+='<td>'+addCom(Number(result[4].point))+" 원"+'</td>'
+                   a+='<td>'+result[4].time+'</td>'
+                   a+='</tr>'
+                }
+                if(result[3]!=undefined){
+                   a+='<tr>';
+                   a+='<th scope="row" class="choi"></th>';
+                   a+='<td>'+result[3].id+'</td>'
+                   a+='<td>'+addCom(Number(result[3].point))+" 원"+'</td>'
+                   a+='<td>'+result[3].time+'</td>'
+                   a+='</tr>'
+                }
+                if(result[2]!=undefined){
+                   a+='<tr>';
+                   a+='<th scope="row" class="choi"></th>';
+                   a+='<td>'+result[2].id+'</td>'
+                   a+='<td>'+addCom(Number(result[2].point))+" 원"+'</td>'
+                   a+='<td>'+result[2].time+'</td>'
+                   a+='</tr>'
+                }
+                if(result[1]!=undefined){
+                   a+='<tr>';
+                   a+='<th scope="row" class="choi"></th>';
+                   a+='<td>'+result[1].id+'</td>'
+                   a+='<td>'+addCom(Number(result[1].point))+" 원"+'</td>'
+                   a+='<td>'+result[1].time+'</td>'
+                   a+='</tr>'
+                }
+                if(result[0]!=undefined){
+                   a+='<tr>';
+                   a+='<th scope="row" class="choi">최고 입찰</th>';
+                   a+='<td>'+result[0].id+'</td>'
+                   a+='<td>'+addCom(Number(result[0].point))+" 원"+'</td>'
+                   a+='<td>'+result[0].time+'</td>'
+                   a+='</tr>'
+                }
+                
+                $("#rankContents").html(a);
+                
+                
+                var m = "";
+                m+='<h2 id=pp class=detail-info>'+addCom(Number(result[0].point))+' 원</h2></th>';
+           	   
+					
+				   $("#presentMoney").html(m);
+				
+				   tenderCount++;
+				   $("#tenderCount").html(tenderCount);
+				   
+				   
+				   lastPrice=Number(result[0].point);
+				   console.log("lastp" + " : "  + lastPrice + "current" + " : " + current);
+				   
+			});
+		});
 		
-	}
-	
-			function addCom(num) {
-				  var regexp = /\B(?=(\d{3})+(?!\d))/g;
-				  return num.toString().replace(regexp, ',');
-				}
-			
-			
+   if(${dto.present_price ==0}){
+      
+      var m = "";
+         
+         m+='<h2 id=pp class=detail-info>'+addCom(${dto.starting_price })+' 원</h2></th>';
+         
+         $("#presentMoney").html(m);
+      
+   }
+   
+         function addCom(num) {
+              var regexp = /\B(?=(\d{3})+(?!\d))/g;
+              return num.toString().replace(regexp, ',');
+            }
+         
+         
          var rgx1 = /\D/g;  // /[^0-9]/g 와 같은 표현
          var rgx2 = /(\d+)(\d{3})/; 
 
@@ -485,155 +622,162 @@ $("#logout_na").on("click", function() {
    
    $("#rankContents").html(s);
    
-      var current = ${currentMoney};
       var myMoney = ${myMoney};
       
       $("#tend").on("click",function(){
-    	  
-	  
-    	  if(${email==null}){
-    		  alert("로그인 하세요");
-    		  return false;
-    	  }
-    	  
-    	  if($("#money").val()==""){
-    		  alert("입찰 금액을 입력해주세요.");
-    		  return false;
-    	  }
-    	  
-    		if(${dto.present_price ==0}){
-    			
-    			var m = "";
-    	   	   
-    	   	   m+='<h2 id=pp class=detail-info>'+addCom(${dto.starting_price })+' 원</h2></th>';
-    				
-    			   $("#presentMoney").html(m);
-    			
-    		}
+         
+     
+         if(${email==null}){
+            alert("로그인 하세요");
+            return false;
+         }
+         
+         if($("#money").val()==""){
+            alert("입찰 금액을 입력해주세요.");
+            return false;
+         }
+         
+          if(${dto.present_price ==0}){
+             
+             var m = "";
+                
+                m+='<h2 id=pp class=detail-info>'+addCom(${dto.starting_price })+' 원</h2></th>';
+                
+                $("#presentMoney").html(m);
+             
+          }
 
     	  var number = $("#money").val().replace(/,/gi,"");
-    	  var money = Number(number);
-    	  var min = Number(${dto.min_price });
+    	  var money = Number(number);//입찰하려는 가격
+    	  var min = Number(${dto.min_price });//최소입찰단위
     	  
     	  var currentMoney = 0;
     	  
-    	  if(${dto.present_price }==0){
-    		  currentMoney=${dto.starting_price };
+    	  if(${dto.present_price }==0){//현재가가 0원일때
+    		  currentMoney=${dto.starting_price };//시작가로 대체한다.
+    		  lastPrice=Number(${dto.starting_price });
+    		  if(money<currentMoney+min){
+    			  alert("최소 입찰 금액은 " + addCom(currentMoney+min) + " 원 입니다.");
+    			  $("#money").val(addCom(Number(currentMoney+min)));
+    			  return false
+    		  }
     	  }else{
-    		  currentMoney=Number(${dto.present_price });
+    		  currentMoney=Number(${dto.present_price });//현재가가 0원이 아니라면 현재가로 가겠다
+    		  lastPrice=Number(${dto.present_price });
+    		  if(money<currentMoney+min){
+    			  alert("최소 입찰 금액은 " + addCom(current+min) + " 원 입니다.");
+    			  $("#money").val(addCom(Number(current+min)));
+    			  return false;
+    		  }
     	  }
     	  
     	  
-    	  var firstPrice =Number(${dto.starting_price });
+    	  var firstPrice =Number(${dto.starting_price });//시작가
     	  if(money<=firstPrice){
-    		  alert("최소 입찰 금액은  "+ addCom(currentMoney+min) +" 원 입니다.");
-              $("#money").val(addCom(currentMoney+min));
+    		  alert("최소 입찰 금액은 "+ addCom(current+min) +" 원 입니다.");
+    		  console.log("여기서도 확인" + " : " + lastPrice + " : " + min);
+              $("#money").val(addCom(Number(current+min)));
               return false;
-    	  }
-    	  
-         if(money<current+min){
-            alert("최소 입찰 금액은  "+ addCom(currentMoney+min) +" 원 입니다.");
-            $("#money").val(addCom(currentMoney+min));
-            return false;
-         }else{
+    	  }else{
+    		  
             if(myMoney<money){
                alert("보유 잔액이 부족 합니다.");
                $("#money").val("");
                return false;
             }else{
                
-          	  var result = confirm("정말 입찰하시겠습니까?");
-        	  
-        	  if(result==false){
-        		  $("#money").val("");
-        		  return false;
-        	  }
-            	
+               var result = confirm("정말 입찰하시겠습니까?");
+             
+             if(result==false){
+                $("#money").val("");
+                return false;
+             }
+               
                $.ajax({
                   url:"/tender",
                   data:{"money":money,"boardNum":${dto.no },"title":"${dto.title }","img":"${i_dto.title_img }"},
                   dataType:"JSON"
                }).done(function(resp){
                   
+
+            	   
                   if(resp!=null){
                      
                      console.log(resp);
                      
-                     var s ="";
+//                      var s ="";
                      
-                     if(resp[4]!=null){
-                        s+='<tr>';
-                        s+='<th scope="row" class="choi"></th>';
-                        s+='<td>'+resp[4].id+'</td>'
-                        s+='<td>'+addCom(resp[4].point)+" 원"+'</td>'
-                        s+='<td>'+resp[4].time+'</td>'
-                        s+='</tr>'
-                     }
-                     if(resp[3]!=null){
-                        s+='<tr>';
-                        s+='<th scope="row" class="choi"></th>';
-                        s+='<td>'+resp[3].id+'</td>'
-                        s+='<td>'+addCom(resp[3].point)+" 원"+'</td>'
-                        s+='<td>'+resp[3].time+'</td>'
-                        s+='</tr>'
-                     }
-                     if(resp[2]!=null){
-                        s+='<tr>';
-                        s+='<th scope="row" class="choi"></th>';
-                        s+='<td>'+resp[2].id+'</td>'
-                        s+='<td>'+addCom(resp[2].point)+" 원"+'</td>'
-                        s+='<td>'+resp[2].time+'</td>'
-                        s+='</tr>'
-                     }
-                     if(resp[1]!=null){
-                        s+='<tr>';
-                        s+='<th scope="row" class="choi"></th>';
-                        s+='<td>'+resp[1].id+'</td>'
-                        s+='<td>'+addCom(resp[1].point)+" 원"+'</td>'
-                        s+='<td>'+resp[1].time+'</td>'
-                        s+='</tr>'
-                     }
-                     if(resp[0]!=null){
-                        s+='<tr>';
-                        s+='<th scope="row" class="choi">최고 입찰</th>';
-                        s+='<td>'+resp[0].id+'</td>'
-                        s+='<td>'+addCom(resp[0].point)+" 원"+'</td>'
-                        s+='<td>'+resp[0].time+'</td>'
-                        s+='</tr>'
-                     }
-                     $("#rankContents").html(s);
+//                      if(resp[4]!=null){
+//                         s+='<tr>';
+//                         s+='<th scope="row" class="choi"></th>';
+//                         s+='<td>'+resp[4].id+'</td>'
+//                         s+='<td>'+addCom(resp[4].point)+" 원"+'</td>'
+//                         s+='<td>'+resp[4].time+'</td>'
+//                         s+='</tr>'
+//                      }
+//                      if(resp[3]!=null){
+//                         s+='<tr>';
+//                         s+='<th scope="row" class="choi"></th>';
+//                         s+='<td>'+resp[3].id+'</td>'
+//                         s+='<td>'+addCom(resp[3].point)+" 원"+'</td>'
+//                         s+='<td>'+resp[3].time+'</td>'
+//                         s+='</tr>'
+//                      }
+//                      if(resp[2]!=null){
+//                         s+='<tr>';
+//                         s+='<th scope="row" class="choi"></th>';
+//                         s+='<td>'+resp[2].id+'</td>'
+//                         s+='<td>'+addCom(resp[2].point)+" 원"+'</td>'
+//                         s+='<td>'+resp[2].time+'</td>'
+//                         s+='</tr>'
+//                      }
+//                      if(resp[1]!=null){
+//                         s+='<tr>';
+//                         s+='<th scope="row" class="choi"></th>';
+//                         s+='<td>'+resp[1].id+'</td>'
+//                         s+='<td>'+addCom(resp[1].point)+" 원"+'</td>'
+//                         s+='<td>'+resp[1].time+'</td>'
+//                         s+='</tr>'
+//                      }
+//                      if(resp[0]!=null){
+//                         s+='<tr>';
+//                         s+='<th scope="row" class="choi">최고 입찰</th>';
+//                         s+='<td>'+resp[0].id+'</td>'
+//                         s+='<td>'+addCom(resp[0].point)+" 원"+'</td>'
+//                         s+='<td>'+resp[0].time+'</td>'
+//                         s+='</tr>'
+//                      }
+//                      $("#rankContents").html(s);
                      current=resp[0].point;
                      
                      alert("입찰 되었습니다");
                      $("#money").val("");
                      
                      $.ajax({
-                  	   url:"/currentPrice",
-                  		data:{"boardNum":${dto.no }}
+                        url:"/currentPrice",
+                        data:{"boardNum":${dto.no }}
                      }).done(function(resp){
                   	 
                   	   console.log(addCom(resp))
                   	   
                   	   var m = "";
                   	   
-                  	   m+='<h2 id=pp class=detail-info>'+addCom(resp)+' 원</h2></th>';
+//                   	   m+='<h2 id=pp class=detail-info>'+addCom(resp)+' 원</h2></th>';
       					
-      				   $("#presentMoney").html(m);
+//       				   $("#presentMoney").html(m);
                      }); 
-                     
-//          			client.send("/app2/chat2",{}, JSON.stringify({boardNum : ${dto.no }}));
-                     
                   }else{
                      alert("입찰 실패");
                   }
                   
                   $.ajax({
-                	  url:"/tenderCount",
-                	  data:{"boardNum":${dto.no }}
+                     url:"/tenderCount",
+                     data:{"boardNum":${dto.no }}
                   }).done(function(resp){
-                	  $("#tenderCount").html(resp);
+//                 	  $("#tenderCount").html(resp);
                   });
                   
+                  client.send("/app/chat2",{}, JSON.stringify({boardNum:${dto.no }}));
                   
                }).fail(function(resp){
 
@@ -643,6 +787,8 @@ $("#logout_na").on("click", function() {
                  
                })
    
+				//////////////////////////////////웹 소켓
+              
             }
          }
       });
@@ -650,220 +796,242 @@ $("#logout_na").on("click", function() {
       
    </script>
 
+	<!--================Product Description Area =================-->
+	<section class="product_description_area">
+		<div class="container">
+			<ul class="nav nav-tabs" id="myTab" role="tablist">
+				<li class="nav-item"><a class="nav-link active" id="home-tab"
+					data-toggle="tab" href="#home" role="tab" aria-controls="home"
+					aria-selected="true">물품정보</a></li>
+				<li class="nav-item"><a class="nav-link" id="profile-tab"
+					data-toggle="tab" href="#profile" role="tab"
+					aria-controls="profile" aria-selected="false">판매자 정보</a></li>
+				<li class="nav-item"><a class="nav-link" id="contact-tab"
+					data-toggle="tab" href="#contact" role="tab"
+					aria-controls="contact" aria-selected="false">배송/반품</a></li>
+				<li class="nav-item"><a class="nav-link" id="review-tab"
+					data-toggle="tab" href="#review" role="tab" aria-controls="review"
+					aria-selected="false" onclick="fnMove()">문의 및 댓글</a></li>
+			</ul>
+			<div class="tab-content" id="myTabContent">
+				<div class="tab-pane fade active show" id="home" role="tabpanel"
+					aria-labelledby="home-tab" style="text-align: center;">
+					<!-- 물품정보 -->
+					<div class="col-md-62">
+						<p style="text-align: left; font-size: 25px; line-height: 40px; padding-left: 60px; padding-right: 60px; padding-top: 30px;">
+							${dto.contents }</p>
+					</div>
+					<br> <br> <br>
+         
+					<!-- 상세 이미지  -->
+					<div class="selector">
+						<img src="img/title/${i_dto.title_img }"
+							onerror="this.style.display='none'" alt=''>
+					</div>
+					<br>
+					<div class="selector">
+						<img src="img/middle/${i_dto.middle1_img }"
+							onerror="this.style.display='none'" alt=''>
+					</div>
+					<br>
+					<div class="selector">
+						<img src="img/middle/${i_dto.middle2_img }"
+							onerror="this.style.display='none'" alt=''>
+					</div>
+					<br>
+					<div class="selector">
+						<img src="img/middle/${i_dto.middle3_img }"
+							onerror="this.style.display='none'" alt=''>
+					</div>
+					<br>
+					<div class="selector">
+						<img src="img/middle/${i_dto.middle4_img }"
+							onerror="this.style.display='none'" alt=''>
+					</div>
+					<br>
+					<div class="selector">
+						<img src="img/middle/${i_dto.middle5_img }"
+							onerror="this.style.display='none'" alt=''>
+					</div>
+					<br>
+					<div class="selector">
+						<img src="img/middle/${i_dto.middle6_img }"
+							onerror="this.style.display='none'" alt=''>
+					</div>
+					<br>
+					<div class="selector">
+						<img src="img/middle/${i_dto.middle7_img }"
+							onerror="this.style.display='none'" alt=''>
+					</div>
+					<br>
+					<div class="selector">
+						<img src="img/middle/${i_dto.middle8_img }"
+							onerror="this.style.display='none'" alt=''>
+					</div>
+					<br>
+					<div class="selector">
+						<img src="img/middle/${i_dto.middle9_img }"
+							onerror="this.style.display='none'" alt=''>
+					</div>
+					<br>
+					<div class="selector">
+						<img src="img/middle/${i_dto.middle10_img }"
+							onerror="this.style.display='none'" alt=''>
+					</div>
+					<br>
+				</div>
+				<div class="tab-pane fade" id="profile" role="tabpanel"
+					aria-labelledby="profile-tab">
+					<div class="table-responsive">
+						<table class="table">
+							<tbody>
+								<tr>
+									<td>
+										<h5>판매자 아이디</h5>
+									</td>
+									<td>
+										<h5>${dto.id }</h5>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<h5>판매자 회원등급</h5>
+									</td>
+									<td>
+										<h5>${dto.member_class }</h5>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<h5>판매자 연락처</h5>
+									</td>
+									<td>
+										<h5>${dto.phone }</h5>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="section-top-border" style="padding-top: 50px;">
+						<h3 class="mb-30" style="padding-left: 25px;">판매자 정보</h3>
+						<div class="row">
+							<div class="col-lg-12">
+								<blockquote class="generic-blockquote">
+									(주)캥거루에 등록된 상품과 상품 내용은 개별 판매자가 등록한 것으로써, (주)캥거루는 중개 시스템만 제공하며
+									해당 등록 내용에 대하여 일체의 책임을 지지 않습니다. <br>판매자가 사업자 회원이 아닌 개인 회원의
+									경우 판매자 정보는 [캥거루 결제처리] 이후 판매자의 연락처 등을 구매한 소비자에게 즉시 제공하게 됩니다.
+									<h2 id=dotted_line></h2>
+									구매 안정 서비스 (KCP) 가입 업체 : A111233434784 (주)캥거루는 구매 안전 서비스(KCP)에
+									가입하였으며, 캥거루에 등록된 모든 입점 판매자는 자동적으로 해당 서비스에 가입됩니다.
+								</blockquote>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="tab-pane fade" id="contact" role="tabpanel"
+					aria-labelledby="contact-tab">
+					<div class="row">
+						<div class="input-group flex-nowrap" style="padding-left: 16px;">
+							<span class="input-group-text" id="addon-wrapping"
+								style="font-size: 15px; line-height: 30px;"> <img
+								src="img/volume_2.png" alt="" style="width: 30px; height: 30px;">
+								&nbsp 전자상거래등에서 소비자 보호에 관한 법률에 의한 반품 규정이 판매자가 지정한 반품 조건보다 우선합니다.
+							</span>
+						</div>
+						<div class="container" style="padding-top: 30px;">
+							<table class="table table-striped">
+								<tr>
+								<tr>
+									<td>배송지역</td>
+									<td>전국※제주권 및 도서산간 지역은 배송비가 추가될 수 있습니다.</td>
+								</tr>
+								<tr>
+									<td>배송방법</td>
+									<td>택배, 선불/착불 [2,500원]</td>
+								</tr>
+								<tr>
+									<td>반품기간</td>
+									<td>수령일로부터 7일 이내에 반품을 신청하실 수 있습니다.</td>
+								</tr>
+								<tr>
+									<td>반품비용</td>
+									<td>원인 제공자 부담을 원칙으로 합니다.</td>
+								</tr>
+								<tr>
+									<td>
+									<td>
+							</table>
+						</div>
+						<div>
+							<div style="padding-left: 40px;">
+								※반품시 주의사항<br> 아래 각 호의 경우에는 반품이 되지 않습니다.<br> 1)소비자의 책임
+								있는 사유로 상품 등이 멸실/훼손된 경우(단지 확인을 위한 포장 훼손 제외)<br> 2)소비자의
+								사용/소비에 의해 상품 등의 가치가 현저히 감소한 경우<br> 3)시간의 경과에 의해 재판매가 곤란할
+								정도로 상품 등의 가치가 현저히 감소한 경우<br> 4)복제가 가능한 상품 등의 포장을 훼손한 경우<br>
+								5)판매/생산 방식의 특성상, 반품시 판매자에게 회복할 수 없는 손해가 발생하는 경우(주문 접수 후 개별 생산,
+								맞춤 제작 등)<br> <br> ※파손 물품 반품시 주의사항<br> 물품 수령시
+								택배기사와 함께 물품의 파손 여부를 확인하신 후,<br> 반품 신청시 파손 이미지를 등록해 주시면 안전하고
+								신속하게 환불 처리를 해드리고 있습니다.<br> <br>
+							</div>
+							<div style="padding-left: 30px; font-size: 12px;">
+								<blockquote class="generic-blockquote">
+									※전자상거래 등에서의 소비자 보호에 관한 법률<br> 제15조 (재화등의 공급 등) <br>
+									①통신판매업자는 소비자가 청약을 한 날부터 7일 이내에 재화등의 공급에 필요한 조치를 하여야 하고, 소비자가
+									재화등을 공급받기 전에 미리 재화등의 대금의 전부 또는 일부를 지급하는 경우(이하 "선불식 통신판매"라 한다)에는
+									소비자가 그 대금의 전부 또는 일부를 지급한 날부터 3영업일 이내에 재화등의 공급을 위하여 필요한 조치를 하여야
+									한다. 다만, 소비자와 통신판매업자간에 재화등의 공급시기에 관하여 별도의 약정이 있는 경우에는 그러하지 아니하다.
+									<br> ②통신판매업자는 청약을 받은 재화등을 공급하기 곤란하다는 것을 알았을 때에는 그 사유를
+									소비자에게 지체 없이 알려야 하고, 선불식 통신판매의 경우에는 소비자가 그 대금의 전부 또는 일부를 지급한 날부터
+									3영업일 이내에 환급하거나 환급에 필요한 조치를 하여야 한다.<br> ③통신판매업자는 소비자가 재화등의
+									공급 절차 및 진행 상황을 확인할 수 있도록 적절한 조치를 하여야 한다. 이 경우 공정거래위원회는 그 조치에
+									필요한 사항을 정하여 고시할 수 있다. <br> ④제18조제1항 내지 제5항의 규정은 제2항의 선불식
+									통신판매에 있어서 환급하거나 환급에 필요한 조치를 하여야 하는 경우에 이를 준용한다.<br> <br>
+									제17조(청약철회등) <br> ①통신판매업자와 재화등의 구매에 관한 계약을 체결한 소비자는 다음 각호의
+									기간(거래당사자가 다음 각호의 기간보다 긴 기간으로 약정한 경우에는 그 기간을 말한다) 이내에 당해 계약에 관한
+									청약철회등을 할 수있다. <br> 1. 제13조제2항의 규정에 의한 계약내용에 관한 서면을 교부받은
+									날부터 7일. 다만, 그 서면을 교부 받은 때보다 재화등의 공급이 늦게 이루어진 경우에는 재화등의 공급을 받거나
+									공급이 개시된 날부터 7일 <br> 2. 제13조제2항의 규정에 의한 계약내용에 관한 서면을 교부 받지
+									아니한 경우, 통신판매업자의 주소 등이 기재되지 아니한 서면을 교부 받은 경우 또는 통신판매업자의 주소변경 등의
+									사유로 제1호의 기간 이내에 청약철회등을 할 수 없는 경우에는 그 주소를 안 날 또는 알 수 있었던 날부터 7일
+									<br> ②소비자는 다음 각호의 1에 해당하는 경우에는 통신판매업자의 의사에 반하여 제1항의 규정에 의한
+									청약철회등을 할 수 없다. 다만, 통신판매업자가 제6항의 규정에 따른 조치를 하지 아니하는 때에는 제2호 내지
+									제4호에 해당하는 경우에도 청약철회등을 할 수 있다. <br> 1. 소비자에게 책임 있는 사유로 재화등이
+									멸실 또는 훼손된 경우. 다만, 재화등의 내용을 확인하기 위하여 포장 등을 훼손한 경우를 제외한다. <br>
+									2. 소비자의 사용 또는 일부 소비에 의하여 재화등의 가치가 현저히 감소한 경우<br> 3. 시간의
+									경과에 의하여 재판매가 곤란할 정도로 재화등의 가치가 현저히 감소한 경우 <br> 4. 복제가 가능한
+									재화 등의 포장을 훼손한 경우 <br> 5. 그 밖에 거래의 안전을 위하여 대통령령이 정하는 경우 <br>
+									③소비자는 제1항 및 제2항의 규정에 불구하고 재화등의 내용이 표시·광고 내용과 다르거나 계약내용과 다르게 이행된
+									경우에는 당해 재화등을 공급받은 날부터 3월 이내, 그 사실을 안 날 또는 알 수 있었던 날부터 30일 이내에
+									청약철회등을 할 수 있다.<br> <br> 제18조(청약철회등의 효과)<br>
+									①소비자는 제17조제1항 또는 제3항의 규정에 의하여 청약철회등을 행한 경우에는 이미 공급받은 재화등을 반환하여야
+									한다.<br> ②통신판매업자(소비자로부터 재화등의 대금을 지급 받은 자 또는 소비자와 통신판매에 관한
+									계약을 체결한 자를 포함한다. 이하 제2항 내지 제10항에서 같다)는 재화등을 반환 받은 날부터 3영업일 이내에
+									이미 지급 받은 재화등의 대금을 환급하여야 한다. 이 경우 통신판매업자가 소비자에게 재화등의 대금의 환급을 지연한
+									때에는 그 지연기간에 대하여 공정거래위원회가 정하여 고시하는 지연이자율을 곱하여 산정한 지연이자(이하
+									"지연배상금"이라 한다)를 지급하여야 한다.<br> ⑨제17조제1항의 규정에 의한 청약철회등의 경우
+									공급받은 재화등의 반환에 필요한 비용은 소비자가 이를 부담하며 통신판매업자는 소비자에게 청약철회등을 이유로 위약금
+									또는 손해배상을 청구할 수 없다.<br> ⑩제17조제3항의 규정에 의한 청약철회등의 경우 재화등의 반환에
+									필요한 비용은 통신판매업자가 이를 부담한다.<br>
+								</blockquote>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
 
-   <!--================Product Description Area =================-->
-   <section class="product_description_area p-0">
-      <div class="container">
-         <ul class="nav nav-tabs" id="myTab" role="tablist">
-            <li class="nav-item"><a class="nav-link" id="home-tab"
-               data-toggle="tab" href="#home" role="tab" aria-controls="home"
-               aria-selected="true">물품정보</a></li>
-            <li class="nav-item"><a class="nav-link" id="profile-tab"
-               data-toggle="tab" href="#profile" role="tab"
-               aria-controls="profile" aria-selected="false">판매자 정보</a></li>
-            <li class="nav-item"><a class="nav-link" id="contact-tab"
-               data-toggle="tab" href="#contact" role="tab"
-               aria-controls="contact" aria-selected="false">배송/반품</a></li>
-            <li class="nav-item"><a class="nav-link active" id="review-tab"
-               data-toggle="tab" href="#review" role="tab" aria-controls="review"
-               aria-selected="false">문의 및 댓글</a></li>
-         </ul>
-         <div class="tab-content" id="myTabContent">
-            <div class="tab-pane fade" id="home" role="tabpanel"
-               aria-labelledby="home-tab" style="text-align: center;">
-               
-               
-               
-               <div class="col-md-62">
-                     <p style=text-align:left;font-size:25px;line-height:40px;padding-left:60px;padding-right:60px;padding-top:30px;>
-                        ${dto.contents }   
-                     </p>
-               </div><br><br><br>                                           
-               
-               
-               
-               <!-- 상세 이미지  -->
-               <div class="selector">
-                  <img src="img/title/${i_dto.title_img }" onerror="this.style.display='none'"
-                     alt=''>
-               </div>
-               <br>
-               <div class="selector">
-                  <img src="img/middle/${i_dto.middle1_img }"
-                     onerror="this.style.display='none'" alt=''>
-               </div>
-               <br>
-               <div class="selector">
-                  <img src="img/middle/${i_dto.middle2_img }"
-                     onerror="this.style.display='none'" alt=''>
-               </div>
-               <br>
-               <div class="selector">
-                  <img src="img/middle/${i_dto.middle3_img }"
-                     onerror="this.style.display='none'" alt=''>
-               </div>
-               <br>
-               <div class="selector">
-                  <img src="img/middle/${i_dto.middle4_img }"
-                     onerror="this.style.display='none'" alt=''>
-               </div>
-               <br>
-               <div class="selector">
-                  <img src="img/middle/${i_dto.middle5_img }"
-                     onerror="this.style.display='none'" alt=''>
-               </div>
-               <br>
-               <div class="selector">
-                  <img src="img/middle/${i_dto.middle6_img }"
-                     onerror="this.style.display='none'" alt=''>
-               </div>
-               <br>
-               <div class="selector">
-                  <img src="img/middle/${i_dto.middle7_img }"
-                     onerror="this.style.display='none'" alt=''>
-               </div>
-               <br>
-               <div class="selector">
-                  <img src="img/middle/${i_dto.middle8_img }"
-                     onerror="this.style.display='none'" alt=''>
-               </div>
-               <br>
-               <div class="selector">
-                  <img src="img/middle/${i_dto.middle9_img }" onerror="this.style.display='none'" alt=''>
-               </div>
-               <br>
-               <div class="selector">
-                  <img src="img/middle/${i_dto.middle10_img }"
-                     onerror="this.style.display='none'" alt=''>
-               </div>
-               <br>
-            </div>
-            <div class="tab-pane fade" id="profile" role="tabpanel"
-               aria-labelledby="profile-tab">
-               <div class="table-responsive">
-                  <table class="table">
-                     <tbody>
-                        <tr>
-                           <td>
-                              <h5>판매자 아이디</h5>
-                           </td>
-                           <td>
-                              <h5>${dto.id }</h5>
-                           </td>
-                        </tr>
-                        <tr>
-                           <td>
-                              <h5>판매자 회원등급</h5>
-                           </td>
-                           <td>
-                              <h5>${dto.member_class }</h5>
-                           </td>
-                        </tr>
-                        <tr>
-                           <td>
-                              <h5>판매자 연락처</h5>
-                           </td>
-                           <td>
-                              <h5>${dto.phone }</h5>
-                           </td>
-                        </tr>
-                     </tbody>
-                  </table>
-               </div>
-               <div class="section-top-border" style="padding-top: 50px;">
-                  <h3 class="mb-30" style="padding-left: 25px;">판매자 정보</h3>
-                  <div class="row">
-                     <div class="col-lg-12">
-                        <blockquote class="generic-blockquote">
-                           (주)캥거루에 등록된 상품과 상품 내용은 개별 판매자가 등록한 것으로써, (주)캥거루는 중개 시스템만 제공하며
-                           해당 등록 내용에 대하여 일체의 책임을 지지 않습니다. <br>판매자가 사업자 회원이 아닌 개인 회원의
-                           경우 판매자 정보는 [캥거루 결제처리] 이후 판매자의 연락처 등을 구매한 소비자에게 즉시 제공하게 됩니다.
-                           <h2 id=dotted_line></h2>
-                           구매 안정 서비스 (KCP) 가입 업체 : A111233434784 (주)캥거루는 구매 안전 서비스(KCP)에
-                           가입하였으며, 캥거루에 등록된 모든 입점 판매자는 자동적으로 해당 서비스에 가입됩니다.
-                        </blockquote>
-                     </div>
-                  </div>
-               </div>
-            </div>
-            <div class="tab-pane fade" id="contact" role="tabpanel"
-               aria-labelledby="contact-tab">
-               <div class="row">                  
-                  <div class="input-group flex-nowrap" style=padding-left:16px;>
-                        <span class="input-group-text" id="addon-wrapping" style=font-size:15px;line-height:30px;>
-                           <img src="img/volume_2.png" alt="" style=width:30px;height:30px;> &nbsp 전자상거래등에서 소비자 보호에 관한 법률에 의한 반품 규정이 판매자가 지정한 반품 조건보다 우선합니다.
-                        </span>
-                  </div>
-                  <div class="container" style=padding-top:30px;>           
-                       <table class="table table-striped">                     
-                            <tr><tr>   
-                                  <td>배송지역</td>
-                                <td>전국※제주권 및 도서산간 지역은 배송비가 추가될 수 있습니다.</td>
-                             </tr>
-                            <tr>
-                               <td>배송방법</td>
-                                <td>택배, 선불/착불 [2,500원]</td>
-                            </tr>
-                             <tr>
-                                <td>반품기간</td>
-                                <td>수령일로부터 7일 이내에 반품을 신청하실 수 있습니다.</td>
-                             </tr>
-                             <tr>
-                                <td>반품비용</td>
-                                <td>원인 제공자 부담을 원칙으로 합니다.</td>
-                             </tr>
-                            <tr><td><td>
-                      </table>
-                     </div>
-                  <div>
-                     <div style=padding-left:40px;>
-                        ※반품시 주의사항<br>
-                        아래 각 호의 경우에는 반품이 되지 않습니다.<br>
-                        1)소비자의 책임 있는 사유로 상품 등이 멸실/훼손된 경우(단지 확인을 위한 포장 훼손 제외)<br>
-                        2)소비자의 사용/소비에 의해 상품 등의 가치가 현저히 감소한 경우<br>
-                        3)시간의 경과에 의해 재판매가 곤란할 정도로 상품 등의 가치가 현저히 감소한 경우<br>
-                        4)복제가 가능한 상품 등의 포장을 훼손한 경우<br>
-                        5)판매/생산 방식의 특성상, 반품시 판매자에게 회복할 수 없는 손해가 발생하는 경우(주문 접수 후 개별 생산, 맞춤 제작 등)<br><br>
-                        
-                        ※파손 물품 반품시 주의사항<br>
-                        물품 수령시 택배기사와 함께 물품의 파손 여부를 확인하신 후,<br>
-                        반품 신청시 파손 이미지를 등록해 주시면 안전하고 신속하게 환불 처리를 해드리고 있습니다.<br><br>
-                     </div>
-                     <div style=padding-left:30px;font-size:12px;>
-                        <blockquote class="generic-blockquote">
-                           ※전자상거래 등에서의 소비자 보호에 관한 법률<br>
-                           제15조 (재화등의 공급 등) <br>
-                           ①통신판매업자는 소비자가 청약을 한 날부터 7일 이내에 재화등의 공급에 필요한 조치를 하여야 하고, 소비자가 재화등을 공급받기 전에 미리 재화등의 대금의 전부 또는 일부를 지급하는 경우(이하 "선불식 통신판매"라 한다)에는 소비자가 그 대금의 전부 또는 일부를 지급한 날부터 3영업일 이내에 재화등의 공급을 위하여 필요한 조치를 하여야 한다. 다만, 소비자와 통신판매업자간에 재화등의 공급시기에 관하여 별도의 약정이 있는 경우에는 그러하지 아니하다. <br>
-                           ②통신판매업자는 청약을 받은 재화등을 공급하기 곤란하다는 것을 알았을 때에는 그 사유를 소비자에게 지체 없이 알려야 하고, 선불식 통신판매의 경우에는 소비자가 그 대금의 전부 또는 일부를 지급한 날부터 3영업일 이내에 환급하거나 환급에 필요한 조치를 하여야 한다.<br>
-                           ③통신판매업자는 소비자가 재화등의 공급 절차 및 진행 상황을 확인할 수 있도록 적절한 조치를 하여야 한다. 이 경우 공정거래위원회는 그 조치에 필요한 사항을 정하여 고시할 수 있다. <br>
-                           ④제18조제1항 내지 제5항의 규정은 제2항의 선불식 통신판매에 있어서 환급하거나 환급에 필요한 조치를 하여야 하는 경우에 이를 준용한다.<br>   <br>
-                           제17조(청약철회등) <br>
-                           ①통신판매업자와 재화등의 구매에 관한 계약을 체결한 소비자는 다음 각호의 기간(거래당사자가 다음 각호의 기간보다 긴 기간으로 약정한 경우에는 그 기간을 말한다) 이내에 당해 계약에 관한 청약철회등을 할 수있다. <br>
-                           1. 제13조제2항의 규정에 의한 계약내용에 관한 서면을 교부받은 날부터 7일. 다만, 그 서면을 교부 받은 때보다 재화등의 공급이 늦게 이루어진 경우에는 재화등의 공급을 받거나 공급이 개시된 날부터 7일 <br>
-                           2. 제13조제2항의 규정에 의한 계약내용에 관한 서면을 교부 받지 아니한 경우, 통신판매업자의 주소 등이 기재되지 아니한 서면을 교부 받은 경우 또는 통신판매업자의 주소변경 등의 사유로 제1호의 기간 이내에 청약철회등을 할 수 없는 경우에는 그 주소를 안 날 또는 알 수 있었던 날부터 7일 <br>
-                           ②소비자는 다음 각호의 1에 해당하는 경우에는 통신판매업자의 의사에 반하여 제1항의 규정에 의한 청약철회등을 할 수 없다. 다만, 통신판매업자가 제6항의 규정에 따른 조치를 하지 아니하는 때에는 제2호 내지 제4호에 해당하는 경우에도 청약철회등을 할 수 있다. <br>
-                           1. 소비자에게 책임 있는 사유로 재화등이 멸실 또는 훼손된 경우. 다만, 재화등의 내용을 확인하기 위하여 포장 등을 훼손한 경우를 제외한다. <br>
-                           2. 소비자의 사용 또는 일부 소비에 의하여 재화등의 가치가 현저히 감소한 경우<br>
-                           3. 시간의 경과에 의하여 재판매가 곤란할 정도로 재화등의 가치가 현저히 감소한 경우 <br>
-                           4. 복제가 가능한 재화 등의 포장을 훼손한 경우 <br>
-                           5. 그 밖에 거래의 안전을 위하여 대통령령이 정하는 경우 <br>
-                           ③소비자는 제1항 및 제2항의 규정에 불구하고 재화등의 내용이 표시·광고 내용과 다르거나 계약내용과 다르게 이행된 경우에는 당해 재화등을 공급받은 날부터 3월 이내, 그 사실을 안 날 또는 알 수 있었던 날부터 30일 이내에 청약철회등을 할 수 있다.<br><br>
-                           제18조(청약철회등의 효과)<br>
-                           ①소비자는 제17조제1항 또는 제3항의 규정에 의하여 청약철회등을 행한 경우에는 이미 공급받은 재화등을 반환하여야 한다.<br>
-                           ②통신판매업자(소비자로부터 재화등의 대금을 지급 받은 자 또는 소비자와 통신판매에 관한 계약을 체결한 자를 포함한다. 이하 제2항 내지 제10항에서 같다)는 재화등을 반환 받은 날부터 3영업일 이내에 이미 지급 받은 재화등의 대금을 환급하여야 한다. 이 경우 통신판매업자가 소비자에게 재화등의 대금의 환급을 지연한 때에는 그 지연기간에 대하여 공정거래위원회가 정하여 고시하는 지연이자율을 곱하여 산정한 지연이자(이하 "지연배상금"이라 한다)를 지급하여야 한다.<br>
-                           ⑨제17조제1항의 규정에 의한 청약철회등의 경우 공급받은 재화등의 반환에 필요한 비용은 소비자가 이를 부담하며 통신판매업자는 소비자에게 청약철회등을 이유로 위약금 또는 손해배상을 청구할 수 없다.<br>
-                           ⑩제17조제3항의 규정에 의한 청약철회등의 경우 재화등의 반환에 필요한 비용은 통신판매업자가 이를 부담한다.<br>
-                        </blockquote>
-                     </div>
-                  </div>      
-               </div>
-            </div>
-         </div>
-      </div>
-   </section>
-   <!--================End Product Description Area =================-->
+	<script>
+	  function fnMove(){
+	        var offset = $("#MovingPoint").offset();
+	        $('html, body').animate({scrollTop : offset.top}, 500);
+	    }
+   </script>
+	
+	<!--================End Product Description Area =================-->
 
-<!-- 댓글 area -->
+	<!-- 댓글 area -->
+
 
 	<!--================Blog Area =================-->
 	<section class="blog_area single-post-area section_gap p-0">
@@ -889,20 +1057,25 @@ $("#logout_na").on("click", function() {
 											</div>
 										</div>
 										<c:choose>
-										<c:when test="${email==arr.id }">
-										<div class="reply-btn">
-<!-- 											<a href="" class="m-1 btn-reply text-uppercase">수정</a>  -->
-												<input type="button" seq="${arr.seq }" name="${arr.id }" class="m-1 btn-reply text-uppercase commentDelete" value="삭제"/>
-										</div>
-										</c:when>
-										<c:otherwise>
-										</c:otherwise>
+											<c:when test="${email==arr.id }">
+												<div class="reply-btn">
+													<!-- 											<a href="" class="m-1 btn-reply text-uppercase">수정</a>  -->
+													<input type="button" seq="${arr.seq }" name="${arr.id }"
+														class="m-1 btn-reply text-uppercase commentDelete"
+														value="삭제" />
+												</div>
+											</c:when>
+											<c:otherwise>
+											</c:otherwise>
+
 										</c:choose>
 									</div>
 								</div>
 							</div>
 						</c:forEach>
 					</div>
+					<div id=MovingPoint></div>	<!-- 댓글 이동 탭 -->
+					
 					<div class="row p-0 m-0 numBox">
 						<div class="col-12 d-flex justify-content-center navi mt-1">
 							<nav aria-label="Page navigation example">
@@ -910,8 +1083,6 @@ $("#logout_na").on("click", function() {
 							</nav>
 						</div>
 					</div>
-
-					<!--                    ///////////////////////////-->
 					<div class="comment-form m-3 p-4">
 						<form>
 							<div class="form-group">
@@ -929,7 +1100,7 @@ $("#logout_na").on("click", function() {
 		</div>
 	</section>
 
-<!-- 댓글 스크 -->
+	<!-- 댓글 스크 -->
 
 	<script>
 	
@@ -1106,226 +1277,224 @@ $("#logout_na").on("click", function() {
 				
 			});
 			
-			}
-			}
+			}			
 		});
 	</script>
 
-   <!-- Start related-product Area -->
-   <section class="related-product-area section_gap_bottom">
-      <div class="container">
-         <div class="row justify-content-center">
-            <div class="col-lg-6 text-center">
-               <div class="section-title">
-                  <h1>Deals of the Week</h1>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                     sed do eiusmod tempor incididunt ut labore et dolore magna
-                     aliqua.</p>
-               </div>
-            </div>
-         </div>
-         <div class="row">
-            <div class="col-lg-9">
-               <div class="row">
-                  <div class="col-lg-4 col-md-4 col-sm-6 mb-20">
-                     <div class="single-related-product d-flex">
-                        <a href="#"><img src="img/r1.jpg" alt=""></a>
-                        <div class="desc">
-                           <a href="#" class="title">Black lace Heels</a>
-                           <div class="price">
-                              <h6>$189.00</h6>
-                              <h6 class="l-through">$210.00</h6>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="col-lg-4 col-md-4 col-sm-6 mb-20">
-                     <div class="single-related-product d-flex">
-                        <a href="#"><img src="img/r2.jpg" alt=""></a>
-                        <div class="desc">
-                           <a href="#" class="title">Black lace Heels</a>
-                           <div class="price">
-                              <h6>$189.00</h6>
-                              <h6 class="l-through">$210.00</h6>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="col-lg-4 col-md-4 col-sm-6 mb-20">
-                     <div class="single-related-product d-flex">
-                        <a href="#"><img src="img/r3.jpg" alt=""></a>
-                        <div class="desc">
-                           <a href="#" class="title">Black lace Heels</a>
-                           <div class="price">
-                              <h6>$189.00</h6>
-                              <h6 class="l-through">$210.00</h6>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="col-lg-4 col-md-4 col-sm-6 mb-20">
-                     <div class="single-related-product d-flex">
-                        <a href="#"><img src="img/r5.jpg" alt=""></a>
-                        <div class="desc">
-                           <a href="#" class="title">Black lace Heels</a>
-                           <div class="price">
-                              <h6>$189.00</h6>
-                              <h6 class="l-through">$210.00</h6>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="col-lg-4 col-md-4 col-sm-6 mb-20">
-                     <div class="single-related-product d-flex">
-                        <a href="#"><img src="img/r6.jpg" alt=""></a>
-                        <div class="desc">
-                           <a href="#" class="title">Black lace Heels</a>
-                           <div class="price">
-                              <h6>$189.00</h6>
-                              <h6 class="l-through">$210.00</h6>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="col-lg-4 col-md-4 col-sm-6 mb-20">
-                     <div class="single-related-product d-flex">
-                        <a href="#"><img src="img/r7.jpg" alt=""></a>
-                        <div class="desc">
-                           <a href="#" class="title">Black lace Heels</a>
-                           <div class="price">
-                              <h6>$189.00</h6>
-                              <h6 class="l-through">$210.00</h6>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="col-lg-4 col-md-4 col-sm-6">
-                     <div class="single-related-product d-flex">
-                        <a href="#"><img src="img/r9.jpg" alt=""></a>
-                        <div class="desc">
-                           <a href="#" class="title">Black lace Heels</a>
-                           <div class="price">
-                              <h6>$189.00</h6>
-                              <h6 class="l-through">$210.00</h6>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="col-lg-4 col-md-4 col-sm-6">
-                     <div class="single-related-product d-flex">
-                        <a href="#"><img src="img/r10.jpg" alt=""></a>
-                        <div class="desc">
-                           <a href="#" class="title">Black lace Heels</a>
-                           <div class="price">
-                              <h6>$189.00</h6>
-                              <h6 class="l-through">$210.00</h6>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="col-lg-4 col-md-4 col-sm-6">
-                     <div class="single-related-product d-flex">
-                        <a href="#"><img src="img/r11.jpg" alt=""></a>
-                        <div class="desc">
-                           <a href="#" class="title">Black lace Heels</a>
-                           <div class="price">
-                              <h6>$189.00</h6>
-                              <h6 class="l-through">$210.00</h6>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-            </div>
-            <div class="col-lg-3">
-               <div class="ctg-right">
-                  <a href="#" target="_blank"> <img
-                     class="img-fluid d-block mx-auto" src="img/category/c5.jpg"
-                     alt="">
-                  </a>
-               </div>
-            </div>
-         </div>
-      </div>
-   </section>
-   <!-- End related-product Area -->
+	<!-- Start related-product Area -->
+	<section class="related-product-area section_gap_bottom">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-lg-6 text-center">
+					<div class="section-title">
+						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+							sed do eiusmod tempor incididunt ut labore et dolore magna
+							aliqua.</p>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-9">
+					<div class="row">
+						<div class="col-lg-4 col-md-4 col-sm-6 mb-20">
+							<div class="single-related-product d-flex">
+								<a href="#"><img src="img/r1.jpg" alt=""></a>
+								<div class="desc">
+									<a href="#" class="title">Black lace Heels</a>
+									<div class="price">
+										<h6>$189.00</h6>
+										<h6 class="l-through">$210.00</h6>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-4 col-md-4 col-sm-6 mb-20">
+							<div class="single-related-product d-flex">
+								<a href="#"><img src="img/r2.jpg" alt=""></a>
+								<div class="desc">
+									<a href="#" class="title">Black lace Heels</a>
+									<div class="price">
+										<h6>$189.00</h6>
+										<h6 class="l-through">$210.00</h6>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-4 col-md-4 col-sm-6 mb-20">
+							<div class="single-related-product d-flex">
+								<a href="#"><img src="img/r3.jpg" alt=""></a>
+								<div class="desc">
+									<a href="#" class="title">Black lace Heels</a>
+									<div class="price">
+										<h6>$189.00</h6>
+										<h6 class="l-through">$210.00</h6>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-4 col-md-4 col-sm-6 mb-20">
+							<div class="single-related-product d-flex">
+								<a href="#"><img src="img/r5.jpg" alt=""></a>
+								<div class="desc">
+									<a href="#" class="title">Black lace Heels</a>
+									<div class="price">
+										<h6>$189.00</h6>
+										<h6 class="l-through">$210.00</h6>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-4 col-md-4 col-sm-6 mb-20">
+							<div class="single-related-product d-flex">
+								<a href="#"><img src="img/r6.jpg" alt=""></a>
+								<div class="desc">
+									<a href="#" class="title">Black lace Heels</a>
+									<div class="price">
+										<h6>$189.00</h6>
+										<h6 class="l-through">$210.00</h6>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-4 col-md-4 col-sm-6 mb-20">
+							<div class="single-related-product d-flex">
+								<a href="#"><img src="img/r7.jpg" alt=""></a>
+								<div class="desc">
+									<a href="#" class="title">Black lace Heels</a>
+									<div class="price">
+										<h6>$189.00</h6>
+										<h6 class="l-through">$210.00</h6>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-4 col-md-4 col-sm-6">
+							<div class="single-related-product d-flex">
+								<a href="#"><img src="img/r9.jpg" alt=""></a>
+								<div class="desc">
+									<a href="#" class="title">Black lace Heels</a>
+									<div class="price">
+										<h6>$189.00</h6>
+										<h6 class="l-through">$210.00</h6>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-4 col-md-4 col-sm-6">
+							<div class="single-related-product d-flex">
+								<a href="#"><img src="img/r10.jpg" alt=""></a>
+								<div class="desc">
+									<a href="#" class="title">Black lace Heels</a>
+									<div class="price">
+										<h6>$189.00</h6>
+										<h6 class="l-through">$210.00</h6>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-4 col-md-4 col-sm-6">
+							<div class="single-related-product d-flex">
+								<a href="#"><img src="img/r11.jpg" alt=""></a>
+								<div class="desc">
+									<a href="#" class="title">Black lace Heels</a>
+									<div class="price">
+										<h6>$189.00</h6>
+										<h6 class="l-through">$210.00</h6>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-3">
+					<div class="ctg-right">
+						<a href="#" target="_blank"> <img
+							class="img-fluid d-block mx-auto" src="img/category/c5.jpg"
+							alt="">
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- End related-product Area -->
 
-   <!-- start footer Area -->
-   <footer class="footer-area section_gap">
-      <div class="container">
-         <div class="row">
-            <div class="col-lg-3  col-md-6 col-sm-6">
-               <div class="single-footer-widget">
-                  <h6>About Us</h6>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                     sed do eiusmod tempor incididunt ut labore dolore magna aliqua.</p>
-               </div>
-            </div>
-            <div class="col-lg-4  col-md-6 col-sm-6">
-               <div class="single-footer-widget">
-                  현재 활성화된 경매수
-                  <!--                   <h6>Newsletter</h6> -->
-                  <!--                   <p>Stay update with our latest</p> -->
-                  <!--                   <div class="" id="mc_embed_signup"> -->
+	<!-- start footer Area -->
+	<footer class="footer-area section_gap">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-3  col-md-6 col-sm-6">
+					<div class="single-footer-widget">
+						<h6>About Us</h6>
+						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+							sed do eiusmod tempor incididunt ut labore dolore magna aliqua.</p>
+					</div>
+				</div>
+				<div class="col-lg-4  col-md-6 col-sm-6">
+					<div class="single-footer-widget">
+						현재 활성화된 경매수
+						<!--                   <h6>Newsletter</h6> -->
+						<!--                   <p>Stay update with our latest</p> -->
+						<!--                   <div class="" id="mc_embed_signup"> -->
 
-                  <!--                      <form target="_blank" novalidate="true" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01" -->
-                  <!--                       method="get" class="form-inline"> -->
+						<!--                      <form target="_blank" novalidate="true" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01" -->
+						<!--                       method="get" class="form-inline"> -->
 
-                  <!--                         <div class="d-flex flex-row"> -->
+						<!--                         <div class="d-flex flex-row"> -->
 
-                  <!--                            <input class="form-control" name="EMAIL" placeholder="Enter Email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Email '" -->
-                  <!--                             required="" type="email"> -->
+						<!--                            <input class="form-control" name="EMAIL" placeholder="Enter Email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Email '" -->
+						<!--                             required="" type="email"> -->
 
 
-                  <!--                            <button class="click-btn btn btn-default"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></button> -->
-                  <!--                            <div style="position: absolute; left: -5000px;"> -->
-                  <!--                               <input name="b_36c4fd991d266f23781ded980_aefe40901a" tabindex="-1" value="" type="text"> -->
-                  <!--                            </div> -->
+						<!--                            <button class="click-btn btn btn-default"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></button> -->
+						<!--                            <div style="position: absolute; left: -5000px;"> -->
+						<!--                               <input name="b_36c4fd991d266f23781ded980_aefe40901a" tabindex="-1" value="" type="text"> -->
+						<!--                            </div> -->
 
-                  <!--                            <div class="col-lg-4 col-md-4"> -->
-                  <!--                                     <button class="bb-btn btn"><span class="lnr lnr-arrow-right"></span></button> -->
-                  <!--                                  </div>   -->
-                  <!--                         </div> -->
-                  <!--                         <div class="info"></div> -->
-                  <!--                      </form> -->
-                  <!--                   </div> -->
-               </div>
-            </div>
-            <div class="col-lg-3  col-md-6 col-sm-6">
-               <div class="single-footer-widget mail-chimp">
-                  현재 총 거래 량
-                  <!--                   <h6 class="mb-20">Instragram Feed</h6> -->
-                  <!--                   <ul class="instafeed d-flex flex-wrap"> -->
-                  <!--                      <li><img src="../resources/img/i1.jpg" alt=""></li> -->
-                  <!--                      <li><img src="../resources/img/i2.jpg" alt=""></li> -->
-                  <!--                      <li><img src="../resources/img/i3.jpg" alt=""></li> -->
-                  <!--                      <li><img src="../resources/img/i4.jpg" alt=""></li> -->
-                  <!--                      <li><img src="../resources/img/i5.jpg" alt=""></li> -->
-                  <!--                      <li><img src="../resources/img/i6.jpg" alt=""></li> -->
-                  <!--                      <li><img src="../resources/img/i7.jpg" alt=""></li> -->
-                  <!--                      <li><img src="../resources/img/i8.jpg" alt=""></li> -->
-                  <!--                   </ul> -->
-               </div>
-            </div>
-            <div class="col-lg-2 col-md-6 col-sm-6">
-               <div class="single-footer-widget">
-                  <h6>Follow Us</h6>
-                  <p>Let us be social</p>
-                  <div class="footer-social d-flex align-items-center">
-                     <a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i
-                        class="fa fa-twitter"></i></a> <a href="#"><i
-                        class="fa fa-dribbble"></i></a> <a href="#"><i
-                        class="fa fa-behance"></i></a>
-                  </div>
-               </div>
-            </div>
-         </div>
-         <div
-            class="footer-bottom d-flex justify-content-center align-items-center flex-wrap">
-            <p class="footer-text m-0">
-               <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-               Copyright &copy;
-               <script>
+						<!--                            <div class="col-lg-4 col-md-4"> -->
+						<!--                                     <button class="bb-btn btn"><span class="lnr lnr-arrow-right"></span></button> -->
+						<!--                                  </div>   -->
+						<!--                         </div> -->
+						<!--                         <div class="info"></div> -->
+						<!--                      </form> -->
+						<!--                   </div> -->
+					</div>
+				</div>
+				<div class="col-lg-3  col-md-6 col-sm-6">
+					<div class="single-footer-widget mail-chimp">
+						현재 총 거래 량
+						<!--                   <h6 class="mb-20">Instragram Feed</h6> -->
+						<!--                   <ul class="instafeed d-flex flex-wrap"> -->
+						<!--                      <li><img src="../resources/img/i1.jpg" alt=""></li> -->
+						<!--                      <li><img src="../resources/img/i2.jpg" alt=""></li> -->
+						<!--                      <li><img src="../resources/img/i3.jpg" alt=""></li> -->
+						<!--                      <li><img src="../resources/img/i4.jpg" alt=""></li> -->
+						<!--                      <li><img src="../resources/img/i5.jpg" alt=""></li> -->
+						<!--                      <li><img src="../resources/img/i6.jpg" alt=""></li> -->
+						<!--                      <li><img src="../resources/img/i7.jpg" alt=""></li> -->
+						<!--                      <li><img src="../resources/img/i8.jpg" alt=""></li> -->
+						<!--                   </ul> -->
+					</div>
+				</div>
+				<div class="col-lg-2 col-md-6 col-sm-6">
+					<div class="single-footer-widget">
+						<h6>Follow Us</h6>
+						<p>Let us be social</p>
+						<div class="footer-social d-flex align-items-center">
+							<a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i
+								class="fa fa-twitter"></i></a> <a href="#"><i
+								class="fa fa-dribbble"></i></a> <a href="#"><i
+								class="fa fa-behance"></i></a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div
+				class="footer-bottom d-flex justify-content-center align-items-center flex-wrap">
+				<p class="footer-text m-0">
+					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+					Copyright &copy;
+					<script>
                   document.write(new Date().getFullYear());
                </script>
                All rights reserved | This template is made with <i
@@ -1339,10 +1508,6 @@ $("#logout_na").on("click", function() {
    <!-- End footer Area -->
 
    <script src="../resources/js/vendor/jquery-2.2.4.min.js"></script>
-   <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/popper.../resources/js/1.11.0/umd/popper.min.js"
-      integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
-      crossorigin="anonymous"></script>
    <script src="../resources/js/vendor/bootstrap.min.js"></script>
    <script src="../resources/js/jquery.ajaxchimp.min.js"></script>
    <script src="../resources/js/jquery.nice-select.min.js"></script>

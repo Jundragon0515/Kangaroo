@@ -69,7 +69,7 @@ h1 {
 }
 
 #wrapper {
-	width: 480px;
+	width: 400px;
 	margin: auto;
 }
 
@@ -91,11 +91,6 @@ h1 {
 	margin-left: 10px;
 }
 
-#input_auth {
-	width: 276px !important;
-	border-radius: 5px;
-	border: 1px solid #ffba00;
-}
 
 .banner {
 	text-align: center;
@@ -111,7 +106,7 @@ h1 {
 			<h1>환불하기</h1>
 		</div>
 		<div class="form-group mb-3">
-			<textarea class="form-control" name="message" id="message" rows="1"
+			<textarea class="form-control" name="message" id="message" rows="5"
 				placeholder="환불 사유를 입력해주세요" onfocus="this.placeholder = ''"
 				onblur="this.placeholder = '환불 사유를 입력해주세요'"></textarea>
 		</div>

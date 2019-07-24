@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import kh.spring.dao.GoodsTradeDAO;
 import kh.spring.dto.Used_transaction_boardDTO;
-import kh.spring.dto.GoodsTradeDTO;
 
 @Service
 public class GoodsTradeService {
@@ -75,8 +74,27 @@ public class GoodsTradeService {
    
    //안전거래 게시판 옵션선택 후 네비
    public String safeBoardNaviOption(HttpSession session, int currentPage, int recordCountPerPage) {
-      return gdao.getNaviOption_safe(session, currentPage, recordCountPerPage);
+	   return gdao.getNaviOption_safe(session, currentPage, recordCountPerPage);
    }
-  
+   
+   //-----------------------------------------------------------------------------------------------------------
+   
+   //직거래 검색어
+   public List<Used_transaction_boardDTO> directList_search(HttpSession session, int start, int end){
+	      return gdao.directList_search(session, start, end);
+	   }
+  //직거래 검색어 네비
+   public String directBoardNavi_search(HttpSession session, int currentPage, int recordCountPerPage){
+	   return gdao.getNavi_direct_search(session, currentPage, recordCountPerPage);
+   }
+   
+   //안전거래 검색어
+   public List<Used_transaction_boardDTO> safeList_search(HttpSession session, int start, int end){
+	      return gdao.safeList_search(session, start, end);
+	   }
+  //안전거래 검색어 네비
+   public String safeBoardNavi_search(HttpSession session, int currentPage, int recordCountPerPage){
+	   return gdao.getNavi_safe_search(session, currentPage, recordCountPerPage);
+   }
 
 }

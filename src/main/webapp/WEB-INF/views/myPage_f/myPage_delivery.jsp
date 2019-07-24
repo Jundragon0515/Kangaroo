@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="zxx" class="no-js">
 
@@ -55,6 +56,16 @@
 .nav_ul * {
 	text-align: center;
 }
+a{
+	font-size: 18px;
+	color: black;
+}
+.cart_inner .table tbody tr td {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    vertical-align: middle;
+    align-self: center;
+}
 </style>
 <script>
 	$(function() {
@@ -95,18 +106,18 @@
 								}, 1000);
 							});
 				});
-		$("#confirme").on("click",function(){
+		$(".confirme").on("click",function(){
 			var anwser=confirm("정말 구매 확정 하시겠습니까?");
 			if(anwser==true){
-				var seq = $("#confirme").attr("seq");
+				var seq = $(this).attr("seq");
 				$(location).attr("href","/confirme?seq="+seq);
 			}
 		})
-		$("#refund").on("click",function(){
+		$(".refund").on("click",function(){
 			var anwser=confirm("정말 환불 요청 하시겠습니까?");
 			if(anwser==true){
-				var seq = $("#refund").attr("seq");
-				open("/refund?seq="+seq, "_blank", "width=100,height=100");
+				var seq = $(this).attr("seq");
+				open("/goRefund?seq="+seq, "_blank", "width=500,height=500");
 			}
 		})
 		$(".lookup").on("click",function(){
@@ -118,7 +129,7 @@
 			}).done(function(resp){
 				open(
 						"/golookup?resp="+resp,
-						"_blank", "width=500,height=500");
+						"_blank", "width=1000,height=600");
 			});
 			//대기
 		});
@@ -153,21 +164,13 @@
 						id="navbarSupportedContent">
 						<ul class="nav navbar-nav menu_nav ml-auto">
 							<!-- 							<li class="nav-item active"><a class="nav-link" href="/">Home</a></li> -->
-							<li class="nav-item submenu dropdown"><a href="#"
-								class="nav-link dropdown-toggle" data-toggle="dropdown"
-								role="button" aria-haspopup="true" aria-expanded="false">중고
-									거래</a>
-								<ul class="dropdown-menu">
 									<li class="nav-item"><a class="nav-link" href="/trade">중고
 											직거래</a></li>
-									<li class="nav-item"><a class="nav-link" href="/trade">중고
+									<li class="nav-item"><a class="nav-link" href="/trade_safe">중고
 											안전거래</a></li>
 									<li class="nav-item"><a class="nav-link" href="/auction">중고
 											경매</a></li>
-								</ul></li>
-							<li class="nav-item "><a class="nav-link" href="/">고객센터</a></li>
 							<li class="nav-item "><a class="nav-link" href="/">공지사항</a></li>
-
 							<c:choose>
 								<c:when test="${logintype=='admin'}">
 									<li class="nav-item "><a class="nav-link" href="/admin">관리자페이지</a></li>
@@ -179,8 +182,8 @@
 										role="button" aria-haspopup="true" aria-expanded="false"><img
 											src="../resources/img/account.png" width="35px"></a>
 										<ul class="dropdown-menu nav_ul">
-											<li class="nav-item "><a class="nav-link" href="/">찜목록</a></li>
-											<li class="nav-item active"><a class="nav-link"
+											<li class="nav-item "><a class="nav-link" href="/goCart">찜목록</a></li>
+											<li class="nav-item "><a class="nav-link"
 												href="/goMyPage">마이페이지</a></li>
 											<li class="nav-item "><a class="nav-link"
 												href="/toPoint">포인트충전</a></li>
@@ -194,8 +197,8 @@
 										role="button" aria-haspopup="true" aria-expanded="false"><img
 											src="../resources/img/account.png" width="40px"></a>
 										<ul class="dropdown-menu nav_ul">
-											<li class="nav-item "><a class="nav-link" href="/">찜목록</a></li>
-											<li class="nav-item active"><a class="nav-link"
+											<li class="nav-item "><a class="nav-link" href="/goCart">찜목록</a></li>
+											<li class="nav-item "><a class="nav-link"
 												href="/goMyPage">마이페이지</a></li>
 											<li class="nav-item "><a class="nav-link"
 												href="/toPoint">포인트충전</a></li>
@@ -209,7 +212,7 @@
 										role="button" aria-haspopup="true" aria-expanded="false"><img
 											src="../resources/img/account.png" width="40px"></a>
 										<ul class="dropdown-menu nav_ul">
-											<li class="nav-item "><a class="nav-link" href="/">찜목록</a></li>
+											<li class="nav-item "><a class="nav-link" href="/goCart">찜목록</a></li>
 											<li class="nav-item "><a class="nav-link"
 												href="/goMyPage">마이페이지</a></li>
 											<li class="nav-item "><a class="nav-link"
@@ -302,12 +305,12 @@
                            			<c:choose>
                            			<c:when test="${i.type=='거래' }">
                                         <div class="d-flex">
-                                        	<a href="/user_detailPage?no=${i.product_num }">
-                                            	<img src="${i.product_img}" alt="">
+                                        	<a href="/used_detailPage?no=${i.product_num }">
+                                            	<img src="/img/title/${i.product_img}" width="150px" height="100px"  alt="">
                                             </a>
                                         </div>
                                         <div class="media-body">
-                                        	<a href="/user_detailPage?no=${i.product_num }">
+                                        	<a href="/used_detailPage?no=${i.product_num }">
                                             <p>${i.product_title }</p>
                                             </a>
                                         </div>
@@ -315,7 +318,7 @@
                                         <c:when test="${i.type=='경매' }">
                                         <div class="d-flex">
                                         	<a href="#">
-                                            	<img src="${i.product_img}" alt="">
+                                            	<img src="/img/title/${i.product_img}" width="150px" height="100px"  alt="">
                                             </a>
                                         </div>
                                         <div class="media-body">
@@ -328,7 +331,7 @@
                                     </div>
                                     </td>
                                     <td>
-                                    <h5>${i.price }</h5>
+                                    <h5><fmt:formatNumber value="${i.price}" pattern="#,###" /></h5>
                                     </td>
                                     <td>
                                     <h5>${i.seller }</h5>
@@ -386,13 +389,14 @@
                                 <th scope="col">현재 입찰가</th>
                                 <th scope="col">현재 입찰자</th>
                                 <th scope="col">입찰</th>
+                                <th scope="col">경매 진행 상황</th>
                             </tr>
                         </thead>
                         <tbody>
                          <c:choose>
                            <c:when test="${tender_list==null}">
                             <tr>
-                           <td colspan="5">
+                           <td colspan="6">
                            <div class="media">
                                         <div class="media-body">
                                             <p>입찰 하신 물품이 없습니다.</p>
@@ -411,7 +415,7 @@
                            			<div class="media">
                                         <div class="d-flex">
                                         	<a href="/auction_detailPage?no=${i.board_num }">
-                                            	<img src="${i.board_img}" alt="">
+                                            	<img src="/img/title/${i.board_img}" width="150px" height="100px"  alt="">
                                             </a>
                                         </div>
                                         <div class="media-body">
@@ -422,7 +426,7 @@
                                     </div>
                                     </td>
                                     <td>
-                                    <h5>${i.point }</h5>
+                                    <h5><fmt:formatNumber value="${i.price}" pattern="#,###" /></h5>
                                     </td>
                                     <td>
                                     <h5>${i.id }</h5>
@@ -434,10 +438,20 @@
                                     </c:when>
                                     </c:choose>
                                     </td>
+                                    <td>
+                                    <c:choose>
+                                    <c:when test="${i.onGoing=='Y' }">
+                                   	판매 진행 중
+                                    </c:when>
+                                    <c:otherwise>
+                                    	판매완료
+                                    </c:otherwise>
+                                    </c:choose>
+                                    </td>
                            			</tr>
                            </c:forEach>
                             <tr>
-                           <td colspan="5">
+                           <td colspan="6">
                            <div class="media">
                                         <div class="media-body">
                                             <p>${tender_navi }</p>

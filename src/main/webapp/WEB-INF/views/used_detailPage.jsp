@@ -74,8 +74,38 @@
 .nav_ul * {
    text-align: center;
 }
+
+/* 오른쪽 TOP 버튼 */
+.btn-fixed {
+   position: fixed;
+   top: 540px;
+   cursor:pointer;
+}
+
+.back-to-top {text-decoration: none; display: none; color:#fe912b; }
+
+.back-to-top:hover {color: #818bb0}
+
 </style>
 <script>
+$(function(){
+    var offset = 500;   // 수직으로 어느정도 움직여야 버튼이 나올까?
+    var duration = 600;   // top으로 이동할때까지의 animate 시간 (밀리세컨드, default는 400. 예제의 기본은 500)
+    $(window).scroll(function() {
+        if ($(this).scrollTop() > offset) {
+            $('.back-to-top').fadeIn(duration);
+        } else {
+            $('.back-to-top').fadeOut(duration);
+        }
+    });
+    
+    $('.back-to-top').click(function(event) {
+        event.preventDefault();
+        $('html, body').animate({scrollTop: 0}, duration);
+        return false;
+    })
+}) 
+
 $("#logout_na").on("click", function() {
           $.ajax({
                    url:"logout",
@@ -103,7 +133,13 @@ $("#logout_na").on("click", function() {
 </script>
 </head>
 <body>
-   <header class="header_area sticky-header">
+<div>
+<!-- start fixbutton -->
+     <div class="d-none d-lg-block col-lg-1" style=padding-left:90%;>
+        <i class="fas fa-chevron-circle-up btn-fixed back-to-top fa-3x"></i>
+     </div>
+<!-- end fixbutton -->
+  <header class="header_area sticky-header">
 		<div class="main_menu">
 			<nav class="navbar navbar-expand-lg navbar-light main_box">
 				<div class="container">
@@ -123,21 +159,13 @@ $("#logout_na").on("click", function() {
 						id="navbarSupportedContent">
 						<ul class="nav navbar-nav menu_nav ml-auto">
 							<!-- 							<li class="nav-item active"><a class="nav-link" href="/">Home</a></li> -->
-							<li class="nav-item submenu dropdown"><a href="#"
-								class="nav-link dropdown-toggle" data-toggle="dropdown"
-								role="button" aria-haspopup="true" aria-expanded="false">중고
-									거래</a>
-								<ul class="dropdown-menu">
 									<li class="nav-item"><a class="nav-link" href="/trade">중고
 											직거래</a></li>
-									<li class="nav-item"><a class="nav-link" href="/trade">중고
+									<li class="nav-item"><a class="nav-link" href="/trade_safe">중고
 											안전거래</a></li>
 									<li class="nav-item"><a class="nav-link" href="/auction">중고
 											경매</a></li>
-								</ul></li>
-							<li class="nav-item "><a class="nav-link" href="/">고객센터</a></li>
 							<li class="nav-item "><a class="nav-link" href="/">공지사항</a></li>
-
 							<c:choose>
 								<c:when test="${logintype=='admin'}">
 									<li class="nav-item "><a class="nav-link" href="/admin">관리자페이지</a></li>
@@ -149,8 +177,8 @@ $("#logout_na").on("click", function() {
 										role="button" aria-haspopup="true" aria-expanded="false"><img
 											src="../resources/img/account.png" width="35px"></a>
 										<ul class="dropdown-menu nav_ul">
-											<li class="nav-item "><a class="nav-link" href="/">찜목록</a></li>
-											<li class="nav-item active"><a class="nav-link"
+											<li class="nav-item "><a class="nav-link" href="/goCart">찜목록</a></li>
+											<li class="nav-item "><a class="nav-link"
 												href="/goMyPage">마이페이지</a></li>
 											<li class="nav-item "><a class="nav-link"
 												href="/toPoint">포인트충전</a></li>
@@ -164,8 +192,8 @@ $("#logout_na").on("click", function() {
 										role="button" aria-haspopup="true" aria-expanded="false"><img
 											src="../resources/img/account.png" width="40px"></a>
 										<ul class="dropdown-menu nav_ul">
-											<li class="nav-item "><a class="nav-link" href="/">찜목록</a></li>
-											<li class="nav-item active"><a class="nav-link"
+											<li class="nav-item "><a class="nav-link" href="/goCart">찜목록</a></li>
+											<li class="nav-item "><a class="nav-link"
 												href="/goMyPage">마이페이지</a></li>
 											<li class="nav-item "><a class="nav-link"
 												href="/toPoint">포인트충전</a></li>
@@ -179,7 +207,7 @@ $("#logout_na").on("click", function() {
 										role="button" aria-haspopup="true" aria-expanded="false"><img
 											src="../resources/img/account.png" width="40px"></a>
 										<ul class="dropdown-menu nav_ul">
-											<li class="nav-item "><a class="nav-link" href="/">찜목록</a></li>
+											<li class="nav-item "><a class="nav-link" href="/goCart">찜목록</a></li>
 											<li class="nav-item "><a class="nav-link"
 												href="/goMyPage">마이페이지</a></li>
 											<li class="nav-item "><a class="nav-link"
@@ -235,16 +263,16 @@ $("#logout_na").on("click", function() {
                   </ol>
                   <div class="carousel-inner">
                      <div class="carousel-item active">
-                        <img src="img/title/${i_dto.title_img }" class="d-block w-100" onerror="this.style.display='none'" alt=''>
+                        <img src="img/title/${i_dto.title_img }" class="d-block w-100" onerror="this.style.display='none'" alt='' height=350px; width=auto;>
                      </div>
                      <div class="carousel-item">
-                        <img src="img/middle/${i_dto.middle1_img }" class="d-block w-100" onerror="this.style.display='none'" alt=''>
+                        <img src="img/middle/${i_dto.middle1_img }" class="d-block w-100" onerror="this.style.display='none'" alt='' height=350px; width=auto;>
                      </div>
                      <div class="carousel-item">
-                        <img src="img/middle/${i_dto.middle2_img }" class="d-block w-100" onerror="this.style.display='none'" alt=''>
+                        <img src="img/middle/${i_dto.middle2_img }" class="d-block w-100" onerror="this.style.display='none'" alt='' height=350px; width=auto;>
                      </div>
                      <div class="carousel-item">
-                        <img src="img/middle/${i_dto.middle3_img }" class="d-block w-100" onerror="this.style.display='none'" alt=''>
+                        <img src="img/middle/${i_dto.middle3_img }" class="d-block w-100" onerror="this.style.display='none'" alt='' height=350px; width=auto;>
                      </div>
                   </div>
                   <a class="carousel-control-prev" href="#carouselExampleIndicators"
@@ -296,48 +324,124 @@ $("#logout_na").on("click", function() {
                         </tbody>
                      </table>
                   </div>
-
                   <div style=text-align:right;padding-right:10px;>
                      <input type="button" id="cart" class="primary-btn" value="찜하기">
+                  <c:choose>
+                  <c:when test="${dto.onGoing=='y' }">
+                     <input type="button" class="genric-btn primary radius" id="buy" value="구매 하기"/>
+                     </c:when>
+                     <c:when test="${dto.onGoing=='n' }">
+                     <input type="button" class="genric-btn primary radius" id="soldOut" value="판매 완료"/>
+                     </c:when>
+                     </c:choose>
                   </div>
                </div>
             </div>
          </div>
       </div>
    </div>
+   
+<!--   	구매 script -->
+   <script>
+   
+   
+   $("#soldOut").on("click",function(){
+	 
+	   alert("판매 완료된 상품 입니다.");
+   })
+   
+   $("#buy").on("click",function(){
+	  
+	   if(${email==null}){
+		   alert("로그인 하세요.");
+		   return false;
+	   }
+	   
+	   var result = confirm("정말로 구매하시겠습니까?");
+	   
+	   if(result==false){
+		   return false;
+	   }
+	   
+	   
+	   
+	   
+	   var boardNum = "${dto.no }";
+	   var price = Number(${dto.price });
+	   var d_price = Number(${dto.delivery_cost });
+	   var img = "${i_dto.title_img }";
+	   var title = "${dto.title }";
+	   var s_id = "${dto.id }";
+	   var b_id = "${email}";
+	   
+	   var myMoney = Number(${myMoney});
+	   var price_p = price+d_price;
+	   
+	   if(myMoney<price_p){
+		   alert("보유 잔액이 부족합니다.");
+		   return false;
+	   }
+	   console.log(boardNum + " : " + price + " : " + d_price + " : " + img + " :"  + title + " : " + s_id + " : " + b_id);
+	   
+	   $.ajax({
+		  
+		   url:"/buy",
+		   data:{
+			   "boardNum":boardNum,
+			   "price":price+d_price,
+			   "img":img,
+			   "title":title,
+			   "s_id":s_id,
+			   "b_id":b_id
+		   },
+	   }).done(function(resp){
+		   
+		   if(resp==1){
+			   alert("구매 성공!");
+			   location.reload();
+			   
+		   }else{
+			   alert("구매 실패!");
+			   location.reload();
+		   }
+		   
+	   });
+   
+   });
+   
+   
+   </script>
    <!--================End Single Product Area =================-->
 
    <!--================Product Description Area =================-->
-   <section class="product_description_area">
-      <div class="container">
-         <ul class="nav nav-tabs" id="myTab" role="tablist">
-            <li class="nav-item"><a class="nav-link" id="home-tab"
-               data-toggle="tab" href="#home" role="tab" aria-controls="home"
-               aria-selected="true">물품정보</a></li>
-            <li class="nav-item"><a class="nav-link" id="profile-tab"
-               data-toggle="tab" href="#profile" role="tab"
-               aria-controls="profile" aria-selected="false">판매자 정보</a></li>
-            <li class="nav-item"><a class="nav-link" id="contact-tab"
-               data-toggle="tab" href="#contact" role="tab"
-               aria-controls="contact" aria-selected="false">배송/반품</a></li>
-            <li class="nav-item"><a class="nav-link active" id="review-tab"
-               data-toggle="tab" href="#review" role="tab" aria-controls="review"
-               aria-selected="false">문의 및 댓글</a></li>
-         </ul>
-         <div class="tab-content" id="myTabContent">
-            <div class="tab-pane fade" id="home" role="tabpanel"
-               aria-labelledby="home-tab" style="text-align: center;">
-               
-               
-               
+	<section class="product_description_area">
+		<div class="container">
+			<ul class="nav nav-tabs" id="myTab" role="tablist">
+				<li class="nav-item"><a class="nav-link active" id="home-tab"
+					data-toggle="tab" href="#home" role="tab" aria-controls="home"
+					aria-selected="true">물품정보</a></li>
+				<li class="nav-item"><a class="nav-link" id="profile-tab"
+					data-toggle="tab" href="#profile" role="tab"
+					aria-controls="profile" aria-selected="false">판매자 정보</a></li>
+				<li class="nav-item"><a class="nav-link" id="contact-tab"
+					data-toggle="tab" href="#contact" role="tab"
+					aria-controls="contact" aria-selected="false">배송/반품</a></li>
+				<li class="nav-item"><a class="nav-link" id="review-tab"
+					data-toggle="tab" href="#review" role="tab" aria-controls="review"
+					aria-selected="false" onclick="fnMove()">문의 및 댓글</a></li>
+			</ul>
+			<div class="tab-content" id="myTabContent">
+				<div class="tab-pane fade active show" id="home" role="tabpanel"
+					aria-labelledby="home-tab" style="text-align: center;">
+				
+				<!-- 물품정보 -->                                      
+
                <div class="col-md-62">
                      <p style=text-align:left;font-size:25px;line-height:40px;padding-left:60px;padding-right:60px;padding-top:30px;>
                         ${dto.contents }   
                      </p>
-               </div><br><br><br>                                           
-               
-               
-               
+               </div><br><br><br>               
+                                                       
                <!-- 상세 이미지  -->
                <div class="selector">
                   <img src="img/title/${i_dto.title_img }"" onerror="this.style.display='none'"
@@ -519,6 +623,13 @@ $("#logout_na").on("click", function() {
       </div>
    </section>
    
+   	<script>
+	  function fnMove(){
+	        var offset = $("#MovingPoint").offset();
+	        $('html, body').animate({scrollTop : offset.top}, 500);
+	    }
+   </script>
+   
    <!-- 댓글 area -->
 
 	<!--================Blog Area =================-->
@@ -559,6 +670,7 @@ $("#logout_na").on("click", function() {
 							</div>
 						</c:forEach>
 					</div>
+					   <div id=MovingPoint></div>	<!-- 댓글 이동 탭 -->
 					<div class="row p-0 m-0 numBox">
 						<div class="col-12 d-flex justify-content-center navi mt-1">
 							<nav aria-label="Page navigation example">
@@ -1012,11 +1124,8 @@ $("#logout_na").on("click", function() {
 	</script>
 	
 	
+   <script src="https://use.fontawesome.com/releases/v5.0.0/js/all.js"></script>
    <script src="../resources/js/vendor/jquery-2.2.4.min.js"></script>
-   <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/popper.../resources/js/1.11.0/umd/popper.min.js"
-      integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
-      crossorigin="anonymous"></script>
    <script src="../resources/js/vendor/bootstrap.min.js"></script>
    <script src="../resources/js/jquery.ajaxchimp.min.js"></script>
    <script src="../resources/js/jquery.nice-select.min.js"></script>
@@ -1029,5 +1138,6 @@ $("#logout_na").on("click", function() {
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
    <script src="../resources/js/gmaps.min.js"></script>
    <script src="../resources/js/main.js"></script>
+   </div>
    </body>
    </html>
