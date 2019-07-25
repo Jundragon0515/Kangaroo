@@ -293,7 +293,7 @@ pageEncoding="UTF-8"%>
        
        /* 삭제버튼 */
        $("#btn-delete").on("click", function(){
-    	   $("#deleteForm").submit();
+    	    $("#deleteForm").submit();
        });
       
       
@@ -580,7 +580,7 @@ pageEncoding="UTF-8"%>
                </div>
                <!-- End boardInfo  -->
                ${rsearch_result_null }
-            <form action="auctionBoardDelete">
+			<form id="deleteForm" action="auctionBoardDelete">
                <div class="row list-nav">
                   <c:forEach var="temp" items="${list }">
                      <div class="col-lg-3 col-md-6">

@@ -241,7 +241,7 @@
        $("#text-search").keydown(function(key){
     	   if(key.keyCode==13){
     		   var text_search = $("#text-search").val();
-    		   $(location).attr("href", "/tradeOption?search="+text_search);
+    		   $(location).attr("href", "/tradeOption_safe?search="+text_search);
     	   }
        });
        
