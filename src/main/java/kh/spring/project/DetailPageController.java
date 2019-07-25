@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 
+import kh.spring.dao.AuctionDAO;
 import kh.spring.dao.DetailPageDAO;
+import kh.spring.dao.GoodsTradeDAO;
 import kh.spring.dao.MemberDAO;
 import kh.spring.dto.Auction_boardDTO;
 import kh.spring.dto.Auction_img_boardDTO;
@@ -34,6 +36,12 @@ public class DetailPageController {
 	
 	@Autowired
 	private MemberService sdao;
+	
+	@Autowired
+	private GoodsTradeDAO gtdao;
+	
+	@Autowired
+	private AuctionDAO acdao;
 	
 	@Autowired
 	HttpSession session;
@@ -115,7 +123,9 @@ public class DetailPageController {
 		int no = Integer.parseInt(request.getParameter("no"));
 		Used_transaction_img_boardDTO i_dto = dao.u_i_selectByNo(no);	
 		Used_transaction_boardDTO dto = dao.u_selectByNo(no);
-
+		//조회수 올리기
+		gtdao.viewCountUpdate(no);
+		
 		int currentPage = 1;
 
 		String id = (String) session.getAttribute("email");
@@ -148,49 +158,50 @@ public class DetailPageController {
 
 	@RequestMapping("/auction_detailPage")							// 경매_상세 페이지
 	public String auction_detailPage(HttpServletRequest request) {
-		int no = Integer.parseInt(request.getParameter("no"));
-		Auction_img_boardDTO i_dto = dao.a_i_selectByNo(no);	
-		Auction_boardDTO dto = dao.a_selectByNo(no);
-		
-		int currentMoney = 0;
-		int currentPage = 1;
-		
-		if(request.getParameter("currentPage")!=null) {
-			currentPage=Integer.parseInt(request.getParameter("currentPage"));
-		}
-		
-		int boardNum = no;
-		try {
-			List<CommentDTO> result = mdao.commentList2(currentPage, boardNum);
-			
-			try {
-			currentMoney = mdao.currentMoney(no);
-			System.out.println(currentMoney);
-			}catch(Exception e) {
-			}
-			
-			request.setAttribute("list", result);
-			request.setAttribute("getNavi", mdao.getNaviforComment2(currentPage,no));
-			String id = (String) session.getAttribute("email");
+	      int no = Integer.parseInt(request.getParameter("no"));
+	      Auction_img_boardDTO i_dto = dao.a_i_selectByNo(no);   
+	      Auction_boardDTO dto = dao.a_selectByNo(no);
+		  //조회수 올리기
+		  acdao.viewCountUpdate(no);
+	      int currentMoney = 0;
+	      int currentPage = 1;
+	      
+	      if(request.getParameter("currentPage")!=null) {
+	         currentPage=Integer.parseInt(request.getParameter("currentPage"));
+	      }
+	      
+	      int boardNum = no;
+	      try {
+	         List<CommentDTO> result = mdao.commentList2(currentPage, boardNum);
+	         
+	         try {
+	         currentMoney = mdao.currentMoney(no);
+	         System.out.println(currentMoney);
+	         }catch(Exception e) {
+	         }
+	         
+	         request.setAttribute("list", result);
+	         request.setAttribute("getNavi", mdao.getNaviforComment2(currentPage,no));
+	         String id = (String) session.getAttribute("email");
 
-			List<TenderDTO> rank = mdao.rank(no);// 1~5까지의 랭크
-			request.setAttribute("rank", rank);
-			request.setAttribute("currentMoney", currentMoney);
-			if((String) session.getAttribute("email")!=null) {
-			request.setAttribute("myMoney", mdao.myMoney(id));
-			}else {
-				request.setAttribute("myMoney", 0);
-			}
-			int tenderCount = dao.tenderCount(boardNum);
-			request.setAttribute("tenderCount", tenderCount);
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		System.out.println("사진 확인용" + i_dto.getTitle_img());
-		request.setAttribute("i_dto", i_dto);
-		request.setAttribute("dto", dto);
-		return "auction_detailPage";
+	         List<TenderDTO> rank = mdao.rank(no);// 1~5까지의 랭크
+	         request.setAttribute("rank", rank);
+	         request.setAttribute("currentMoney", currentMoney);
+	         if((String) session.getAttribute("email")!=null) {
+	         request.setAttribute("myMoney", mdao.myMoney(id));
+	         }else {
+	            request.setAttribute("myMoney", 0);
+	         }
+	         int tenderCount = dao.tenderCount(boardNum);
+	         request.setAttribute("tenderCount", tenderCount);
+	         
+	      } catch (Exception e) {
+	         e.printStackTrace();
+	      }
+	      System.out.println("사진 확인용" + i_dto.getTitle_img());
+	      request.setAttribute("i_dto", i_dto);
+	      request.setAttribute("dto", dto);
+	      return "auction_detailPage";
 	}
 
 	@RequestMapping("/deleteComment")

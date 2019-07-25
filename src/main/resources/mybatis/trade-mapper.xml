@@ -66,4 +66,9 @@
 		select count(*) from used_transaction_board where TRADE_TYPE='안전거래' ${search}
 	</select>
 	
+	<!-- 조회수 업데이트 -->
+	<update id="viewCountUpdate" parameterType="int">
+		update used_transaction_board set viewCount = viewCount+1 where no = #{no}
+	</update>
+	
 </mapper>

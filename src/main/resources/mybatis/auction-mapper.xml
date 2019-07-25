@@ -31,5 +31,10 @@
 	<select id="recordTotalCount_auction_search" parameterType="map" resultType="int">
 		select count(*) from auction_board ${search}
 	</select>
+	
+	<!-- 조회수 업데이트 -->
+	<update id="viewCountUpdate" parameterType="int">
+		update auction_board set viewCount = viewCount+1 where no = #{no}
+	</update>
 
 </mapper>
