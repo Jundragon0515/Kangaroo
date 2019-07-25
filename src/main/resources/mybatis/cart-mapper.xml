@@ -23,7 +23,7 @@
 </insert>
 
 <select id="overlapCheck" resultType="int">
-	select count(*) from trade_cart where no=#{value}
+	select count(*) from trade_cart where no=#{no} and id=#{id}
 </select>
 
 <delete id="cartTradeDelete">
@@ -34,7 +34,7 @@
  	insert into auction_cart values(#{id},#{no},#{title_img},#{title},#{end_date},#{category},#{price})
  </insert> 
  <select id="overlapCheckAuction" resultType="int">
- 	select count(*) from auction_cart where no=#{value}
+ 	select count(*) from auction_cart where no=#{no} and id=#{id}
  </select> 
  <delete id="cartAuctionDelete">
  	delete from auction_cart where no=#{value}

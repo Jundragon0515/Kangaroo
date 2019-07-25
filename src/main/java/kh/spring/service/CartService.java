@@ -45,15 +45,16 @@ public class CartService {
 		return dao.stream(dto);
 	}
 	
-	public int overlapCheck(int no) {
-		return dao.overlap(no);
+	
+	public int overlapCheck(CartTradeDTO dto) {
+		return dao.overlap(dto);
 	}
 	
 	public int streamingAuction(CartAuctionDTO dto) {
 		return dao.streamimgAuction(dto);
 	}
 	
-	public int overplapCheckAuction(int no) {
-		return dao.overlapAuction(no);
+	public int overplapCheckAuction(CartAuctionDTO dto) {
+		return dao.overlapAuction(dto);
 	}
 }

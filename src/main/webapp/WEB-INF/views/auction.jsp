@@ -608,9 +608,10 @@ pageEncoding="UTF-8"%>
                                  </div>
                                  <div class="row product-details" style="padding-left: 10px;">
                                     <div class="prd-bottom" style="margin-top: 5px;">
-                                       <a href="" class="social-info"> <span class="lnr lnr-heart"></span>
-                                          <p class="hover-text">Wishlist</p>
-                                       </a> <a href="/auction_detailPage?no=${temp.no}" class="social-info">
+                                       <a href="boardGgymAuction?no=${temp.no}&title_img=${temp.title_img}&title=${temp.title}&trade_type=${temp.end_date }&category=${temp.category }&price=${temp.starting_price}&id=${temp.id}" class="social-info ggym"> <span class="lnr lnr-heart"></span>
+                                          <p class="hover-text">ADD TO BAG</p>
+                                       </a> 
+                                       <a href="/auction_detailPage?no=${temp.no}" class="social-info">
                                         <span class="lnr lnr-move"></span>
                                           <p class="hover-text">view more</p>
                                        </a>
@@ -619,6 +620,7 @@ pageEncoding="UTF-8"%>
                               </div>
                         </div>
                         </div>
+
                      </div>
                   </c:forEach>
                </div>
@@ -727,6 +729,17 @@ pageEncoding="UTF-8"%>
    </div>
    </footer>
    <!-- End footer Area -->
+   
+   <script>
+		$(".ggym").on("click",function(){
+			if(${email==null}){
+				   alert("로그인 하세요.");
+				   return false;
+			   }
+		})
+	
+	</script>
+   
    <script src="https://use.fontawesome.com/releases/v5.0.0/js/all.js"></script>
    <script
       src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
