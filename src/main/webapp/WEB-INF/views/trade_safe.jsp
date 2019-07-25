@@ -507,9 +507,9 @@
                            <div class="row">
                               <div class="col-lg-12 col-md-12 col-sm-12">
                                  <select id="viewCount" name="viewCount">
+                                    <option value="12">12개씩 보기</option>
                                     <option value="16">16개씩 보기</option>
-                                    <option value="24">24개씩 보기</option>
-                                    <option value="32">32개씩 보기</option>
+                                    <option value="20">20개씩 보기</option>
                                  </select>
                               </div>
                            </div>

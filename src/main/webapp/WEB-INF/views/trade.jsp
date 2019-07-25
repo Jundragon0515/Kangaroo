@@ -1,5 +1,6 @@
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -505,9 +506,9 @@
                            <div class="row">
                               <div class="col-lg-12 col-md-12 col-sm-12">
                                  <select id="viewCount" name="viewCount" onchange="viewCount()">
+                                    <option value="12">12개씩 보기</option>
                                     <option value="16">16개씩 보기</option>
-                                    <option value="24">24개씩 보기</option>
-                                    <option value="32">32개씩 보기</option>
+                                    <option value="20">20개씩 보기</option>
                                  </select>
                               </div>
                            </div>

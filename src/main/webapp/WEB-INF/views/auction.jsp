@@ -530,9 +530,9 @@ pageEncoding="UTF-8"%>
                            <div class="row">
                               <div class="col-lg-12 col-md-12 col-sm-12">
                                  <select id="viewCount" name="viewCount">
+                                    <option value="12">12개씩 보기</option>
                                     <option value="16">16개씩 보기</option>
-                                    <option value="24">24개씩 보기</option>
-                                    <option value="32">32개씩 보기</option>
+                                    <option value="20">20개씩 보기</option>
                                  </select>
                               </div>
                            </div>
@@ -554,10 +554,10 @@ pageEncoding="UTF-8"%>
                			<c:when test="${temp.onGoing=='n'}">
                         <div class="single-product" style="margin-bottom: 15px;">
                            <div class="card">
-                           <div class="onging">
+<!--                            <div class="onging"> -->
                            <img class="onging-img" src="../resources/img/banner/soldout.png">
                            <button class="ongoing-btn"></button>
-                           <div>
+<!--                            <div> -->
                               <a href="/auction_detailPage?no=${temp.no}">
                               <img class="img-fluid product-img-size" style="margin-bottom: 5px;"
                                  src="../resources/img/title/${temp.title_img}" alt=""></a>
@@ -571,7 +571,15 @@ pageEncoding="UTF-8"%>
                                     </div>
                                  </div>
                                  <div class="row">
-                                    <div class="col-lg-12">현재가격:${temp.present_price}</div>
+                                 <c:choose>
+                                 	<c:when test="${temp.present_price==0}">
+                                 		<div class="col-lg-12">현재가격1:${temp.starting_price}</div>
+                                 	</c:when>
+                                 	
+                                 	<c:otherwise>
+                                 		<div class="col-lg-12">현재가격2:${temp.present_price}</div>
+                                 	</c:otherwise>
+                                 </c:choose>
                                  </div>
                                  <div class="row">
                                     <div class="col-sm-12 col-md-10 col-lg-8 ${temp.no}"></div>
@@ -589,8 +597,8 @@ pageEncoding="UTF-8"%>
                                     </div>
                                  </div>
                               </div>
-                           </div>
-                           </div>
+<!--                            </div> -->
+<!--                            </div> -->
                         </div>
                         </div>
                         </c:when>
@@ -610,7 +618,15 @@ pageEncoding="UTF-8"%>
                                     </div>
                                  </div>
                                  <div class="row">
-                                    <div class="col-lg-12">현재가격:${temp.present_price}</div>
+                                    <c:choose>
+                                 	<c:when test="${temp.present_price==0}">
+                                 		<div class="col-lg-12">현재가격 : ${temp.starting_price}원</div>
+                                 	</c:when>
+                                 	
+                                 	<c:otherwise>
+                                 		<div class="col-lg-12">현재가격 : ${temp.present_price}원</div>
+                                 	</c:otherwise>
+                                 </c:choose>
                                  </div>
                                  <div class="row">
                                     <div class="col-sm-12 col-md-10 col-lg-8 ${temp.no}"></div>

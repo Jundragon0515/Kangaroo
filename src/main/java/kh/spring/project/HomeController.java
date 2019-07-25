@@ -1,5 +1,7 @@
 package kh.spring.project;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -11,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import kh.spring.dto.Auction_boardDTO;
 import kh.spring.dto.MemberDTO;
+import kh.spring.dto.Used_transaction_boardDTO;
 import kh.spring.service.MemberService;
 
 @Controller
@@ -22,11 +26,21 @@ public class HomeController {
 	MemberService mes;
 	public static int visitCount = 0;
 	@RequestMapping("/")
-	public String visit() { 	// 첫 방문
+	public ModelAndView visit() { 	// 첫 방문
 		System.out.println("반갑습니다.");
 		visitCount++;
 		System.out.println(visitCount);
-		return "index";
+		
+		ModelAndView mav =new ModelAndView();
+		List<Used_transaction_boardDTO> mainDirectList = mes.directList();
+		List<Used_transaction_boardDTO> mainSafeList = mes.safeList();
+		List<Auction_boardDTO> mainAuctionList = mes.auctionList();
+		mav.addObject("mainDirectList",mainDirectList);
+		mav.addObject("mainSafeList",mainSafeList);
+		mav.addObject("auctionList", mainAuctionList);
+		mav.setViewName("index");
+	
+		return mav;
 	}
 	@RequestMapping("/index")
 	public String home() { 		//홈
@@ -119,4 +133,6 @@ public class HomeController {
 		se.invalidate();
 		return "redirect:"+old_url;
 	}
+	
+
 }
