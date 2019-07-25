@@ -2,6 +2,7 @@ package kh.spring.service;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -18,7 +19,9 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.Gson;
 import com.google.gson.JsonParser;
 
+import kh.spring.dao.AuctionDAO;
 import kh.spring.dao.DetailPageDAO;
+import kh.spring.dao.GoodsTradeDAO;
 import kh.spring.dao.KakaoDAO;
 import kh.spring.dao.MailDAO;
 import kh.spring.dao.MemberDAO;
@@ -27,6 +30,7 @@ import kh.spring.dto.Auction_boardDTO;
 import kh.spring.dto.MemberDTO;
 import kh.spring.dto.OrderDTO;
 import kh.spring.dto.TenderDTO;
+import kh.spring.dto.Used_transaction_boardDTO;
 
 @Component
 public class MemberService {
@@ -42,6 +46,10 @@ public class MemberService {
 	KakaoDAO ka;
 	@Autowired
 	DetailPageDAO ddao;
+	@Autowired
+	GoodsTradeDAO gtdao;
+	@Autowired
+	AuctionDAO adao;
 	
 	@Transactional("txManager")
 	public int buy(OrderDTO dto) {
@@ -328,4 +336,21 @@ public class MemberService {
 			return -1;
 		}
 	}
+	
+	//메인화면 직거래 리스트
+	public List<Used_transaction_boardDTO> directList(){
+		return gtdao.main_direct_list();
+	}
+	
+	//메인화면 안전거래 리스트
+	public List<Used_transaction_boardDTO> safeList(){
+		return gtdao.main_safe_list();
+	}
+	
+	//메인화면 경매 리스트
+	public List<Auction_boardDTO> auctionList(){
+		return adao.main_Auction_List();
+	}
+	
+	
 }

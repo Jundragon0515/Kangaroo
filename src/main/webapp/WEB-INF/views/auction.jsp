@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
 
@@ -554,9 +555,9 @@ pageEncoding="UTF-8"%>
                            <div class="row">
                               <div class="col-lg-12 col-md-12 col-sm-12">
                                  <select id="viewCount" name="viewCount">
+                                    <option value="12">12개씩 보기</option>
                                     <option value="16">16개씩 보기</option>
-                                    <option value="24">24개씩 보기</option>
-                                    <option value="32">32개씩 보기</option>
+                                    <option value="20">20개씩 보기</option>
                                  </select>
                               </div>
                            </div>
@@ -590,7 +591,15 @@ pageEncoding="UTF-8"%>
                                     </div>
                                  </div>
                                  <div class="row">
-                                    <div class="col-lg-12">현재가격:${temp.present_price}</div>
+                                 <c:choose>
+                                 	<c:when test="${temp.present_price==0}">
+                                 		<div class="col-lg-12">현재가격 : <fmt:formatNumber value="${temp.starting_price}" pattern="#,###" />원</div>
+                                 	</c:when>
+                                 	
+                                 	<c:otherwise>
+                                 		<div class="col-lg-12">현재가격 : <fmt:formatNumber value="${temp.starting_price}" pattern="#,###" />원</div>
+                                 	</c:otherwise>
+                                 </c:choose>
                                  </div>
                                  <div class="row">
                                     <div class="col-sm-12 col-md-10 col-lg-8 ${temp.no}"></div>
@@ -621,7 +630,6 @@ pageEncoding="UTF-8"%>
                   <b class="paging">${navi }</b>
                </div>
             </div>
-
          </div>
          <!-- end center  -->
 
