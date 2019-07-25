@@ -22,7 +22,7 @@
 <!-- Site Title -->
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <!-- 웹 소켓 cdn -->
-<script
+<script	
    src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.3.0/sockjs.min.js"></script>
 <script
    src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
@@ -331,6 +331,7 @@ $("#logout_na").on("click", function() {
                      </table>
                   </div>
                   <div style=text-align:right;padding-right:10px;>
+                  	 <input type="button" id="report" class="genric-btn danger radius" value="신고하기" onclick="showPopup();"/>
                      <input type="button" id="cart" class="genric-btn primary radius" value="찜하기">
                   <c:choose>
 
@@ -1134,14 +1135,19 @@ $("#logout_na").on("click", function() {
 			url : "/steamingTrade",
 			data : {"no":"${dto.no}","title_img":"${i_dto.title_img}",
 				"title":"${dto.title}","trade_type":"${dto.trade_type}",
-				"category":"${dto.category}","price":"${dto.price}"}
+				"category":"${dto.category}","price":"${dto.price}","id":"${dto.id}"}
 		}).done(function(resp){
 			alert(resp);
 		})
 	});
-	
-	
+
 	</script>
+	
+	<script language="javascript">
+ 			function showPopup() { 
+ 				window.open("resources/index.html", "a", "width=550, height=500, left=450, top=300"); 
+ 				}
+  	</script>
 	
 	
    <script src="https://use.fontawesome.com/releases/v5.0.0/js/all.js"></script>

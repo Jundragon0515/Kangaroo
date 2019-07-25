@@ -549,6 +549,7 @@ function viewCount(){
    		$(".auctionCheck").attr("checked",true);
    	})
    	
+   	
    
    </script>
 

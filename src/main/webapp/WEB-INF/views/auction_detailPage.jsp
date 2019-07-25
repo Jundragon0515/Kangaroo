@@ -470,6 +470,7 @@ $("#logout_na").on("click", function() {
 
 						<!--                   입찰창 -->
 						<div style=text-align:right;padding-right:10px;>
+						<input type="button" id="report" class="genric-btn danger radius" value="신고하기"onclick="showPopup();"/>
 						<input type="button" id="cartAuction" class="genric-btn primary radius" value="찜하기">
 						</div>
 						<div class="card_area d-flex align-items-center">
@@ -477,7 +478,7 @@ $("#logout_na").on("click", function() {
 						<c:choose>
 						
                   <c:when test="${dto.onGoing=='y' }">
-                  
+                  	
                   	<c:choose>
                   	<c:when test="${dto.id==email}">
                   	</c:when>
@@ -1577,13 +1578,19 @@ $("#logout_na").on("click", function() {
    		$("#cartAuction").on("click",function(){
 			$.ajax({
 				url : "/steamingAuction",
-				data : {"no":"${dto.no}","title_img":"${i_dto.title_img}","title":"${dto.title}","end_date":"${dto.end_date}","category":"${dto.category}","price":"${dto.present_price}"}				
+				data : {"no":"${dto.no}","title_img":"${i_dto.title_img}","title":"${dto.title}","end_date":"${dto.end_date}","category":"${dto.category}","price":"${dto.present_price}","id":"${dto.id}"}				
 				}).done(function(resp){
 					alert(resp);
 			})
 		});
    
    </script>
+   
+   <script language="javascript">
+ 			function showPopup() { 
+ 				window.open("resources/index.html", "a", "width=550, height=500, left=450, top=300"); 
+ 				}
+  </script>
 
    <script src="../resources/js/vendor/jquery-2.2.4.min.js"></script>
    <script src="https://use.fontawesome.com/releases/v5.0.0/js/all.js"></script>

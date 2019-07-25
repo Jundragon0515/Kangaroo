@@ -625,7 +625,7 @@ pageEncoding="UTF-8"%>
                                  </div>
                                  <div class="row product-details" style="padding-left: 10px;">
                                     <div class="prd-bottom" style="margin-top: 5px;">
-                                       <a href="boardGgymAuction?no=${temp.no}&title_img=${temp.title_img}&title=${temp.title}&end_date=${temp.end_date}&category=${temp.category }&price=${temp.present_price}" class="social-info"> <span class="lnr lnr-heart"></span>
+                                       <a href="boardGgymAuction?no=${temp.no}&title_img=${temp.title_img}&title=${temp.title}&end_date=${temp.end_date}&category=${temp.category }&price=${temp.present_price}&id=${temp.id}" class="social-info"> <span class="lnr lnr-heart"></span>
                                           <p class="hover-text">add to bag</p>
 
                                        </a> <a href="/auction_detailPage?no=${temp.no}" class="social-info">
@@ -633,7 +633,7 @@ pageEncoding="UTF-8"%>
                                           <p class="hover-text">view more</p>
                                        </a>
                                     </div>
-                                 </div>
+                                 </div>                           
                               </div>
                            </div>
                         </div>

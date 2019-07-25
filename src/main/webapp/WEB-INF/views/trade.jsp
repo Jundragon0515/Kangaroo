@@ -285,7 +285,6 @@
 </head>
 
 <body>
-
    <!-- Start Header Area -->
    <header class="header_area sticky-header">
 		<div class="main_menu">
@@ -562,7 +561,7 @@
                                  <div class="row product-details" style="padding-left: 10px;">
                                     <div class="prd-bottom" style="margin-top: 5px;">
 
-                                       <a onclick="check();" href="boardGgym?no=${temp.no}&title_img=${temp.title_img}&title=${temp.title}&trade_type=${temp.trade_type }&category=${temp.category }&price=${temp.price}" class="social-info"> <span class="lnr lnr-heart"></span>
+                                       <a href="boardGgym?no=${temp.no}&title_img=${temp.title_img}&title=${temp.title}&trade_type=${temp.trade_type }&category=${temp.category }&price=${temp.price}&id={temp.id}" class="social-info"> <span class="lnr lnr-heart"></span>
                                           <p class="hover-text">add to bag</p>
 
 									 </a> 
@@ -603,7 +602,7 @@
                                  </div>
                                  <div class="row product-details" style="padding-left: 10px;">
                                     <div class="prd-bottom" style="margin-top: 5px;">
-                                       <a href="boardGgym?no=${temp.no}&title_img=${temp.title_img}&title=${temp.title}&trade_type=${temp.trade_type }&category=${temp.category }&price=${temp.price}" class="social-info"> <span class="lnr lnr-heart"></span>
+                                       <a href="boardGgym?no=${temp.no}&title_img=${temp.title_img}&title=${temp.title}&trade_type=${temp.trade_type }&category=${temp.category }&price=${temp.price}&id=${temp.id}" class="social-info"> <span class="lnr lnr-heart"></span>
                                           <p class="hover-text">ADD TO BAG</p>
                                        </a> <a href="/used_detailPage?no=${temp.no}" class="social-info">
                                         <span class="lnr lnr-move"></span>
@@ -725,6 +724,7 @@
    </div>
    </footer>
    <!-- End footer Area -->
+
    
    <script src="https://use.fontawesome.com/releases/v5.0.0/js/all.js"></script>
    <script
