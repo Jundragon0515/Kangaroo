@@ -121,6 +121,10 @@ body {
    top: 540px;
    cursor:pointer;
 }
+#soldOut{
+	position: relative;
+	left: 180px;
+}
 
 .back-to-top {text-decoration: none; display: none; color:#fe912b;}
 
@@ -130,13 +134,47 @@ body {
 <script>
 $(function(){
 
-	
 	var socket = new SockJS("/gettime"); //불특정 다수의 브라우저일 경우를 위해 endpoint url 넣어야 한다
 	var client = Stomp.over(socket);//연결 이후의 작업 지원 
 	client.connect({}, function(resp) {
 		client.subscribe("/response", function(list) {
 			var result = JSON.parse(list.body);
 							$(".time").text(result[0]);
+							console.log("${dto.onGoing}");
+							
+							if($("#rt").text()=="종료"){
+								
+								if(${dto.onGoing=="n"}){
+									
+								}else{
+								
+								
+									$.ajax({
+									
+									url:"/timeStop",
+									data:{"boardNum":${dto.no }}
+									
+								}).done(function(resp){
+									
+									$.ajax({
+										url:"/topTender",
+										data:{"boardNum":"${dto.no }","seller":"${dto.id }"},
+										
+									})
+									
+									var result = Number(resp);
+									console.log(Number(resp));
+									
+									if(result>0){
+									
+										alert("경매 시간이 종료되었습니다 !")
+										location.reload();	
+									}
+									
+								});
+								
+								}
+							}
 		});
 	})
 	setInterval(function() {//시간 보내 달라는 요청
@@ -427,12 +465,34 @@ $("#logout_na").on("click", function() {
 
 						<!--                   입찰창 -->
 						<div class="card_area d-flex align-items-center">
-							<form class="form-inline" id="tender">
+						
+						<c:choose>
+						
+                  <c:when test="${dto.onGoing=='y' }">
+                  
+                  	<c:choose>
+                  	<c:when test="${dto.id==email}">
+                  	</c:when>
+                  	<c:otherwise>
+                     <form class="form-inline" id="tender">
 								<input type="text" class="form-control mb-2 mr-sm-2" id="money"
 									onchange="getNumber(this);" onkeyup="getNumber(this);"
 									placeholder="입찰금액을 입력해주세요."> <input type="button"
 									class="genric-btn primary radius" id="tend" value="입찰" />
 							</form>
+							</c:otherwise>
+							</c:choose>
+							
+                     </c:when>
+                     
+                     <c:when test="${dto.onGoing=='n' }">
+                     <form class="form-inline" id="tender">
+                     <input type="button" class="genric-btn primary radius" id="soldOut" value="TIME OVER"/>
+                     </form>
+                     </c:when>
+                     
+                     </c:choose>
+							
 						</div>
 
 						<!-- 				입찰창 end -->
@@ -796,7 +856,7 @@ $("#logout_na").on("click", function() {
    </script>
 
 	<!--================Product Description Area =================-->
-	<section class="product_description_area">
+	<section class="product_description_area mb-0 pb-0">
 		<div class="container">
 			<ul class="nav nav-tabs" id="myTab" role="tablist">
 				<li class="nav-item"><a class="nav-link active" id="home-tab"
@@ -1033,7 +1093,7 @@ $("#logout_na").on("click", function() {
 
 
 	<!--================Blog Area =================-->
-	<section class="blog_area single-post-area section_gap p-0">
+	<section class="blog_area single-post-area section_gap pt-0 mt-0">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12 posts-list">
