@@ -31,10 +31,10 @@ public class TradeController {
       
       session.setAttribute("selectCategory", "all");
       session.setAttribute("selectPrice", " ");
-      session.setAttribute("selectView", "16");
+      session.setAttribute("selectView", "12");
 
       int currentPage = 0;
-      int recordCountPerPage=16;
+      int recordCountPerPage=12;
       List<Used_transaction_boardDTO> list = null;
 
       String currentPageResult = request.getParameter("currentPage");
@@ -105,7 +105,7 @@ public class TradeController {
          tradeService.checkPrice(session);
       }
       if(selectView==null) {
-         session.setAttribute("selectView", "16");
+         session.setAttribute("selectView", "12");
       }else {
          tradeService.checkView(session);
       }
@@ -158,10 +158,10 @@ public class TradeController {
       
       session.setAttribute("selectCategory", "all");
       session.setAttribute("selectPrice", " ");
-      session.setAttribute("selectView", "16");
+      session.setAttribute("selectView", "12");
 
       int currentPage = 0;
-      int recordCountPerPage=16;
+      int recordCountPerPage=12;
       List<Used_transaction_boardDTO> list = null;
 
       String currentPageResult = request.getParameter("currentPage");
@@ -231,7 +231,7 @@ public class TradeController {
          tradeService.checkPrice(session);
       }
       if(selectView==null) {
-         session.setAttribute("selectView", "16");
+         session.setAttribute("selectView", "12");
       }else {
          tradeService.checkView(session);
       }

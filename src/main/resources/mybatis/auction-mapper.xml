@@ -3,7 +3,7 @@
 <mapper namespace="AuctionDAO">
 
    <select id="auctionList" parameterType="map" resultType="kh.spring.dto.Auction_boardDTO">
-      select * from (select row_number() over(order by no) as rown, auction_board.* from auction_board) where rown between #{start} and #{end}
+      select * from (select row_number() over(order by no desc) as rown, auction_board.* from auction_board) where rown between #{start} and #{end}
    </select>
    
    <select id="auctionPrice" parameterType="map" resultType="kh.spring.dto.Auction_boardDTO">
@@ -24,7 +24,7 @@
    
    	<!--경매 게시판 검색어  -->
 	<select id="auctionList_search" parameterType="map" resultType="kh.spring.dto.Auction_boardDTO">
-		select * from (select row_number() over(order by no) as rown, auction_board.* from auction_board ${search}) where rown between #{start} and #{end}
+		select * from (select row_number() over(order by no desc) as rown, auction_board.* from auction_board ${search}) where rown between #{start} and #{end}
 	</select>
 
 	<!--경매 게시판 검색 기본 설정 총 개수  -->
@@ -36,5 +36,10 @@
 	<update id="viewCountUpdate" parameterType="int">
 		update auction_board set viewCount = viewCount+1 where no = #{no}
 	</update>
+	
+	<!--메인페이지 경매리스트  -->
+	<select id="mainAuctionList" parameterType="map" resultType="kh.spring.dto.Auction_boardDTO">
+		select * from (select row_number() over(order by no desc) as rown, auction_board.* from auction_board where ongoing='y') where rown between #{start} and #{end}
+	</select>
 
 </mapper>

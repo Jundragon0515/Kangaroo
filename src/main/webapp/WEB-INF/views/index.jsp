@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="zxx" class="no-js">
 
@@ -44,6 +45,11 @@
 </head>
 <style>
 
+/* * {
+	box-sizing:border-box;
+	border : 1px solid black;
+} */
+
 .owl-nav {
 	top: 430px;
 }
@@ -59,6 +65,18 @@
 	text-align: center;
 }
 
+/* 등록상품 메인 이미지  */
+.product-img-size {
+   width: 330px;
+   height: 230px;
+}
+
+/*카드리스트 마우스 오버*/
+.card:hover {
+   border: solid 1px #ffba00;
+   margin: 1px;
+}
+
 </style>
 <script>
 	$(function() {
@@ -68,21 +86,38 @@
 			client.subscribe("/response", function(list) {
 				var result = JSON.parse(list.body);
 				var z = 0;
-					 			<c:forEach var="i" items="${main_option_list}">
-								$("."+"${i.no}").text(result[z++]);
+					 			<c:forEach var="i" items="${auctionList}">
+								$(".${i.no}").text("남은시간 : "+result[z++]);
 								</c:forEach>
 			});
 		})
 		setInterval(function() {//시간 보내 달라는 요청
 			var list = new Array();
-						<c:forEach var="i" items="${main_option_list}">
+						<c:forEach var="i" items="${auctionList}">
 							list.push("${i.end_date}");
 						</c:forEach>
 			client.send("/app/time", {}, JSON.stringify({
 				end_dates : list
 			}));
 		}, 900);
-		
+		var list2 = new Array();
+		<c:forEach var="i" items="${auctionList}">
+		list2.push("${i.no}");
+		</c:forEach>
+		setInterval(function() {
+			for(var z=0; z<list2.length ; z++){
+				if(!list2[z])
+					continue;
+				if($("."+list2[z]).text()=='남은시간 : 종료'){
+					$("."+list2[z]+"_re").before("<img class='onging-img' src=''../resources/img/banner/soldout.png'><button class='ongoing-btn'></button>");
+					client.send("/app/end", {}, JSON.stringify({
+						no : list2[z]
+					}));
+					delete list2[z];
+				}
+				
+			}	
+		}, 900);
 		
 		$("#logout_na").on("click", function() {
 			 $.ajax({
@@ -276,53 +311,109 @@
 				<div class="row justify-content-center">
 					<div class="col-lg-6 text-center">
 						<div class="section-title">
-							<h1>중고 거래</h1>
+							<h1>중고 직거래</h1>
+							<p>판매자와 직접 빠른 거래를 해보세요!</p>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+				<!-- 직거래리스트 -->
+				<c:forEach var="temp" items="${mainDirectList }">
+					<!-- single product -->
+					<div class="col-lg-3 col-md-6">
+						<div class="single-product">
+                        <div class="card">
+                              <a href="/used_detailPage?no=${temp.no}">
+                              <img class="img-fluid product-img-size" style="margin-bottom: 5px;"
+                                 src="/img/title/${temp.title_img}" alt=""></a>
+                              <div class="card-body" style="padding: 12px;">
+                                 <div class="row">
+                                    <div class="d-none d-lg-block col-lg-12">[${temp.category}]</div>
+                                 </div>
+                                 <div class="row">
+                                    <div class="col-lg-12">
+                                       <h4>${temp.title}</h4>
+                                    </div>
+                                 </div>
+                                 <div class="row">
+                                    <div class="col-lg-12">판매가격 : <fmt:formatNumber value="${temp.price}" pattern="#,###" />원</div>
+                                 </div>
+                                 <div class="row">
+                                    <div class="col-sm-12 col-md-10 col-lg-8">${temp.joinDate}</div>
+                                    <div class="d-none d-xl-block col-lg-2"><i class="fas fa-eye fa-2x"></i></div>
+                                    <div class="col-sm-12 col-md-2 col-lg-2">${temp.viewCount}</div>
+                                 </div>
+                                 <div class="row product-details" style="padding-left: 10px;">
+                                    <div class="prd-bottom" style="margin-top: 5px;">
+                                       <a href="" class="social-info"> <span class="lnr lnr-heart"></span>
+                                          <p class="hover-text">Wishlist</p>
+                                       </a> <a href="/used_detailPage?no=${temp.no}" class="social-info">
+                                        <span class="lnr lnr-move"></span>
+                                          <p class="hover-text">view more</p>
+                                       </a>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+						</div>
+					</div>
+					</c:forEach>
+				</div>
+			</div>
+		</div>
+				<!-- single product slide -->
+		<div class="single-product-slider">
+			<div class="container">
+				<div class="row justify-content-center">
+					<div class="col-lg-6 text-center">
+						<div class="section-title">
+							<h1>중고 안전거래</h1>
 							<p>안전하게 중고 물품 거래를 해보세요!</p>
 						</div>
 					</div>
 				</div>
 				<div class="row">
+				<!-- 안전거래 리스트 -->
+				<c:forEach var="temp" items="${mainSafeList }">
 					<!-- single product -->
 					<div class="col-lg-3 col-md-6">
 						<div class="single-product">
-							<img class="img-fluid" src="../resources/img/product/p1.jpg"
-								alt="">
-							<div class="product-details">
-								<h6>addidas New Hammer sole for Sports person</h6>
-								<div class="price">
-									<h6>$150.00</h6>
-									<h6 class="asd"></h6>
-								</div>
-								<div class="prd-bottom">
-									<a href="" class="social-info"> <span class="ti-bag"></span>
-										<p class="hover-text">add to bag</p>
-									</a> <a href="/auction_detailPage" class="social-info"> <span class="lnr lnr-move"></span>
-										<p class="hover-text">view more</p>
-									</a>
-								</div>
-							</div>
+                        <div class="card">
+                              <a href="/used_detailPage?no=${temp.no}">
+                              <img class="img-fluid product-img-size" style="margin-bottom: 5px;"
+                                 src="/img/title/${temp.title_img}" alt=""></a>
+                              <div class="card-body" style="padding: 12px;">
+                                 <div class="row">
+                                    <div class="d-none d-lg-block col-lg-12">[${temp.category}]</div>
+                                 </div>
+                                 <div class="row">
+                                    <div class="col-lg-12">
+                                       <h4>${temp.title}</h4>
+                                    </div>
+                                 </div>
+                                 <div class="row">
+                                    <div class="col-lg-12">판매가격 : <fmt:formatNumber value="${temp.price}" pattern="#,###" />원</div>
+                                 </div>
+                                 <div class="row">
+                                    <div class="col-sm-12 col-md-10 col-lg-8">${temp.joinDate}</div>
+                                    <div class="d-none d-xl-block col-lg-2"><i class="fas fa-eye fa-2x"></i></div>
+                                    <div class="col-sm-12 col-md-2 col-lg-2">${temp.viewCount}</div>
+                                 </div>
+                                 <div class="row product-details" style="padding-left: 10px;">
+                                    <div class="prd-bottom" style="margin-top: 5px;">
+                                       <a href="" class="social-info"> <span class="lnr lnr-heart"></span>
+                                          <p class="hover-text">Wishlist</p>
+                                       </a> <a href="/used_detailPage?no=${temp.no}" class="social-info">
+                                        <span class="lnr lnr-move"></span>
+                                          <p class="hover-text">view more</p>
+                                       </a>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
 						</div>
 					</div>
-					<div class="col-lg-3 col-md-6">
-						<div class="single-product">
-							<img class="img-fluid" src="../resources/img/product/p1.jpg"
-								alt="">
-							<div class="product-details">
-								<h6>addidas New Hammer sole for Sports person</h6>
-								<div class="price">
-									<h6>$150.00</h6>
-									<h6 class="asd2"></h6>
-								</div>
-								<div class="prd-bottom">
-									<a href="" class="social-info"> <span class="ti-bag"></span>
-										<p class="hover-text">add to bag</p>
-									</a> <a href="/used_detailPage" class="social-info"> <span class="lnr lnr-move"></span>
-										<p class="hover-text">view more</p>
-									</a>
-								</div>
-							</div>
-						</div>
-					</div>
+					</c:forEach>
 				</div>
 			</div>
 		</div>
@@ -339,26 +430,50 @@
 				</div>
 				<div class="row">
 					<!-- single product -->
-					<c:forEach var="i" items="${main_option_list}">
+					<c:forEach var="temp" items="${auctionList}">
 						<div class="col-lg-3 col-md-6">
 							<div class="single-product">
-								<img class="img-fluid" src="../resources/img/product/p6.jpg"
-									alt="">
-								<div class="product-details">
-									<h6>addidas New Hammer sole for Sports person</h6>
-									<div class="price">
-										<h6>$150.00</h6>
-										<h6 class="${i.no}"></h6>
-									</div>
-									<div class="prd-bottom">
-										<a href="" class="social-info"> <span class="ti-bag"></span>
-											<p class="hover-text">add to bag</p>
-										</a> <a href="" class="social-info"> <span
-											class="lnr lnr-move"></span>
-											<p class="hover-text">view more</p>
-										</a>
-									</div>
-								</div>
+                           <div class="card">
+                              <a href="/auction_detailPage?no=${temp.no}" class="${temp.no}_re">
+                              <img class="img-fluid product-img-size" style="margin-bottom: 5px;"
+                                 src="../resources/img/title/${temp.title_img}" alt=""></a>
+                              <div class="card-body" style="padding: 12px;">
+                                 <div class="row">
+                                    <div class="d-none d-lg-block col-lg-12">[${temp.category}]</div>
+                                 </div>
+                                 <div class="row">
+                                    <div class="col-lg-12">
+                                       <h4>${temp.title}</h4>
+                                    </div>
+                                 </div>
+                                 <div class="row">
+                                 <c:choose>
+                                 	<c:when test="${temp.present_price==0}">
+                                 		<div class="col-lg-12">현재가격 : <fmt:formatNumber value="${temp.starting_price}" pattern="#,###" />원</div>
+                                 		
+                                 	</c:when>
+                                 	<c:otherwise>
+                                 		<div class="col-lg-12">현재가격 : <fmt:formatNumber value="${temp.starting_price}" pattern="#,###" />원</div>
+                                 	</c:otherwise>
+                                 </c:choose>
+                                 </div>
+                                 <div class="row">
+                                    <div class="col-sm-12 col-md-10 col-lg-8 ${temp.no}"></div>
+                                    <div class="d-none d-xl-block col-lg-2"><i class="fas fa-eye fa-2x"></i></div>
+                                    <div class="col-sm-12 col-md-2 col-lg-2">${temp.viewCount}</div>
+                                 </div>
+                                 <div class="row product-details" style="padding-left: 10px;">
+                                    <div class="prd-bottom" style="margin-top: 5px;">
+                                       <a href="" class="social-info"> <span class="lnr lnr-heart"></span>
+                                          <p class="hover-text">Wishlist</p>
+                                       </a> <a href="/auction_detailPage?no=${temp.no}" class="social-info">
+                                        <span class="lnr lnr-move"></span>
+                                          <p class="hover-text">view more</p>
+                                       </a>
+                                    </div>
+                                 </div>
+                              </div>
+                        </div>
 							</div>
 						</div>
 					</c:forEach>
@@ -455,6 +570,7 @@
 		</div>
 	</footer>
 	<!-- End footer Area -->
+	<script src="https://use.fontawesome.com/releases/v5.0.0/js/all.js"></script>
 	<script src="https://unpkg.com/popper.js"></script>
 	<script src="../resources/js/vendor/jquery-2.2.4.min.js"></script>
 	<script src="../resources/js/vendor/bootstrap.min.js"></script>

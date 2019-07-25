@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kh.spring.dto.Auction_boardDTO;
-import kh.spring.dto.Used_transaction_boardDTO;
 
 
 
@@ -173,14 +172,14 @@ public class AuctionDAO {
    // n개씩 보기 개수 설정
    public void checkView(HttpSession session) {
       String view =(String)session.getAttribute("selectView");
-      if(view.equals("16")) {
+      if(view.equals("12")) {
+         session.setAttribute("selectView", "12");
+      }else if(view.equals("16")) {
          session.setAttribute("selectView", "16");
-      }else if(view.equals("24")) {
-         session.setAttribute("selectView", "24");
-      }else if(view.equals("32")) {
-         session.setAttribute("selectView", "32");
+      }else if(view.equals("20")) {
+         session.setAttribute("selectView", "20");
       }else {
-         session.setAttribute("selectView", "16");
+         session.setAttribute("selectView", "12");
       }
    }
    
@@ -294,6 +293,14 @@ public class AuctionDAO {
    //조회수 업데이트
    public void viewCountUpdate(int no) {
 	   sst.update("AuctionDAO.viewCountUpdate", no);
+   }
+   
+   //메인페이지 경매리스트
+   public List<Auction_boardDTO> main_Auction_List(){
+	   HashMap<String, Object> param = new HashMap<>();
+	   param.put("start", "1");
+	   param.put("end", "8");
+	   return sst.selectList("AuctionDAO.mainAuctionList", param);
    }
    
    

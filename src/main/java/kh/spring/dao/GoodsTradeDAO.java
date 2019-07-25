@@ -283,14 +283,14 @@ public class GoodsTradeDAO {
    // n개씩 보기 개수 설정
    public void checkView(HttpSession session) {
 	   String view =(String)session.getAttribute("selectView");
-	   if(view.equals("16")) {
+	   if(view.equals("12")) {
+		   session.setAttribute("selectView", "12");
+	   }else if(view.equals("16")) {
 		   session.setAttribute("selectView", "16");
-	   }else if(view.equals("24")) {
-		   session.setAttribute("selectView", "24");
-	   }else if(view.equals("32")) {
-		   session.setAttribute("selectView", "32");
+	   }else if(view.equals("20")) {
+		   session.setAttribute("selectView", "20");
 	   }else {
-		   session.setAttribute("selectView", "16");
+		   session.setAttribute("selectView", "12");
 	   }
    }
    
@@ -482,6 +482,22 @@ public class GoodsTradeDAO {
    //조회수 업데이트
    public void viewCountUpdate(int no) {
 	   sst.update("GoodsTradeDAO.viewCountUpdate", no);
+   }
+   
+   //메인페이지 직거래 리스트
+   public List<Used_transaction_boardDTO>main_direct_list(){
+	      HashMap<String, String> param = new HashMap<>();
+	      param.put("start", "1");
+	      param.put("end", "8");
+	      return sst.selectList("GoodsTradeDAO.mainDirectList",param);
+	   }
+   
+   //메인 안전거래 리스트
+   public List<Used_transaction_boardDTO> main_safe_list(){
+	      HashMap<String, Object> param = new HashMap<>();
+	      param.put("start", "1");
+	      param.put("end", "8");
+	   return sst.selectList("GoodsTradeDAO.mainSafeList", param);
    }
    
 }

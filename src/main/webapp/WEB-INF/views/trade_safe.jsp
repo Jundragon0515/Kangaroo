@@ -1,5 +1,6 @@
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -513,9 +514,9 @@
                            <div class="row">
                               <div class="col-lg-12 col-md-12 col-sm-12">
                                  <select id="viewCount" name="viewCount">
+                                    <option value="12">12개씩 보기</option>
                                     <option value="16">16개씩 보기</option>
-                                    <option value="24">24개씩 보기</option>
-                                    <option value="32">32개씩 보기</option>
+                                    <option value="20">20개씩 보기</option>
                                  </select>
                               </div>
                            </div>
@@ -552,7 +553,7 @@
                                     </div>
                                  </div>
                                  <div class="row">
-                                    <div class="col-lg-12">${temp.price}</div>
+                                    <div class="col-lg-12">판매가 : <fmt:formatNumber value="${temp.price}" pattern="#,###" />원</div>
                                  </div>
                                  <div class="row">
                                     <div class="col-sm-12 col-md-10 col-lg-8">${temp.joinDate}</div>
@@ -561,8 +562,9 @@
                                  </div>
                                  <div class="row product-details" style="padding-left: 10px;">
                                     <div class="prd-bottom" style="margin-top: 5px;">
-                                       <a href="boardGgymSafe?no=${temp.no}&title_img=${temp.title_img}&title=${temp.title}&trade_type=${temp.trade_type }&category=${temp.category }&price=${temp.price}&id=${temp.id}" class="social-info"> <span class="lnr lnr-heart"></span>
+                                       <a href="boardGgymSafe?no=${temp.no}&title_img=${temp.title_img}&title=${temp.title}&trade_type=${temp.trade_type }&category=${temp.category }&price=${temp.price}&id=${temp.id}" class="social-info ggym"> <span class="lnr lnr-heart"></span>
                                           <p class="hover-text">add to bag</p>
+
 										</a>
 										
                                         <a href="/used_detailPage?no=${temp.no}" class="social-info">
@@ -591,7 +593,7 @@
                                     </div>
                                  </div>
                                  <div class="row">
-                                    <div class="col-lg-12">${temp.price}</div>
+                                    <div class="col-lg-12">판매가 : <fmt:formatNumber value="${temp.price}" pattern="#,###" />원</div>
                                  </div>
                                  <div class="row">
                                     <div class="col-sm-12 col-md-10 col-lg-8">${temp.joinDate}</div>
@@ -600,8 +602,9 @@
                                  </div>
                                  <div class="row product-details" style="padding-left: 10px;">
                                     <div class="prd-bottom" style="margin-top: 5px;">
-                                       <a href="boardGgymSafe?no=${temp.no}&title_img=${temp.title_img}&title=${temp.title}&trade_type=${temp.trade_type }&category=${temp.category }&price=${temp.price}&id=${temp.id}" class="social-info"> <span class="lnr lnr-heart"></span>
+                                       <a href="boardGgymSafe?no=${temp.no}&title_img=${temp.title_img}&title=${temp.title}&trade_type=${temp.trade_type }&category=${temp.category }&price=${temp.price}&id=${temp.id}" class="social-info ggym"> <span class="lnr lnr-heart"></span>
                                           <p class="hover-text">ADD TO BAG</p>
+
                                        </a> <a href="/used_detailPage?no=${temp.no}" class="social-info">
                                         <span class="lnr lnr-move"></span>
                                           <p class="hover-text">view more</p>
@@ -722,6 +725,17 @@
    </div>
    </footer>
    <!-- End footer Area -->
+   
+   <script>
+		$(".ggym").on("click",function(){
+			if(${email==null}){
+				   alert("로그인 하세요.");
+				   return false;
+			   }
+		})
+	
+	</script>
+   
    <script src="https://use.fontawesome.com/releases/v5.0.0/js/all.js"></script>
    <script
       src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>

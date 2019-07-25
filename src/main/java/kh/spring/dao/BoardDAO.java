@@ -65,15 +65,17 @@ public class BoardDAO {
 			needNext = false;
 		}
 		StringBuilder sb = new StringBuilder();
+		sb.append("<nav aria-label='Page navigation example'><ul class='pagination justify-content-center'>");
 		if (needPrev) {
-			sb.append("<a href='goMyPage_sold?auc_currentPage=" + (startNavi - 1) + "&used_currentPage="+used_currentPage+"&or2_currentPage="+or2_currentPage+"'> <이전 </a>");
+			sb.append("<li class='page-item'><a class='page-link' href='goMyPage_sold?auc_currentPage=" + (startNavi - 1) + "&used_currentPage="+used_currentPage+"&or2_currentPage="+or2_currentPage+"'> <이전 </a></li>");
 		}
 		for (int i = startNavi; i <= endNavi; i++) {
-			sb.append("<a class='pageNum' href='goMyPage_sold?auc_currentPage=" + i + "&used_currentPage="+used_currentPage+"&or2_currentPage="+or2_currentPage+"'>  " + i + "  </a>");
+			sb.append("<li class='page-item'><a class='page-link' class='pageNum' href='goMyPage_sold?auc_currentPage=" + i + "&used_currentPage="+used_currentPage+"&or2_currentPage="+or2_currentPage+"'>  " + i + "  </a></li>");
 		}
 		if (needNext) {
-			sb.append("<a href='goMyPage_sold?auc_currentPage=" + (endNavi + 1) + "&used_currentPage="+used_currentPage+"&or2_currentPage="+or2_currentPage+"'> 다음> </a>");
+			sb.append("<li class='page-item'><a class='page-link' href='goMyPage_sold?auc_currentPage=" + (endNavi + 1) + "&used_currentPage="+used_currentPage+"&or2_currentPage="+or2_currentPage+"'> 다음> </a></li>");
 		}
+		sb.append("</ul></nav>");
 		return sb.toString();
 	}
 	public List<Used_transaction_boardDTO> selectById_us(int currentPage,String id){
@@ -117,15 +119,17 @@ public class BoardDAO {
 			needNext = false;
 		}
 		StringBuilder sb = new StringBuilder();
+		sb.append("<nav aria-label='Page navigation example'><ul class='pagination justify-content-center'>");
 		if (needPrev) {
-			sb.append("<a href='goMyPage_sold?used_currentPage=" + (startNavi - 1) + "&auc_currentPage="+auc_currentPage+"&or2_currentPage="+or2_currentPage+"'> <이전 </a>");
+			sb.append("<li class='page-item'><a class='page-link' href='goMyPage_sold?used_currentPage=" + (startNavi - 1) + "&auc_currentPage="+auc_currentPage+"&or2_currentPage="+or2_currentPage+"'> <이전 </a></li>");
 		}
 		for (int i = startNavi; i <= endNavi; i++) {
-			sb.append("<a class='pageNum' href='goMyPage_sold?used_currentPage=" + i + "&auc_currentPage="+auc_currentPage+"&or2_currentPage="+or2_currentPage+"'>  " + i + "  </a>");
+			sb.append("<li class='page-item'><a class='page-link' class='pageNum' href='goMyPage_sold?used_currentPage=" + i + "&auc_currentPage="+auc_currentPage+"&or2_currentPage="+or2_currentPage+"'>  " + i + "  </a></li>");
 		}
 		if (needNext) {
-			sb.append("<a href='goMyPage_sold?used_currentPage=" + (endNavi + 1) + "&auc_currentPage="+auc_currentPage+"&or2_currentPage="+or2_currentPage+"'> 다음> </a>");
+			sb.append("<li class='page-item'><a class='page-link' href='goMyPage_sold?used_currentPage=" + (endNavi + 1) + "&auc_currentPage="+auc_currentPage+"&or2_currentPage="+or2_currentPage+"'> 다음> </a></li>");
 		}
+		sb.append("</ul></nav>");
 		return sb.toString();
 	}
 	public int writeInsert(Used_transaction_boardDTO dto) {

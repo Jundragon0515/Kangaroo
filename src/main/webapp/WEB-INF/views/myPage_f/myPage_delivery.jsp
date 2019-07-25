@@ -66,6 +66,31 @@ a{
     vertical-align: middle;
     align-self: center;
 }
+.btn{
+	font-size: 15px;
+    font-weight: bold;
+    border : 1px solid;
+}
+.page-link{
+	color:black;
+}
+@media only screen and (max-width: 1200px) {
+	.order table td:nth-child(4),
+	.order table th:nth-child(4),
+	.order table td:nth-child(6), 
+	.order table th:nth-child(6){display: none;}
+}
+ 
+@media only screen and (max-width: 1000px) {
+	.order table td:nth-child(1),
+	.order table th:nth-child(1),
+	.order table td:nth-child(3),
+	.order table th:nth-child(3),
+	.order table td:nth-child(5),
+	.order table th:nth-child(5),
+	.order table td:nth-child(7),
+	.order table th:nth-child(7){display: none;}
+}
 </style>
 <script>
 	$(function() {
@@ -268,13 +293,13 @@ a{
 						</ul>
 					</div>
 					<div class="card-body">
-						<section class="cart_area">
         <div class="container">
             <div class="cart_inner">
-                <div class="table-responsive">
+                <div >
                 <h1>배송 조회</h1>
                 <hr>
-                    <table class="table">
+                <div class="order">
+                    <table class="table" >
                         <thead>
                             <tr>
                                 <th scope="col">주문번호</th>
@@ -354,11 +379,11 @@ a{
                                     <td>
                                     <c:choose>
                                     <c:when test="${i.situation=='배송중'}">
-                                     <h5><input type=button class="lookup" seq="${i.seq }" value="배송조회"></h5>
+                                     <h5><input type=button class="lookup btn btn-light" seq="${i.seq }" value="배송조회"></h5>
                                     </c:when>
                                     <c:when test="${i.situation=='배송완료'}">
-                                    <h5><input type=button class="confirme" seq="${i.seq }" value="구매확정"></h5>
-                                    <h5><input type=button class="refund" seq="${i.seq }" value="환불요청"></h5>
+                                    <h5><input type=button class="confirme btn btn-light" seq="${i.seq }" value="구매확정"></h5>
+                                    <h5><input type=button class="refund btn btn-light" seq="${i.seq }" value="환불요청"></h5>
                                     </c:when>
                                      <c:when test="${i.situation=='구매확정'}">
                                     <h5>구매확정</h5>
@@ -373,20 +398,18 @@ a{
                                     </td>
                            			</tr>
                            		</c:forEach>
-                           			<tr>
-                           <td colspan="8">
-                           <div class="media">
-                                        <div class="media-body">
-                                            <p>${order_navi}</p>
-                                        </div>
-                                    </div>
-                           </td>
-                           </tr>
                            </c:otherwise>
                            </c:choose>
                        </tbody>
                      </table>
+                     </div>
+                      <div class="media">
+                                        <div class="media-body">
+                                            <p>${order_navi}</p>
+                                        </div>
+                                    </div>
                      <h1 class="mt-5">내가 입찰 중인 상품</h1><hr>
+                     <div class="order">
                      <table class="table">
                         <thead>
                             <tr>
@@ -440,7 +463,7 @@ a{
                                     <td>
                                     <c:choose>
                                     <c:when test="${i.id!=email}">
-                                    <h5><a href="/auction_detailPage?no=${i.board_num }"><input type=button class="tender" value="입찰 하러가기"></a></h5>
+                                    <h5><a href="/auction_detailPage?no=${i.board_num }"><input type=button class="tender btn btn-light" value="입찰 하러가기"></a></h5>
                                     </c:when>
                                     </c:choose>
                                     </td>
@@ -456,28 +479,24 @@ a{
                                     </td>
                            			</tr>
                            </c:forEach>
-                            <tr>
-                           <td colspan="6">
-                           <div class="media">
-                                        <div class="media-body">
-                                            <p>${tender_navi }</p>
-                                        </div>
-                                    </div>
-                           </td>
-                           </tr>
                            </c:otherwise>
                            </c:choose>
                         </tbody>
-					</table>                        
+					</table> 
+					</div>
+					</div>
+					<div class="media">
+                                        <div class="media-body ">
+                                            <p>${tender_navi }</p>
+                                        </div>
+                                    </div>                       
                    </div>
                  </div>
                </div>
-              </section>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
 
 	<footer class="footer-area section_gap">
 		<div class="container">

@@ -66,6 +66,47 @@ a{
     vertical-align: middle;
     align-self: center;
 }
+
+.btn{
+	font-size: 15px;
+    font-weight: bold;
+    border : 1px solid;
+}
+.page-link{
+	color:black;
+}
+@media only screen and (max-width: 1200px) {
+	#order table td:nth-child(4),
+	#order table th:nth-child(4),
+	#order table td:nth-child(6), 
+	#order table th:nth-child(6){display: none;}
+	
+}
+ 
+@media only screen and (max-width: 1000px) {
+	#order table td:nth-child(3),
+	#order table th:nth-child(3),
+	#order table td:nth-child(5),
+	#order table th:nth-child(5),
+	#order table td:nth-child(7),
+	#order table th:nth-child(7),
+	#order table td:nth-child(8),
+	#order table th:nth-child(8){display: none;}
+	
+	
+}
+@media only screen and (max-width: 1000px) {
+	#auc table td:nth-child(3),
+	#auc table th:nth-child(3),
+	#auc table td:nth-child(4),
+	#auc table th:nth-child(4){display: none;}
+}
+@media only screen and (max-width: 1000px) {
+	#used table td:nth-child(3),
+	#used table th:nth-child(3){display: none;}
+}
+
+
 </style>
 <script>
 	$(function() {
@@ -308,9 +349,10 @@ a{
 						<section class="cart_area">
         <div class="container">
             <div class="cart_inner">
-                <div class="table-responsive">
+                <div >
                 <h1>판매 조회</h1>
                 <hr>
+                <div id="order">
                     <table class="table">
                         <thead>
                             <tr>
@@ -391,42 +433,41 @@ a{
                                     <td>
                                     <c:choose>
                                     <c:when test="${i.situation=='입금완료'}">
-                                    <h5><input type=button class="preparing" seq="${i.seq }" value="배송준비중 으로 변경"></h5>
+                                    <h5><input type=button class="preparing btn btn-light" seq="${i.seq }" value="배송준비중으로  변경"></h5>
                                     </c:when>
                                     <c:when test="${i.situation=='배송준비중'}">
-                                    <h5><input type=button class="start" buyer="${i.buyer }" seq="${i.seq }" value="배송출발 로 변경"></h5>
+                                    <h5><input type=button class="start btn btn-light" buyer="${i.buyer }" seq="${i.seq }" value="배송출발 로 변경"></h5>
                                     </c:when>
                                     <c:when test="${i.situation=='배송출발'}">
-                                    <h5><input type=button class="ing" seq="${i.seq }" value="배송중 으로 변경"></h5>
+                                    <h5><input type=button class="ing btn btn-light" seq="${i.seq }" value="배송중 으로 변경"></h5>
                                     </c:when>
                                     <c:when test="${i.situation=='배송중'}">
-                                    <h5><input type=button class="lookup" seq="${i.seq }" value="배송조회"></h5>
-                                    <h5><input type=button class="comp" seq="${i.seq }" value="배송완료 로 변경"></h5>
+                                    <h5><input type=button class="lookup btn btn-light" seq="${i.seq }" value="배송조회"></h5>
+                                    <h5><input type=button class="comp btn btn-light" seq="${i.seq }" value="배송완료 로 변경"></h5>
                                     </c:when>
                                     <c:when test="${i.situation=='구매확정'}">
                                     <h5>구매확정</h5>
                                     </c:when>
                                     <c:when test="${i.situation=='환불요청'}">
-                                    <h5><input type=button class="refund" seq="${i.seq }" value="환불처리완료 로 변경"></h5>
+                                    <h5><input type=button class="refund btn btn-light" seq="${i.seq }" value="환불처리완료 로 변경"></h5>
                                     </c:when>
                                     </c:choose>
                                     </td>
                            			</tr>
                            		</c:forEach>
-                           			<tr>
-                           <td colspan="8">
-                           <div class="media">
-                                        <div class="media-body">
-                                            <p>${order_navi}</p>
-                                        </div>
-                                    </div>
-                           </td>
-                           </tr>
+                          
                            </c:otherwise>
                            </c:choose>
                        </tbody>
                      </table>
+                     </div>
+                      <div class="media">
+                                        <div class="media-body">
+                                            <p>${order_navi}</p>
+                                        </div>
+                                    </div>
                      <h1 class="mt-5">내가 등록한 상품(경매)</h1><hr>
+                     <div id="auc">
                      <table class="table">
                         <thead>
                             <tr>
@@ -484,20 +525,19 @@ a{
                                     </td>
                            			</tr>
                            </c:forEach>
-                            <tr>
-                           <td colspan="4">
-                           <div class="media">
-                                        <div class="media-body">
-                                            <p>${auction_navi }</p>
-                                        </div>
-                                    </div>
-                           </td>
-                           </tr>
+                           
                            </c:otherwise>
                            </c:choose>
                         </tbody>
 					</table>  
+					</div>
+					<div class="media">
+                                        <div class="media-body">
+                                            <p>${auction_navi }</p>
+                                        </div>
+                                    </div>
 					<h1 class="mt-5">내가 등록한 상품(거래)</h1><hr>
+					<div id="used">
                      <table class="table">
                         <thead>
                             <tr>
@@ -551,19 +591,16 @@ a{
                                     </td>
                            			</tr>
                            </c:forEach>
-                            <tr>
-                           <td colspan="3">
-                           <div class="media">
-                                        <div class="media-body">
-                                            <p>${used_navi }</p>
-                                        </div>
-                                    </div>	
-                           </td>
-                           </tr>
                            </c:otherwise>
                            </c:choose>
                         </tbody>
-					</table>                                
+					</table> 
+					</div> 
+					 <div class="media">
+                                        <div class="media-body">
+                                            <p>${used_navi }</p>
+                                        </div>
+                                    </div>	                              
                    </div>
                  </div>
                </div>

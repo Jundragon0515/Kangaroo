@@ -30,7 +30,7 @@ public class MyPageController {
 	MemberService mes;
 	@Autowired
 	MyPageService mps;
-	@RequestMapping("/updateProc")
+	@RequestMapping(value="updateProc" , produces="application/String;charset=UTF-8")
 	public String updateProc(MemberDTO dto) { //멤버 정보 업데이트
 		dto.setId(se.getAttribute("email").toString());
 		mes.updateProc(dto);

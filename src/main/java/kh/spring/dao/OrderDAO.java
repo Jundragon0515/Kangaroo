@@ -18,17 +18,7 @@ public class OrderDAO {
 	private SqlSessionTemplate sst;
 	@Autowired
 	private HttpSession se;
-	static int recordCountPerPage = 5;// 한 페이지에 보여줄 글 개수
-	static int naviCountPerPage = 10;// 한페이지에 보여줄 페이지 번호 수
-	public List<OrderDTO> selectByBuyer(int currentPage,String buyer){
-		int endNum = currentPage * recordCountPerPage;
-		int startNum = endNum - 4;
-		Map<String,String> map = new HashMap<>();
-		map.put("startNum", Integer.toString(startNum));
-		map.put("endNum", Integer.toString(endNum));
-		map.put("buyer", buyer);
-		return sst.selectList("OrderDAO.selectByBuyer", map);
-	}
+	
 	public List<OrderDTO> selectBySeller(int currentPage,String seller){
 		int endNum = currentPage * recordCountPerPage;
 		int startNum = endNum - 4;
@@ -38,10 +28,21 @@ public class OrderDAO {
 		map.put("seller", seller);
 		return sst.selectList("OrderDAO.selectBySeller", map);
 	}
+	static int recordCountPerPage = 5;// 한 페이지에 보여줄 글 개수
+	static int naviCountPerPage = 10;// 한페이지에 보여줄 페이지 번호 수
 	public int recordCount(String buyer) { // 글 갯수
 		return sst.selectOne("OrderDAO.recordCount",buyer);
 	}
-	public String getNavi(int currentPage,String buyer) {
+	public List<OrderDTO> selectByBuyer(int currentPage,String buyer){//리스트 가져오기
+		int endNum = currentPage * recordCountPerPage;
+		int startNum = endNum - 4;
+		Map<String,String> map = new HashMap<>();
+		map.put("startNum", Integer.toString(startNum));
+		map.put("endNum", Integer.toString(endNum));
+		map.put("buyer", buyer);
+		return sst.selectList("OrderDAO.selectByBuyer", map);
+	}
+	public String getNavi(int currentPage,String buyer) { // 리스트 네비
 		int recordTotalCount = this.recordCount(buyer); // 전체 글 갯수
 		int pageTotalCount = 0;
 		int te_currentPage=(int)se.getAttribute("te_currentPage");
@@ -69,15 +70,17 @@ public class OrderDAO {
 			needNext = false;
 		}
 		StringBuilder sb = new StringBuilder();
+		sb.append("<nav aria-label='Page navigation example'><ul class='pagination justify-content-center'>");
 		if (needPrev) {
-			sb.append("<a href='goMyPage_delivery?or_currentPage=" + (startNavi - 1) + "&te_currentPage="+te_currentPage+ "'> <이전 </a>");
+			sb.append("<li class='page-item'><a class='page-link' href='goMyPage_delivery?or_currentPage=" + (startNavi - 1) + "&te_currentPage="+te_currentPage+ "'> <이전 </a></li>");
 		}
 		for (int i = startNavi; i <= endNavi; i++) {
-			sb.append("<a class='pageNum' href='goMyPage_delivery?or_currentPage=" + i + "&te_currentPage="+te_currentPage+  "'>  " + i + "  </a>");
+			sb.append("<li class='page-item'><a class='pageNum page-link' href='goMyPage_delivery?or_currentPage=" + i + "&te_currentPage="+te_currentPage+  "'>  " + i + "  </a></li>");
 		}
 		if (needNext) {
-			sb.append("<a href='goMyPage_delivery?or_currentPage=" + (endNavi + 1) + "&te_currentPage="+te_currentPage+  "'> 다음> </a>");
+			sb.append("<li class='page-item'><a class='page-link' href='goMyPage_delivery?or_currentPage=" + (endNavi + 1) + "&te_currentPage="+te_currentPage+  "'> 다음> </a></li>");
 		}
+		sb.append("</ul></nav>");
 		return sb.toString();
 	}
 	public OrderDTO selectBySeq(int seq) {
@@ -118,15 +121,17 @@ public class OrderDAO {
 			needNext = false;
 		}
 		StringBuilder sb = new StringBuilder();
+		sb.append("<nav aria-label='Page navigation example'><ul class='pagination justify-content-center'>");
 		if (needPrev) {
-			sb.append("<a href='goMyPage_sold?or2_currentPage=" + (startNavi - 1) + "&used_currentPage="+used_currentPage+"&auc_currentPage="+auc_currentPage+"'> <이전 </a>");
+			sb.append("<li class='page-item'><a class='page-link'  href='goMyPage_sold?or2_currentPage=" + (startNavi - 1) + "&used_currentPage="+used_currentPage+"&auc_currentPage="+auc_currentPage+"'> <이전 </a></li>");
 		}
 		for (int i = startNavi; i <= endNavi; i++) {
-			sb.append("<a class='pageNum' href='goMyPage_sold?or2_currentPage=" + i + "&used_currentPage="+used_currentPage+"&auc_currentPage="+auc_currentPage+"'>  " + i + "  </a>");
+			sb.append("<li class='page-item'> <a class='page-link' href='goMyPage_sold?or2_currentPage=" + i + "&used_currentPage="+used_currentPage+"&auc_currentPage="+auc_currentPage+"'>  " + i + "  </a></li>");
 		}
 		if (needNext) {
-			sb.append("<a href='goMyPage_sold?or2_currentPage=" + (endNavi + 1) + "&used_currentPage="+used_currentPage+"&auc_currentPage="+auc_currentPage+"'> 다음> </a>");
+			sb.append("<li class='page-item'><a class='page-link'  href='goMyPage_sold?or2_currentPage=" + (endNavi + 1) + "&used_currentPage="+used_currentPage+"&auc_currentPage="+auc_currentPage+"'> 다음> </a></li>");
 		}
+		sb.append("</ul></nav>");
 		return sb.toString();
 	}
 	public int recordCount2(String seller) { // 글 갯수

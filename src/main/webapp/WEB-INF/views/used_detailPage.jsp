@@ -331,7 +331,7 @@ $("#logout_na").on("click", function() {
                      </table>
                   </div>
                   <div style=text-align:right;padding-right:10px;>
-                  	 <input type="button" id="report" class="genric-btn danger radius" value="신고하기" onclick="showPopup();"/>
+                  	 <input type="button" id="report" class="genric-btn danger radius" value="신고하기">
                      <input type="button" id="cart" class="genric-btn primary radius" value="찜하기">
                   <c:choose>
 
@@ -383,9 +383,7 @@ $("#logout_na").on("click", function() {
 	   if(result==false){
 		   return false;
 	   }
-	   
-	   
-	   
+	     	   
 	   
 	   var boardNum = "${dto.no }";
 	   var price = Number(${dto.price });
@@ -429,7 +427,6 @@ $("#logout_na").on("click", function() {
 	   });
    
    });
-   
    
    </script>
    <!--================End Single Product Area =================-->
@@ -1131,6 +1128,10 @@ $("#logout_na").on("click", function() {
 	<script>
 	
 	$("#cart").on("click",function(){
+		if(${email==null}){
+			   alert("로그인 하세요.");
+			   return false;
+		   }
 		$.ajax({
 			url : "/steamingTrade",
 			data : {"no":"${dto.no}","title_img":"${i_dto.title_img}",
@@ -1141,14 +1142,16 @@ $("#logout_na").on("click", function() {
 		})
 	});
 
+	$("#report").on("click",function(){
+		if(${email==null}){
+			   alert("로그인 하세요.");
+			   return false;
+		   }else{
+			   window.open("resources/index.html", "a", "width=550, height=500, left=450, top=300");
+		   }
+	}) 
+		
 	</script>
-	
-	<script language="javascript">
- 			function showPopup() { 
- 				window.open("resources/index.html", "a", "width=550, height=500, left=450, top=300"); 
- 				}
-  	</script>
-	
 	
    <script src="https://use.fontawesome.com/releases/v5.0.0/js/all.js"></script>
    <script src="../resources/js/vendor/jquery-2.2.4.min.js"></script>

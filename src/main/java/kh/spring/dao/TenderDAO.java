@@ -60,15 +60,17 @@ public class TenderDAO {
 			needNext = false;
 		}
 		StringBuilder sb = new StringBuilder();
+		sb.append("<nav aria-label='Page navigation example'><ul class='pagination justify-content-center'>");
 		if (needPrev) {
-			sb.append("<a href='goMyPage_delivery?te_currentPage=" + (startNavi - 1) + "&or_currentPage="+or_currentPage+ "'> <이전 </a>");
+			sb.append("<li class='page-item'><a class='page-link' href='goMyPage_delivery?te_currentPage=" + (startNavi - 1) + "&or_currentPage="+or_currentPage+ "'> <이전 </a></li>");
 		}
 		for (int i = startNavi; i <= endNavi; i++) {
-			sb.append("<a class='pageNum' href='goMyPage_delivery?te_currentPage=" + i + "&or_currentPage="+or_currentPage+  "'>  " + i + "  </a>");
+			sb.append("<li class='page-item'><a class='pageNum page-link' href='goMyPage_delivery?te_currentPage=" + i + "&or_currentPage="+or_currentPage+  "'>  " + i + "  </a></li>");
 		}
 		if (needNext) {
-			sb.append("<a href='goMyPage_delivery?te_currentPage=" + (endNavi + 1) + "&or_currentPage="+or_currentPage+  "'> 다음> </a>");
+			sb.append("<li class='page-item'><a class='page-link' href='goMyPage_delivery?te_currentPage=" + (endNavi + 1) + "&or_currentPage="+or_currentPage+  "'> 다음> </a></li>");
 		}
+		sb.append("</ul></nav>");
 		return sb.toString();
 	}
 }
