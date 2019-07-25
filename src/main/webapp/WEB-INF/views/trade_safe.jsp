@@ -1,5 +1,6 @@
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -329,6 +330,8 @@
 												href="/goMyPage">마이페이지</a></li>
 											<li class="nav-item "><a class="nav-link"
 												href="/toPoint">포인트충전</a></li>
+											<li class="nav-item "><a class="nav-link"
+												href="/toPoint_exc">포인트환급</a></li>
 											<li class="nav-item "><input type="button"
 												class="nav-link nav_b" id="logout_na" value="로그아웃"></li>
 										</ul></li>
@@ -342,8 +345,10 @@
 											<li class="nav-item "><a class="nav-link" href="/goCart">찜목록</a></li>
 											<li class="nav-item "><a class="nav-link"
 												href="/goMyPage">마이페이지</a></li>
-											<li class="nav-item "><a class="nav-link"
+												<li class="nav-item "><a class="nav-link"
 												href="/toPoint">포인트충전</a></li>
+											<li class="nav-item "><a class="nav-link"
+												href="/toPoint_exc">포인트환급</a></li>
 											<li class="nav-item "><input type="button"
 												class="nav-link nav_b" id="logout_ka" value="로그아웃"></li>
 										</ul></li>
@@ -359,6 +364,8 @@
 												href="/goMyPage">마이페이지</a></li>
 											<li class="nav-item "><a class="nav-link"
 												href="/toPoint">포인트충전</a></li>
+												<li class="nav-item "><a class="nav-link"
+												href="/toPoint_exc">포인트환급</a></li>
 											<li class="nav-item "><a class="nav-link" href="/logout">로그아웃</a></li>
 										</ul></li>
 								</c:when>
@@ -546,7 +553,7 @@
                                     </div>
                                  </div>
                                  <div class="row">
-                                    <div class="col-lg-12">${temp.price}</div>
+                                    <div class="col-lg-12">판매가 : <fmt:formatNumber value="${temp.price}" pattern="#,###" />원</div>
                                  </div>
                                  <div class="row">
                                     <div class="col-sm-12 col-md-10 col-lg-8">${temp.joinDate}</div>
@@ -555,9 +562,11 @@
                                  </div>
                                  <div class="row product-details" style="padding-left: 10px;">
                                     <div class="prd-bottom" style="margin-top: 5px;">
-                                       <a href="" class="social-info"> <span class="lnr lnr-heart"></span>
+                                       <a href="boardGgymSafe?no=${temp.no}&title_img=${temp.title_img}&title=${temp.title}&trade_type=${temp.trade_type }&category=${temp.category }&price=${temp.price}" class="social-info"> <span class="lnr lnr-heart"></span>
                                           <p class="hover-text">Wishlist</p>
-                                       </a> <a href="/used_detailPage?no=${temp.no}" class="social-info">
+										</a>
+										
+                                        <a href="/used_detailPage?no=${temp.no}" class="social-info">
                                         <span class="lnr lnr-move"></span>
                                           <p class="hover-text">view more</p>
                                        </a>
@@ -583,7 +592,7 @@
                                     </div>
                                  </div>
                                  <div class="row">
-                                    <div class="col-lg-12">${temp.price}</div>
+                                    <div class="col-lg-12">판매가 : <fmt:formatNumber value="${temp.price}" pattern="#,###" />원</div>
                                  </div>
                                  <div class="row">
                                     <div class="col-sm-12 col-md-10 col-lg-8">${temp.joinDate}</div>
@@ -592,7 +601,7 @@
                                  </div>
                                  <div class="row product-details" style="padding-left: 10px;">
                                     <div class="prd-bottom" style="margin-top: 5px;">
-                                       <a href="" class="social-info"> <span class="lnr lnr-heart"></span>
+                                       <a href="boardGgymSafe?no=${temp.no}&title_img=${temp.title_img}&title=${temp.title}&trade_type=${temp.trade_type }&category=${temp.category }&price=${temp.price}" class="social-info"> <span class="lnr lnr-heart"></span>
                                           <p class="hover-text">Wishlist</p>
                                        </a> <a href="/used_detailPage?no=${temp.no}" class="social-info">
                                         <span class="lnr lnr-move"></span>

@@ -66,6 +66,11 @@ a{
     vertical-align: middle;
     align-self: center;
 }
+.btn{
+	font-size: 15px;
+    font-weight: bold;
+    border : 1px solid;
+}
 </style>
 <script>
 	$(function() {
@@ -187,6 +192,8 @@ a{
 												href="/goMyPage">마이페이지</a></li>
 											<li class="nav-item "><a class="nav-link"
 												href="/toPoint">포인트충전</a></li>
+											<li class="nav-item "><a class="nav-link"
+												href="/toPoint_exc">포인트환급</a></li>
 											<li class="nav-item "><input type="button"
 												class="nav-link nav_b" id="logout_na" value="로그아웃"></li>
 										</ul></li>
@@ -200,8 +207,10 @@ a{
 											<li class="nav-item "><a class="nav-link" href="/goCart">찜목록</a></li>
 											<li class="nav-item "><a class="nav-link"
 												href="/goMyPage">마이페이지</a></li>
-											<li class="nav-item "><a class="nav-link"
+												<li class="nav-item "><a class="nav-link"
 												href="/toPoint">포인트충전</a></li>
+											<li class="nav-item "><a class="nav-link"
+												href="/toPoint_exc">포인트환급</a></li>
 											<li class="nav-item "><input type="button"
 												class="nav-link nav_b" id="logout_ka" value="로그아웃"></li>
 										</ul></li>
@@ -217,6 +226,8 @@ a{
 												href="/goMyPage">마이페이지</a></li>
 											<li class="nav-item "><a class="nav-link"
 												href="/toPoint">포인트충전</a></li>
+												<li class="nav-item "><a class="nav-link"
+												href="/toPoint_exc">포인트환급</a></li>
 											<li class="nav-item "><a class="nav-link" href="/logout">로그아웃</a></li>
 										</ul></li>
 								</c:when>
@@ -348,11 +359,11 @@ a{
                                     <td>
                                     <c:choose>
                                     <c:when test="${i.situation=='배송중'}">
-                                     <h5><input type=button class="lookup" seq="${i.seq }" value="배송조회"></h5>
+                                     <h5><input type=button class="lookup btn btn-light" seq="${i.seq }" value="배송조회"></h5>
                                     </c:when>
                                     <c:when test="${i.situation=='배송완료'}">
-                                    <h5><input type=button class="confirme" seq="${i.seq }" value="구매확정"></h5>
-                                    <h5><input type=button class="refund" seq="${i.seq }" value="환불요청"></h5>
+                                    <h5><input type=button class="confirme btn btn-light" seq="${i.seq }" value="구매확정"></h5>
+                                    <h5><input type=button class="refund btn btn-light" seq="${i.seq }" value="환불요청"></h5>
                                     </c:when>
                                      <c:when test="${i.situation=='구매확정'}">
                                     <h5>구매확정</h5>
@@ -434,7 +445,7 @@ a{
                                     <td>
                                     <c:choose>
                                     <c:when test="${i.id!=email}">
-                                    <h5><a href="/auction_detailPage?no=${i.board_num }"><input type=button class="tender" value="입찰 하러가기"></a></h5>
+                                    <h5><a href="/auction_detailPage?no=${i.board_num }"><input type=button class="tender btn btn-light" value="입찰 하러가기"></a></h5>
                                     </c:when>
                                     </c:choose>
                                     </td>

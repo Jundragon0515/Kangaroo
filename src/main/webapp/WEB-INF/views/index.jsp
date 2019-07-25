@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="zxx" class="no-js">
 
@@ -173,6 +174,8 @@
 												href="/goMyPage">마이페이지</a></li>
 											<li class="nav-item "><a class="nav-link"
 												href="/toPoint">포인트충전</a></li>
+											<li class="nav-item "><a class="nav-link"
+												href="/toPoint_exc">포인트환급</a></li>
 											<li class="nav-item "><input type="button"
 												class="nav-link nav_b" id="logout_na" value="로그아웃"></li>
 										</ul></li>
@@ -186,8 +189,10 @@
 											<li class="nav-item "><a class="nav-link" href="/goCart">찜목록</a></li>
 											<li class="nav-item "><a class="nav-link"
 												href="/goMyPage">마이페이지</a></li>
-											<li class="nav-item "><a class="nav-link"
+												<li class="nav-item "><a class="nav-link"
 												href="/toPoint">포인트충전</a></li>
+											<li class="nav-item "><a class="nav-link"
+												href="/toPoint_exc">포인트환급</a></li>
 											<li class="nav-item "><input type="button"
 												class="nav-link nav_b" id="logout_ka" value="로그아웃"></li>
 										</ul></li>
@@ -203,6 +208,8 @@
 												href="/goMyPage">마이페이지</a></li>
 											<li class="nav-item "><a class="nav-link"
 												href="/toPoint">포인트충전</a></li>
+												<li class="nav-item "><a class="nav-link"
+												href="/toPoint_exc">포인트환급</a></li>
 											<li class="nav-item "><a class="nav-link" href="/logout">로그아웃</a></li>
 										</ul></li>
 								</c:when>
@@ -312,7 +319,7 @@
                                     </div>
                                  </div>
                                  <div class="row">
-                                    <div class="col-lg-12">${temp.price}</div>
+                                    <div class="col-lg-12">판매가격 : <fmt:formatNumber value="${temp.price}" pattern="#,###" />원</div>
                                  </div>
                                  <div class="row">
                                     <div class="col-sm-12 col-md-10 col-lg-8">${temp.joinDate}</div>
@@ -368,7 +375,7 @@
                                     </div>
                                  </div>
                                  <div class="row">
-                                    <div class="col-lg-12">${temp.price}</div>
+                                    <div class="col-lg-12">판매가격 : <fmt:formatNumber value="${temp.price}" pattern="#,###" />원</div>
                                  </div>
                                  <div class="row">
                                     <div class="col-sm-12 col-md-10 col-lg-8">${temp.joinDate}</div>
@@ -425,10 +432,11 @@
                                  <div class="row">
                                  <c:choose>
                                  	<c:when test="${temp.present_price==0}">
-                                 		<div class="col-lg-12">현재가격:${temp.starting_price}</div>
+                                 		<div class="col-lg-12">현재가격 : <fmt:formatNumber value="${temp.starting_price}" pattern="#,###" />원</div>
+                                 		
                                  	</c:when>
                                  	<c:otherwise>
-                                 		<div class="col-lg-12">현재가격:${temp.present_price}</div>
+                                 		<div class="col-lg-12">현재가격 : <fmt:formatNumber value="${temp.starting_price}" pattern="#,###" />원</div>
                                  	</c:otherwise>
                                  </c:choose>
                                  </div>
@@ -546,6 +554,7 @@
 	</footer>
 	<!-- End footer Area -->
 	<script src="https://use.fontawesome.com/releases/v5.0.0/js/all.js"></script>
+	<script src="https://unpkg.com/popper.js"></script>
 	<script src="../resources/js/vendor/jquery-2.2.4.min.js"></script>
 	<script src="../resources/js/vendor/bootstrap.min.js"></script>
 	<script src="../resources/js/jquery.ajaxchimp.min.js"></script>

@@ -46,13 +46,6 @@ public class HomeController {
 	public String home() { 		//홈
 		return "index";
 	}
-	@RequestMapping("/toPoint")
-	public String toPoint() { //포인트 충전
-		if(se.getAttribute("email")!=null) {
-			mes.setPoint();
-		}
-		return "point_f/point";
-	}
 	@RequestMapping("/login_main")
 	public String login_main() { // 로그인 메인페이지
 
@@ -76,7 +69,7 @@ public class HomeController {
 	public String insert() { // 회원가입 페이지로 갈때
 		return "insert";
 	}
-	@RequestMapping(value="/insertProc" , method=RequestMethod.POST)
+	@RequestMapping(value="/insertProc" , method=RequestMethod.POST,  produces="application/String;charset=UTF-8")
 	public String insertProc(MemberDTO dto,HttpServletRequest request){ // 회원가입 기능
 		return mes.insertProc(dto, request);
 	}

@@ -74,6 +74,11 @@ select pw from members where id=#{value}
 		from tender order by point desc) where BOARD_NUM=#{value} and rownum=1
 	</select>
 
+	<select id="topTender" resultType="kh.spring.dto.TenderDTO">
+		select * from (select *
+		from tender order by point desc) where BOARD_NUM=#{value} and rownum=1
+	</select>
+	
 	<!-- 현재 보유 금액 -->
 	<select id="myMoney" resultType="integer">
 		select point from members

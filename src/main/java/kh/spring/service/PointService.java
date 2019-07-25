@@ -27,5 +27,17 @@ public class PointService {
 		me.setPoint(email, money);
 		return pdao.insert(email,money);
 	}
+	@Transactional("txManager")
+	public String minus(int money) {
+		String email=(String)se.getAttribute("email");
+		int point=me.getPoint(email);
+		if(point<money) {
+			return "잔액이 부족합니다";
+		}else {
+			point=point-money;
+		}
+		me.setPoint(email, point);
+		return "환급이 완료되었습니다.";
+	}
 }
 

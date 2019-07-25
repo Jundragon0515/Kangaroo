@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import kh.spring.dao.AdminDAO;
+import kh.spring.dao.CartDAO;
 
 @Component
 public class AdminService {
@@ -22,6 +23,7 @@ public class AdminService {
             try {
                dao.boardWriteDelete(value[i]);
                dao.boardImgDelete(value[i]);
+               dao.cartDelete(value[i]);
             } catch (Exception e) {
                e.printStackTrace();
             }
@@ -34,6 +36,7 @@ public class AdminService {
             try {
                dao.auctionBoardDelete(value[i]);
                dao.auctionBoardImgDelete(value[i]);
+               dao.cartAuctionDelete(value[i]);
             } catch (Exception e) {
                e.printStackTrace();
             }

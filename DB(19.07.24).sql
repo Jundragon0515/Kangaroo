@@ -391,6 +391,6 @@ nocache
 nomaxvalue;
 
 
-
+update members set point = 1000000;
 insert into members values('admin@admin.com','13a95c75b44f95ead23f47f0bf10667e57b44ec5150180c8a39a39361cf56169','admin',null,default,null,null,null,default,'a','admin','¿ì¼ö','n','y');
 commit;

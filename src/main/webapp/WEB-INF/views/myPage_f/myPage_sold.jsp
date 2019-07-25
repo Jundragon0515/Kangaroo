@@ -66,6 +66,12 @@ a{
     vertical-align: middle;
     align-self: center;
 }
+
+.btn{
+	font-size: 15px;
+    font-weight: bold;
+    border : 1px solid;
+}
 </style>
 <script>
 	$(function() {
@@ -224,6 +230,8 @@ a{
 												href="/goMyPage">마이페이지</a></li>
 											<li class="nav-item "><a class="nav-link"
 												href="/toPoint">포인트충전</a></li>
+											<li class="nav-item "><a class="nav-link"
+												href="/toPoint_exc">포인트환급</a></li>
 											<li class="nav-item "><input type="button"
 												class="nav-link nav_b" id="logout_na" value="로그아웃"></li>
 										</ul></li>
@@ -237,8 +245,10 @@ a{
 											<li class="nav-item "><a class="nav-link" href="/goCart">찜목록</a></li>
 											<li class="nav-item "><a class="nav-link"
 												href="/goMyPage">마이페이지</a></li>
-											<li class="nav-item "><a class="nav-link"
+												<li class="nav-item "><a class="nav-link"
 												href="/toPoint">포인트충전</a></li>
+											<li class="nav-item "><a class="nav-link"
+												href="/toPoint_exc">포인트환급</a></li>
 											<li class="nav-item "><input type="button"
 												class="nav-link nav_b" id="logout_ka" value="로그아웃"></li>
 										</ul></li>
@@ -254,6 +264,8 @@ a{
 												href="/goMyPage">마이페이지</a></li>
 											<li class="nav-item "><a class="nav-link"
 												href="/toPoint">포인트충전</a></li>
+												<li class="nav-item "><a class="nav-link"
+												href="/toPoint_exc">포인트환급</a></li>
 											<li class="nav-item "><a class="nav-link" href="/logout">로그아웃</a></li>
 										</ul></li>
 								</c:when>
@@ -385,23 +397,23 @@ a{
                                     <td>
                                     <c:choose>
                                     <c:when test="${i.situation=='입금완료'}">
-                                    <h5><input type=button class="preparing" seq="${i.seq }" value="배송준비중 으로 변경"></h5>
+                                    <h5><input type=button class="preparing btn btn-light" seq="${i.seq }" value="배송준비중으로  변경"></h5>
                                     </c:when>
                                     <c:when test="${i.situation=='배송준비중'}">
-                                    <h5><input type=button class="start" buyer="${i.buyer }" seq="${i.seq }" value="배송출발 로 변경"></h5>
+                                    <h5><input type=button class="start btn btn-light" buyer="${i.buyer }" seq="${i.seq }" value="배송출발 로 변경"></h5>
                                     </c:when>
                                     <c:when test="${i.situation=='배송출발'}">
-                                    <h5><input type=button class="ing" seq="${i.seq }" value="배송중 으로 변경"></h5>
+                                    <h5><input type=button class="ing btn btn-light" seq="${i.seq }" value="배송중 으로 변경"></h5>
                                     </c:when>
                                     <c:when test="${i.situation=='배송중'}">
-                                    <h5><input type=button class="lookup" seq="${i.seq }" value="배송조회"></h5>
-                                    <h5><input type=button class="comp" seq="${i.seq }" value="배송완료 로 변경"></h5>
+                                    <h5><input type=button class="lookup btn btn-light" seq="${i.seq }" value="배송조회"></h5>
+                                    <h5><input type=button class="comp btn btn-light" seq="${i.seq }" value="배송완료 로 변경"></h5>
                                     </c:when>
                                     <c:when test="${i.situation=='구매확정'}">
                                     <h5>구매확정</h5>
                                     </c:when>
                                     <c:when test="${i.situation=='환불요청'}">
-                                    <h5><input type=button class="refund" seq="${i.seq }" value="환불처리완료 로 변경"></h5>
+                                    <h5><input type=button class="refund btn btn-light" seq="${i.seq }" value="환불처리완료 로 변경"></h5>
                                     </c:when>
                                     </c:choose>
                                     </td>

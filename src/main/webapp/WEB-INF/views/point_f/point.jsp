@@ -41,6 +41,28 @@
 <script type="text/javascript"
 	src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <script>
+function addCom(num) {
+    var regexp = /\B(?=(\d{3})+(?!\d))/g;
+    return num.toString().replace(regexp, ',');
+  }
+var rgx1 = /\D/g;  // /[^0-9]/g 와 같은 표현
+var rgx2 = /(\d+)(\d{3})/; 
+function getNumber(obj){
+    var num01;
+    var num02;
+    num01 = obj.value;
+    num02 = num01.replace(rgx1,"");
+    num01 = setComma(num02);
+    obj.value =  num01;
+}
+function setComma(inNum){
+    var outNum;
+    outNum = inNum; 
+    while (rgx2.test(outNum)) {
+         outNum = outNum.replace(rgx2, '$1' + ',' + '$2');
+     }
+    return outNum;
+}
 $(function(){
 	<c:choose>
 	<c:when test="${logintype==null}">
@@ -60,7 +82,7 @@ $(function(){
     	var postcode="${zipcode}";
     }
 	$("#payment_btn").on("click",function(){
-		var  amount = $("#donaMoney").val();
+		var  amount = Number($("#donaMoney").val());
 		IMP.request_pay({
 		    pg : 'html5_inicis', // version 1.1.0부터 지원.
 		    pay_method : $("#donaMethod option:selected").val(),
@@ -194,6 +216,8 @@ $(function(){
 												href="/goMyPage">마이페이지</a></li>
 											<li class="nav-item "><a class="nav-link"
 												href="/toPoint">포인트충전</a></li>
+											<li class="nav-item "><a class="nav-link"
+												href="/toPoint_exc">포인트환급</a></li>
 											<li class="nav-item "><input type="button"
 												class="nav-link nav_b" id="logout_na" value="로그아웃"></li>
 										</ul></li>
@@ -207,8 +231,10 @@ $(function(){
 											<li class="nav-item "><a class="nav-link" href="/goCart">찜목록</a></li>
 											<li class="nav-item "><a class="nav-link"
 												href="/goMyPage">마이페이지</a></li>
-											<li class="nav-item "><a class="nav-link"
+												<li class="nav-item "><a class="nav-link"
 												href="/toPoint">포인트충전</a></li>
+											<li class="nav-item "><a class="nav-link"
+												href="/toPoint_exc">포인트환급</a></li>
 											<li class="nav-item "><input type="button"
 												class="nav-link nav_b" id="logout_ka" value="로그아웃"></li>
 										</ul></li>
@@ -224,6 +250,8 @@ $(function(){
 												href="/goMyPage">마이페이지</a></li>
 											<li class="nav-item "><a class="nav-link"
 												href="/toPoint">포인트충전</a></li>
+												<li class="nav-item "><a class="nav-link"
+												href="/toPoint_exc">포인트환급</a></li>
 											<li class="nav-item "><a class="nav-link" href="/logout">로그아웃</a></li>
 										</ul></li>
 								</c:when>
@@ -302,7 +330,7 @@ $(function(){
 					</div>
 					<div class=" col-lg-8 col-md-8 col-sm-8">
 						<input type="text" class="form-control" name="donaMoney"
-							id="donaMoney" placeholder="충전하실 금액을 입력해 주세요.">
+							id="donaMoney" placeholder="충전하실 금액을 입력해 주세요." onchange="getNumber(this);" onkeyup="getNumber(this);">
 					</div>
 					<div class="col-lg-12 col-md-12 col-sm-12 mt-5 payment mb-5">
 						<input type="button" class="genric-btn primary-border circle"
