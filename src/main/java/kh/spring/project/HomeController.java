@@ -48,12 +48,10 @@ public class HomeController {
 	}
 	@RequestMapping("/login_main")
 	public String login_main() { // 로그인 메인페이지
-
 		return "login_main";
 	}
 	@RequestMapping("/login")
 	public String login() { // 일반 로그인 페이지
-
 		return "login";
 	}
 	@RequestMapping("/findIdOrPw")
@@ -126,6 +124,4 @@ public class HomeController {
 		se.invalidate();
 		return "redirect:"+old_url;
 	}
-	
-
 }

@@ -250,7 +250,7 @@ pageEncoding="UTF-8"%>
 				if(!list2[z])
 					continue;
 				if($("."+list2[z]).text()=='남은시간 : 종료'){
-					$("."+list2[z]+"_re").before("<img class='onging-img' src=''../resources/img/banner/soldout.png'><button class='ongoing-btn'></button>"); //판매완료 이미지
+					$("."+list2[z]+"_re").before("<img class='onging-img' src='../resources/img/banner/soldout.png'><button class='ongoing-btn'></button>"); //판매완료 이미지
 					client.send("/app/end", {}, JSON.stringify({
 						no : list2[z]
 					}));
