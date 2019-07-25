@@ -194,17 +194,19 @@
     z-index:100;
 }
 
-
 .back-to-top {text-decoration: none; display: none; color:#fe912b;}
 
 .back-to-top:hover {color: #818bb0}
 
-#send{
+/* 삭제버튼  */
+#btn-delete{
 	border: 1px solid #828bb3;
 	background-color:#828bb3;
 	color:white;
 }
-#send:hover {
+
+/* 삭제버튼 hover  */
+#btn-delete:hover {
 	cursor: pointer;
 }
 </style>
@@ -229,24 +231,32 @@
            return false;
        })
        
-       $(".ongoing").on("click", function(){
-    	  alert("d");
-       });
-       
        /* 검색기능 */
       $("#btn-search").on("click", function(){
          var text_search =  $("#text-search").val();
          $(location).attr("href", "tradeOption?search="+text_search);
       });
       
-      
+       /* 검색 엔터키 */
+       $("#text-search").keydown(function(key){
+    	   if(key.keyCode==13){
+    		   var text_search = $("#text-search").val();
+    		   $(location).attr("href", "/tradeOption?search="+text_search);
+    	   }
+       });
+       
+       /* 삭제버튼 */
+       $("#btn-delete").on("click", function(){
+    	   $("#deleteForm").submit();
+       });
+       
+
       /* 페이지 정렬 개수 컨트롤  */
       $("#viewCount").on("change", function(){
         var view = $(this).val();
         $(location).attr("href","tradeOption?view=" + view);
      });
        
-
       /*네이버 로그아웃  */
       $("#logout_na").on("click",function() {
                $.ajax({
@@ -281,12 +291,9 @@
       });
      });
 </script>
-
-
 </head>
 
 <body>
-
    <!-- Start Header Area -->
    <header class="header_area sticky-header">
 		<div class="main_menu">
@@ -399,7 +406,7 @@
    </div>
    </section>
    <!-- End Banner Area -->
-<form action="boardWriteDelete">
+
    <!-- start banner Area -->
    <div class="container-fluid">
       <div class="row">
@@ -463,9 +470,8 @@
                </ul>
                <c:choose>
                	<c:when test="${logintype=='admin'}">
-               		<div class="head "><input type="submit" value="삭제하기" id="send"></div>
+               		<div class="head "><button id="btn-delete" type="button" value="삭제하기">삭제하기</button></div>
                	</c:when>
-
                <c:when test="${logintype!='admin' }">
                <div class="head "><a href="tradeGoodsWrite" style="color: white">제품등록</a></div>
                </c:when>
@@ -482,8 +488,7 @@
                <input type="text" class="form-control" id="text-search" placeholder="검색어를 입력해주세요"
                   aria-label="Recipient's username" aria-describedby="button-addon2">
                <div class="input-group-append">
-                  <button class="btn btn-outline-secondary" id="btn-search" type="button"
-                     id="button-addon2"><i class="fas fa-search"></i></button>
+                  <button class="btn btn-outline-secondary" id="btn-search"><i class="fas fa-search"></i>
                </div>
             </div>
             <!--End search  -->
@@ -524,6 +529,7 @@
                </div>
                <!-- End boardInfo  -->
                ${rsearch_result_null }
+			<form id="deleteForm" action="boardWriteDelete">
                <div class="row list-nav">
                   <c:forEach var="temp" items="${list }">
                      <div class="col-lg-3 col-md-6">

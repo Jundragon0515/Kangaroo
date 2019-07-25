@@ -202,12 +202,15 @@ pageEncoding="UTF-8"%>
 
 .back-to-top:hover {color: #818bb0}
 
-#send{
+/* 삭제버튼  */
+#btn-delete{
 	border: 1px solid #828bb3;
 	background-color:#828bb3;
 	color:white;
 }
-#send:hover {
+
+/* 삭제버튼 hover */
+#btn-delete:hover {
 	cursor: pointer;
 }
 </style>
@@ -247,7 +250,7 @@ pageEncoding="UTF-8"%>
 				if(!list2[z])
 					continue;
 				if($("."+list2[z]).text()=='남은시간 : 종료'){
-					$("."+list2[z]+"_re").before("<img class='onging-img' src=''../resources/img/banner/soldout.png'><button class='ongoing-btn'></button>");
+					$("."+list2[z]+"_re").before("<img class='onging-img' src=''../resources/img/banner/soldout.png'><button class='ongoing-btn'></button>"); //판매완료 이미지
 					client.send("/app/end", {}, JSON.stringify({
 						no : list2[z]
 					}));
@@ -279,6 +282,19 @@ pageEncoding="UTF-8"%>
          var text_search =  $("#text-search").val();
          $(location).attr("href", "auctionOption?search="+text_search);
       });
+       
+       /* 검색 엔터키 */
+       $("#text-search").keydown(function(key){
+    	   if(key.keyCode==13){
+    		   var text_search = $("#text-search").val();
+    		   $(location).attr("href", "/auctionOption?search="+text_search);
+    	   }
+       });
+       
+       /* 삭제버튼 */
+       $("#btn-delete").on("click", function(){
+    	   $("#deleteForm").submit();
+       });
       
       
       /* 페이지 정렬 개수 컨트롤  */
@@ -441,7 +457,7 @@ pageEncoding="UTF-8"%>
    </div>
    </section>
    <!-- End Banner Area -->
-	<form action="auctionBoardDelete">
+
    <!-- start banner Area -->
    <div class="container-fluid">
       <div class="row">
@@ -505,15 +521,13 @@ pageEncoding="UTF-8"%>
                </ul>
               <c:choose>
                	<c:when test="${logintype=='admin'}">
-               		<div class="head "><input type="submit" value="삭제하기" id="send"></div>
+               		<div class="head "><button id="btn-delete" type="button" value="삭제하기">삭제하기</button></div>
                	</c:when>
                <c:when test="${logintype!='admin' }">
                <div class="head "><a href="auctionWrite" style="color: white">경매등록</a></div>
                </c:when>
                </c:choose>
             </div>
-
-
          </div>
          <!-- end menu  -->
 
@@ -525,8 +539,7 @@ pageEncoding="UTF-8"%>
                <input type="text" class="form-control" id="text-search" placeholder="검색어를 입력해주세요"
                   aria-label="Recipient's username" aria-describedby="button-addon2">
                <div class="input-group-append">
-                  <button class="btn btn-outline-secondary" id="btn-search" type="button"
-                     id="button-addon2"><i class="fas fa-search"></i></button>
+                  <button class="btn btn-outline-secondary" id="btn-search" type="btn-search"><i class="fas fa-search"></i></button>
                </div>
             </div>
             <!--End search  -->
@@ -567,6 +580,7 @@ pageEncoding="UTF-8"%>
                </div>
                <!-- End boardInfo  -->
                ${rsearch_result_null }
+            <form action="auctionBoardDelete">
                <div class="row list-nav">
                   <c:forEach var="temp" items="${list }">
                      <div class="col-lg-3 col-md-6">
