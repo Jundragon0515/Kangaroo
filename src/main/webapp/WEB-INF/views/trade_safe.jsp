@@ -21,7 +21,7 @@
 <!-- meta character set -->
 <meta charset="UTF-8">
 <!-- Site Title -->
-<title>중고거래 게시판</title>
+<title>중고 안전거래</title>
 
 <!--
       CSS
@@ -177,21 +177,24 @@
 }
 
 /* 판매완료 표시 */
-.ongoing {
+.ongoing-btn {
    position: absolute;
    width: 100%;
    height: 100%;
    margin-left:-1px;
    background-color: gray;
    opacity:0.5;
-   z-index:2;
+   z-index:4;
+   cursor:pointer;
 }
 
+/* 판매완료 이미지  */
 .onging-img {
     position: absolute;
     width: 100%;
     top: 30%;
-    z-index:100;
+    z-index:5;
+    cursor:pointer;
 }
 
 .back-to-top {text-decoration: none; display: none; color:#fe912b;}
@@ -225,6 +228,19 @@
            }
        });
        
+       /* 판매완료 -> 상세보기 */
+       $(".onging-img").on("click", function(){
+    	  	var href = $(".ongoing-href").val();
+    	    $(location).attr("href", "/used_detailPage?no=" + href);
+       });
+       
+       /* 판매완료 -> 상세보기 */
+       $(".ongoing-btn").on("click", function(){
+   	  		var href = $(".ongoing-href").val();
+	    	$(location).attr("href", "/used_detailPage?no=" + href);
+       });
+       
+       /* 위로가기 버튼  */
        $('.back-to-top').click(function(event) {
            event.preventDefault();
            $('html, body').animate({scrollTop: 0}, duration);
@@ -397,7 +413,7 @@
       <div
          class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
          <div class="col-first">
-            <h1>중고거래</h1>
+            <h1>중고안전거래</h1>
             <nav class="d-flex align-items-center"> <a href="index.html"><span
                class="lnr lnr-arrow-right">Home</span></a> <a href="#"><span
                class="lnr lnr-arrow-right">Shop</span></a> </nav>
@@ -544,10 +560,10 @@
                			<div class="single-product" style="margin-bottom: 15px;">
                            <div class="card">
                            	<img class="onging-img" src="../resources/img/banner/soldout.png">
-                             <button class="ongoing"></button>
-                              <a href="/used_detailPage?no=${temp.no}">
+                             <input type="button" class="ongoing-btn">
+                             <input type="hidden" class="ongoing-href" value=${temp.no}>
                               <img class="img-fluid product-img-size" style="margin-bottom: 5px;"
-                                 src="/img/title/${temp.title_img}" alt=""></a>
+                                 src="/img/title/${temp.title_img}" alt="">
                               <div class="card-body" style="padding: 12px;">
                                  <div class="row">
                                     <div class="d-none d-lg-block col-lg-12">[${temp.category}]</div>

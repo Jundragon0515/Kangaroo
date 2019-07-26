@@ -187,14 +187,17 @@ pageEncoding="UTF-8"%>
    margin-left:-1px;
    background-color: gray;
    opacity:0.5;
-   z-index:2;
+   z-index:4;
+   cursor:pointer;
 }
 
+/* 판매완료 이미지  */
 .onging-img {
     position: absolute;
     width: 100%;
     top: 30%;
-    z-index:100;
+    z-index:5;
+    cursor:pointer;
 }
 
 
@@ -239,7 +242,7 @@ pageEncoding="UTF-8"%>
 			client.send("/app/time", {}, JSON.stringify({
 				end_dates : list
 			}));
-		}, 900);
+		}, 100);
 		
 		var list2 = new Array();
 		<c:forEach var="i" items="${list}">
@@ -250,7 +253,7 @@ pageEncoding="UTF-8"%>
 				if(!list2[z])
 					continue;
 				if($("."+list2[z]).text()=='남은시간 : 종료'){
-					$("."+list2[z]+"_re").before("<img class='onging-img' src='../resources/img/banner/soldout.png'><button class='ongoing-btn'></button>"); //판매완료 이미지
+					$("."+list2[z]+"_re").before("<a href='/auction_detailPage?no="+list2[z]+"'><img class='onging-img' src='../resources/img/banner/soldout.png'><input type='button' class='ongoing-btn'></a>"); //판매완료 이미지
 					client.send("/app/end", {}, JSON.stringify({
 						no : list2[z]
 					}));
@@ -258,7 +261,7 @@ pageEncoding="UTF-8"%>
 				}
 				
 			}	
-		}, 900);
+		}, 100);
        var offset = 50;   // 수직으로 어느정도 움직여야 버튼이 나올까?
        var duration = 600;   // top으로 이동할때까지의 animate 시간 (밀리세컨드, default는 400. 예제의 기본은 500)
        $(window).scroll(function() {
@@ -269,6 +272,8 @@ pageEncoding="UTF-8"%>
            }
        });
        
+       
+       /* 위로가기 버튼  */
        $('.back-to-top').click(function(event) {
            event.preventDefault();
            $('html, body').animate({scrollTop: 0}, duration);
@@ -591,7 +596,7 @@ pageEncoding="UTF-8"%>
                			</c:choose>
                         <div class="single-product" style="margin-bottom: 15px;">
                            <div class="card">
-                           
+                           	<input type="hidden" class="ongoing-href" value="${temp.no}">
                               <a href="/auction_detailPage?no=${temp.no}" class="${temp.no}_re">
                               <img class="img-fluid product-img-size" style="margin-bottom: 5px;"
                                  src="../resources/img/title/${temp.title_img}" alt=""></a>

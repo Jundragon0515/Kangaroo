@@ -21,7 +21,7 @@
 <!-- meta character set -->
 <meta charset="UTF-8">
 <!-- Site Title -->
-<title>중고거래 게시판</title>
+<title>중고 직거래</title>
 
 <!--
       CSS
@@ -42,10 +42,11 @@
 
 <style>
 
-/*    * {
+      * {
    box-sizing: border-box;
    border: 1px solid black;
-}     */
+   word-break:break-all;
+}       
 
 .nav_b {
    border: 0px;
@@ -173,7 +174,7 @@
 /* 왼쪽 Category 영역  */
 .category-area{
    position: relative;
-   top: 100px;
+   padding-top:100px;
 }
 
 /* 판매완료 표시 */
@@ -184,15 +185,24 @@
    margin-left:-1px;
    background-color: gray;
    opacity:0.5;
-   z-index:2;
+   z-index:4;
+   cursor:pointer;
 }
 
+/* 판매완료 이미지  */
 .onging-img {
     position: absolute;
     width: 100%;
     top: 30%;
-    z-index:100;
+    z-index:5;
+    cursor:pointer;
 }
+
+.atag-text{
+	position:relative;
+	text-align:center;
+}
+
 
 .back-to-top {text-decoration: none; display: none; color:#fe912b;}
 
@@ -225,6 +235,19 @@
            }
        });
        
+       /* 판매완료 -> 상세보기 */
+       $(".onging-img").on("click", function(){
+    	  	var href = $(".ongoing-href").val();
+    	    $(location).attr("href", "/used_detailPage?no=" + href);
+       });
+       
+       /* 판매완료 -> 상세보기 */
+       $(".ongoing-btn").on("click", function(){
+   	  		var href = $(".ongoing-href").val();
+	    	$(location).attr("href", "/used_detailPage?no=" + href);
+       });
+       
+       /* 위로가기 버튼  */
        $('.back-to-top').click(function(event) {
            event.preventDefault();
            $('html, body').animate({scrollTop: 0}, duration);
@@ -397,7 +420,7 @@
       <div
          class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
          <div class="col-first">
-            <h1>중고거래</h1>
+            <h1>중고 직거래</h1>
             <nav class="d-flex align-items-center"> <a href="index.html"><span
                class="lnr lnr-arrow-right">Home</span></a> <a href="#"><span
                class="lnr lnr-arrow-right">Shop</span></a> </nav>
@@ -412,8 +435,11 @@
       <div class="row">
 
          <!-- start menu -->
-         <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
-            <div class="sidebar-categories category-area">
+         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-2">
+            <div class="sidebar-categories">
+             <div class="row">
+         		<div class="d-none d-lg-block col-xs-12 col-sm-12 col-md-12 col-lg-2 category-area"></div>
+         	</div>
                <div class="head">제품 카테고리</div>
                <ul class="main-categories">
                   <li class="main-nav-list"><a data-toggle="collapse"
@@ -421,10 +447,8 @@
                      aria-controls="fruitsVegetable">
                      <span class="lnr lnr-arrow-right">
                         </span><a href="tradeOption?category=all">전체보기</a></a>
-                     </li>
-
-
-                     
+                  </li> 
+                  
                   <li class="main-nav-list"><a data-toggle="collapse"
                      href="#meatFish" aria-expanded="false" aria-controls="meatFish"><span
                         class="lnr lnr-arrow-right">
@@ -488,7 +512,7 @@
                <input type="text" class="form-control" id="text-search" placeholder="검색어를 입력해주세요"
                   aria-label="Recipient's username" aria-describedby="button-addon2">
                <div class="input-group-append">
-                  <button class="btn btn-outline-secondary" id="btn-search"><i class="fas fa-search"></i>
+                  <button class="btn btn-outline-secondary" id="btn-search"><i class="fas fa-lg fa-search"></i>
                </div>
             </div>
             <!--End search  -->
@@ -497,35 +521,20 @@
             <div class="single-product-slider">
             <!-- Start boardInfo  -->
                <div class="row list-nav">
-                  <div class="col-lg-7 col-md-5 col-sm-5">
-                     <%-- <span class="list-nav-total">모두 ${recordTotalCount}개의 물품이 검색 되었습니다.</span> --%>
+                  <div class="col-sm-12 col-md-12 col-lg-8 atag-text mt-2"><span style=font-size:25px>${selectCategory }</span>
                   </div>
-
-                  <div class="col-lg-5 col-md-7 col-sm-7">
-                     <div class="row">
-                        <div class="col-lg-8 col-md-8 col-sm-8">
-                           <div class="row">
-                              <div class="col-lg-6 col-md-6 col-sm-6 pl-5">
-                                 <a class="nav-link" href="tradeOption?price=low">낮은가격순</a> 
-                              </div>
-                              <div class="col-lg-6 col-md-6 col-sm-6 pl-5">      
-                                 <a class="nav-link" href="tradeOption?price=high">높은가격순</a> 
-                              </div>
-                           </div>
-                        </div>
-                        <div class="col-lg-4 col-md-4 col-sm-4">
-                           <div class="row">
-                              <div class="col-lg-12 col-md-12 col-sm-12">
-                                 <select id="viewCount" name="viewCount" onchange="viewCount()">
+                  <div class="d-none d-lg-block col-sm-6 col-md-3 col-lg-2 col-xl-1">
+                        <a class="nav-link p-0 mt-2" href="tradeOption?price=low"><span class="atag-text">낮은가격순</span></a> 
+                   </div>
+                   <div class="d-none d-lg-block col-sm-4 col-md-3 col-lg-2 col-xl-1">
+                       <a class="nav-link p-0 mt-2" href="tradeOption?price=high"><span class="atag-text">높은가격순</span></a>
+                    </div>
+                     <div class="d-none d-xl-block col-sm-3 col-md-3 col-lg-2">
+                                <select id="viewCount" name="viewCount" onchange="viewCount()">
                                     <option value="12">12개씩 보기</option>
                                     <option value="16">16개씩 보기</option>
-                                    <option value="20">20개씩 보기</option>
-                                 </select>
-                              </div>
-                           </div>
-                        </div>
+                                    <option value="20">20개씩 보기</option></select>
                      </div>
-                  </div>
                </div>
                <!-- End boardInfo  -->
                ${rsearch_result_null }
@@ -542,13 +551,11 @@
                			<c:when test="${temp.onGoing=='n'}">
                			<div class="single-product" style="margin-bottom: 15px;">
                            <div class="card">
-                           <div class="onging">
                            	<img class="onging-img" src="../resources/img/banner/soldout.png">
-                             <button class="ongoing-btn"></button>
-							<div>
-                              <a href="/used_detailPage?no=${temp.no}">
+                             <input type="button" class="ongoing-btn">
+                              <input type="hidden" class="ongoing-href" value=${temp.no}>
                               <img class="img-fluid product-img-size" style="margin-bottom: 5px;"
-                                 src="/img/title/${temp.title_img}" alt=""></a>
+                                 src="/img/title/${temp.title_img}" alt="">
                               <div class="card-body" style="padding: 12px;">
                                  <div class="row">
                                     <div class="d-none d-lg-block col-lg-12">[${temp.category}]</div>
@@ -571,7 +578,6 @@
 
                                        <a onclick="check();" href="boardGgym?no=${temp.no}&title_img=${temp.title_img}&title=${temp.title}&trade_type=${temp.trade_type }&category=${temp.category }&price=${temp.price}" class="social-info"> <span class="lnr lnr-heart"></span>
                                           <p class="hover-text">Wishlist</p>
-
 									 </a> 
 									 <a href="/used_detailPage?no=${temp.no}" class="social-info">
                                         <span class="lnr lnr-move"></span>
@@ -580,9 +586,7 @@
                                     </div>
                                  </div>
                               </div>
-                           </div>
                         </div>
-                     </div>
                      </div>
                		</c:when>
                		<c:otherwise>
@@ -634,7 +638,6 @@
                   <b class="paging">${navi }</b>
                </div>
             </div>
-
          </div>
          <!-- end center  -->
 
