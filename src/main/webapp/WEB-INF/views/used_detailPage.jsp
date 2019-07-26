@@ -332,6 +332,7 @@ $("#logout_na").on("click", function() {
                   </div>
                   <div style=text-align:right;padding-right:10px;>
                   	 <input type="button" id="report" class="genric-btn danger radius" value="신고하기">
+
                      <input type="button" id="cart" class="genric-btn primary radius" value="찜하기">
                   <c:choose>
 
@@ -1147,8 +1148,15 @@ $("#logout_na").on("click", function() {
 			   alert("로그인 하세요.");
 			   return false;
 		   }else{
-			   window.open("resources/index.html", "a", "width=550, height=500, left=450, top=300");
-		   }
+			   $.ajax({
+				   url:"/go",
+				   data:{"no":"${dto.no}","type":"중고거래"}
+			   }).done(function(resp){
+				   window.open("resources/index.html", "a", "width=550, height=500, left=450, top=300");
+			   })
+			   }
+
+		   
 	}) 
 		
 	</script>

@@ -1593,8 +1593,15 @@ $("#logout_na").on("click", function() {
    				   alert("로그인 하세요.");
    				   return false;
    			   }else{
-   				   window.open("resources/index.html", "a", "width=550, height=500, left=450, top=300");
-   			   }
+   				   $.ajax({
+   					   url:"/go",
+   					   data:{"no":"${dto.no}","type":"경매거래"}
+   				   }).done(function(resp){
+   					   window.open("resources/index.html", "a", "width=550, height=500, left=450, top=300");
+   				   })
+   				   }
+
+   			   
    		}) 
    			
    		
