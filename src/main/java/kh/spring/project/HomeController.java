@@ -26,10 +26,7 @@ public class HomeController {
 	MemberService mes;
 	public static int visitCount = 0;
 	@RequestMapping("/")
-	public ModelAndView visit() { 	// 첫 방문
-		System.out.println("반갑습니다.");
-		visitCount++;
-		System.out.println(visitCount);
+	public ModelAndView visit() { 	//홈
 		
 		ModelAndView mav =new ModelAndView();
 		List<Used_transaction_boardDTO> mainDirectList = mes.directList();
@@ -40,11 +37,24 @@ public class HomeController {
 		mav.addObject("auctionList", mainAuctionList);
 		mav.setViewName("index");
 	
+		
+		
 		return mav;
 	}
-	@RequestMapping("/index")
-	public String home() { 		//홈
-		return "index";
+	@RequestMapping("/start")
+	public ModelAndView home() { 	//첫방문
+
+		visitCount++;
+		ModelAndView mav =new ModelAndView();
+		List<Used_transaction_boardDTO> mainDirectList = mes.directList();
+		List<Used_transaction_boardDTO> mainSafeList = mes.safeList();
+		List<Auction_boardDTO> mainAuctionList = mes.auctionList();
+		mav.addObject("mainDirectList",mainDirectList);
+		mav.addObject("mainSafeList",mainSafeList);
+		mav.addObject("auctionList", mainAuctionList);
+		mav.setViewName("index");
+	
+		return mav;
 	}
 	@RequestMapping("/login_main")
 	public String login_main() { // 로그인 메인페이지
