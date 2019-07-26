@@ -822,9 +822,7 @@ $("#logout_na").on("click", function() {
                   data:{"money":money,"boardNum":${dto.no },"title":"${dto.title }","img":"${i_dto.title_img }"},
                   dataType:"JSON"
                }).done(function(resp){
-                  
-
-                  
+            	   
                   if(resp!=null){
                      
                      console.log(resp);

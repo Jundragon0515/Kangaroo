@@ -405,17 +405,12 @@ public class DetailPageController {
 			System.out.println(result);
 
 			if (result>0) {
-				try {
-					sdao.tender(dto, boardNum);
-				} catch (Exception e) {
-					System.out.println("입찰 오류");
-					e.printStackTrace();
-				}
-				;
-
-				List<TenderDTO> rank = mdao.rank(boardNum);
-				return new Gson().toJson(rank);
-
+					if(sdao.tender(dto, boardNum)>0) {
+						List<TenderDTO> rank = mdao.rank(boardNum);
+						return new Gson().toJson(rank);
+					}else {
+						return null;
+					}
 			} else {
 				return null;
 			}
