@@ -257,7 +257,10 @@
 	}
 
 </style>  
+<script>
+	
 
+</script>
 </head>
 <body>
 
@@ -417,15 +420,25 @@
 					<div id="sel2">	
 							<li>
 								<div class="middleName">거래유형</div>
+								<c:choose>
+								<c:when test="${type=='ggic'}">
                                 <input type="radio" id="test1" class="trade" name="trade_type" value="직거래" checked>
                                 <label for="test1" class="trade">직거래</label>
                                 <input type="radio" id="test2" class="trade" name="trade_type" value="안전거래">
                                 <label for="test2" class="trade">안전거래</label>
+                                </c:when>
+                                <c:when test="${type=='an' }">
+                                <input type="radio" id="test1" class="trade" name="trade_type" value="직거래">
+                                <label for="test1" class="trade">직거래</label>
+                                <input type="radio" id="test2" class="trade" name="trade_type" value="안전거래" checked>
+                                <label for="test2" class="trade">안전거래</label>
+                                </c:when>
+                                </c:choose>
 							</li>
 					</div>		
 				</div>
 							<li>
-								<div class="middleName">택배</div>
+								<div class="middleName">택배</div>								
                                 <input type="radio" id="test3" class="delivery" name="delivery_type" value="선불" disabled="disabled">
                                 <label for="test3" class="trade" id="payInside">선불(구매자 부담)</label>
                                 <input type="radio" id="test4" class="delivery" name="delivery_type" value="착불" disabled="disabled">

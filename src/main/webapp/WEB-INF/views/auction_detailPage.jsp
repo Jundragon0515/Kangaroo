@@ -1192,6 +1192,7 @@ $("#logout_na").on("click", function() {
 												</div>
 											</c:when>
 											<c:otherwise>
+												<input type="button" id="cancle" value="삭제하기" class="genric-btn primary radius">
 											</c:otherwise>
 
 										</c:choose>
@@ -1229,6 +1230,17 @@ $("#logout_na").on("click", function() {
 	<!-- 댓글 스크 -->
 
 	<script>
+	
+	$("#cancle").on("click",function(){
+		   var result = confirm("정말로 삭제하시겠습니까?");
+		   
+		   if(result==true){
+			   	alert("삭제 되었습니다.");
+		   		var no = "${dto.no}";
+		   		$(location).attr("href","cancleAuction?no=${dto.no}");
+		   }
+		   
+	   })
 	
 	$(".commentDelete").on("click",function(){
 		

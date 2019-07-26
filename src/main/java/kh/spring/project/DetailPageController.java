@@ -25,6 +25,7 @@ import kh.spring.dto.OrderDTO;
 import kh.spring.dto.TenderDTO;
 import kh.spring.dto.Used_transaction_boardDTO;
 import kh.spring.dto.Used_transaction_img_boardDTO;
+import kh.spring.service.GoodsTradeService;
 import kh.spring.service.MemberService;
 
 @Controller
@@ -47,6 +48,14 @@ public class DetailPageController {
 	@Autowired
 	HttpSession session;
 	
+	@Autowired
+	private GoodsTradeService gs;
+	
+	@Autowired
+	private TradeController tc;
+	
+	@Autowired
+	private AuctionController ac;
 	
 	@RequestMapping("/topTender")
 	@ResponseBody
@@ -413,5 +422,11 @@ public class DetailPageController {
 
 			return firstMoney;
 		}
-	
+		
+		@RequestMapping("/cancleTrade")
+		   public String cancleTrade(HttpServletRequest request) {
+			int no = Integer.parseInt(request.getParameter("no"));
+			   gs.cancleTrade(no);
+			   return tc.direct(request);
+		}
 }

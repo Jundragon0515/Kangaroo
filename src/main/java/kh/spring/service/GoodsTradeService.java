@@ -96,5 +96,10 @@ public class GoodsTradeService {
    public String safeBoardNavi_search(HttpSession session, int currentPage, int recordCountPerPage){
 	   return gdao.getNavi_safe_search(session, currentPage, recordCountPerPage);
    }
+   
+   //글 삭제
+   public int cancleTrade(int no) {
+		return gdao.cancleTrade(no);
+	}
 
 }

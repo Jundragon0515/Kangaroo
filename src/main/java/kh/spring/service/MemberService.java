@@ -352,5 +352,4 @@ public class MemberService {
 		return adao.main_Auction_List();
 	}
 	
-	
 }

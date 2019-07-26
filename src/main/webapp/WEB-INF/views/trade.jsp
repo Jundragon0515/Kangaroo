@@ -207,6 +207,10 @@
 #send:hover {
 	cursor: pointer;
 }
+#checkAllTradeBoard {
+    left: 89%;
+    position: relative;
+}
 </style>
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -466,7 +470,7 @@
                	</c:when>
 
                <c:when test="${logintype!='admin' }">
-               <div class="head "><a href="tradeGoodsWrite" style="color: white">제품등록</a></div>
+               <div class="head "><a href="tradeGoodsWrite?type=ggic" style="color: white">제품등록</a></div>
                </c:when>
                </c:choose>
             </div>
@@ -528,7 +532,7 @@
                      <div class="col-lg-3 col-md-6">
 						<c:choose>
                				<c:when test="${logintype=='admin'}">
-               					<input type="checkbox" name="checkDelete" value="${temp.no }">
+               					<input type="checkbox" name="checkDelete" value="${temp.no }" class="tradeCheck" id="chk">
                				</c:when>
                			</c:choose>
                 		<c:choose>
@@ -622,6 +626,12 @@
                </div>
               </form>
             </div>
+            <c:choose>
+               	<c:when test="${logintype=='admin'}">
+            		<input type="button" id="checkAllTradeBoard" value="전체선택" name="checkAll" class="genric-btn primary radius">
+            	</c:when>
+            </c:choose>	
+            
             </section>
             <div class="row">
                <div class="col-12 naviArea">
@@ -733,6 +743,13 @@
 				   alert("로그인 하세요.");
 				   return false;
 			   }
+		})
+		$("#checkAllTradeBoard").on("click",function(){
+			if($("input:checkbox[id=chk]").is(":checked")==true){
+				 $("input[id=chk]:checkbox").prop("checked", false);				
+			}else{
+				$("input[id=chk]:checkbox").prop("checked", true);
+			}
 		})
 	
 	</script>

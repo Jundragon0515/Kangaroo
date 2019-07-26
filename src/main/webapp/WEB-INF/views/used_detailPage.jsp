@@ -362,8 +362,10 @@ $("#logout_na").on("click", function() {
                               <td colspan=2 class=detail-info><fmt:formatNumber
                                     value="${dto.delivery_cost }" pattern="#,###" />원</td>
                            </tr>
-                        </tbody>
+                        </tbody>                  
                      </table>
+                     
+                   
                   </div>
                   <div style=text-align:right;padding-right:10px;>
 
@@ -373,7 +375,7 @@ $("#logout_na").on("click", function() {
                   
                   	<c:choose>
                   			<c:when test="${dto.id==email}">
-                  		
+                  				<input type="button" id="cancle" value="삭제하기" class="genric-btn primary radius">
                   			</c:when>
                   	
                   			<c:otherwise>
@@ -404,6 +406,17 @@ $("#logout_na").on("click", function() {
    $("#soldOut").on("click",function(){
 	 
 	   alert("판매 완료된 상품 입니다.");
+   })
+   
+   $("#cancle").on("click",function(){
+	   var result = confirm("정말로 삭제하시겠습니까?");
+	   
+	   if(result==true){
+		   	alert("삭제 되었습니다.");
+	   		var no = "${dto.no}";
+	   		$(location).attr("href","cancleTrade?no=${dto.no}");
+	   }
+	   
    })
    
    $("#buy").on("click",function(){

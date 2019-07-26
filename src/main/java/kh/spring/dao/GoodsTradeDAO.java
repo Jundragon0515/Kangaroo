@@ -500,4 +500,9 @@ public class GoodsTradeDAO {
 	   return sst.selectList("GoodsTradeDAO.mainSafeList", param);
    }
    
+   public int cancleTrade(int no) {
+	   return sst.delete("GoodsTradeDAO.cancleTrade",no);
+   }
+
+   
 }
