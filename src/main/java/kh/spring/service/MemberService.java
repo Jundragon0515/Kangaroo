@@ -158,7 +158,7 @@ public class MemberService {
 				}else {
 					System.out.println("실패");
 				}
-				return "login";
+				return "redirect:login";
 			}else {
 				System.out.println("조건에 맞지 않습니다.");
 				return "login";

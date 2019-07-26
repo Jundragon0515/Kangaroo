@@ -49,6 +49,35 @@
 <link rel="stylesheet" href="../resources/css/main.css">
 
 <style>
+.level{
+	width: 45px;
+	height: 45px;
+	margin-right: 0.5em;
+	margin-bottom: 0.8em;
+}
+#cartAuction{
+	font-size: 20px;
+	padding-left: 0.5em;
+	padding-right: 0.5em;
+	margin-left: 0.2em;
+}
+
+#report{
+	height: 38px;
+	line-height: 30px;
+	font-size: 13px;
+}
+
+#tender{
+	width: 100%;
+}
+
+input::placeholder { font-size: 80%; }
+
+#commentGo{
+font-size: 15px;
+}
+
 body {
    overflow-x: hidden;
 }
@@ -64,13 +93,20 @@ body {
    color: black;
    text-align: center;
    width: 150px;
+   font-size: 15px;
 }
 
 #money {
    margin-top: 10px;
    margin-left: 1em;
-   width: 300px;
+   width: 60%;
    text-align: center;
+   font-weight: bold;
+   font-size: 18px;
+   height: 43px;
+}
+#tend{
+	font-size: 15px;
 }
 
 .detail-info {
@@ -122,8 +158,9 @@ body {
    cursor:pointer;
 }
 #soldOut{
-	position: relative;
-	left: 180px;
+   position: relative;
+   left: 180px;
+   font-size: 15px;
 }
 
 .back-to-top {text-decoration: none; display: none; color:#fe912b;}
@@ -134,56 +171,56 @@ body {
 <script>
 $(function(){
 
-	var socket = new SockJS("/gettime"); //불특정 다수의 브라우저일 경우를 위해 endpoint url 넣어야 한다
-	var client = Stomp.over(socket);//연결 이후의 작업 지원 
-	client.connect({}, function(resp) {
-		client.subscribe("/response", function(list) {
-			var result = JSON.parse(list.body);
-							$(".time").text(result[0]);
-							console.log("${dto.onGoing}");
-							
-							if($("#rt").text()=="종료"){
-								
-								if(${dto.onGoing=="n"}){
-									
-								}else{
-								
-								
-									$.ajax({
-									
-									url:"/timeStop",
-									data:{"boardNum":${dto.no }}
-									
-								}).done(function(resp){
-									
-									$.ajax({
-										url:"/topTender",
-										data:{"boardNum":"${dto.no }","seller":"${dto.id }"},
-										
-									})
-									
-									var result = Number(resp);
-									console.log(Number(resp));
-									
-									if(result>0){
-									
-										alert("경매 시간이 종료되었습니다 !")
-										location.reload();	
-									}
-									
-								});
-								
-								}
-							}
-		});
-	})
-	setInterval(function() {//시간 보내 달라는 요청
-		var list = new Array();
-		list.push("${dto.end_date}");
-		client.send("/app/time", {}, JSON.stringify({
-			end_dates : list
-		}));
-	}, 900);
+   var socket = new SockJS("/gettime"); //불특정 다수의 브라우저일 경우를 위해 endpoint url 넣어야 한다
+   var client = Stomp.over(socket);//연결 이후의 작업 지원 
+   client.connect({}, function(resp) {
+      client.subscribe("/response", function(list) {
+         var result = JSON.parse(list.body);
+                     $(".time").text(result[0]);
+                     console.log("${dto.onGoing}");
+                     
+                     if($("#rt").text()=="종료"){
+                        
+                        if(${dto.onGoing=="n"}){
+                           
+                        }else{
+                        
+                        
+                           $.ajax({
+                           
+                           url:"/timeStop",
+                           data:{"boardNum":${dto.no }}
+                           
+                        }).done(function(resp){
+                           
+                           $.ajax({
+                              url:"/topTender",
+                              data:{"boardNum":"${dto.no }","seller":"${dto.id }"},
+                              
+                           })
+                           
+                           var result = Number(resp);
+                           console.log(Number(resp));
+                           
+                           if(result>0){
+                           
+                              alert("경매 시간이 종료되었습니다 !")
+                              location.reload();   
+                           }
+                           
+                        });
+                        
+                        }
+                     }
+      });
+   })
+   setInterval(function() {//시간 보내 달라는 요청
+      var list = new Array();
+      list.push("${dto.end_date}");
+      client.send("/app/time", {}, JSON.stringify({
+         end_dates : list
+      }));
+   }, 900);
     var offset = 500;   // 수직으로 어느정도 움직여야 버튼이 나올까?
     var duration = 600;   // top으로 이동할때까지의 animate 시간 (밀리세컨드, default는 400. 예제의 기본은 500)
     $(window).scroll(function() {
@@ -237,99 +274,99 @@ $("#logout_na").on("click", function() {
       <!-- end fixbutton -->
    <!-- Start Header Area -->
   <header class="header_area sticky-header">
-		<div class="main_menu">
-			<nav class="navbar navbar-expand-lg navbar-light main_box">
-				<div class="container">
-					<!-- Brand and toggle get grouped for better mobile display logo_h -->
-					<a class="navbar-brand logo_h" href="/"><img
-						src="../resources/img/logo.png" width="60px" alt="">
-						Kangaroo</a>
-					<button class="navbar-toggler" type="button" data-toggle="collapse"
-						data-target="#navbarSupportedContent"
-						aria-controls="navbarSupportedContent" aria-expanded="false"
-						aria-label="Toggle navigation">
-						<span class="icon-bar"></span> <span class="icon-bar"></span> <span
-							class="icon-bar"></span>
-					</button>
-					<!-- Collect the nav links, forms, and other content for toggling -->
-					<div class="collapse navbar-collapse offset"
-						id="navbarSupportedContent">
-						<ul class="nav navbar-nav menu_nav ml-auto">
-							<!-- 							<li class="nav-item active"><a class="nav-link" href="/">Home</a></li> -->
-									<li class="nav-item"><a class="nav-link" href="/trade">중고
-											직거래</a></li>
-									<li class="nav-item"><a class="nav-link" href="/trade_safe">중고
-											안전거래</a></li>
-									<li class="nav-item"><a class="nav-link" href="/auction">중고
-											경매</a></li>
-							<li class="nav-item "><a class="nav-link" href="/">공지사항</a></li>
-							<c:choose>
-								<c:when test="${logintype=='admin'}">
-									<li class="nav-item "><a class="nav-link" href="/admin">관리자페이지</a></li>
-									<li class="nav-item "><a class="nav-link" href="/logout">로그아웃</a></li>
-								</c:when>
-								<c:when test="${logintype=='naver'}">
-									<li class="nav-item submenu dropdown"><a href="#"
-										class="nav-link dropdown-toggle" data-toggle="dropdown"
-										role="button" aria-haspopup="true" aria-expanded="false"><img
-											src="../resources/img/account.png" width="35px"></a>
-										<ul class="dropdown-menu nav_ul">
-											<li class="nav-item "><a class="nav-link" href="/goCart">찜목록</a></li>
-											<li class="nav-item "><a class="nav-link"
-												href="/goMyPage">마이페이지</a></li>
-											<li class="nav-item "><a class="nav-link"
-												href="/toPoint">포인트충전</a></li>
-											<li class="nav-item "><a class="nav-link"
-												href="/toPoint_exc">포인트환급</a></li>
-											<li class="nav-item "><input type="button"
-												class="nav-link nav_b" id="logout_na" value="로그아웃"></li>
-										</ul></li>
-								</c:when>
-								<c:when test="${logintype=='kakao'}">
-									<li class="nav-item submenu dropdown"><a href="#"
-										class="nav-link dropdown-toggle" data-toggle="dropdown"
-										role="button" aria-haspopup="true" aria-expanded="false"><img
-											src="../resources/img/account.png" width="40px"></a>
-										<ul class="dropdown-menu nav_ul">
-											<li class="nav-item "><a class="nav-link" href="/goCart">찜목록</a></li>
-											<li class="nav-item "><a class="nav-link"
-												href="/goMyPage">마이페이지</a></li>
-												<li class="nav-item "><a class="nav-link"
-												href="/toPoint">포인트충전</a></li>
-											<li class="nav-item "><a class="nav-link"
-												href="/toPoint_exc">포인트환급</a></li>
-											<li class="nav-item "><input type="button"
-												class="nav-link nav_b" id="logout_ka" value="로그아웃"></li>
-										</ul></li>
-								</c:when>
-								<c:when test="${logintype=='email'}">
-									<li class="nav-item submenu dropdown"><a href="#"
-										class="nav-link dropdown-toggle" data-toggle="dropdown"
-										role="button" aria-haspopup="true" aria-expanded="false"><img
-											src="../resources/img/account.png" width="40px"></a>
-										<ul class="dropdown-menu nav_ul">
-											<li class="nav-item "><a class="nav-link" href="/goCart">찜목록</a></li>
-											<li class="nav-item "><a class="nav-link"
-												href="/goMyPage">마이페이지</a></li>
-											<li class="nav-item "><a class="nav-link"
-												href="/toPoint">포인트충전</a></li>
-												<li class="nav-item "><a class="nav-link"
-												href="/toPoint_exc">포인트환급</a></li>
-											<li class="nav-item "><a class="nav-link" href="/logout">로그아웃</a></li>
-										</ul></li>
-								</c:when>
-								<c:otherwise>
-									<li class="nav-item "><a class="nav-link"
-										href="/login_main">로그인</a></li>
-									<li class="nav-item "><a class="nav-link" href="/insert">회원가입</a></li>
-								</c:otherwise>
-							</c:choose>
-						</ul>
-					</div>
-				</div>
-			</nav>
-		</div>
-	</header>
+      <div class="main_menu">
+         <nav class="navbar navbar-expand-lg navbar-light main_box">
+            <div class="container">
+               <!-- Brand and toggle get grouped for better mobile display logo_h -->
+               <a class="navbar-brand logo_h" href="/"><img
+                  src="../resources/img/logo.png" width="60px" alt="">
+                  Kangaroo</a>
+               <button class="navbar-toggler" type="button" data-toggle="collapse"
+                  data-target="#navbarSupportedContent"
+                  aria-controls="navbarSupportedContent" aria-expanded="false"
+                  aria-label="Toggle navigation">
+                  <span class="icon-bar"></span> <span class="icon-bar"></span> <span
+                     class="icon-bar"></span>
+               </button>
+               <!-- Collect the nav links, forms, and other content for toggling -->
+               <div class="collapse navbar-collapse offset"
+                  id="navbarSupportedContent">
+                  <ul class="nav navbar-nav menu_nav ml-auto">
+                     <!--                      <li class="nav-item active"><a class="nav-link" href="/">Home</a></li> -->
+                           <li class="nav-item"><a class="nav-link" href="/trade">중고
+                                 직거래</a></li>
+                           <li class="nav-item"><a class="nav-link" href="/trade_safe">중고
+                                 안전거래</a></li>
+                           <li class="nav-item"><a class="nav-link" href="/auction">중고
+                                 경매</a></li>
+                     <li class="nav-item "><a class="nav-link" href="/">공지사항</a></li>
+                     <c:choose>
+                        <c:when test="${logintype=='admin'}">
+                           <li class="nav-item "><a class="nav-link" href="/admin">관리자페이지</a></li>
+                           <li class="nav-item "><a class="nav-link" href="/logout">로그아웃</a></li>
+                        </c:when>
+                        <c:when test="${logintype=='naver'}">
+                           <li class="nav-item submenu dropdown"><a href="#"
+                              class="nav-link dropdown-toggle" data-toggle="dropdown"
+                              role="button" aria-haspopup="true" aria-expanded="false"><img
+                                 src="../resources/img/account.png" width="35px"></a>
+                              <ul class="dropdown-menu nav_ul">
+                                 <li class="nav-item "><a class="nav-link" href="/goCart">찜목록</a></li>
+                                 <li class="nav-item "><a class="nav-link"
+                                    href="/goMyPage">마이페이지</a></li>
+                                 <li class="nav-item "><a class="nav-link"
+                                    href="/toPoint">포인트충전</a></li>
+                                 <li class="nav-item "><a class="nav-link"
+                                    href="/toPoint_exc">포인트환급</a></li>
+                                 <li class="nav-item "><input type="button"
+                                    class="nav-link nav_b" id="logout_na" value="로그아웃"></li>
+                              </ul></li>
+                        </c:when>
+                        <c:when test="${logintype=='kakao'}">
+                           <li class="nav-item submenu dropdown"><a href="#"
+                              class="nav-link dropdown-toggle" data-toggle="dropdown"
+                              role="button" aria-haspopup="true" aria-expanded="false"><img
+                                 src="../resources/img/account.png" width="40px"></a>
+                              <ul class="dropdown-menu nav_ul">
+                                 <li class="nav-item "><a class="nav-link" href="/goCart">찜목록</a></li>
+                                 <li class="nav-item "><a class="nav-link"
+                                    href="/goMyPage">마이페이지</a></li>
+                                    <li class="nav-item "><a class="nav-link"
+                                    href="/toPoint">포인트충전</a></li>
+                                 <li class="nav-item "><a class="nav-link"
+                                    href="/toPoint_exc">포인트환급</a></li>
+                                 <li class="nav-item "><input type="button"
+                                    class="nav-link nav_b" id="logout_ka" value="로그아웃"></li>
+                              </ul></li>
+                        </c:when>
+                        <c:when test="${logintype=='email'}">
+                           <li class="nav-item submenu dropdown"><a href="#"
+                              class="nav-link dropdown-toggle" data-toggle="dropdown"
+                              role="button" aria-haspopup="true" aria-expanded="false"><img
+                                 src="../resources/img/account.png" width="40px"></a>
+                              <ul class="dropdown-menu nav_ul">
+                                 <li class="nav-item "><a class="nav-link" href="/goCart">찜목록</a></li>
+                                 <li class="nav-item "><a class="nav-link"
+                                    href="/goMyPage">마이페이지</a></li>
+                                 <li class="nav-item "><a class="nav-link"
+                                    href="/toPoint">포인트충전</a></li>
+                                    <li class="nav-item "><a class="nav-link"
+                                    href="/toPoint_exc">포인트환급</a></li>
+                                 <li class="nav-item "><a class="nav-link" href="/logout">로그아웃</a></li>
+                              </ul></li>
+                        </c:when>
+                        <c:otherwise>
+                           <li class="nav-item "><a class="nav-link"
+                              href="/login_main">로그인</a></li>
+                           <li class="nav-item "><a class="nav-link" href="/insert">회원가입</a></li>
+                        </c:otherwise>
+                     </c:choose>
+                  </ul>
+               </div>
+            </div>
+         </nav>
+      </div>
+   </header>
 
    <!-- End Header Area -->
 
@@ -355,7 +392,7 @@ $("#logout_na").on("click", function() {
    <div class="product_image_area">
       <div class="container">
          <div class="row s_product_inner">
-            <div class="col-lg-6">
+            <div class="col-lg-6" style="margin: auto;">
                <!--이미지 미리보기 -->
                <div id="carouselExampleIndicators" class="carousel slide"
                   data-ride="carousel">
@@ -363,28 +400,28 @@ $("#logout_na").on("click", function() {
                      <li data-target="#carouselExampleIndicators" data-slide-to="0"
                         class="active"></li>
                      <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                     <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+<!--                      <li data-target="#carouselExampleIndicators" data-slide-to="2"></li> -->
                   </ol>
                   <div class="carousel-inner">
                      <div class="carousel-item active">
                         <img src="img/title/${i_dto.title_img }" class="d-block w-100"
-                           onerror="this.style.display='none'" alt='' height=400px; width=auto;>
+                           onerror="this.style.display='none'" alt='' height=500px; width=auto;>
                      </div>
                      <div class="carousel-item">
                         <img src="img/middle/${i_dto.middle1_img }"
                            class="d-block w-100" onerror="this.style.display='none'"
-                           alt='' height=400px; width=auto;>
+                           alt='' height=500px; width=auto;>
                      </div>
-                     <div class="carousel-item">
-                        <img src="img/middle/${i_dto.middle2_img }"
-                           class="d-block w-100" onerror="this.style.display='none'"
-                           alt='' height=400px; width=auto;>
-                     </div>
-                     <div class="carousel-item">
-                        <img src="img/middle/${i_dto.middle3_img }"
-                           class="d-block w-100" onerror="this.style.display='none'"
-                           alt='' height=400px; width=auto;>
-                     </div>
+<!--                      <div class="carousel-item"> -->
+<%--                         <img src="img/middle/${i_dto.middle2_img }" --%>
+<!--                            class="d-block w-100" onerror="this.style.display='none'" -->
+<!--                            alt='' height=400px; width=auto;> -->
+<!--                      </div> -->
+<!--                      <div class="carousel-item"> -->
+<%--                         <img src="img/middle/${i_dto.middle3_img }" --%>
+<!--                            class="d-block w-100" onerror="this.style.display='none'" -->
+<!--                            alt='' height=400px; width=auto;> -->
+<!--                      </div> -->
                   </div>
                   <a class="carousel-control-prev" href="#carouselExampleIndicators"
                      role="button" data-slide="prev"> <span
@@ -398,13 +435,13 @@ $("#logout_na").on("click", function() {
                </div>
 
             </div>
-            <div class="col-lg-5 offset-lg-1">
+            <div class="col-lg-5 offset-lg-1" style="margin-left: 0px;margin-right: 20px;">
                <div class="s_product_text1">
 
                   <div class="container">
                      <table class="table">
                         <tr>
-                           <h3 style="text-align: right; padding-right: 30px;">${dto.title }</h3>
+                           <h3 style="text-align: right; padding-right: 12px;">${dto.title }</h3>
                         </tr>
                         <tbody>
                            <tr>
@@ -462,47 +499,49 @@ $("#logout_na").on("click", function() {
                      </table>
                   </div>
 
-						<!--                   <div class="card_area d-flex align-items-center"> -->
-						<!--                      <a class="primary-btn" href="#">Add to Cart</a> <a -->
-						<!--                         class="icon_btn" href="#"><i class="lnr lnr lnr-diamond"></i></a> -->
-						<!--                      <a class="icon_btn" href="#"><i class="lnr lnr lnr-heart"></i></a> -->
-						<!--                   </div> -->
+                  <!--                   <div class="card_area d-flex align-items-center"> -->
+                  <!--                      <a class="primary-btn" href="#">Add to Cart</a> <a -->
+                  <!--                         class="icon_btn" href="#"><i class="lnr lnr lnr-diamond"></i></a> -->
+                  <!--                      <a class="icon_btn" href="#"><i class="lnr lnr lnr-heart"></i></a> -->
+                  <!--                   </div> -->
 
-						<!--                   입찰창 -->
-						<div style=text-align:right;padding-right:10px;>
-						<input type="button" id="report" class="genric-btn danger radius" value="신고하기">
-						<input type="button" id="cartAuction" class="genric-btn primary radius" value="찜하기">
-						</div>
-						<div class="card_area d-flex align-items-center">
-						
-						<c:choose>
-						
+                  <!--                   입찰창 -->
+                  <div class="card_area d-flex align-items-center">
+                  
+                  <c:choose>
+                  
                   <c:when test="${dto.onGoing=='y' }">
-                  	
-                  	<c:choose>
-                  	<c:when test="${dto.id==email}">
-                  	</c:when>
-                  	<c:otherwise>
+                     
+                     <c:choose>
+                     <c:when test="${dto.id==email}">
+                     </c:when>
+                     <c:otherwise>
                      <form class="form-inline" id="tender">
-								<input type="text" class="form-control mb-2 mr-sm-2" id="money"
-									onchange="getNumber(this);" onkeyup="getNumber(this);"
-									placeholder="입찰금액을 입력해주세요."> <input type="button"
-									class="genric-btn primary radius" id="tend" value="입찰" />
-							</form>
-							</c:otherwise>
-							</c:choose>
-							
+                        <input type="text" class="form-control mb-2 mr-sm-2" id="money"
+                           onchange="getNumber(this);" onkeyup="getNumber(this);"
+                           placeholder="입찰금액을 입력해주세요."> <input type="button"
+                           class="genric-btn primary radius" id="tend" value="입찰" />
+                           <input type="button" id="cartAuction" class="genric-btn primary radius" value="♡">
+                     </form>
+                     </c:otherwise>
+                     </c:choose>
+                     
                      </c:when>
                      
                      <c:when test="${dto.onGoing=='n' }">
                      <form class="form-inline" id="tender">
-                     <input type="button" class="genric-btn primary radius" id="soldOut" value="TIME OVER"/>
+                     <input type="button" class="genric-btn danger radius" id="soldOut" value="TIME OVER"/>
                      </form>
                      </c:when>
                      
                      </c:choose>
-							
-						</div>
+                     
+                     
+                  </div>
+<!--                   <br><br><br> -->
+<!--                   <div style=text-align:right;padding-right:10px;> -->
+                  
+<!--                   </div> -->
                </div>
             </div>
          </div>
@@ -862,32 +901,33 @@ $("#logout_na").on("click", function() {
       
    </script>
 
-	<!--================Product Description Area =================-->
-	<section class="product_description_area mb-0 pb-0">
-		<div class="container">
-			<ul class="nav nav-tabs" id="myTab" role="tablist">
-				<li class="nav-item"><a class="nav-link active" id="home-tab"
-					data-toggle="tab" href="#home" role="tab" aria-controls="home"
-					aria-selected="true">물품정보</a></li>
-				<li class="nav-item"><a class="nav-link" id="profile-tab"
-					data-toggle="tab" href="#profile" role="tab"
-					aria-controls="profile" aria-selected="false">판매자 정보</a></li>
-				<li class="nav-item"><a class="nav-link" id="contact-tab"
-					data-toggle="tab" href="#contact" role="tab"
-					aria-controls="contact" aria-selected="false">배송/반품</a></li>
-				<li class="nav-item"><a class="nav-link" id="review-tab"
-					data-toggle="tab" href="#review" role="tab" aria-controls="review"
-					aria-selected="false" onclick="fnMove()">문의 및 댓글</a></li>
-			</ul>
-			<div class="tab-content" id="myTabContent">
-				<div class="tab-pane fade active show" id="home" role="tabpanel"
-					aria-labelledby="home-tab" style="text-align: center;">
-					<!-- 물품정보 -->
-					<div class="col-md-62">
-						<p style="text-align: left; font-size: 25px; line-height: 40px; padding-left: 60px; padding-right: 60px; padding-top: 30px;">
-							${dto.contents }</p>
-					</div>
-					<br> <br> <br>
+   <!--================Product Description Area =================-->
+   <section class="product_description_area mb-0 pb-0">
+      <div class="container">
+         <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item"><a class="nav-link active" id="home-tab"
+               data-toggle="tab" href="#home" role="tab" aria-controls="home"
+               aria-selected="true">물품정보</a></li>
+            <li class="nav-item"><a class="nav-link" id="profile-tab"
+               data-toggle="tab" href="#profile" role="tab"
+               aria-controls="profile" aria-selected="false">판매자 정보</a></li>
+            <li class="nav-item"><a class="nav-link" id="contact-tab"
+               data-toggle="tab" href="#contact" role="tab"
+               aria-controls="contact" aria-selected="false">배송/반품</a></li>
+            <li class="nav-item"><a class="nav-link" id="review-tab"
+               data-toggle="tab" href="#review" role="tab" aria-controls="review"
+               aria-selected="false" onclick="fnMove()">문의 및 댓글</a></li>
+               <input type="button" id="report" class="genric-btn danger radius" value="신고" onclick="showPopup();"/>
+         </ul>
+         <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade active show" id="home" role="tabpanel"
+               aria-labelledby="home-tab" style="text-align: center;">
+               <!-- 물품정보 -->
+               <div class="col-md-62">
+                  <p style="text-align: left; font-size: 25px; line-height: 40px; padding-left: 60px; padding-right: 60px; padding-top: 30px;">
+                     ${dto.contents }</p>
+               </div>
+               <br> <br> <br>
 
          
                <!-- 상세 이미지  -->
@@ -1094,10 +1134,10 @@ $("#logout_na").on("click", function() {
            $('html, body').animate({scrollTop : offset.top}, 500);
        }
    </script>
-	
-	<!--================End Product Description Area =================-->
+   
+   <!--================End Product Description Area =================-->
 
-	<!-- 댓글 area -->
+   <!-- 댓글 area -->
 
 
 	<!--================Blog Area =================-->
@@ -1105,10 +1145,9 @@ $("#logout_na").on("click", function() {
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12 posts-list">
-
-					<br> <br> <br>
-
-
+				
+				<br>
+				
 					<div id="comments">
 						<c:forEach var="arr" items="${list }">
 							<div class="comments-area comments m-3 p-4">
@@ -1116,11 +1155,31 @@ $("#logout_na").on("click", function() {
 									<div class="single-comment justify-content-between d-flex">
 										<div class="user justify-content-between d-flex">
 											<div class="desc">
-												<h5>
-													<a href="#">${arr.id }</a>
+											<c:choose>
+											<c:when test="${arr.member_class=='브론즈' }">
+											<img alt="" src="/resources/img/브론즈.PNG" class="level">
+											</c:when>
+											<c:when test="${arr.member_class=='실버' }">
+											<img alt="" src="/resources/img/실버.PNG" class="level">
+											</c:when>
+											<c:when test="${arr.member_class=='골드' }">
+											<img alt="" src="/resources/img/골드.PNG" class="level">
+											</c:when>
+											<c:when test="${arr.member_class=='플래티넘' }">
+											<img alt="" src="/resources/img/플래.PNG" class="level">
+											</c:when>
+											<c:when test="${arr.member_class=='다이아몬드' }">
+											<img alt="" src="/resources/img/골드.PNG" class="level">
+											</c:when>
+											<c:when test="${arr.member_class=='마스터' }">
+											<img alt="" src="/resources/img/마스터.png" class="level">
+											</c:when>
+											</c:choose>
+												<h5 style="display: inline">
+													<a href="javascript:void(0)">${arr.id }</a>
 												</h5>
-												<p class="date">${arr.time }</p>
-												<p class="comment">${arr.contents }</p>
+												<p class="date" style="display:inline;margin-left: 1em">${arr.time }</p>
+												<p class="comment" style="margin-left: 4em">${arr.contents }</p>
 											</div>
 										</div>
 										<c:choose>
@@ -1158,8 +1217,8 @@ $("#logout_na").on("click", function() {
 									onfocus="this.placeholder = ''"
 									onblur="this.placeholder = '메세지를 입력해 주세요.'" required=""></textarea>
 							</div>
-							<input type="button" class="primary-btn submit_btn"
-								id="commentGo" value="작성 완료" />
+							<input type="button" class="genric-btn success circle"
+								id="commentGo" value="글 쓰기" />
 						</form>
 					</div>
 				</div>
@@ -1216,22 +1275,21 @@ $("#logout_na").on("click", function() {
 				return false;
 			}
 			
-
 			var msg = $("#message").val();
 			
 			if(msg==""){
 				alert("내용을 입력해 주세요.");
-			}else{
+			}else{//2
 			var result = confirm("댓글을 작성하시겠습니까?");
 			
-			if(result){
+			if(result){//1
 			
 
 			//댓글 작성
 			$.ajax({
 				url : "/a_comment",
 				data : {"msg":msg,"boardNum":${dto.no }}
-			}).done(function(resp) {
+			}).done(function(resp) {//3
 				
 				$.ajax({
 					url:"/a_commentsTop5",
@@ -1241,327 +1299,232 @@ $("#logout_na").on("click", function() {
 					
 					$("#message").val("");
 					location.reload();
-					
-// 					AJAX 버림
-// 	                var r ="";
-	                
-// 	                if(resp[4]!=null){
-// 		                   r+='<div class="comments-area comments m-3 p-4">';
-// 		                   r+='<div class="comment-list">';
-// 		                   r+='<div class="single-comment justify-content-between d-flex">'
-// 		                   r+='<div class="user justify-content-between d-flex">'
-// 		                   r+='<div class="desc">'
-// 		                   r+='<h5>'
-// 		                   r+='<a href="#">'+resp[4].id+'</a>'
-// 		                   r+='</h5>'
-// 		                   r+='<p class="date">'+resp[4].time+'</p>'
-// 		                   r+='<p class="comment">'+resp[4].contents+'</p>'
-// 		                   r+='</div>'
-// 		                   r+='</div>'
-// 		               	   r+='<div class="reply-btn">'
-// 		                   r+='<input type="button" seq='+resp[4].seq+' name='+resp[4].id+' class="m-1 btn-reply text-uppercase commentDelete" value="삭제"/>'
-// 		                   r+='</div></div></div></div>'
-		                   
-		                
-		                   
-// 		                }
-// 		                if(resp[3]!=null){
-// 		                	r+='<div class="comments-area comments m-3 p-4">';
-// 		                    r+='<div class="comment-list">';
-// 		                    r+='<div class="single-comment justify-content-between d-flex">'
-// 		                    r+='<div class="user justify-content-between d-flex">'
-// 		                    r+='<div class="desc">'
-// 		                    r+='<h5>'
-// 		                    r+='<a href="#">'+resp[3].id+'</a>'
-// 		                    r+='</h5>'
-// 		                    r+='<p class="date">'+resp[3].time+'</p>'
-// 		                    r+='<p class="comment">'+resp[3].contents+'</p>'
-// 		                    r+='</div>'
-// 		                    r+='</div>'
-// 		                	   r+='<div class="reply-btn">'
-// 		                    r+='<input type="button" seq='+resp[3].seq+' name='+resp[3].id+' class="m-1 btn-reply text-uppercase commentDelete" value="삭제"/>'
-// 		                    r+='</div></div></div></div>'
-// 		                }
-// 		                if(resp[2]!=null){
-// 		                	r+='<div class="comments-area comments m-3 p-4">';
-// 		                    r+='<div class="comment-list">';
-// 		                    r+='<div class="single-comment justify-content-between d-flex">'
-// 		                    r+='<div class="user justify-content-between d-flex">'
-// 		                    r+='<div class="desc">'
-// 		                    r+='<h5>'
-// 		                    r+='<a href="#">'+resp[2].id+'</a>'
-// 		                    r+='</h5>'
-// 		                    r+='<p class="date">'+resp[2].time+'</p>'
-// 		                    r+='<p class="comment">'+resp[2].contents+'</p>'
-// 		                    r+='</div>'
-// 		                    r+='</div>'
-// 		                	   r+='<div class="reply-btn">'
-// 		                    r+='<input type="button" seq='+resp[2].seq+' name='+resp[2].id+' class="m-1 btn-reply text-uppercase commentDelete" value="삭제"/>'
-// 		                    r+='</div></div></div></div>'
-// 		                }
-// 		                if(resp[1]!=null){
-// 		                	r+='<div class="comments-area comments m-3 p-4">';
-// 		                    r+='<div class="comment-list">';
-// 		                    r+='<div class="single-comment justify-content-between d-flex">'
-// 		                    r+='<div class="user justify-content-between d-flex">'
-// 		                    r+='<div class="desc">'
-// 		                    r+='<h5>'
-// 		                    r+='<a href="#">'+resp[1].id+'</a>'
-// 		                    r+='</h5>'
-// 		                    r+='<p class="date">'+resp[1].time+'</p>'
-// 		                    r+='<p class="comment">'+resp[1].contents+'</p>'
-// 		                    r+='</div>'
-// 		                    r+='</div>'
-// 		                	   r+='<div class="reply-btn">'
-// 		                    r+='<input type="button" seq='+resp[1].seq+' name='+resp[1].id+' class="m-1 btn-reply text-uppercase commentDelete" value="삭제"/>'
-// 		                    r+='</div></div></div></div>'
-// 		                }
-// 		                if(resp[0]!=null){
-// 		                	r+='<div class="comments-area comments m-3 p-4">';
-// 		                    r+='<div class="comment-list">';
-// 		                    r+='<div class="single-comment justify-content-between d-flex">'
-// 		                    r+='<div class="user justify-content-between d-flex">'
-// 		                    r+='<div class="desc">'
-// 		                    r+='<h5>'
-// 		                    r+='<a href="#">'+resp[0].id+'</a>'
-// 		                    r+='</h5>'
-// 		                    r+='<p class="date">'+resp[0].time+'</p>'
-// 		                    r+='<p class="comment">'+resp[0].contents+'</p>'
-// 		                    r+='</div>'
-// 		                    r+='</div>'
-// 		                	   r+='<div class="reply-btn">'
-// 		                    r+='<input type="button" seq='+resp[0].seq+' name='+resp[0].id+' class="m-1 btn-reply text-uppercase commentDelete" value="삭제"/>'
-// 		                    r+='</div></div></div></div>'
-// 		                }
-	                
-// 	                $("#comments").html(r);
-				
-
-	    			//댓글 최근5개 가져오기
-	    			
-	                
+  
 			});
 				
 			});
 			
-			}			
+			}
+			
+			}
+			
 		});
 	</script>
 
-	<!-- Start related-product Area -->
-	<section class="related-product-area section_gap_bottom">
-		<div class="container">
-			<div class="row justify-content-center">
-				<div class="col-lg-6 text-center">
-					<div class="section-title">
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-							sed do eiusmod tempor incididunt ut labore et dolore magna
-							aliqua.</p>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-lg-9">
-					<div class="row">
-						<div class="col-lg-4 col-md-4 col-sm-6 mb-20">
-							<div class="single-related-product d-flex">
-								<a href="#"><img src="img/r1.jpg" alt=""></a>
-								<div class="desc">
-									<a href="#" class="title">Black lace Heels</a>
-									<div class="price">
-										<h6>$189.00</h6>
-										<h6 class="l-through">$210.00</h6>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-4 col-md-4 col-sm-6 mb-20">
-							<div class="single-related-product d-flex">
-								<a href="#"><img src="img/r2.jpg" alt=""></a>
-								<div class="desc">
-									<a href="#" class="title">Black lace Heels</a>
-									<div class="price">
-										<h6>$189.00</h6>
-										<h6 class="l-through">$210.00</h6>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-4 col-md-4 col-sm-6 mb-20">
-							<div class="single-related-product d-flex">
-								<a href="#"><img src="img/r3.jpg" alt=""></a>
-								<div class="desc">
-									<a href="#" class="title">Black lace Heels</a>
-									<div class="price">
-										<h6>$189.00</h6>
-										<h6 class="l-through">$210.00</h6>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-4 col-md-4 col-sm-6 mb-20">
-							<div class="single-related-product d-flex">
-								<a href="#"><img src="img/r5.jpg" alt=""></a>
-								<div class="desc">
-									<a href="#" class="title">Black lace Heels</a>
-									<div class="price">
-										<h6>$189.00</h6>
-										<h6 class="l-through">$210.00</h6>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-4 col-md-4 col-sm-6 mb-20">
-							<div class="single-related-product d-flex">
-								<a href="#"><img src="img/r6.jpg" alt=""></a>
-								<div class="desc">
-									<a href="#" class="title">Black lace Heels</a>
-									<div class="price">
-										<h6>$189.00</h6>
-										<h6 class="l-through">$210.00</h6>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-4 col-md-4 col-sm-6 mb-20">
-							<div class="single-related-product d-flex">
-								<a href="#"><img src="img/r7.jpg" alt=""></a>
-								<div class="desc">
-									<a href="#" class="title">Black lace Heels</a>
-									<div class="price">
-										<h6>$189.00</h6>
-										<h6 class="l-through">$210.00</h6>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-4 col-md-4 col-sm-6">
-							<div class="single-related-product d-flex">
-								<a href="#"><img src="img/r9.jpg" alt=""></a>
-								<div class="desc">
-									<a href="#" class="title">Black lace Heels</a>
-									<div class="price">
-										<h6>$189.00</h6>
-										<h6 class="l-through">$210.00</h6>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-4 col-md-4 col-sm-6">
-							<div class="single-related-product d-flex">
-								<a href="#"><img src="img/r10.jpg" alt=""></a>
-								<div class="desc">
-									<a href="#" class="title">Black lace Heels</a>
-									<div class="price">
-										<h6>$189.00</h6>
-										<h6 class="l-through">$210.00</h6>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-4 col-md-4 col-sm-6">
-							<div class="single-related-product d-flex">
-								<a href="#"><img src="img/r11.jpg" alt=""></a>
-								<div class="desc">
-									<a href="#" class="title">Black lace Heels</a>
-									<div class="price">
-										<h6>$189.00</h6>
-										<h6 class="l-through">$210.00</h6>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3">
-					<div class="ctg-right">
-						<a href="#" target="_blank"> <img
-							class="img-fluid d-block mx-auto" src="img/category/c5.jpg"
-							alt="">
-						</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!-- End related-product Area -->
+   <!-- Start related-product Area -->
+   <section class="related-product-area section_gap_bottom">
+      <div class="container">
+         <div class="row justify-content-center">
+            <div class="col-lg-6 text-center">
+               <div class="section-title">
+                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                     sed do eiusmod tempor incididunt ut labore et dolore magna
+                     aliqua.</p>
+               </div>
+            </div>
+         </div>
+         <div class="row">
+            <div class="col-lg-9">
+               <div class="row">
+                  <div class="col-lg-4 col-md-4 col-sm-6 mb-20">
+                     <div class="single-related-product d-flex">
+                        <a href="#"><img src="img/r1.jpg" alt=""></a>
+                        <div class="desc">
+                           <a href="#" class="title">Black lace Heels</a>
+                           <div class="price">
+                              <h6>$189.00</h6>
+                              <h6 class="l-through">$210.00</h6>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-lg-4 col-md-4 col-sm-6 mb-20">
+                     <div class="single-related-product d-flex">
+                        <a href="#"><img src="img/r2.jpg" alt=""></a>
+                        <div class="desc">
+                           <a href="#" class="title">Black lace Heels</a>
+                           <div class="price">
+                              <h6>$189.00</h6>
+                              <h6 class="l-through">$210.00</h6>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-lg-4 col-md-4 col-sm-6 mb-20">
+                     <div class="single-related-product d-flex">
+                        <a href="#"><img src="img/r3.jpg" alt=""></a>
+                        <div class="desc">
+                           <a href="#" class="title">Black lace Heels</a>
+                           <div class="price">
+                              <h6>$189.00</h6>
+                              <h6 class="l-through">$210.00</h6>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-lg-4 col-md-4 col-sm-6 mb-20">
+                     <div class="single-related-product d-flex">
+                        <a href="#"><img src="img/r5.jpg" alt=""></a>
+                        <div class="desc">
+                           <a href="#" class="title">Black lace Heels</a>
+                           <div class="price">
+                              <h6>$189.00</h6>
+                              <h6 class="l-through">$210.00</h6>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-lg-4 col-md-4 col-sm-6 mb-20">
+                     <div class="single-related-product d-flex">
+                        <a href="#"><img src="img/r6.jpg" alt=""></a>
+                        <div class="desc">
+                           <a href="#" class="title">Black lace Heels</a>
+                           <div class="price">
+                              <h6>$189.00</h6>
+                              <h6 class="l-through">$210.00</h6>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-lg-4 col-md-4 col-sm-6 mb-20">
+                     <div class="single-related-product d-flex">
+                        <a href="#"><img src="img/r7.jpg" alt=""></a>
+                        <div class="desc">
+                           <a href="#" class="title">Black lace Heels</a>
+                           <div class="price">
+                              <h6>$189.00</h6>
+                              <h6 class="l-through">$210.00</h6>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-lg-4 col-md-4 col-sm-6">
+                     <div class="single-related-product d-flex">
+                        <a href="#"><img src="img/r9.jpg" alt=""></a>
+                        <div class="desc">
+                           <a href="#" class="title">Black lace Heels</a>
+                           <div class="price">
+                              <h6>$189.00</h6>
+                              <h6 class="l-through">$210.00</h6>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-lg-4 col-md-4 col-sm-6">
+                     <div class="single-related-product d-flex">
+                        <a href="#"><img src="img/r10.jpg" alt=""></a>
+                        <div class="desc">
+                           <a href="#" class="title">Black lace Heels</a>
+                           <div class="price">
+                              <h6>$189.00</h6>
+                              <h6 class="l-through">$210.00</h6>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-lg-4 col-md-4 col-sm-6">
+                     <div class="single-related-product d-flex">
+                        <a href="#"><img src="img/r11.jpg" alt=""></a>
+                        <div class="desc">
+                           <a href="#" class="title">Black lace Heels</a>
+                           <div class="price">
+                              <h6>$189.00</h6>
+                              <h6 class="l-through">$210.00</h6>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="col-lg-3">
+               <div class="ctg-right">
+                  <a href="#" target="_blank"> <img
+                     class="img-fluid d-block mx-auto" src="img/category/c5.jpg"
+                     alt="">
+                  </a>
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+   <!-- End related-product Area -->
 
-	<!-- start footer Area -->
-	<footer class="footer-area section_gap">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-3  col-md-6 col-sm-6">
-					<div class="single-footer-widget">
-						<h6>About Us</h6>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-							sed do eiusmod tempor incididunt ut labore dolore magna aliqua.</p>
-					</div>
-				</div>
-				<div class="col-lg-4  col-md-6 col-sm-6">
-					<div class="single-footer-widget">
-						현재 활성화된 경매수
-						<!--                   <h6>Newsletter</h6> -->
-						<!--                   <p>Stay update with our latest</p> -->
-						<!--                   <div class="" id="mc_embed_signup"> -->
+   <!-- start footer Area -->
+   <footer class="footer-area section_gap">
+      <div class="container">
+         <div class="row">
+            <div class="col-lg-3  col-md-6 col-sm-6">
+               <div class="single-footer-widget">
+                  <h6>About Us</h6>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                     sed do eiusmod tempor incididunt ut labore dolore magna aliqua.</p>
+               </div>
+            </div>
+            <div class="col-lg-4  col-md-6 col-sm-6">
+               <div class="single-footer-widget">
+                  현재 활성화된 경매수
+                  <!--                   <h6>Newsletter</h6> -->
+                  <!--                   <p>Stay update with our latest</p> -->
+                  <!--                   <div class="" id="mc_embed_signup"> -->
 
-						<!--                      <form target="_blank" novalidate="true" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01" -->
-						<!--                       method="get" class="form-inline"> -->
+                  <!--                      <form target="_blank" novalidate="true" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01" -->
+                  <!--                       method="get" class="form-inline"> -->
 
-						<!--                         <div class="d-flex flex-row"> -->
+                  <!--                         <div class="d-flex flex-row"> -->
 
-						<!--                            <input class="form-control" name="EMAIL" placeholder="Enter Email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Email '" -->
-						<!--                             required="" type="email"> -->
+                  <!--                            <input class="form-control" name="EMAIL" placeholder="Enter Email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Email '" -->
+                  <!--                             required="" type="email"> -->
 
 
-						<!--                            <button class="click-btn btn btn-default"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></button> -->
-						<!--                            <div style="position: absolute; left: -5000px;"> -->
-						<!--                               <input name="b_36c4fd991d266f23781ded980_aefe40901a" tabindex="-1" value="" type="text"> -->
-						<!--                            </div> -->
+                  <!--                            <button class="click-btn btn btn-default"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></button> -->
+                  <!--                            <div style="position: absolute; left: -5000px;"> -->
+                  <!--                               <input name="b_36c4fd991d266f23781ded980_aefe40901a" tabindex="-1" value="" type="text"> -->
+                  <!--                            </div> -->
 
-						<!--                            <div class="col-lg-4 col-md-4"> -->
-						<!--                                     <button class="bb-btn btn"><span class="lnr lnr-arrow-right"></span></button> -->
-						<!--                                  </div>   -->
-						<!--                         </div> -->
-						<!--                         <div class="info"></div> -->
-						<!--                      </form> -->
-						<!--                   </div> -->
-					</div>
-				</div>
-				<div class="col-lg-3  col-md-6 col-sm-6">
-					<div class="single-footer-widget mail-chimp">
-						현재 총 거래 량
-						<!--                   <h6 class="mb-20">Instragram Feed</h6> -->
-						<!--                   <ul class="instafeed d-flex flex-wrap"> -->
-						<!--                      <li><img src="../resources/img/i1.jpg" alt=""></li> -->
-						<!--                      <li><img src="../resources/img/i2.jpg" alt=""></li> -->
-						<!--                      <li><img src="../resources/img/i3.jpg" alt=""></li> -->
-						<!--                      <li><img src="../resources/img/i4.jpg" alt=""></li> -->
-						<!--                      <li><img src="../resources/img/i5.jpg" alt=""></li> -->
-						<!--                      <li><img src="../resources/img/i6.jpg" alt=""></li> -->
-						<!--                      <li><img src="../resources/img/i7.jpg" alt=""></li> -->
-						<!--                      <li><img src="../resources/img/i8.jpg" alt=""></li> -->
-						<!--                   </ul> -->
-					</div>
-				</div>
-				<div class="col-lg-2 col-md-6 col-sm-6">
-					<div class="single-footer-widget">
-						<h6>Follow Us</h6>
-						<p>Let us be social</p>
-						<div class="footer-social d-flex align-items-center">
-							<a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i
-								class="fa fa-twitter"></i></a> <a href="#"><i
-								class="fa fa-dribbble"></i></a> <a href="#"><i
-								class="fa fa-behance"></i></a>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div
-				class="footer-bottom d-flex justify-content-center align-items-center flex-wrap">
-				<p class="footer-text m-0">
-					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-					Copyright &copy;
-					<script>
+                  <!--                            <div class="col-lg-4 col-md-4"> -->
+                  <!--                                     <button class="bb-btn btn"><span class="lnr lnr-arrow-right"></span></button> -->
+                  <!--                                  </div>   -->
+                  <!--                         </div> -->
+                  <!--                         <div class="info"></div> -->
+                  <!--                      </form> -->
+                  <!--                   </div> -->
+               </div>
+            </div>
+            <div class="col-lg-3  col-md-6 col-sm-6">
+               <div class="single-footer-widget mail-chimp">
+                  현재 총 거래 량
+                  <!--                   <h6 class="mb-20">Instragram Feed</h6> -->
+                  <!--                   <ul class="instafeed d-flex flex-wrap"> -->
+                  <!--                      <li><img src="../resources/img/i1.jpg" alt=""></li> -->
+                  <!--                      <li><img src="../resources/img/i2.jpg" alt=""></li> -->
+                  <!--                      <li><img src="../resources/img/i3.jpg" alt=""></li> -->
+                  <!--                      <li><img src="../resources/img/i4.jpg" alt=""></li> -->
+                  <!--                      <li><img src="../resources/img/i5.jpg" alt=""></li> -->
+                  <!--                      <li><img src="../resources/img/i6.jpg" alt=""></li> -->
+                  <!--                      <li><img src="../resources/img/i7.jpg" alt=""></li> -->
+                  <!--                      <li><img src="../resources/img/i8.jpg" alt=""></li> -->
+                  <!--                   </ul> -->
+               </div>
+            </div>
+            <div class="col-lg-2 col-md-6 col-sm-6">
+               <div class="single-footer-widget">
+                  <h6>Follow Us</h6>
+                  <p>Let us be social</p>
+                  <div class="footer-social d-flex align-items-center">
+                     <a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i
+                        class="fa fa-twitter"></i></a> <a href="#"><i
+                        class="fa fa-dribbble"></i></a> <a href="#"><i
+                        class="fa fa-behance"></i></a>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div
+            class="footer-bottom d-flex justify-content-center align-items-center flex-wrap">
+            <p class="footer-text m-0">
+               <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+               Copyright &copy;
+               <script>
                   document.write(new Date().getFullYear());
                </script>
                All rights reserved | This template is made with <i
@@ -1596,9 +1559,13 @@ $("#logout_na").on("click", function() {
    				   window.open("resources/index.html", "a", "width=550, height=500, left=450, top=300");
    			   }
    		}) 
-   			
-   		
    </script>
+   
+   <script language="javascript">
+          function showPopup() { 
+             window.open("resources/index.html", "a", "width=850, height=500, left=450, top=300"); 
+             }
+  </script>
 
    <script src="../resources/js/vendor/jquery-2.2.4.min.js"></script>
    <script src="https://use.fontawesome.com/releases/v5.0.0/js/all.js"></script>

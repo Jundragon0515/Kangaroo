@@ -20,6 +20,7 @@ import kh.spring.dao.MemberDAO;
 import kh.spring.dto.Auction_boardDTO;
 import kh.spring.dto.Auction_img_boardDTO;
 import kh.spring.dto.CommentDTO;
+import kh.spring.dto.MemberDTO;
 import kh.spring.dto.OrderDTO;
 import kh.spring.dto.TenderDTO;
 import kh.spring.dto.Used_transaction_boardDTO;
@@ -173,7 +174,6 @@ public class DetailPageController {
 	      int boardNum = no;
 	      try {
 	         List<CommentDTO> result = mdao.commentList2(currentPage, boardNum);
-	         
 	         try {
 	         currentMoney = mdao.currentMoney(no);
 	         System.out.println(currentMoney);
@@ -294,12 +294,16 @@ public class DetailPageController {
 		String msg = request.getParameter("msg");
 		int currentPage1 = 1;
 
+		MemberDTO mdto = mdao.selectById(id);
+		String level = mdto.getMember_class();
+		
 		CommentDTO dto = new CommentDTO();
 		dto.setId(id);
 		dto.setBoardNum(board_num);
 		dto.setIpaddress(ipaddress);
 		dto.setContents(msg);
-
+		dto.setMember_class(level);
+		
 		mdao.insertComment(dto);
 
 		List<CommentDTO> contents = null;
@@ -327,13 +331,18 @@ public class DetailPageController {
 		String ipaddress = request.getRemoteAddr();
 		String msg = request.getParameter("msg");
 		int currentPage = 1;
-
+		
+		MemberDTO mdto = mdao.selectById(id);
+		String level = mdto.getMember_class();
+		
 		CommentDTO dto = new CommentDTO();
+
 		dto.setId(id);
 		dto.setBoardNum(board_num);
 		dto.setIpaddress(ipaddress);
 		dto.setContents(msg);
-
+		dto.setMember_class(level);
+		
 		System.out.println(dto.getId() + " : " + dto.getContents() + " : " + dto.getBoardNum());
 		mdao.insertComment2(dto);
 
