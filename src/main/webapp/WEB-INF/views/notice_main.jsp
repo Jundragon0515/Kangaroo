@@ -133,14 +133,17 @@ b, sup, sub, u, del {
 	#btnclass{
 		float: right;
 	}
-	.pagination a {
-		width: 55px;
+	#asd{
+		width: 60px;
+	}
+	.page-link{
+	padding: inherit;
 	}
 </style>
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script>
 	$(function() {
-		if(${logintype != 'email'}){
+		if(${logintype != 'admin'}){
 			$("input").remove("#noitceinput");
 		};
 	    
@@ -280,7 +283,7 @@ b, sup, sub, u, del {
 	   			         <c:forEach var="result" items="${dtos }">
 		   			         <tr>
 		   			             <td class="no">${result.no }</td>
-		   			             <td class="title"><a href="notice?no=${result.no }&viewcount=${result.viewcount }">${result.title }</a></td>
+		   			             <td class="title"><a href="notice?no=${result.no }&viewcount=${result.viewcount }" style="color: black; text-decoration:none">${result.title }</a></td>
 		   			             <td class="time" ><c:set var="TextValue" value="${result.joindate }"/>${fn:substring(TextValue,0,10) }</td>
 		   			             <td class="view">${result.viewcount }</td>
 		   			         </tr>

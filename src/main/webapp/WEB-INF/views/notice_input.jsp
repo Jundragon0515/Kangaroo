@@ -130,17 +130,17 @@ b, sup, sub, u, del {
    </script>
 <script>
 	$(function() {
-		/* <c:choose>
+		 <c:choose>
 		    <c:when test="${logintype!='admin'}">
 		    	alert("관리자만 이용 가능합니다");
 		    $(location).attr("href", "/login_main");
 		    </c:when>
-	    </c:choose> */
+	    </c:choose> 
 		$("#reset").on("click",function(){
 			$(location).attr("href","notice_main");
 		});
 	    $("#input").on("click",function(){
-	    	if($("#title_input").val() == "" || $("#writting").val() == ""){
+	    	if($("#title_input").val() == ""){
 	    		alert("값을 제대로 입력해 주세요.");
 	    	}else{
 	    		$("#submit").submit();
@@ -272,7 +272,7 @@ b, sup, sub, u, del {
 	   			<div class="mid_nav_one col-lg-10 col-md-10 col-sm-12 mb-2"><input type="text" id="title_input" name="title" onkeyup="noSpaceForm(this);"></div>
 	   			<div class="mid_nav_one col-lg-12 col-md-12 col-sm-12 mb-2" ><input id="file" type="file"  name="image" style="float:left"></div>
 	   		</div>
-		   	<textarea class="form-control mb-2" id="writting" rows="3"  name="contents" onkeyup="noSpaceForm(this);"></textarea>
+		   	<textarea class="form-control mb-2" id="writting" rows="3"  name="contents" ></textarea>
 		   	<div class="mb-2" id="btnclass"><input id="input" type="button" class="btn btn-warning mr-2" value="입력"><input  class="btn btn-warning" type="button" id="reset" value="취소"></div>
 	   	</div>
    	</div>

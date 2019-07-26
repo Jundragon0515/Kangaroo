@@ -115,7 +115,7 @@ b, sup, sub, u, del {
 	}
 	#writting{
 		height:600px;
-		overflow: scroll;
+		overflow-y: hidden;
 	}
 	.mid_nav_one{
 		font-size: 18px;
@@ -129,12 +129,13 @@ b, sup, sub, u, del {
 	height: 300px;
 	display: block; margin: 0px auto;
 	}
+	
 </style>
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script>
 $(function(){
 	
-	if(${logintype != 'email'}){
+	if(${logintype != 'admin'}){
 		$("input").remove("#delete");
 		$("input").remove("#update");
 	};
@@ -290,7 +291,7 @@ $(function(){
 			   			<input type="hidden" id="no" name="no" value="${ndtos.no }">
 			   			<div class="subtitle col-lg-12 col-md-12 col-sm-12" ><b >등록일 :</b>&nbsp;&nbsp;<c:set var="TextValue" value="${ndtos.joindate }"/>${fn:substring(TextValue,0,10) }</div>
 			   			<input type="hidden" id="joindate" name="joindate" value="${ndtos.joindate }">
-			   			<div class="subtitle col-lg-12 col-md-12 col-sm-12"><b >조회수 :</b>&nbsp;&nbsp;${ndtos.viewcount }</div>
+			   			<div class="subtitle col-lg-12 col-md-12 col-sm-12 mb-3"><b >조회수 :</b>&nbsp;&nbsp;${ndtos.viewcount }</div>
 			   			<input type="hidden" id="viewcount" name="viewcount" value="${ndtos.viewcount }">
 			   			<div class="form-control mid_nav_one col-12" id="writting" rows="3" style="word-break:break-all;" name="contents">&nbsp;&nbsp;<img class="imgs" src="${ndtos.image}"><br id="imgbr">${ndtos.contents}</div>
 			   			<input type="hidden" id="image" name="image" value="${ndtos.image}">

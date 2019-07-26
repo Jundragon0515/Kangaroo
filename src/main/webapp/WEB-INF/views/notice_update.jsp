@@ -130,12 +130,12 @@ b, sup, sub, u, del {
    </script>
 <script>
 	$(function() {
-		/* <c:choose>
+		 <c:choose>
 	    <c:when test="${logintype!='admin'}">
 	    	alert("관리자만 이용 가능합니다");
 	    $(location).attr("href", "notice_main");
 	    </c:when>
-    </c:choose> */
+    </c:choose> 
 		$("#reset").on("click",function(){
 			if (confirm("뒤로가기?") == true){    //확인
 				$("#renotice").attr("action", "resetnotice");
