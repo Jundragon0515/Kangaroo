@@ -1,32 +1,127 @@
 package kh.spring.project;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import kh.spring.dao.MemberDAO;
+import kh.spring.dto.Auction_boardDTO;
 import kh.spring.dto.MemberDTO;
+import kh.spring.dto.Used_transaction_boardDTO;
 import kh.spring.service.MemberService;
 
 @Controller
 public class HomeController {
 	@Autowired
+	private MemberDAO dao;
+	@Autowired
 	HttpSession se;
 	@Autowired
 	MemberService mes;
 	public static int visitCount = 0;
-	@RequestMapping("/")
-	public String visit() { 	// 첫 방문
-		System.out.println("반갑습니다.");
-		visitCount++;
-		System.out.println(visitCount);
-		return "index";
+	
+	   @RequestMapping("/")
+	   public String visit() {    // 첫 방문
+	      System.out.println("반갑습니다.");
+	      visitCount++;
+	      System.out.println(visitCount);
+	      
+	      return "index";
+	   }
+	
+	@RequestMapping("/level")
+	@ResponseBody
+	@Transactional("txManager")
+	public int level() { 	
+		
+		String id = (String)se.getAttribute("email");
+		int b1 = dao.count1(id);
+		int b2 = dao.count2(id);
+		int b = b1+b2;
+		int c1 = dao.countComment1(id);
+		int c2 = dao.countComment2(id);
+		int c = c1+c2;
+		
+		String level = dao.level(id);
+		System.out.println("레벨 테스트 " + b + " : " +c);
+		
+		try {
+		if(level.equals("브론즈")) {
+			visitCount++;
+			if(b>=100 & c>=100) {
+				dao.levelUp(id, "마스터");
+				return 6;
+			}else if(b>=50 & c>=50){
+				dao.levelUp(id, "다이아");
+				return 5;
+			}else if(b>=10 & c>=10) {
+				dao.levelUp(id, "플래티넘");
+				return 4;
+			}else if(b>=5 & c>=5) {
+				dao.levelUp(id, "골드");
+				return 3;
+			}else if(b>=1 & c>=1) {
+				dao.levelUp(id, "실버");
+				return 2;
+			}
+		}else if(level.equals("실버")) {
+			visitCount++;
+			if(b>=100 & c>=100) {
+				dao.levelUp(id, "마스터");
+				return 6;
+			}else if(b>=50 & c>=50){
+				dao.levelUp(id, "다이아");
+				return 5;
+			}else if(b>=10 & c>=10) {
+				dao.levelUp(id, "플래티넘");
+				return 4;
+			}else if(b>=5 & c>=5) {
+				dao.levelUp(id, "골드");
+				return 3;
+			}
+		}else if(level.equals("골드")) {
+			visitCount++;
+			if(b>=100 & c>=100) {
+				dao.levelUp(id, "마스터");
+				return 6;
+			}else if(b>=50 & c>=50){
+				dao.levelUp(id, "다이아");
+				return 5;
+			}else if(b>=10 & c>=10) {
+				dao.levelUp(id, "플래티넘");
+				return 4;
+			}
+		}else if(level.equals("플래티넘")) {
+			visitCount++;
+			if(b>=100 & c>=100) {
+				dao.levelUp(id, "마스터");
+				return 6;
+			}else if(b>=50 & c>=50){
+				dao.levelUp(id, "다이아");
+				return 5;
+			}
+		}else if(level.equals("다이아몬드")) {
+			visitCount++;
+			if(b>=100 & c>=100) {
+				dao.levelUp(id, "마스터");
+				return 6;
+			}
+		}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return 0;
+		
 	}
 	@RequestMapping("/index")
 	public String home() { 		//홈
