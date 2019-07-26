@@ -96,21 +96,38 @@ select pw from members where id=#{value}
 
 <!-- 	댓글insert -->
 	<insert id="commentInsert">
-		insert into comments values(comments_seq.nextval,#{boardNum},#{id},#{contents},default,#{ipaddress})
+		insert into comments values(comments_seq.nextval,#{boardNum},#{id},#{contents},default,#{ipaddress},#{member_class})
 	</insert>
 
 <!-- 	댓글 최근 5 -->
 
 	<select id="commentTop5" resultType="kh.spring.dto.CommentDTO">
-	select * from (select row_number() over (order by seq desc)rank,seq, id, contents,time,ipaddress,boardNum from comments where boardNum=#{value}) where rank between 1 and 5 
+	select * from (select row_number() over (order by seq desc)rank,seq, id, contents,time,ipaddress,boardNum,member_class from comments where boardNum=#{value}) where rank between 1 and 5 
 	</select>
 	
 	<insert id="commentInsert2">
-		insert into comments2 values(comments_seq2.nextval,#{boardNum},#{id},#{contents},default,#{ipaddress})
+		insert into comments2 values(comments_seq2.nextval,#{boardNum},#{id},#{contents},default,#{ipaddress},#{member_class})
 	</insert>
 
 	<select id="commentTop52" resultType="kh.spring.dto.CommentDTO">
-	select * from (select row_number() over (order by seq desc)rank,seq, id, contents,time,ipaddress,boardNum from comments2 where boardNum=#{value}) where rank between 1 and 5
+	select * from (select row_number() over (order by seq desc)rank,seq, id, contents,time,ipaddress,boardNum,member_class from comments2 where boardNum=#{value}) where rank between 1 and 5
 	</select>
 
+	<select id="count1" resultType="integer">
+		select count(*) from AUCTION_BOARD where id = #{value}
+	</select>
+	<select id="count2" resultType="integer">
+		select count(*) from USED_TRANSACTION_BOARD where id = #{value}
+	</select>
+	
+	<select id="commentCount1" resultType="integer">
+		select count(*) from comments where id = #{value}
+	</select>
+	<select id="commentCount2" resultType="integer">
+		select count(*) from comments2 where id = #{value}
+	</select>
+
+	<select id="level" resultType="String">
+		select member_class from members where id = #{value}
+	</select>
 </mapper>

@@ -50,6 +50,10 @@
 	update AUCTION_BOARD set ongoing='n' where no=#{value}
 </update>
 
+<update id="soldOut_tender">
+	update tender set ongoing='n' where no=#{value}
+</update>
+
 <insert id="pointUsing">
 	insert into point_using values(p_u_no_seq.nextval,#{buyer},#{product_title},#{price},default)
 </insert>
