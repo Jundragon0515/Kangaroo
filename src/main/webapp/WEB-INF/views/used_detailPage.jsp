@@ -331,8 +331,9 @@ $("#logout_na").on("click", function() {
                      </table>
                   </div>
                   <div style=text-align:right;padding-right:10px;>
-                     <input type="button" id="cart" class="primary-btn" value="찜하기">
-                  	<c:choose>
+                     <input type="button" id="cart" class="genric-btn primary radius" value="찜하기">
+                  <c:choose>
+
                   <c:when test="${dto.onGoing=='y' }">
                   
                   	<c:choose>
@@ -1130,10 +1131,10 @@ $("#logout_na").on("click", function() {
 	
 	$("#cart").on("click",function(){
 		$.ajax({
-			url : "/steaming",
+			url : "/steamingTrade",
 			data : {"no":"${dto.no}","title_img":"${i_dto.title_img}",
 				"title":"${dto.title}","trade_type":"${dto.trade_type}",
-				"delivery":"무료","price":"${dto.price}"}
+				"category":"${dto.category}","price":"${dto.price}"}
 		}).done(function(resp){
 			alert(resp);
 		})
