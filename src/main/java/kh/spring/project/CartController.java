@@ -93,7 +93,15 @@ public class CartController {
 	@RequestMapping("boardGgymAuction")
 	public String boardGgymAuction(CartAuctionDTO dto,HttpServletRequest request,Model model)throws Exception {
 		String boardPersonId = dto.getId();
+		System.out.println(boardPersonId);
 		dto.setId((String) session.getAttribute("email"));
+		System.out.println(dto.getId());
+		System.out.println(dto.getNo());
+		System.out.println(dto.getTitle_img());
+		System.out.println(dto.getTitle());
+		System.out.println(dto.getEnd_date());
+		System.out.println(dto.getCategory());
+		System.out.println(dto.getPrice());
 		if(boardPersonId.equals(dto.getId())) {
 			model.addAttribute("msg", "자신의 글은 찜을 못합니다.");
 		}else if(cs.overplapCheckAuction(dto)==1) {

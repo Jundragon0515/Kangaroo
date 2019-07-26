@@ -63,11 +63,17 @@ public class MemberService {
 	}
 	
 	@Transactional("txManager")
-	public void tender(TenderDTO dto, int Board_num) {
+	public int tender(TenderDTO dto, int Board_num) {
+		
+		if(dto.getPoint() <= me.currentMoney(Board_num)) {
+			
+			return -1;
+			
+		}else {
 		me.minus(dto);
 		me.tender(dto);
 		try {
-		me.plus(me.moneyBack(1));//1고정
+		me.plus(me.moneyBack(Board_num));
 		}catch(Exception e) {
 			System.out.println("첫번째 입찰 발생");
 		}
@@ -80,6 +86,8 @@ public class MemberService {
 		a_dto.setNo(Board_num);
 		ddao.a_updatePrice(a_dto);
 		
+		return 1;
+		}
 	}
 	public String loginProc(String id , String pw) { //로그인 
 		if(me.loginProc(id,pw) > 0) {
@@ -346,11 +354,18 @@ public class MemberService {
 	public List<Used_transaction_boardDTO> safeList(){
 		return gtdao.main_safe_list();
 	}
+	//상세페이지 안전거래 리스트
+		public List<Used_transaction_boardDTO> d_safeList(){
+			return gtdao.d_main_safe_list();
+		}
 	
 	//메인화면 경매 리스트
 	public List<Auction_boardDTO> auctionList(){
 		return adao.main_Auction_List();
 	}
-	
+	//상세페이지 경매 리스트
+		public List<Auction_boardDTO> d_auctionList(){
+			return adao.d_main_Auction_List();
+		}
 	
 }

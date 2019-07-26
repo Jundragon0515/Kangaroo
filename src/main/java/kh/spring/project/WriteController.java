@@ -38,7 +38,13 @@ public class WriteController {
    HttpSession se;
    
    @RequestMapping("tradeGoodsWrite")
-   public String write() {
+   public String write(HttpServletRequest request) {
+	   String type = request.getParameter("type");
+	   if(type.equals("ggic")) {
+		   request.setAttribute("type", type);
+		   return "goodsTradeWrite";
+	   }
+	  request.setAttribute("type", type); 
       return "goodsTradeWrite";
    } //중고 글쓰기로 가기
 
