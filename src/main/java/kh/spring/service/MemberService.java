@@ -346,11 +346,19 @@ public class MemberService {
 	public List<Used_transaction_boardDTO> safeList(){
 		return gtdao.main_safe_list();
 	}
+	//상세페이지 안전거래 리스트
+		public List<Used_transaction_boardDTO> d_safeList(){
+			return gtdao.d_main_safe_list();
+		}
 	
 	//메인화면 경매 리스트
 	public List<Auction_boardDTO> auctionList(){
 		return adao.main_Auction_List();
 	}
+	//상세페이지 경매 리스트
+		public List<Auction_boardDTO> d_auctionList(){
+			return adao.d_main_Auction_List();
+		}
 	
 	
 }

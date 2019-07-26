@@ -49,6 +49,25 @@
 <link rel="stylesheet" href="../resources/css/main.css">
 
 <style>
+.blinking{
+	-webkit-animation:blink 2.0s ease-in-out infinite alternate;
+    -moz-animation:blink 2.0s ease-in-out infinite alternate;
+    animation:blink 2.0s ease-in-out infinite alternate;
+}
+@-webkit-keyframes blink{
+    0% {opacity:0;}
+    100% {opacity:1;}
+}
+@-moz-keyframes blink{
+    0% {opacity:0;}
+    100% {opacity:1;}
+}
+@keyframes blink{
+    0% {opacity:0;}
+    100% {opacity:1;}
+}
+
+
 .level{
 	width: 45px;
 	height: 45px;
@@ -1317,131 +1336,35 @@ $("#logout_na").on("click", function() {
          <div class="row justify-content-center">
             <div class="col-lg-6 text-center">
                <div class="section-title">
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                     sed do eiusmod tempor incididunt ut labore et dolore magna
-                     aliqua.</p>
+                  <p class="image blinking">새로 올라온 경매 게시글들을 확인해 보세요.</p>
                </div>
             </div>
          </div>
-         <div class="row">
-            <div class="col-lg-9">
+         <br><br>
+         <div class="row" style="margin-left: 3.5em">
+            <div class="col-lg-12">
                <div class="row">
-                  <div class="col-lg-4 col-md-4 col-sm-6 mb-20">
+              	<c:forEach var="arr" items="${d_list }">
+                  <div class="col-lg-4 col-md-4 col-sm-6 mb-3" style="">
                      <div class="single-related-product d-flex">
-                        <a href="#"><img src="img/r1.jpg" alt=""></a>
+                        <a href="/auction_detailPage?no=${arr.no}"><img id="f_img" src="../resources/img/title/${arr.title_img}" alt="" style="width: 130px;display: inline;"></a>
                         <div class="desc">
-                           <a href="#" class="title">Black lace Heels</a>
+                           <a href="/auction_detailPage?no=${arr.no}" class="title">${arr.title }</a>
                            <div class="price">
-                              <h6>$189.00</h6>
-                              <h6 class="l-through">$210.00</h6>
+                           <c:choose>
+                           		<c:when test="${arr.present_price==0}">
+                           			<h6>현재가격 : <fmt:formatNumber value="${arr.starting_price}" pattern="#,###" />원</h6>
+                           		</c:when>
+                           		<c:otherwise>
+                           			<h6>현재가격 : <fmt:formatNumber value="${arr.starting_price}" pattern="#,###" />원</h6>
+                           		</c:otherwise>
+                           </c:choose>
                            </div>
                         </div>
                      </div>
                   </div>
-                  <div class="col-lg-4 col-md-4 col-sm-6 mb-20">
-                     <div class="single-related-product d-flex">
-                        <a href="#"><img src="img/r2.jpg" alt=""></a>
-                        <div class="desc">
-                           <a href="#" class="title">Black lace Heels</a>
-                           <div class="price">
-                              <h6>$189.00</h6>
-                              <h6 class="l-through">$210.00</h6>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="col-lg-4 col-md-4 col-sm-6 mb-20">
-                     <div class="single-related-product d-flex">
-                        <a href="#"><img src="img/r3.jpg" alt=""></a>
-                        <div class="desc">
-                           <a href="#" class="title">Black lace Heels</a>
-                           <div class="price">
-                              <h6>$189.00</h6>
-                              <h6 class="l-through">$210.00</h6>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="col-lg-4 col-md-4 col-sm-6 mb-20">
-                     <div class="single-related-product d-flex">
-                        <a href="#"><img src="img/r5.jpg" alt=""></a>
-                        <div class="desc">
-                           <a href="#" class="title">Black lace Heels</a>
-                           <div class="price">
-                              <h6>$189.00</h6>
-                              <h6 class="l-through">$210.00</h6>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="col-lg-4 col-md-4 col-sm-6 mb-20">
-                     <div class="single-related-product d-flex">
-                        <a href="#"><img src="img/r6.jpg" alt=""></a>
-                        <div class="desc">
-                           <a href="#" class="title">Black lace Heels</a>
-                           <div class="price">
-                              <h6>$189.00</h6>
-                              <h6 class="l-through">$210.00</h6>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="col-lg-4 col-md-4 col-sm-6 mb-20">
-                     <div class="single-related-product d-flex">
-                        <a href="#"><img src="img/r7.jpg" alt=""></a>
-                        <div class="desc">
-                           <a href="#" class="title">Black lace Heels</a>
-                           <div class="price">
-                              <h6>$189.00</h6>
-                              <h6 class="l-through">$210.00</h6>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="col-lg-4 col-md-4 col-sm-6">
-                     <div class="single-related-product d-flex">
-                        <a href="#"><img src="img/r9.jpg" alt=""></a>
-                        <div class="desc">
-                           <a href="#" class="title">Black lace Heels</a>
-                           <div class="price">
-                              <h6>$189.00</h6>
-                              <h6 class="l-through">$210.00</h6>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="col-lg-4 col-md-4 col-sm-6">
-                     <div class="single-related-product d-flex">
-                        <a href="#"><img src="img/r10.jpg" alt=""></a>
-                        <div class="desc">
-                           <a href="#" class="title">Black lace Heels</a>
-                           <div class="price">
-                              <h6>$189.00</h6>
-                              <h6 class="l-through">$210.00</h6>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="col-lg-4 col-md-4 col-sm-6">
-                     <div class="single-related-product d-flex">
-                        <a href="#"><img src="img/r11.jpg" alt=""></a>
-                        <div class="desc">
-                           <a href="#" class="title">Black lace Heels</a>
-                           <div class="price">
-                              <h6>$189.00</h6>
-                              <h6 class="l-through">$210.00</h6>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-            </div>
-            <div class="col-lg-3">
-               <div class="ctg-right">
-                  <a href="#" target="_blank"> <img
-                     class="img-fluid d-block mx-auto" src="img/category/c5.jpg"
-                     alt="">
-                  </a>
+                  </c:forEach>
+                  
                </div>
             </div>
          </div>

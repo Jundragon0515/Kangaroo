@@ -128,6 +128,15 @@ public class DetailPageController {
 		gtdao.viewCountUpdate(no);
 		
 		int currentPage = 1;
+		
+//	      List<Used_transaction_boardDTO> mainDirectList = mes.directList();
+			List<Used_transaction_boardDTO> d_mainSafeList = sdao.safeList();
+			request.setAttribute("d_list", d_mainSafeList);
+//			List<Auction_boardDTO> detailAuctionList = sdao.d_auctionList();
+//			request.setAttribute("d_list", detailAuctionList);
+//			mav.addObject("mainDirectList",mainDirectList);
+//			mav.addObject("mainSafeList",mainSafeList);
+//			mav.addObject("auctionList", mainAuctionList);
 
 		String id = (String) session.getAttribute("email");
 		if(id!=null) {
@@ -166,6 +175,14 @@ public class DetailPageController {
 		  acdao.viewCountUpdate(no);
 	      int currentMoney = 0;
 	      int currentPage = 1;
+	      
+//	      List<Used_transaction_boardDTO> mainDirectList = mes.directList();
+//			List<Used_transaction_boardDTO> mainSafeList = mes.safeList();
+			List<Auction_boardDTO> detailAuctionList = sdao.d_auctionList();
+			request.setAttribute("d_list", detailAuctionList);
+//			mav.addObject("mainDirectList",mainDirectList);
+//			mav.addObject("mainSafeList",mainSafeList);
+//			mav.addObject("auctionList", mainAuctionList);
 	      
 	      if(request.getParameter("currentPage")!=null) {
 	         currentPage=Integer.parseInt(request.getParameter("currentPage"));
