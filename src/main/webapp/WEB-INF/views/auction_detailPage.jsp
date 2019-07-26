@@ -49,6 +49,10 @@
 <link rel="stylesheet" href="../resources/css/main.css">
 
 <style>
+#commentGo{
+	font-size: 15px;
+}
+
 body {
    overflow-x: hidden;
 }
@@ -469,9 +473,6 @@ $("#logout_na").on("click", function() {
 						<!--                   </div> -->
 
 						<!--                   입찰창 -->
-						<div style=text-align:right;padding-right:10px;>
-						<input type="button" id="cartAuction" class="genric-btn primary radius" value="찜하기">
-						</div>
 						<div class="card_area d-flex align-items-center">
 						
 						<c:choose>
@@ -1105,8 +1106,7 @@ $("#logout_na").on("click", function() {
 			<div class="row">
 				<div class="col-lg-12 posts-list">
 
-					<br> <br> <br>
-
+<br>
 
 					<div id="comments">
 						<c:forEach var="arr" items="${list }">
@@ -1157,8 +1157,8 @@ $("#logout_na").on("click", function() {
 									onfocus="this.placeholder = ''"
 									onblur="this.placeholder = '메세지를 입력해 주세요.'" required=""></textarea>
 							</div>
-							<input type="button" class="primary-btn submit_btn"
-								id="commentGo" value="작성 완료" />
+							<input type="button" class="genric-btn success circle"
+								id="commentGo" value="글 쓰기" />
 						</form>
 					</div>
 				</div>
@@ -1215,22 +1215,21 @@ $("#logout_na").on("click", function() {
 				return false;
 			}
 			
-
 			var msg = $("#message").val();
 			
 			if(msg==""){
 				alert("내용을 입력해 주세요.");
-			}else{
+			}else{//2
 			var result = confirm("댓글을 작성하시겠습니까?");
 			
-			if(result){
+			if(result){//1
 			
 
 			//댓글 작성
 			$.ajax({
 				url : "/a_comment",
 				data : {"msg":msg,"boardNum":${dto.no }}
-			}).done(function(resp) {
+			}).done(function(resp) {//3
 				
 				$.ajax({
 					url:"/a_commentsTop5",
@@ -1240,110 +1239,15 @@ $("#logout_na").on("click", function() {
 					
 					$("#message").val("");
 					location.reload();
-					
-// 					AJAX 버림
-// 	                var r ="";
-	                
-// 	                if(resp[4]!=null){
-// 		                   r+='<div class="comments-area comments m-3 p-4">';
-// 		                   r+='<div class="comment-list">';
-// 		                   r+='<div class="single-comment justify-content-between d-flex">'
-// 		                   r+='<div class="user justify-content-between d-flex">'
-// 		                   r+='<div class="desc">'
-// 		                   r+='<h5>'
-// 		                   r+='<a href="#">'+resp[4].id+'</a>'
-// 		                   r+='</h5>'
-// 		                   r+='<p class="date">'+resp[4].time+'</p>'
-// 		                   r+='<p class="comment">'+resp[4].contents+'</p>'
-// 		                   r+='</div>'
-// 		                   r+='</div>'
-// 		               	   r+='<div class="reply-btn">'
-// 		                   r+='<input type="button" seq='+resp[4].seq+' name='+resp[4].id+' class="m-1 btn-reply text-uppercase commentDelete" value="삭제"/>'
-// 		                   r+='</div></div></div></div>'
-		                   
-		                
-		                   
-// 		                }
-// 		                if(resp[3]!=null){
-// 		                	r+='<div class="comments-area comments m-3 p-4">';
-// 		                    r+='<div class="comment-list">';
-// 		                    r+='<div class="single-comment justify-content-between d-flex">'
-// 		                    r+='<div class="user justify-content-between d-flex">'
-// 		                    r+='<div class="desc">'
-// 		                    r+='<h5>'
-// 		                    r+='<a href="#">'+resp[3].id+'</a>'
-// 		                    r+='</h5>'
-// 		                    r+='<p class="date">'+resp[3].time+'</p>'
-// 		                    r+='<p class="comment">'+resp[3].contents+'</p>'
-// 		                    r+='</div>'
-// 		                    r+='</div>'
-// 		                	   r+='<div class="reply-btn">'
-// 		                    r+='<input type="button" seq='+resp[3].seq+' name='+resp[3].id+' class="m-1 btn-reply text-uppercase commentDelete" value="삭제"/>'
-// 		                    r+='</div></div></div></div>'
-// 		                }
-// 		                if(resp[2]!=null){
-// 		                	r+='<div class="comments-area comments m-3 p-4">';
-// 		                    r+='<div class="comment-list">';
-// 		                    r+='<div class="single-comment justify-content-between d-flex">'
-// 		                    r+='<div class="user justify-content-between d-flex">'
-// 		                    r+='<div class="desc">'
-// 		                    r+='<h5>'
-// 		                    r+='<a href="#">'+resp[2].id+'</a>'
-// 		                    r+='</h5>'
-// 		                    r+='<p class="date">'+resp[2].time+'</p>'
-// 		                    r+='<p class="comment">'+resp[2].contents+'</p>'
-// 		                    r+='</div>'
-// 		                    r+='</div>'
-// 		                	   r+='<div class="reply-btn">'
-// 		                    r+='<input type="button" seq='+resp[2].seq+' name='+resp[2].id+' class="m-1 btn-reply text-uppercase commentDelete" value="삭제"/>'
-// 		                    r+='</div></div></div></div>'
-// 		                }
-// 		                if(resp[1]!=null){
-// 		                	r+='<div class="comments-area comments m-3 p-4">';
-// 		                    r+='<div class="comment-list">';
-// 		                    r+='<div class="single-comment justify-content-between d-flex">'
-// 		                    r+='<div class="user justify-content-between d-flex">'
-// 		                    r+='<div class="desc">'
-// 		                    r+='<h5>'
-// 		                    r+='<a href="#">'+resp[1].id+'</a>'
-// 		                    r+='</h5>'
-// 		                    r+='<p class="date">'+resp[1].time+'</p>'
-// 		                    r+='<p class="comment">'+resp[1].contents+'</p>'
-// 		                    r+='</div>'
-// 		                    r+='</div>'
-// 		                	   r+='<div class="reply-btn">'
-// 		                    r+='<input type="button" seq='+resp[1].seq+' name='+resp[1].id+' class="m-1 btn-reply text-uppercase commentDelete" value="삭제"/>'
-// 		                    r+='</div></div></div></div>'
-// 		                }
-// 		                if(resp[0]!=null){
-// 		                	r+='<div class="comments-area comments m-3 p-4">';
-// 		                    r+='<div class="comment-list">';
-// 		                    r+='<div class="single-comment justify-content-between d-flex">'
-// 		                    r+='<div class="user justify-content-between d-flex">'
-// 		                    r+='<div class="desc">'
-// 		                    r+='<h5>'
-// 		                    r+='<a href="#">'+resp[0].id+'</a>'
-// 		                    r+='</h5>'
-// 		                    r+='<p class="date">'+resp[0].time+'</p>'
-// 		                    r+='<p class="comment">'+resp[0].contents+'</p>'
-// 		                    r+='</div>'
-// 		                    r+='</div>'
-// 		                	   r+='<div class="reply-btn">'
-// 		                    r+='<input type="button" seq='+resp[0].seq+' name='+resp[0].id+' class="m-1 btn-reply text-uppercase commentDelete" value="삭제"/>'
-// 		                    r+='</div></div></div></div>'
-// 		                }
-	                
-// 	                $("#comments").html(r);
-				
-
-	    			//댓글 최근5개 가져오기
-	    			
-	                
+  
 			});
 				
 			});
 			
-			}			
+			}
+			
+			}
+			
 		});
 	</script>
 
@@ -1572,18 +1476,6 @@ $("#logout_na").on("click", function() {
       </div>
    </footer>
    <!-- End footer Area -->
-   
-   <script>
-   		$("#cartAuction").on("click",function(){
-			$.ajax({
-				url : "/steamingAuction",
-				data : {"no":"${dto.no}","title_img":"${i_dto.title_img}","title":"${dto.title}","end_date":"${dto.end_date}","category":"${dto.category}","price":"${dto.present_price}"}				
-				}).done(function(resp){
-					alert(resp);
-			})
-		});
-   
-   </script>
 
    <script src="../resources/js/vendor/jquery-2.2.4.min.js"></script>
    <script src="https://use.fontawesome.com/releases/v5.0.0/js/all.js"></script>
