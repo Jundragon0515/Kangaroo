@@ -438,13 +438,25 @@
 					</div>		
 				</div>
 							<li>
-								<div class="middleName">택배</div>								
+								<div class="middleName">택배</div>
+								<c:choose>
+								<c:when test="${type=='ggic'}">								
                                 <input type="radio" id="test3" class="delivery" name="delivery_type" value="선불" disabled="disabled">
                                 <label for="test3" class="trade" id="payInside">선불(구매자 부담)</label>
                                 <input type="radio" id="test4" class="delivery" name="delivery_type" value="착불" disabled="disabled">
                                 <label for="test4" class="trade">착불(구매자 부담)</label>
                                 <input type="radio" id="test5" class="delivery" name="delivery_type" value="무료배송" disabled="disabled">
                                 <label for="test5" class="trade">무료(판매자 부담)</label>
+                                </c:when>
+                                <c:when test="${type=='an' }">
+                                <input type="radio" id="test3" class="delivery" name="delivery_type" value="선불">
+                                <label for="test3" class="trade" id="payInside">선불(구매자 부담)</label>
+                                <input type="radio" id="test4" class="delivery" name="delivery_type" value="착불">
+                                <label for="test4" class="trade">착불(구매자 부담)</label>
+                                <input type="radio" id="test5" class="delivery" name="delivery_type" value="무료배송">
+                                <label for="test5" class="trade">무료(판매자 부담)</label>
+                                </c:when>
+                                </c:choose>
 							</li>
 							<div id="mainImg" class="middleName">메인 이미지</div>
                             <input type="file" id="image" class="imgRegister1" accept=".jpg, .png"><br>
