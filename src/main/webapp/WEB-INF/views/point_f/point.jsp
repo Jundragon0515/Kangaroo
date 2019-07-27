@@ -108,7 +108,7 @@ $(function(){
 				    	$.ajax({
 				    		url:"insert.po",
 				    		data:{
-				    			amount : $("#donaMoney").val()
+				    			amount : Number($("#donaMoney").val().replace(/,/gi,""))
 				    		},
 				    		type:"post"
 				    	}).done(function(resp){

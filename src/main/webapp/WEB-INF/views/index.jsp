@@ -99,7 +99,7 @@
 			client.send("/app/time", {}, JSON.stringify({
 				end_dates : list
 			}));
-		}, 900);
+		}, 100);
 		var list2 = new Array();
 		<c:forEach var="i" items="${auctionList}">
 		list2.push("${i.no}");
@@ -117,7 +117,7 @@
 				}
 				
 			}	
-		}, 900);
+		}, 100);
 		
 		$("#logout_na").on("click", function() {
 			 $.ajax({

@@ -270,7 +270,7 @@ b, sup, sub, u, del {
 	   			<div class="mid_nav_title col-12 my-3"><h1>공지사항</h1></div>
 	   			<div class="mid_nav_one col-lg-2 col-md-2 col-sm-12 mb-2  "><h3 id="title_title" style="align-content: center;">제목</h3></div>
 	   			<div class="mid_nav_one col-lg-10 col-md-10 col-sm-12 mb-2"><input type="text" id="title_input" name="title" onkeyup="noSpaceForm(this);"></div>
-	   			<div class="mid_nav_one col-lg-12 col-md-12 col-sm-12 mb-2" ><input id="file" type="file"  name="image" style="float:left"></div>
+	   			<div class="mid_nav_one col-lg-12 col-md-12 col-sm-12 mb-2" ><input id="file" type="file"  name="image" style="float:left" accept=".jap, .png"></div>
 	   		</div>
 		   	<textarea class="form-control mb-2" id="writting" rows="3"  name="contents" ></textarea>
 		   	<div class="mb-2" id="btnclass"><input id="input" type="button" class="btn btn-warning mr-2" value="입력"><input  class="btn btn-warning" type="button" id="reset" value="취소"></div>

@@ -240,7 +240,7 @@ pageEncoding="UTF-8"%>
 			client.send("/app/time", {}, JSON.stringify({
 				end_dates : list
 			}));
-		}, 900);
+		}, 100);
 		
 		var list2 = new Array();
 		<c:forEach var="i" items="${list}">
@@ -259,7 +259,7 @@ pageEncoding="UTF-8"%>
 				}
 				
 			}	
-		}, 900);
+		}, 100);
        var offset = 50;   // 수직으로 어느정도 움직여야 버튼이 나올까?
        var duration = 600;   // top으로 이동할때까지의 animate 시간 (밀리세컨드, default는 400. 예제의 기본은 500)
        $(window).scroll(function() {
