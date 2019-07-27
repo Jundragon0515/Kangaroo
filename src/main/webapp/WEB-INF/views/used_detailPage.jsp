@@ -1136,6 +1136,7 @@ $("#logout_na").on("click", function() {
 				   data:{"no":"${dto.no}","type":"중고거래"}
 			   }).done(function(resp){
 				   window.open("resources/index.html", "a", "width=550, height=500, left=450, top=300");
+				   
 			   })
 			   }
 
