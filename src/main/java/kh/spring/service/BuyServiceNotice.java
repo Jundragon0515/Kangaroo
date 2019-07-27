@@ -272,13 +272,13 @@ public class BuyServiceNotice{
 		StringBuilder sb = new StringBuilder();
 		 sb.append("<nav aria-label='Page navigation example'><ul class='pagination justify-content-center'>");
 		if(needPrev) {
-			sb.append("<li class='page-item'><a class='page-link' href='Board.board?currentPage="+(startNavi-1)+"'> 이전 </a></li>");
+			sb.append("<li><a class='page-link' id='asd' href='Board.board?currentPage="+(startNavi-1)+"'>이전</a></li>");
 		}
 		for(int i = startNavi; i<=endNavi; i++) {
-			sb.append("<li class='page-item'><a class='page-link' href='Board.board?currentPage="+i+"'>" + i + " </a></li>");
+			sb.append("<li><a class='page-link' href='Board.board?currentPage="+i+"'>" + i + " </a></li>");
 		}
 		if(needNext) {
-			sb.append("<li class='page-item'><a class='page-link' href='Board.board?currentPage="+(endNavi+1)+"'>"+ "다음" +"</a></li>");
+			sb.append("<li><a class='page-link' id='asd' href='Board.board?currentPage="+(endNavi+1)+"'>"+"다음"+"</a></li>");
 		}
 		sb.append("</ul></nav>");
 		return sb.toString();
