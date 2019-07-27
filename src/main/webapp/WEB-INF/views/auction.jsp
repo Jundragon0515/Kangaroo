@@ -239,14 +239,17 @@ pageEncoding="UTF-8"%>
 		
 		var list2 = new Array();
 		<c:forEach var="i" items="${list}">
-		list2.push(".${i.no}");
+		list2.push("${i.no}");
 		</c:forEach>
 		setInterval(function() {
 			for(var z=0; z<list2.length ; z++){
 				if(!list2[z])
 					continue;
-				if($(list2[z]).text()=='남은시간 : 종료'){
-					$(list2[z]+"_re").before("<img class='onging-img' src=''../resources/img/banner/soldout.png'><button class='ongoing-btn'></button>");
+				if($("."+list2[z]).text()=='남은시간 : 종료'){
+					$("."+list2[z]+"_re").before("<img class='onging-img' src=''../resources/img/banner/soldout.png'><button class='ongoing-btn'></button>");
+					client.send("/app/end", {}, JSON.stringify({
+						no : list2[z]
+					}));
 					delete list2[z];
 				}
 				

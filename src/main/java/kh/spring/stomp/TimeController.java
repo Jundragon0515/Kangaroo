@@ -17,6 +17,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
+import kh.spring.dao.DetailPageDAO;
 import kh.spring.dao.MemberDAO;
 
 @Controller
@@ -24,6 +25,8 @@ public class TimeController {
 	
 	@Autowired
 	MemberDAO me;
+	@Autowired
+	DetailPageDAO de;
 	@MessageMapping("/time")//
 	@SendTo("/response")//chat으로 들어오면 이런작업을하고 response를 구독하고 있는애들 한테 보내라 
 	public List<String> timeProc(StompHeaderAccessor sha, String end_dates) throws ParseException {
@@ -52,5 +55,14 @@ public class TimeController {
 			}
 		}
 		return result;
+	}
+	@MessageMapping("/end")
+	public void end(StompHeaderAccessor sha, String no) {
+		System.out.println(no);
+		Gson gs = new Gson();
+		JsonParser parse = new JsonParser();
+		JsonElement ele = parse.parse(no);
+		String end=ele.getAsJsonObject().get("no").getAsString();
+		de.soldOut_Auction(Integer.parseInt(end));
 	}
 }
