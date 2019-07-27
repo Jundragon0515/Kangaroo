@@ -236,7 +236,22 @@ pageEncoding="UTF-8"%>
 				end_dates : list
 			}));
 		}, 900);
-      
+		
+		var list2 = new Array();
+		<c:forEach var="i" items="${list}">
+		list2.push(".${i.no}");
+		</c:forEach>
+		setInterval(function() {
+			for(var z=0; z<list2.length ; z++){
+				if(!list2[z])
+					continue;
+				if($(list2[z]).text()=='남은시간 : 종료'){
+					$(list2[z]+"_re").before("<img class='onging-img' src=''../resources/img/banner/soldout.png'><button class='ongoing-btn'></button>");
+					delete list2[z];
+				}
+				
+			}	
+		}, 900);
        var offset = 50;   // 수직으로 어느정도 움직여야 버튼이 나올까?
        var duration = 600;   // top으로 이동할때까지의 animate 시간 (밀리세컨드, default는 400. 예제의 기본은 500)
        $(window).scroll(function() {
@@ -556,15 +571,10 @@ pageEncoding="UTF-8"%>
                					<input type="checkbox" name="checkDelete" value="${temp.no }">
                				</c:when>
                			</c:choose>
-               			<c:choose>
-               			<c:when test="${temp.onGoing=='n'}">
                         <div class="single-product" style="margin-bottom: 15px;">
                            <div class="card">
-                           <div class="onging">
-                           <img class="onging-img" src="../resources/img/banner/soldout.png">
-                           <button class="ongoing-btn"></button>
-                           <div>
-                              <a href="/auction_detailPage?no=${temp.no}">
+                           
+                              <a href="/auction_detailPage?no=${temp.no}" class="${temp.no}_re">
                               <img class="img-fluid product-img-size" style="margin-bottom: 5px;"
                                  src="../resources/img/title/${temp.title_img}" alt=""></a>
                               <div class="card-body" style="padding: 12px;">
@@ -595,49 +605,8 @@ pageEncoding="UTF-8"%>
                                     </div>
                                  </div>
                               </div>
-                           </div>
-                           </div>
                         </div>
                         </div>
-                        </c:when>
-                        <c:otherwise>
-                       	<div class="single-product" style="margin-bottom: 15px;">
-                           <div class="card">
-                              <a href="/auction_detailPage?no=${temp.no}"><img class="img-fluid product-img-size"
-                                 style="margin-bottom: 5px;"
-                                 src="../resources/img/title/${temp.title_img}" alt=""></a>
-                              <div class="card-body" style="padding: 12px;">
-                                 <div class="row">
-                                    <div class="d-none d-lg-block col-lg-12">[${temp.category}]</div>
-                                 </div>
-                                 <div class="row">
-                                    <div class="col-lg-12">
-                                       <h4>${temp.title}</h4>
-                                    </div>
-                                 </div>
-                                 <div class="row">
-                                    <div class="col-lg-12">현재가격:${temp.present_price}</div>
-                                 </div>
-                                 <div class="row">
-                                    <div class="col-sm-12 col-md-10 col-lg-8 ${temp.no}"></div>
-                                    <div class="d-none d-xl-block col-lg-2"><i class="fas fa-eye fa-2x"></i></div>
-                                    <div class="col-sm-12 col-md-2 col-lg-2">${temp.viewCount}</div>
-                                 </div>
-                                 <div class="row product-details" style="padding-left: 10px;">
-                                    <div class="prd-bottom" style="margin-top: 5px;">
-                                       <a href="" class="social-info"> <span class="lnr lnr-heart"></span>
-                                          <p class="hover-text">Wishlist</p>
-                                       </a> <a href="/auction_detailPage?no=${temp.no}" class="social-info">
-                                        <span class="lnr lnr-move"></span>
-                                          <p class="hover-text">view more</p>
-                                       </a>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                        </c:otherwise>
-                        </c:choose>
                      </div>
                   </c:forEach>
                </div>

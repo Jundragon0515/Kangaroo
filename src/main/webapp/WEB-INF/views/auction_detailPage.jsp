@@ -134,7 +134,6 @@ body {
 <script>
 $(function(){
 
-<<<<<<< HEAD
 	var socket = new SockJS("/gettime"); //불특정 다수의 브라우저일 경우를 위해 endpoint url 넣어야 한다
 	var client = Stomp.over(socket);//연결 이후의 작업 지원 
 	client.connect({}, function(resp) {
@@ -1091,7 +1090,6 @@ $("#logout_na").on("click", function() {
            $('html, body').animate({scrollTop : offset.top}, 500);
        }
    </script>
-<<<<<<< HEAD
 	
 	<!--================End Product Description Area =================-->
 
