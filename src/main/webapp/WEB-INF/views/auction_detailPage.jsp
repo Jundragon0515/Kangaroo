@@ -1209,7 +1209,6 @@ $("#logout_na").on("click", function() {
 												</div>
 											</c:when>
 											<c:otherwise>
-												<input type="button" id="cancle" value="삭제하기" class="genric-btn primary radius">
 											</c:otherwise>
 
 										</c:choose>
