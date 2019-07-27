@@ -1,14 +1,18 @@
 package kh.spring.project;
 
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import kh.spring.dto.CartAuctionDTO;
 import kh.spring.dto.CartTradeDTO;
@@ -30,14 +34,15 @@ public class CartController {
 	@ResponseBody
 	@RequestMapping(value="/steamingTrade" , produces="application/String;charset=UTF-8")
 	public String streaming(CartTradeDTO dto) {
+		String boardPersonId = dto.getId();//게시글쓴 id
 		dto.setId((String) session.getAttribute("email"));
-
-		if(cs.overlapCheck(dto.getNo())==1) {
+		if(boardPersonId.equals(dto.getId())) {
+			return "자신의 글은 찜을 못합니다.";
+		}else if(cs.overlapCheck(dto)==1) {
 			return "찜 목록에 있습니다.";
-		}else {
-			cs.streaming(dto);
-		}
-		return dto.getTitle()+"찜을 하셨습니다.";
+		}	
+		cs.streaming(dto);
+		return dto.getTitle()+"을 찜 하셨습니다 .";		
 	}
 	@RequestMapping("ggymDelete")
 	public String ggymDelete(HttpServletRequest request) {
@@ -47,46 +52,80 @@ public class CartController {
 		}
 		return this.cartProc(request);
 	}
-
+	
 	@RequestMapping("boardGgym")
-	public String boardGym(CartTradeDTO dto,HttpServletRequest request) {
+	public String boardGym(CartTradeDTO dto,HttpServletRequest request,Model model)throws Exception {
+		//PrintWriter out = response.getWriter();
+		String boardPersonId = dto.getId();
 		dto.setId((String) session.getAttribute("email"));
-		if(cs.overlapCheck(dto.getNo())==1) {
-			return this.cartProc(request);
+		if(boardPersonId.equals(dto.getId())) {
+			//out.println("<script>alert('자신의 글은 찜을 못합니다.1');</script>");
+			model.addAttribute("msg", "자신의 글은 찜을 못합니다.");
+		}else if(cs.overlapCheck(dto)==1) {
+			//out.println("<script>alert('찜 목록에 있습니다.');</script>");
+			model.addAttribute("msg", "찜 목록에 있습니다.");
+		}else {
+			//out.println("<script>alert('"+dto.getTitle()+"을 찜 하셨습니다 .');</script>");
+			cs.streaming(dto);	
+			model.addAttribute("msg", dto.getTitle()+"을 찜 하셨습니다.");	
 		}
-		cs.streaming(dto);		
-		return tr.direct(request);
+		//out.flush();
+		model.addAttribute("type","trade");
+		return "boardGgymCheck";
 	}
 
 	@RequestMapping("boardGgymSafe")
-	public String boardGymSafe(CartTradeDTO dto,HttpServletRequest request) {
+	public String boardGymSafe(CartTradeDTO dto,HttpServletRequest request,Model model)throws Exception {
+		String boardPersonId = dto.getId();
 		dto.setId((String) session.getAttribute("email"));
-		if(cs.overlapCheck(dto.getNo())==1) {
-			return this.cartProc(request);
+		if(boardPersonId.equals(dto.getId())) {
+			model.addAttribute("msg", "자신의 글은 찜을 못합니다.");
+		}else if(cs.overlapCheck(dto)==1) {
+			model.addAttribute("msg", "찜 목록에 있습니다.");
+		}else {
+			cs.streaming(dto);
+			model.addAttribute("msg", dto.getTitle()+"을 찜 하셨습니다.");
 		}
-		cs.streaming(dto);		
-		return tr.safe(request);
+		model.addAttribute("type", "safe");
+		return "boardGgymCheck";
 	}
 
 	@RequestMapping("boardGgymAuction")
-	public String boardGgymAuction(CartAuctionDTO dto,HttpServletRequest request) {
+	public String boardGgymAuction(CartAuctionDTO dto,HttpServletRequest request,Model model)throws Exception {
+		String boardPersonId = dto.getId();
+		System.out.println(boardPersonId);
 		dto.setId((String) session.getAttribute("email"));
-		if(cs.overplapCheckAuction(dto.getNo())==1) {
-			return this.cartProc(request);
+		System.out.println(dto.getId());
+		System.out.println(dto.getNo());
+		System.out.println(dto.getTitle_img());
+		System.out.println(dto.getTitle());
+		System.out.println(dto.getEnd_date());
+		System.out.println(dto.getCategory());
+		System.out.println(dto.getPrice());
+		if(boardPersonId.equals(dto.getId())) {
+			model.addAttribute("msg", "자신의 글은 찜을 못합니다.");
+		}else if(cs.overplapCheckAuction(dto)==1) {
+			model.addAttribute("msg", "찜 목록에 있습니다.");
+		}else {
+			cs.streamingAuction(dto);
+			model.addAttribute("msg", dto.getTitle()+"을 찜 하셨습니다.");
 		}
-		cs.streamingAuction(dto);
-		return ar.index(request);
+		model.addAttribute("type", "auction");
+		return "boardGgymCheck";
 	}
 
 	@ResponseBody
 	@RequestMapping(value="/steamingAuction", produces="application/String;charset=UTF-8")
 	public String streamingAuction(CartAuctionDTO dto) {
+		String boardPersonId = dto.getId();
 		dto.setId((String) session.getAttribute("email"));
-		if(cs.overplapCheckAuction(dto.getNo())==1) {
+		if(boardPersonId.equals(dto.getId())) {
+			return "자신의 글은 찜을 못합니다.";
+		}else if(cs.overplapCheckAuction(dto)==1) {
 			return "찜 목록에 있습니다.";
 		}
 		cs.streamingAuction(dto);
-		return dto.getTitle()+"찜을 하셨습니다.";
+		return dto.getTitle()+"을 찜 하셨습니다 .";
 	}
 	@RequestMapping("ggymDeleteAuction")
 	public String ggymDeleteAuction(HttpServletRequest request) {

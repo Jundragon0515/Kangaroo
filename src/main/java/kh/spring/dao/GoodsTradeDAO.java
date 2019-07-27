@@ -500,5 +500,17 @@ public class GoodsTradeDAO {
 	   return sst.selectList("GoodsTradeDAO.mainSafeList", param);
    }
    
-   
+
+   public int cancleTrade(int no) {
+	   return sst.delete("GoodsTradeDAO.cancleTrade",no);
+   }
+
+   //상세 안전거래 리스트
+   public List<Used_transaction_boardDTO> d_main_safe_list(){
+	      HashMap<String, Object> param = new HashMap<>();
+	      param.put("start", "1");
+	      param.put("end", "6");
+	   return sst.selectList("GoodsTradeDAO.mainSafeList", param);
+   }
+
 }

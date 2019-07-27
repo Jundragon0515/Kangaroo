@@ -98,4 +98,8 @@ public class GoodsTradeService {
    }
    
 
+   //글 삭제
+   public int cancleTrade(int no) {
+		return gdao.cancleTrade(no);
+	}
 }

@@ -22,7 +22,7 @@
 <!-- Site Title -->
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <!-- 웹 소켓 cdn -->
-<script
+<script	
    src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.3.0/sockjs.min.js"></script>
 <script
    src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
@@ -47,6 +47,58 @@
 <link rel="stylesheet" href="../resources/css/main.css">
 
 <style>
+.blinking{
+	-webkit-animation:blink 2.0s ease-in-out infinite alternate;
+    -moz-animation:blink 2.0s ease-in-out infinite alternate;
+    animation:blink 2.0s ease-in-out infinite alternate;
+}
+@-webkit-keyframes blink{
+    0% {opacity:0;}
+    100% {opacity:1;}
+}
+@-moz-keyframes blink{
+    0% {opacity:0;}
+    100% {opacity:1;}
+}
+@keyframes blink{
+    0% {opacity:0;}
+    100% {opacity:1;}
+}
+.level{
+	width: 45px;
+	height: 45px;
+	margin-right: 0.5em;
+	margin-bottom: 0.8em;
+}
+#commentGo{
+font-size: 15px;
+}
+#report{
+	height: 38px;
+	line-height: 30px;
+	font-size: 13px;
+}
+#tender{
+	position: relative;
+	left: 250px;
+	width: 200px;
+}
+#buy{
+	font-size: 15px;
+	line-height: 40px;
+}
+#cart{
+	font-size: 20px;
+	padding-left: 0.5em;
+	padding-right: 0.5em;
+	margin-right: 0.2em;
+	position: relative;
+	top: 2px;
+}
+#soldOut{
+   font-size: 15px;
+   margin-right: 0.5em;
+}
 .detail-info {
    text-align: right;
 }
@@ -257,7 +309,7 @@ $("#logout_na").on("click", function() {
    <div class="product_image_area">
       <div class="container">
          <div class="row s_product_inner">
-            <div class="col-lg-6">
+            <div class="col-lg-6" style="margin: auto;">
             <!--이미지 미리보기 -->
                <div id="carouselExampleIndicators" class="carousel slide"
                   data-ride="carousel">
@@ -265,21 +317,21 @@ $("#logout_na").on("click", function() {
                      <li data-target="#carouselExampleIndicators" data-slide-to="0"
                         class="active"></li>
                      <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                     <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+<!--                      <li data-target="#carouselExampleIndicators" data-slide-to="2"></li> -->
                   </ol>
                   <div class="carousel-inner">
                      <div class="carousel-item active">
-                        <img src="img/title/${i_dto.title_img }" class="d-block w-100" onerror="this.style.display='none'" alt='' height=350px; width=auto;>
+                        <img src="img/title/${i_dto.title_img }" class="d-block w-100" onerror="this.style.display='none'" alt='' height=450px; width=auto;>
                      </div>
                      <div class="carousel-item">
-                        <img src="img/middle/${i_dto.middle1_img }" class="d-block w-100" onerror="this.style.display='none'" alt='' height=350px; width=auto;>
+                        <img src="img/middle/${i_dto.middle1_img }" class="d-block w-100" onerror="this.style.display='none'" alt='' height=450px; width=auto;>
                      </div>
-                     <div class="carousel-item">
-                        <img src="img/middle/${i_dto.middle2_img }" class="d-block w-100" onerror="this.style.display='none'" alt='' height=350px; width=auto;>
-                     </div>
-                     <div class="carousel-item">
-                        <img src="img/middle/${i_dto.middle3_img }" class="d-block w-100" onerror="this.style.display='none'" alt='' height=350px; width=auto;>
-                     </div>
+<!--                      <div class="carousel-item"> -->
+<%--                         <img src="img/middle/${i_dto.middle2_img }" class="d-block w-100" onerror="this.style.display='none'" alt='' height=350px; width=auto;> --%>
+<!--                      </div> -->
+<!--                      <div class="carousel-item"> -->
+<%--                         <img src="img/middle/${i_dto.middle3_img }" class="d-block w-100" onerror="this.style.display='none'" alt='' height=350px; width=auto;> --%>
+<!--                      </div> -->
                   </div>
                   <a class="carousel-control-prev" href="#carouselExampleIndicators"
                      role="button" data-slide="prev"> <span
@@ -293,14 +345,14 @@ $("#logout_na").on("click", function() {
                </div>
 
             </div>
-            <div class="col-lg-5 offset-lg-1">
+            <div class="col-lg-5 offset-lg-1" style="margin-left: 0px;margin-right: 20px;">
                <div class="s_product_text1">
 
 
                   <div class="container">
                      <table class="table">
                         <tr>
-                           <h3 style="text-align: right; padding-right: 30px;">${dto.title }</h3>
+                           <h3 style="text-align: right; padding-right: 12px;">${dto.title }</h3>
                         </tr>
                         <tbody>
                            <tr>
@@ -327,22 +379,25 @@ $("#logout_na").on("click", function() {
                               <td colspan=2 class=detail-info><fmt:formatNumber
                                     value="${dto.delivery_cost }" pattern="#,###" />원</td>
                            </tr>
-                        </tbody>
+                        </tbody>                  
                      </table>
+                     
+                   
                   </div>
                   <div style=text-align:right;padding-right:10px;>
-                     <input type="button" id="cart" class="genric-btn primary radius" value="찜하기">
+
                   <c:choose>
 
                   <c:when test="${dto.onGoing=='y' }">
                   
                   	<c:choose>
                   			<c:when test="${dto.id==email}">
-                  		
+                  				<input type="button" id="cancle" value="삭제하기" class="genric-btn primary radius">
                   			</c:when>
                   	
                   			<c:otherwise>
                      				<input type="button" class="genric-btn primary radius" id="buy" value="구매 하기"/>
+                     				<input type="button" id="cart" class="genric-btn primary radius" value="♡">
 							</c:otherwise>
 							
 					</c:choose>
@@ -350,7 +405,7 @@ $("#logout_na").on("click", function() {
                      </c:when>
                      
                      <c:when test="${dto.onGoing=='n' }">
-                     <input type="button" class="genric-btn primary radius" id="soldOut" value="판매 완료"/>
+                     <input type="button" class="genric-btn danger radius" id="soldOut" value="판매 완료"/>
                      </c:when>
                      
                      </c:choose>
@@ -370,6 +425,17 @@ $("#logout_na").on("click", function() {
 	   alert("판매 완료된 상품 입니다.");
    })
    
+   $("#cancle").on("click",function(){
+	   var result = confirm("정말로 삭제하시겠습니까?");
+	   
+	   if(result==true){
+		   	alert("삭제 되었습니다.");
+	   		var no = "${dto.no}";
+	   		$(location).attr("href","cancleTrade?no=${dto.no}");
+	   }
+	   
+   })
+   
    $("#buy").on("click",function(){
 	  
 	   if(${email==null}){
@@ -382,9 +448,7 @@ $("#logout_na").on("click", function() {
 	   if(result==false){
 		   return false;
 	   }
-	   
-	   
-	   
+	     	   
 	   
 	   var boardNum = "${dto.no }";
 	   var price = Number(${dto.price });
@@ -429,7 +493,6 @@ $("#logout_na").on("click", function() {
    
    });
    
-   
    </script>
    <!--================End Single Product Area =================-->
 
@@ -449,6 +512,7 @@ $("#logout_na").on("click", function() {
 				<li class="nav-item"><a class="nav-link" id="review-tab"
 					data-toggle="tab" href="#review" role="tab" aria-controls="review"
 					aria-selected="false" onclick="fnMove()">문의 및 댓글</a></li>
+					<input type="button" id="report" class="genric-btn danger radius" value="신고" onclick="showPopup();"/>
 			</ul>
 			<div class="tab-content" id="myTabContent">
 				<div class="tab-pane fade active show" id="home" role="tabpanel"
@@ -657,10 +721,9 @@ $("#logout_na").on("click", function() {
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12 posts-list">
-
-					<br> <br> <br>
-
-
+				
+				<br>
+				
 					<div id="comments">
 						<c:forEach var="arr" items="${list }">
 							<div class="comments-area comments m-3 p-4">
@@ -668,29 +731,54 @@ $("#logout_na").on("click", function() {
 									<div class="single-comment justify-content-between d-flex">
 										<div class="user justify-content-between d-flex">
 											<div class="desc">
-												<h5>
-													<a href="#">${arr.id }</a>
+											<c:choose>
+											<c:when test="${arr.member_class=='브론즈' }">
+											<img alt="" src="/resources/img/브론즈.PNG" class="level">
+											</c:when>
+											<c:when test="${arr.member_class=='실버' }">
+											<img alt="" src="/resources/img/실버.PNG" class="level">
+											</c:when>
+											<c:when test="${arr.member_class=='골드' }">
+											<img alt="" src="/resources/img/골드.PNG" class="level">
+											</c:when>
+											<c:when test="${arr.member_class=='플래티넘' }">
+											<img alt="" src="/resources/img/플래.PNG" class="level">
+											</c:when>
+											<c:when test="${arr.member_class=='다이아몬드' }">
+											<img alt="" src="/resources/img/골드.PNG" class="level">
+											</c:when>
+											<c:when test="${arr.member_class=='마스터' }">
+											<img alt="" src="/resources/img/마스터.png" class="level">
+											</c:when>
+											</c:choose>
+												<h5 style="display: inline">
+													<a href="javascript:void(0)">${arr.id }</a>
 												</h5>
-												<p class="date">${arr.time }</p>
-												<p class="comment">${arr.contents }</p>
+												<p class="date" style="display:inline;margin-left: 1em">${arr.time }</p>
+												<br><br>
+												<p class="comment" style="margin-left: 4em">${arr.contents }</p>
 											</div>
 										</div>
 										<c:choose>
-										<c:when test="${email==arr.id }">
-										<div class="reply-btn">
-<!-- 											<a href="" class="m-1 btn-reply text-uppercase">수정</a>  -->
-												<input type="button" seq="${arr.seq }" name="${arr.id }" class="m-1 btn-reply text-uppercase commentDelete" value="삭제"/>
-										</div>
-										</c:when>
-										<c:otherwise>
-										</c:otherwise>
+											<c:when test="${email==arr.id }">
+												<div class="reply-btn">
+													<!-- 											<a href="" class="m-1 btn-reply text-uppercase">수정</a>  -->
+													<input type="button" seq="${arr.seq }" name="${arr.id }"
+														class="m-1 btn-reply text-uppercase commentDelete"
+														value="삭제" />
+												</div>
+											</c:when>
+											<c:otherwise>
+											</c:otherwise>
 										</c:choose>
 									</div>
 								</div>
 							</div>
 						</c:forEach>
 					</div>
+					
 					   <div id=MovingPoint></div>	<!-- 댓글 이동 탭 -->
+					   
 					<div class="row p-0 m-0 numBox">
 						<div class="col-12 d-flex justify-content-center navi mt-1">
 							<nav aria-label="Page navigation example">
@@ -698,8 +786,6 @@ $("#logout_na").on("click", function() {
 							</nav>
 						</div>
 					</div>
-
-					<!--                    ///////////////////////////-->
 					<div class="comment-form m-3 p-4">
 						<form>
 							<div class="form-group">
@@ -708,8 +794,8 @@ $("#logout_na").on("click", function() {
 									onfocus="this.placeholder = ''"
 									onblur="this.placeholder = '메세지를 입력해 주세요.'" required=""></textarea>
 							</div>
-							<input type="button" class="primary-btn submit_btn"
-								id="commentGo" value="작성 완료" />
+							<input type="button" class="genric-btn success circle"
+								id="commentGo" value="글 쓰기" />
 						</form>
 					</div>
 				</div>
@@ -906,132 +992,28 @@ $("#logout_na").on("click", function() {
          <div class="row justify-content-center">
             <div class="col-lg-6 text-center">
                <div class="section-title">
-                  <h1>Deals of the Week</h1>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                     sed do eiusmod tempor incididunt ut labore et dolore magna
-                     aliqua.</p>
+                  <p class="image blinking">새로 올라온 안전거래 게시글들을 확인해 보세요.</p>
                </div>
             </div>
          </div>
-         <div class="row">
-            <div class="col-lg-9">
+         <br><br>
+         <div class="row" style="margin-left: 3.5em">
+            <div class="col-lg-12">
                <div class="row">
-                  <div class="col-lg-4 col-md-4 col-sm-6 mb-20">
+              	<c:forEach var="arr" items="${d_list }">
+                  <div class="col-lg-4 col-md-4 col-sm-6 mb-3" style="">
                      <div class="single-related-product d-flex">
-                        <a href="#"><img src="img/r1.jpg" alt=""></a>
+                        <a href="/used_detailPage?no=${arr.no}"><img id="f_img" src="../resources/img/title/${arr.title_img}" alt="" style="width: 130px;display: inline;"></a>
                         <div class="desc">
-                           <a href="#" class="title">Black lace Heels</a>
+                           <a href="/used_detailPage?no=${arr.no}" class="title">${arr.title }</a>
                            <div class="price">
-                              <h6>$189.00</h6>
-                              <h6 class="l-through">$210.00</h6>
+                      			<h6>현재가격 : <fmt:formatNumber value="${arr.price}" pattern="#,###" />원</h6>
                            </div>
                         </div>
                      </div>
                   </div>
-                  <div class="col-lg-4 col-md-4 col-sm-6 mb-20">
-                     <div class="single-related-product d-flex">
-                        <a href="#"><img src="img/r2.jpg" alt=""></a>
-                        <div class="desc">
-                           <a href="#" class="title">Black lace Heels</a>
-                           <div class="price">
-                              <h6>$189.00</h6>
-                              <h6 class="l-through">$210.00</h6>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="col-lg-4 col-md-4 col-sm-6 mb-20">
-                     <div class="single-related-product d-flex">
-                        <a href="#"><img src="img/r3.jpg" alt=""></a>
-                        <div class="desc">
-                           <a href="#" class="title">Black lace Heels</a>
-                           <div class="price">
-                              <h6>$189.00</h6>
-                              <h6 class="l-through">$210.00</h6>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="col-lg-4 col-md-4 col-sm-6 mb-20">
-                     <div class="single-related-product d-flex">
-                        <a href="#"><img src="img/r5.jpg" alt=""></a>
-                        <div class="desc">
-                           <a href="#" class="title">Black lace Heels</a>
-                           <div class="price">
-                              <h6>$189.00</h6>
-                              <h6 class="l-through">$210.00</h6>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="col-lg-4 col-md-4 col-sm-6 mb-20">
-                     <div class="single-related-product d-flex">
-                        <a href="#"><img src="img/r6.jpg" alt=""></a>
-                        <div class="desc">
-                           <a href="#" class="title">Black lace Heels</a>
-                           <div class="price">
-                              <h6>$189.00</h6>
-                              <h6 class="l-through">$210.00</h6>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="col-lg-4 col-md-4 col-sm-6 mb-20">
-                     <div class="single-related-product d-flex">
-                        <a href="#"><img src="img/r7.jpg" alt=""></a>
-                        <div class="desc">
-                           <a href="#" class="title">Black lace Heels</a>
-                           <div class="price">
-                              <h6>$189.00</h6>
-                              <h6 class="l-through">$210.00</h6>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="col-lg-4 col-md-4 col-sm-6">
-                     <div class="single-related-product d-flex">
-                        <a href="#"><img src="img/r9.jpg" alt=""></a>
-                        <div class="desc">
-                           <a href="#" class="title">Black lace Heels</a>
-                           <div class="price">
-                              <h6>$189.00</h6>
-                              <h6 class="l-through">$210.00</h6>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="col-lg-4 col-md-4 col-sm-6">
-                     <div class="single-related-product d-flex">
-                        <a href="#"><img src="img/r10.jpg" alt=""></a>
-                        <div class="desc">
-                           <a href="#" class="title">Black lace Heels</a>
-                           <div class="price">
-                              <h6>$189.00</h6>
-                              <h6 class="l-through">$210.00</h6>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="col-lg-4 col-md-4 col-sm-6">
-                     <div class="single-related-product d-flex">
-                        <a href="#"><img src="img/r11.jpg" alt=""></a>
-                        <div class="desc">
-                           <a href="#" class="title">Black lace Heels</a>
-                           <div class="price">
-                              <h6>$189.00</h6>
-                              <h6 class="l-through">$210.00</h6>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-            </div>
-            <div class="col-lg-3">
-               <div class="ctg-right">
-                  <a href="#" target="_blank"> <img
-                     class="img-fluid d-block mx-auto" src="img/category/c5.jpg"
-                     alt="">
-                  </a>
+                  </c:forEach>
+                  
                </div>
             </div>
          </div>
@@ -1130,19 +1112,38 @@ $("#logout_na").on("click", function() {
 	<script>
 	
 	$("#cart").on("click",function(){
+		if(${email==null}){
+			   alert("로그인 하세요.");
+			   return false;
+		   }
 		$.ajax({
 			url : "/steamingTrade",
 			data : {"no":"${dto.no}","title_img":"${i_dto.title_img}",
 				"title":"${dto.title}","trade_type":"${dto.trade_type}",
-				"category":"${dto.category}","price":"${dto.price}"}
+				"category":"${dto.category}","price":"${dto.price}","id":"${dto.id}"}
 		}).done(function(resp){
 			alert(resp);
 		})
 	});
-	
-	
+
+	$("#report").on("click",function(){
+		if(${email==null}){
+			   alert("로그인 하세요.");
+			   return false;
+		   }else{
+			   $.ajax({
+				   url:"/go",
+				   data:{"no":"${dto.no}","type":"중고거래"}
+			   }).done(function(resp){
+				   window.open("resources/index.html", "a", "width=550, height=500, left=450, top=300");
+				   
+			   })
+			   }
+
+		   
+	}) 
+		
 	</script>
-	
 	
    <script src="https://use.fontawesome.com/releases/v5.0.0/js/all.js"></script>
    <script src="../resources/js/vendor/jquery-2.2.4.min.js"></script>

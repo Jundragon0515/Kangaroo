@@ -249,6 +249,10 @@ position:relative;
 #btn-delete:hover {
 	cursor: pointer;
 }
+#checkAllAuctionBoard {
+    left: 89%;
+    position: relative;
+}
 </style>
 
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
@@ -609,7 +613,7 @@ position:relative;
                      <div class="col-lg-3 col-md-6">
 						<c:choose>
                				<c:when test="${logintype=='admin'}">
-               					<input type="checkbox" name="checkDelete" value="${temp.no }">
+               					<input type="checkbox" name="checkDelete" value="${temp.no }" class="auctionCheck" id="chk">
                				</c:when>
                			</c:choose>
                         <div class="single-product" style="margin-bottom: 15px;">
@@ -643,11 +647,12 @@ position:relative;
                                     <div class="d-none d-sm-block col-xs-2 col-sm-2 col-md-2 col-lg-2 m-0 pr-0"><i class="fas fa-eye fa-2x fontawesome"></i></div>
                                     <div class="d-none d-sm-block col-xs-4 col-sm-4 col-md-4 col-lg-2 pr-0"><span class="view">${temp.viewCount}</span></div>
                                  </div>
-                                 <div class="row product-details" style="padding-left: 10px;">
-                                    <div class="prd-bottom" style="margin-top: 5px;">
-                                       <a href="" class="social-info"> <span class="lnr lnr-heart"></span>
+                                 <div class="row product-details" style="padding-left: 15px;">
+                                    <div class="prd-bottom" style="margin-top: 10px;">
+                                       <a href="boardGgymAuction?no=${temp.no}&title_img=${temp.title_img}&title=${temp.title}&end_date=${temp.end_date }&category=${temp.category }&price=${temp.starting_price}&id=${temp.id}" class="social-info ggym"> <span class="lnr lnr-heart"></span>
                                           <p class="hover-text">Wishlist</p>
-                                       </a> <a href="/auction_detailPage?no=${temp.no}" class="social-info">
+                                       </a> 
+                                       <a href="/auction_detailPage?no=${temp.no}" class="social-info">
                                         <span class="lnr lnr-move"></span>
                                           <p class="hover-text">view more</p>
                                        </a>
@@ -656,20 +661,26 @@ position:relative;
                               </div>
                         </div>
                         </div>
+
                      </div>
                   </c:forEach>
                </div>
                </form>
             </div>
+             <c:choose>
+               	<c:when test="${logintype=='admin'}">
+            		<input type="button" id="checkAllAuctionBoard" value="전체선택" name="checkAll" class="genric-btn primary radius">
+            	</c:when>
+            </c:choose>	
             </section>
             <div class="row">
                <div class="col-12 naviArea">
                   <b class="paging">${navi }</b>
                </div>
-            </div>
+            </div>        
          </div>
          <!-- end center  -->
-
+		
          <!-- start fixbutton -->
          <div class="d-none d-lg-block col-lg-1">
             <i class="fas fa-chevron-circle-up btn-fixed back-to-top fa-3x"></i>
@@ -764,6 +775,24 @@ position:relative;
    </div>
    </footer>
    <!-- End footer Area -->
+   
+   <script>
+		$(".ggym").on("click",function(){
+			if(${email==null}){
+				   alert("로그인 하세요.");
+				   return false;
+			   }
+		})
+		$("#checkAllAuctionBoard").on("click",function(){
+			if($("input:checkbox[id=chk]").is(":checked")==true){
+				 $("input[id=chk]:checkbox").prop("checked", false);				
+			}else{
+				$("input[id=chk]:checkbox").prop("checked", true);
+			}
+		})
+	
+	</script>
+   
    <script src="https://use.fontawesome.com/releases/v5.0.0/js/all.js"></script>
    <script
       src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>

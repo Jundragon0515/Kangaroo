@@ -257,7 +257,10 @@
 	}
 
 </style>  
+<script>
+	
 
+</script>
 </head>
 <body>
 
@@ -393,7 +396,7 @@
 						<ul class="list">
                         <br>                        
 						    <li><a><span class="middleName">물품제목</span></a><input type="text" class="form-control goodsContents" id="goodsTitle" name="title" placeholder="물품제목을 입력하세요."></li><br>
-							<li><a><span class="middleName">물품가격</span></a><input type="text"  class="form-control goodsContents" id="goodsPrice" name="price" placeholder="물품가격을 입력하세요." onkeydown="javascript: return event.keyCode == 69 ? false : true"></li><br>
+							<li><a><span class="middleName">물품가격</span></a><input type="text" priceOnly  class="form-control goodsContents" id="goodsPrice" name="price" placeholder="물품가격을 입력하세요." onkeydown="javascript: return event.keyCode == 69 ? false : true"></li><br>
 							<li><a><span class="middleName">핸드폰번호</span></a><input type="text" phoneOnly  class="form-control goodsContents" id="phone" name="phone" placeholder="-없이 핸드폰 번호를 입력해주세요." onkeydown="javascript: return event.keyCode == 69 ? false : true"></li><br>
 							
 				<div id="sel">		
@@ -417,21 +420,43 @@
 					<div id="sel2">	
 							<li>
 								<div class="middleName">거래유형</div>
+								<c:choose>
+								<c:when test="${type=='ggic'}">
                                 <input type="radio" id="test1" class="trade" name="trade_type" value="직거래" checked>
                                 <label for="test1" class="trade">직거래</label>
                                 <input type="radio" id="test2" class="trade" name="trade_type" value="안전거래">
                                 <label for="test2" class="trade">안전거래</label>
+                                </c:when>
+                                <c:when test="${type=='an' }">
+                                <input type="radio" id="test1" class="trade" name="trade_type" value="직거래">
+                                <label for="test1" class="trade">직거래</label>
+                                <input type="radio" id="test2" class="trade" name="trade_type" value="안전거래" checked>
+                                <label for="test2" class="trade">안전거래</label>
+                                </c:when>
+                                </c:choose>
 							</li>
 					</div>		
 				</div>
 							<li>
 								<div class="middleName">택배</div>
+								<c:choose>
+								<c:when test="${type=='ggic'}">								
                                 <input type="radio" id="test3" class="delivery" name="delivery_type" value="선불" disabled="disabled">
                                 <label for="test3" class="trade" id="payInside">선불(구매자 부담)</label>
                                 <input type="radio" id="test4" class="delivery" name="delivery_type" value="착불" disabled="disabled">
                                 <label for="test4" class="trade">착불(구매자 부담)</label>
                                 <input type="radio" id="test5" class="delivery" name="delivery_type" value="무료배송" disabled="disabled">
                                 <label for="test5" class="trade">무료(판매자 부담)</label>
+                                </c:when>
+                                <c:when test="${type=='an' }">
+                                <input type="radio" id="test3" class="delivery" name="delivery_type" value="선불">
+                                <label for="test3" class="trade" id="payInside">선불(구매자 부담)</label>
+                                <input type="radio" id="test4" class="delivery" name="delivery_type" value="착불">
+                                <label for="test4" class="trade">착불(구매자 부담)</label>
+                                <input type="radio" id="test5" class="delivery" name="delivery_type" value="무료배송">
+                                <label for="test5" class="trade">무료(판매자 부담)</label>
+                                </c:when>
+                                </c:choose>
 							</li>
 							<div id="mainImg" class="middleName">메인 이미지</div>
                             <input type="file" id="image" class="imgRegister1" accept=".jpg, .png"><br>
@@ -589,7 +614,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	 		$("#pay").remove();
 	 		$("#collectible").remove();
 	 		$("#free").remove();
-	 		$("#payInside").append('<input type="text" id="pay" value="2500" name="delivery_cost">');
+	 		$("#payInside").append('<input type="text" id="pay" value="2500" name="delivery_cost" disabled="disabled">');
 	 		$("pay").attr("disabled",true);
 	 	})
 	 	$("#test4").on("click",function(){
@@ -802,40 +827,45 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 					alert("핸드폰 번호를 입력하세요.");
 				} else if ($("#titleImg").html() == "") {
 					alert("메인 이미지를 입력하세요.");
-				} else if ($("#preview").text() == "") {
+				} else if ($("#preview").text().length==33) {
 					alert("상세 이미지 1개 이상 입력하세요.");
 				} else if(deli[0].checked==false && deli[1].checked==false && deli[2].checked==false && trade.checked==false){
 					alert("택배 방법을 입력하세요.");
 				} else {
-					//var contents = $("#writting").val();
-					//contents = contents.replace(/(&nbsp;)+/ig, "");// 맨 앞 공백, 공백연속으로 쳤을때 &nbsp;
-					//contents = contents.replace(/^[ ]+/ig, "");	// &nbsp;자르고나서 또 맨앞에 오는 공백 자르기
-					//contents = contents.replace(/(<div><br><\/div>)+/ig, "");// 내용없이 엔터쳤을때
-					//contents = contents.replace("/(<div>[ ]*?<\/div>)/ig", "");// 공백만 넣고 엔터쳤을때
-					var contentsText = $("#writting").val();
+					var contents = $("#writting").val();
+					var title = $("#goodsTitle").val();
+					contents = contents.replace(/(&nbsp;)+/ig, "");// 맨 앞 공백, 공백연속으로 쳤을때 &nbsp;
+					contents = contents.replace(/^[ ]+/ig, "");	// &nbsp;자르고나서 또 맨앞에 오는 공백 자르기
+					contents = contents.replace(/(<div><br><\/div>)+/ig, "");// 내용없이 엔터쳤을때
+					contents = contents.replace("/(<div>[ ]*?<\/div>)/ig", "");// 공백만 넣고 엔터쳤을때
+					title = title.replace(/(&nbsp;)+/ig, "");// 맨 앞 공백, 공백연속으로 쳤을때 &nbsp;
+					title = title.replace(/^[ ]+/ig, "");	// &nbsp;자르고나서 또 맨앞에 오는 공백 자르기
+					title = title.replace(/(<div><br><\/div>)+/ig, "");// 내용없이 엔터쳤을때
+					title = title.replace("/(<div>[ ]*?<\/div>)/ig", "");// 공백만 넣고 엔터쳤을때
+					
+					var contentsText = contents;
 					var regContents = /^[가-힣 .,:;()!^?~0-9a-zA-Z\n]{1,150}$/g;	 //레직스 바꾸기		
-					var titleText = $("#goodsTitle").val();
+					var titleText = title;
 					var regTitle = /^[가-힣 .,:;()!^?~0-9a-zA-Z]{1,22}$/g;
 					var price = parseInt($("#goodsPrice").val());
+					var regPrice = /[1-9][0-9]{3,7}/g;
 					var phoneText = $("#phone").val();			
 					var regPhone = /(01[0|1|6|9|7])[-](\d{3}|\d{4})[-](\d{4}$)/g;	
 					
 					if(!regContents.test(contentsText)){
-						alert('잘못된 내용 입니다.');
-			            $('#writting').val("");
+						alert('한글,영문(1글자~150글자 사이 입력하세요.)');			      
 					}else if(!regTitle.test(titleText)){
-						alert('잘못된 제목 입니다.');
-			            $('#goodsTitle').val("");
+						alert('한글,영문(1글자~22글자 사이 입력하세요.)');
 					}else if(!regPhone.test(phoneText)){
 						alert('잘못된 휴대폰 번호입니다.');
-			            $('#phone').val("");	
 					}else if(price !=0){
 						if(price<1000){
-							alert("1000원 이상 가격을 입력하세요.");
+							alert("1,000원~99,999,999원 사이 입력하세요.");
 							$("#goodsPrice").val("");
-							}else if(price>1000000){
-								alert("1,000,000원 이하 가격을 입력하세요.");
-								$("#goodsPrice").val("");
+							}else if(price>99999999){
+								alert("1,000원~99,999,999원 사이 입력하세요.");
+							}else if(!regPrice.test(price)){
+								alert("가격은 숫자만 입력할 수 있습니다.(1,000원~99,999,999원 사이)")
 							}else{
 								var contents = $("#writting").val();
 								

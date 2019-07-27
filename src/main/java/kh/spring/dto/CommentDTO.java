@@ -8,7 +8,9 @@ public class CommentDTO {
 	private String contents;
 	private String time;
 	private String ipaddress;
-	public CommentDTO(int seq, int boardNum, String id, String contents, String time, String ipaddress) {
+	private String member_class;
+	public CommentDTO(int seq, int boardNum, String id, String contents, String time, String ipaddress,
+			String member_class) {
 		super();
 		this.seq = seq;
 		this.boardNum = boardNum;
@@ -16,6 +18,7 @@ public class CommentDTO {
 		this.contents = contents;
 		this.time = time;
 		this.ipaddress = ipaddress;
+		this.member_class = member_class;
 	}
 	public CommentDTO() {
 		super();
@@ -55,6 +58,12 @@ public class CommentDTO {
 	}
 	public void setIpaddress(String ipaddress) {
 		this.ipaddress = ipaddress;
+	}
+	public String getMember_class() {
+		return member_class;
+	}
+	public void setMember_class(String member_class) {
+		this.member_class = member_class;
 	}
 	
 	

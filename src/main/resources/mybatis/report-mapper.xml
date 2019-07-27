@@ -3,7 +3,7 @@
 <mapper namespace="ReportDAO">
 
 <insert id="reportInsert">
-	insert into report values(r_no_seq.nextval,#{title},#{sender},#{reason},#{contents})
+	insert into report values(#{no},#{sender},#{type},default,#{ipaddress},#{title},#{reason},#{contents})
 
 </insert>
 </mapper>

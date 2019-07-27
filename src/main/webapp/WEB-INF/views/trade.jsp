@@ -246,6 +246,10 @@ position:relative;
 #btn-delete:hover {
 	cursor: pointer;
 }
+#checkAllTradeBoard {
+    left: 89%;
+    position: relative;
+}
 </style>
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -525,7 +529,7 @@ position:relative;
                		<div class="head "><button id="btn-delete" type="button" value="삭제하기">삭제하기</button></div>
                	</c:when>
                <c:when test="${logintype!='admin' }">
-               <div class="head "><a href="tradeGoodsWrite" style="color: white">제품등록</a></div>
+               <div class="head "><a href="tradeGoodsWrite?type=ggic" style="color: white">제품등록</a></div>
                </c:when>
                </c:choose>
             </div>
@@ -572,7 +576,7 @@ position:relative;
                      <div class="col-lg-3 col-md-6">
 						<c:choose>
                				<c:when test="${logintype=='admin'}">
-               					<input type="checkbox" name="checkDelete" value="${temp.no }">
+               					<input type="checkbox" name="checkDelete" value="${temp.no }" class="tradeCheck" id="chk">
                				</c:when>
                			</c:choose>
                 		<c:choose>
@@ -605,7 +609,7 @@ position:relative;
                                  <div class="row product-details" style="padding-left: 10px;">
                                     <div class="prd-bottom" style="margin-top: 5px;">
 
-                                       <a onclick="check();" href="boardGgym?no=${temp.no}&title_img=${temp.title_img}&title=${temp.title}&trade_type=${temp.trade_type }&category=${temp.category }&price=${temp.price}" class="social-info"> <span class="lnr lnr-heart"></span>
+                                       <a href="boardGgym?no=${temp.no}&title_img=${temp.title_img}&title=${temp.title}&trade_type=${temp.trade_type }&category=${temp.category }&price=${temp.price}" class="social-info"> <span class="lnr lnr-heart"></span>
                                           <p class="hover-text">Wishlist</p>
 									 </a> 
 									 <a href="/used_detailPage?no=${temp.no}" class="social-info">
@@ -642,10 +646,12 @@ position:relative;
                                     <div class="d-none d-sm-block col-xs-2 col-sm-2 col-md-2 col-lg-2 m-0 pr-0"><i class="fas fa-eye fa-2x fontawesome"></i></div>
                                     <div class="d-none d-sm-block col-xs-4 col-sm-4 col-md-4 col-lg-2 pr-0"><span class="view">${temp.viewCount}</span></div>
                                  </div>
+
                                  <div class="row product-details" style="padding-left: 15px;">
                                     <div class="prd-bottom" style="margin-top: 10px;">
-                                       <a href="boardGgym?no=${temp.no}&title_img=${temp.title_img}&title=${temp.title}&trade_type=${temp.trade_type }&category=${temp.category }&price=${temp.price}" class="social-info"> <span class="lnr lnr-heart"></span>
+                                       <a href="boardGgym?no=${temp.no}&title_img=${temp.title_img}&title=${temp.title}&trade_type=${temp.trade_type }&category=${temp.category }&price=${temp.price}&id=${temp.id}" class="social-info ggym"> <span class="lnr lnr-heart"></span>
                                           <p class="hover-text">Wishlist</p>
+
                                        </a> <a href="/used_detailPage?no=${temp.no}" class="social-info">
                                         <span class="lnr lnr-move"></span>
                                           <p class="hover-text">view more</p>
@@ -662,6 +668,12 @@ position:relative;
                </div>
               </form>
             </div>
+            <c:choose>
+               	<c:when test="${logintype=='admin'}">
+            		<input type="button" id="checkAllTradeBoard" value="전체선택" name="checkAll" class="genric-btn primary radius">
+            	</c:when>
+            </c:choose>	
+            
             </section>
             <div class="row">
                <div class="col-12 naviArea">
@@ -765,6 +777,24 @@ position:relative;
    </div>
    </footer>
    <!-- End footer Area -->
+	
+	<script>
+		$(".ggym").on("click",function(){
+			if(${email==null}){
+				   alert("로그인 하세요.");
+				   return false;
+			   }
+		})
+		$("#checkAllTradeBoard").on("click",function(){
+			if($("input:checkbox[id=chk]").is(":checked")==true){
+				 $("input[id=chk]:checkbox").prop("checked", false);				
+			}else{
+				$("input[id=chk]:checkbox").prop("checked", true);
+			}
+		})
+	
+	</script>
+	
    
    <script src="https://use.fontawesome.com/releases/v5.0.0/js/all.js"></script>
    <script

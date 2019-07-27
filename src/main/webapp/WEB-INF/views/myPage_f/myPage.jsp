@@ -42,6 +42,8 @@
 <!-- 모든 브라우저 호완성을 위해 추가  -->
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+<script
+	src="https://unpkg.com/popper.js"></script>
 </head>
 <style>
 .nav_b {
@@ -57,6 +59,9 @@
 .nav_ul * {
 	text-align: center;
 }
+#qm:hover {
+	cursor:pointer;
+}
 </style>
 <script>
 	$(function() {
@@ -67,6 +72,7 @@
 		$(location).attr("href", "/login_main");
 		</c:when>
 		</c:choose>
+		$('[data-toggle="tooltip"]').tooltip();
 		$("#on").hide();
 		$("#logout_na").on("click",function() {
 							$.ajax({
@@ -293,7 +299,8 @@
 									<td >${address2 }</td>
 								</tr>
 								<tr>
-									<th scope="row">회원등급</th>
+									<th scope="row">회원등급<img
+											src="../resources/img/qm.png" width="30px" id="qm" data-toggle="tooltip"  data-html="true" data-placement="right" title="<p>브론즈=기본  <br> 실버=댓글 1,판매 1 <br> 골드=댓글 5,판매 5 <br> 플래티넘=댓글 10,판매 10 <br> 다이아=댓글 50,판매 50 <br> 마스터=댓글 100,판매 100 </p>"></th>
 									<td colspan="2">${member_class}</td>
 								</tr>
 								<tr>

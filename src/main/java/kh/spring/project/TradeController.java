@@ -284,5 +284,5 @@ public class TradeController {
    public String goodsTradeWrite() {
       return "goodsTradeWrite";
    }
-
+   
 }

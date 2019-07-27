@@ -177,16 +177,16 @@ public class CartDAO {
 		return sst.insert("CartDAO.stream",dto);
 	}
 
-	public int overlap(int no) {
-		return sst.selectOne("CartDAO.overlapCheck", no);
+	public int overlap(CartTradeDTO dto) {
+		return sst.selectOne("CartDAO.overlapCheck", dto);
 	} 
 	
 	public int streamimgAuction(CartAuctionDTO dto) {
 		return sst.insert("CartDAO.streamAuction",dto);
 	}
 	
-	public int overlapAuction(int no) {
-		return sst.selectOne("CartDAO.overlapCheckAuction",no);
+	public int overlapAuction(CartAuctionDTO dto) {
+		return sst.selectOne("CartDAO.overlapCheckAuction",dto);
 	}
 
 }

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -20,10 +20,8 @@
 <meta charset="UTF-8">
 <!-- Site Title -->
 <title>Kangaroo Shop</title>
-<!--
-		CSS
-		============================================= -->
-		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="32x32"
+	href="/favicon-32x32.png">
 <link rel="stylesheet" href="../resources/css/linearicons.css">
 <link rel="stylesheet" href="../resources/css/font-awesome.min.css">
 <link rel="stylesheet" href="../resources/css/themify-icons.css">
@@ -37,54 +35,48 @@
 <link rel="stylesheet" href="../resources/css/magnific-popup.css">
 <link rel="stylesheet" href="../resources/css/main.css">
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<link
-   href="https://fonts.googleapis.com/css?family=Do+Hyeon|Noto+Sans+KR|Acme|Nanum+Pen+Script&display=swap"
-   rel="stylesheet">
-   <style>
-* {
-   font-family: 'Noto Sans KR', sans-serif;
-}
-#div {
-   margin-top: 10%;
-   overflow: hidden;
-   text-align: center;
-   width: 400px;
-   height: 500px;
-}
-form>div{
-   background-color: #ffffff95;
-    border-radius:5px;
+<style>
+#layer {
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	height: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	display: -webkit-flex; -webkit-align-item; center;
+	-webkit-justify-content: center;
 }
 
-#header {
-   width: 108.1%;
-   height: 40%;
+#row {
+	margin-top: 80px;
+	margin-bottom: 80px;
+	background-color: #ffffff95;
+	width: 300px;
+	height: 400px;
+	border-radius: 10px;
 }
 
-logo {
-   width: 100%;
-   height: auto;
+.row>div {
+	text-align: center;
 }
 
-#log {
-   width:300px;
-}
-.form-control {
-   float: left;
-   width: 100%;
-   height: 100%;
+#login_btn, #kakao_login_btn, #sign_up_btn, #toMain_btn {
+	width: 222px;
+	height: 49px;
 }
 
-.input_text {
-   text-align: right;
+#naver_login_btn {
+	width: 222px;
+	height: 49px;
+	background-color: transparent;
+	border: none;
+	cursor: pointer;
 }
 
-main>div>input {
-   margin-left: 50px;
-}
-
-main>div {
-   padding-top: 80%;
+b, sup, sub, u, del {
+	color: black;
 }
 .nav_b {
 	border: 0px;
@@ -100,66 +92,83 @@ main>div {
 	text-align: center;
 }
 </style>
-   <script>
-   $(function()
-		   <c:choose>
-	<c:when test="${logintype!=null}">
-		alert("로그아웃후 이용 가능합니다");
-		$(location).attr("href","/");
-	</c:when>
-	</c:choose>
-    {
-      $(document).keyup(function(e) {
-           if ( e.keyCode == 13) {
-              $("#login_btn").click();
-           }
-       });
-      $("#login_btn").on("click", function()
-      {
-         $.ajax
-           ({
-              type: "POST",
-              url:"loginProc",
-              data:
-              {
-                 id:$("#id").val(),
-                 pw:$("#pw").val()
-              }
-           })
-           .done(function(response)
-           {
-              if(response == "Y")
-              {
-            	  $.ajax
-                  ({
-                     url:"/level"
-                  }).done(function(resp){
-                	  location.href = "/";	  
-                  })
-                 
-              }
-              else if(response == "N")
-              {
-                 alert("아이디 혹은 비밀번호를 확인해주세요.");
-              }
-              else
-              {
-                 alert("ERROR");
-              }
-           })
-           .fail(function()
-           {
-              window.location.href = "error.pc";
-           });
-      });
-      
-       $("#back_btn").on("click", function()
-       {
-          location.href = "login_main";
-       });
-    });
+<style>
+	.subtitle{
+		float: right;
+		
+	}
+
+	#title_input{
+		width:100%;
+	}
+	
+	h1{
+		text-align: center;
+	}
+	#writting{
+		height: 500px;
+	}
+	.mid_nav_one{
+		float: left;
+	}
+	#btnclass{
+		float: right;
+	}
+</style>
+<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+<script>
+      function noSpaceForm(obj) { // 공백사용못하게
+         var str_space = /\s/; // 공백체크
+         if (str_space.exec(obj.value)) { //공백 체크
+            alert("해당 항목에는 공백을 사용할수 없습니다.\n\n공백은 자동적으로 제거 됩니다.");
+            obj.focus();
+            obj.value = obj.value.replace(' ', ''); // 공백제거
+            return false;
+         }
+         // onkeyup="noSpaceForm(this);" onchange="noSpaceForm(this);"
+      }
+   </script>
+<script>
+	$(function() {
+		 <c:choose>
+	    <c:when test="${logintype!='admin'}">
+	    	alert("관리자만 이용 가능합니다");
+	    $(location).attr("href", "notice_main");
+	    </c:when>
+    </c:choose> 
+		$("#reset").on("click",function(){
+			if (confirm("뒤로가기?") == true){    //확인
+				$("#renotice").attr("action", "resetnotice");
+				$("#renotice").submit();
+			 }else{   //취소
+			     return false;
+			 }
+			
+			 // no 번호를 이용하여 서치후 다시 돌아가는것처럼 보이게한다
+		})
+		$("#input").on("click",function(){
+			if(confirm("입력 하시겠습니까?") == true){
+				if($("#title_input").val() == "" || $("#writting").val() == ""){
+		    		alert("값을 제대로 입력해 주세요.");
+		    		return false;
+		    	}else{
+		    		return true;
+		    	}
+			}else{ // 취소
+				return false;
+			}
+		})
+		
+		$("#sign_up_btn").on("click", function() {
+			location.href = "insert";
+		});
+		$("#toMain_btn").on("click", function() {
+			location.href = "/";
+		});
+	});
+	onload = function() {
+	};
 </script>
-   
 </head>
 <body>
 <header class="header_area sticky-header">
@@ -205,8 +214,6 @@ main>div {
 												href="/goMyPage">마이페이지</a></li>
 											<li class="nav-item "><a class="nav-link"
 												href="/toPoint">포인트충전</a></li>
-											<li class="nav-item "><a class="nav-link"
-												href="/toPoint_exc">포인트환급</a></li>
 											<li class="nav-item "><input type="button"
 												class="nav-link nav_b" id="logout_na" value="로그아웃"></li>
 										</ul></li>
@@ -220,10 +227,8 @@ main>div {
 											<li class="nav-item "><a class="nav-link" href="/goCart">찜목록</a></li>
 											<li class="nav-item "><a class="nav-link"
 												href="/goMyPage">마이페이지</a></li>
-												<li class="nav-item "><a class="nav-link"
-												href="/toPoint">포인트충전</a></li>
 											<li class="nav-item "><a class="nav-link"
-												href="/toPoint_exc">포인트환급</a></li>
+												href="/toPoint">포인트충전</a></li>
 											<li class="nav-item "><input type="button"
 												class="nav-link nav_b" id="logout_ka" value="로그아웃"></li>
 										</ul></li>
@@ -239,8 +244,6 @@ main>div {
 												href="/goMyPage">마이페이지</a></li>
 											<li class="nav-item "><a class="nav-link"
 												href="/toPoint">포인트충전</a></li>
-												<li class="nav-item "><a class="nav-link"
-												href="/toPoint_exc">포인트환급</a></li>
 											<li class="nav-item "><a class="nav-link" href="/logout">로그아웃</a></li>
 										</ul></li>
 								</c:when>
@@ -255,63 +258,43 @@ main>div {
 				</div>
 			</nav>
 		</div>
-	</header><!-- Start Banner Area -->
+	</header>
+	<!-- Start Banner Area -->
 	<section class="banner-area organic-breadcrumb">
 	<div class="container">
 		<div
 			class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
 			<div class="col-first">
-				<h1>로그인</h1>
+				<h1>로그인 메인</h1>
 				<nav class="d-flex align-items-center"> <a href="/">메인페이지<span
-					class="lnr lnr-arrow-right"></span></a> <a href="/login_main">로그인 메인<span
-					class="lnr lnr-arrow-right"></span></a> <a href="/login">로그인<span
-					class="lnr "></span></a></nav>
+					class="lnr lnr-arrow-right"></span></a> <a href="/login_main">공지사항
+					메인<span class="lnr "></span>
+				</a> </nav>
 			</div>
 		</div>
 	</div>
 	</section>
-<form action="loginProc" method="post">
-      <div class="container col-md-6" id="div">
-         <div class="row pt-4" id="main">
-            <div class="col-1"></div>
-            <div class="col-3 input_text pt-2">
-               <label>아이디 :</label>
-            </div>
-            <div class="col-7">
-               <input type="text" class="form-control" placeholder="아이디 입력"
-                  name="id" id="id" required>
-            </div>
-            <div class="col-1"></div>
-         </div>
-         <div class="row pt-1 mt-1" id="main">
-            <div class=" col-4 input_text pt-2">
-               <label>비밀번호 :</label>
-            </div>
-            <div class="col-7">
-               <input class="form-control" type="password" placeholder="비밀번호 입력"
-                  name="pw" id="pw" required>
-            </div>
-            <div class="col-1"></div>
-         </div>
-         <div class="row pt-1 mt-2" id="main">
-            <div class="col-1"></div>
-            <div class="col-10 input_text">
-               <a href="findIdOrPw" style="color: #7a5634">아이디 비밀번호 찾기</a> <span>/</span>
-                <a href="insert" style="color: #7a5634">회원가입</a>
-            </div>
-            <div class="col-1"></div>
-         </div>
-         <div class="row pt-1 mt-2" id="main">
-            <div class="col-2"></div>
-            <div class="col-9 input_text">
-               <button type="button" class="btn btn-warning" id="login_btn">확인</button>
-               <button type="button" class="btn btn-warning" id="back_btn">돌아가기</button>
-            </div>
-            <div class="col-1"></div>
-         </div>
-      </div>
-   </form>
-<footer class="footer-area section_gap">
+	<!-- show time  -->
+<main>
+   <form action="noticeupdate.do" id="renotice" method="post" enctype="multipart/form-data" >
+   <div class="row">
+	   <div class="container mb-5" id="board"  >
+	   		<div id="mid_nav">
+	   			<div class="mid_nav_title col-12 my-3"><h1>공지사항</h1></div>
+	   			<input type="hidden" name="no" value="${dtos.no}">
+	   			<div class="mid_nav_one col-lg-2 col-md-2 col-sm-12 mb-2  "><h3 id="title_title" style="align-content: center;">제목</h3></div>
+	   			<div class="mid_nav_one col-lg-10 col-md-10 col-sm-12 mb-2"><input type="text" id="title_input" name="title" value="${dtos.title}" onkeyup="noSpaceForm(this);"></div>
+	   			<div class="mid_nav_one col-lg-12 col-md-12 col-sm-12 mb-2"><input type="file"  name="images" id="file" style="float:left" ></div>
+		   	<input type="hidden" name="image" value="${dtos.image}">
+	   		</div>
+		   	<textarea class="form-control mb-2" id="writting" rows="3"  name="contents" onkeyup="noSpaceForm(this);">${dtos.contents}</textarea>
+		   	<div class="mb-2" id="btnclass"><input id="input" type="submit" class="btn btn-warning mr-2" value="입력"><input class="btn btn-warning" type="button" id="reset" value="취소"></div>
+	   	</div>
+   	</div>
+   	</form>
+  </main>
+	<!-- show time  -end- -->
+	<footer class="footer-area section_gap">
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-3  col-md-6 col-sm-6">
@@ -385,7 +368,9 @@ main>div {
 			<p class="footer-text m-0">
 				<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 				Copyright &copy;
-				<script>document.write(new Date().getFullYear());</script>
+				<script>
+					document.write(new Date().getFullYear());
+				</script>
 				All rights reserved | This template is made with <i
 					class="fa fa-heart-o" aria-hidden="true"></i> by <a
 					href="https://colorlib.com" target="_blank">Colorlib</a>
@@ -410,5 +395,17 @@ main>div {
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
 	<script src="../resources/js/gmaps.min.js"></script>
 	<script src="../resources/js/main.js"></script>
+	<script type='text/javascript'>
+		Kakao.init('473f4afca91d6d42fb0364e90c3df475');
+		Kakao.Auth.createLoginButton({
+			container : '#kakao-login-btn',
+			success : function(authObj) {
+				location.href = "login.ka";
+			},
+			fail : function(err) {
+				alert(JSON.stringify(err));
+			}
+		});
+	</script>
 </body>
 </html>
