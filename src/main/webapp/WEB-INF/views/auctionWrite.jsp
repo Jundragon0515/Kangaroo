@@ -513,6 +513,7 @@
 							<div id="man" class="middleName">메인 이미지</div>
                             <input type="file" id="image" class="imgRegister1" accept=".jpg, .png">
 							<input type="hidden" id="imgTitle" name="title_img">
+							
                          
 				<div id="a">		  
 <br>
