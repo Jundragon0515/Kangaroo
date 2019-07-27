@@ -531,7 +531,7 @@
 												<input type="hidden" name="middle1_img" id="d">
 										</div>
 										<!-- 미리보기 영역 -->
-										<div id="preview" class="content">상세 이미지 최소1장부터 최대 10장까지 넣을 수 있습니다.</div>
+										<div id="preview" class="content"></div>
 										<!-- multipart 업로드시 영역 -->
 									</div>
 								</div>      

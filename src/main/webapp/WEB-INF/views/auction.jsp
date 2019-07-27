@@ -210,6 +210,10 @@ pageEncoding="UTF-8"%>
 #send:hover {
 	cursor: pointer;
 }
+#checkAllAuctionBoard {
+    left: 89%;
+    position: relative;
+}
 </style>
 
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
@@ -513,7 +517,6 @@ pageEncoding="UTF-8"%>
                </c:choose>
             </div>
 
-
          </div>
          <!-- end menu  -->
 
@@ -572,7 +575,7 @@ pageEncoding="UTF-8"%>
                      <div class="col-lg-3 col-md-6">
 						<c:choose>
                				<c:when test="${logintype=='admin'}">
-               					<input type="checkbox" name="checkDelete" value="${temp.no }">
+               					<input type="checkbox" name="checkDelete" value="${temp.no }" class="auctionCheck" id="chk">
                				</c:when>
                			</c:choose>
                         <div class="single-product" style="margin-bottom: 15px;">
@@ -608,7 +611,7 @@ pageEncoding="UTF-8"%>
                                  </div>
                                  <div class="row product-details" style="padding-left: 10px;">
                                     <div class="prd-bottom" style="margin-top: 5px;">
-                                       <a href="boardGgymAuction?no=${temp.no}&title_img=${temp.title_img}&title=${temp.title}&trade_type=${temp.end_date }&category=${temp.category }&price=${temp.starting_price}&id=${temp.id}" class="social-info ggym"> <span class="lnr lnr-heart"></span>
+                                       <a href="boardGgymAuction?no=${temp.no}&title_img=${temp.title_img}&title=${temp.title}&end_date=${temp.end_date }&category=${temp.category }&price=${temp.starting_price}&id=${temp.id}" class="social-info ggym"> <span class="lnr lnr-heart"></span>
                                           <p class="hover-text">ADD TO BAG</p>
                                        </a> 
                                        <a href="/auction_detailPage?no=${temp.no}" class="social-info">
@@ -626,15 +629,20 @@ pageEncoding="UTF-8"%>
                </div>
                </form>
             </div>
+             <c:choose>
+               	<c:when test="${logintype=='admin'}">
+            		<input type="button" id="checkAllAuctionBoard" value="전체선택" name="checkAll" class="genric-btn primary radius">
+            	</c:when>
+            </c:choose>	
             </section>
             <div class="row">
                <div class="col-12 naviArea">
                   <b class="paging">${navi }</b>
                </div>
-            </div>
+            </div>        
          </div>
          <!-- end center  -->
-
+		
          <!-- start fixbutton -->
          <div class="d-none d-lg-block col-lg-1">
             <i class="fas fa-chevron-circle-up btn-fixed back-to-top fa-3x"></i>
@@ -736,6 +744,13 @@ pageEncoding="UTF-8"%>
 				   alert("로그인 하세요.");
 				   return false;
 			   }
+		})
+		$("#checkAllAuctionBoard").on("click",function(){
+			if($("input:checkbox[id=chk]").is(":checked")==true){
+				 $("input[id=chk]:checkbox").prop("checked", false);				
+			}else{
+				$("input[id=chk]:checkbox").prop("checked", true);
+			}
 		})
 	
 	</script>

@@ -80,4 +80,9 @@
 	<select id="mainSafeList" parameterType="map" resultType="kh.spring.dto.Used_transaction_boardDTO">
 		select * from (select row_number() over(order by no desc) as rown, used_transaction_board.* from used_transaction_board where TRADE_TYPE='안전거래' and ongoing='y') where rown between #{start} and #{end}
 	</select>
+	
+	<delete id="cancleTrade">
+		delete from used_transaction_board where no=#{value}
+	</delete>
+
 </mapper>

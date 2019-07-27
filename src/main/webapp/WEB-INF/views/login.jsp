@@ -130,7 +130,13 @@ main>div {
            {
               if(response == "Y")
               {
-                 location.href = "/";
+            	  $.ajax
+                  ({
+                     url:"/level"
+                  }).done(function(resp){
+                	  location.href = "/";	  
+                  })
+                 
               }
               else if(response == "N")
               {
