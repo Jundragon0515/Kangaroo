@@ -455,7 +455,7 @@ function viewCount(){
                                 <td>
                                     <div class="media">
                                         <div class="d-flex">
-                                        	<input type="checkbox" class="tradeCheck" name="checkDelete" value="${trade.no}">
+                                        	<input type="checkbox" class="tradeCheck" name="checkDelete" value="${trade.no}" id="chkTrade">
                                             <img src="img/title/${trade.title_img }" class="tImg" alt="">
                                         </div>
                                         <div class="media-body">
@@ -502,7 +502,7 @@ function viewCount(){
                                 <td>
                                     <div class="media">
                                         <div class="d-flex">
-                                        <input type="checkbox" class="auctionCheck" name="checkDeleteAuction" value="${auction.no}">
+                                        <input type="checkbox" class="auctionCheck" name="checkDeleteAuction" value="${auction.no}" id="chkAuction">
                                             <img src="img/title/${auction.title_img}" class="tImg" alt="">
                                         </div>
                                         <div class="media-body">
@@ -542,15 +542,22 @@ function viewCount(){
    </footer>
    
    <script>
-   	$("#allCheckTrade").on("click",function(){
-   		$(".tradeCheck").attr("checked",true);
-   	})
-   	$("#allCheckAuction").on("click",function(){
-   		$(".auctionCheck").attr("checked",true);
-   	})
-   	
-   	
-   
+   $("#allCheckTrade").on("click",function(){
+		if($("input:checkbox[id=chkTrade]").is(":checked")==true){
+			 $("input[id=chkTrade]:checkbox").prop("checked", false);				
+		}else{
+			$("input[id=chkTrade]:checkbox").prop("checked", true);
+		}
+	})
+	
+	$("#allCheckAuction").on("click",function(){
+			if($("input:checkbox[id=chkAuction]").is(":checked")==true){
+				 $("input[id=chkAuction]:checkbox").prop("checked", false);				
+			}else{
+				$("input[id=chkAuction]:checkbox").prop("checked", true);
+			}
+		})
+
    </script>
 
    <!-- End footer Area -->

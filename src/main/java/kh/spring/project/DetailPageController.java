@@ -20,10 +20,12 @@ import kh.spring.dao.MemberDAO;
 import kh.spring.dto.Auction_boardDTO;
 import kh.spring.dto.Auction_img_boardDTO;
 import kh.spring.dto.CommentDTO;
+import kh.spring.dto.MemberDTO;
 import kh.spring.dto.OrderDTO;
 import kh.spring.dto.TenderDTO;
 import kh.spring.dto.Used_transaction_boardDTO;
 import kh.spring.dto.Used_transaction_img_boardDTO;
+import kh.spring.service.GoodsTradeService;
 import kh.spring.service.MemberService;
 
 @Controller
@@ -46,6 +48,14 @@ public class DetailPageController {
 	@Autowired
 	HttpSession session;
 	
+	@Autowired
+	private GoodsTradeService gs;
+	
+	@Autowired
+	private TradeController tc;
+	
+	@Autowired
+	private AuctionController ac;
 	
 	@RequestMapping("/topTender")
 	@ResponseBody
@@ -127,6 +137,15 @@ public class DetailPageController {
 		gtdao.viewCountUpdate(no);
 		
 		int currentPage = 1;
+		
+//	      List<Used_transaction_boardDTO> mainDirectList = mes.directList();
+			List<Used_transaction_boardDTO> d_mainSafeList = sdao.safeList();
+			request.setAttribute("d_list", d_mainSafeList);
+//			List<Auction_boardDTO> detailAuctionList = sdao.d_auctionList();
+//			request.setAttribute("d_list", detailAuctionList);
+//			mav.addObject("mainDirectList",mainDirectList);
+//			mav.addObject("mainSafeList",mainSafeList);
+//			mav.addObject("auctionList", mainAuctionList);
 
 		String id = (String) session.getAttribute("email");
 		if(id!=null) {
@@ -166,6 +185,14 @@ public class DetailPageController {
 	      int currentMoney = 0;
 	      int currentPage = 1;
 	      
+//	      List<Used_transaction_boardDTO> mainDirectList = mes.directList();
+//			List<Used_transaction_boardDTO> mainSafeList = mes.safeList();
+			List<Auction_boardDTO> detailAuctionList = sdao.d_auctionList();
+			request.setAttribute("d_list", detailAuctionList);
+//			mav.addObject("mainDirectList",mainDirectList);
+//			mav.addObject("mainSafeList",mainSafeList);
+//			mav.addObject("auctionList", mainAuctionList);
+	      
 	      if(request.getParameter("currentPage")!=null) {
 	         currentPage=Integer.parseInt(request.getParameter("currentPage"));
 	      }
@@ -173,7 +200,6 @@ public class DetailPageController {
 	      int boardNum = no;
 	      try {
 	         List<CommentDTO> result = mdao.commentList2(currentPage, boardNum);
-	         
 	         try {
 	         currentMoney = mdao.currentMoney(no);
 	         System.out.println(currentMoney);
@@ -294,12 +320,16 @@ public class DetailPageController {
 		String msg = request.getParameter("msg");
 		int currentPage1 = 1;
 
+		MemberDTO mdto = mdao.selectById(id);
+		String level = mdto.getMember_class();
+		
 		CommentDTO dto = new CommentDTO();
 		dto.setId(id);
 		dto.setBoardNum(board_num);
 		dto.setIpaddress(ipaddress);
 		dto.setContents(msg);
-
+		dto.setMember_class(level);
+		
 		mdao.insertComment(dto);
 
 		List<CommentDTO> contents = null;
@@ -327,13 +357,18 @@ public class DetailPageController {
 		String ipaddress = request.getRemoteAddr();
 		String msg = request.getParameter("msg");
 		int currentPage = 1;
-
+		
+		MemberDTO mdto = mdao.selectById(id);
+		String level = mdto.getMember_class();
+		
 		CommentDTO dto = new CommentDTO();
+
 		dto.setId(id);
 		dto.setBoardNum(board_num);
 		dto.setIpaddress(ipaddress);
 		dto.setContents(msg);
-
+		dto.setMember_class(level);
+		
 		System.out.println(dto.getId() + " : " + dto.getContents() + " : " + dto.getBoardNum());
 		mdao.insertComment2(dto);
 
@@ -379,17 +414,12 @@ public class DetailPageController {
 			System.out.println(result);
 
 			if (result>0) {
-				try {
-					sdao.tender(dto, boardNum);
-				} catch (Exception e) {
-					System.out.println("입찰 오류");
-					e.printStackTrace();
-				}
-				;
-
-				List<TenderDTO> rank = mdao.rank(boardNum);
-				return new Gson().toJson(rank);
-
+					if(sdao.tender(dto, boardNum)>0) {
+						List<TenderDTO> rank = mdao.rank(boardNum);
+						return new Gson().toJson(rank);
+					}else {
+						return null;
+					}
 			} else {
 				return null;
 			}
@@ -404,5 +434,11 @@ public class DetailPageController {
 
 			return firstMoney;
 		}
-	
+		
+		@RequestMapping("/cancleTrade")
+		   public String cancleTrade(HttpServletRequest request) {
+			int no = Integer.parseInt(request.getParameter("no"));
+			   gs.cancleTrade(no);
+			   return tc.direct(request);
+		}
 }

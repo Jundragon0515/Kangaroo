@@ -5,6 +5,7 @@ import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -30,6 +31,43 @@ public class MemberDAO {
 	private JdbcTemplate template;
 	@Autowired
 	private DataSource ds;
+	
+	public int levelUp(String id, String grade) throws Exception {
+		
+		String sql ="update members set member_class = ? where id = ?";
+		
+		try (Connection con = ds.getConnection();
+			PreparedStatement pstat = con.prepareStatement(sql);){
+			pstat.setString(1, grade);
+			pstat.setString(2, id);
+			
+			int result = pstat.executeUpdate();
+			
+			return result; 
+					
+		}
+		
+		
+	}
+	
+	public String level(String id) {
+		return sst.selectOne("MemberDAO.level", id);
+	}
+	
+	public int count1(String id) {
+		return sst.selectOne("MemberDAO.count1",id);
+	}
+	public int count2(String id) {
+		return sst.selectOne("MemberDAO.count2",id);
+	}
+	
+	public int countComment1(String id) {
+		return sst.selectOne("MemberDAO.commentCount1",id);
+	}
+	public int countComment2(String id) {
+		return sst.selectOne("MemberDAO.commentCount2",id);
+	}
+	
 	public int getPoint(String id) {
 		return sst.selectOne("MemberDAO.getPoint", id);
 	}
@@ -147,7 +185,7 @@ public List<CommentDTO> commentList(int currentPage, int boardNum) throws Except
 int endNum = currentPage * recordCountPerPage;
 int startNum = endNum - (recordCountPerPage - 1);
 
-String sql = "select * from (select row_number() over (order by seq desc)rank, seq,  id, contents,time,ipaddress,boardNum from comments where boardNum=?)\r\n" + 
+String sql = "select * from (select row_number() over (order by seq desc)rank, seq,  id, contents,time,ipaddress,boardNum,member_class from comments where boardNum=?)\r\n" + 
 "where rank between ? and ? order by seq asc";
 
 try (Connection con = ds.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
@@ -167,6 +205,7 @@ while (rs.next()) {
 	String time = rs.getString(5);
 	String ipaddress = rs.getString(6);
 	int board_Num = rs.getInt(7);
+	String level = rs.getString(8);
 
 	CommentDTO dto = new CommentDTO();
 	dto.setSeq(seq);
@@ -175,6 +214,7 @@ while (rs.next()) {
 	dto.setTime(time);
 	dto.setIpaddress(ipaddress);
 	dto.setBoardNum(board_Num);
+	dto.setMember_class(level);
 	result.add(dto);
 }
 
@@ -270,7 +310,7 @@ public List<CommentDTO> commentList2(int currentPage, int boardNum) throws Excep
 int endNum = currentPage * recordCountPerPage2;
 int startNum = endNum - (recordCountPerPage2 - 1);
 
-String sql = "select * from (select row_number() over (order by seq desc)rank, seq,  id, contents,time,ipaddress,boardNum from comments2 where boardNum=?)\r\n" + 
+String sql = "select * from (select row_number() over (order by seq desc)rank, seq,  id, contents,time,ipaddress,boardNum,member_class from comments2 where boardNum=?)\r\n" + 
 "where rank between ? and ? order by seq asc";
 
 try (Connection con = ds.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
@@ -290,6 +330,7 @@ while (rs.next()) {
 	String time = rs.getString(5);
 	String ipaddress = rs.getString(6);
 	int board_Num = rs.getInt(7);
+	String level = rs.getString(8);
 
 	CommentDTO dto = new CommentDTO();
 	dto.setSeq(seq);
@@ -298,7 +339,9 @@ while (rs.next()) {
 	dto.setTime(time);
 	dto.setIpaddress(ipaddress);
 	dto.setBoardNum(board_Num);
+	dto.setMember_class(level);
 	result.add(dto);
+	
 }
 
 return result;

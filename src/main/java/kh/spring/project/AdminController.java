@@ -40,6 +40,15 @@ public class AdminController {
 		return tc.direct(request);
 	}
 	
+	@RequestMapping("boardWriteSafeDelete")
+	public String boardWritesafeDelete(HttpServletRequest request) {
+		String[] value =  request.getParameterValues("checkDelete");
+		if(value!=null) {
+			sv.boardDelete(value);
+		}
+		return tc.safe(request);
+	}
+	
 	@RequestMapping("auctionBoardDelete")
 	public String acutionWriteDelete(HttpServletRequest request) {
 		String[] value =  request.getParameterValues("checkDelete");

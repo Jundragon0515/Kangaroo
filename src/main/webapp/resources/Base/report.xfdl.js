@@ -32,7 +32,7 @@
             obj.set_font("normal 13pt/normal \"Arial\"");
             this.addChild(obj.name, obj);
 
-            obj = new Static("Static03","214","343","52","55",null,null,null,null,null,null,this);
+            obj = new Static("Static03","214","273","52","55",null,null,null,null,null,null,this);
             obj.set_taborder("2");
             obj.set_text("내용");
             obj.set_font("normal 13pt/normal \"Arial\"");
@@ -55,7 +55,7 @@
             obj.set_textAlign("left");
             this.addChild(obj.name, obj);
 
-            obj = new TextArea("contents","352","312","337","137",null,null,null,null,null,null,this);
+            obj = new TextArea("contents","352","260","337","199",null,null,null,null,null,null,this);
             obj.set_taborder("5");
             obj.set_dragscrolltype("horz");
             obj.set_wordWrap("english");
@@ -63,26 +63,14 @@
             obj.set_textAlign("left");
             this.addChild(obj.name, obj);
 
-            obj = new Button("Button00","649","463","71","37",null,null,null,null,null,null,this);
+            obj = new Button("Button00","619","473","71","37",null,null,null,null,null,null,this);
             obj.set_taborder("6");
             obj.set_text("신고하기");
             obj.set_font("normal 13pt/normal \"Arial\"");
             this.addChild(obj.name, obj);
 
-            obj = new Static("Static04","214","256","106","34",null,null,null,null,null,null,this);
-            obj.set_taborder("7");
-            obj.set_text("작성자");
-            obj.set_font("normal 13pt/normal \"Arial\"");
-            this.addChild(obj.name, obj);
-
-            obj = new Edit("writer","352","255","337","37",null,null,null,null,null,null,this);
-            obj.set_taborder("8");
-            obj.set_font("normal 10pt/normal \"Arial\"");
-            obj.set_textAlign("left");
-            this.addChild(obj.name, obj);
-
             obj = new Static("Static00","210","24","449","98",null,null,null,null,null,null,this);
-            obj.set_taborder("9");
+            obj.set_taborder("7");
             obj.set_text("신고하기");
             obj.set_textAlign("center");
             obj.set_font("normal 30pt/normal \"Arial\"");
@@ -111,7 +99,7 @@
                 p.Static03.set_taborder("2");
                 p.Static03.set_text("내용");
                 p.Static03.set_font("normal 13pt/normal \"Arial\"");
-                p.Static03.move("214","343","52","55",null,null);
+                p.Static03.move("214","273","52","55",null,null);
 
                 p.cause.set_taborder("3");
                 p.cause.set_innerdataset(cause_innerdataset);
@@ -131,24 +119,14 @@
                 p.contents.set_wordWrap("english");
                 p.contents.set_font("normal 10pt/normal \"Arial\"");
                 p.contents.set_textAlign("left");
-                p.contents.move("352","312","337","137",null,null);
+                p.contents.move("352","260","337","199",null,null);
 
                 p.Button00.set_taborder("6");
                 p.Button00.set_text("신고하기");
                 p.Button00.set_font("normal 13pt/normal \"Arial\"");
-                p.Button00.move("649","463","71","37",null,null);
+                p.Button00.move("619","473","71","37",null,null);
 
-                p.Static04.set_taborder("7");
-                p.Static04.set_text("작성자");
-                p.Static04.set_font("normal 13pt/normal \"Arial\"");
-                p.Static04.move("214","256","106","34",null,null);
-
-                p.writer.set_taborder("8");
-                p.writer.set_font("normal 10pt/normal \"Arial\"");
-                p.writer.set_textAlign("left");
-                p.writer.move("352","255","337","37",null,null);
-
-                p.Static00.set_taborder("9");
+                p.Static00.set_taborder("7");
                 p.Static00.set_text("신고하기");
                 p.Static00.set_textAlign("center");
                 p.Static00.set_font("normal 30pt/normal \"Arial\"");
@@ -171,13 +149,9 @@
 
                 p.Static02.move("54","201","47","38",null,null);
 
-                p.Static04.move("54","256","106","34",null,null);
+                p.Static03.move("54","323","52","55",null,null);
 
-                p.Static03.move("54","343","52","55",null,null);
-
-                p.contents.move("162","312","337","137",null,null);
-
-                p.writer.move("162","255","337","37",null,null);
+                p.contents.move("162","260","337","189",null,null);
 
                 p.title.move("162","202","337","38",null,null);
 
@@ -205,15 +179,12 @@
         {
         	var cause = this.cause.text;
         	var title = this.title.value;
-        	var writer = this.writer.value;
         	var contents = this.contents.value;
 
          		var params = "cause="+cause;
          			params += " title="+title;
-         			params += " writer="+writer;
          			params += " contents="+contents;
 
-        	console.log(cause+title+writer+contents);
 
         	this.transaction("report","../../report","","",params,"saveCallback");
         };
