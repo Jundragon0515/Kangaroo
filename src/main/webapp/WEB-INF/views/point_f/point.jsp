@@ -82,7 +82,7 @@ $(function(){
     	var postcode="${zipcode}";
     }
 	$("#payment_btn").on("click",function(){
-		var  amount = Number($("#donaMoney").val());
+		var  amount = Number($("#donaMoney").val().replace(/,/gi,""));
 		IMP.request_pay({
 		    pg : 'html5_inicis', // version 1.1.0부터 지원.
 		    pay_method : $("#donaMethod option:selected").val(),
