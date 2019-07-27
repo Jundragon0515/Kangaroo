@@ -21,12 +21,24 @@ public class CartService {
 	public List<CartAuctionDTO> auctionList(int start1, int end1,String email){
 	    return dao.selectListA(start1, end1,email);
 	}
+	
+	public void cartTradeDelete(String value[]) {
+		for(int i=0; i<value.length; i++) {
+			dao.cartTradeDelete(value[i]);
+		}
+	}	
+	public void cartAuctionDelete(String  value[]) {
+		for(int i=0; i<value.length; i++) {
+			dao.cartAuctionDelete(value[i]);
+		}
+	}
+	
 	//일반 화면 게시판 네비
 	public String tradeNavi(int currentPage, int recordCountPerPage) {
 	   return dao.getNavi(currentPage, recordCountPerPage);
 	}
-	public String auctionNavi(int currentPage1, int recordCountPerPage) {
-		return dao.getNaviA(currentPage1, recordCountPerPage);
+	public String auctionNavi(int currentPage1, int recordCountPerPage1) {
+		return dao.getNaviA(currentPage1, recordCountPerPage1);
 	}
 	
 	public int streaming(CartTradeDTO dto) {
@@ -36,5 +48,12 @@ public class CartService {
 	public int overlapCheck(int no) {
 		return dao.overlap(no);
 	}
-
+	
+	public int streamingAuction(CartAuctionDTO dto) {
+		return dao.streamimgAuction(dto);
+	}
+	
+	public int overplapCheckAuction(int no) {
+		return dao.overlapAuction(no);
+	}
 }
