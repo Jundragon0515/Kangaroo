@@ -41,12 +41,12 @@
 
 
 <style>
-
-      * {
+ 
+/*   * {
    box-sizing: border-box;
    border: 1px solid black;
    word-break:break-all;
-}       
+} */    
 
 .nav_b {
    border: 0px;
@@ -137,7 +137,7 @@
 /*카드리스트 마우스 오버*/
 .card:hover {
    border: solid 1px #ffba00;
-   margin: 1px;
+   margin: -1px;
 }
 
 /*텍스트 가운데 정렬  */
@@ -201,8 +201,35 @@
 .atag-text{
 	position:relative;
 	text-align:center;
+	width:100%;
+	left:20%;
 }
 
+.atag-category{
+	position:relative;
+	text-align:center;
+	width:100%;
+}
+
+/* 폰트 이미지  */
+.fontawesome{
+	position:relative;
+	top:6%;
+}
+
+/* 조회수  */
+.view{
+	position:relative;
+	top:10%;
+	text-align:center;
+}
+
+/* 입력날짜 */
+.joinDate{
+position:relative;
+	top:10%;
+	text-align:center;
+}
 
 .back-to-top {text-decoration: none; display: none; color:#fe912b;}
 
@@ -224,7 +251,8 @@
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script>
 
-     $(function(){  
+     $(function(){ 
+    
        var offset = 50;   // 수직으로 어느정도 움직여야 버튼이 나올까?
        var duration = 600;   // top으로 이동할때까지의 animate 시간 (밀리세컨드, default는 400. 예제의 기본은 500)
        $(window).scroll(function() {
@@ -338,7 +366,7 @@
 						id="navbarSupportedContent">
 						<ul class="nav navbar-nav menu_nav ml-auto">
 							<!-- 							<li class="nav-item active"><a class="nav-link" href="/">Home</a></li> -->
-									<li class="nav-item"><a class="nav-link" href="/trade">중고
+									<li class="nav-item active"><a class="nav-link" href="/trade">중고
 											직거래</a></li>
 									<li class="nav-item"><a class="nav-link" href="/trade_safe">중고
 											안전거래</a></li>
@@ -442,7 +470,7 @@
          	</div>
                <div class="head">제품 카테고리</div>
                <ul class="main-categories">
-                  <li class="main-nav-list"><a data-toggle="collapse"
+                  <li class="main-nav-list naviCategory"><a data-toggle="collapse"
                      href="#" aria-expanded="false"
                      aria-controls="fruitsVegetable">
                      <span class="lnr lnr-arrow-right">
@@ -521,12 +549,12 @@
             <div class="single-product-slider">
             <!-- Start boardInfo  -->
                <div class="row list-nav">
-                  <div class="col-sm-12 col-md-12 col-lg-8 atag-text mt-2"><span style=font-size:25px>${selectCategory }</span>
+                  <div class="col-sm-12 col-md-11 col-lg-8 atag-category mt-2"><input class="viewCategory" type="hidden" value=${viewCategory }>
                   </div>
-                  <div class="d-none d-lg-block col-sm-6 col-md-3 col-lg-2 col-xl-1">
-                        <a class="nav-link p-0 mt-2" href="tradeOption?price=low"><span class="atag-text">낮은가격순</span></a> 
+                  <div class="d-none d-lg-block col-sm-6 col-md-4 col-lg-2 col-xl-1 p-0">
+                        <a class="nav-link p-0 mt-2 mr-0" href="tradeOption?price=low"><span class="atag-text">낮은가격순</span></a> 
                    </div>
-                   <div class="d-none d-lg-block col-sm-4 col-md-3 col-lg-2 col-xl-1">
+                   <div class="d-none d-lg-block col-sm-4 col-md-4 col-lg-2 col-xl-1 p-0">
                        <a class="nav-link p-0 mt-2" href="tradeOption?price=high"><span class="atag-text">높은가격순</span></a>
                     </div>
                      <div class="d-none d-xl-block col-sm-3 col-md-3 col-lg-2">
@@ -558,7 +586,7 @@
                                  src="/img/title/${temp.title_img}" alt="">
                               <div class="card-body" style="padding: 12px;">
                                  <div class="row">
-                                    <div class="d-none d-lg-block col-lg-12">[${temp.category}]</div>
+                                    <div class="d-none d-lg-block col-lg-12"><span class="selectCategory">[${temp.category}]</span></div>
                                  </div>
                                  <div class="row">
                                     <div class="col-lg-12">
@@ -569,9 +597,10 @@
                                     <div class="col-lg-12">판매가 : <fmt:formatNumber value="${temp.price}" pattern="#,###" />원</div>
                                  </div>
                                  <div class="row">
-                                    <div class="col-sm-12 col-md-10 col-lg-8">${temp.joinDate}</div>
-                                    <div class="d-none d-xl-block col-lg-2"><i class="fas fa-eye fa-2x"></i></div>
-                                    <div class="col-sm-12 col-md-2 col-lg-2">${temp.viewCount}</div>
+                                    <div class="d-none d-sm-block col-xs-2 col-sm-2 col-md-2 col-lg-2 pr-0"><i class="far fa-clock fa-2x fontawesome"></i></div>
+                                    <div class="d-none d-sm-block col-xs-4 col-sm-4 col-md-4 col-lg-6 pr-0"><span class="joinDate">${temp.joinDate}</span></div> 
+                                    <div class="d-none d-sm-block col-xs-2 col-sm-2 col-md-2 col-lg-2 m-0 pr-0"><i class="fas fa-eye fa-2x fontawesome"></i></div>
+                                    <div class="d-none d-sm-block col-xs-4 col-sm-4 col-md-4 col-lg-2 pr-0"><span class="view">${temp.viewCount}</span></div>
                                  </div>
                                  <div class="row product-details" style="padding-left: 10px;">
                                     <div class="prd-bottom" style="margin-top: 5px;">
@@ -608,12 +637,13 @@
                                     <div class="col-lg-12">판매가 : <fmt:formatNumber value="${temp.price}" pattern="#,###" />원</div>
                                  </div>
                                  <div class="row">
-                                    <div class="col-sm-12 col-md-10 col-lg-8">${temp.joinDate}</div>
-                                    <div class="d-none d-xl-block col-lg-2"><i class="fas fa-eye fa-2x"></i></div>
-                                    <div class="col-sm-12 col-md-2 col-lg-2">${temp.viewCount}</div>
+                                    <div class="d-none d-sm-block col-xs-2 col-sm-2 col-md-2 col-lg-2 pr-0"><i class="far fa-clock fa-2x fontawesome"></i></div>
+                                    <div class="d-none d-sm-block col-xs-4 col-sm-4 col-md-4 col-lg-6 pr-0"><span class="joinDate">${temp.joinDate}</span></div> 
+                                    <div class="d-none d-sm-block col-xs-2 col-sm-2 col-md-2 col-lg-2 m-0 pr-0"><i class="fas fa-eye fa-2x fontawesome"></i></div>
+                                    <div class="d-none d-sm-block col-xs-4 col-sm-4 col-md-4 col-lg-2 pr-0"><span class="view">${temp.viewCount}</span></div>
                                  </div>
-                                 <div class="row product-details" style="padding-left: 10px;">
-                                    <div class="prd-bottom" style="margin-top: 5px;">
+                                 <div class="row product-details" style="padding-left: 15px;">
+                                    <div class="prd-bottom" style="margin-top: 10px;">
                                        <a href="boardGgym?no=${temp.no}&title_img=${temp.title_img}&title=${temp.title}&trade_type=${temp.trade_type }&category=${temp.category }&price=${temp.price}" class="social-info"> <span class="lnr lnr-heart"></span>
                                           <p class="hover-text">Wishlist</p>
                                        </a> <a href="/used_detailPage?no=${temp.no}" class="social-info">

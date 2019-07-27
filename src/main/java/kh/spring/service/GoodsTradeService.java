@@ -96,5 +96,6 @@ public class GoodsTradeService {
    public String safeBoardNavi_search(HttpSession session, int currentPage, int recordCountPerPage){
 	   return gdao.getNavi_safe_search(session, currentPage, recordCountPerPage);
    }
+   
 
 }

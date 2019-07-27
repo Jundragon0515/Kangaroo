@@ -500,4 +500,5 @@ public class GoodsTradeDAO {
 	   return sst.selectList("GoodsTradeDAO.mainSafeList", param);
    }
    
+   
 }

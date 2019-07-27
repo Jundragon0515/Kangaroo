@@ -321,8 +321,8 @@
 				<c:forEach var="temp" items="${mainDirectList }">
 					<!-- single product -->
 					<div class="col-lg-3 col-md-6">
-						<div class="single-product">
-                        <div class="card">
+<div class="single-product" style="margin-bottom: 15px;">
+                           <div class="card">
                               <a href="/used_detailPage?no=${temp.no}">
                               <img class="img-fluid product-img-size" style="margin-bottom: 5px;"
                                  src="/img/title/${temp.title_img}" alt=""></a>
@@ -336,16 +336,17 @@
                                     </div>
                                  </div>
                                  <div class="row">
-                                    <div class="col-lg-12">판매가격 : <fmt:formatNumber value="${temp.price}" pattern="#,###" />원</div>
+                                    <div class="col-lg-12">판매가 : <fmt:formatNumber value="${temp.price}" pattern="#,###" />원</div>
                                  </div>
                                  <div class="row">
-                                    <div class="col-sm-12 col-md-10 col-lg-8">${temp.joinDate}</div>
-                                    <div class="d-none d-xl-block col-lg-2"><i class="fas fa-eye fa-2x"></i></div>
-                                    <div class="col-sm-12 col-md-2 col-lg-2">${temp.viewCount}</div>
+                                    <div class="d-none d-sm-block col-xs-2 col-sm-2 col-md-2 col-lg-2 pr-0"><i class="far fa-clock fa-2x fontawesome"></i></div>
+                                    <div class="d-none d-sm-block col-xs-4 col-sm-4 col-md-4 col-lg-6 pr-0"><span class="joinDate">${temp.joinDate}</span></div> 
+                                    <div class="d-none d-sm-block col-xs-2 col-sm-2 col-md-2 col-lg-2 m-0 pr-0"><i class="fas fa-eye fa-2x fontawesome"></i></div>
+                                    <div class="d-none d-sm-block col-xs-4 col-sm-4 col-md-4 col-lg-2 pr-0"><span class="view">${temp.viewCount}</span></div>
                                  </div>
-                                 <div class="row product-details" style="padding-left: 10px;">
-                                    <div class="prd-bottom" style="margin-top: 5px;">
-                                       <a href="" class="social-info"> <span class="lnr lnr-heart"></span>
+                                 <div class="row product-details" style="padding-left: 15px;">
+                                    <div class="prd-bottom" style="margin-top: 10px;">
+                                       <a href="boardGgym?no=${temp.no}&title_img=${temp.title_img}&title=${temp.title}&trade_type=${temp.trade_type }&category=${temp.category }&price=${temp.price}" class="social-info"> <span class="lnr lnr-heart"></span>
                                           <p class="hover-text">Wishlist</p>
                                        </a> <a href="/used_detailPage?no=${temp.no}" class="social-info">
                                         <span class="lnr lnr-move"></span>
@@ -355,7 +356,7 @@
                                  </div>
                               </div>
                            </div>
-						</div>
+                        </div>
 					</div>
 					</c:forEach>
 				</div>
@@ -377,8 +378,8 @@
 				<c:forEach var="temp" items="${mainSafeList }">
 					<!-- single product -->
 					<div class="col-lg-3 col-md-6">
-						<div class="single-product">
-                        <div class="card">
+						<div class="single-product" style="margin-bottom: 15px;">
+                           <div class="card">
                               <a href="/used_detailPage?no=${temp.no}">
                               <img class="img-fluid product-img-size" style="margin-bottom: 5px;"
                                  src="/img/title/${temp.title_img}" alt=""></a>
@@ -392,16 +393,17 @@
                                     </div>
                                  </div>
                                  <div class="row">
-                                    <div class="col-lg-12">판매가격 : <fmt:formatNumber value="${temp.price}" pattern="#,###" />원</div>
+                                    <div class="col-lg-12">판매가 : <fmt:formatNumber value="${temp.price}" pattern="#,###" />원</div>
                                  </div>
                                  <div class="row">
-                                    <div class="col-sm-12 col-md-10 col-lg-8">${temp.joinDate}</div>
-                                    <div class="d-none d-xl-block col-lg-2"><i class="fas fa-eye fa-2x"></i></div>
-                                    <div class="col-sm-12 col-md-2 col-lg-2">${temp.viewCount}</div>
+                                    <div class="d-none d-sm-block col-xs-2 col-sm-2 col-md-2 col-lg-2 pr-0"><i class="far fa-clock fa-2x fontawesome"></i></div>
+                                    <div class="d-none d-sm-block col-xs-4 col-sm-4 col-md-4 col-lg-6 pr-0"><span class="joinDate">${temp.joinDate}</span></div> 
+                                    <div class="d-none d-sm-block col-xs-2 col-sm-2 col-md-2 col-lg-2 m-0 pr-0"><i class="fas fa-eye fa-2x fontawesome"></i></div>
+                                    <div class="d-none d-sm-block col-xs-4 col-sm-4 col-md-4 col-lg-2 pr-0"><span class="view">${temp.viewCount}</span></div>
                                  </div>
-                                 <div class="row product-details" style="padding-left: 10px;">
-                                    <div class="prd-bottom" style="margin-top: 5px;">
-                                       <a href="" class="social-info"> <span class="lnr lnr-heart"></span>
+                                 <div class="row product-details" style="padding-left: 15px;">
+                                    <div class="prd-bottom" style="margin-top: 10px;">
+                                       <a href="boardGgym?no=${temp.no}&title_img=${temp.title_img}&title=${temp.title}&trade_type=${temp.trade_type }&category=${temp.category }&price=${temp.price}" class="social-info"> <span class="lnr lnr-heart"></span>
                                           <p class="hover-text">Wishlist</p>
                                        </a> <a href="/used_detailPage?no=${temp.no}" class="social-info">
                                         <span class="lnr lnr-move"></span>
@@ -411,7 +413,7 @@
                                  </div>
                               </div>
                            </div>
-						</div>
+                        </div>
 					</div>
 					</c:forEach>
 				</div>
@@ -432,8 +434,9 @@
 					<!-- single product -->
 					<c:forEach var="temp" items="${auctionList}">
 						<div class="col-lg-3 col-md-6">
-							<div class="single-product">
+                        <div class="single-product" style="margin-bottom: 15px;">
                            <div class="card">
+                           	<input type="hidden" class="ongoing-href" value="${temp.no}">
                               <a href="/auction_detailPage?no=${temp.no}" class="${temp.no}_re">
                               <img class="img-fluid product-img-size" style="margin-bottom: 5px;"
                                  src="../resources/img/title/${temp.title_img}" alt=""></a>
@@ -450,17 +453,17 @@
                                  <c:choose>
                                  	<c:when test="${temp.present_price==0}">
                                  		<div class="col-lg-12">현재가격 : <fmt:formatNumber value="${temp.starting_price}" pattern="#,###" />원</div>
-                                 		
                                  	</c:when>
+                                 	
                                  	<c:otherwise>
                                  		<div class="col-lg-12">현재가격 : <fmt:formatNumber value="${temp.starting_price}" pattern="#,###" />원</div>
                                  	</c:otherwise>
                                  </c:choose>
                                  </div>
                                  <div class="row">
-                                    <div class="col-sm-12 col-md-10 col-lg-8 ${temp.no}"></div>
-                                    <div class="d-none d-xl-block col-lg-2"><i class="fas fa-eye fa-2x"></i></div>
-                                    <div class="col-sm-12 col-md-2 col-lg-2">${temp.viewCount}</div>
+                                    <div class="col-sm-12 col-md-10 col-lg-8 pr-0 ${temp.no}"></div>
+                                    <div class="d-none d-sm-block col-xs-2 col-sm-2 col-md-2 col-lg-2 m-0 pr-0"><i class="fas fa-eye fa-2x fontawesome"></i></div>
+                                    <div class="d-none d-sm-block col-xs-4 col-sm-4 col-md-4 col-lg-2 pr-0"><span class="view">${temp.viewCount}</span></div>
                                  </div>
                                  <div class="row product-details" style="padding-left: 10px;">
                                     <div class="prd-bottom" style="margin-top: 5px;">
@@ -474,7 +477,7 @@
                                  </div>
                               </div>
                         </div>
-							</div>
+                        </div>
 						</div>
 					</c:forEach>
 				</div>

@@ -56,8 +56,9 @@ public class TradeController {
       // 페이징 버튼
       String resultNavi = tradeService.directBoardNavi(currentPage, recordCountPerPage);
       /*request.setAttribute("recordTotalCount", list.size()); // 전체개수 */
+      	request.setAttribute("viewCategory", "전체보기");
         request.setAttribute("list", list);
-       request.setAttribute("navi", resultNavi);
+        request.setAttribute("navi", resultNavi);
        return "trade";
    }
    
@@ -94,7 +95,7 @@ public class TradeController {
 		}
       
       if(selectCategory==null) {
-         session.setAttribute("selectCategory", " ");  
+         session.setAttribute("selectCategory", " 전체보기 ");  
       }else {
          tradeService.checkCategory(session);
       }
@@ -144,6 +145,7 @@ public class TradeController {
 		}
 
       /* request.setAttribute("recordTotalCount", list.size()); // 전체개수 */
+	  request.setAttribute("viewCategory", selectCategory);
       request.setAttribute("navi", resultNavi);
       request.setAttribute("list", list);
 
@@ -270,6 +272,8 @@ public class TradeController {
 		}
 		
       /* request.setAttribute("recordTotalCount", list.size()); // 전체개수 */
+		
+	  request.setAttribute("viewCategory", selectCategory);
       request.setAttribute("navi", resultNavi);
       request.setAttribute("list", list);
 

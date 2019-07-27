@@ -41,11 +41,12 @@
 
 
 <style>
-
-/*     * {
+ 
+/*   * {
    box-sizing: border-box;
    border: 1px solid black;
-}   */   
+   word-break:break-all;
+} */    
 
 .nav_b {
    border: 0px;
@@ -136,7 +137,7 @@
 /*카드리스트 마우스 오버*/
 .card:hover {
    border: solid 1px #ffba00;
-   margin: 1px;
+   margin: -1px;
 }
 
 /*텍스트 가운데 정렬  */
@@ -173,7 +174,7 @@
 /* 왼쪽 Category 영역  */
 .category-area{
    position: relative;
-   top: 100px;
+   padding-top:100px;
 }
 
 /* 판매완료 표시 */
@@ -197,6 +198,39 @@
     cursor:pointer;
 }
 
+.atag-text{
+	position:relative;
+	text-align:center;
+	width:100%;
+	left:20%;
+}
+
+.atag-category{
+	position:relative;
+	text-align:center;
+	width:100%;
+}
+
+/* 폰트 이미지  */
+.fontawesome{
+	position:relative;
+	top:6%;
+}
+
+/* 조회수  */
+.view{
+	position:relative;
+	top:10%;
+	text-align:center;
+}
+
+/* 입력날짜 */
+.joinDate{
+position:relative;
+	top:10%;
+	text-align:center;
+}
+
 .back-to-top {text-decoration: none; display: none; color:#fe912b;}
 
 .back-to-top:hover {color: #818bb0}
@@ -208,7 +242,7 @@
 	color:white;
 }
 
-/* 삭제버튼  hover  */
+/* 삭제버튼 hover  */
 #btn-delete:hover {
 	cursor: pointer;
 }
@@ -333,7 +367,7 @@
 							<!-- 							<li class="nav-item active"><a class="nav-link" href="/">Home</a></li> -->
 									<li class="nav-item"><a class="nav-link" href="/trade">중고
 											직거래</a></li>
-									<li class="nav-item"><a class="nav-link" href="/trade_safe">중고
+									<li class="nav-item active"><a class="nav-link" href="/trade_safe">중고
 											안전거래</a></li>
 									<li class="nav-item"><a class="nav-link" href="/auction">중고
 											경매</a></li>
@@ -514,35 +548,20 @@
             <div class="single-product-slider">
             <!-- Start boardInfo  -->
                <div class="row list-nav">
-                  <div class="col-lg-7 col-md-5 col-sm-5">
-                     <%-- <span class="list-nav-total">모두 ${recordTotalCount}개의 물품이 검색 되었습니다.</span> --%>
+                  <div class="col-sm-12 col-md-11 col-lg-8 atag-category mt-2"><span style=font-size:25px>${selectCategory }</span>
                   </div>
-
-                  <div class="col-lg-5 col-md-7 col-sm-7">
-                     <div class="row">
-                        <div class="col-lg-8 col-md-8 col-sm-8">
-                           <div class="row">
-                              <div class="col-lg-6 col-md-6 col-sm-6 pl-5">
-                                 <a class="nav-link" href="tradeOption_safe?price=low">낮은가격순</a> 
-                              </div>
-                              <div class="col-lg-6 col-md-6 col-sm-6 pl-5">      
-                                 <a class="nav-link" href="tradeOption_safe?price=high">높은가격순</a> 
-                              </div>
-                           </div>
-                        </div>
-                        <div class="col-lg-4 col-md-4 col-sm-4">
-                           <div class="row">
-                              <div class="col-lg-12 col-md-12 col-sm-12">
-                                 <select id="viewCount" name="viewCount">
+                  <div class="d-none d-lg-block col-sm-6 col-md-4 col-lg-2 col-xl-1 p-0">
+                        <a class="nav-link p-0 mt-2 mr-0" href="tradeOption?price=low"><span class="atag-text">낮은가격순</span></a> 
+                   </div>
+                   <div class="d-none d-lg-block col-sm-4 col-md-4 col-lg-2 col-xl-1 p-0">
+                       <a class="nav-link p-0 mt-2" href="tradeOption?price=high"><span class="atag-text">높은가격순</span></a>
+                    </div>
+                     <div class="d-none d-xl-block col-sm-3 col-md-3 col-lg-2">
+                                <select id="viewCount" name="viewCount" onchange="viewCount()">
                                     <option value="12">12개씩 보기</option>
                                     <option value="16">16개씩 보기</option>
-                                    <option value="20">20개씩 보기</option>
-                                 </select>
-                              </div>
-                           </div>
-                        </div>
+                                    <option value="20">20개씩 보기</option></select>
                      </div>
-                  </div>
                </div>
                <!-- End boardInfo  -->
                ${rsearch_result_null }
@@ -577,17 +596,16 @@
                                     <div class="col-lg-12">판매가 : <fmt:formatNumber value="${temp.price}" pattern="#,###" />원</div>
                                  </div>
                                  <div class="row">
-                                    <div class="col-sm-12 col-md-10 col-lg-8">${temp.joinDate}</div>
-                                    <div class="d-none d-xl-block col-lg-2"><i class="fas fa-eye fa-2x"></i></div>
-                                    <div class="col-sm-12 col-md-2 col-lg-2">${temp.viewCount}</div>
+                                    <div class="d-none d-sm-block col-xs-2 col-sm-2 col-md-2 col-lg-2 pr-0"><i class="far fa-clock fa-2x fontawesome"></i></div>
+                                    <div class="d-none d-sm-block col-xs-4 col-sm-4 col-md-4 col-lg-6 pr-0"><span class="joinDate">${temp.joinDate}</span></div> 
+                                    <div class="d-none d-sm-block col-xs-2 col-sm-2 col-md-2 col-lg-2 m-0 pr-0"><i class="fas fa-eye fa-2x fontawesome"></i></div>
+                                    <div class="d-none d-sm-block col-xs-4 col-sm-4 col-md-4 col-lg-2 pr-0"><span class="view">${temp.viewCount}</span></div>
                                  </div>
-                                 <div class="row product-details" style="padding-left: 10px;">
-                                    <div class="prd-bottom" style="margin-top: 5px;">
-                                       <a href="boardGgymSafe?no=${temp.no}&title_img=${temp.title_img}&title=${temp.title}&trade_type=${temp.trade_type }&category=${temp.category }&price=${temp.price}" class="social-info"> <span class="lnr lnr-heart"></span>
+                                 <div class="row product-details" style="padding-left: 15px;">
+                                    <div class="prd-bottom" style="margin-top: 10px;">
+                                       <a href="boardGgym?no=${temp.no}&title_img=${temp.title_img}&title=${temp.title}&trade_type=${temp.trade_type }&category=${temp.category }&price=${temp.price}" class="social-info"> <span class="lnr lnr-heart"></span>
                                           <p class="hover-text">Wishlist</p>
-										</a>
-										
-                                        <a href="/used_detailPage?no=${temp.no}" class="social-info">
+                                       </a> <a href="/used_detailPage?no=${temp.no}" class="social-info">
                                         <span class="lnr lnr-move"></span>
                                           <p class="hover-text">view more</p>
                                        </a>
@@ -616,13 +634,14 @@
                                     <div class="col-lg-12">판매가 : <fmt:formatNumber value="${temp.price}" pattern="#,###" />원</div>
                                  </div>
                                  <div class="row">
-                                    <div class="col-sm-12 col-md-10 col-lg-8">${temp.joinDate}</div>
-                                    <div class="d-none d-xl-block col-lg-2"><i class="fas fa-eye fa-2x"></i></div>
-                                    <div class="col-sm-12 col-md-2 col-lg-2">${temp.viewCount}</div>
+                                    <div class="d-none d-sm-block col-xs-2 col-sm-2 col-md-2 col-lg-2 pr-0"><i class="far fa-clock fa-2x fontawesome"></i></div>
+                                    <div class="d-none d-sm-block col-xs-4 col-sm-4 col-md-4 col-lg-6 pr-0"><span class="joinDate">${temp.joinDate}</span></div> 
+                                    <div class="d-none d-sm-block col-xs-2 col-sm-2 col-md-2 col-lg-2 m-0 pr-0"><i class="fas fa-eye fa-2x fontawesome"></i></div>
+                                    <div class="d-none d-sm-block col-xs-4 col-sm-4 col-md-4 col-lg-2 pr-0"><span class="view">${temp.viewCount}</span></div>
                                  </div>
-                                 <div class="row product-details" style="padding-left: 10px;">
-                                    <div class="prd-bottom" style="margin-top: 5px;">
-                                       <a href="boardGgymSafe?no=${temp.no}&title_img=${temp.title_img}&title=${temp.title}&trade_type=${temp.trade_type }&category=${temp.category }&price=${temp.price}" class="social-info"> <span class="lnr lnr-heart"></span>
+                                      <div class="row product-details" style="padding-left: 15px;">
+                                    <div class="prd-bottom" style="margin-top: 10px;">
+                                       <a href="boardGgym?no=${temp.no}&title_img=${temp.title_img}&title=${temp.title}&trade_type=${temp.trade_type }&category=${temp.category }&price=${temp.price}" class="social-info"> <span class="lnr lnr-heart"></span>
                                           <p class="hover-text">Wishlist</p>
                                        </a> <a href="/used_detailPage?no=${temp.no}" class="social-info">
                                         <span class="lnr lnr-move"></span>
