@@ -130,7 +130,13 @@ main>div {
            {
               if(response == "Y")
               {
-                 location.href = "/";
+            	  $.ajax
+                  ({
+                     url:"/level"
+                  }).done(function(resp){
+                	  location.href = "/";	  
+                  })
+                 
               }
               else if(response == "N")
               {
@@ -176,24 +182,16 @@ main>div {
 						id="navbarSupportedContent">
 						<ul class="nav navbar-nav menu_nav ml-auto">
 							<!-- 							<li class="nav-item active"><a class="nav-link" href="/">Home</a></li> -->
-							<li class="nav-item submenu dropdown"><a href="#"
-								class="nav-link dropdown-toggle" data-toggle="dropdown"
-								role="button" aria-haspopup="true" aria-expanded="false">중고
-									거래</a>
-								<ul class="dropdown-menu">
 									<li class="nav-item"><a class="nav-link" href="/trade">중고
 											직거래</a></li>
-									<li class="nav-item"><a class="nav-link" href="/trade">중고
+									<li class="nav-item"><a class="nav-link" href="/trade_safe">중고
 											안전거래</a></li>
-									<li class="nav-item"><a class="nav-link" href="/">중고
+									<li class="nav-item"><a class="nav-link" href="/auction">중고
 											경매</a></li>
-								</ul></li>
-							<li class="nav-item "><a class="nav-link" href="/">고객센터</a></li>
 							<li class="nav-item "><a class="nav-link" href="/">공지사항</a></li>
-
 							<c:choose>
 								<c:when test="${logintype=='admin'}">
-									<li class="nav-item "><a class="nav-link" href="/">관리자페이지</a></li>
+									<li class="nav-item "><a class="nav-link" href="/admin">관리자페이지</a></li>
 									<li class="nav-item "><a class="nav-link" href="/logout">로그아웃</a></li>
 								</c:when>
 								<c:when test="${logintype=='naver'}">
@@ -202,11 +200,13 @@ main>div {
 										role="button" aria-haspopup="true" aria-expanded="false"><img
 											src="../resources/img/account.png" width="35px"></a>
 										<ul class="dropdown-menu nav_ul">
-											<li class="nav-item "><a class="nav-link" href="/">쪽지</a></li>
-											<li class="nav-item "><a class="nav-link" href="/">장바구니</a></li>
-											<li class="nav-item"><a class="nav-link" href="/">마이페이지</a></li>
+											<li class="nav-item "><a class="nav-link" href="/goCart">찜목록</a></li>
+											<li class="nav-item "><a class="nav-link"
+												href="/goMyPage">마이페이지</a></li>
 											<li class="nav-item "><a class="nav-link"
 												href="/toPoint">포인트충전</a></li>
+											<li class="nav-item "><a class="nav-link"
+												href="/toPoint_exc">포인트환급</a></li>
 											<li class="nav-item "><input type="button"
 												class="nav-link nav_b" id="logout_na" value="로그아웃"></li>
 										</ul></li>
@@ -217,11 +217,13 @@ main>div {
 										role="button" aria-haspopup="true" aria-expanded="false"><img
 											src="../resources/img/account.png" width="40px"></a>
 										<ul class="dropdown-menu nav_ul">
-											<li class="nav-item "><a class="nav-link" href="/">쪽지</a></li>
-											<li class="nav-item "><a class="nav-link" href="/">장바구니</a></li>
-											<li class="nav-item"><a class="nav-link" href="/">마이페이지</a></li>
+											<li class="nav-item "><a class="nav-link" href="/goCart">찜목록</a></li>
 											<li class="nav-item "><a class="nav-link"
+												href="/goMyPage">마이페이지</a></li>
+												<li class="nav-item "><a class="nav-link"
 												href="/toPoint">포인트충전</a></li>
+											<li class="nav-item "><a class="nav-link"
+												href="/toPoint_exc">포인트환급</a></li>
 											<li class="nav-item "><input type="button"
 												class="nav-link nav_b" id="logout_ka" value="로그아웃"></li>
 										</ul></li>
@@ -232,11 +234,13 @@ main>div {
 										role="button" aria-haspopup="true" aria-expanded="false"><img
 											src="../resources/img/account.png" width="40px"></a>
 										<ul class="dropdown-menu nav_ul">
-											<li class="nav-item "><a class="nav-link" href="/">쪽지</a></li>
-											<li class="nav-item "><a class="nav-link" href="/">장바구니</a></li>
-											<li class="nav-item"><a class="nav-link" href="/">마이페이지</a></li>
+											<li class="nav-item "><a class="nav-link" href="/goCart">찜목록</a></li>
+											<li class="nav-item "><a class="nav-link"
+												href="/goMyPage">마이페이지</a></li>
 											<li class="nav-item "><a class="nav-link"
 												href="/toPoint">포인트충전</a></li>
+												<li class="nav-item "><a class="nav-link"
+												href="/toPoint_exc">포인트환급</a></li>
 											<li class="nav-item "><a class="nav-link" href="/logout">로그아웃</a></li>
 										</ul></li>
 								</c:when>
@@ -251,8 +255,7 @@ main>div {
 				</div>
 			</nav>
 		</div>
-	</header>
-	<!-- Start Banner Area -->
+	</header><!-- Start Banner Area -->
 	<section class="banner-area organic-breadcrumb">
 	<div class="container">
 		<div

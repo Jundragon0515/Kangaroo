@@ -2,6 +2,7 @@ package kh.spring.service;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
@@ -17,11 +19,18 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.Gson;
 import com.google.gson.JsonParser;
 
+import kh.spring.dao.AuctionDAO;
+import kh.spring.dao.DetailPageDAO;
+import kh.spring.dao.GoodsTradeDAO;
 import kh.spring.dao.KakaoDAO;
 import kh.spring.dao.MailDAO;
 import kh.spring.dao.MemberDAO;
 import kh.spring.dao.NaverDAO;
+import kh.spring.dto.Auction_boardDTO;
 import kh.spring.dto.MemberDTO;
+import kh.spring.dto.OrderDTO;
+import kh.spring.dto.TenderDTO;
+import kh.spring.dto.Used_transaction_boardDTO;
 
 @Component
 public class MemberService {
@@ -35,7 +44,51 @@ public class MemberService {
 	NaverDAO na;
 	@Autowired
 	KakaoDAO ka;
-
+	@Autowired
+	DetailPageDAO ddao;
+	@Autowired
+	GoodsTradeDAO gtdao;
+	@Autowired
+	AuctionDAO adao;
+	
+	@Transactional("txManager")
+	public int buy(OrderDTO dto) {
+		
+		ddao.buy_minus(dto);
+		ddao.buy(dto);
+		ddao.soldOut(dto.getProduct_num());
+		ddao.pointUsing(dto);
+		
+		return 1;
+	}
+	
+	@Transactional("txManager")
+	public int tender(TenderDTO dto, int Board_num) {
+		
+		if(dto.getPoint() <= me.currentMoney(Board_num)) {
+			
+			return -1;
+			
+		}else {
+		me.minus(dto);
+		me.tender(dto);
+		try {
+		me.plus(me.moneyBack(Board_num));
+		}catch(Exception e) {
+			System.out.println("첫번째 입찰 발생");
+		}
+		
+		System.out.println(dto.getPoint());
+		System.out.println(Board_num);
+		
+		Auction_boardDTO a_dto = new Auction_boardDTO();
+		a_dto.setPresent_price(dto.getPoint());
+		a_dto.setNo(Board_num);
+		ddao.a_updatePrice(a_dto);
+		
+		return 1;
+		}
+	}
 	public String loginProc(String id , String pw) { //로그인 
 		if(me.loginProc(id,pw) > 0) {
 			if(id.equals("admin@admin.com"))
@@ -49,6 +102,8 @@ public class MemberService {
 			se.setAttribute("address2", m_info.getAddress2());
 			se.setAttribute("info",m_info);
 			se.setAttribute("logintype", m_info.getLogintype());
+			se.setAttribute("point", m_info.getPoint());
+			se.setAttribute("member_class", m_info.getMember_class());
 			return "Y";
 		}else {
 			return "N";
@@ -111,7 +166,7 @@ public class MemberService {
 				}else {
 					System.out.println("실패");
 				}
-				return "login";
+				return "redirect:login";
 			}else {
 				System.out.println("조건에 맞지 않습니다.");
 				return "login";
@@ -189,8 +244,10 @@ public class MemberService {
 			se.setAttribute("zipcode",m_info.getZipcode());
 			se.setAttribute("address1", m_info.getAddress1());
 			se.setAttribute("address2", m_info.getAddress2());
+			se.setAttribute("point", m_info.getPoint());
 			se.setAttribute("info",m_info);
 			se.setAttribute("logintype", m_info.getLogintype());
+			se.setAttribute("member_class", m_info.getMember_class());
 			mav.setViewName("redirect:/infoInsert");
 		}else {
 			MemberDTO m_info=me.selectById(email);
@@ -203,8 +260,10 @@ public class MemberService {
 				se.setAttribute("zipcode",m_info.getZipcode());
 				se.setAttribute("address1", m_info.getAddress1());
 				se.setAttribute("address2", m_info.getAddress2());
+				se.setAttribute("point", m_info.getPoint());
 				se.setAttribute("info",m_info);
 				se.setAttribute("logintype", m_info.getLogintype());
+				se.setAttribute("member_class", m_info.getMember_class());
 				mav.setViewName("redirect:/");							
 			}
 		}
@@ -248,6 +307,8 @@ public class MemberService {
 			se.setAttribute("address2", m_info.getAddress2());
 			se.setAttribute("info",m_info);
 			se.setAttribute("logintype", m_info.getLogintype());
+			se.setAttribute("point", m_info.getPoint());
+			se.setAttribute("member_class", m_info.getMember_class());
 			mav.setViewName("redirect:/infoInsert");
 		}else {
 			MemberDTO m_info=me.selectById(email);
@@ -260,8 +321,10 @@ public class MemberService {
 				se.setAttribute("zipcode",m_info.getZipcode());
 				se.setAttribute("address1", m_info.getAddress1());
 				se.setAttribute("address2", m_info.getAddress2());
+				se.setAttribute("point", m_info.getPoint());
 				se.setAttribute("info",m_info);
 				se.setAttribute("logintype", m_info.getLogintype());
+				se.setAttribute("member_class", m_info.getMember_class());
 				mav.setViewName("redirect:/");				
 			}
 		}
@@ -273,4 +336,36 @@ public class MemberService {
 	public void setPoint() {
 		se.setAttribute("point", me.getPoint((String)se.getAttribute("email")));
 	}
+	public int pwCk(String pw) {
+		String realPw=me.getPw((String)se.getAttribute("email"));
+		if(realPw.equals(MemberDAO.encryptSHA256(pw))) {
+			return 1; 
+		}else {
+			return -1;
+		}
+	}
+	
+	//메인화면 직거래 리스트
+	public List<Used_transaction_boardDTO> directList(){
+		return gtdao.main_direct_list();
+	}
+	
+	//메인화면 안전거래 리스트
+	public List<Used_transaction_boardDTO> safeList(){
+		return gtdao.main_safe_list();
+	}
+	//상세페이지 안전거래 리스트
+		public List<Used_transaction_boardDTO> d_safeList(){
+			return gtdao.d_main_safe_list();
+		}
+	
+	//메인화면 경매 리스트
+	public List<Auction_boardDTO> auctionList(){
+		return adao.main_Auction_List();
+	}
+	//상세페이지 경매 리스트
+		public List<Auction_boardDTO> d_auctionList(){
+			return adao.d_main_Auction_List();
+		}
+	
 }

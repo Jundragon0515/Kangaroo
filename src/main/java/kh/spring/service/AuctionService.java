@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import kh.spring.dao.AuctionDAO;
 import kh.spring.dto.Auction_boardDTO;
+import kh.spring.dto.Used_transaction_boardDTO;
 
 @Service
 public class AuctionService {
@@ -22,37 +23,46 @@ public class AuctionService {
 
    //처음 화면
    public List<Auction_boardDTO> auctionList(int start, int end){
-      return adao.selectList(start, end);
+      return adao.auctionList(start, end);
    }
    
    //카테고리 설정
    public void checkCategory(HttpSession session) {
-	   adao.checkCategory(session);
+      adao.checkCategory(session);
    }
    
    //가격 낮은순 OR 높은순 정렬
    public void checkPrice(HttpSession session) {
-	   adao.checkPrice(session);
+      adao.checkPrice(session);
    }
    
    public void checkView(HttpSession session) {
-	   adao.checkView(session);
+      adao.checkView(session);
    }
    
    //게시판 옵션 설정
-   public List<Auction_boardDTO> selectOption(HttpSession session, int start, int end){
-	   return adao.selectOption(session, start, end);
+   public List<Auction_boardDTO> auctionOption(HttpSession session, int start, int end){
+      return adao.auctionOption(session, start, end);
    }
    
    //일반 화면 게시판 네비
-   public String tradeBoardNavi(int currentPage, int recordCountPerPage) {
+   public String auctionBoardNavi(int currentPage, int recordCountPerPage) {
       return adao.getNavi(currentPage, recordCountPerPage);
    }
    
    //옵션선택 후 게시판 네비
-   public String tradeBoardNaviOption(HttpSession session, int currentPage, int recordCountPerPage) {
-	   return adao.getNaviOption(session, currentPage, recordCountPerPage);
+   public String auctionBoardNaviOption(HttpSession session, int currentPage, int recordCountPerPage) {
+      return adao.getNaviOption(session, currentPage, recordCountPerPage);
    }
   
+   //검색어
+   public List<Auction_boardDTO> auctionList_search(HttpSession session, int start, int end){
+	   return adao.auctionList_search(session, start, end);
+   }
+   
+   //검색어 네비
+   public String auctionBoardNavi_search(HttpSession session, int currentPage, int recordCountPerPage){
+	   return adao.getNavi_auction_search(session, currentPage, recordCountPerPage);
+   }
 
 }

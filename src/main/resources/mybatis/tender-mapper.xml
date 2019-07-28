@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="TenderDAO">
+<select id="recordCount" resultType="Integer">
+select count(*) from tender where id=#{value} 
+</select>
+<select id = "selectById" parameterType="Map" resultType="kh.spring.dto.TenderDTO">
+select * from (select row_number()over(order by seq desc) as rown , tender.* from tender where ROWID IN (SELECT MAX(ROWID)from tender GROUP BY BOARD_NUM)) where (rown between #{startNum} and #{endNum})and id=#{id} 
+</select>
+</mapper>

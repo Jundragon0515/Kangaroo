@@ -90,29 +90,23 @@ loge {
 	width: 100%;
 	height: 100%;
 }
-
 select {
 	padding: 0px;
 }
-
 .btn-warning {
 	margin-top: 30px;
 	cursor: pointer;
 }
-
 .ui-datepicker-trigger {
 	cursor: pointer;
 }
-
 .hasDatepicker {
 	cursor: pointer;
 }
-
 #email, #adress {
 	margin: 0px;
 	padding: 0px;
 }
-
 #email>.btn {
 	margin: 0px;
 }
@@ -121,11 +115,9 @@ select {
 	background: 000000;
 	width: 100%;
 }
-
 .nav_b:hover {
 	cursor: pointer;
 }
-
 .nav_ul * {
 	text-align: center;
 }
@@ -138,6 +130,8 @@ select {
 			$(location).attr("href","login_main");
 		</c:when>
 		</c:choose>
+		
+		$("#phone").focus();
 		$("#phone").on("focusout", function() {
 			$("phonecheckvar").val("");
 			var phonetext = $("#phone").val();
@@ -146,6 +140,7 @@ select {
 				$("#phonecheck").text("사용가능한 핸드폰 번호입니다.");
 				$("#phonecheck").css("color", "blue");
 				$("#phonecheckvar").val("올바른 양식 입니다.");
+				$("#name").focus();
 			} else {
 				$("#phonecheck").text("양식에 맞지 않습니다.");
 				$("#phonecheck").css("color", "red");
@@ -186,7 +181,7 @@ select {
 		$("#back_btn").on("click", function() {
 			var back = confirm("마이페이지로 돌아갑니다.");
 			if (back) {
-				location.href = "/";/////////////////////////////////////////////////////////////////////////////////여기 차후 변경
+				location.href = "/goMyPage";/////////////////////////////////////////////////////////////////////////////////여기 차후 변경
 			}
 		});
 		$(document).submit(function() {
@@ -319,24 +314,16 @@ select {
 						id="navbarSupportedContent">
 						<ul class="nav navbar-nav menu_nav ml-auto">
 							<!-- 							<li class="nav-item active"><a class="nav-link" href="/">Home</a></li> -->
-							<li class="nav-item submenu dropdown"><a href="#"
-								class="nav-link dropdown-toggle" data-toggle="dropdown"
-								role="button" aria-haspopup="true" aria-expanded="false">중고
-									거래</a>
-								<ul class="dropdown-menu">
 									<li class="nav-item"><a class="nav-link" href="/trade">중고
 											직거래</a></li>
-									<li class="nav-item"><a class="nav-link" href="/trade">중고
+									<li class="nav-item"><a class="nav-link" href="/trade_safe">중고
 											안전거래</a></li>
-									<li class="nav-item"><a class="nav-link" href="/">중고
+									<li class="nav-item"><a class="nav-link" href="/auction">중고
 											경매</a></li>
-								</ul></li>
-							<li class="nav-item "><a class="nav-link" href="/">고객센터</a></li>
 							<li class="nav-item "><a class="nav-link" href="/">공지사항</a></li>
-
 							<c:choose>
 								<c:when test="${logintype=='admin'}">
-									<li class="nav-item "><a class="nav-link" href="/">관리자페이지</a></li>
+									<li class="nav-item "><a class="nav-link" href="/admin">관리자페이지</a></li>
 									<li class="nav-item "><a class="nav-link" href="/logout">로그아웃</a></li>
 								</c:when>
 								<c:when test="${logintype=='naver'}">
@@ -345,11 +332,13 @@ select {
 										role="button" aria-haspopup="true" aria-expanded="false"><img
 											src="../resources/img/account.png" width="35px"></a>
 										<ul class="dropdown-menu nav_ul">
-											<li class="nav-item "><a class="nav-link" href="/">쪽지</a></li>
-											<li class="nav-item "><a class="nav-link" href="/">장바구니</a></li>
-											<li class="nav-item"><a class="nav-link" href="/">마이페이지</a></li>
+											<li class="nav-item "><a class="nav-link" href="/goCart">찜목록</a></li>
+											<li class="nav-item "><a class="nav-link"
+												href="/goMyPage">마이페이지</a></li>
 											<li class="nav-item "><a class="nav-link"
 												href="/toPoint">포인트충전</a></li>
+											<li class="nav-item "><a class="nav-link"
+												href="/toPoint_exc">포인트환급</a></li>
 											<li class="nav-item "><input type="button"
 												class="nav-link nav_b" id="logout_na" value="로그아웃"></li>
 										</ul></li>
@@ -360,11 +349,13 @@ select {
 										role="button" aria-haspopup="true" aria-expanded="false"><img
 											src="../resources/img/account.png" width="40px"></a>
 										<ul class="dropdown-menu nav_ul">
-											<li class="nav-item "><a class="nav-link" href="/">쪽지</a></li>
-											<li class="nav-item "><a class="nav-link" href="/">장바구니</a></li>
-											<li class="nav-item"><a class="nav-link" href="/">마이페이지</a></li>
+											<li class="nav-item "><a class="nav-link" href="/goCart">찜목록</a></li>
 											<li class="nav-item "><a class="nav-link"
+												href="/goMyPage">마이페이지</a></li>
+												<li class="nav-item "><a class="nav-link"
 												href="/toPoint">포인트충전</a></li>
+											<li class="nav-item "><a class="nav-link"
+												href="/toPoint_exc">포인트환급</a></li>
 											<li class="nav-item "><input type="button"
 												class="nav-link nav_b" id="logout_ka" value="로그아웃"></li>
 										</ul></li>
@@ -375,11 +366,13 @@ select {
 										role="button" aria-haspopup="true" aria-expanded="false"><img
 											src="../resources/img/account.png" width="40px"></a>
 										<ul class="dropdown-menu nav_ul">
-											<li class="nav-item "><a class="nav-link" href="/">쪽지</a></li>
-											<li class="nav-item "><a class="nav-link" href="/">장바구니</a></li>
-											<li class="nav-item"><a class="nav-link" href="/">마이페이지</a></li>
+											<li class="nav-item "><a class="nav-link" href="/goCart">찜목록</a></li>
+											<li class="nav-item "><a class="nav-link"
+												href="/goMyPage">마이페이지</a></li>
 											<li class="nav-item "><a class="nav-link"
 												href="/toPoint">포인트충전</a></li>
+												<li class="nav-item "><a class="nav-link"
+												href="/toPoint_exc">포인트환급</a></li>
 											<li class="nav-item "><a class="nav-link" href="/logout">로그아웃</a></li>
 										</ul></li>
 								</c:when>
@@ -427,34 +420,7 @@ select {
 				</div>
 			</div>
 			<form id="login" action="updateProc" method="post">
-				<div class="row" id="main">
-					<div class="col-lg-1 col-md-1 col-sm-1"></div>
-					<div class="col-lg-9 col-md-9 col-sm-9 text_label ">
-						<label for="" class="mt-2 mb-1 mr-3"><strong>이 름</strong></label><span
-							id="namecheck"></span><input type="hidden"  id="namecheckvar"
-							name="namecheckvar">
-					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2"></div>
-				</div>
-				<div class="row" id="main">
-					<div class="col-lg-1 col-md-1 col-sm-1"></div>
-					<div class="col-lg-9 col-md-9 col-sm-9 text_label">
-						<input type="text" class="form-control" placeholder="6자 이내"
-							value="${name }"
-							name="name" id="name" required onkeyup="noSpaceForm(this);"
-							onchange="noSpaceForm(this);">
-					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2"></div>
-				</div>
-				<div class="row" id="main">
-					<div class="col-1"></div>
-
-					<div class="col-3"></div>
-				</div>
-
-				<div class="row" id="main">
-					<div class="col-1"></div>
-				</div>
+				
 				<div class="row" id="main">
 					<div class="col-lg-1 col-md-1 col-sm-1"></div>
 					<div class="col-lg-9 col-md-9 col-sm-9 text_label">
@@ -469,11 +435,28 @@ select {
 					<div class="col-lg-9 col-md-9 col-sm-9 text_label">
 						<input type="text" class="form-control"
 							placeholder="ex)010-9890-2814" value="${phone }" name="phone" id="phone" required
-							onkeyup="noSpaceForm(this);" onchange="noSpaceForm(this);">
+							onkeyup="noSpaceForm(this);"  onchange="noSpaceForm(this);">
 					</div>
 					<div class="col-lg-2 col-md-2 col-sm-2"></div>
 				</div>
-
+				<div class="row" id="main">
+               <div class="col-lg-1 col-md-1 col-sm-1"></div>
+               <div class="col-lg-9 col-md-9 col-sm-9 text_label ">
+                  <label for="" class="mt-2 mb-1 mr-3"><strong>이 름</strong></label><span
+                     id="namecheck"></span><input type="hidden" id="namecheckvar"
+                     name="namecheckvar">
+               </div>
+               <div class="col-lg-2 col-md-2 col-sm-2"></div>
+            </div>
+            <div class="row" id="main">
+               <div class="col-lg-1 col-md-1 col-sm-1"></div>
+               <div class="col-lg-9 col-md-9 col-sm-9 text_label">
+                  <input type="text" class="form-control" placeholder="6자 이내"
+                     name="name" id="name" required onkeyup="noSpaceForm(this);"
+                     onchange="noSpaceForm(this);">
+               </div>
+               <div class="col-lg-2 col-md-2 col-sm-2"></div>
+            </div>
 				<div class="row" id="main">
 					<div class="col-lg-1 col-md-1 col-sm-1"></div>
 					<div class="col-lg-9 col-md-9 col-sm-9 text_label">
@@ -531,7 +514,7 @@ select {
 					<div class="col-lg-1 col-md-1 col-sm-1"></div>
 					<div class="col-lg-9 col-md-9 col-sm-9 input_text">
 						<button type="button" class="btn btn-warning" id="ok" name="ok">정보 저장</button>
-						<button type="button" class="btn btn-warning ml-4" id="back_btn">메인 으로</button>
+						<button type="button" class="btn btn-warning ml-4" id="back_btn">마이페이지로</button>
 
 					</div>
 					<div class="col-lg-2 col-md-2 col-sm-2"></div>

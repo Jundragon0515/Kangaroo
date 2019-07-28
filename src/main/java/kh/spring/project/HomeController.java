@@ -1,43 +1,156 @@
 package kh.spring.project;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import kh.spring.dao.MemberDAO;
+import kh.spring.dto.Auction_boardDTO;
 import kh.spring.dto.MemberDTO;
+import kh.spring.dto.Used_transaction_boardDTO;
 import kh.spring.service.MemberService;
 
 @Controller
 public class HomeController {
 	@Autowired
+	private MemberDAO dao;
+	@Autowired
 	HttpSession se;
 	@Autowired
 	MemberService mes;
-
+	public static int visitCount = 0;
 	@RequestMapping("/")
-	public String home() { //홈
-		return "index";
+	public ModelAndView visit() { 	//홈
+		
+		ModelAndView mav =new ModelAndView();
+		List<Used_transaction_boardDTO> mainDirectList = mes.directList();
+		List<Used_transaction_boardDTO> mainSafeList = mes.safeList();
+		List<Auction_boardDTO> mainAuctionList = mes.auctionList();
+		mav.addObject("mainDirectList",mainDirectList);
+		mav.addObject("mainSafeList",mainSafeList);
+		mav.addObject("auctionList", mainAuctionList);
+		mav.setViewName("index");
+	
+		return mav;
+		
+	   }
+	
+	@RequestMapping("/start")
+	public ModelAndView home() { 	//첫방문
+
+		visitCount++;
+		ModelAndView mav =new ModelAndView();
+		List<Used_transaction_boardDTO> mainDirectList = mes.directList();
+		List<Used_transaction_boardDTO> mainSafeList = mes.safeList();
+		List<Auction_boardDTO> mainAuctionList = mes.auctionList();
+		mav.addObject("mainDirectList",mainDirectList);
+		mav.addObject("mainSafeList",mainSafeList);
+		mav.addObject("auctionList", mainAuctionList);
+		mav.setViewName("index");
+	
+		return mav;
 	}
-	@RequestMapping("/toPoint")
-	public String toPoint() { //포인트 충전
-		mes.setPoint();
-		return "point";
+	
+	@RequestMapping("/level")
+	@ResponseBody
+	@Transactional("txManager")
+	public int level() { 	
+		
+		String id = (String)se.getAttribute("email");
+		int b1 = dao.count1(id);
+		int b2 = dao.count2(id);
+		int b = b1+b2;
+		int c1 = dao.countComment1(id);
+		int c2 = dao.countComment2(id);
+		int c = c1+c2;
+		
+		String level = dao.level(id);
+		System.out.println("레벨 테스트 " + b + " : " +c);
+		
+		try {
+		if(level.equals("브론즈")) {
+			visitCount++;
+			if(b>=100 & c>=100) {
+				dao.levelUp(id, "마스터");
+				return 6;
+			}else if(b>=50 & c>=50){
+				dao.levelUp(id, "다이아몬드");
+				return 5;
+			}else if(b>=10 & c>=10) {
+				dao.levelUp(id, "플래티넘");
+				return 4;
+			}else if(b>=5 & c>=5) {
+				dao.levelUp(id, "골드");
+				return 3;
+			}else if(b>=1 & c>=1) {
+				dao.levelUp(id, "실버");
+				return 2;
+			}
+		}else if(level.equals("실버")) {
+			visitCount++;
+			if(b>=100 & c>=100) {
+				dao.levelUp(id, "마스터");
+				return 6;
+			}else if(b>=50 & c>=50){
+				dao.levelUp(id, "다이아몬드");
+				return 5;
+			}else if(b>=10 & c>=10) {
+				dao.levelUp(id, "플래티넘");
+				return 4;
+			}else if(b>=5 & c>=5) {
+				dao.levelUp(id, "골드");
+				return 3;
+			}
+		}else if(level.equals("골드")) {
+			visitCount++;
+			if(b>=100 & c>=100) {
+				dao.levelUp(id, "마스터");
+				return 6;
+			}else if(b>=50 & c>=50){
+				dao.levelUp(id, "다이아몬드");
+				return 5;
+			}else if(b>=10 & c>=10) {
+				dao.levelUp(id, "플래티넘");
+				return 4;
+			}
+		}else if(level.equals("플래티넘")) {
+			visitCount++;
+			if(b>=100 & c>=100) {
+				dao.levelUp(id, "마스터");
+				return 6;
+			}else if(b>=50 & c>=50){
+				dao.levelUp(id, "다이아몬드");
+				return 5;
+			}
+		}else if(level.equals("다이아몬드")) {
+			visitCount++;
+			if(b>=100 & c>=100) {
+				dao.levelUp(id, "마스터");
+				return 6;
+			}
+		}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return 0;
+		
 	}
 	@RequestMapping("/login_main")
 	public String login_main() { // 로그인 메인페이지
-
 		return "login_main";
 	}
 	@RequestMapping("/login")
 	public String login() { // 일반 로그인 페이지
-
 		return "login";
 	}
 	@RequestMapping("/findIdOrPw")
@@ -53,7 +166,7 @@ public class HomeController {
 	public String insert() { // 회원가입 페이지로 갈때
 		return "insert";
 	}
-	@RequestMapping(value="/insertProc" , method=RequestMethod.POST)
+	@RequestMapping(value="/insertProc" , method=RequestMethod.POST,  produces="application/String;charset=UTF-8")
 	public String insertProc(MemberDTO dto,HttpServletRequest request){ // 회원가입 기능
 		return mes.insertProc(dto, request);
 	}
@@ -101,27 +214,13 @@ public class HomeController {
 		return mes.idcheck(id);
 	}
 	@RequestMapping("/infoInsert")
-	public String sInsert() {
+	public String sInsert() {  // 정보입력으로
 		return "infoInsert";
 	}
 	@RequestMapping("/logout")
-	public String logout(HttpServletRequest request) {
+	public String logout(HttpServletRequest request) { //로그아웃
 		String old_url = request.getHeader("referer");
 		se.invalidate();
 		return "redirect:"+old_url;
-	}
-	@RequestMapping("/updateProc")
-	public String updateProc(MemberDTO dto) {
-		dto.setId(se.getAttribute("email").toString());
-		mes.updateProc(dto);
-		se.setAttribute("email", dto.getId());
-		se.setAttribute("name",dto.getName());
-		se.setAttribute("phone",dto.getPhone());
-		se.setAttribute("zipcode",dto.getZipcode());
-		se.setAttribute("address1", dto.getAddress1());
-		se.setAttribute("address2", dto.getAddress2());
-		se.setAttribute("info",dto);
-		se.setAttribute("logintype", dto.getLogintype());
-		return "redirect:/";
 	}
 }

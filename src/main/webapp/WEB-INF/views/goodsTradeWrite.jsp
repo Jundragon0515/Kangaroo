@@ -6,35 +6,34 @@
 <html>
 
 <head>
-	<!-- Mobile Specific Meta -->
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<!-- Favicon-->
-	<link rel="shortcut icon" href="../resources/img/fav.png">
-	<!-- Author Meta -->
-	<meta name="author" content="CodePixar">
-	<!-- Meta Description -->
-	<meta name="description" content="">
-	<!-- Meta Keyword -->
-	<meta name="keywords" content="">
-	<!-- meta character set -->
-	<meta charset="UTF-8">
-	<!-- Site Title -->
-	<title>Karma Shop</title>
-	<!--
-			CSS
-			============================================= -->
-	<link rel="stylesheet" href="../resources/css/linearicons.css">
-	<link rel="stylesheet" href="../resources/css/font-awesome.min.css">
-	<link rel="stylesheet" href="../resources/css/themify-icons.css">
-	<link rel="stylesheet" href="../resources/css/bootstrap.css">
-	<link rel="stylesheet" href="../resources/css/owl.carousel.css">
-	<link rel="stylesheet" href="../resources/css/nice-select.css">
-	<link rel="stylesheet" href="../resources/css/nouislider.min.css">
-	<link rel="stylesheet" href="../resources/css/ion.rangeSlider.css" />
-	<link rel="stylesheet" href="../resources/css/ion.rangeSlider.skinFlat.css" />
-	<link rel="stylesheet" href="../resources/css/main.css">
+   <!-- Mobile Specific Meta -->
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+   <!-- Favicon-->
+   <link rel="shortcut icon" href="../resources/img/fav.png">
+   <!-- Author Meta -->
+   <meta name="author" content="CodePixar">
+   <!-- Meta Description -->
+   <meta name="description" content="">
+   <!-- Meta Keyword -->
+   <meta name="keywords" content="">
+   <!-- meta character set -->
+   <meta charset="UTF-8">
+   <!-- Site Title -->
+   <title>Karma Shop</title>
+   <!--
+         CSS
+         ============================================= -->
+   <link rel="stylesheet" href="../resources/css/linearicons.css">
+   <link rel="stylesheet" href="../resources/css/font-awesome.min.css">
+   <link rel="stylesheet" href="../resources/css/themify-icons.css">
+   <link rel="stylesheet" href="../resources/css/bootstrap.css">
+   <link rel="stylesheet" href="../resources/css/owl.carousel.css">
+   <link rel="stylesheet" href="../resources/css/nice-select.css">
+   <link rel="stylesheet" href="../resources/css/nouislider.min.css">
+   <link rel="stylesheet" href="../resources/css/ion.rangeSlider.css" />
+   <link rel="stylesheet" href="../resources/css/ion.rangeSlider.skinFlat.css" />
+   <link rel="stylesheet" href="../resources/css/main.css">
   <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-</head>
 <style>
     .category,.dropdown-menu{
         background-color: #ffba00;
@@ -51,7 +50,7 @@
 [type="radio"]:not(:checked) + label
 {
     position: relative;
-    padding-left: 28px;
+    padding-left: 20px;
     cursor: pointer;
     line-height: 20px;
     display: inline-block;
@@ -97,22 +96,27 @@
         top: 85px;
     }
     [type="text"]{
-    	background-color:#ffebb3;
-    	color:#feffed;
+    	background-color:#fafff2;
+    	color:#ffba00;
+    	border : 1px solid #ffebb3;
+    }
+    [type="text"]:hover{
+    	cursor: pointer;
     }
     #titleImg{
         border: 5px solid #ffebb3;
         border-radius: 30px 30px 30px 30px;
         position: relative;
         top: 85px;
-        width: 557px;
+        width:540px;
         height: 502px;
     }
-    #middle{
-    	width: 555px;
-        height: 498px;
-        border-radius: 30px 30px 30px 30px;
-    }
+    #middle {
+    	width: 510px;
+    	height: 473px;
+   	 	border-radius: 30px 30px 30px 30px;
+   	 	margin: 10px 10px 10px 10px;
+	}
 
     #contents{
         border: 1px solid black;
@@ -124,20 +128,21 @@
         top: 85px;
     }
     #writting{
-    	border-radius:20px 20px 20px 20px;
+    	border-radius:30px 30px 30px 30px;
         position: relative;
         top: 85px;
         padding-left: 6px;
         margin: auto;
-        width: 103%;
+        width: 540px;
         height: 323px;
         resize: none;
         overflow:auto;
         background:#fafff2;
+        border :5px solid #ffebb3;
     }
     #writting:hover{
-    	cursor:pointer;
-    	color:#ffba00;
+       cursor:pointer;
+       color:#ffba00;
     }
 
     .input{
@@ -153,42 +158,52 @@
         color: #ffba00;
     }
     .txc-textbox{
-    	width:100px;
-    	height:50px;
+       width:100px;
+       height:50px;
     }
     .nice-select{
+    	position:relative;
+        padding-left: 0px;
+    	padding-right: 20px;
     	color : white;
-    	background-color: #ffba00;
+    	background-color: #ffce47;
+    	border : 1px solid ffce47;
     	
+    }
+    .nice-select:hover{
+    	background-color:#ffd45e;
     }
     .nice-select .list{
     	color: #ffba00;
     	background-color : white;
+    	overflow-y:scroll;
+    	height:200px;
     }
     #preview{
-    	border:2px solid #ffebb3;
-    	border-radius:10px 10px 10px 10px;
+    	border: 3px solid #ffebb3;
+    	border-radius: 10px 10px 10px 10px;
     	width: 460px;
-    	height: 344px;
-    	overflow:auto;
-    	
-    }
-    .thumbnail{
-    	width: 100px;
-    	height: 100px;
-    
-    }/* 상세이미지 크기 */
+    	height: 376px;
+    	overflow: auto;
+    	position: relative;
+    	bottom: 19px;
+	}  
+    /* 상세이미지 크기 */
     .preview-box{    	
     	width: 200px;
     	height: 100px;
     	display: inline;
     }
-    #detailImg{
-    	background-color:#ffba00;
-    	color:white;
+    #detailImg {
+    	position:relative;
+    	bottom:21px;
+    	background-color: #ffce47;
+    	color: white;
     	border-radius: 3px 3px 3px 3px;
-    	font-size:19px;
-    }
+    	font-size: 29px;
+   	 	height: 40px;
+    	padding-top: 10px;
+	}
     #detailImg:hover {
     	background-color:#ffd45e;
     	color:white;
@@ -196,7 +211,7 @@
 	}
 	#register{
 		position:relative;
-		top:10px;
+		bottom:10px;
 		left:20px;
 	}
 	#sel,#sel1,#sel2{
@@ -206,17 +221,15 @@
 		position:relative;
 		top:10px;
 	}
-	#mainImg{
-		position: relative;
-    	top:20px;
-	}
-	#image{
-		position:relative;
-		top:20px;
+
+	#image:hover{
+		cursor: pointer;
 	}
 	#pay{
-		width:60px;
-
+		width:50px;
+		height:25px;
+		color: black;
+		padding-left: 5px;
 	}
 	.nav_b {
 		border: 0px;
@@ -224,17 +237,34 @@
 		width: 100%;
 	}
 
-	.nav_b:hover {
-		cursor: pointer;
-	}
-
+   .nav_b:hover {
+      cursor: pointer;
+   }
 	.nav_ul * {
 		text-align: center;
 	}
-</style>
+	#sang{
+		position:relative;
+		bottom:20px;
+	}
+	.middleName {
+    	color: darkgoldenrod;
+    	font-size: 18px;
+	}
+	.thumbnail{
+		width: 100px;
+    	height: 100px;
+	}
+
+</style>  
+<script>
+	
+
+</script>
+</head>
 <body>
 
-	<!-- Start Header Area -->
+   <!-- Start Header Area -->
 <header class="header_area sticky-header">
 		<div class="main_menu">
 			<nav class="navbar navbar-expand-lg navbar-light main_box">
@@ -255,24 +285,16 @@
 						id="navbarSupportedContent">
 						<ul class="nav navbar-nav menu_nav ml-auto">
 							<!-- 							<li class="nav-item active"><a class="nav-link" href="/">Home</a></li> -->
-							<li class="nav-item submenu dropdown"><a href="#"
-								class="nav-link dropdown-toggle" data-toggle="dropdown"
-								role="button" aria-haspopup="true" aria-expanded="false">중고
-									거래</a>
-								<ul class="dropdown-menu">
 									<li class="nav-item"><a class="nav-link" href="/trade">중고
 											직거래</a></li>
-									<li class="nav-item"><a class="nav-link" href="/trade">중고
+									<li class="nav-item"><a class="nav-link" href="/trade_safe">중고
 											안전거래</a></li>
-									<li class="nav-item"><a class="nav-link" href="/">중고
+									<li class="nav-item"><a class="nav-link" href="/auction">중고
 											경매</a></li>
-								</ul></li>
-							<li class="nav-item "><a class="nav-link" href="/">고객센터</a></li>
 							<li class="nav-item "><a class="nav-link" href="/">공지사항</a></li>
-
 							<c:choose>
 								<c:when test="${logintype=='admin'}">
-									<li class="nav-item "><a class="nav-link" href="/">관리자페이지</a></li>
+									<li class="nav-item "><a class="nav-link" href="/admin">관리자페이지</a></li>
 									<li class="nav-item "><a class="nav-link" href="/logout">로그아웃</a></li>
 								</c:when>
 								<c:when test="${logintype=='naver'}">
@@ -281,11 +303,13 @@
 										role="button" aria-haspopup="true" aria-expanded="false"><img
 											src="../resources/img/account.png" width="35px"></a>
 										<ul class="dropdown-menu nav_ul">
-											<li class="nav-item "><a class="nav-link" href="/">쪽지</a></li>
-											<li class="nav-item "><a class="nav-link" href="/">장바구니</a></li>
-											<li class="nav-item"><a class="nav-link" href="/">마이페이지</a></li>
+											<li class="nav-item "><a class="nav-link" href="/goCart">찜목록</a></li>
+											<li class="nav-item "><a class="nav-link"
+												href="/goMyPage">마이페이지</a></li>
 											<li class="nav-item "><a class="nav-link"
 												href="/toPoint">포인트충전</a></li>
+											<li class="nav-item "><a class="nav-link"
+												href="/toPoint_exc">포인트환급</a></li>
 											<li class="nav-item "><input type="button"
 												class="nav-link nav_b" id="logout_na" value="로그아웃"></li>
 										</ul></li>
@@ -296,11 +320,13 @@
 										role="button" aria-haspopup="true" aria-expanded="false"><img
 											src="../resources/img/account.png" width="40px"></a>
 										<ul class="dropdown-menu nav_ul">
-											<li class="nav-item "><a class="nav-link" href="/">쪽지</a></li>
-											<li class="nav-item "><a class="nav-link" href="/">장바구니</a></li>
-											<li class="nav-item"><a class="nav-link" href="/">마이페이지</a></li>
+											<li class="nav-item "><a class="nav-link" href="/goCart">찜목록</a></li>
 											<li class="nav-item "><a class="nav-link"
+												href="/goMyPage">마이페이지</a></li>
+												<li class="nav-item "><a class="nav-link"
 												href="/toPoint">포인트충전</a></li>
+											<li class="nav-item "><a class="nav-link"
+												href="/toPoint_exc">포인트환급</a></li>
 											<li class="nav-item "><input type="button"
 												class="nav-link nav_b" id="logout_ka" value="로그아웃"></li>
 										</ul></li>
@@ -311,11 +337,13 @@
 										role="button" aria-haspopup="true" aria-expanded="false"><img
 											src="../resources/img/account.png" width="40px"></a>
 										<ul class="dropdown-menu nav_ul">
-											<li class="nav-item "><a class="nav-link" href="/">쪽지</a></li>
-											<li class="nav-item "><a class="nav-link" href="/">장바구니</a></li>
-											<li class="nav-item"><a class="nav-link" href="/">마이페이지</a></li>
+											<li class="nav-item "><a class="nav-link" href="/goCart">찜목록</a></li>
+											<li class="nav-item "><a class="nav-link"
+												href="/goMyPage">마이페이지</a></li>
 											<li class="nav-item "><a class="nav-link"
 												href="/toPoint">포인트충전</a></li>
+												<li class="nav-item "><a class="nav-link"
+												href="/toPoint_exc">포인트환급</a></li>
 											<li class="nav-item "><a class="nav-link" href="/logout">로그아웃</a></li>
 										</ul></li>
 								</c:when>
@@ -333,56 +361,57 @@
 	</header>
 	<!-- End Header Area -->
 
-	   <!-- Start Banner Area -->
-	<section class="banner-area organic-breadcrumb">
-	<div class="container">
-		<div
-			class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
-			<div class="col-first">
-				<h1>중고물품 글쓰기</h1>
-				<nav class="d-flex align-items-center"> <a href="/">메인페이지<span
-					class="lnr lnr-arrow-right"></span></a> <a href="/#">중고거래
-					<span class="lnr lnr-arrow-right"></span>
-				</a> <a href="/tradeGoodsWrite">중고거래 물품 등록<span class="lnr "></span></a></nav>
-			</div>
-		</div>
-	</div>
-	</section>
-
+      <!-- Start Banner Area -->
+   <section class="banner-area organic-breadcrumb">
+   <div class="container">
+      <div
+         class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+         <div class="col-first">
+            <h1>중고물품 글쓰기</h1>
+            <nav class="d-flex align-items-center"> <a href="/">메인페이지<span
+               class="lnr lnr-arrow-right"></span></a> <a href="/#">중고거래
+               <span class="lnr lnr-arrow-right"></span>
+            </a> <a href="/tradeGoodsWrite">중고거래 물품 등록<span class="lnr "></span></a></nav>
+         </div>
+      </div>
+   </div>
+   </section>
 	<form action="goodsRegister" method="post" enctype="multipart/form-data" id="send">
 	<div class="product_image_area">
 		<div class="container">
 		    <div class="name">중고 물품등록</div>
 			<div class="row s_product_inner">
-				<div class="col-lg-6 col-md-6 col-sm-6">
-                    <div id="titleName">타이틀 이미지</div>
- 
+				<div class="col-lg-6 col-md-12 col-sm-12">
+                    <div id="titleName" class="middleName">타이틀 이미지</div>
+ 				
                     	<input type="hidden" name="title_img" id="imgTitle">
 				        <div id="titleImg" contenteditable="false"></div>
-						
-						<div id="writtingContents">물품 설명</div>
-							<textarea class="form-control" id="writting" rows="3" placeholder="물품설명" name="contents"></textarea>	
-				</div>
-				<div class="col-lg-5 offset-lg-1 offset-md-1 offset-sm-1">
+				
+						<div id="writtingContents" class="middleName">물품 설명</div>
+							
+						<textarea id="writting" placeholder="물품설명을 해주세요." name="contents"></textarea>	
+				</div>			
+				<div class="col-lg-5 offset-lg-1 col-md-12 col-sm-12">
 					<div class="s_product_text">
 						<ul class="list">
                         <br>                        
-						    <li><a class="active"><span>물품제목</span></a><input type="text" class="form-control goodsContents" id="goodsTitle" name="title" placeholder="물품제목을 입력하세요."></li>
-							<li><a><span>물품가격</span></a><input type="text" priceOnly  class="form-control goodsContents" id="goodsPrice" name="price" placeholder="물품가격을 입력하세요." onkeydown="javascript: return event.keyCode == 69 ? false : true"></li>
-							<li><a><span>핸드폰번호</span></a><input type="text" phoneOnly  class="form-control goodsContents" id="phone" name="phone" placeholder="-없이 핸드폰 번호를 입력해주세요." onkeydown="javascript: return event.keyCode == 69 ? false : true"></li>
-							<li><a><span>계좌번호</span></a><input type="text" acountOnly  class="form-control goodsContents" id="account" name="account" placeholder="반드시 본인의 계좌번호를 입력해주세요." onkeydown="javascript: return event.keyCode == 69 ? false : true"></li>	
-							
+						    <li><a><span class="middleName">물품제목</span></a><input type="text" class="form-control goodsContents" id="goodsTitle" name="title" placeholder="물품제목을 입력하세요."></li><br>
+							<li><a><span class="middleName">물품가격</span></a><input type="text" priceOnly  class="form-control goodsContents" id="goodsPrice" name="price" placeholder="물품가격을 입력하세요." onkeydown="javascript: return event.keyCode == 69 ? false : true"></li><br>
+							<li><a><span class="middleName">핸드폰번호</span></a><input type="text" phoneOnly  class="form-control goodsContents" id="phone" name="phone" placeholder="-없이 핸드폰 번호를 입력해주세요." onkeydown="javascript: return event.keyCode == 69 ? false : true"></li><br>
 							
 				<div id="sel">		
-					<div id="sel1">
+					<div id="sel1">					
 							<li>
-							<div>카테고리</div>
+							<div class="middleName">카테고리</div>
 							<div class="txc-textbox">
 								<select id="category" name="category">
- 									 <option value="volvo">Volvo</option>
-  									 <option value="saab">Saab</option>
- 									 <option value="mercedes">Mercedes</option>
-  									 <option value="audi">Audi</option>
+ 									 <option value="미술품">미술품</option>
+  									 <option value="도서">도서</option>
+ 									 <option value="가전제품">가전제품</option>
+  									 <option value="취미/수집">취미/수집</option>
+  									 <option value="생활용품">생활용품</option>
+  									 <option value="스포츠/레저">스포츠/레저</option>
+  									 <option value="기타">기타</option>
 								</select>
 							</div>
 							</li>
@@ -390,66 +419,89 @@
 					
 					<div id="sel2">	
 							<li>
-								<div>거래유형</div>
+								<div class="middleName">거래유형</div>
+								<c:choose>
+								<c:when test="${type=='ggic'}">
                                 <input type="radio" id="test1" class="trade" name="trade_type" value="직거래" checked>
                                 <label for="test1" class="trade">직거래</label>
                                 <input type="radio" id="test2" class="trade" name="trade_type" value="안전거래">
                                 <label for="test2" class="trade">안전거래</label>
+                                </c:when>
+                                <c:when test="${type=='an' }">
+                                <input type="radio" id="test1" class="trade" name="trade_type" value="직거래">
+                                <label for="test1" class="trade">직거래</label>
+                                <input type="radio" id="test2" class="trade" name="trade_type" value="안전거래" checked>
+                                <label for="test2" class="trade">안전거래</label>
+                                </c:when>
+                                </c:choose>
 							</li>
 					</div>		
 				</div>
 							<li>
-								<div>택배</div>
+								<div class="middleName">택배</div>
+								<c:choose>
+								<c:when test="${type=='ggic'}">								
                                 <input type="radio" id="test3" class="delivery" name="delivery_type" value="선불" disabled="disabled">
                                 <label for="test3" class="trade" id="payInside">선불(구매자 부담)</label>
                                 <input type="radio" id="test4" class="delivery" name="delivery_type" value="착불" disabled="disabled">
                                 <label for="test4" class="trade">착불(구매자 부담)</label>
                                 <input type="radio" id="test5" class="delivery" name="delivery_type" value="무료배송" disabled="disabled">
-                                <label for="test5" class="trade">무료배송(판매자 부담)</label>
+                                <label for="test5" class="trade">무료(판매자 부담)</label>
+                                </c:when>
+                                <c:when test="${type=='an' }">
+                                <input type="radio" id="test3" class="delivery" name="delivery_type" value="선불">
+                                <label for="test3" class="trade" id="payInside">선불(구매자 부담)</label>
+                                <input type="radio" id="test4" class="delivery" name="delivery_type" value="착불">
+                                <label for="test4" class="trade">착불(구매자 부담)</label>
+                                <input type="radio" id="test5" class="delivery" name="delivery_type" value="무료배송">
+                                <label for="test5" class="trade">무료(판매자 부담)</label>
+                                </c:when>
+                                </c:choose>
 							</li>
-							<div id="mainImg">메인 이미지</div>
-                            <input type="file" id="image" class="imgRegister1" accept=".jpg, .png">
+							<div id="mainImg" class="middleName">메인 이미지</div>
+                            <input type="file" id="image" class="imgRegister1" accept=".jpg, .png"><br>
                          
 				<div id="a"><br>		  
-                          <div>상세 이미지</div>                                        
+                          <div id="sang" class="middleName">상세 이미지</div>                                        
                        	 <!--  <input type="file" id="image1" class="imgRegister" accept=".gif, .jpg, .png">                       	 
                        	  <button type=button class="filePlus">+</button>
                        	  <div class="imgUploade" contenteditable="false"></div>  옆으로 상세 이미지 보여주게!!! 안됨... 
                        	  <input type="hidden" name="middle1_img" id="middle1"> -->
 
-									<div class="body">
-										<!-- 첨부 버튼 -->
-										<div id="attach">
-											<label class="waves-effect waves-teal btn-flat"
-												for="uploadInputBox" id="detailImg">파일선택</label> 
-												<input id="uploadInputBox" accept=".jpg, .png"
-												style="display: none" type="file" name="file" multiple
-												class="z" /> <input type="hidden" name="middle1_img" id="d">
-										</div>
 
-										<!-- 미리보기 영역 -->
+                           <div class="body">
+                              <!-- 첨부 버튼 -->
+                              <div id="attach">
+                                 <label class="waves-effect waves-teal btn-flat"
+                                    for="uploadInputBox" id="detailImg">파일선택</label> 
+                                    <input id="uploadInputBox" accept=".jpg, .png"
+                                    style="display: none" type="file" name="file" multiple
+                                    class="z" /> <input type="hidden" name="middle1_img" id="d">
+                              </div>
 
-										<div id="preview" class="content"></div>
+                              <!-- 미리보기 영역 -->
+
+										<div id="preview" class="content col-md-12 col-sm-12">상세 이미지 최소1장부터 최대 10장까지 넣을 수 있습니다.</div>
 
 										<!-- multipart 업로드시 영역 -->
 									</div>
 								</div>       
-                          <div class="col-md-12 text-right">
+                          <div class="text-right">
 								<button type="button" id="register" class="primary-btn">등록하기</button>								
 				        </div>                 
 						</ul>
 						<br>		
-                        <br>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+                     <br>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
 
 <br><br><br><br>
 
-	<!-- start footer Area -->
-	<footer class="footer-area section_gap">
+   <!-- start footer Area -->
+   <footer class="footer-area section_gap">
       <div class="container">
          <div class="row">
             <div class="col-lg-3  col-md-6 col-sm-6">
@@ -529,9 +581,15 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
          </div>
       </div>
    </footer>
-
-
+   
 	 <script> 
+	 <c:choose>
+		<c:when test="${logintype==null}">
+		alert("로그인후 이용 가능합니다");
+		$(location).attr("href", "/login_main");
+		</c:when>
+		</c:choose>
+	 
 		 $("#test1").on("click",function(){
 	 		$("#test3").attr("checked",false);
 	 		$("#test4").attr("checked",false);
@@ -556,7 +614,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	 		$("#pay").remove();
 	 		$("#collectible").remove();
 	 		$("#free").remove();
-	 		$("#payInside").append('<input type="text" id="pay" value="2500" name="delivery_cost">');
+	 		$("#payInside").append('<input type="text" id="pay" value="2500" name="delivery_cost" disabled="disabled">');
 	 		$("pay").attr("disabled",true);
 	 	})
 	 	$("#test4").on("click",function(){
@@ -574,14 +632,14 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	 	
 	 	
         $("input:text[priceOnly]").on("keyup", function() {
-   			 $(this).val(($(this).val().replace(/[^0-9]/g,"")));
-		});
+             $(this).val(($(this).val().replace(/[^0-9]/g,"")));
+      });
         $("input:text[phoneOnly]").on("keyup", function() {
-   			 $(this).val($(this).val().replace(/[^0-9]/g,""));
-		});
+             $(this).val($(this).val().replace(/[^0-9]/g,""));
+      });
         $("input:text[acountOnly]").on("keyup", function() {
-   			 $(this).val($(this).val().replace(/[^0-9]/g,""));
-		});
+             $(this).val($(this).val().replace(/[^0-9]/g,""));
+      });
         //핸드폰 가격 계좌 숫자만 입력받게하기
 
         $('#example .dropdown-menu li > a').bind('click', function (e) {
@@ -600,7 +658,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 				data:formData
 			}).done(function(resp){
 				$("#image").attr("disabled",true);
-				$("#titleImg").append("<img src='/image/title/"+resp+"' id='middle'>");
+				$("#titleImg").append("<img src='/img/title/"+resp+"' id='middle'>");
 				$("#imgTitle").val(resp);
 			})
 		})//메인 이미지 바로 띄우는 것
@@ -616,13 +674,12 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
                 if(input[0].files.length<11){
                 for (var fileIndex = 0; fileIndex < input[0].files.length; fileIndex++) {
                     var file = input[0].files[fileIndex];
- 					console.log("ㅁ:"+input[0].files.length);
                     if (validation(file.name))
                         continue;
              
                     var reader = new FileReader();
                     reader.onload = function(img) {               
-     		
+           
                         //div id="preview" 내에 동적코드추가.
                         //이 부분을 수정해서 이미지 링크 외 파일명, 사이즈 등의 부가설명을 할 수 있을 것이다.
                         var imgNum = ++previewIndex;                                             
@@ -635,16 +692,15 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
                                                 + imgNum
                                                 + "\" onclick=\"deletePreview(this)\">"
                                                 + "삭제" + "</a>" + "</div>");
-                                              
-                        
+                                                                      
                         files[imgNum] = file;
-                    	
+                       
                     };
                     reader.readAsDataURL(file);
                 }
                 $(".preview-box").remove();
             }else{
-            	alert("상세 이미지는 10개 까지 됩니다.");
+               alert("상세 이미지는 10개 까지 됩니다.");
             }
                 
             } else{
@@ -721,43 +777,46 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
                 addPreview($(this)); //preview form 추가하기
             });
         });
-		
-			 function autoHypenPhone(str){
-				str = str.replace(/[^0-9]/g, '');
-				var tmp = '';
-				if (str.length < 4) {
-					return str;
-				} else if (str.length < 7) {
-					tmp += str.substr(0, 3);
-					tmp += '-';
-					tmp += str.substr(3);
-					return tmp;
-				} else if (str.length < 11) {
-					tmp += str.substr(0, 3);
-					tmp += '-';
-					tmp += str.substr(3, 3);
-					tmp += '-';
-					tmp += str.substr(6);
-					return tmp;
-				} else {
-					tmp += str.substr(0, 3);
-					tmp += '-';
-					tmp += str.substr(3, 4);
-					tmp += '-';
-					tmp += str.substr(7);
-					return tmp;
-				}
-				return str;
-			}
+      
+          function autoHypenPhone(str){
+            str = str.replace(/[^0-9]/g, '');
+            var tmp = '';
+            if (str.length < 4) {
+               return str;
+            } else if (str.length < 7) {
+               tmp += str.substr(0, 3);
+               tmp += '-';
+               tmp += str.substr(3);
+               return tmp;
+            } else if (str.length < 11) {
+               tmp += str.substr(0, 3);
+               tmp += '-';
+               tmp += str.substr(3, 3);
+               tmp += '-';
+               tmp += str.substr(6);
+               return tmp;
+            } else {
+               tmp += str.substr(0, 3);
+               tmp += '-';
+               tmp += str.substr(3, 4);
+               tmp += '-';
+               tmp += str.substr(7);
+               return tmp;
+            }
+            return str;
+         }
         var cellPhone = document.getElementById('phone');
-    	cellPhone.onkeyup = function(event){
-    	    event = event || window.event;
-    	    var _val = this.value.trim();
-    	    this.value = autoHypenPhone(_val) ;
-    	}
+       cellPhone.onkeyup = function(event){
+           event = event || window.event;
+           var _val = this.value.trim();
+           this.value = autoHypenPhone(_val) ;
+       }
+
 
 
 			$("#register").on("click", function() {
+				var trade = document.getElementById("test1");
+				var deli = document.getElementsByName("delivery_type");
 				if ($("#writting").val() == "") {
 					alert("물품 설명을 입력해주세요.");
 				} else if ($("#goodsTitle").val() == "") {
@@ -766,48 +825,50 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 					alert("가격을 입력하세요.");
 				} else if ($("#phone").val() == "") {
 					alert("핸드폰 번호를 입력하세요.");
-				} else if ($("#account").val() == "") {
-					alert("계좌를 입력하세요.");
 				} else if ($("#titleImg").html() == "") {
 					alert("메인 이미지를 입력하세요.");
-				} else if ($("#preview").text() == "") {
+				} else if ($("#preview").text().length==33) {
 					alert("상세 이미지 1개 이상 입력하세요.");
+				} else if(deli[0].checked==false && deli[1].checked==false && deli[2].checked==false && trade.checked==false){
+					alert("택배 방법을 입력하세요.");
 				} else {
-					//var contents = $("#writting").val();
-					//contents = contents.replace(/(&nbsp;)+/ig, "");// 맨 앞 공백, 공백연속으로 쳤을때 &nbsp;
-					//contents = contents.replace(/^[ ]+/ig, "");	// &nbsp;자르고나서 또 맨앞에 오는 공백 자르기
-					//contents = contents.replace(/(<div><br><\/div>)+/ig, "");// 내용없이 엔터쳤을때
-					//contents = contents.replace("/(<div>[ ]*?<\/div>)/ig", "");// 공백만 넣고 엔터쳤을때
-					var contentsText = $("#writting").val();
-					var regContents = /^[가-힣 .,:;()!^?~0-9]{1,150}$/g;	 //레직스 바꾸기		
-					var titleText = $("#goodsTitle").val();
-					var regTitle = /^[가-힣 .,:;()!^?~0-9]{5,22}$/g;
+					var contents = $("#writting").val();
+					var title = $("#goodsTitle").val();
+					contents = contents.replace(/(&nbsp;)+/ig, "");// 맨 앞 공백, 공백연속으로 쳤을때 &nbsp;
+					contents = contents.replace(/^[ ]+/ig, "");	// &nbsp;자르고나서 또 맨앞에 오는 공백 자르기
+					contents = contents.replace(/(<div><br><\/div>)+/ig, "");// 내용없이 엔터쳤을때
+					contents = contents.replace("/(<div>[ ]*?<\/div>)/ig", "");// 공백만 넣고 엔터쳤을때
+					title = title.replace(/(&nbsp;)+/ig, "");// 맨 앞 공백, 공백연속으로 쳤을때 &nbsp;
+					title = title.replace(/^[ ]+/ig, "");	// &nbsp;자르고나서 또 맨앞에 오는 공백 자르기
+					title = title.replace(/(<div><br><\/div>)+/ig, "");// 내용없이 엔터쳤을때
+					title = title.replace("/(<div>[ ]*?<\/div>)/ig", "");// 공백만 넣고 엔터쳤을때
+					
+					var contentsText = contents;
+					var regContents = /^[가-힣 .,:;()!^?~0-9a-zA-Z\n]{1,150}$/g;	 //레직스 바꾸기		
+					var titleText = title;
+					var regTitle = /^[가-힣 .,:;()!^?~0-9a-zA-Z]{1,22}$/g;
 					var price = parseInt($("#goodsPrice").val());
+					var regPrice = /[1-9][0-9]{3,7}/g;
 					var phoneText = $("#phone").val();			
 					var regPhone = /(01[0|1|6|9|7])[-](\d{3}|\d{4})[-](\d{4}$)/g;	
-					var accountText = $("#account").val();
-					var regAccount = /^[\d]{12,15}$/g;
 					
 					if(!regContents.test(contentsText)){
-						alert('잘못된 내용 입니다.');
-			            $('#writting').val("");
+						alert('한글,영문(1글자~150글자 사이 입력하세요.)');			      
 					}else if(!regTitle.test(titleText)){
-						alert('잘못된 제목 입니다.');
-			            $('#goodsTitle').val("");
+						alert('한글,영문(1글자~22글자 사이 입력하세요.)');
 					}else if(!regPhone.test(phoneText)){
 						alert('잘못된 휴대폰 번호입니다.');
-			            $('#phone').val("");	
-					}else if(!regAccount.test(accountText)){
-						alert('잘못된 계좌 번호입니다.');
-			            $('#account').val("");
 					}else if(price !=0){
 						if(price<1000){
-							alert("1000원 이상 가격을 입력하세요.");
+							alert("1,000원~99,999,999원 사이 입력하세요.");
 							$("#goodsPrice").val("");
-							}else if(price>1000000){
-								alert("1,000,000원 이하 가격을 입력하세요.");
-								$("#goodsPrice").val("");
+							}else if(price>99999999){
+								alert("1,000원~99,999,999원 사이 입력하세요.");
+							}else if(!regPrice.test(price)){
+								alert("가격은 숫자만 입력할 수 있습니다.(1,000원~99,999,999원 사이)")
 							}else{
+								var contents = $("#writting").val();
+								
 								$("#send").submit();
 						}
 					}
@@ -838,24 +899,41 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	             },1000);
 	          });
 		});
-			
-			
+		
+		var rgx1 = /\D/g;  // /[^0-9]/g 와 같은 표현
+		var rgx2 = /(\d+)(\d{3})/; 
+
+		function getNumber(obj){
+		     var num01;
+		     var num02;
+		     num01 = obj.value;
+		     num02 = num01.replace(rgx1,"");
+		     num01 = setComma(num02);
+		     obj.value =  num01;
+		}
+		function setComma(inNum){
+		     var outNum;
+		     outNum = inNum; 
+		     while (rgx2.test(outNum)) {
+		          outNum = outNum.replace(rgx2, '$1' + ',' + '$2');
+		      }
+		     return outNum;
+		}
+
 		</script>
 
-	<script src="../resources/js/vendor/jquery-2.2.4.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.../resources/js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
-	 crossorigin="anonymous"></script>
-	<script src="../resources/js/vendor/bootstrap.min.js"></script>
-	<script src="../resources/js/jquery.ajaxchimp.min.js"></script>
-	<script src="../resources/js/jquery.nice-select.min.js"></script>
-	<script src="../resources/js/jquery.sticky.js"></script>
-	<script src="../resources/js/nouislider.min.js"></script>
-	<script src="../resources/js/jquery.magnific-popup.min.js"></script>
-	<script src="../resources/js/owl.carousel.min.js"></script>
-	<!--gmaps Js-->
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
-	<script src="../resources/js/gmaps.min.js"></script>
-	<script src="../resources/js/main.js"></script>
+   <script src="../resources/js/vendor/jquery-2.2.4.min.js"></script>
+   <script src="../resources/js/vendor/bootstrap.min.js"></script>
+   <script src="../resources/js/jquery.ajaxchimp.min.js"></script>
+   <script src="../resources/js/jquery.nice-select.min.js"></script>
+   <script src="../resources/js/jquery.sticky.js"></script>
+   <script src="../resources/js/nouislider.min.js"></script>
+   <script src="../resources/js/jquery.magnific-popup.min.js"></script>
+   <script src="../resources/js/owl.carousel.min.js"></script>
+   <!--gmaps Js-->
+   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
+   <script src="../resources/js/gmaps.min.js"></script>
+   <script src="../resources/js/main.js"></script>
     
 </body>
 

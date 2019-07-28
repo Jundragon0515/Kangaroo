@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+   pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <!-- Mobile Specific Meta -->
 <meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+   content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <!-- Favicon-->
 <link rel="shortcut icon" href="../resources/img/fav.png">
 <!-- Author Meta -->
@@ -29,363 +29,349 @@
 <link rel="stylesheet" href="../resources/css/nouislider.min.css">
 <link rel="stylesheet" href="../resources/css/ion.rangeSlider.css" />
 <link rel="stylesheet"
-	href="../resources/css/ion.rangeSlider.skinFlat.css" />
+   href="../resources/css/ion.rangeSlider.skinFlat.css" />
 <link rel="stylesheet" href="../resources/css/magnific-popup.css">
 <link rel="stylesheet" href="../resources/css/main.css">
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <link
-	href="https://fonts.googleapis.com/css?family=Do+Hyeon|Noto+Sans+KR|Acme|Nanum+Pen+Script&display=swap"
-	rel="stylesheet">
+   href="https://fonts.googleapis.com/css?family=Do+Hyeon|Noto+Sans+KR|Acme|Nanum+Pen+Script&display=swap"
+   rel="stylesheet">
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <style>
 * {
-	font-family: 'Noto Sans KR', sans-serif;
+   font-family: 'Noto Sans KR', sans-serif;
 }
 
 body {
-	-webkit-background-size: cover;
-	-moz-background-size: cover;
-	background-size: cover;
-	-o-background-size: cover;
+   -webkit-background-size: cover;
+   -moz-background-size: cover;
+   background-size: cover;
+   -o-background-size: cover;
 }
 
 #span1 {
-	color: blue;
+   color: blue;
 }
 
 #span2 {
-	color: red;
+   color: red;
 }
 
 #div {
-	background-color: #ffffff95;
-	text-align: center;
-	width: 90%;
-	height: 100%;
-	border-radius: 10px;
+   background-color: #ffffff95;
+   text-align: center;
+   width: 90%;
+   height: 100%;
+   border-radius: 10px;
 }
 
 label {
-	color: #8e7540;
+   color: #8e7540;
 }
 
 #header {
-	width: 108.5%;
-	height: 25%;
+   width: 108.5%;
+   height: 25%;
 }
 
 #img {
-	margin-top: 1%;
-	width: 100%;
-	height: auto;
+   margin-top: 1%;
+   width: 100%;
+   height: auto;
 }
 
 loge {
-	float: left;
-	height: 75%;
+   float: left;
+   height: 75%;
 }
 
 .text_label {
-	text-align: left;
-	width: 100%;
-	height: 100%;
+   text-align: left;
+   width: 100%;
+   height: 100%;
 }
 
 select {
-	padding: 0px;
+   padding: 0px;
 }
 
 .btn-warning {
-	margin-top: 30px;
-	cursor: pointer;
+   margin-top: 30px;
+   cursor: pointer;
 }
 
 .ui-datepicker-trigger {
-	cursor: pointer;
+   cursor: pointer;
 }
 
 .hasDatepicker {
-	cursor: pointer;
+   cursor: pointer;
 }
 
 #email, #adress {
-	margin: 0px;
-	padding: 0px;
+   margin: 0px;
+   padding: 0px;
 }
 
 #email>.btn {
-	margin: 0px;
+   margin: 0px;
 }
 .nav_b {
-	border: 0px;
-	background: 000000;
-	width: 100%;
+   border: 0px;
+   background: 000000;
+   width: 100%;
 }
 
 .nav_b:hover {
-	cursor: pointer;
+   cursor: pointer;
 }
 
 .nav_ul * {
-	text-align: center;
+   text-align: center;
 }
 </style>
 <script>
-   $(function() {
-	   
-	   <c:choose>
-		<c:when test="${logintype!=null}">
-			alert("로그아웃후 이용 가능합니다");
-			$(location).attr("href","/");
-		</c:when>
-		</c:choose>
-      $("#emailAuth_btn").hide();
-      $("#email_auth_badge").hide();
 
-      $("#id").on("focusout", function() {
-         if ($("#emailAuth_btn").attr("flag") == "true") {//이메일 인증완료
+$(function() {
+   
+   <c:choose>
+      <c:when test="${logintype!=null}">
+         alert("로그아웃후 이용 가능합니다");
+         $(location).attr("href","/");
+      </c:when>
+   </c:choose>
+   $("#emailAuth_btn").hide();
+   $("#email_auth_badge").hide();
+
+   $("#id").on("focusout", function() {
+      if ($("#emailAuth_btn").attr("flag") == "true") {//이메일 인증완료
+         $("#emailAuth_btn").attr("flag", "false");
+         $("#idrealcheck").attr("flag", "false");
+      } else if ($("#idrealcheck").attr("flag") == "true") {//id 중복체크 완료
+         $("#idrealcheck").attr("flag", "false");
+         $("#emailAuth_btn").toggle();
+         $("#idrealcheck").toggle();
+      }
+   });
+   $("#id").on("input", function() {
+      if ($("#emailAuth_btn").attr("flag") == "true") {
             $("#emailAuth_btn").attr("flag", "false");
             $("#idrealcheck").attr("flag", "false");
             $("#idrealcheck").toggle();
             $("#email_auth_badge").toggle();
-         } else if ($("#idrealcheck").attr("flag") == "true") {//id 중복체크 완료
+            $("#idcheckvar").val("");
+      } else if($("#idrealcheck").attr("flag") == "true") {//id 중복체크 완료
             $("#idrealcheck").attr("flag", "false");
             $("#emailAuth_btn").toggle();
             $("#idrealcheck").toggle();
-         }
-         $("#idcheck").text("");
+      }
+      $("#idcheck").text("");
+   });
 
-      });
-      $("#id").on("input", function() {
-         if ($("#emailAuth_btn").attr("flag") == "true") {//이메일 인증완료
-            $("#emailAuth_btn").attr("flag", "false");
-            $("#idrealcheck").attr("flag", "false");
-            $("#idrealcheck").toggle();
-            $("#email_auth_badge").toggle();
-         } else if ($("#idrealcheck").attr("flag") == "true") {//id 중복체크 완료
-            $("#idrealcheck").attr("flag", "false");
-            $("#emailAuth_btn").toggle();
-            $("#idrealcheck").toggle();
-         }
-         $("#idcheck").text("");
-      });
-
-      $("#idrealcheck")
-            .on(
-                  "click",
-                  function() {
-                     $
-                           .ajax({
-                              url : "idcheck",
-                              type : "post",
-                              dataType : "json",
-                              data : {
-                                 id : $("#id").val()
-                              }
-                           })
-                           .done(
-                                 function(resp) {
-                                    var result = JSON
-                                          .stringify(resp);
-                                    var idtext = $("#id").val();
-                                    var regex = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/g // 영어 숫자  6자리에서 12자리
-                                    if (regex.exec(idtext) != null) {
-                                       if (result == 1) {
-                                          $("#idcheck")
-                                                .text(
-                                                      "이미 가입된 아이디 입니다.");
-                                          $("#idcheck").css(
-                                                "color", "red");
-                                          $("#idcheckvar")
-                                                .val("");
-                                          $("#id").val("");
-                                       } else if (result == 0) {
-                                          $("#idcheck")
-                                                .text(
-                                                      "사용 가능한 아이디 입니다.");
-                                          $("#idcheck").css(
-                                                "color",
-                                                "green")
-                                          $("#idcheckvar")
-                                                .val(
-                                                      "사용 가능한 아이디 입니다.");
-                                          $("#idrealcheck").attr(
-                                                "flag", "true");
-                                          $("#emailAuth_btn")
-                                                .toggle();
-                                          $("#idrealcheck")
-                                                .toggle();
-                                       } else if (result == -1) {
-                                          $("#idcheck")
-                                                .text(
-                                                      "아이디를 입력해 주세요.");
-                                          $("#idcheck").css(
-                                                "color", "red");
-                                          $("#idcheckvar")
-                                                .val("");
-                                          $("#id").val("");
-                                       }
-                                    } else {
-                                       $("#idcheck").text(
-                                             "올바른 형식으로 입력하세요.");
-                                       $("#idcheck").css("color",
-                                             "red");
-                                       $("#idcheckvar").val("");
+   $("#idrealcheck")
+         .on(
+               "click",
+               function() {
+                  $
+                        .ajax({
+                           url : "idcheck",
+                           type : "post",
+                           dataType : "json",
+                           data : {
+                              id : $("#id").val()
+                           }
+                        })
+                        .done(
+                              function(resp) {
+                                 var result = JSON
+                                       .stringify(resp);
+                                 var idtext = $("#id").val();
+                                 var regex = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/g // 영어 숫자  6자리에서 12자리
+                                 if (regex.exec(idtext) != null) {
+                                    if (result == 1) {
+                                       $("#idcheck")
+                                             .text(
+                                                   "이미 가입된 아이디 입니다.");
+                                       $("#idcheck").css(
+                                             "color", "red");
+                                       $("#idcheckvar")
+                                             .val("");
+                                       $("#id").val("");
+                                    } else if (result == 0) {
+                                       $("#idcheck")
+                                             .text(
+                                                   "사용 가능한 아이디 입니다.");
+                                       $("#idcheck").css(
+                                             "color",
+                                             "green")
+                                       $("#idcheckvar")
+                                             .val(
+                                                   "");
+                                       $("#idrealcheck").attr(
+                                             "flag", "true");
+                                       $("#emailAuth_btn")
+                                             .toggle();
+                                       $("#idrealcheck")
+                                             .toggle();
+                                    } else if (result == -1) {
+                                       $("#idcheck")
+                                             .text(
+                                                   "아이디를 입력해 주세요.");
+                                       $("#idcheck").css(
+                                             "color", "red");
+                                       $("#idcheckvar")
+                                             .val("");
                                        $("#id").val("");
                                     }
-                                 })
-                  })
-      $("#emailAuth_btn").on(
-            "click",
-            function() {//이메일 인증
-               var email = $("#id").val();
-               window.open("emailAuth.login?email=" + email, "",
-                     "width=600px,height=500px");
-            });
+                                 } else {
+                                    $("#idcheck").text(
+                                          "올바른 형식으로 입력하세요.");
+                                    $("#idcheck").css("color",
+                                          "red");
+                                    $("#idcheckvar").val("");
+                                    $("#id").val("");
+                                 }
+                              })
+               })
+   $("#emailAuth_btn").on(
+         "click",
+         function() {//이메일 인증
+            var email = $("#id").val();
+            window.open("emailAuth.login?email=" + email, "",
+                  "width=600px,height=500px");
+         });
 
-      $("#pw2").on("focusout", function() {
-         $("#pwcheckvar").val("");
-         var regex = /^[A-Za-z0-9]{6,12}$/g // 영어 숫자 6자리에서 12자리            
-         var pw1 = $("#pw1").val();
-         var pw2 = $("#pw2").val();
-         if (regex.exec(pw2) != null) {
-            if (pw1 == pw2) {
-               $("#pwcheck1").text("사용가능 합니다.");
-               $("#pwcheck1").css("color", "green");
-               $("#pwcheckvar").val("사용가능 합니다.");
-            } else {
-               $("#pwcheck1").text("비밀번호가 일치하지 않습니다.");
-               $("#pwcheck1").css("color", "red");
-               $("#pwcheck1").css("font-size", "15px");
-               $("#pw2").val("");
-               $("#pwcheckvar").val("");
-            }
+   $("#pw2").on("focusout", function() {
+      $("#pwcheckvar").val("");
+      var regex = /^[A-Za-z0-9]{6,12}$/g // 영어 숫자 6자리에서 12자리            
+      var pw1 = $("#pw1").val();
+      var pw2 = $("#pw2").val();
+      if (regex.exec(pw2) != null) {
+         if (pw1 == pw2) {
+            $("#pwcheck1").text("사용가능 합니다.");
+            $("#pwcheck1").css("color", "green");
+            $("#pwcheckvar").val("사용가능 합니다.");
          } else {
-            $("#pwcheck1").text("사용불가능 합니다.");
+            $("#pwcheck1").text("비밀번호가 일치하지 않습니다.");
             $("#pwcheck1").css("color", "red");
+            $("#pwcheck1").css("font-size", "15px");
             $("#pw2").val("");
             $("#pwcheckvar").val("");
          }
-      })
+      } else {
+         $("#pwcheck1").text("사용불가능 합니다.");
+         $("#pwcheck1").css("color", "red");
+         $("#pw2").val("");
+         $("#pwcheckvar").val("");
+      }
+   })
 
-      $("#phone").on("focusout", function() {
-         $("phonecheckvar").val("");
-         var phonetext = $("#phone").val();
-         var regex = /^01([0|1|6|7|8|9]?)-([0-9]{3,4})-([0-9]{4})$/g
-         if (regex.exec(phonetext) != null) {
-            $("#phonecheck").text("사용가능한 핸드폰 번호입니다.");
-            $("#phonecheck").css("color", "blue");
-            $("#phonecheckvar").val("올바른 양식 입니다.");
-         } else {
-            $("#phonecheck").text("양식에 맞지 않습니다.");
-            $("#phonecheck").css("color", "red");
-            $("#phone").val("");
-            $("#phonecheckvar").val("");
-         }
-      })
+   $("#phone").on("focusout", function() {
+      $("phonecheckvar").val("");
+      var phonetext = $("#phone").val();
+      var regex = /^01([0|1|6|7|8|9]?)-([0-9]{3,4})-([0-9]{4})$/g
+      if (regex.exec(phonetext) != null) {
+         $("#phonecheck").text("사용가능한 핸드폰 번호입니다.");
+         $("#phonecheck").css("color", "blue");
+         $("#phonecheckvar").val("올바른 양식 입니다.");
+      } else {
+         $("#phonecheck").text("양식에 맞지 않습니다.");
+         $("#phonecheck").css("color", "red");
+         $("#phone").val("");
+         $("#phonecheckvar").val("");
+      }
+   })
 
-      $("#name").on("focusout", function() {// 이름 형식이 맞는지 구별 regex
+   $("#name").on("focusout", function() {// 이름 형식이 맞는지 구별 regex
+      $("#namecheckvar").val("");
+      var nicknametext = $("#name").val();
+      var regex = /^.{1,6}$/g
+      if (regex.exec(nicknametext) != null) {
+         $("#namecheck").text("올바른 양식 입니다.");
+         $("#namecheck").css("color", "blue");
+         $("#namecheckvar").val("올바른 양식 입니다.");
+      } else {
+         $("#namecheck").text("양식에 맞지 않습니다.");
+         $("#namecheck").css("color", "red");
+         $("#nametext").val("");
          $("#namecheckvar").val("");
-         var nicknametext = $("#name").val();
-         var regex = /^.{1,6}$/g
-         if (regex.exec(nicknametext) != null) {
-            $("#namecheck").text("올바른 양식 입니다.");
-            $("#namecheck").css("color", "blue");
-            $("#namecheckvar").val("올바른 양식 입니다.");
-         } else {
-            $("#namecheck").text("양식에 맞지 않습니다.");
-            $("#namecheck").css("color", "red");
-            $("#nametext").val("");
-            $("#namecheckvar").val("");
-         }
-      })
+      }
+   })
 
-      $("#ok")
-            .on(
-                  "click",
-                  function() {
-                     if (($("#idcheckvar").val() == "사용 가능한 아이디 입니다." && $(
-                           "#pwcheckvar").val() == "사용가능 합니다.")
-                           && ($("#namecheckvar").val() == "올바른 양식 입니다."
-                                 && $("#phonecheckvar").val() == "올바른 양식 입니다." && ($(
-                                 "#pw1").val() == $("#pw2").val()))) {
-                        $("#login").submit();
-                        return true;
-                     } else {
-                        /*lert($("input[name=gender]").val());*/
-                        alert("가입란에 정확히 입력해주세요.");
-                        return false;
-                     }
-                  })
 
-      $(document).keyup(function(e) {
-         if (e.keyCode == 13) {
-            $("#ok").click();
-         }
-      });
-      $("#ok")
-            .on(
-                  "click",
-                  function() {
-                     if ($("#idrealcheck").attr("flag") == "false") {
-                        alert("id중복확인을 해주세요.");
-                        $("#id").focus();
-                        return;
-                     } else if ($("#emailAuth_btn").attr("flag") == "false") { //email인증
-                        alert("email인증을 해주세요.");
-                        $("#id").focus();
-                        return;
-                     }
-                     if ((($("#pwcheckvar").val() == "사용가능 합니다.")
-                           && ($("#namecheckvar").val() == "올바른 양식 입니다.") && ($(
-                           "#phonecheckvar").val() == "올바른 양식 입니다.")
-
-                     )) {
-                        $("#login").submit();
-                     } else {
-                        alert("값을 입력해주세요.");
-                        return false;
-                     }
-                  });
-
-      $("#back_btn").on("click", function() {
-         var back = confirm("메인화면으로 돌아갑니다.");
-         if (back) {
-            location.href = "login_main";
-         }
-      });
-
-      $(document).submit(function() {
-         if ($("#id").val() == "") {
-            alert("값을 입력해 주세요.");
-            return false;
-         } else if ($("#pw1").val() == "") {
-            alert("비밀번호 를 정확히 입력해 주세요.");
-            return false;
-         } else if ($("#name").val() == "") {
-            alert("이름을 정확히 입력해 주세요.");
-            return false;
-         } else if ($("#pw1").val() != $("#pw2").val()) {
-            alert("패스워드 조건이 맞는지 확인해주세요.");
-            return false;
-         } else if ($("#zipcode").val() == "") {
-            alert("우편번호를 입력해 주세요.");
-            return false;
-         } else if ($("#address1").val() == "") {
-            alert("주소를 입력해 주세요.");
-            return false;
-         } else if ($("#address2").val() == "") {
-            alert("상세주소를 입력해 주세요.");
-            return false;
-         } else {
-        	 if(confirm("회원가입 하시겠습니까?"))
-            	return true;
-        	 else
-        	 	return false;
-         }
-      })
+   $(document).keyup(function(e) {
+      if (e.keyCode == 13) {
+         $("#ok").click();
+      }
    });
+   $("#ok")
+         .on(
+               "click",
+               function() {
+                  if ($("#idrealcheck").attr("flag") == "false") {
+                     alert("id중복확인을 해주세요.");
+                     $("#id").focus();
+                     return;
+                  } else if ($("#emailAuth_btn").attr("flag") == "false") { //email인증
+                     alert("email인증을 해주세요.");
+                     $("#id").focus();
+                     return;
+                  }else if (
+                        ($("#pwcheckvar").val() == "사용가능 합니다.") && 
+                       ($("#namecheckvar").val() == "올바른 양식 입니다.") && 
+                       ($("#phonecheckvar").val() == "올바른 양식 입니다.") &&
+                       ($("#idcheckvar").val() == "사용 가능한 아이디 입니다.")
+                        ) 
+                      {
+                     $("#login").submit();
+                  } else {
+                     alert("값을 입력해주세요.");
+                     return false;
+                  }
+               });
+
+   $("#back_btn").on("click", function() {
+      var back = confirm("메인화면으로 돌아갑니다.");
+      if (back) {
+         location.href = "login_main";
+      }
+   });
+
+   $(document).submit(function() {
+      if ($("#id").val() == "") {
+         alert("값을 입력해 주세요.");
+         return false;
+      } else if ($("#pw1").val() == "") {
+         alert("비밀번호 를 정확히 입력해 주세요.");
+         return false;
+      } else if ($("#name").val() == "") {
+         alert("이름을 정확히 입력해 주세요.");
+         return false;
+      } else if ($("#pw1").val() != $("#pw2").val()) {
+         alert("패스워드 조건이 맞는지 확인해주세요.");
+         return false;
+      } else if ($("#zipcode").val() == "") {
+         alert("우편번호를 입력해 주세요.");
+         return false;
+      } else if ($("#address1").val() == "") {
+         alert("주소를 입력해 주세요.");
+         return false;
+      } else if ($("#address2").val() == "") {
+         alert("상세주소를 입력해 주세요.");
+         return false;
+      } else {
+        if(confirm("회원가입을 하시겠습니까?") == true){
+           return true;   
+        }else{
+            return false;
+        }
+      }
+   })
+});
 </script>
+
+
+
 <script>
       function noSpaceForm(obj) { // 공백사용못하게
          var str_space = /\s/; // 공백체크
@@ -471,24 +457,16 @@ select {
 						id="navbarSupportedContent">
 						<ul class="nav navbar-nav menu_nav ml-auto">
 							<!-- 							<li class="nav-item active"><a class="nav-link" href="/">Home</a></li> -->
-							<li class="nav-item submenu dropdown"><a href="#"
-								class="nav-link dropdown-toggle" data-toggle="dropdown"
-								role="button" aria-haspopup="true" aria-expanded="false">중고
-									거래</a>
-								<ul class="dropdown-menu">
 									<li class="nav-item"><a class="nav-link" href="/trade">중고
 											직거래</a></li>
-									<li class="nav-item"><a class="nav-link" href="/trade">중고
+									<li class="nav-item"><a class="nav-link" href="/trade_safe">중고
 											안전거래</a></li>
-									<li class="nav-item"><a class="nav-link" href="/">중고
+									<li class="nav-item"><a class="nav-link" href="/auction">중고
 											경매</a></li>
-								</ul></li>
-							<li class="nav-item "><a class="nav-link" href="/">고객센터</a></li>
 							<li class="nav-item "><a class="nav-link" href="/">공지사항</a></li>
-
 							<c:choose>
 								<c:when test="${logintype=='admin'}">
-									<li class="nav-item "><a class="nav-link" href="/">관리자페이지</a></li>
+									<li class="nav-item "><a class="nav-link" href="/admin">관리자페이지</a></li>
 									<li class="nav-item "><a class="nav-link" href="/logout">로그아웃</a></li>
 								</c:when>
 								<c:when test="${logintype=='naver'}">
@@ -497,11 +475,13 @@ select {
 										role="button" aria-haspopup="true" aria-expanded="false"><img
 											src="../resources/img/account.png" width="35px"></a>
 										<ul class="dropdown-menu nav_ul">
-											<li class="nav-item "><a class="nav-link" href="/">쪽지</a></li>
-											<li class="nav-item "><a class="nav-link" href="/">장바구니</a></li>
-											<li class="nav-item"><a class="nav-link" href="/">마이페이지</a></li>
+											<li class="nav-item "><a class="nav-link" href="/goCart">찜목록</a></li>
+											<li class="nav-item "><a class="nav-link"
+												href="/goMyPage">마이페이지</a></li>
 											<li class="nav-item "><a class="nav-link"
 												href="/toPoint">포인트충전</a></li>
+											<li class="nav-item "><a class="nav-link"
+												href="/toPoint_exc">포인트환급</a></li>
 											<li class="nav-item "><input type="button"
 												class="nav-link nav_b" id="logout_na" value="로그아웃"></li>
 										</ul></li>
@@ -512,11 +492,13 @@ select {
 										role="button" aria-haspopup="true" aria-expanded="false"><img
 											src="../resources/img/account.png" width="40px"></a>
 										<ul class="dropdown-menu nav_ul">
-											<li class="nav-item "><a class="nav-link" href="/">쪽지</a></li>
-											<li class="nav-item "><a class="nav-link" href="/">장바구니</a></li>
-											<li class="nav-item"><a class="nav-link" href="/">마이페이지</a></li>
+											<li class="nav-item "><a class="nav-link" href="/goCart">찜목록</a></li>
 											<li class="nav-item "><a class="nav-link"
+												href="/goMyPage">마이페이지</a></li>
+												<li class="nav-item "><a class="nav-link"
 												href="/toPoint">포인트충전</a></li>
+											<li class="nav-item "><a class="nav-link"
+												href="/toPoint_exc">포인트환급</a></li>
 											<li class="nav-item "><input type="button"
 												class="nav-link nav_b" id="logout_ka" value="로그아웃"></li>
 										</ul></li>
@@ -527,11 +509,13 @@ select {
 										role="button" aria-haspopup="true" aria-expanded="false"><img
 											src="../resources/img/account.png" width="40px"></a>
 										<ul class="dropdown-menu nav_ul">
-											<li class="nav-item "><a class="nav-link" href="/">쪽지</a></li>
-											<li class="nav-item "><a class="nav-link" href="/">장바구니</a></li>
-											<li class="nav-item"><a class="nav-link" href="/">마이페이지</a></li>
+											<li class="nav-item "><a class="nav-link" href="/goCart">찜목록</a></li>
+											<li class="nav-item "><a class="nav-link"
+												href="/goMyPage">마이페이지</a></li>
 											<li class="nav-item "><a class="nav-link"
 												href="/toPoint">포인트충전</a></li>
+												<li class="nav-item "><a class="nav-link"
+												href="/toPoint_exc">포인트환급</a></li>
 											<li class="nav-item "><a class="nav-link" href="/logout">로그아웃</a></li>
 										</ul></li>
 								</c:when>
@@ -547,21 +531,21 @@ select {
 			</nav>
 		</div>
 	</header>
-	<!-- Start Banner Area -->
-	<section class="banner-area organic-breadcrumb">
-	<div class="container">
-		<div
-			class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
-			<div class="col-first">
-				<h1>회원가입</h1>
-				<nav class="d-flex align-items-center"> <a href="/">메인페이지<span
-					class="lnr lnr-arrow-right"></span></a> <a href="/insert">회원가입<span
-					class="lnr "></span></a> </nav>
-			</div>
-		</div>
-	</div>
-	</section>
-	 <form id="login" action="insertProc" method="post">
+   <!-- Start Banner Area -->
+   <section class="banner-area organic-breadcrumb">
+   <div class="container">
+      <div
+         class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+         <div class="col-first">
+            <h1>회원가입</h1>
+            <nav class="d-flex align-items-center"> <a href="/">메인페이지<span
+               class="lnr lnr-arrow-right"></span></a> <a href="/insert">회원가입<span
+               class="lnr "></span></a> </nav>
+         </div>
+      </div>
+   </div>
+   </section>
+   <form id="login" action="insertProc" method="post">
       <div class="row mb-2" id="mid">
          <div class="container col-md-6 mt-6 mb-6" id="div">
             <div class="row" id="main">
@@ -738,103 +722,104 @@ select {
          </div>
       </div>
    </form>
-q	<footer class="footer-area section_gap">
-	<div class="container">
-		<div class="row">
-			<div class="col-lg-3  col-md-6 col-sm-6">
-				<div class="single-footer-widget">
-					<h6>About Us</h6>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-						sed do eiusmod tempor incididunt ut labore dolore magna aliqua.</p>
-				</div>
-			</div>
-			<div class="col-lg-4  col-md-6 col-sm-6">
-				<div class="single-footer-widget">
-					현재 활성화된 경매수
-					<!-- 						<h6>Newsletter</h6> -->
-					<!-- 						<p>Stay update with our latest</p> -->
-					<!-- 						<div class="" id="mc_embed_signup"> -->
 
-					<!-- 							<form target="_blank" novalidate="true" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01" -->
-					<!-- 							 method="get" class="form-inline"> -->
+  <footer class="footer-area section_gap">
+   <div class="container">
+      <div class="row">
+         <div class="col-lg-3  col-md-6 col-sm-6">
+            <div class="single-footer-widget">
+               <h6>About Us</h6>
+               <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                  sed do eiusmod tempor incididunt ut labore dolore magna aliqua.</p>
+            </div>
+         </div>
+         <div class="col-lg-4  col-md-6 col-sm-6">
+            <div class="single-footer-widget">
+               현재 활성화된 경매수
+               <!--                   <h6>Newsletter</h6> -->
+               <!--                   <p>Stay update with our latest</p> -->
+               <!--                   <div class="" id="mc_embed_signup"> -->
 
-					<!-- 								<div class="d-flex flex-row"> -->
+               <!--                      <form target="_blank" novalidate="true" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01" -->
+               <!--                       method="get" class="form-inline"> -->
 
-					<!-- 									<input class="form-control" name="EMAIL" placeholder="Enter Email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Email '" -->
-					<!-- 									 required="" type="email"> -->
+               <!--                         <div class="d-flex flex-row"> -->
+
+               <!--                            <input class="form-control" name="EMAIL" placeholder="Enter Email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Email '" -->
+               <!--                             required="" type="email"> -->
 
 
-					<!-- 									<button class="click-btn btn btn-default"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></button> -->
-					<!-- 									<div style="position: absolute; left: -5000px;"> -->
-					<!-- 										<input name="b_36c4fd991d266f23781ded980_aefe40901a" tabindex="-1" value="" type="text"> -->
-					<!-- 									</div> -->
+               <!--                            <button class="click-btn btn btn-default"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></button> -->
+               <!--                            <div style="position: absolute; left: -5000px;"> -->
+               <!--                               <input name="b_36c4fd991d266f23781ded980_aefe40901a" tabindex="-1" value="" type="text"> -->
+               <!--                            </div> -->
 
-					<!-- 									<div class="col-lg-4 col-md-4"> -->
-					<!-- 												<button class="bb-btn btn"><span class="lnr lnr-arrow-right"></span></button> -->
-					<!-- 											</div>   -->
-					<!-- 								</div> -->
-					<!-- 								<div class="info"></div> -->
-					<!-- 							</form> -->
-					<!-- 						</div> -->
-				</div>
-			</div>
-			<div class="col-lg-3  col-md-6 col-sm-6">
-				<div class="single-footer-widget mail-chimp">
-					현재 총 거래 량
-					<!-- 						<h6 class="mb-20">Instragram Feed</h6> -->
-					<!-- 						<ul class="instafeed d-flex flex-wrap"> -->
-					<!-- 							<li><img src="../resources/img/i1.jpg" alt=""></li> -->
-					<!-- 							<li><img src="../resources/img/i2.jpg" alt=""></li> -->
-					<!-- 							<li><img src="../resources/img/i3.jpg" alt=""></li> -->
-					<!-- 							<li><img src="../resources/img/i4.jpg" alt=""></li> -->
-					<!-- 							<li><img src="../resources/img/i5.jpg" alt=""></li> -->
-					<!-- 							<li><img src="../resources/img/i6.jpg" alt=""></li> -->
-					<!-- 							<li><img src="../resources/img/i7.jpg" alt=""></li> -->
-					<!-- 							<li><img src="../resources/img/i8.jpg" alt=""></li> -->
-					<!-- 						</ul> -->
-				</div>
-			</div>
-			<div class="col-lg-2 col-md-6 col-sm-6">
-				<div class="single-footer-widget">
-					<h6>Follow Us</h6>
-					<p>Let us be social</p>
-					<div class="footer-social d-flex align-items-center">
-						<a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i
-							class="fa fa-twitter"></i></a> <a href="#"><i
-							class="fa fa-dribbble"></i></a> <a href="#"><i
-							class="fa fa-behance"></i></a>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div
-			class="footer-bottom d-flex justify-content-center align-items-center flex-wrap">
-			<p class="footer-text m-0">
-				<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-				Copyright &copy;
-				<script>document.write(new Date().getFullYear());</script>
-				All rights reserved | This template is made with <i
-					class="fa fa-heart-o" aria-hidden="true"></i> by <a
-					href="https://colorlib.com" target="_blank">Colorlib</a>
-				<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-			</p>
-		</div>
-	</div>
-	</footer>
-	<!-- End footer Area -->
-	<!-- End footer Area -->
+               <!--                            <div class="col-lg-4 col-md-4"> -->
+               <!--                                     <button class="bb-btn btn"><span class="lnr lnr-arrow-right"></span></button> -->
+               <!--                                  </div>   -->
+               <!--                         </div> -->
+               <!--                         <div class="info"></div> -->
+               <!--                      </form> -->
+               <!--                   </div> -->
+            </div>
+         </div>
+         <div class="col-lg-3  col-md-6 col-sm-6">
+            <div class="single-footer-widget mail-chimp">
+               현재 총 거래 량
+               <!--                   <h6 class="mb-20">Instragram Feed</h6> -->
+               <!--                   <ul class="instafeed d-flex flex-wrap"> -->
+               <!--                      <li><img src="../resources/img/i1.jpg" alt=""></li> -->
+               <!--                      <li><img src="../resources/img/i2.jpg" alt=""></li> -->
+               <!--                      <li><img src="../resources/img/i3.jpg" alt=""></li> -->
+               <!--                      <li><img src="../resources/img/i4.jpg" alt=""></li> -->
+               <!--                      <li><img src="../resources/img/i5.jpg" alt=""></li> -->
+               <!--                      <li><img src="../resources/img/i6.jpg" alt=""></li> -->
+               <!--                      <li><img src="../resources/img/i7.jpg" alt=""></li> -->
+               <!--                      <li><img src="../resources/img/i8.jpg" alt=""></li> -->
+               <!--                   </ul> -->
+            </div>
+         </div>
+         <div class="col-lg-2 col-md-6 col-sm-6">
+            <div class="single-footer-widget">
+               <h6>Follow Us</h6>
+               <p>Let us be social</p>
+               <div class="footer-social d-flex align-items-center">
+                  <a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i
+                     class="fa fa-twitter"></i></a> <a href="#"><i
+                     class="fa fa-dribbble"></i></a> <a href="#"><i
+                     class="fa fa-behance"></i></a>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div
+         class="footer-bottom d-flex justify-content-center align-items-center flex-wrap">
+         <p class="footer-text m-0">
+            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+            Copyright &copy;
+            <script>document.write(new Date().getFullYear());</script>
+            All rights reserved | This template is made with <i
+               class="fa fa-heart-o" aria-hidden="true"></i> by <a
+               href="https://colorlib.com" target="_blank">Colorlib</a>
+            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+         </p>
+      </div>
+   </div>
+   </footer>
+   <!-- End footer Area -->
+   <!-- End footer Area -->
 
-	<script src="../resources/js/vendor/bootstrap.min.js"></script>
-	<script src="../resources/js/jquery.ajaxchimp.min.js"></script>
-	<script src="../resources/js/jquery.nice-select.min.js"></script>
-	<script src="../resources/js/jquery.sticky.js"></script>
-	<script src="../resources/js/nouislider.min.js"></script>
-	<script src="../resources/js/jquery.magnific-popup.min.js"></script>
-	<script src="../resources/js/owl.carousel.min.js"></script>
-	<!--gmaps Js-->
-	<script
-		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
-	<script src="../resources/js/gmaps.min.js"></script>
-	<script src="../resources/js/main.js"></script>
+   <script src="../resources/js/vendor/bootstrap.min.js"></script>
+   <script src="../resources/js/jquery.ajaxchimp.min.js"></script>
+   <script src="../resources/js/jquery.nice-select.min.js"></script>
+   <script src="../resources/js/jquery.sticky.js"></script>
+   <script src="../resources/js/nouislider.min.js"></script>
+   <script src="../resources/js/jquery.magnific-popup.min.js"></script>
+   <script src="../resources/js/owl.carousel.min.js"></script>
+   <!--gmaps Js-->
+   <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
+   <script src="../resources/js/gmaps.min.js"></script>
+   <script src="../resources/js/main.js"></script>
 </body>
 </html>

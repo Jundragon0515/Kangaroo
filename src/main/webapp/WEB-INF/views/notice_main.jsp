@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -22,9 +21,8 @@
 <meta charset="UTF-8">
 <!-- Site Title -->
 <title>Kangaroo Shop</title>
-<!--
-		CSS
-		============================================= -->
+<link rel="icon" type="image/png" sizes="32x32"
+	href="/favicon-32x32.png">
 <link rel="stylesheet" href="../resources/css/linearicons.css">
 <link rel="stylesheet" href="../resources/css/font-awesome.min.css">
 <link rel="stylesheet" href="../resources/css/themify-icons.css">
@@ -38,102 +36,48 @@
 <link rel="stylesheet" href="../resources/css/magnific-popup.css">
 <link rel="stylesheet" href="../resources/css/main.css">
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script type="text/javascript"
-	src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
-<script>
-$(function(){
-	<c:choose>
-	<c:when test="${logintype==null}">
-		alert("로그인이 필요합니다");
-		$(location).attr("href","login_main");
-	</c:when>
-	</c:choose>
-	var IMP = window.IMP; // 생략가능
-	IMP.init('imp81233823');
-    if("${id==null}"==true){
-    	alert("로그인이 필요 합니다.");
-    	$(location).attr("href","/");
-    }else{
-    	var email="${email}";
-    	var name ="${name}";
-    	var tel ="${phone}";
-    	var postcode="${zipcode}";
-    }
-	$("#payment_btn").on("click",function(){
-		var  amount = $("#donaMoney").val();
-		IMP.request_pay({
-		    pg : 'html5_inicis', // version 1.1.0부터 지원.
-		    pay_method : $("#donaMethod option:selected").val(),
-		    merchant_uid : 'merchant_' + new Date().getTime(),
-		    name : '포인트 충전',
-		    amount : amount,
-		    buyer_email : email,
-		    buyer_name : name,
-		    buyer_tel : tel,
-		    buyer_addr : '0',
-		    buyer_postcode : postcode,
-		    m_redirect_url : 'http://localhost/callback.su'
-		}, function(rsp) {
-		    if ( rsp.success ) {
-		        var msg = '결제가 완료되었습니다.';
-		        msg += '고유ID : ' + rsp.imp_uid;
-		        msg += '상점 거래ID : ' + rsp.merchant_uid;
-		        msg += '결제 금액 : ' + rsp.paid_amount;
-		        msg += '카드 승인번호 : ' + rsp.apply_num;
-		        msg += '감사합니다!';
-		        if(alert(msg)==null){
-		        	console.log("asd");
-				    	$.ajax({
-				    		url:"insert.po",
-				    		data:{
-				    			amount : $("#donaMoney").val()
-				    		},
-				    		type:"post"
-				    	}).done(function(resp){
-				    		$(location).attr("href","/toPoint");
-				    	});
-				}
-		    } else {
-		        var msg = '결제에 실패하였습니다.';
-		        msg += '에러내용 : ' + rsp.error_msg;   
-		        alert(msg);
-		    }
-		});
-	});
-	$("#logout_na").on("click", function() {
-		 $.ajax({
-               url:"logout",
-               type:"get"
-            }).done(function(){
-               var naver=open("https://nid.naver.com/nidlogin.logout?returl=https://www.naver.com/", "_blank", "width=100,height=100");
-               setTimeout(function(){
-                  naver.close();
-                  location.reload(true);
-               },1000);
-            });
-	});
-	$("#logout_ka").on("click", function() {
-		 $.ajax({
-            url:"logout",
-            type:"get"
-         }).done(function(){
-            var kakao=open("https://developers.kakao.com/logout", "_blank", "width=100,height=100");
-            setTimeout(function(){
-               kakao.close();
-               location.reload(true);
-            },1000);
-         });
-	});
-
-});
-</script>
 <style>
-.h1 {
+#layer {
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	height: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	display: -webkit-flex; -webkit-align-item; center;
+	-webkit-justify-content: center;
+}
+
+#row {
+	margin-top: 80px;
+	margin-bottom: 80px;
+	background-color: #ffffff95;
+	width: 300px;
+	height: 400px;
+	border-radius: 10px;
+}
+
+.row>div {
 	text-align: center;
 }
 
-.payment {
-	text-align: center;
+#login_btn, #kakao_login_btn, #sign_up_btn, #toMain_btn {
+	width: 222px;
+	height: 49px;
+}
+
+#naver_login_btn {
+	width: 222px;
+	height: 49px;
+	background-color: transparent;
+	border: none;
+	cursor: pointer;
+}
+
+b, sup, sub, u, del {
+	color: black;
 }
 .nav_b {
 	border: 0px;
@@ -149,9 +93,73 @@ $(function(){
 	text-align: center;
 }
 </style>
+<style>
+    table{
+        text-align: center;
+         width:100%;
+    }
+    .no{
+        width: 10%;
+
+    }
+    .title{
+        width: 65%;
+
+    }
+    .time{
+        width: 15%;
+
+    }
+    .view{
+        width: 10%;
+
+    }
+	table,td{
+       -moz-border-radius: 2px;
+	}
+	.subtitle,.subtitle>*{
+		float: right;
+		
+	}
+	h1{
+		text-align: center;
+	}
+	#writting{
+		height: 500px;
+	}
+	.mid_nav_one{
+		float: left;
+	}
+	#btnclass{
+		float: right;
+	}
+	#asd{
+		width: 60px;
+	}
+	.page-link{
+	padding: inherit;
+	}
+</style>
+<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+<script>
+	$(function() {
+		if(${logintype != 'admin'}){
+			$("input").remove("#noitceinput");
+		};
+	    
+	    $("#noitceinput").on("click",function(){
+	  	  	$(location).attr("href","noitceinput")
+	    })
+		$("#toMain_btn").on("click", function() {
+			location.href = "/";
+		});
+	});
+	onload = function() {
+	};
+</script>
 </head>
 <body>
-	<header class="header_area sticky-header">
+<header class="header_area sticky-header">
 		<div class="main_menu">
 			<nav class="navbar navbar-expand-lg navbar-light main_box">
 				<div class="container">
@@ -171,24 +179,16 @@ $(function(){
 						id="navbarSupportedContent">
 						<ul class="nav navbar-nav menu_nav ml-auto">
 							<!-- 							<li class="nav-item active"><a class="nav-link" href="/">Home</a></li> -->
-							<li class="nav-item submenu dropdown"><a href="#"
-								class="nav-link dropdown-toggle" data-toggle="dropdown"
-								role="button" aria-haspopup="true" aria-expanded="false">중고
-									거래</a>
-								<ul class="dropdown-menu">
 									<li class="nav-item"><a class="nav-link" href="/trade">중고
 											직거래</a></li>
-									<li class="nav-item"><a class="nav-link" href="/trade">중고
+									<li class="nav-item"><a class="nav-link" href="/trade_safe">중고
 											안전거래</a></li>
-									<li class="nav-item"><a class="nav-link" href="/">중고
+									<li class="nav-item"><a class="nav-link" href="/auction">중고
 											경매</a></li>
-								</ul></li>
-							<li class="nav-item "><a class="nav-link" href="/">고객센터</a></li>
 							<li class="nav-item "><a class="nav-link" href="/">공지사항</a></li>
-
 							<c:choose>
 								<c:when test="${logintype=='admin'}">
-									<li class="nav-item "><a class="nav-link" href="/">관리자페이지</a></li>
+									<li class="nav-item "><a class="nav-link" href="/admin">관리자페이지</a></li>
 									<li class="nav-item "><a class="nav-link" href="/logout">로그아웃</a></li>
 								</c:when>
 								<c:when test="${logintype=='naver'}">
@@ -197,9 +197,9 @@ $(function(){
 										role="button" aria-haspopup="true" aria-expanded="false"><img
 											src="../resources/img/account.png" width="35px"></a>
 										<ul class="dropdown-menu nav_ul">
-											<li class="nav-item "><a class="nav-link" href="/">쪽지</a></li>
-											<li class="nav-item "><a class="nav-link" href="/">장바구니</a></li>
-											<li class="nav-item"><a class="nav-link" href="/">마이페이지</a></li>
+											<li class="nav-item "><a class="nav-link" href="/goCart">찜목록</a></li>
+											<li class="nav-item "><a class="nav-link"
+												href="/goMyPage">마이페이지</a></li>
 											<li class="nav-item "><a class="nav-link"
 												href="/toPoint">포인트충전</a></li>
 											<li class="nav-item "><input type="button"
@@ -212,9 +212,9 @@ $(function(){
 										role="button" aria-haspopup="true" aria-expanded="false"><img
 											src="../resources/img/account.png" width="40px"></a>
 										<ul class="dropdown-menu nav_ul">
-											<li class="nav-item "><a class="nav-link" href="/">쪽지</a></li>
-											<li class="nav-item "><a class="nav-link" href="/">장바구니</a></li>
-											<li class="nav-item"><a class="nav-link" href="/">마이페이지</a></li>
+											<li class="nav-item "><a class="nav-link" href="/goCart">찜목록</a></li>
+											<li class="nav-item "><a class="nav-link"
+												href="/goMyPage">마이페이지</a></li>
 											<li class="nav-item "><a class="nav-link"
 												href="/toPoint">포인트충전</a></li>
 											<li class="nav-item "><input type="button"
@@ -227,9 +227,9 @@ $(function(){
 										role="button" aria-haspopup="true" aria-expanded="false"><img
 											src="../resources/img/account.png" width="40px"></a>
 										<ul class="dropdown-menu nav_ul">
-											<li class="nav-item "><a class="nav-link" href="/">쪽지</a></li>
-											<li class="nav-item "><a class="nav-link" href="/">장바구니</a></li>
-											<li class="nav-item"><a class="nav-link" href="/">마이페이지</a></li>
+											<li class="nav-item "><a class="nav-link" href="/goCart">찜목록</a></li>
+											<li class="nav-item "><a class="nav-link"
+												href="/goMyPage">마이페이지</a></li>
 											<li class="nav-item "><a class="nav-link"
 												href="/toPoint">포인트충전</a></li>
 											<li class="nav-item "><a class="nav-link" href="/logout">로그아웃</a></li>
@@ -253,73 +253,54 @@ $(function(){
 		<div
 			class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
 			<div class="col-first">
-				<h1>포인트 충전</h1>
+				<h1>공지사항 메인</h1>
 				<nav class="d-flex align-items-center"> <a href="/">메인페이지<span
-					class="lnr lnr-arrow-right"></span></a> <a href="/topoint">포인트충전<span
-					class="lnr "></span></a> </nav>
+					class="lnr lnr-arrow-right"></span></a> <a href="/login_main">공지사항
+					메인<span class="lnr "></span>
+				</a> </nav>
 			</div>
 		</div>
 	</div>
 	</section>
-	<c:choose>
-		<c:when test="${logintype==null}">
-			<div class="card text-center">
-				<div class="card-header">실패!</div>
-				<div class="card-body">
-					<h5 class="card-title">해당 서비스는 로그인이 필요합니다!</h5>
-					<p class="card-text">로그인 이후 포인트 충전을 이용 해주시기 바랍니다!</p>
-					<a href="/login_main" class="btn btn-primary">로그인 하러 가기</a>
-				</div>
-				<div class="card-footer text-muted"></div>
-			</div>
-		</c:when>
-		<c:otherwise>
-			<div class="header mt-5">
-				<div class="row ">
-					<div class="header col-lg-12 ">
-						<h1 style="color: #f7b825;" class="h1">충전하기</h1>
-					</div>
-				</div>
-			</div>
-			<div class="container mt-5">
-				<div class=" main2 row mt-5">
-					<div class=" col-lg-4 col-md-4 col-sm-4">
-						<h3>현재 보유 포인트</h3>
-					</div>
-					<div class=" col-lg-8 col-md-8 col-sm-8">
-						<input type="text" class="form-control" 
-							 value="${point}" readonly>
-					</div>
-
-				</div>
-				<div class="main1 row pt-3 mt-4">
-					<div class="  col-lg-4 col-md-4 col-sm-4 ">
-						<h3 style="margin-top: 8px;">결제 방식</h3>
-					</div>
-					<div class="  col-lg-8 col-md-8 col-sm-8 float-left">
-						<select id="donaMethod">
-							<option value="card">카드</option>
-							<option value="trans">실시간 계좌이체</option>
-							<option value="phone">휴대폰 소액결제</option>
-						</select>
-					</div>
-				</div>
-				<div class=" main2 row mt-5">
-					<div class=" col-lg-4 col-md-4 col-sm-4">
-						<h3>결제 금액</h3>
-					</div>
-					<div class=" col-lg-8 col-md-8 col-sm-8">
-						<input type="text" class="form-control" name="donaMoney"
-							id="donaMoney" placeholder="충전하실 금액을 입력해 주세요.">
-					</div>
-					<div class="col-lg-12 col-md-12 col-sm-12 mt-5 payment mb-5">
-						<input type="button" class="genric-btn primary-border circle"
-							id="payment_btn" style="font-size: 1.5em" value="결제 하기">
-					</div>
-				</div>
-			</div>
-		</c:otherwise>
-	</c:choose>
+	<div class="mt-5 mb-5">
+		<span hidden="none">sad</span>
+	</div>
+	<!-- show time  -->
+<main>
+   <div class="row">
+	   <div class="container" id="board">
+	   		<div id="mid_nav">
+	   			<div class="mid_nav_title col-12 my-3"><h1>공지사항</h1></div>
+	   			<div class="mid_nav_one col-12 mb-2"><B>소통의 공간!</B>&ensp;</div>
+	   			<div class="col-12">
+	   			    <table class="table table-hover">
+	   			         <tr>
+	   			             <td class="no">번호</td>
+	   			             <td class="title">제목</td>
+	   			             <td class="time">등록일</td>
+	   			             <td class="view">조회수</td>
+	   			         </tr>
+	   			         <c:forEach var="result" items="${dtos }">
+		   			         <tr>
+		   			             <td class="no">${result.no }</td>
+		   			             <td class="title"><a href="notice?no=${result.no }&viewcount=${result.viewcount }" style="color: black; text-decoration:none">${result.title }</a></td>
+		   			             <td class="time" ><c:set var="TextValue" value="${result.joindate }"/>${fn:substring(TextValue,0,10) }</td>
+		   			             <td class="view">${result.viewcount }</td>
+		   			         </tr>
+	   			         </c:forEach>
+	   			         <tr>
+	   			            <td colspan="4">
+	   			            ${nav }  <input class="btn btn-warning my-2" type="button" id="noitceinput" value="글쓰기" style="float: right;">
+	   			            </td>
+	   			         </tr>
+	   			    </table>
+	   			</div>
+	   		</div>
+		   	
+	   	</div>
+   	</div>
+</main>
+	<!-- show time  -end- -->
 	<footer class="footer-area section_gap">
 	<div class="container">
 		<div class="row">
@@ -394,7 +375,9 @@ $(function(){
 			<p class="footer-text m-0">
 				<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 				Copyright &copy;
-				<script>document.write(new Date().getFullYear());</script>
+				<script>
+					document.write(new Date().getFullYear());
+				</script>
 				All rights reserved | This template is made with <i
 					class="fa fa-heart-o" aria-hidden="true"></i> by <a
 					href="https://colorlib.com" target="_blank">Colorlib</a>
@@ -419,5 +402,17 @@ $(function(){
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
 	<script src="../resources/js/gmaps.min.js"></script>
 	<script src="../resources/js/main.js"></script>
+	<script type='text/javascript'>
+		Kakao.init('473f4afca91d6d42fb0364e90c3df475');
+		Kakao.Auth.createLoginButton({
+			container : '#kakao-login-btn',
+			success : function(authObj) {
+				location.href = "login.ka";
+			},
+			fail : function(err) {
+				alert(JSON.stringify(err));
+			}
+		});
+	</script>
 </body>
 </html>
