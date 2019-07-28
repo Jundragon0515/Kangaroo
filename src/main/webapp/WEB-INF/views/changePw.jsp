@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.4.1.js">
 </script>
+<link rel="shortcut icon" href="../resources/img/logo.png">
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <link

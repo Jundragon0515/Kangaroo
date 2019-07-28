@@ -11,8 +11,7 @@
 
 	<!-- Favicon-->
 
-	<link rel="shortcut icon" href="img/fav.png">
-
+<link rel="shortcut icon" href="../resources/img/logo.png">
 	<!-- Author Meta -->
 
 	<meta name="author" content="CodePixar">
@@ -60,7 +59,8 @@
 	<link rel="stylesheet" href="../resources/css/main.css">
 
   <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-
+<link rel="icon" type="image/png" sizes="32x32"
+	href="/favicon-32x32.png">
 </head>
 <style>
     .category,.dropdown-menu{
@@ -337,7 +337,7 @@
 											안전거래</a></li>
 									<li class="nav-item"><a class="nav-link" href="/auction">중고
 											경매</a></li>
-							<li class="nav-item "><a class="nav-link" href="/">공지사항</a></li>
+							<li class="nav-item "><a class="nav-link" href="notice_main">공지사항</a></li>
 							<c:choose>
 								<c:when test="${logintype=='admin'}">
 									<li class="nav-item "><a class="nav-link" href="/admin">관리자페이지</a></li>

@@ -7,6 +7,7 @@
 <title>이메일 인증 페이지</title>
 <link rel="icon" type="image/png" sizes="32x32"
    href="/favicon-32x32.png">
+<link rel="shortcut icon" href="../resources/img/logo.png">
 <script src="https://code.jquery.com/jquery-3.4.0.min.js">
 </script>
 <link rel="stylesheet"

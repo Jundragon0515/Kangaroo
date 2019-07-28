@@ -11,7 +11,7 @@
 
    content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <!-- Favicon-->
-<link rel="shortcut icon" href="img/fav.png">
+<link rel="shortcut icon" href="../resources/img/logo.png">
 <!-- Author Meta -->
 <meta name="author" content="CodePixar">
 <!-- Meta Description -->
@@ -47,7 +47,8 @@
 <link rel="stylesheet"
    href="../resources/css/ion.rangeSlider.skinFlat.css" />
 <link rel="stylesheet" href="../resources/css/main.css">
-
+<link rel="icon" type="image/png" sizes="32x32"
+	href="/favicon-32x32.png">
 <style>
 .blinking{
 	-webkit-animation:blink 2.0s ease-in-out infinite alternate;
@@ -293,99 +294,99 @@ $("#logout_na").on("click", function() {
       <!-- end fixbutton -->
    <!-- Start Header Area -->
   <header class="header_area sticky-header">
-      <div class="main_menu">
-         <nav class="navbar navbar-expand-lg navbar-light main_box">
-            <div class="container">
-               <!-- Brand and toggle get grouped for better mobile display logo_h -->
-               <a class="navbar-brand logo_h" href="/"><img
-                  src="../resources/img/logo.png" width="60px" alt="">
-                  Kangaroo</a>
-               <button class="navbar-toggler" type="button" data-toggle="collapse"
-                  data-target="#navbarSupportedContent"
-                  aria-controls="navbarSupportedContent" aria-expanded="false"
-                  aria-label="Toggle navigation">
-                  <span class="icon-bar"></span> <span class="icon-bar"></span> <span
-                     class="icon-bar"></span>
-               </button>
-               <!-- Collect the nav links, forms, and other content for toggling -->
-               <div class="collapse navbar-collapse offset"
-                  id="navbarSupportedContent">
-                  <ul class="nav navbar-nav menu_nav ml-auto">
-                     <!--                      <li class="nav-item active"><a class="nav-link" href="/">Home</a></li> -->
-                           <li class="nav-item"><a class="nav-link" href="/trade">중고
-                                 직거래</a></li>
-                           <li class="nav-item"><a class="nav-link" href="/trade_safe">중고
-                                 안전거래</a></li>
-                           <li class="nav-item"><a class="nav-link" href="/auction">중고
-                                 경매</a></li>
-                     <li class="nav-item "><a class="nav-link" href="/">공지사항</a></li>
-                     <c:choose>
-                        <c:when test="${logintype=='admin'}">
-                           <li class="nav-item "><a class="nav-link" href="/admin">관리자페이지</a></li>
-                           <li class="nav-item "><a class="nav-link" href="/logout">로그아웃</a></li>
-                        </c:when>
-                        <c:when test="${logintype=='naver'}">
-                           <li class="nav-item submenu dropdown"><a href="#"
-                              class="nav-link dropdown-toggle" data-toggle="dropdown"
-                              role="button" aria-haspopup="true" aria-expanded="false"><img
-                                 src="../resources/img/account.png" width="35px"></a>
-                              <ul class="dropdown-menu nav_ul">
-                                 <li class="nav-item "><a class="nav-link" href="/goCart">찜목록</a></li>
-                                 <li class="nav-item "><a class="nav-link"
-                                    href="/goMyPage">마이페이지</a></li>
-                                 <li class="nav-item "><a class="nav-link"
-                                    href="/toPoint">포인트충전</a></li>
-                                 <li class="nav-item "><a class="nav-link"
-                                    href="/toPoint_exc">포인트환급</a></li>
-                                 <li class="nav-item "><input type="button"
-                                    class="nav-link nav_b" id="logout_na" value="로그아웃"></li>
-                              </ul></li>
-                        </c:when>
-                        <c:when test="${logintype=='kakao'}">
-                           <li class="nav-item submenu dropdown"><a href="#"
-                              class="nav-link dropdown-toggle" data-toggle="dropdown"
-                              role="button" aria-haspopup="true" aria-expanded="false"><img
-                                 src="../resources/img/account.png" width="40px"></a>
-                              <ul class="dropdown-menu nav_ul">
-                                 <li class="nav-item "><a class="nav-link" href="/goCart">찜목록</a></li>
-                                 <li class="nav-item "><a class="nav-link"
-                                    href="/goMyPage">마이페이지</a></li>
-                                    <li class="nav-item "><a class="nav-link"
-                                    href="/toPoint">포인트충전</a></li>
-                                 <li class="nav-item "><a class="nav-link"
-                                    href="/toPoint_exc">포인트환급</a></li>
-                                 <li class="nav-item "><input type="button"
-                                    class="nav-link nav_b" id="logout_ka" value="로그아웃"></li>
-                              </ul></li>
-                        </c:when>
-                        <c:when test="${logintype=='email'}">
-                           <li class="nav-item submenu dropdown"><a href="#"
-                              class="nav-link dropdown-toggle" data-toggle="dropdown"
-                              role="button" aria-haspopup="true" aria-expanded="false"><img
-                                 src="../resources/img/account.png" width="40px"></a>
-                              <ul class="dropdown-menu nav_ul">
-                                 <li class="nav-item "><a class="nav-link" href="/goCart">찜목록</a></li>
-                                 <li class="nav-item "><a class="nav-link"
-                                    href="/goMyPage">마이페이지</a></li>
-                                 <li class="nav-item "><a class="nav-link"
-                                    href="/toPoint">포인트충전</a></li>
-                                    <li class="nav-item "><a class="nav-link"
-                                    href="/toPoint_exc">포인트환급</a></li>
-                                 <li class="nav-item "><a class="nav-link" href="/logout">로그아웃</a></li>
-                              </ul></li>
-                        </c:when>
-                        <c:otherwise>
-                           <li class="nav-item "><a class="nav-link"
-                              href="/login_main">로그인</a></li>
-                           <li class="nav-item "><a class="nav-link" href="/insert">회원가입</a></li>
-                        </c:otherwise>
-                     </c:choose>
-                  </ul>
-               </div>
-            </div>
-         </nav>
-      </div>
-   </header>
+		<div class="main_menu">
+			<nav class="navbar navbar-expand-lg navbar-light main_box">
+				<div class="container">
+					<!-- Brand and toggle get grouped for better mobile display logo_h -->
+					<a class="navbar-brand logo_h" href="/"><img
+						src="../resources/img/logo.png" width="60px" alt="">
+						Kangaroo</a>
+					<button class="navbar-toggler" type="button" data-toggle="collapse"
+						data-target="#navbarSupportedContent"
+						aria-controls="navbarSupportedContent" aria-expanded="false"
+						aria-label="Toggle navigation">
+						<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+							class="icon-bar"></span>
+					</button>
+					<!-- Collect the nav links, forms, and other content for toggling -->
+					<div class="collapse navbar-collapse offset"
+						id="navbarSupportedContent">
+						<ul class="nav navbar-nav menu_nav ml-auto">
+							<!-- 							<li class="nav-item active"><a class="nav-link" href="/">Home</a></li> -->
+									<li class="nav-item"><a class="nav-link" href="/trade">중고
+											직거래</a></li>
+									<li class="nav-item"><a class="nav-link" href="/trade_safe">중고
+											안전거래</a></li>
+									<li class="nav-item"><a class="nav-link" href="/auction">중고
+											경매</a></li>
+							<li class="nav-item "><a class="nav-link" href="notice_main">공지사항</a></li>
+							<c:choose>
+								<c:when test="${logintype=='admin'}">
+									<li class="nav-item "><a class="nav-link" href="/admin">관리자페이지</a></li>
+									<li class="nav-item "><a class="nav-link" href="/logout">로그아웃</a></li>
+								</c:when>
+								<c:when test="${logintype=='naver'}">
+									<li class="nav-item submenu dropdown"><a href="#"
+										class="nav-link dropdown-toggle" data-toggle="dropdown"
+										role="button" aria-haspopup="true" aria-expanded="false"><img
+											src="../resources/img/account.png" width="35px"></a>
+										<ul class="dropdown-menu nav_ul">
+											<li class="nav-item "><a class="nav-link" href="/goCart">찜목록</a></li>
+											<li class="nav-item "><a class="nav-link"
+												href="/goMyPage">마이페이지</a></li>
+											<li class="nav-item "><a class="nav-link"
+												href="/toPoint">포인트충전</a></li>
+											<li class="nav-item "><a class="nav-link"
+												href="/toPoint_exc">포인트환급</a></li>
+											<li class="nav-item "><input type="button"
+												class="nav-link nav_b" id="logout_na" value="로그아웃"></li>
+										</ul></li>
+								</c:when>
+								<c:when test="${logintype=='kakao'}">
+									<li class="nav-item submenu dropdown"><a href="#"
+										class="nav-link dropdown-toggle" data-toggle="dropdown"
+										role="button" aria-haspopup="true" aria-expanded="false"><img
+											src="../resources/img/account.png" width="40px"></a>
+										<ul class="dropdown-menu nav_ul">
+											<li class="nav-item "><a class="nav-link" href="/goCart">찜목록</a></li>
+											<li class="nav-item "><a class="nav-link"
+												href="/goMyPage">마이페이지</a></li>
+												<li class="nav-item "><a class="nav-link"
+												href="/toPoint">포인트충전</a></li>
+											<li class="nav-item "><a class="nav-link"
+												href="/toPoint_exc">포인트환급</a></li>
+											<li class="nav-item "><input type="button"
+												class="nav-link nav_b" id="logout_ka" value="로그아웃"></li>
+										</ul></li>
+								</c:when>
+								<c:when test="${logintype=='email'}">
+									<li class="nav-item submenu dropdown"><a href="#"
+										class="nav-link dropdown-toggle" data-toggle="dropdown"
+										role="button" aria-haspopup="true" aria-expanded="false"><img
+											src="../resources/img/account.png" width="40px"></a>
+										<ul class="dropdown-menu nav_ul">
+											<li class="nav-item "><a class="nav-link" href="/goCart">찜목록</a></li>
+											<li class="nav-item "><a class="nav-link"
+												href="/goMyPage">마이페이지</a></li>
+											<li class="nav-item "><a class="nav-link"
+												href="/toPoint">포인트충전</a></li>
+												<li class="nav-item "><a class="nav-link"
+												href="/toPoint_exc">포인트환급</a></li>
+											<li class="nav-item "><a class="nav-link" href="/logout">로그아웃</a></li>
+										</ul></li>
+								</c:when>
+								<c:otherwise>
+									<li class="nav-item "><a class="nav-link"
+										href="/login_main">로그인</a></li>
+									<li class="nav-item "><a class="nav-link" href="/insert">회원가입</a></li>
+								</c:otherwise>
+							</c:choose>
+						</ul>
+					</div>
+				</div>
+			</nav>
+		</div>
+	</header>
 
    <!-- End Header Area -->
 
