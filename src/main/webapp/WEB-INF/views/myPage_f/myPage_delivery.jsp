@@ -268,7 +268,7 @@ a{
 			<div
 				class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
 				<div class="col-first">
-					<h1>로그인</h1>
+					<h1>주몬 조회</h1>
 					<nav class="d-flex align-items-center">
 						<a href="/">메인페이지<span class="lnr lnr-arrow-right"></span></a> <a
 							href="/goMyPage">마이페이지<span class="lnr lnr-arrow-right"></span></a>
