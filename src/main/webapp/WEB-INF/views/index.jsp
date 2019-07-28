@@ -86,21 +86,38 @@
 			client.subscribe("/response", function(list) {
 				var result = JSON.parse(list.body);
 				var z = 0;
-					 			<c:forEach var="i" items="${main_option_list}">
-								$("."+"${i.no}").text(result[z++]);
+					 			<c:forEach var="i" items="${auctionList}">
+								$(".${i.no}").text("남은시간 : "+result[z++]);
 								</c:forEach>
 			});
 		})
 		setInterval(function() {//시간 보내 달라는 요청
 			var list = new Array();
-						<c:forEach var="i" items="${main_option_list}">
+						<c:forEach var="i" items="${auctionList}">
 							list.push("${i.end_date}");
 						</c:forEach>
 			client.send("/app/time", {}, JSON.stringify({
 				end_dates : list
 			}));
 		}, 900);
-		
+		var list2 = new Array();
+		<c:forEach var="i" items="${auctionList}">
+		list2.push("${i.no}");
+		</c:forEach>
+		setInterval(function() {
+			for(var z=0; z<list2.length ; z++){
+				if(!list2[z])
+					continue;
+				if($("."+list2[z]).text()=='남은시간 : 종료'){
+					$("."+list2[z]+"_re").before("<img class='onging-img' src=''../resources/img/banner/soldout.png'><button class='ongoing-btn'></button>");
+					client.send("/app/end", {}, JSON.stringify({
+						no : list2[z]
+					}));
+					delete list2[z];
+				}
+				
+			}	
+		}, 900);
 		
 		$("#logout_na").on("click", function() {
 			 $.ajax({
@@ -417,7 +434,7 @@
 						<div class="col-lg-3 col-md-6">
 							<div class="single-product">
                            <div class="card">
-                              <a href="/auction_detailPage?no=${temp.no}">
+                              <a href="/auction_detailPage?no=${temp.no}" class="${temp.no}_re">
                               <img class="img-fluid product-img-size" style="margin-bottom: 5px;"
                                  src="../resources/img/title/${temp.title_img}" alt=""></a>
                               <div class="card-body" style="padding: 12px;">

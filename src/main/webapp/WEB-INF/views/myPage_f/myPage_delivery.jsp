@@ -71,6 +71,9 @@ a{
     font-weight: bold;
     border : 1px solid;
 }
+.page-link{
+	color:black;
+}
 </style>
 <script>
 	$(function() {
@@ -464,7 +467,7 @@ a{
                             <tr>
                            <td colspan="6">
                            <div class="media">
-                                        <div class="media-body">
+                                        <div class="media-body ">
                                             <p>${tender_navi }</p>
                                         </div>
                                     </div>

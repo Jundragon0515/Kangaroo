@@ -72,6 +72,10 @@ a{
     font-weight: bold;
     border : 1px solid;
 }
+.page-link{
+	color:black;
+}
+
 </style>
 <script>
 	$(function() {
