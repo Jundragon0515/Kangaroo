@@ -219,6 +219,16 @@ a{
 					"_blank", "width=500,height=500");
 			}
 		});
+		$("#comp2").on("click",function(){
+			$.ajax({
+				url : "comp2",
+				data:{
+					seq:$(this).attr("seq")
+				}
+		}).done(function(){
+			location.reload(true);
+			})
+		});
 		
 	});
 </script>
@@ -583,8 +593,11 @@ a{
                                     </td>
                                     <td>
                                     <c:choose>
-                                    <c:when test="${i.onGoing=='y' && trade_type=='안전거래'}">
+                                    <c:when test="${i.onGoing=='y' && i.trade_type=='안전거래'}">
                                    	판매 진행 중
+                                    </c:when>
+                                     <c:when test="${i.onGoing=='y' && i.trade_type=='직거래'}">
+                                   	<input type="button" value="판매 완료" seq="${i.no }" class="genric-btn primary-border circle" id="comp2">
                                     </c:when>
                                     <c:otherwise>
                                     	판매완료
