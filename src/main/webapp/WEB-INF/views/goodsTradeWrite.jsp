@@ -371,9 +371,9 @@
             <h1>중고물품 글쓰기</h1>
             <nav class="d-flex align-items-center"> <a href="/">메인페이지<span
 
-               class="lnr lnr-arrow-right"></span></a> <a href="/#">중고거래
+               class="lnr lnr-arrow-right"></span></a> <a href="/trade">중고거래
                <span class="lnr lnr-arrow-right"></span>
-            </a> <a href="/tradeGoodsWrite">중고거래 물품 등록<span class="lnr "></span></a></nav>
+            </a> <a href="#">중고거래 물품 등록<span class="lnr "></span></a></nav>
          </div>
       </div>
    </div>
