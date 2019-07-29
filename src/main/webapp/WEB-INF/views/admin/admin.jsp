@@ -119,29 +119,29 @@
    background-color: #ffa03a;
 }
 .owl-nav {
-	top: 430px;
+   top: 430px;
 }
 .nav_b {
-	border: 0px;
-	background: 000000;
-	width: 100%;
+   border: 0px;
+   background: 000000;
+   width: 100%;
 }
 .nav_b:hover {
-	cursor: pointer;
+   cursor: pointer;
 }
 .nav_ul * {
-	text-align: center;
+   text-align: center;
 }
 </style>
 <script>
 $(function() {     
-	<c:choose>
-	   <c:when test="${logintype!='admin'}">
-	      alert("관리자만 이용 가능합니다");
-	      $(location).attr("href","/");
-	   </c:when>
-	 </c:choose>
-    $("#emailCheck").click(function(){		// 회원 아이디 조회 결과 반환
+   <c:choose>
+      <c:when test="${logintype!='admin'}">
+         alert("관리자만 이용 가능합니다");
+         $(location).attr("href","/");
+      </c:when>
+    </c:choose>
+    $("#emailCheck").click(function(){      // 회원 아이디 조회 결과 반환
         $.ajax({
             url : "emailCheck",
             type : "post",
@@ -162,102 +162,102 @@ $(function() {
 </script>
 </head>
 <body id="page-top">
-		<!-- Start Header Area -->
-	<header class="header_area sticky-header">
-		<div class="main_menu">
-			<nav class="navbar navbar-expand-lg navbar-light main_box">
-				<div class="container">
-					<!-- Brand and toggle get grouped for better mobile display logo_h -->
-					<a class="navbar-brand logo_h" href="/"><img
-						src="../resources/img/logo.png" width="60px" alt="">
-						Kangaroo</a>
-					<button class="navbar-toggler" type="button" data-toggle="collapse"
-						data-target="#navbarSupportedContent"
-						aria-controls="navbarSupportedContent" aria-expanded="false"
-						aria-label="Toggle navigation">
-						<span class="icon-bar"></span> <span class="icon-bar"></span> <span
-							class="icon-bar"></span>
-					</button>
-					<!-- Collect the nav links, forms, and other content for toggling -->
-					<div class="collapse navbar-collapse offset"
-						id="navbarSupportedContent">
-						<ul class="nav navbar-nav menu_nav ml-auto">
-							<!-- 							<li class="nav-item active"><a class="nav-link" href="/">Home</a></li> -->
-									<li class="nav-item"><a class="nav-link" href="/trade">중고
-											직거래</a></li>
-									<li class="nav-item"><a class="nav-link" href="/trade_safe">중고
-											안전거래</a></li>
-									<li class="nav-item"><a class="nav-link" href="/auction">중고
-											경매</a></li>
-							<li class="nav-item "><a class="nav-link" href="notice_main">공지사항</a></li>
-							<c:choose>
-								<c:when test="${logintype=='admin'}">
-									<li class="nav-item "><a class="nav-link" href="/admin">관리자페이지</a></li>
-									<li class="nav-item "><a class="nav-link" href="/logout">로그아웃</a></li>
-								</c:when>
-								<c:when test="${logintype=='naver'}">
-									<li class="nav-item submenu dropdown"><a href="#"
-										class="nav-link dropdown-toggle" data-toggle="dropdown"
-										role="button" aria-haspopup="true" aria-expanded="false"><img
-											src="../resources/img/account.png" width="35px"></a>
-										<ul class="dropdown-menu nav_ul">
-											<li class="nav-item "><a class="nav-link" href="/goCart">찜목록</a></li>
-											<li class="nav-item "><a class="nav-link"
-												href="/goMyPage">마이페이지</a></li>
-											<li class="nav-item "><a class="nav-link"
-												href="/toPoint">포인트충전</a></li>
-											<li class="nav-item "><a class="nav-link"
-												href="/toPoint_exc">포인트환급</a></li>
-											<li class="nav-item "><input type="button"
-												class="nav-link nav_b" id="logout_na" value="로그아웃"></li>
-										</ul></li>
-								</c:when>
-								<c:when test="${logintype=='kakao'}">
-									<li class="nav-item submenu dropdown"><a href="#"
-										class="nav-link dropdown-toggle" data-toggle="dropdown"
-										role="button" aria-haspopup="true" aria-expanded="false"><img
-											src="../resources/img/account.png" width="40px"></a>
-										<ul class="dropdown-menu nav_ul">
-											<li class="nav-item "><a class="nav-link" href="/goCart">찜목록</a></li>
-											<li class="nav-item "><a class="nav-link"
-												href="/goMyPage">마이페이지</a></li>
-												<li class="nav-item "><a class="nav-link"
-												href="/toPoint">포인트충전</a></li>
-											<li class="nav-item "><a class="nav-link"
-												href="/toPoint_exc">포인트환급</a></li>
-											<li class="nav-item "><input type="button"
-												class="nav-link nav_b" id="logout_ka" value="로그아웃"></li>
-										</ul></li>
-								</c:when>
-								<c:when test="${logintype=='email'}">
-									<li class="nav-item submenu dropdown"><a href="#"
-										class="nav-link dropdown-toggle" data-toggle="dropdown"
-										role="button" aria-haspopup="true" aria-expanded="false"><img
-											src="../resources/img/account.png" width="40px"></a>
-										<ul class="dropdown-menu nav_ul">
-											<li class="nav-item "><a class="nav-link" href="/goCart">찜목록</a></li>
-											<li class="nav-item "><a class="nav-link"
-												href="/goMyPage">마이페이지</a></li>
-											<li class="nav-item "><a class="nav-link"
-												href="/toPoint">포인트충전</a></li>
-												<li class="nav-item "><a class="nav-link"
-												href="/toPoint_exc">포인트환급</a></li>
-											<li class="nav-item "><a class="nav-link" href="/logout">로그아웃</a></li>
-										</ul></li>
-								</c:when>
-								<c:otherwise>
-									<li class="nav-item "><a class="nav-link"
-										href="/login_main">로그인</a></li>
-									<li class="nav-item "><a class="nav-link" href="/insert">회원가입</a></li>
-								</c:otherwise>
-							</c:choose>
-						</ul>
-					</div>
-				</div>
-			</nav>
-		</div>
-	</header>
-	<!-- End Header Area -->
+      <!-- Start Header Area -->
+   <header class="header_area sticky-header">
+      <div class="main_menu">
+         <nav class="navbar navbar-expand-lg navbar-light main_box">
+            <div class="container">
+               <!-- Brand and toggle get grouped for better mobile display logo_h -->
+               <a class="navbar-brand logo_h" href="/"><img
+                  src="../resources/img/logo.png" width="60px" alt="">
+                  Kangaroo</a>
+               <button class="navbar-toggler" type="button" data-toggle="collapse"
+                  data-target="#navbarSupportedContent"
+                  aria-controls="navbarSupportedContent" aria-expanded="false"
+                  aria-label="Toggle navigation">
+                  <span class="icon-bar"></span> <span class="icon-bar"></span> <span
+                     class="icon-bar"></span>
+               </button>
+               <!-- Collect the nav links, forms, and other content for toggling -->
+               <div class="collapse navbar-collapse offset"
+                  id="navbarSupportedContent">
+                  <ul class="nav navbar-nav menu_nav ml-auto">
+                     <!--                      <li class="nav-item active"><a class="nav-link" href="/">Home</a></li> -->
+                           <li class="nav-item"><a class="nav-link" href="/trade">중고
+                                 직거래</a></li>
+                           <li class="nav-item"><a class="nav-link" href="/trade_safe">중고
+                                 안전거래</a></li>
+                           <li class="nav-item"><a class="nav-link" href="/auction">중고
+                                 경매</a></li>
+                     <li class="nav-item "><a class="nav-link" href="notice_main">공지사항</a></li>
+                     <c:choose>
+                        <c:when test="${logintype=='admin'}">
+                           <li class="nav-item "><a class="nav-link" href="/admin">관리자페이지</a></li>
+                           <li class="nav-item "><a class="nav-link" href="/logout">로그아웃</a></li>
+                        </c:when>
+                        <c:when test="${logintype=='naver'}">
+                           <li class="nav-item submenu dropdown"><a href="#"
+                              class="nav-link dropdown-toggle" data-toggle="dropdown"
+                              role="button" aria-haspopup="true" aria-expanded="false"><img
+                                 src="../resources/img/account.png" width="35px"></a>
+                              <ul class="dropdown-menu nav_ul">
+                                 <li class="nav-item "><a class="nav-link" href="/goCart">찜목록</a></li>
+                                 <li class="nav-item "><a class="nav-link"
+                                    href="/goMyPage">마이페이지</a></li>
+                                 <li class="nav-item "><a class="nav-link"
+                                    href="/toPoint">포인트충전</a></li>
+                                 <li class="nav-item "><a class="nav-link"
+                                    href="/toPoint_exc">포인트환급</a></li>
+                                 <li class="nav-item "><input type="button"
+                                    class="nav-link nav_b" id="logout_na" value="로그아웃"></li>
+                              </ul></li>
+                        </c:when>
+                        <c:when test="${logintype=='kakao'}">
+                           <li class="nav-item submenu dropdown"><a href="#"
+                              class="nav-link dropdown-toggle" data-toggle="dropdown"
+                              role="button" aria-haspopup="true" aria-expanded="false"><img
+                                 src="../resources/img/account.png" width="40px"></a>
+                              <ul class="dropdown-menu nav_ul">
+                                 <li class="nav-item "><a class="nav-link" href="/goCart">찜목록</a></li>
+                                 <li class="nav-item "><a class="nav-link"
+                                    href="/goMyPage">마이페이지</a></li>
+                                    <li class="nav-item "><a class="nav-link"
+                                    href="/toPoint">포인트충전</a></li>
+                                 <li class="nav-item "><a class="nav-link"
+                                    href="/toPoint_exc">포인트환급</a></li>
+                                 <li class="nav-item "><input type="button"
+                                    class="nav-link nav_b" id="logout_ka" value="로그아웃"></li>
+                              </ul></li>
+                        </c:when>
+                        <c:when test="${logintype=='email'}">
+                           <li class="nav-item submenu dropdown"><a href="#"
+                              class="nav-link dropdown-toggle" data-toggle="dropdown"
+                              role="button" aria-haspopup="true" aria-expanded="false"><img
+                                 src="../resources/img/account.png" width="40px"></a>
+                              <ul class="dropdown-menu nav_ul">
+                                 <li class="nav-item "><a class="nav-link" href="/goCart">찜목록</a></li>
+                                 <li class="nav-item "><a class="nav-link"
+                                    href="/goMyPage">마이페이지</a></li>
+                                 <li class="nav-item "><a class="nav-link"
+                                    href="/toPoint">포인트충전</a></li>
+                                    <li class="nav-item "><a class="nav-link"
+                                    href="/toPoint_exc">포인트환급</a></li>
+                                 <li class="nav-item "><a class="nav-link" href="/logout">로그아웃</a></li>
+                              </ul></li>
+                        </c:when>
+                        <c:otherwise>
+                           <li class="nav-item "><a class="nav-link"
+                              href="/login_main">로그인</a></li>
+                           <li class="nav-item "><a class="nav-link" href="/insert">회원가입</a></li>
+                        </c:otherwise>
+                     </c:choose>
+                  </ul>
+               </div>
+            </div>
+         </nav>
+      </div>
+   </header>
+   <!-- End Header Area -->
 
 <!-- ================================================= Page Wrapper ================================================= -->
 <div id="wrapper">
@@ -453,7 +453,7 @@ $(function() {
                            <div
                               class="text-xs font-weight-bold text-primary text-uppercase mb-1" style=font-size:18px;>금일의 방문자</div>
                            <div class="h5 mb-0 font-weight-bold text-gray-800" id=visitCount style=font-size:30px;padding-top:12px;padding-left:20px;>
-                           		<fmt:formatNumber value="${visitCount }" pattern="#,###"/> 명</div>
+                                 <fmt:formatNumber value="${visitCount }" pattern="#,###"/> 명</div>
                         </div>
                         <div class="col-auto">
                            <i class="fas fa-calendar fa-2x text-gray-300" style=padding-top:35px;padding-right:25px;></i>
@@ -567,7 +567,7 @@ $(function() {
                </div>
             </div>
 
-		<!-- 차트_도넛 (myPieChart) -->
+      <!-- 차트_도넛 (myPieChart) -->
             <div class="col-xl-4 col-lg-5">
                <div class="card shadow mb-4">
                   <!-- Card Header - Dropdown -->
@@ -575,7 +575,7 @@ $(function() {
                      <h6 class="m-0 font-weight-bold text-primary" style=font-size:18px;>거래 방식별 점유율</h6>
                      <div class="dropdown no-arrow">
                         <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                       		<i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                             <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
                            <div class="dropdown-header">Dropdown Header:</div>
@@ -673,12 +673,12 @@ $(function() {
                         </div>
                   </div>
                </div>
-			</div>
-			
-		<!-- Content Column -->
+         </div>
+         
+      <!-- Content Column -->
            <div class="col-lg-5 mb-6">
            
-			<!-- Approach (신고 접수 내역) -->
+         <!-- Approach (신고 접수 내역) -->
                <div class="card shadow mb-4">
                   <div class="card-header py-3">
                      <div class="row boardTitle">
@@ -909,9 +909,9 @@ var ctx = document.getElementById("myPieChart");
                        data : {
                            labels : [ '경매 완료 수' , '직거래 완료 수' , '안전거래 완료 수' ],
                            datasets : [ {
-                               data : [ <fmt:formatNumber value="${auctionCount}" pattern="#,###"/> 	,
-                            	   		<fmt:formatNumber value="${directTradeCount}" pattern="#,###"/> , 
-                            	   		<fmt:formatNumber value="${safeTradeCount}" pattern="#,###"/>		],
+                               data : [ <fmt:formatNumber value="${auctionCount}" pattern="#,###"/>    ,
+                                        <fmt:formatNumber value="${directTradeCount}" pattern="#,###"/> , 
+                                        <fmt:formatNumber value="${safeTradeCount}" pattern="#,###"/>      ],
                                backgroundColor : ['rgb(191, 126, 221)' , '#ffc61e', '#85e898' ],
                                hoverBackgroundColor : ['rgb(255, 44, 125)' , 'rgb(244, 255, 106)', 'rgb(108, 190, 250)'],
                                hoverBorderColor : "rgba(234, 236, 244, 1)",
@@ -930,7 +930,7 @@ var ctx = document.getElementById("myPieChart");
                                caretPadding : 10,
                            },
                            legend : {
-                               display :	false
+                               display :   false
                            },
                            cutoutPercentage : 30,
                        },
@@ -944,64 +944,61 @@ var ctx = document.getElementById("myPieChart");
                        }else{$(answer).css('color','blue');}
                    });
                    </script>
-	</div>
+   </div>
 </div>
 <!-- start footer Area -->
-	<footer class="footer-area section_gap">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-3  col-md-6 col-sm-6">
-					<div class="single-footer-widget">
-						<h6>About Us</h6>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-							sed do eiusmod tempor incididunt ut labore dolore magna aliqua.</p>
-					</div>
-				</div>
-				<div class="col-lg-4  col-md-6 col-sm-6">
-					<div class="single-footer-widget">
-						현재 활성화된 경매수 <br>             
-						&emsp;&emsp; : <fmt:formatNumber value="${auctionActiveCount }" pattern="#,###"/> 건 
-					</div>
-				</div>
-				<div class="col-lg-3  col-md-6 col-sm-6">
-					<div class="single-footer-widget mail-chimp">
-						현재 총 거래 량<br>
-						&emsp;&emsp; : <fmt:formatNumber value="${totalCount }" pattern="#,###"/> 건 
-					</div>
-				</div>
-				<div class="col-lg-2 col-md-6 col-sm-6">
-					<div class="single-footer-widget">
-						<h6>Follow Us</h6>
-						<p>Let us be social</p>
-						<div class="footer-social d-flex align-items-center">
-							<a href="#"><i class="fa fa-facebook"></i></a>
-							<a href="#"><i class="fa fa-twitter"></i></a>
-							<a href="#"><i class="fa fa-dribbble"></i></a>
-							<a href="#"><i class="fa fa-behance"></i></a>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="footer-bottom d-flex justify-content-center align-items-center flex-wrap">
-				<p class="footer-text m-0">
-					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-					Copyright &copy;
-					<script>
-						document.write(new Date().getFullYear());
-					</script>
-					All rights reserved | This template is made with <i
-						class="fa fa-heart-o" aria-hidden="true"></i> by <a
-						href="https://colorlib.com" target="_blank">Colorlib</a>
-					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-				</p>
-			</div>
-		</div>
-	</footer>
-	</div>
+   <footer class="footer-area section_gap">
+      <div class="container">
+         <div class="row">
+            <div class="col-lg-3  col-md-6 col-sm-6">
+               <div class="single-footer-widget">
+                  <h6>About Us</h6>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                     sed do eiusmod tempor incididunt ut labore dolore magna aliqua.</p>
+               </div>
+            </div>
+            <div class="col-lg-4  col-md-6 col-sm-6">
+               <div class="single-footer-widget">
+                  현재 활성화된 경매수 <br>             
+                  &emsp;&emsp; : <fmt:formatNumber value="${auctionActiveCount }" pattern="#,###"/> 건 
+               </div>
+            </div>
+            <div class="col-lg-3  col-md-6 col-sm-6">
+               <div class="single-footer-widget mail-chimp">
+                  현재 총 거래 량<br>
+                  &emsp;&emsp; : <fmt:formatNumber value="${totalCount }" pattern="#,###"/> 건 
+               </div>
+            </div>
+            <div class="col-lg-2 col-md-6 col-sm-6">
+               <div class="single-footer-widget">
+                  <h6>Follow Us</h6>
+                  <p>Let us be social</p>
+                  <div class="footer-social d-flex align-items-center">
+                     <a href="#"><i class="fa fa-facebook"></i></a>
+                     <a href="#"><i class="fa fa-twitter"></i></a>
+                     <a href="#"><i class="fa fa-dribbble"></i></a>
+                     <a href="#"><i class="fa fa-behance"></i></a>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="footer-bottom d-flex justify-content-center align-items-center flex-wrap">
+            <p class="footer-text m-0">
+               <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+               Copyright &copy;
+               <script>
+                  document.write(new Date().getFullYear());
+               </script>
+               All rights reserved | This template is made with <i
+                  class="fa fa-heart-o" aria-hidden="true"></i> by <a
+                  href="https://colorlib.com" target="_blank">Colorlib</a>
+               <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+            </p>
+         </div>
+      </div>
+   </footer>
+   </div>
 <!-- End footer Area -->
-<script src="https://use.fontawesome.com/releases/v5.0.0/js/all.js"></script>
-<script src="https://unpkg.com/popper.js"></script>
-<script src="../resources/js/jquery.nice-select.min.js"></script>
 <script src="../resources/js/vendor/jquery-2.2.4.min.js"></script>
 <script src="../resources/js/vendor/bootstrap.min.js"></script>
 <script src="../resources/js/jquery.ajaxchimp.min.js"></script>

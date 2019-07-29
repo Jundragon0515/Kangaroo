@@ -513,7 +513,7 @@ $("#logout_na").on("click", function() {
 				<li class="nav-item"><a class="nav-link" id="review-tab"
 					data-toggle="tab" href="#review" role="tab" aria-controls="review"
 					aria-selected="false" onclick="fnMove()">문의 및 댓글</a></li>
-					<input type="button" id="report" class="genric-btn danger radius" value="신고" onclick="showPopup();"/>
+					<input type="button" id="report" class="genric-btn danger radius" value="신고" >
 			</ul>
 			<div class="tab-content" id="myTabContent">
 				<div class="tab-pane fade active show" id="home" role="tabpanel"
