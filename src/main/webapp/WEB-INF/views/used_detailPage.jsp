@@ -746,7 +746,7 @@ $("#logout_na").on("click", function() {
 											<img alt="" src="/resources/img/플래.PNG" class="level">
 											</c:when>
 											<c:when test="${arr.member_class=='다이아몬드' }">
-											<img alt="" src="/resources/img/골드.PNG" class="level">
+											<img alt="" src="/resources/img/다이아.PNG" class="level">
 											</c:when>
 											<c:when test="${arr.member_class=='마스터' }">
 											<img alt="" src="/resources/img/마스터.png" class="level">
@@ -1004,7 +1004,7 @@ $("#logout_na").on("click", function() {
               	<c:forEach var="arr" items="${d_list }">
                   <div class="col-lg-4 col-md-4 col-sm-6 mb-3" style="">
                      <div class="single-related-product d-flex">
-                        <a href="/used_detailPage?no=${arr.no}"><img id="f_img" src="../resources/img/title/${arr.title_img}" alt="" style="width: 130px;display: inline;"></a>
+                        <a href="/used_detailPage?no=${arr.no}"><img id="f_img" src="../resources/img/title/${arr.title_img}" alt="" style="width: 130px;height:100px;display: inline;"></a>
                         <div class="desc">
                            <a href="/used_detailPage?no=${arr.no}" class="title">${arr.title }</a>
                            <div class="price">

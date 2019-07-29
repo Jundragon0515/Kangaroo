@@ -211,7 +211,7 @@
 }
 </style>
 
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script>
 
 function viewCount(){
@@ -224,7 +224,12 @@ function viewCount(){
 
 
    $(function(){
-      
+	   <c:choose>
+		<c:when test="${logintype==null}">
+		alert("로그인후 이용 가능합니다");
+		$(location).attr("href", "/login_main");
+		</c:when>
+		</c:choose>
 /*       $("#category").on("click", function(){
          var category = $(this).text();
          console.log(category);
