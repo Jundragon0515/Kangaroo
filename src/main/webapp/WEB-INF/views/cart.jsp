@@ -542,7 +542,7 @@ function viewCount(){
         </div>
     </section>
     <!--================End Cart Area =================-->
-   </footer>
+   
    
    <script>
    $("#allCheckTrade").on("click",function(){

@@ -155,7 +155,6 @@ public class CartController {
 
 		int end = currentPage * recordCountPerPage;
 		int start = end - (recordCountPerPage - 1);
-
 		String currentPageResult1 = request.getParameter("currentPage1");
 		if (currentPageResult1 != null) {
 			currentPage1 = Integer.parseInt(currentPageResult1);

@@ -375,6 +375,16 @@ public class MemberService {
 		}
 	}
 	
+	public Used_transaction_boardDTO mainTrade(int no){
+		System.out.println("1");
+		return gtdao.mainTrade(no);
+	}
+	
+	public Auction_boardDTO mainAuction(int no) {
+		System.out.println("2");
+		return gtdao.mainAuction(no);
+	}
+	
 	//메인화면 직거래 리스트
 	public List<Used_transaction_boardDTO> directList(){
 		return gtdao.main_direct_list();
@@ -396,6 +406,6 @@ public class MemberService {
 	//상세페이지 경매 리스트
 		public List<Auction_boardDTO> d_auctionList(){
 			return adao.d_main_Auction_List();
-		}
+	}
 	
 }
