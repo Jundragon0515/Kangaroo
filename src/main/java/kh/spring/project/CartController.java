@@ -140,7 +140,8 @@ public class CartController {
 	public String cartProc(HttpServletRequest request) {
 		List<CartTradeDTO> tList = null;
 		List<CartAuctionDTO> cList = null;
-
+		String email = (String)session.getAttribute("email");
+		System.out.println(email);
 		int currentPage = 0;
 		int currentPage1 = 0;
 		int recordCountPerPage=3;
@@ -164,11 +165,11 @@ public class CartController {
 		int end1 = currentPage1 * recordCountPerPage1;
 		int start1 = end1 - (recordCountPerPage1 - 1);
 
-		tList = cs.tradeList(start, end,(String)session.getAttribute("email"));
-		cList = cs.auctionList(start1, end1, (String)session.getAttribute("email"));
+		tList = cs.tradeList(start, end,email);
+		cList = cs.auctionList(start1, end1, email);
 		// 페이징 버튼
-		String tradeNavi = cs.tradeNavi(currentPage, recordCountPerPage);
-		String auctionNavi = cs.auctionNavi(currentPage1, recordCountPerPage1);
+		String tradeNavi = cs.tradeNavi(currentPage, recordCountPerPage,email);
+		String auctionNavi = cs.auctionNavi(currentPage1, recordCountPerPage1,email);
 		/*request.setAttribute("recordTotalCount", list.size()); // 전체개수 */
 		request.setAttribute("navi", tradeNavi);
 		request.setAttribute("navi1", auctionNavi);
