@@ -18,6 +18,6 @@ public class ReportDAO {
 		return sst.insert("ReportDAO.reportInsert",dto);
 	}
 	public List<ReportDTO> selectReport(){
-		return sst.selectList("ReportDAO.reportSelect");
+		return sst.selectList("ReportDAO.selectReport");
 	}
 }

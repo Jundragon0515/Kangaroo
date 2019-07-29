@@ -606,7 +606,7 @@ $(function() {
          <div class="row">
 
             <!-- Content Column -->
-            <div class="col-lg-7 mb-6">
+            <div class="col-lg-6 mb-6">
             
                <!-- Project Card Example -->
                <div class="card shadow mb-4">
@@ -676,7 +676,7 @@ $(function() {
 			</div>
 			
 		<!-- Content Column -->
-           <div class="col-lg-5 mb-6">
+           <div class="col-lg-6 mb-6">
            
 			<!-- Approach (신고 접수 내역) -->
                <div class="card shadow mb-4">
@@ -687,7 +687,7 @@ $(function() {
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                            <!-- <a href="list.board03?noticeCurrentPage=1" class="moreBtn">더보기></a> -->
-                           <a href="reportBoard" class="moreBtn">더보기></a>
+                           <a href="" class="moreBtn">더보기></a>
                         </div>
                      </div>
                   </div>
@@ -695,28 +695,18 @@ $(function() {
                      <div class="text">
                         <div class="row text-center">
                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 font-weight-bold d-none d-sm-block">글번호</div>
-                           <div class="col-lg-4 col-md-8 col-sm-10 col-xs-10 font-weight-bold myTitle d-none d-sm-block">글제목</div>
-                           <div class="col-lg-2 col-md-2 col-sm-4 col-xs-4 font-weight-bold d-none d-md-block">내용</div>
-                           <div class="col-lg-2 col-md-6 col-sm-4 col-xs-4 font-weight-bold d-none d-lg-block">작성자</div>
-                           <div class="col-lg-2 col-md-6 col-sm-4 col-xs-4 font-weight-bold d-none d-lg-block">작성일</div>
+                           <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 font-weight-bold myTitle d-none d-sm-block">글제목</div>
+                           <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 font-weight-bold d-none d-lg-block">작성자</div>
+                           <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 font-weight-bold d-none d-lg-block">작성일</div>
                         </div>
                         <div class="row text-center">
-                           <c:choose>
-                              <c:when test="${noticeRecordCount == 0 }">
-                                 <div class="noneRecord col-lg-12 col-md-12 col-sm-12 mt-2">신고 접수 내역이 없습니다.</div>
-                              </c:when>
-                              <c:otherwise>
-                                 <c:forEach var="list" items="${noticeList}">
-                                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2  d-none d-sm-block">${list.seq }</div>
-                                    <div class="col-lg-4 col-md-8 col-sm-10 col-xs-10  myTitle d-none d-sm-block">
-                                       <a href="noticeContent.board03?seq=${list.seq }&&commentPage=1">${list.title }</a>
-                                    </div>
-                                    <div class="col-lg-2 col-md-2 col-sm-4 col-xs-4  d-none d-md-block">${list.timeForm }</div>
-                                    <div class="col-lg-2 col-md-6 col-sm-4 col-xs-4  d-none d-lg-block">${list.writer }</div>
-                                    <div class="col-lg-2 col-md-6 col-sm-4 col-xs-4  d-none d-lg-block">${list.viewCount }</div>
-                                 </c:forEach>
-                              </c:otherwise>
-                           </c:choose>
+                              <c:forEach var="list" items="${selectReport}">
+                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2  d-none d-sm-block">${list.no }</div>
+                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3  myTitle d-none d-sm-block">
+                                	<a href = "">${list.title }</a></div>
+                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3  d-none d-lg-block">${list.sender }</div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4  d-none d-lg-block">${list.joindate }</div>
+                             </c:forEach>
                         </div>
                      </div>
                   </div>
@@ -999,9 +989,7 @@ var ctx = document.getElementById("myPieChart");
 	</footer>
 	</div>
 <!-- End footer Area -->
-<script src="https://use.fontawesome.com/releases/v5.0.0/js/all.js"></script>
-<script src="https://unpkg.com/popper.js"></script>
-<script src="../resources/js/jquery.nice-select.min.js"></script>
+
 <script src="../resources/js/vendor/jquery-2.2.4.min.js"></script>
 <script src="../resources/js/vendor/bootstrap.min.js"></script>
 <script src="../resources/js/jquery.ajaxchimp.min.js"></script>
