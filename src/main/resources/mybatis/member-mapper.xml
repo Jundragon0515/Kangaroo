@@ -5,10 +5,10 @@
 select point from members where id=#{value}
 </select>
 <insert id="insertProc">
-   insert into Members(id,pw,name,phone,zipcode,address1,address2,ipaddress,logintype) values(#{id},#{pw},#{name},#{phone},#{zipcode},#{address1},#{address2},#{ipaddress},#{logintype}) 
+   insert into Members(id,pw,name,phone,zipcode,address1,address2,ipaddress,logintype,point) values(#{id},#{pw},#{name},#{phone},#{zipcode},#{address1},#{address2},#{ipaddress},#{logintype},#{point}) 
 </insert>
 <insert id="insertSocial">
-   insert into Members values (#{id},null,null,null,default,null,null,null,default,#{ipaddress},#{logintype},default,default,default) 
+   insert into Members values (#{id},null,null,null,default,null,null,null,default,#{ipaddress},#{logintype},default,${point},default,default) 
 </insert>
 <select id="selectIdCheck" resultType="int">
    select count(*) from members where id=#{id}
