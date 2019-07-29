@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import kh.spring.dao.AdminDAO;
 import kh.spring.dto.Auction_boardDTO;
 import kh.spring.dto.Auction_img_boardDTO;
 import kh.spring.dto.Used_transaction_boardDTO;
@@ -32,8 +33,9 @@ public class WriteController {
    @Autowired
    private TradeController tc;
    @Autowired
-
    private AuctionController ac;
+   @Autowired
+   private AdminDAO adao;
    @Autowired
    HttpSession se;
    
@@ -45,6 +47,8 @@ public class WriteController {
 		   return "goodsTradeWrite";
 	   }
 	  request.setAttribute("type", type); 
+	  request.setAttribute("auctionActiveCount", adao.auctionActiveCount());            // 활성화된 경매  수
+	  request.setAttribute("totalCount", adao.auctionCount()+adao.directTradeCount()+adao.safeTradeCount());	// 총 거래량
       return "goodsTradeWrite";
    } //중고 글쓰기로 가기
 
@@ -79,11 +83,15 @@ public class WriteController {
       if(dto.getTrade_type().equals("직거래")) {
     	  return "redirect:"+tc.direct(request);
       }
+      request.setAttribute("auctionActiveCount", adao.auctionActiveCount());            // 활성화된 경매  수
+	  request.setAttribute("totalCount", adao.auctionCount()+adao.directTradeCount()+adao.safeTradeCount());	// 총 거래량
       return "redirect:"+tc.safe(request);
    }  //중고 거래 등록하는 것
 
    @RequestMapping("auctionWrite")
-   public String auctionWriteProc() {
+   public String auctionWriteProc(HttpServletRequest request) {
+	  request.setAttribute("auctionActiveCount", adao.auctionActiveCount());            // 활성화된 경매  수
+	  request.setAttribute("totalCount", adao.auctionCount()+adao.directTradeCount()+adao.safeTradeCount());	// 총 거래량
       return "auctionWrite";
    } //경매 글쓰기로 가는 것
 
@@ -102,7 +110,8 @@ public class WriteController {
          e.printStackTrace();
       }
 
-
+      request.setAttribute("auctionActiveCount", adao.auctionActiveCount());            // 활성화된 경매  수
+	  request.setAttribute("totalCount", adao.auctionCount()+adao.directTradeCount()+adao.safeTradeCount());	// 총 거래량
       return "redirect:"+ac.index(request);
 
    } //경매 글쓰기 완성 등록하면 홈으로가는 것
