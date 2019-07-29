@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="CartDAO">
+
+<select id="selectList" parameterType="map" resultType="kh.spring.dto.CartTradeDTO">
+      select * from (select row_number() over(order by no) as rown, trade_cart.* from trade_cart) where rown between #{start} and #{end} and id=#{email}
+   </select>
+
+<select id="recordTotalCount" resultType="int">
+      select count(*) from trade_cart
+</select>
+
+<select id="selectListA" parameterType="map" resultType="kh.spring.dto.CartAuctionDTO">
+      select * from (select row_number() over(order by no) as rown, auction_cart.* from auction_cart) where rown between #{start} and #{end} and id=#{email}
+   </select>
+
+<select id="recordTotalCountA" resultType="int">
+      select count(*) from auction_cart
+</select>
+
+<insert id="stream">
+	insert into trade_cart values(#{id},#{no},#{title_img},#{title},#{trade_type},#{category},#{price})
+</insert>
+
+<select id="overlapCheck" resultType="int">
+	select count(*) from trade_cart where no=#{no} and id=#{id}
+</select>
+
+<delete id="cartTradeDelete">
+	delete from trade_cart where no=#{value}
+</delete>
+  
+ <insert id="streamAuction">
+ 	insert into auction_cart values(#{id},#{no},#{title_img},#{title},#{end_date},#{category},#{price})
+ </insert> 
+ <select id="overlapCheckAuction" resultType="int">
+ 	select count(*) from auction_cart where no=#{no} and id=#{id}
+ </select> 
+ <delete id="cartAuctionDelete">
+ 	delete from auction_cart where no=#{value}
+ </delete>
+</mapper>

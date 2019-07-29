@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="GoodsTradeDAO">
+
+
+	<!--직거래 게시판 기본 설정  -->
+	<select id="directList" parameterType="map" resultType="kh.spring.dto.Used_transaction_boardDTO">
+		select * from (select row_number() over(order by no desc) as rown, used_transaction_board.* from used_transaction_board where TRADE_TYPE='직거래') where rown between #{start} and #{end}
+	</select>
+	
+	<!--직거래 게시판 옵션 설정  -->
+	<select id="directPrice" parameterType="map" resultType="kh.spring.dto.Used_transaction_boardDTO">
+		select * from (select row_number() over(order by price ${price}) as rown, used_transaction_board.* from used_transaction_board where TRADE_TYPE='직거래' ${category}) where rown between #{start} and #{end}
+	</select>
+	
+	<!--직거래 게시판 기본 설정 총 개수  -->
+	<select id="recordTotalCount_direct" resultType="int">
+		select count(*) from used_transaction_board where TRADE_TYPE='직거래'
+	</select>
+	
+	<!--직거래 게시판 옵션 설정 총 개수  -->
+	<select id="recordTotalCountOption_direct" parameterType="map" resultType="int">
+		select count(*) from used_transaction_board where TRADE_TYPE='직거래' ${category}
+	</select>
+	
+	<!--직거래 게시판 검색어  -->
+	<select id="directList_search" parameterType="map" resultType="kh.spring.dto.Used_transaction_boardDTO">
+		select * from (select row_number() over(order by no desc) as rown, used_transaction_board.* from used_transaction_board where TRADE_TYPE='직거래' ${search}) where rown between #{start} and #{end}
+	</select>
+	
+	<!--직거래 게시판 검색 기본 설정 총 개수  -->
+	<select id="recordTotalCount_direct_search" parameterType="map" resultType="int">
+		select count(*) from used_transaction_board where TRADE_TYPE='직거래' ${search}
+	</select>
+	
+	
+	<!-- ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  -->
+	
+	<!--안전거래 게시판 기본 설정  -->
+	<select id="safeList" parameterType="map" resultType="kh.spring.dto.Used_transaction_boardDTO">
+		select * from (select row_number() over(order by no desc) as rown, used_transaction_board.* from used_transaction_board where TRADE_TYPE='안전거래') where rown between #{start} and #{end}
+	</select>
+	
+	<!--안전거래 게시판 옵션 설정  -->
+	<select id="safePrice" parameterType="map" resultType="kh.spring.dto.Used_transaction_boardDTO">
+		select * from (select row_number() over(order by price ${price}) as rown, used_transaction_board.* from used_transaction_board where TRADE_TYPE='안전거래' ${category}) where rown between #{start} and #{end}
+	</select>
+	
+	<!--안전거래 게시판 기본 설정 총 개수  -->
+	<select id="recordTotalCount_safe" resultType="int">
+		select count(*) from used_transaction_board where TRADE_TYPE='안전거래'
+	</select>
+	
+	<!--안전거래 게시판 옵션 설정 총 개수  -->
+	<select id="recordTotalCountOption_safe"  parameterType="String" resultType="int">
+		select count(*) from used_transaction_board where TRADE_TYPE='안전거래' ${category}
+	</select>
+	
+	<!--안전거래 게시판 검색어  -->
+	<select id="safeList_search" parameterType="map" resultType="kh.spring.dto.Used_transaction_boardDTO">
+		select * from (select row_number() over(order by no desc) as rown, used_transaction_board.* from used_transaction_board where TRADE_TYPE='안전거래' ${search}) where rown between #{start} and #{end}
+	</select>
+	
+	<!--안전거래 게시판 검색 기본 설정 총 개수  -->
+	<select id="recordTotalCount_safe_search" parameterType="map" resultType="int">
+		select count(*) from used_transaction_board where TRADE_TYPE='안전거래' ${search}
+	</select>
+	
+	<!-- 조회수 업데이트 -->
+	<update id="viewCountUpdate" parameterType="int">
+		update used_transaction_board set viewCount = viewCount+1 where no = #{no}
+	</update>
+	
+	<!--메인페이지 직거래  -->
+	<select id="mainDirectList" parameterType="map" resultType="kh.spring.dto.Used_transaction_boardDTO">
+		select * from (select row_number() over(order by no desc) as rown, used_transaction_board.* from used_transaction_board where TRADE_TYPE='직거래' and ongoing='y') where rown between #{start} and #{end}
+	</select>
+	
+	<!--메인페이지 안전거래  -->
+	<select id="mainSafeList" parameterType="map" resultType="kh.spring.dto.Used_transaction_boardDTO">
+		select * from (select row_number() over(order by no desc) as rown, used_transaction_board.* from used_transaction_board where TRADE_TYPE='안전거래' and ongoing='y') where rown between #{start} and #{end}
+	</select>
+	
+	<delete id="cancleTrade">
+		delete from used_transaction_board where no=#{value}
+	</delete>
+
+</mapper>

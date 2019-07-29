@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="AuctionDAO">
+
+   <select id="auctionList" parameterType="map" resultType="kh.spring.dto.Auction_boardDTO">
+      select * from (select row_number() over(order by no desc) as rown, auction_board.* from auction_board) where rown between #{start} and #{end}
+   </select>
+   
+   <select id="auctionPrice" parameterType="map" resultType="kh.spring.dto.Auction_boardDTO">
+      select * from (select row_number() over(order by PRESENT_PRICE ${price}) as rown, auction_board.* from auction_board ${category}) where rown between #{start} and #{end}
+   </select>
+  
+   <select id="recordTotalCount" resultType="int">
+      select count(*) from auction_board
+   </select>
+   
+   <select id="recordTotalCountOption" resultType="int">
+      select count(*) from auction_board ${category}
+   </select>
+   
+   <delete id="delete">
+      delete from auction_board
+   </delete>
+   
+   	<!--경매 게시판 검색어  -->
+	<select id="auctionList_search" parameterType="map" resultType="kh.spring.dto.Auction_boardDTO">
+		select * from (select row_number() over(order by no desc) as rown, auction_board.* from auction_board ${search}) where rown between #{start} and #{end}
+	</select>
+
+	<!--경매 게시판 검색 기본 설정 총 개수  -->
+	<select id="recordTotalCount_auction_search" parameterType="map" resultType="int">
+		select count(*) from auction_board ${search}
+	</select>
+	
+	<!-- 조회수 업데이트 -->
+	<update id="viewCountUpdate" parameterType="int">
+		update auction_board set viewCount = viewCount+1 where no = #{no}
+	</update>
+	
+	<!--메인페이지 경매리스트  -->
+	<select id="mainAuctionList" parameterType="map" resultType="kh.spring.dto.Auction_boardDTO">
+		select * from (select row_number() over(order by no desc) as rown, auction_board.* from auction_board where ongoing='y') where rown between #{start} and #{end}
+	</select>
+
+</mapper>

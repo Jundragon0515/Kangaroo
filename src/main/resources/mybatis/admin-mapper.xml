@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="AdminDAO">
+
+
+<insert id="insertVisitCount">
+	insert into admin values(admin_seq.nextval, default,#{value})
+</insert>
+<delete id="boardWriteDelete">
+	delete from used_transaction_board where no=#{value}
+</delete>
+
+<delete id="boardImgDelete">
+	delete from used_transaction_img_board where no=#{value}
+</delete>
+
+<delete id="auctionBoardDelete">
+	delete from auction_board where no=#{value}
+</delete>
+
+<delete id="auctionBoardImgDelete">
+	delete from auction_img_board where no=#{value}
+</delete>
+
+<delete id="deleteCart">
+	delete from trade_cart where no=#{value}
+</delete>
+
+<delete id="deleteCartAuction">
+	delete from auction_cart where no=#{value}
+</delete>
+
+</mapper>
