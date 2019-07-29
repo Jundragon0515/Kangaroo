@@ -9,6 +9,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kh.spring.dto.Auction_boardDTO;
 import kh.spring.dto.Used_transaction_boardDTO;
 
 
@@ -510,6 +511,14 @@ public class GoodsTradeDAO {
 	      param.put("start", "1");
 	      param.put("end", "6");
 	   return sst.selectList("GoodsTradeDAO.mainSafeList", param);
+   }
+   
+   public Used_transaction_boardDTO mainTrade(int no){
+	   return sst.selectOne("GoodsTradeDAO.mainTrade",no);
+   }
+   
+   public Auction_boardDTO mainAuction(int no) {
+	   return sst.selectOne("GoodsTradeDAO.mainAuction",no);
    }
 
 }

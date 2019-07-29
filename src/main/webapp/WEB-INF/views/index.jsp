@@ -105,7 +105,33 @@
 }
 .back-to-top {text-decoration: none; display: none; color:#fe912b;}
 
+.back-to-top:hover {color: #818bb0}
+#tradeI {
+    width: 635px;
+    height: 479px;
 
+}
+#tradeT,#tradeA,#tradeC,#auctionT,#auctionA,#auctionC{
+	color: white;
+}
+#auctionI{
+    width: 635px;
+    height: 479px;
+    position: relative;
+    top: 13px;
+}
+#auctionA{
+	position: relative;
+    top: 100px;
+}
+#auctionC{
+	position: relative;
+    top: 100px;	
+}
+#auctionT{
+	position:relative;
+	top: 130px;
+}
 .back-to-top {
 	text-decoration: none;
 	display: none;
@@ -308,61 +334,52 @@
 			</div>
 		</header>
 		<!-- End Header Area -->
+	<!-- start banner Area -->
+	<section class="banner-area">
+		<div class="container">
+			<div class="row fullscreen2 align-items-center justify-content-start"
+				style="height: 660px;">
+				<div class="col-lg-12">
+					<div class="active-banner-slider owl-carousel">
+						<!-- single-slide -->
+						<div class="row single-slide align-items-center d-flex"> <!-- 중고 -->
+							<div class="col-lg-5 col-md-6">
+								<div class="banner-content">
+									<h1 id="tradeT">
+										${mainTrade.title}
+									</h1>
+									<p id="tradeC">${mainTrade.contents}</p>
+									<div class="add-bag d-flex align-items-center">
 
-		<!-- start banner Area -->
-		<section class="banner-area">
-			<div class="container">
-				<div
-					class="row fullscreen2 align-items-center justify-content-start"
-					style="height: 660px;">
-					<div class="col-lg-12">
-						<div class="active-banner-slider owl-carousel">
-							<!-- single-slide -->
-							<div class="row single-slide align-items-center d-flex">
-								<div class="col-lg-5 col-md-6">
-									<div class="banner-content">
-										<h1>
-											Nike New <br>Collection!
-										</h1>
-										<p>Lorem ipsum dolor sit amet, consectetur adipisicing
-											elit, sed do eiusmod tempor incididunt ut labore et dolore
-											magna aliqua. Ut enim ad minim veniam, quis nostrud
-											exercitation.</p>
-										<div class="add-bag d-flex align-items-center">
-
-											<span class="add-text text-uppercase">알아보기</span>
-										</div>
-									</div>
-								</div>
-								<div class="col-lg-7">
-									<div class="banner-img">
-										<img class="img-fluid"
-											src="../resources/img/banner/banner-img.png" alt="">
+										<a href="/used_detailPage?no=${mainTrade.no }"><span class="add-text text-uppercase" id="tradeA">알아보기</span></a>
 									</div>
 								</div>
 							</div>
-							<!-- single-slide -->
-							<div class="row single-slide">
-								<div class="col-lg-5">
-									<div class="banner-content">
-										<h1>
-											Nike New <br>Collection!
-										</h1>
-										<p>Lorem ipsum dolor sit amet, consectetur adipisicing
-											elit, sed do eiusmod tempor incididunt ut labore et dolore
-											magna aliqua. Ut enim ad minim veniam, quis nostrud
-											exercitation.</p>
-										<div class="add-bag d-flex align-items-center">
+							<div class="col-lg-7">
+								<div class="banner-img">
+									<img class="img-fluid"
+										src="/img/title/${mainTrade.title_img}" id="tradeI" alt="">
+								</div>
+							</div>
+						</div>
+						<!-- single-slide -->
+						<div class="row single-slide">  <!-- 경매 -->
+							<div class="col-lg-5">
+								<div class="banner-content">
+									<h1 id="auctionT">
+										${mainAuction.title }
+									</h1>
+									<p id="auctionC">${mainAuction.contents }</p>
+									<div class="add-bag d-flex align-items-center">
 
-											<span class="add-text text-uppercase">알아보기</span>
-										</div>
+										<a href="/auction_detailPage?no=${mainAuction.no }"><span class="add-text text-uppercase" id="auctionA">알아보기</span></a>
 									</div>
 								</div>
-								<div class="col-lg-7">
-									<div class="banner-img">
-										<img class="img-fluid"
-											src="../resources/img/banner/banner-img.png" alt="">
-									</div>
+							</div>
+							<div class="col-lg-7">
+								<div class="banner-img">
+									<img class="img-fluid"
+										src="/img/title/${mainAuction.title_img}" id="auctionI" alt="">
 								</div>
 							</div>
 						</div>
