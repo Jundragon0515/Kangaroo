@@ -371,7 +371,7 @@ position:relative;
 						id="navbarSupportedContent">
 						<ul class="nav navbar-nav menu_nav ml-auto">
 							<!-- 							<li class="nav-item active"><a class="nav-link" href="/">Home</a></li> -->
-									<li class="nav-item"><a class="nav-link" href="/trade">중고
+									<li class="nav-item active"><a class="nav-link" href="/trade">중고
 											직거래</a></li>
 									<li class="nav-item"><a class="nav-link" href="/trade_safe">중고
 											안전거래</a></li>
@@ -454,8 +454,8 @@ position:relative;
          class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
          <div class="col-first">
             <h1>중고 직거래</h1>
-            <nav class="d-flex align-items-center"> <a href="index.html"><span
-               class="lnr lnr-arrow-right">Home</span></a> <a href="#"><span
+            <nav class="d-flex align-items-center"> <a href="/"><span
+               class="lnr lnr-arrow-right">Home</span></a> <a href="trade"><span
                class="lnr lnr-arrow-right">Shop</span></a> </nav>
          </div>
       </div>
