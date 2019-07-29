@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        #rank{
+            width: 60%;
+            margin: auto;
+            margin-top: 100px;
+            text-align: center;
+        }
+        .choi{
+            color: darkorange;
+            text-align: center;
+            width: 150px;
+        }
+        #tender{
+            position: relative;
+            left: 40%;
+            margin-top: 10px;
+        }
+        #money{
+            width: 15%;
+            text-align: center;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <table class="table table-striped table-dark" id="rank">
+  <thead>
+    <tr>
+      <th scope="col" class="choi"></th>
+      <th scope="col">아이디</th>
+      <th scope="col">입찰가</th>
+      <th scope="col">입찰 시간</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row" class="choi"></th>
+      <td>Mark</td>
+      <td>Otto</td>
+      <td>@mdo</td>
+    </tr>
+    <tr>
+      <th scope="row" class="choi"></th>
+      <td>Jacob</td>
+      <td>Thornton</td>
+      <td>@fat</td>
+    </tr>
+    <tr>
+      <th scope="row" class="choi">최고 입찰</th>
+      <td>Larry</td>
+      <td>the Bird</td>
+      <td>@twitter</td>
+    </tr>
+  </tbody>
+</table>
+
+<form class="form-inline" id="tender">
+  <input type="text" class="form-control mb-2 mr-sm-2" id="money" placeholder="입찰금액을 입력해주세요.">
+
+  <button class="btn btn-secondary mb-2">입찰</button>
+</form>
+</body>
+</html>
