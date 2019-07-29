@@ -247,7 +247,7 @@
 	#register{
 		position:relative;
 		top:23px;
-		left:20px;
+		left: 13px;
 	}
 	#sel,#sel1,#sel2{
 		float:left;
@@ -415,9 +415,9 @@
 			<div class="col-first">
 				<h1>경매물품 글쓰기</h1>
 				<nav class="d-flex align-items-center"> <a href="/">메인페이지<span
-					class="lnr lnr-arrow-right"></span></a> <a href="/#">경매거래
+					class="lnr lnr-arrow-right"></span></a> <a href="/auction">경매거래
 					<span class="lnr lnr-arrow-right"></span>
-				</a> <a href="/auctionWrite">경매 물품 등록<span class="lnr "></span></a></nav>
+				</a> <a href="#">경매 물품 등록<span class="lnr "></span></a></nav>
 			</div>
 		</div>
 	</div>
@@ -441,7 +441,9 @@
 						<ul class="list">
                         <br>                        
 						    <li><a><span class="middleName">물품제목</span></a><input type="text" class="form-control goodsContents" id="goodsTitle" name="title" placeholder="물품제목을 입력하세요."></li><br>
-							<li><a><span class="middleName">시작가</span></a><input type="text" priceOnly  class="form-control goodsContents" id="goodsPrice" name="starting_price" placeholder="시작가 입력하세요." onkeydown="javascript: return event.keyCode == 69 ? false : true"></li><br>
+
+							<li><a><span class="middleName">시작가</span></a><input type="text" class="form-control goodsContents" id="goodsPrice" onchange="getNumber(this);" onkeyup="getNumber(this);" name="starting_price" placeholder="시작가 입력하세요."></li><br>
+
 							<li><a><span class="middleName">핸드폰번호</span></a><input type="text" phoneOnly  class="form-control goodsContents" id="phone" name="phone" placeholder="-없이 핸드폰 번호를 입력해주세요." onkeydown="javascript: return event.keyCode == 69 ? false : true"></li><br>
 							
 							
@@ -530,7 +532,7 @@
 												<input type="hidden" name="middle1_img" id="d">
 										</div>
 										<!-- 미리보기 영역 -->
-										<div id="preview" class="content"></div>
+										<div id="preview" class="content">상세 이미지 최소1장부터 최대 10장까지 넣을 수 있습니다.</div>
 										<!-- multipart 업로드시 영역 -->
 									</div>
 								</div>      
@@ -538,7 +540,8 @@
   
 
                           <div class="col-md-12 text-right">
-								<button type="button" id="register" class="primary-btn">등록하기</button>								
+								<button type="button" id="register" class="genric-btn primary radius">등록하기</button>								
+
 				        </div>                 
 						</ul>
 						<br>		
@@ -692,6 +695,11 @@
 				});
 
 		
+		$("#image").on("click",function(){
+			$("#middle").remove();
+        	$("#imgTitle").val().remove();
+		})
+
 		$("#image").on("input",function() {
 							var formData = new FormData();
 							formData.append("formData", $(this)[0].files[0]);
@@ -704,7 +712,6 @@
 									})
 									.done(function(resp) {
 												//var time = new Date().getTime();
-												$("#image").attr("disabled",true);
 												$("#titleImg")
 														.append("<img src='/img/title/"+resp+"' id='middle'>");
 												$("#imgTitle").val(resp);		
@@ -907,25 +914,32 @@
 			var regContents = /^[가-힣 .,:;()!^?~0-9a-zA-Z\n]{1,150}$/g;	 //레직스 바꾸기		
 			var titleText = title;
 			var regTitle = /^[가-힣 .,:;()!^?~0-9a-zA-Z]{1,22}$/g;
-			var price = parseInt($("#goodsPrice").val());
+			var price = $("#goodsPrice").val();
+			price = price.replace(/,/ig,"");
 			var regPrice = /[1-9][0-9]{3,7}/g;
 			var phoneText = $("#phone").val();			
 			var regPhone = /(01[0|1|6|9|7])[-](\d{3}|\d{4})[-](\d{4}$)/g;	
 		
 			if(!regContents.test(contentsText)){
-				alert('한글,영문(1글자~150글자 사이 입력하세요.)');
+				alert('내용은 한글,영문(1글자~150글자 사이 입력하세요.)');
 			}else if(!regTitle.test(titleText)){
-				alert('한글,영문(1글자~22글자 사이 입력하세요.)');
+				alert('제목은 한글,영문(1글자~22글자 사이 입력하세요.)');
 			}else if(!regPhone.test(phoneText)){
 				alert('잘못된 휴대폰 번호입니다.');	
 			}else if(price !=0){
 				if(price<1000){
-					alert("1,000원~99,999,999원 사이 입력하세요.");
+					alert("물품 가격은 1,000원~99,999,999원 사이 입력하세요.");
 					}else if(price>99999999){
-						alert("1,000원~99,999,999원 사이 입력하세요.");
+						alert("물품 가격은 1,000원~99,999,999원 사이 입력하세요.");
 					}else if(!regPrice.test(price)){
-						alert("가격은 숫자만 입력할 수 있습니다.(1,000원~99,999,999원 사이)")
+						alert("물품 가격은 숫자만 입력할 수 있습니다.(1,000원~99,999,999원 사이)")
 					}else{
+						var result = confirm("등록하시겠습니까?");
+						if(result==false){
+							return false;
+						}
+						price = parseInt(price);
+						$("#goodsPrice").val(price);
 						$("#send").submit();
 				}
 			}
@@ -955,9 +969,28 @@
 	                location.reload(true);
 	             },1000);
 	          });
-		});	
-	
-	
+
+		});		
+		var rgx1 = /\D/g;  // /[^0-9]/g 와 같은 표현
+		var rgx2 = /(\d+)(\d{3})/; 
+
+		function getNumber(obj){
+		     var num01;
+		     var num02;
+		     num01 = obj.value;
+		     num02 = num01.replace(rgx1,"");
+		     num01 = setComma(num02);
+		     obj.value =  num01;
+		}
+		function setComma(inNum){
+		     var outNum;
+		     outNum = inNum; 
+		     while (rgx2.test(outNum)) {
+		          outNum = outNum.replace(rgx2, '$1' + ',' + '$2');
+		      }
+		     return outNum;
+		}
+		
 	</script>
  
 

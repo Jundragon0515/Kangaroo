@@ -31,7 +31,6 @@ public class WriteService {
    @Transactional("txManager")
    public void goodsInsert(MultipartHttpServletRequest mtfRequest,Used_transaction_boardDTO dto,Used_transaction_img_boardDTO udto)throws Exception{
       String uploadPath = session.getServletContext().getRealPath("/resources/img/middle");
-      System.out.println("asd"+udto.getMiddle2_img());
       List<MultipartFile> fileList = mtfRequest.getFiles("file");
       System.out.println(uploadPath);
       int a =1;

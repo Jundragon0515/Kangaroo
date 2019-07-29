@@ -159,7 +159,6 @@ $(function(){
     })
 
 $("#logout_na").on("click", function() {
-	console.log("asd");
           $.ajax({
                    url:"logout",
                    type:"get"
