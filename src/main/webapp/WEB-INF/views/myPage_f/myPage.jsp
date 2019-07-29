@@ -361,7 +361,7 @@
 								<tr>
 									<th scope="row">회원등급<img
 											src="../resources/img/qm.png" width="30px" id="qm" data-toggle="tooltip"  data-html="true" data-placement="right" title="<p>브론즈=기본  <br> 실버=댓글 1,판매 1 <br> 골드=댓글 5,판매 5 <br> 플래티넘=댓글 10,판매 10 <br> 다이아=댓글 50,판매 50 <br> 마스터=댓글 100,판매 100 </p>"></th>
-									<td colspan="2">${member_class}</td>
+									<td colspan="2">${member_class}<img  src="/resources/img/${member_class}.PNG" width="50px"></td>
 								</tr>
 								<tr>
 									<th scope="row" colspan="3"><input type="button" id="infoInsert" class="genric-btn primary circle mr-3" value="정보 수정 하기">
