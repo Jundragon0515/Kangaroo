@@ -154,7 +154,7 @@ public class CartController {
 
 		int end = currentPage * recordCountPerPage;
 		int start = end - (recordCountPerPage - 1);
-
+		
 		String currentPageResult1 = request.getParameter("currentPage1");
 		if (currentPageResult1 != null) {
 			currentPage1 = Integer.parseInt(currentPageResult1);
@@ -163,17 +163,22 @@ public class CartController {
 		}
 		int end1 = currentPage1 * recordCountPerPage1;
 		int start1 = end1 - (recordCountPerPage1 - 1);
-
+		try {
 		tList = cs.tradeList(start, end,(String)session.getAttribute("email"));
 		cList = cs.auctionList(start1, end1, (String)session.getAttribute("email"));
 		// 페이징 버튼
 		String tradeNavi = cs.tradeNavi(currentPage, recordCountPerPage);
 		String auctionNavi = cs.auctionNavi(currentPage1, recordCountPerPage1);
-		/*request.setAttribute("recordTotalCount", list.size()); // 전체개수 */
 		request.setAttribute("navi", tradeNavi);
 		request.setAttribute("navi1", auctionNavi);
 		session.setAttribute("tList", tList);
 		session.setAttribute("cList", cList);
+		}catch(Exception e) {
+			e.printStackTrace();
+			return "index";
+		}
+		/*request.setAttribute("recordTotalCount", list.size()); // 전체개수 */
+		
 		return "cart";
 	}
 }

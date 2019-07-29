@@ -224,7 +224,12 @@ function viewCount(){
 
 
    $(function(){
-      
+	   <c:choose>
+		<c:when test="${logintype==null}">
+		alert("로그인후 이용 가능합니다");
+		$(location).attr("href", "/login_main");
+		</c:when>
+		</c:choose>
 /*       $("#category").on("click", function(){
          var category = $(this).text();
          console.log(category);
@@ -266,7 +271,7 @@ function viewCount(){
       });
       
       /* 페이지 정렬 개수 */
-      $("select option[value=" + '${view}' + "]").attr("selected", true);
+//       $("select option[value=" + '${view}' + "]").attr("selected", true);
       
       /* 페이지 정렬 개수 컨트롤  */
 /*       $("#viewCount").on("click", function(){
