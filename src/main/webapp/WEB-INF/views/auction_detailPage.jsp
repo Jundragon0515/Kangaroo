@@ -535,7 +535,7 @@ $("#logout_na").on("click", function() {
                      <c:when test="${dto.id==email}">
                      </c:when>
                      <c:otherwise>
-                     <form class="form-inline" id="tender">
+                     <form class="form-inline" id="tender" onsubmit="return false;">
                         <input type="text" class="form-control mb-2 mr-sm-2" id="money"
                            onchange="getNumber(this);" onkeyup="getNumber(this);"
                            placeholder="입찰금액을 입력해주세요."> <input type="button"
@@ -588,7 +588,7 @@ $("#logout_na").on("click", function() {
 
 
    <script>
-   
+
       var lastPrice = 0;
          var current = ${currentMoney};
 

@@ -517,7 +517,7 @@ a{
                                     </td>
                                     <td>
                                     <c:choose>
-                                    <c:when test="${i.onGoing=='Y' }">
+                                    <c:when test="${i.onGoing=='y' }">
                                    	판매 진행 중
                                     </c:when>
                                     <c:otherwise>
