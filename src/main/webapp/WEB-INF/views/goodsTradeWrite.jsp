@@ -9,7 +9,7 @@
    <!-- Mobile Specific Meta -->
    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
    <!-- Favicon-->
-   <link rel="shortcut icon" href="../resources/img/fav.png">
+<link rel="shortcut icon" href="../resources/img/logo.png">
    <!-- Author Meta -->
    <meta name="author" content="CodePixar">
    <!-- Meta Description -->
@@ -34,6 +34,8 @@
    <link rel="stylesheet" href="../resources/css/ion.rangeSlider.skinFlat.css" />
    <link rel="stylesheet" href="../resources/css/main.css">
   <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+  <link rel="icon" type="image/png" sizes="32x32"
+	href="/favicon-32x32.png">
 <style>
     .category,.dropdown-menu{
         background-color: #ffba00;
@@ -212,7 +214,6 @@
 	#register{
 		position:relative;
 		bottom:10px;
-		left:20px;
 	}
 	#sel,#sel1,#sel2{
 		float:left;
@@ -291,7 +292,7 @@
 											안전거래</a></li>
 									<li class="nav-item"><a class="nav-link" href="/auction">중고
 											경매</a></li>
-							<li class="nav-item "><a class="nav-link" href="/">공지사항</a></li>
+							<li class="nav-item "><a class="nav-link" href="notice_main">공지사항</a></li>
 							<c:choose>
 								<c:when test="${logintype=='admin'}">
 									<li class="nav-item "><a class="nav-link" href="/admin">관리자페이지</a></li>
@@ -369,6 +370,7 @@
          <div class="col-first">
             <h1>중고물품 글쓰기</h1>
             <nav class="d-flex align-items-center"> <a href="/">메인페이지<span
+
                class="lnr lnr-arrow-right"></span></a> <a href="/#">중고거래
                <span class="lnr lnr-arrow-right"></span>
             </a> <a href="/tradeGoodsWrite">중고거래 물품 등록<span class="lnr "></span></a></nav>
@@ -396,7 +398,9 @@
 						<ul class="list">
                         <br>                        
 						    <li><a><span class="middleName">물품제목</span></a><input type="text" class="form-control goodsContents" id="goodsTitle" name="title" placeholder="물품제목을 입력하세요."></li><br>
-							<li><a><span class="middleName">물품가격</span></a><input type="text" priceOnly  class="form-control goodsContents" id="goodsPrice" name="price" placeholder="물품가격을 입력하세요." onkeydown="javascript: return event.keyCode == 69 ? false : true"></li><br>
+
+							<li><a><span class="middleName">물품가격</span></a><input type="text" class="form-control goodsContents" id="goodsPrice"  onchange="getNumber(this);" onkeyup="getNumber(this);" name="price" placeholder="물품가격을 입력하세요."></li><br>
+
 							<li><a><span class="middleName">핸드폰번호</span></a><input type="text" phoneOnly  class="form-control goodsContents" id="phone" name="phone" placeholder="-없이 핸드폰 번호를 입력해주세요." onkeydown="javascript: return event.keyCode == 69 ? false : true"></li><br>
 							
 				<div id="sel">		
@@ -487,7 +491,8 @@
 									</div>
 								</div>       
                           <div class="text-right">
-								<button type="button" id="register" class="primary-btn">등록하기</button>								
+								<button type="button" id="register" class="genric-btn primary radius">등록하기</button>								
+
 				        </div>                 
 						</ul>
 						<br>		
@@ -646,6 +651,11 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
             var html = $(this).html();
             $('#example button.dropdown-toggle').html(html + ' <span class="caret"></span>');
         }); 
+   
+        $("#image").on("click",function(){
+        	$("#middle").remove();
+        	$("#imgTitle").val().remove();
+        })
 
         $("#image").on("input",function(){
 			var formData = new FormData();
@@ -657,7 +667,6 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 				contentType:false,
 				data:formData
 			}).done(function(resp){
-				$("#image").attr("disabled",true);
 				$("#titleImg").append("<img src='/img/title/"+resp+"' id='middle'>");
 				$("#imgTitle").val(resp);
 			})
@@ -847,28 +856,33 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 					var regContents = /^[가-힣 .,:;()!^?~0-9a-zA-Z\n]{1,150}$/g;	 //레직스 바꾸기		
 					var titleText = title;
 					var regTitle = /^[가-힣 .,:;()!^?~0-9a-zA-Z]{1,22}$/g;
-					var price = parseInt($("#goodsPrice").val());
+					var price = $("#goodsPrice").val();
+					price = price.replace(/,/ig,"");
 					var regPrice = /[1-9][0-9]{3,7}/g;
 					var phoneText = $("#phone").val();			
 					var regPhone = /(01[0|1|6|9|7])[-](\d{3}|\d{4})[-](\d{4}$)/g;	
 					
 					if(!regContents.test(contentsText)){
-						alert('한글,영문(1글자~150글자 사이 입력하세요.)');			      
+						alert('내용은 한글,영문(1글자~150글자 사이 입력하세요.)');			      
 					}else if(!regTitle.test(titleText)){
-						alert('한글,영문(1글자~22글자 사이 입력하세요.)');
+						alert('제목은 한글,영문(1글자~22글자 사이 입력하세요.)');
 					}else if(!regPhone.test(phoneText)){
 						alert('잘못된 휴대폰 번호입니다.');
 					}else if(price !=0){
 						if(price<1000){
-							alert("1,000원~99,999,999원 사이 입력하세요.");
+							alert("물품 가격은 1,000원~99,999,999원 사이 입력하세요.");
 							$("#goodsPrice").val("");
 							}else if(price>99999999){
-								alert("1,000원~99,999,999원 사이 입력하세요.");
+								alert("물품 가격은 1,000원~99,999,999원 사이 입력하세요.");
 							}else if(!regPrice.test(price)){
 								alert("가격은 숫자만 입력할 수 있습니다.(1,000원~99,999,999원 사이)")
 							}else{
-								var contents = $("#writting").val();
-								
+								var result = confirm("등록하시겠습니까?");
+								if(result==false){
+									return false;
+								}
+								price = parseInt(price);
+								$("#goodsPrice").val(price);
 								$("#send").submit();
 						}
 					}

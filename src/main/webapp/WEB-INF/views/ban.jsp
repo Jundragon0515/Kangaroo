@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>정지회원 알림창</title>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<link rel="shortcut icon" href="../resources/img/logo.png">
 </head>
 <body>
 <script>

@@ -10,7 +10,7 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <!-- Favicon-->
-<link rel="shortcut icon" href="../resources/img/fav.png">
+<link rel="shortcut icon" href="../resources/img/logo.png">
 <!-- Author Meta -->
 <meta name="author" content="CodePixar">
 <!-- Meta Description -->
@@ -42,6 +42,8 @@
 <!-- 모든 브라우저 호완성을 위해 추가  -->
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+<link rel="icon" type="image/png" sizes="32x32"
+	href="/favicon-32x32.png">
 </head>
 <style>
 
@@ -471,7 +473,9 @@
                                  </div>
                                  <div class="row product-details" style="padding-left: 10px;">
                                     <div class="prd-bottom" style="margin-top: 5px;">
-                                       <a href="boardGgymAuction?no=${temp.no}&title_img=${temp.title_img}&title=${temp.title}&trade_type=${temp.end_date }&category=${temp.category }&price=${temp.starting_price}&id=${temp.id}" class="social-info ggym"> <span class="lnr lnr-heart"></span>
+
+                                       <a href="boardGgymAuction?no=${temp.no}&title_img=${temp.title_img}&title=${temp.title}&end_date=${temp.end_date }&category=${temp.category }&price=${temp.starting_price}&id=${temp.id}" class="social-info ggym"> <span class="lnr lnr-heart"></span>
+
                                           <p class="hover-text">ADD TO BAG</p>
                                        </a> <a href="/auction_detailPage?no=${temp.no}" class="social-info">
                                         <span class="lnr lnr-move"></span>

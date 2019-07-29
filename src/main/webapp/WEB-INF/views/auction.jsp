@@ -11,8 +11,7 @@ pageEncoding="UTF-8"%>
 <meta name="viewport"
    content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <!-- Favicon-->
-<link rel="shortcut icon" href="/../resources/img/fav.png">
-<!-- Author Meta -->
+<link rel="shortcut icon" href="../resources/img/logo.png"><!-- Author Meta -->
 <meta name="author" content="CodePixar">
 <!-- Meta Description -->
 <meta name="description" content="">
@@ -26,6 +25,8 @@ pageEncoding="UTF-8"%>
 <!--
       CSS
       ============================================= -->
+      <link rel="icon" type="image/png" sizes="32x32"
+	href="/favicon-32x32.png">
 <link rel="stylesheet" href="../resources/css/linearicons.css">
 <link rel="stylesheet" href="../resources/css/font-awesome.min.css">
 <link rel="stylesheet" href="../resources/css/themify-icons.css">
@@ -411,9 +412,9 @@ position:relative;
 											직거래</a></li>
 									<li class="nav-item"><a class="nav-link" href="/trade_safe">중고
 											안전거래</a></li>
-									<li class="nav-item active"><a class="nav-link" href="/auction">중고
+									<li class="nav-item"><a class="nav-link" href="/auction">중고
 											경매</a></li>
-							<li class="nav-item "><a class="nav-link" href="/">공지사항</a></li>
+							<li class="nav-item "><a class="nav-link" href="notice_main">공지사항</a></li>
 							<c:choose>
 								<c:when test="${logintype=='admin'}">
 									<li class="nav-item "><a class="nav-link" href="/admin">관리자페이지</a></li>
