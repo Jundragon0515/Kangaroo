@@ -46,50 +46,60 @@
 	href="/favicon-32x32.png">
 </head>
 <style>
-
 /* * {
-	box-sizing:border-box;
-	border : 1px solid black;
+	box-sizing: border-box;
+	border: 1px solid black;
 } */
 
 .owl-nav {
 	top: 430px;
 }
+
 .nav_b {
 	border: 0px;
 	background: 000000;
 	width: 100%;
 }
+
 .nav_b:hover {
 	cursor: pointer;
 }
+
 .nav_ul * {
 	text-align: center;
 }
 
 /* 등록상품 메인 이미지  */
 .product-img-size {
-   width: 330px;
-   height: 230px;
+	width: 330px;
+	height: 230px;
 }
 
 /*카드리스트 마우스 오버*/
 .card:hover {
-   border: solid 1px #ffba00;
-   margin: 1px;
+	border: solid 1px #ffba00;
+	margin: 1px;
 }
 
 /* 오른쪽 TOP 버튼 */
 .btn-fixed {
-   position: fixed;
-   top: 540px;
-   cursor:pointer;
+	position: fixed;
+	top: 540px;
+	cursor: pointer;
 }
-#soldOut{
-   position: relative;
-   left: 180px;
-   font-size: 15px;
+
+#soldOut {
+	position: relative;
+	left: 180px;
+	font-size: 15px;
 }
+
+.footerTitle {
+	font-size: 20px;
+	text-align: center;
+	font-color: white;
+}
+
 .nav-link{
 	font-size:30px;
 }
@@ -122,8 +132,15 @@
 	position:relative;
 	top: 130px;
 }
+.back-to-top {
+	text-decoration: none;
+	display: none;
+	color: #fe912b;
+}
 
-
+.back-to-top:hover {
+	color: #818bb0
+}
 </style>
 <script>
 	$(function() {
@@ -210,109 +227,113 @@
 	});
 </script>
 <body>
-<div>
-   <!-- start fixbutton -->
-       <div class="d-none d-lg-block col-lg-1" style=padding-left:90%;>
-          <i class="fas fa-chevron-circle-up btn-fixed back-to-top fa-3x"></i>
-       </div>
-      <!-- end fixbutton -->
-	<!-- Start Header Area -->
-	<header class="header_area sticky-header">
-		<div class="main_menu">
-			<nav class="navbar navbar-expand-lg navbar-light main_box">
-				<div class="container">
-					<!-- Brand and toggle get grouped for better mobile display logo_h -->
-					<a class="navbar-brand logo_h" href="/"><img
-						src="../resources/img/logo.png" width="60px" alt="">
-						Kangaroo</a>
-					<button class="navbar-toggler" type="button" data-toggle="collapse"
-						data-target="#navbarSupportedContent"
-						aria-controls="navbarSupportedContent" aria-expanded="false"
-						aria-label="Toggle navigation">
-						<span class="icon-bar"></span> <span class="icon-bar"></span> <span
-							class="icon-bar"></span>
-					</button>
-					<!-- Collect the nav links, forms, and other content for toggling -->
-					<div class="collapse navbar-collapse offset"
-						id="navbarSupportedContent">
-						<ul class="nav navbar-nav menu_nav ml-auto">
-							<!-- 							<li class="nav-item active"><a class="nav-link" href="/">Home</a></li> -->
-									<li class="nav-item"><a class="nav-link" href="/trade">중고
-											직거래</a></li>
-									<li class="nav-item"><a class="nav-link" href="/trade_safe">중고
-											안전거래</a></li>
-									<li class="nav-item"><a class="nav-link" href="/auction">중고
-											경매</a></li>
-							<li class="nav-item "><a class="nav-link" href="notice_main">공지사항</a></li>
-							<c:choose>
-								<c:when test="${logintype=='admin'}">
-									<li class="nav-item "><a class="nav-link" href="/admin">관리자페이지</a></li>
-									<li class="nav-item "><a class="nav-link" href="/logout">로그아웃</a></li>
-								</c:when>
-								<c:when test="${logintype=='naver'}">
-									<li class="nav-item submenu dropdown"><a href="#"
-										class="nav-link dropdown-toggle" data-toggle="dropdown"
-										role="button" aria-haspopup="true" aria-expanded="false"><img
-											src="../resources/img/account.png" width="35px"></a>
-										<ul class="dropdown-menu nav_ul">
-											<li class="nav-item "><a class="nav-link" href="/goCart">찜목록</a></li>
-											<li class="nav-item "><a class="nav-link"
-												href="/goMyPage">마이페이지</a></li>
-											<li class="nav-item "><a class="nav-link"
-												href="/toPoint">포인트충전</a></li>
-											<li class="nav-item "><a class="nav-link"
-												href="/toPoint_exc">포인트환급</a></li>
-											<li class="nav-item "><input type="button"
-												class="nav-link nav_b" id="logout_na" value="로그아웃"></li>
-										</ul></li>
-								</c:when>
-								<c:when test="${logintype=='kakao'}">
-									<li class="nav-item submenu dropdown"><a href="#"
-										class="nav-link dropdown-toggle" data-toggle="dropdown"
-										role="button" aria-haspopup="true" aria-expanded="false"><img
-											src="../resources/img/account.png" width="40px"></a>
-										<ul class="dropdown-menu nav_ul">
-											<li class="nav-item "><a class="nav-link" href="/goCart">찜목록</a></li>
-											<li class="nav-item "><a class="nav-link"
-												href="/goMyPage">마이페이지</a></li>
-												<li class="nav-item "><a class="nav-link"
-												href="/toPoint">포인트충전</a></li>
-											<li class="nav-item "><a class="nav-link"
-												href="/toPoint_exc">포인트환급</a></li>
-											<li class="nav-item "><input type="button"
-												class="nav-link nav_b" id="logout_ka" value="로그아웃"></li>
-										</ul></li>
-								</c:when>
-								<c:when test="${logintype=='email'}">
-									<li class="nav-item submenu dropdown"><a href="#"
-										class="nav-link dropdown-toggle" data-toggle="dropdown"
-										role="button" aria-haspopup="true" aria-expanded="false"><img
-											src="../resources/img/account.png" width="40px"></a>
-										<ul class="dropdown-menu nav_ul">
-											<li class="nav-item "><a class="nav-link" href="/goCart">찜목록</a></li>
-											<li class="nav-item "><a class="nav-link"
-												href="/goMyPage">마이페이지</a></li>
-											<li class="nav-item "><a class="nav-link"
-												href="/toPoint">포인트충전</a></li>
-												<li class="nav-item "><a class="nav-link"
-												href="/toPoint_exc">포인트환급</a></li>
-											<li class="nav-item "><a class="nav-link" href="/logout">로그아웃</a></li>
-										</ul></li>
-								</c:when>
-								<c:otherwise>
-									<li class="nav-item "><a class="nav-link"
-										href="/login_main">로그인</a></li>
-									<li class="nav-item "><a class="nav-link" href="/insert">회원가입</a></li>
-								</c:otherwise>
-							</c:choose>
-						</ul>
-					</div>
-				</div>
-			</nav>
+	<div>
+		<!-- start fixbutton -->
+		<div class="d-none d-lg-block col-lg-1" style="padding-left: 90%;">
+			<i class="fas fa-chevron-circle-up btn-fixed back-to-top fa-3x"></i>
 		</div>
-	</header>
-	<!-- End Header Area -->
-
+		<!-- end fixbutton -->
+		<!-- Start Header Area -->
+		<header class="header_area sticky-header">
+			<div class="main_menu">
+				<nav class="navbar navbar-expand-lg navbar-light main_box">
+					<div class="container">
+						<!-- Brand and toggle get grouped for better mobile display logo_h -->
+						<a class="navbar-brand logo_h" href="/"><img
+							src="../resources/img/logo.png" width="60px" alt="">
+							Kangaroo</a>
+						<button class="navbar-toggler" type="button"
+							data-toggle="collapse" data-target="#navbarSupportedContent"
+							aria-controls="navbarSupportedContent" aria-expanded="false"
+							aria-label="Toggle navigation">
+							<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+								class="icon-bar"></span>
+						</button>
+						<!-- Collect the nav links, forms, and other content for toggling -->
+						<div class="collapse navbar-collapse offset"
+							id="navbarSupportedContent">
+							<ul class="nav navbar-nav menu_nav ml-auto">
+								<!-- 							<li class="nav-item active"><a class="nav-link" href="/">Home</a></li> -->
+								<li class="nav-item"><a class="nav-link" href="/trade">중고
+										직거래</a></li>
+								<li class="nav-item"><a class="nav-link" href="/trade_safe">중고
+										안전거래</a></li>
+								<li class="nav-item"><a class="nav-link" href="/auction">중고
+										경매</a></li>
+								<li class="nav-item "><a class="nav-link"
+									href="notice_main">공지사항</a></li>
+								<c:choose>
+									<c:when test="${logintype=='admin'}">
+										<li class="nav-item "><a class="nav-link" href="/admin">관리자페이지</a></li>
+										<li class="nav-item "><a class="nav-link" href="/logout">로그아웃</a></li>
+									</c:when>
+									<c:when test="${logintype=='naver'}">
+										<li class="nav-item submenu dropdown"><a href="#"
+											class="nav-link dropdown-toggle" data-toggle="dropdown"
+											role="button" aria-haspopup="true" aria-expanded="false"><img
+												src="../resources/img/account.png" width="35px"></a>
+											<ul class="dropdown-menu nav_ul">
+												<li class="nav-item "><a class="nav-link"
+													href="/goCart">찜목록</a></li>
+												<li class="nav-item "><a class="nav-link"
+													href="/goMyPage">마이페이지</a></li>
+												<li class="nav-item "><a class="nav-link"
+													href="/toPoint">포인트충전</a></li>
+												<li class="nav-item "><a class="nav-link"
+													href="/toPoint_exc">포인트환급</a></li>
+												<li class="nav-item "><input type="button"
+													class="nav-link nav_b" id="logout_na" value="로그아웃"></li>
+											</ul></li>
+									</c:when>
+									<c:when test="${logintype=='kakao'}">
+										<li class="nav-item submenu dropdown"><a href="#"
+											class="nav-link dropdown-toggle" data-toggle="dropdown"
+											role="button" aria-haspopup="true" aria-expanded="false"><img
+												src="../resources/img/account.png" width="40px"></a>
+											<ul class="dropdown-menu nav_ul">
+												<li class="nav-item "><a class="nav-link"
+													href="/goCart">찜목록</a></li>
+												<li class="nav-item "><a class="nav-link"
+													href="/goMyPage">마이페이지</a></li>
+												<li class="nav-item "><a class="nav-link"
+													href="/toPoint">포인트충전</a></li>
+												<li class="nav-item "><a class="nav-link"
+													href="/toPoint_exc">포인트환급</a></li>
+												<li class="nav-item "><input type="button"
+													class="nav-link nav_b" id="logout_ka" value="로그아웃"></li>
+											</ul></li>
+									</c:when>
+									<c:when test="${logintype=='email'}">
+										<li class="nav-item submenu dropdown"><a href="#"
+											class="nav-link dropdown-toggle" data-toggle="dropdown"
+											role="button" aria-haspopup="true" aria-expanded="false"><img
+												src="../resources/img/account.png" width="40px"></a>
+											<ul class="dropdown-menu nav_ul">
+												<li class="nav-item "><a class="nav-link"
+													href="/goCart">찜목록</a></li>
+												<li class="nav-item "><a class="nav-link"
+													href="/goMyPage">마이페이지</a></li>
+												<li class="nav-item "><a class="nav-link"
+													href="/toPoint">포인트충전</a></li>
+												<li class="nav-item "><a class="nav-link"
+													href="/toPoint_exc">포인트환급</a></li>
+												<li class="nav-item "><a class="nav-link"
+													href="/logout">로그아웃</a></li>
+											</ul></li>
+									</c:when>
+									<c:otherwise>
+										<li class="nav-item "><a class="nav-link"
+											href="/login_main">로그인</a></li>
+										<li class="nav-item "><a class="nav-link" href="/insert">회원가입</a></li>
+									</c:otherwise>
+								</c:choose>
+							</ul>
+						</div>
+					</div>
+				</nav>
+			</div>
+		</header>
+		<!-- End Header Area -->
 	<!-- start banner Area -->
 	<section class="banner-area">
 		<div class="container">
@@ -365,249 +386,304 @@
 					</div>
 				</div>
 			</div>
-		</div>
-	</section>
-	<section class="owl-carousel active-product-area section_gap">
-		<!-- single product slide -->
-		<div class="single-product-slider">
+		</section>
+		<section class="owl-carousel active-product-area section_gap">
+			<!-- single product slide -->
+			<div class="single-product-slider">
+				<div class="container">
+					<div class="row justify-content-center">
+						<div class="col-lg-6 text-center">
+							<div class="section-title">
+								<h1>중고 직거래</h1>
+								<p>판매자와 직접 빠른 거래를 해보세요!</p>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<!-- 직거래리스트 -->
+						<c:forEach var="temp" items="${mainDirectList }">
+							<!-- single product -->
+							<div class="col-lg-3 col-md-6">
+								<div class="single-product" style="margin-bottom: 15px;">
+									<div class="card">
+										<a href="/used_detailPage?no=${temp.no}"> <img
+											class="img-fluid product-img-size"
+											style="margin-bottom: 5px;"
+											src="/img/title/${temp.title_img}" alt=""></a>
+										<div class="card-body" style="padding: 12px;">
+											<div class="row">
+												<div class="d-none d-lg-block col-lg-12">[${temp.category}]</div>
+											</div>
+											<div class="row">
+												<div class="col-lg-12">
+													<h4>${temp.title}</h4>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-lg-12">
+													판매가 :
+													<fmt:formatNumber value="${temp.price}" pattern="#,###" />
+													원
+												</div>
+											</div>
+											<div class="row">
+												<div
+													class="d-none d-sm-block col-xs-2 col-sm-2 col-md-2 col-lg-2 pr-0">
+													<i class="far fa-clock fa-2x fontawesome"></i>
+												</div>
+												<div
+													class="d-none d-sm-block col-xs-4 col-sm-4 col-md-4 col-lg-6 pr-0">
+													<span class="joinDate">${temp.joinDate}</span>
+												</div>
+												<div
+													class="d-none d-sm-block col-xs-2 col-sm-2 col-md-2 col-lg-2 m-0 pr-0">
+													<i class="fas fa-eye fa-2x fontawesome"></i>
+												</div>
+												<div
+													class="d-none d-sm-block col-xs-4 col-sm-4 col-md-4 col-lg-2 pr-0">
+													<span class="view">${temp.viewCount}</span>
+												</div>
+											</div>
+
+											<div class="row product-details" style="padding-left: 10px;">
+												<div class="prd-bottom" style="margin-top: 5px;">
+													<a
+														href="boardGgym?no=${temp.no}&title_img=${temp.title_img}&title=${temp.title}&trade_type=${temp.trade_type }&category=${temp.category }&price=${temp.price}&id=${temp.id}"
+														class="social-info ggym"> <span class="lnr lnr-heart"></span>
+														<p class="hover-text">Wishlist</p>
+
+													</a> <a href="/used_detailPage?no=${temp.no}"
+														class="social-info"> <span class="lnr lnr-move"></span>
+														<p class="hover-text">view more</p>
+													</a>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</c:forEach>
+					</div>
+				</div>
+			</div>
+			<!-- single product slide -->
+			<div class="single-product-slider">
+				<div class="container">
+					<div class="row justify-content-center">
+						<div class="col-lg-6 text-center">
+							<div class="section-title">
+								<h1>중고 안전거래</h1>
+								<p>안전하게 중고 물품 거래를 해보세요!</p>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<!-- 안전거래 리스트 -->
+						<c:forEach var="temp" items="${mainSafeList }">
+							<!-- single product -->
+							<div class="col-lg-3 col-md-6">
+								<div class="single-product" style="margin-bottom: 15px;">
+									<div class="card">
+										<a href="/used_detailPage?no=${temp.no}"> <img
+											class="img-fluid product-img-size"
+											style="margin-bottom: 5px;"
+											src="/img/title/${temp.title_img}" alt=""></a>
+										<div class="card-body" style="padding: 12px;">
+											<div class="row">
+												<div class="d-none d-lg-block col-lg-12">[${temp.category}]</div>
+											</div>
+											<div class="row">
+												<div class="col-lg-12">
+													<h4>${temp.title}</h4>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-lg-12">
+													판매가 :
+													<fmt:formatNumber value="${temp.price}" pattern="#,###" />
+													원
+												</div>
+											</div>
+											<div class="row">
+												<div
+													class="d-none d-sm-block col-xs-2 col-sm-2 col-md-2 col-lg-2 pr-0">
+													<i class="far fa-clock fa-2x fontawesome"></i>
+												</div>
+												<div
+													class="d-none d-sm-block col-xs-4 col-sm-4 col-md-4 col-lg-6 pr-0">
+													<span class="joinDate">${temp.joinDate}</span>
+												</div>
+												<div
+													class="d-none d-sm-block col-xs-2 col-sm-2 col-md-2 col-lg-2 m-0 pr-0">
+													<i class="fas fa-eye fa-2x fontawesome"></i>
+												</div>
+												<div
+													class="d-none d-sm-block col-xs-4 col-sm-4 col-md-4 col-lg-2 pr-0">
+													<span class="view">${temp.viewCount}</span>
+												</div>
+											</div>
+
+											<div class="row product-details" style="padding-left: 10px;">
+												<div class="prd-bottom" style="margin-top: 5px;">
+													<a
+														href="boardGgymSafe?no=${temp.no}&title_img=${temp.title_img}&title=${temp.title}&trade_type=${temp.trade_type }&category=${temp.category }&price=${temp.price}&id=${temp.id}"
+														class="social-info ggym"> <span class="lnr lnr-heart"></span>
+														<p class="hover-text">Wishlist</p>
+
+													</a> <a href="/used_detailPage?no=${temp.no}"
+														class="social-info"> <span class="lnr lnr-move"></span>
+														<p class="hover-text">view more</p>
+													</a>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</c:forEach>
+					</div>
+				</div>
+			</div>
+			<!-- single product slide -->
+			<div class="single-product-slider">
+				<div class="container">
+					<div class="row justify-content-center">
+						<div class="col-lg-6 text-center">
+							<div class="section-title">
+								<h1>중고 경매</h1>
+								<p>중고 물품 경매에 참여 하여 좋은 가격에 원하는 물품을 얻어보세요!</p>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<!-- single product -->
+						<c:forEach var="temp" items="${auctionList}">
+							<div class="col-lg-3 col-md-6">
+								<div class="single-product" style="margin-bottom: 15px;">
+									<div class="card">
+										<input type="hidden" class="ongoing-href" value="${temp.no}">
+										<a href="/auction_detailPage?no=${temp.no}"
+											class="${temp.no}_re"> <img
+											class="img-fluid product-img-size"
+											style="margin-bottom: 5px;"
+											src="../resources/img/title/${temp.title_img}" alt=""></a>
+										<div class="card-body" style="padding: 12px;">
+											<div class="row">
+												<div class="d-none d-lg-block col-lg-12">[${temp.category}]</div>
+											</div>
+											<div class="row">
+												<div class="col-lg-12">
+													<h4>${temp.title}</h4>
+												</div>
+											</div>
+											<div class="row">
+												<c:choose>
+													<c:when test="${temp.present_price==0}">
+														<div class="col-lg-12">
+															현재가격 :
+															<fmt:formatNumber value="${temp.starting_price}"
+																pattern="#,###" />
+															원
+														</div>
+													</c:when>
+
+													<c:otherwise>
+														<div class="col-lg-12">
+															현재가격 :
+															<fmt:formatNumber value="${temp.starting_price}"
+																pattern="#,###" />
+															원
+														</div>
+													</c:otherwise>
+												</c:choose>
+											</div>
+											<div class="row">
+												<div class="col-sm-12 col-md-10 col-lg-8 pr-0 ${temp.no}"></div>
+												<div
+													class="d-none d-sm-block col-xs-2 col-sm-2 col-md-2 col-lg-2 m-0 pr-0">
+													<i class="fas fa-eye fa-2x fontawesome"></i>
+												</div>
+												<div
+													class="d-none d-sm-block col-xs-4 col-sm-4 col-md-4 col-lg-2 pr-0">
+													<span class="view">${temp.viewCount}</span>
+												</div>
+											</div>
+											<div class="row product-details" style="padding-left: 10px;">
+												<div class="prd-bottom" style="margin-top: 5px;">
+
+													<a
+														href="boardGgymAuction?no=${temp.no}&title_img=${temp.title_img}&title=${temp.title}&end_date=${temp.end_date }&category=${temp.category }&price=${temp.starting_price}&id=${temp.id}"
+														class="social-info ggym"> <span class="lnr lnr-heart"></span>
+
+														<p class="hover-text">ADD TO BAG</p>
+													</a> <a href="/auction_detailPage?no=${temp.no}"
+														class="social-info"> <span class="lnr lnr-move"></span>
+														<p class="hover-text">view more</p>
+													</a>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</c:forEach>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- end product Area -->
+
+		<!-- start footer Area -->
+		<footer class="footer-area section_gap">
 			<div class="container">
-				<div class="row justify-content-center">
-					<div class="col-lg-6 text-center">
-						<div class="section-title">
-							<h1>중고 직거래</h1>
-							<p>판매자와 직접 빠른 거래를 해보세요!</p>
-						</div>
-					</div>
-				</div>
 				<div class="row">
-				<!-- 직거래리스트 -->
-				<c:forEach var="temp" items="${mainDirectList }">
-					<!-- single product -->
-					<div class="col-lg-3 col-md-6">
-<div class="single-product" style="margin-bottom: 15px;">
-                           <div class="card">
-                              <a href="/used_detailPage?no=${temp.no}">
-                              <img class="img-fluid product-img-size" style="margin-bottom: 5px;"
-                                 src="/img/title/${temp.title_img}" alt=""></a>
-                              <div class="card-body" style="padding: 12px;">
-                                 <div class="row">
-                                    <div class="d-none d-lg-block col-lg-12">[${temp.category}]</div>
-                                 </div>
-                                 <div class="row">
-                                    <div class="col-lg-12">
-                                       <h4>${temp.title}</h4>
-                                    </div>
-                                 </div>
-                                 <div class="row">
-                                    <div class="col-lg-12">판매가 : <fmt:formatNumber value="${temp.price}" pattern="#,###" />원</div>
-                                 </div>
-                                 <div class="row">
-                                    <div class="d-none d-sm-block col-xs-2 col-sm-2 col-md-2 col-lg-2 pr-0"><i class="far fa-clock fa-2x fontawesome"></i></div>
-                                    <div class="d-none d-sm-block col-xs-4 col-sm-4 col-md-4 col-lg-6 pr-0"><span class="joinDate">${temp.joinDate}</span></div> 
-                                    <div class="d-none d-sm-block col-xs-2 col-sm-2 col-md-2 col-lg-2 m-0 pr-0"><i class="fas fa-eye fa-2x fontawesome"></i></div>
-                                    <div class="d-none d-sm-block col-xs-4 col-sm-4 col-md-4 col-lg-2 pr-0"><span class="view">${temp.viewCount}</span></div>
-                                 </div>
-
-                                 <div class="row product-details" style="padding-left: 10px;">
-                                    <div class="prd-bottom" style="margin-top: 5px;">
-                                       <a href="boardGgym?no=${temp.no}&title_img=${temp.title_img}&title=${temp.title}&trade_type=${temp.trade_type }&category=${temp.category }&price=${temp.price}&id=${temp.id}" class="social-info ggym"> <span class="lnr lnr-heart"></span>
-                                          <p class="hover-text">Wishlist</p>
-
-                                       </a> <a href="/used_detailPage?no=${temp.no}" class="social-info">
-                                        <span class="lnr lnr-move"></span>
-                                          <p class="hover-text">view more</p>
-                                       </a>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
+					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+						<div class="">
+							<dl>
+								<dt>
+									<h6>(주) &nbsp;&nbsp;Kangaroo</h6>
+								</dt>
+								<dd>서울특별시 중구 남대문로 120 대일빌딩 3층 (04540)</dd>
+								<dd>대표이사: 홍길동 사업자등록번호 : 815-81-00000</dd>
+								<dd>Tel: 1599-0000 Fax: 02-894-0000</dd>
+								<dd>E-mail: custimerservice@aaaa.co.kr</dd>
+							</dl>
+						</div>
 					</div>
-					</c:forEach>
-				</div>
-			</div>
-		</div>
-				<!-- single product slide -->
-		<div class="single-product-slider">
-			<div class="container">
-				<div class="row justify-content-center">
-					<div class="col-lg-6 text-center">
-						<div class="section-title">
-							<h1>중고 안전거래</h1>
-							<p>안전하게 중고 물품 거래를 해보세요!</p>
+					<div class="col-sm-4 col-md-4 col-lg-4 footerTitle">
+						<div class="single-footer-widget">
+							<h6><span>현재 활성화된 경매수</span></h6>
+							&emsp;&emsp; <br> <h6><span><fmt:formatNumber
+									value="${auctionActiveCount }" pattern="#,###" /> 건</span></h6>
+						</div>
+					</div>
+					<div class="col-sm-4 col-md-4 col-lg-4 footerTitle">
+						<div class="single-footer-widget mail-chimp">
+							<h6><span style="font-size=50px;">현재 총 거래 량</span></h6>
+							&emsp;&emsp; <br> <h6><span><fmt:formatNumber
+									value="${totalCount }" pattern="#,###" /> 건 </span></h6>
 						</div>
 					</div>
 				</div>
-				<div class="row">
-				<!-- 안전거래 리스트 -->
-				<c:forEach var="temp" items="${mainSafeList }">
-					<!-- single product -->
-					<div class="col-lg-3 col-md-6">
-						<div class="single-product" style="margin-bottom: 15px;">
-                           <div class="card">
-                              <a href="/used_detailPage?no=${temp.no}">
-                              <img class="img-fluid product-img-size" style="margin-bottom: 5px;"
-                                 src="/img/title/${temp.title_img}" alt=""></a>
-                              <div class="card-body" style="padding: 12px;">
-                                 <div class="row">
-                                    <div class="d-none d-lg-block col-lg-12">[${temp.category}]</div>
-                                 </div>
-                                 <div class="row">
-                                    <div class="col-lg-12">
-                                       <h4>${temp.title}</h4>
-                                    </div>
-                                 </div>
-                                 <div class="row">
-                                    <div class="col-lg-12">판매가 : <fmt:formatNumber value="${temp.price}" pattern="#,###" />원</div>
-                                 </div>
-                                 <div class="row">
-                                    <div class="d-none d-sm-block col-xs-2 col-sm-2 col-md-2 col-lg-2 pr-0"><i class="far fa-clock fa-2x fontawesome"></i></div>
-                                    <div class="d-none d-sm-block col-xs-4 col-sm-4 col-md-4 col-lg-6 pr-0"><span class="joinDate">${temp.joinDate}</span></div> 
-                                    <div class="d-none d-sm-block col-xs-2 col-sm-2 col-md-2 col-lg-2 m-0 pr-0"><i class="fas fa-eye fa-2x fontawesome"></i></div>
-                                    <div class="d-none d-sm-block col-xs-4 col-sm-4 col-md-4 col-lg-2 pr-0"><span class="view">${temp.viewCount}</span></div>
-                                 </div>
-
-                                 <div class="row product-details" style="padding-left: 10px;">
-                                    <div class="prd-bottom" style="margin-top: 5px;">
-                                       <a href="boardGgymSafe?no=${temp.no}&title_img=${temp.title_img}&title=${temp.title}&trade_type=${temp.trade_type }&category=${temp.category }&price=${temp.price}&id=${temp.id}" class="social-info ggym"> <span class="lnr lnr-heart"></span>
-                                          <p class="hover-text">Wishlist</p>
-
-                                       </a> <a href="/used_detailPage?no=${temp.no}" class="social-info">
-                                        <span class="lnr lnr-move"></span>
-                                          <p class="hover-text">view more</p>
-                                       </a>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-					</div>
-					</c:forEach>
-				</div>
-			</div>
-		</div>
-		<!-- single product slide -->
-		<div class="single-product-slider">
-			<div class="container">
-				<div class="row justify-content-center">
-					<div class="col-lg-6 text-center">
-						<div class="section-title">
-							<h1>중고 경매</h1>
-							<p>중고 물품 경매에 참여 하여 좋은 가격에 원하는 물품을 얻어보세요!</p>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<!-- single product -->
-					<c:forEach var="temp" items="${auctionList}">
-						<div class="col-lg-3 col-md-6">
-                        <div class="single-product" style="margin-bottom: 15px;">
-                           <div class="card">
-                           	<input type="hidden" class="ongoing-href" value="${temp.no}">
-                              <a href="/auction_detailPage?no=${temp.no}" class="${temp.no}_re">
-                              <img class="img-fluid product-img-size" style="margin-bottom: 5px;"
-                                 src="../resources/img/title/${temp.title_img}" alt=""></a>
-                              <div class="card-body" style="padding: 12px;">
-                                 <div class="row">
-                                    <div class="d-none d-lg-block col-lg-12">[${temp.category}]</div>
-                                 </div>
-                                 <div class="row">
-                                    <div class="col-lg-12">
-                                       <h4>${temp.title}</h4>
-                                    </div>
-                                 </div>
-                                 <div class="row">
-                                 <c:choose>
-                                 	<c:when test="${temp.present_price==0}">
-                                 		<div class="col-lg-12">현재가격 : <fmt:formatNumber value="${temp.starting_price}" pattern="#,###" />원</div>
-                                 	</c:when>
-                                 	
-                                 	<c:otherwise>
-                                 		<div class="col-lg-12">현재가격 : <fmt:formatNumber value="${temp.starting_price}" pattern="#,###" />원</div>
-                                 	</c:otherwise>
-                                 </c:choose>
-                                 </div>
-                                 <div class="row">
-                                    <div class="col-sm-12 col-md-10 col-lg-8 pr-0 ${temp.no}"></div>
-                                    <div class="d-none d-sm-block col-xs-2 col-sm-2 col-md-2 col-lg-2 m-0 pr-0"><i class="fas fa-eye fa-2x fontawesome"></i></div>
-                                    <div class="d-none d-sm-block col-xs-4 col-sm-4 col-md-4 col-lg-2 pr-0"><span class="view">${temp.viewCount}</span></div>
-                                 </div>
-                                 <div class="row product-details" style="padding-left: 10px;">
-                                    <div class="prd-bottom" style="margin-top: 5px;">
-
-                                       <a href="boardGgymAuction?no=${temp.no}&title_img=${temp.title_img}&title=${temp.title}&end_date=${temp.end_date }&category=${temp.category }&price=${temp.starting_price}&id=${temp.id}" class="social-info ggym"> <span class="lnr lnr-heart"></span>
-
-                                          <p class="hover-text">ADD TO BAG</p>
-                                       </a> <a href="/auction_detailPage?no=${temp.no}" class="social-info">
-                                        <span class="lnr lnr-move"></span>
-                                          <p class="hover-text">view more</p>
-                                       </a>
-                                    </div>
-                                 </div>
-                              </div>
-                        </div>
-                        </div>
-						</div>
-					</c:forEach>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!-- end product Area -->
-
-	<!-- start footer Area -->
-	<footer class="footer-area section_gap">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-3  col-md-6 col-sm-6">
-					<div class="single-footer-widget">
-						<h6>About Us</h6>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-							sed do eiusmod tempor incididunt ut labore dolore magna aliqua.</p>
-					</div>
-				</div>
-				<div class="col-lg-4  col-md-6 col-sm-6">
-					<div class="single-footer-widget">
-						현재 활성화된 경매수 <br>             
-						&emsp;&emsp; : <fmt:formatNumber value="${auctionActiveCount }" pattern="#,###"/> 건 
-					</div>
-				</div>
-				<div class="col-lg-3  col-md-6 col-sm-6">
-					<div class="single-footer-widget mail-chimp">
-						현재 총 거래 량<br>
-						&emsp;&emsp; : <fmt:formatNumber value="${totalCount }" pattern="#,###"/> 건 
-					</div>
-				</div>
-				<div class="col-lg-2 col-md-6 col-sm-6">
-					<div class="single-footer-widget">
-						<h6>Follow Us</h6>
-						<p>Let us be social</p>
-						<div class="footer-social d-flex align-items-center">
-							<a href="#"><i class="fa fa-facebook"></i></a>
-							<a href="#"><i class="fa fa-twitter"></i></a>
-							<a href="#"><i class="fa fa-dribbble"></i></a>
-							<a href="#"><i class="fa fa-behance"></i></a>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="footer-bottom d-flex justify-content-center align-items-center flex-wrap">
-				<p class="footer-text m-0">
-					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-					Copyright &copy;
-					<script>
+				<!-- 저작권 -->
+				<div
+					class="footer-bottom d-flex justify-content-center align-items-center flex-wrap">
+					<p class="footer-text m-0">
+						<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+						Copyright &copy;
+						<script>
 						document.write(new Date().getFullYear());
 					</script>
-					All rights reserved | This template is made with <i
-						class="fa fa-heart-o" aria-hidden="true"></i> by <a
-						href="https://colorlib.com" target="_blank">Colorlib</a>
-					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-				</p>
+						All rights reserved | This template is made with <i
+							class="fa fa-heart-o" aria-hidden="true"></i> by <a
+							href="/" target="_blank">Colorlib</a>
+						<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+					</p>
+				</div>
 			</div>
-		</div>
-	</footer>
+		</footer>
 	</div>
-<!-- End footer Area -->
+	<!-- End footer Area -->
 	<script>
 		$(".ggym").on("click",function(){
 			if(${email==null}){
@@ -617,7 +693,7 @@
 		})
 	
 	</script>
-	
+
 	<script src="https://use.fontawesome.com/releases/v5.0.0/js/all.js"></script>
 	<script src="https://unpkg.com/popper.js"></script>
 	<script src="../resources/js/vendor/jquery-2.2.4.min.js"></script>

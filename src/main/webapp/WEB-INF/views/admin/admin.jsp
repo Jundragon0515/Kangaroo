@@ -132,6 +132,12 @@
 .nav_ul * {
    text-align: center;
 }
+
+.footerTitle {
+	font-size: 20px;
+	text-align: center;
+	font-color: white;
+}
 </style>
 <script>
 $(function() {     
@@ -606,7 +612,7 @@ $(function() {
          <div class="row">
 
             <!-- Content Column -->
-            <div class="col-lg-7 mb-6">
+            <div class="col-lg-6 mb-6">
             
                <!-- Project Card Example -->
                <div class="card shadow mb-4">
@@ -673,10 +679,10 @@ $(function() {
                         </div>
                   </div>
                </div>
-         </div>
-         
-      <!-- Content Column -->
-           <div class="col-lg-5 mb-6">
+			</div>
+			
+		<!-- Content Column -->
+           <div class="col-lg-6 mb-6">
            
          <!-- Approach (신고 접수 내역) -->
                <div class="card shadow mb-4">
@@ -687,7 +693,7 @@ $(function() {
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                            <!-- <a href="list.board03?noticeCurrentPage=1" class="moreBtn">더보기></a> -->
-                           <a href="reportBoard" class="moreBtn">더보기></a>
+                           <a href="" class="moreBtn">더보기></a>
                         </div>
                      </div>
                   </div>
@@ -695,28 +701,18 @@ $(function() {
                      <div class="text">
                         <div class="row text-center">
                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 font-weight-bold d-none d-sm-block">글번호</div>
-                           <div class="col-lg-4 col-md-8 col-sm-10 col-xs-10 font-weight-bold myTitle d-none d-sm-block">글제목</div>
-                           <div class="col-lg-2 col-md-2 col-sm-4 col-xs-4 font-weight-bold d-none d-md-block">내용</div>
-                           <div class="col-lg-2 col-md-6 col-sm-4 col-xs-4 font-weight-bold d-none d-lg-block">작성자</div>
-                           <div class="col-lg-2 col-md-6 col-sm-4 col-xs-4 font-weight-bold d-none d-lg-block">작성일</div>
+                           <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 font-weight-bold myTitle d-none d-sm-block">글제목</div>
+                           <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 font-weight-bold d-none d-lg-block">작성자</div>
+                           <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 font-weight-bold d-none d-lg-block">작성일</div>
                         </div>
                         <div class="row text-center">
-                           <c:choose>
-                              <c:when test="${noticeRecordCount == 0 }">
-                                 <div class="noneRecord col-lg-12 col-md-12 col-sm-12 mt-2">신고 접수 내역이 없습니다.</div>
-                              </c:when>
-                              <c:otherwise>
-                                 <c:forEach var="list" items="${noticeList}">
-                                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2  d-none d-sm-block">${list.seq }</div>
-                                    <div class="col-lg-4 col-md-8 col-sm-10 col-xs-10  myTitle d-none d-sm-block">
-                                       <a href="noticeContent.board03?seq=${list.seq }&&commentPage=1">${list.title }</a>
-                                    </div>
-                                    <div class="col-lg-2 col-md-2 col-sm-4 col-xs-4  d-none d-md-block">${list.timeForm }</div>
-                                    <div class="col-lg-2 col-md-6 col-sm-4 col-xs-4  d-none d-lg-block">${list.writer }</div>
-                                    <div class="col-lg-2 col-md-6 col-sm-4 col-xs-4  d-none d-lg-block">${list.viewCount }</div>
-                                 </c:forEach>
-                              </c:otherwise>
-                           </c:choose>
+                              <c:forEach var="list" items="${selectReport}">
+                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2  d-none d-sm-block">${list.no }</div>
+                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3  myTitle d-none d-sm-block">
+                                	<a href = "">${list.title }</a></div>
+                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3  d-none d-lg-block">${list.sender }</div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4  d-none d-lg-block">${list.joindate }</div>
+                             </c:forEach>
                         </div>
                      </div>
                   </div>
@@ -946,59 +942,56 @@ var ctx = document.getElementById("myPieChart");
                    </script>
    </div>
 </div>
-<!-- start footer Area -->
-   <footer class="footer-area section_gap">
-      <div class="container">
-         <div class="row">
-            <div class="col-lg-3  col-md-6 col-sm-6">
-               <div class="single-footer-widget">
-                  <h6>About Us</h6>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                     sed do eiusmod tempor incididunt ut labore dolore magna aliqua.</p>
-               </div>
-            </div>
-            <div class="col-lg-4  col-md-6 col-sm-6">
-               <div class="single-footer-widget">
-                  현재 활성화된 경매수 <br>             
-                  &emsp;&emsp; : <fmt:formatNumber value="${auctionActiveCount }" pattern="#,###"/> 건 
-               </div>
-            </div>
-            <div class="col-lg-3  col-md-6 col-sm-6">
-               <div class="single-footer-widget mail-chimp">
-                  현재 총 거래 량<br>
-                  &emsp;&emsp; : <fmt:formatNumber value="${totalCount }" pattern="#,###"/> 건 
-               </div>
-            </div>
-            <div class="col-lg-2 col-md-6 col-sm-6">
-               <div class="single-footer-widget">
-                  <h6>Follow Us</h6>
-                  <p>Let us be social</p>
-                  <div class="footer-social d-flex align-items-center">
-                     <a href="#"><i class="fa fa-facebook"></i></a>
-                     <a href="#"><i class="fa fa-twitter"></i></a>
-                     <a href="#"><i class="fa fa-dribbble"></i></a>
-                     <a href="#"><i class="fa fa-behance"></i></a>
-                  </div>
-               </div>
-            </div>
-         </div>
-         <div class="footer-bottom d-flex justify-content-center align-items-center flex-wrap">
-            <p class="footer-text m-0">
-               <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-               Copyright &copy;
-               <script>
-                  document.write(new Date().getFullYear());
-               </script>
-               All rights reserved | This template is made with <i
-                  class="fa fa-heart-o" aria-hidden="true"></i> by <a
-                  href="https://colorlib.com" target="_blank">Colorlib</a>
-               <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-            </p>
-         </div>
-      </div>
-   </footer>
-   </div>
-<!-- End footer Area -->
+		<!-- start footer Area -->
+		<footer class="footer-area section_gap">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+						<div class="">
+							<dl>
+								<dt>
+									<h6>(주) &nbsp;&nbsp;Kangaroo</h6>
+								</dt>
+								<dd>서울특별시 중구 남대문로 120 대일빌딩 3층 (04540)</dd>
+								<dd>대표이사: 홍길동 사업자등록번호 : 815-81-00000</dd>
+								<dd>Tel: 1599-0000 Fax: 02-894-0000</dd>
+								<dd>E-mail: custimerservice@aaaa.co.kr</dd>
+							</dl>
+						</div>
+					</div>
+					<div class="col-sm-4 col-md-4 col-lg-4 footerTitle">
+						<div class="single-footer-widget">
+							<h6><span>현재 활성화된 경매수</span></h6>
+							&emsp;&emsp; <br> <h6><span><fmt:formatNumber
+									value="${auctionActiveCount }" pattern="#,###" /> 건</span></h6>
+						</div>
+					</div>
+					<div class="col-sm-4 col-md-4 col-lg-4 footerTitle">
+						<div class="single-footer-widget mail-chimp">
+							<h6><span style="font-size=50px;">현재 총 거래 량</span></h6>
+							&emsp;&emsp; <br> <h6><span><fmt:formatNumber
+									value="${totalCount }" pattern="#,###" /> 건 </span></h6>
+						</div>
+					</div>
+				</div>
+				<!-- 저작권 -->
+				<div
+					class="footer-bottom d-flex justify-content-center align-items-center flex-wrap">
+					<p class="footer-text m-0">
+						<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+						Copyright &copy;
+						<script>
+						document.write(new Date().getFullYear());
+					</script>
+						All rights reserved | This template is made with <i
+							class="fa fa-heart-o" aria-hidden="true"></i> by <a
+							href="/" target="_blank">Colorlib</a>
+						<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+					</p>
+				</div>
+			</div>
+		</footer>
+		
 <script src="../resources/js/vendor/jquery-2.2.4.min.js"></script>
 <script src="../resources/js/vendor/bootstrap.min.js"></script>
 <script src="../resources/js/jquery.ajaxchimp.min.js"></script>
