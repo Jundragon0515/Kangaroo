@@ -163,6 +163,12 @@ body {
    text-align: center;
 }
 
+.footerTitle {
+	font-size: 20px;
+	text-align: center;
+	font-color: white;
+}
+
 
 /* #presentMoney{ */
 
@@ -1480,48 +1486,55 @@ $("#logout_na").on("click", function() {
    </section>
    <!-- End related-product Area -->
 
-   <!-- start footer Area -->
-	<footer class="footer-area section_gap">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-3  col-md-6 col-sm-6">
-					<div class="single-footer-widget">
-						<h6>About Us</h6>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-							sed do eiusmod tempor incididunt ut labore dolore magna aliqua.</p>
+		<!-- start footer Area -->
+		<footer class="footer-area section_gap">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+						<div class="">
+							<dl>
+								<dt>
+									<h6>(주) &nbsp;&nbsp;Kangaroo</h6>
+								</dt>
+								<dd>서울특별시 중구 남대문로 120 대일빌딩 3층 (04540)</dd>
+								<dd>대표이사: 홍길동 사업자등록번호 : 815-81-00000</dd>
+								<dd>Tel: 1599-0000 Fax: 02-894-0000</dd>
+								<dd>E-mail: custimerservice@aaaa.co.kr</dd>
+							</dl>
+						</div>
+					</div>
+					<div class="col-sm-4 col-md-4 col-lg-4 footerTitle">
+						<div class="single-footer-widget">
+							<h6><span>현재 활성화된 경매수</span></h6>
+							&emsp;&emsp; <br> <h6><span><fmt:formatNumber
+									value="${auctionActiveCount }" pattern="#,###" /> 건</span></h6>
+						</div>
+					</div>
+					<div class="col-sm-4 col-md-4 col-lg-4 footerTitle">
+						<div class="single-footer-widget mail-chimp">
+							<h6><span style="font-size=50px;">현재 총 거래 량</span></h6>
+							&emsp;&emsp; <br> <h6><span><fmt:formatNumber
+									value="${totalCount }" pattern="#,###" /> 건 </span></h6>
+						</div>
 					</div>
 				</div>
-				<div class="col-lg-4  col-md-6 col-sm-6">
-					<div class="single-footer-widget">
-						현재 활성화된 경매수 <br>             
-						&emsp;&emsp; : <fmt:formatNumber value="${auctionActiveCount }" pattern="#,###"/> 건 
-					</div>
-				</div>
-				<div class="col-lg-3  col-md-6 col-sm-6">
-					<div class="single-footer-widget mail-chimp">
-						현재 총 거래 량<br>
-						&emsp;&emsp; : <fmt:formatNumber value="${totalCount }" pattern="#,###"/> 건 
-					</div>
-				</div>
-				
-			</div>
-			<div class="footer-bottom d-flex justify-content-center align-items-center flex-wrap">
-				<p class="footer-text m-0">
-					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-					Copyright &copy;
-					<script>
+				<!-- 저작권 -->
+				<div
+					class="footer-bottom d-flex justify-content-center align-items-center flex-wrap">
+					<p class="footer-text m-0">
+						<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+						Copyright &copy;
+						<script>
 						document.write(new Date().getFullYear());
 					</script>
-					All rights reserved | This template is made with <i
-						class="fa fa-heart-o" aria-hidden="true"></i> by <a
-						href="https://colorlib.com" target="_blank">Colorlib</a>
-					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-				</p>
+						All rights reserved | This template is made with <i
+							class="fa fa-heart-o" aria-hidden="true"></i> by <a
+							href="/" target="_blank">Colorlib</a>
+						<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+					</p>
+				</div>
 			</div>
-		</div>
-	</footer>
-	</div>
-<!-- End footer Area -->
+		</footer>
    
    <script>
    		$("#cartAuction").on("click",function(){
