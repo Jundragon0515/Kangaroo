@@ -197,17 +197,13 @@
 	height: 100px;
 	width: 100px;
 }
-#allCheckTrade,#allCheckAuction{
-    position: relative;
-    left: 81%;
-}
-#delete, #deleteAuction {
-    position: relative;
-    left: 81%;
-}
+
 .tradeCheck,.auctionCheck{
     top: 42px;
     position: relative;
+}
+.ccc{
+	text-align: right;
 }
 </style>
 
@@ -475,8 +471,12 @@ function viewCount(){
                           </c:forEach>                        
                         </tbody>                                                                 
                     </table>
-                    <input type="button" value="전체선택" id="allCheckTrade" class="genric-btn primary radius"> 
-                    <input type="submit" value="삭제" id="delete" class="genric-btn primary radius">       
+                    <div class="row ccc">
+                    	<div class="col-lg-12 col-md-12 col-sm-12">
+                    		<input type="button" value="전체선택" id="allCheckTrade" class="genric-btn primary radius">              
+                    		<input type="submit" value="삭제" id="delete" class="genric-btn primary radius">      
+                   		</div>
+                    </div> 
                     <div class="row">
                					<div class="col-12 naviArea">
                  				<b class="paging">${navi}</b>
@@ -524,8 +524,12 @@ function viewCount(){
                           
                         </tbody>
                     </table>   
-                   	 <input type="button" value="전체선택" id="allCheckAuction" class="genric-btn primary radius">
-                     <input type="submit" value="삭제" id="deleteAuction" class="genric-btn primary radius">                 		
+                    <div class="row ccc">
+                    	<div class="col-lg-12 col-md-12 col-sm-12">
+                   	 		<input type="button" value="전체선택" id="allCheckAuction" class="genric-btn primary radius">
+                     		<input type="submit" value="삭제" id="deleteAuction" class="genric-btn primary radius">  
+                     	</div>
+                     </div>               		
                     		<div class="row">
                					<div class="col-12 naviArea">
                  				<b class="paging">${navi1}</b>
