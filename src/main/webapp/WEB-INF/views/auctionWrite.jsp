@@ -700,7 +700,6 @@
         	$("#imgTitle").val().remove();
 		})
 
-		
 		$("#image").on("input",function() {
 							var formData = new FormData();
 							formData.append("formData", $(this)[0].files[0]);
@@ -970,6 +969,7 @@
 	                location.reload(true);
 	             },1000);
 	          });
+
 		});		
 		var rgx1 = /\D/g;  // /[^0-9]/g 와 같은 표현
 		var rgx2 = /(\d+)(\d{3})/; 
@@ -990,8 +990,7 @@
 		      }
 		     return outNum;
 		}
-	
-	
+		
 	</script>
  
 

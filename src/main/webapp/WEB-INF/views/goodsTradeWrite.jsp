@@ -370,9 +370,10 @@
          <div class="col-first">
             <h1>중고물품 글쓰기</h1>
             <nav class="d-flex align-items-center"> <a href="/">메인페이지<span
-               class="lnr lnr-arrow-right"></span></a> <a href="/trade">중고거래
+
+               class="lnr lnr-arrow-right"></span></a> <a href="/#">중고거래
                <span class="lnr lnr-arrow-right"></span>
-            </a> <a href="#">중고거래 물품 등록<span class="lnr "></span></a></nav>
+            </a> <a href="/tradeGoodsWrite">중고거래 물품 등록<span class="lnr "></span></a></nav>
          </div>
       </div>
    </div>
@@ -491,6 +492,7 @@
 								</div>       
                           <div class="text-right">
 								<button type="button" id="register" class="genric-btn primary radius">등록하기</button>								
+
 				        </div>                 
 						</ul>
 						<br>		
@@ -649,7 +651,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
             var html = $(this).html();
             $('#example button.dropdown-toggle').html(html + ' <span class="caret"></span>');
         }); 
-    
+   
         $("#image").on("click",function(){
         	$("#middle").remove();
         	$("#imgTitle").val().remove();
@@ -718,7 +720,8 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
         function deletePreview(obj) {
             var imgNum = obj.attributes['value'].value;
             delete files[imgNum];
-            $("#preview .preview-box[value=" + imgNum + "]").remove();s
+            $("#preview .preview-box[value=" + imgNum + "]").remove();
+            resizeHeight();
         }
  
         //client-side validation

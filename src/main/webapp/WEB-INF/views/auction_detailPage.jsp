@@ -233,7 +233,7 @@ $(function(){
                      }
       });
    })
-})
+
    setInterval(function() {//시간 보내 달라는 요청
       var list = new Array();
       list.push("${dto.end_date}");
@@ -281,6 +281,7 @@ $("#logout_na").on("click", function() {
                 },1000);
              });
       });
+});
 </script>
 </head>
 <body>

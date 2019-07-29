@@ -159,7 +159,6 @@ $(function(){
     })
 
 $("#logout_na").on("click", function() {
-
           $.ajax({
                    url:"logout",
                    type:"get"
@@ -184,7 +183,6 @@ $("#logout_na").on("click", function() {
              });
       });
 });
-
 </script>
 </head>
 <body>
