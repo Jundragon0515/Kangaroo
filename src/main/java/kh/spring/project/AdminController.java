@@ -34,8 +34,7 @@ public class AdminController {
 	
 	@RequestMapping("/admin")
 	public String admin(HttpServletRequest request) {
-		String id = (String) session.getAttribute("id");
-		
+		String id = (String) session.getAttribute("id");		
 		request.setAttribute("visitCount", HomeController.visitCount);					 // 금일 방문자
 		request.setAttribute("visitForWeek", dao.visitForWeek());						 // 최근 일주일간 방문자
 		request.setAttribute("visitForGraph", dao.visitForGraph());			 			// 최근 일주일간 방문자 백분율
@@ -47,6 +46,8 @@ public class AdminController {
 		request.setAttribute("chargingPoint", dao.chargingPoint());						 // 포인트 충전 총액
 		request.setAttribute("auctionActiveCount", dao.auctionActiveCount());            // 활성화된 경매  수
 		request.setAttribute("totalCount", dao.auctionCount()+dao.directTradeCount()+dao.safeTradeCount());	// 총 거래량
+		request.setAttribute("selectReport", rdao.selectReport());						 // 신고 접수 내역
+		
 		return "admin/admin";
 	}
 
@@ -105,12 +106,6 @@ public class AdminController {
 		}
 		return ac.index(request);
 	}
-	
-//	@RequestMapping("reportBoard")
-//	public String reportBoard() {
-//		request.setAttribute("selectReport", rdao.selectReport());			 // 신고 접수 내역
-//		return "admin/reportBoard";
-//	}
 
 }
 
