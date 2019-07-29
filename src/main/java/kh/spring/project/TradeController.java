@@ -149,6 +149,9 @@ public class TradeController {
 		}
 
       /* request.setAttribute("recordTotalCount", list.size()); // 전체개수 */
+/*		String viewview = (String)session.getAttribute("selectView");
+		System.out.println(viewview);
+	  request.setAttribute("view", viewview);*/
 	  request.setAttribute("viewCategory", selectCategory);
       request.setAttribute("navi", resultNavi);
       request.setAttribute("list", list);
