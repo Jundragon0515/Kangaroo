@@ -254,7 +254,6 @@ position:relative;
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script>
-
    $(function(){
        var offset = 50;   // 수직으로 어느정도 움직여야 버튼이 나올까?
        var duration = 600;   // top으로 이동할때까지의 animate 시간 (밀리세컨드, default는 400. 예제의 기본은 500)
@@ -460,9 +459,7 @@ position:relative;
    </div>
    </section>
    <!-- End Banner Area -->
-
 <form action="boardWriteSafeDelete">
-
    <!-- start banner Area -->
    <div class="container-fluid">
       <div class="row">
@@ -478,9 +475,7 @@ position:relative;
                      <span class="lnr lnr-arrow-right">
                         </span><a href="tradeOption_safe?category=all">전체보기</a></a>
                      </li>
-
-
-                     
+                 
                   <li class="main-nav-list"><a data-toggle="collapse"
                      href="#meatFish" aria-expanded="false" aria-controls="meatFish"><span
                         class="lnr lnr-arrow-right">
@@ -613,7 +608,6 @@ position:relative;
                                        <a href="boardGgymSafe?no=${temp.no}&title_img=${temp.title_img}&title=${temp.title}&trade_type=${temp.trade_type }&category=${temp.category }&price=${temp.price}&id=${temp.id}" class="social-info ggym"> <span class="lnr lnr-heart"></span>
                                           <p class="hover-text">Wishlist</p>
 										</a>
-										
                                         <a href="/used_detailPage?no=${temp.no}" class="social-info">
                                         <span class="lnr lnr-move"></span>
                                           <p class="hover-text">view more</p>
@@ -779,7 +773,6 @@ position:relative;
    </div>
    </footer>
    <!-- End footer Area -->
-   
    <script>
 		$(".ggym").on("click",function(){
 			if(${email==null}){
@@ -796,7 +789,6 @@ position:relative;
 			}
 		})
 	</script>
-   
    <script src="https://use.fontawesome.com/releases/v5.0.0/js/all.js"></script>
    <script
       src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>

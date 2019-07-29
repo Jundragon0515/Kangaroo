@@ -1,6 +1,5 @@
 package kh.spring.project;
 
-
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,8 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import kh.spring.dto.Auction_boardDTO;
 import kh.spring.service.AuctionService;
-
-
 
 
 @Controller
