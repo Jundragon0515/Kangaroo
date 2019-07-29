@@ -197,21 +197,17 @@
 	height: 100px;
 	width: 100px;
 }
-#allCheckTrade,#allCheckAuction{
-    position: relative;
-    left: 81%;
-}
-#delete, #deleteAuction {
-    position: relative;
-    left: 81%;
-}
+
 .tradeCheck,.auctionCheck{
     top: 42px;
     position: relative;
 }
+.ccc{
+	text-align: right;
+}
 </style>
 
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script>
 
 function viewCount(){
@@ -224,7 +220,12 @@ function viewCount(){
 
 
    $(function(){
-      
+	   <c:choose>
+		<c:when test="${logintype==null}">
+		alert("로그인후 이용 가능합니다");
+		$(location).attr("href", "/login_main");
+		</c:when>
+		</c:choose>
 /*       $("#category").on("click", function(){
          var category = $(this).text();
          console.log(category);
@@ -264,10 +265,7 @@ function viewCount(){
          var text_search =  $("#text-search").val();
          $(location).attr("href", "auctionOption?search="+text_search);
       });
-      
-      /* 페이지 정렬 개수 */
-      $("select option[value=" + '${view}' + "]").attr("selected", true);
-      
+
       /* 페이지 정렬 개수 컨트롤  */
 /*       $("#viewCount").on("click", function(){
          var view = $(this).val();
@@ -473,8 +471,12 @@ function viewCount(){
                           </c:forEach>                        
                         </tbody>                                                                 
                     </table>
-                    <input type="button" value="전체선택" id="allCheckTrade" class="genric-btn primary radius"> 
-                    <input type="submit" value="삭제" id="delete" class="genric-btn primary radius">       
+                    <div class="row ccc">
+                    	<div class="col-lg-12 col-md-12 col-sm-12">
+                    		<input type="button" value="전체선택" id="allCheckTrade" class="genric-btn primary radius">              
+                    		<input type="submit" value="삭제" id="delete" class="genric-btn primary radius">      
+                   		</div>
+                    </div> 
                     <div class="row">
                					<div class="col-12 naviArea">
                  				<b class="paging">${navi}</b>
@@ -522,8 +524,12 @@ function viewCount(){
                           
                         </tbody>
                     </table>   
-                   	 <input type="button" value="전체선택" id="allCheckAuction" class="genric-btn primary radius">
-                     <input type="submit" value="삭제" id="deleteAuction" class="genric-btn primary radius">                 		
+                    <div class="row ccc">
+                    	<div class="col-lg-12 col-md-12 col-sm-12">
+                   	 		<input type="button" value="전체선택" id="allCheckAuction" class="genric-btn primary radius">
+                     		<input type="submit" value="삭제" id="deleteAuction" class="genric-btn primary radius">  
+                     	</div>
+                     </div>               		
                     		<div class="row">
                					<div class="col-12 naviArea">
                  				<b class="paging">${navi1}</b>

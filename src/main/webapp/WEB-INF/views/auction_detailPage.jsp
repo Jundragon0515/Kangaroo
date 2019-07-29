@@ -44,6 +44,12 @@
 <link rel="stylesheet" href="../resources/css/nice-select.css">
 <link rel="stylesheet" href="../resources/css/nouislider.min.css">
 <link rel="stylesheet" href="../resources/css/ion.rangeSlider.css" />
+<link rel="stylesheet" href="../resources/css/ion.rangeSlider.skinFlat.css" />
+<link rel="stylesheet"
+   href="../resources/css/ion.rangeSlider.skinFlat.css" />
+<link rel="stylesheet" href="../resources/css/main.css">
+
+<style>
 <link rel="stylesheet"
    href="../resources/css/ion.rangeSlider.skinFlat.css" />
 <link rel="stylesheet" href="../resources/css/main.css">
@@ -190,6 +196,56 @@ body {
 </style>
 <script>
 $(function(){
+	var socket = new SockJS("/gettime"); //불특정 다수의 브라우저일 경우를 위해 endpoint url 넣어야 한다
+	var client = Stomp.over(socket);//연결 이후의 작업 지원 
+	client.connect({}, function(resp) {
+		client.subscribe("/response", function(list) {
+			var result = JSON.parse(list.body);
+							$(".time").text(result[0]);
+							console.log("${dto.onGoing}");
+							
+							if($("#rt").text()=="종료"){
+								
+								if(${dto.onGoing=="n"}){
+									
+								}else{
+								
+								
+									$.ajax({
+									
+									url:"/timeStop",
+									data:{"boardNum":${dto.no }}
+									
+								}).done(function(resp){
+									
+									$.ajax({
+										url:"/topTender",
+										data:{"boardNum":"${dto.no }","seller":"${dto.id }"},
+										
+									})
+									
+									var result = Number(resp);
+									console.log(Number(resp));
+									
+									if(result>0){
+									
+										alert("경매 시간이 종료되었습니다 !")
+										location.reload();	
+									}
+									
+								});
+								
+								}
+							}
+		});
+	})
+	setInterval(function() {//시간 보내 달라는 요청
+		var list = new Array();
+		list.push("${dto.end_date}");
+		client.send("/app/time", {}, JSON.stringify({
+			end_dates : list
+		}));
+	}, 900);
    var socket = new SockJS("/gettime"); //불특정 다수의 브라우저일 경우를 위해 endpoint url 넣어야 한다
    var client = Stomp.over(socket);//연결 이후의 작업 지원 
    client.connect({}, function(resp) {
@@ -233,7 +289,6 @@ $(function(){
                      }
       });
    })
-
    setInterval(function() {//시간 보내 달라는 요청
       var list = new Array();
       list.push("${dto.end_date}");
@@ -822,7 +877,6 @@ $("#logout_na").on("click", function() {
                   data:{"money":money,"boardNum":${dto.no },"title":"${dto.title }","img":"${i_dto.title_img }"},
                   dataType:"JSON"
                }).done(function(resp){
-            	   
                   if(resp!=null){
                      
                      console.log(resp);
@@ -1373,7 +1427,6 @@ $("#logout_na").on("click", function() {
 					
 					$("#message").val("");
 					location.reload();
-  
 			});
 				
 			});
@@ -1428,92 +1481,58 @@ $("#logout_na").on("click", function() {
    <!-- End related-product Area -->
 
    <!-- start footer Area -->
-   <footer class="footer-area section_gap">
-      <div class="container">
-         <div class="row">
-            <div class="col-lg-3  col-md-6 col-sm-6">
-               <div class="single-footer-widget">
-                  <h6>About Us</h6>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                     sed do eiusmod tempor incididunt ut labore dolore magna aliqua.</p>
-               </div>
-            </div>
-            <div class="col-lg-4  col-md-6 col-sm-6">
-               <div class="single-footer-widget">
-                  현재 활성화된 경매수
-                  <!--                   <h6>Newsletter</h6> -->
-                  <!--                   <p>Stay update with our latest</p> -->
-                  <!--                   <div class="" id="mc_embed_signup"> -->
-
-                  <!--                      <form target="_blank" novalidate="true" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01" -->
-                  <!--                       method="get" class="form-inline"> -->
-
-                  <!--                         <div class="d-flex flex-row"> -->
-
-                  <!--                            <input class="form-control" name="EMAIL" placeholder="Enter Email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Email '" -->
-                  <!--                             required="" type="email"> -->
-
-
-                  <!--                            <button class="click-btn btn btn-default"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></button> -->
-                  <!--                            <div style="position: absolute; left: -5000px;"> -->
-                  <!--                               <input name="b_36c4fd991d266f23781ded980_aefe40901a" tabindex="-1" value="" type="text"> -->
-                  <!--                            </div> -->
-
-                  <!--                            <div class="col-lg-4 col-md-4"> -->
-                  <!--                                     <button class="bb-btn btn"><span class="lnr lnr-arrow-right"></span></button> -->
-                  <!--                                  </div>   -->
-                  <!--                         </div> -->
-                  <!--                         <div class="info"></div> -->
-                  <!--                      </form> -->
-                  <!--                   </div> -->
-               </div>
-            </div>
-            <div class="col-lg-3  col-md-6 col-sm-6">
-               <div class="single-footer-widget mail-chimp">
-                  현재 총 거래 량
-                  <!--                   <h6 class="mb-20">Instragram Feed</h6> -->
-                  <!--                   <ul class="instafeed d-flex flex-wrap"> -->
-                  <!--                      <li><img src="../resources/img/i1.jpg" alt=""></li> -->
-                  <!--                      <li><img src="../resources/img/i2.jpg" alt=""></li> -->
-                  <!--                      <li><img src="../resources/img/i3.jpg" alt=""></li> -->
-                  <!--                      <li><img src="../resources/img/i4.jpg" alt=""></li> -->
-                  <!--                      <li><img src="../resources/img/i5.jpg" alt=""></li> -->
-                  <!--                      <li><img src="../resources/img/i6.jpg" alt=""></li> -->
-                  <!--                      <li><img src="../resources/img/i7.jpg" alt=""></li> -->
-                  <!--                      <li><img src="../resources/img/i8.jpg" alt=""></li> -->
-                  <!--                   </ul> -->
-               </div>
-            </div>
-            <div class="col-lg-2 col-md-6 col-sm-6">
-               <div class="single-footer-widget">
-                  <h6>Follow Us</h6>
-                  <p>Let us be social</p>
-                  <div class="footer-social d-flex align-items-center">
-                     <a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i
-                        class="fa fa-twitter"></i></a> <a href="#"><i
-                        class="fa fa-dribbble"></i></a> <a href="#"><i
-                        class="fa fa-behance"></i></a>
-                  </div>
-               </div>
-            </div>
-         </div>
-         <div
-            class="footer-bottom d-flex justify-content-center align-items-center flex-wrap">
-            <p class="footer-text m-0">
-               <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-               Copyright &copy;
-               <script>
-                  document.write(new Date().getFullYear());
-               </script>
-               All rights reserved | This template is made with <i
-                  class="fa fa-heart-o" aria-hidden="true"></i> by <a
-                  href="https://colorlib.com" target="_blank">Colorlib</a>
-               <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-            </p>
-         </div>
-      </div>
-   </footer>
-   <!-- End footer Area -->
+	<footer class="footer-area section_gap">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-3  col-md-6 col-sm-6">
+					<div class="single-footer-widget">
+						<h6>About Us</h6>
+						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+							sed do eiusmod tempor incididunt ut labore dolore magna aliqua.</p>
+					</div>
+				</div>
+				<div class="col-lg-4  col-md-6 col-sm-6">
+					<div class="single-footer-widget">
+						현재 활성화된 경매수 <br>             
+						&emsp;&emsp; : <fmt:formatNumber value="${auctionActiveCount }" pattern="#,###"/> 건 
+					</div>
+				</div>
+				<div class="col-lg-3  col-md-6 col-sm-6">
+					<div class="single-footer-widget mail-chimp">
+						현재 총 거래 량<br>
+						&emsp;&emsp; : <fmt:formatNumber value="${totalCount }" pattern="#,###"/> 건 
+					</div>
+				</div>
+				<div class="col-lg-2 col-md-6 col-sm-6">
+					<div class="single-footer-widget">
+						<h6>Follow Us</h6>
+						<p>Let us be social</p>
+						<div class="footer-social d-flex align-items-center">
+							<a href="#"><i class="fa fa-facebook"></i></a>
+							<a href="#"><i class="fa fa-twitter"></i></a>
+							<a href="#"><i class="fa fa-dribbble"></i></a>
+							<a href="#"><i class="fa fa-behance"></i></a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="footer-bottom d-flex justify-content-center align-items-center flex-wrap">
+				<p class="footer-text m-0">
+					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+					Copyright &copy;
+					<script>
+						document.write(new Date().getFullYear());
+					</script>
+					All rights reserved | This template is made with <i
+						class="fa fa-heart-o" aria-hidden="true"></i> by <a
+						href="https://colorlib.com" target="_blank">Colorlib</a>
+					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+				</p>
+			</div>
+		</div>
+	</footer>
+	</div>
+<!-- End footer Area -->
    
    <script>
    		$("#cartAuction").on("click",function(){

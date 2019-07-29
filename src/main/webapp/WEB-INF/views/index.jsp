@@ -79,9 +79,41 @@
    margin: 1px;
 }
 
+/* 오른쪽 TOP 버튼 */
+.btn-fixed {
+   position: fixed;
+   top: 540px;
+   cursor:pointer;
+}
+#soldOut{
+   position: relative;
+   left: 180px;
+   font-size: 15px;
+}
+
+.back-to-top {text-decoration: none; display: none; color:#fe912b;}
+
+.back-to-top:hover {color: #818bb0}
+
 </style>
 <script>
 	$(function() {
+		var offset = 200;   // 수직으로 어느정도 움직여야 버튼이 나올까?
+		var duration = 600;   // top으로 이동할때까지의 animate 시간 (밀리세컨드, default는 400. 예제의 기본은 500)
+		$(window).scroll(function() {
+		    if ($(this).scrollTop() > offset) {
+		        $('.back-to-top').fadeIn(duration);
+		    } else {
+		        $('.back-to-top').fadeOut(duration);
+		    }
+		});
+
+		$('.back-to-top').click(function(event) {
+		    event.preventDefault();
+		    $('html, body').animate({scrollTop: 0}, duration);
+		    return false;
+		})	
+		
 		var socket = new SockJS("/gettime"); //불특정 다수의 브라우저일 경우를 위해 endpoint url 넣어야 한다
 		var client = Stomp.over(socket);//연결 이후의 작업 지원 
 		client.connect({}, function(resp) {
@@ -149,6 +181,12 @@
 	});
 </script>
 <body>
+<div>
+   <!-- start fixbutton -->
+       <div class="d-none d-lg-block col-lg-1" style=padding-left:90%;>
+          <i class="fas fa-chevron-circle-up btn-fixed back-to-top fa-3x"></i>
+       </div>
+      <!-- end fixbutton -->
 	<!-- Start Header Area -->
 	<header class="header_area sticky-header">
 		<div class="main_menu">
@@ -507,48 +545,14 @@
 				</div>
 				<div class="col-lg-4  col-md-6 col-sm-6">
 					<div class="single-footer-widget">
-						현재 활성화된 경매수
-						<!-- 						<h6>Newsletter</h6> -->
-						<!-- 						<p>Stay update with our latest</p> -->
-						<!-- 						<div class="" id="mc_embed_signup"> -->
-
-						<!-- 							<form target="_blank" novalidate="true" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01" -->
-						<!-- 							 method="get" class="form-inline"> -->
-
-						<!-- 								<div class="d-flex flex-row"> -->
-
-						<!-- 									<input class="form-control" name="EMAIL" placeholder="Enter Email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Email '" -->
-						<!-- 									 required="" type="email"> -->
-
-
-						<!-- 									<button class="click-btn btn btn-default"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></button> -->
-						<!-- 									<div style="position: absolute; left: -5000px;"> -->
-						<!-- 										<input name="b_36c4fd991d266f23781ded980_aefe40901a" tabindex="-1" value="" type="text"> -->
-						<!-- 									</div> -->
-
-						<!-- 									<div class="col-lg-4 col-md-4"> -->
-						<!-- 												<button class="bb-btn btn"><span class="lnr lnr-arrow-right"></span></button> -->
-						<!-- 											</div>   -->
-						<!-- 								</div> -->
-						<!-- 								<div class="info"></div> -->
-						<!-- 							</form> -->
-						<!-- 						</div> -->
+						현재 활성화된 경매수 <br>             
+						&emsp;&emsp; : <fmt:formatNumber value="${auctionActiveCount }" pattern="#,###"/> 건 
 					</div>
 				</div>
 				<div class="col-lg-3  col-md-6 col-sm-6">
 					<div class="single-footer-widget mail-chimp">
-						현재 총 거래 량
-						<!-- 						<h6 class="mb-20">Instragram Feed</h6> -->
-						<!-- 						<ul class="instafeed d-flex flex-wrap"> -->
-						<!-- 							<li><img src="../resources/img/i1.jpg" alt=""></li> -->
-						<!-- 							<li><img src="../resources/img/i2.jpg" alt=""></li> -->
-						<!-- 							<li><img src="../resources/img/i3.jpg" alt=""></li> -->
-						<!-- 							<li><img src="../resources/img/i4.jpg" alt=""></li> -->
-						<!-- 							<li><img src="../resources/img/i5.jpg" alt=""></li> -->
-						<!-- 							<li><img src="../resources/img/i6.jpg" alt=""></li> -->
-						<!-- 							<li><img src="../resources/img/i7.jpg" alt=""></li> -->
-						<!-- 							<li><img src="../resources/img/i8.jpg" alt=""></li> -->
-						<!-- 						</ul> -->
+						현재 총 거래 량<br>
+						&emsp;&emsp; : <fmt:formatNumber value="${totalCount }" pattern="#,###"/> 건 
 					</div>
 				</div>
 				<div class="col-lg-2 col-md-6 col-sm-6">
@@ -556,16 +560,15 @@
 						<h6>Follow Us</h6>
 						<p>Let us be social</p>
 						<div class="footer-social d-flex align-items-center">
-							<a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i
-								class="fa fa-twitter"></i></a> <a href="#"><i
-								class="fa fa-dribbble"></i></a> <a href="#"><i
-								class="fa fa-behance"></i></a>
+							<a href="#"><i class="fa fa-facebook"></i></a>
+							<a href="#"><i class="fa fa-twitter"></i></a>
+							<a href="#"><i class="fa fa-dribbble"></i></a>
+							<a href="#"><i class="fa fa-behance"></i></a>
 						</div>
 					</div>
 				</div>
 			</div>
-			<div
-				class="footer-bottom d-flex justify-content-center align-items-center flex-wrap">
+			<div class="footer-bottom d-flex justify-content-center align-items-center flex-wrap">
 				<p class="footer-text m-0">
 					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 					Copyright &copy;
@@ -580,7 +583,8 @@
 			</div>
 		</div>
 	</footer>
-	<!-- End footer Area -->
+	</div>
+<!-- End footer Area -->
 	<script>
 		$(".ggym").on("click",function(){
 			if(${email==null}){
@@ -590,7 +594,6 @@
 		})
 	
 	</script>
-	
 	
 	<script src="https://use.fontawesome.com/releases/v5.0.0/js/all.js"></script>
 	<script src="https://unpkg.com/popper.js"></script>

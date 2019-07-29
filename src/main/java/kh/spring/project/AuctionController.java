@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import kh.spring.dao.AdminDAO;
 import kh.spring.dto.Auction_boardDTO;
 import kh.spring.service.AuctionService;
 
@@ -24,6 +25,9 @@ public class AuctionController {
 
    @Autowired
    private HttpSession session;
+   
+	@Autowired
+	private AdminDAO adao;
 
    @RequestMapping("/auction")
    public String index(HttpServletRequest request) {
@@ -57,6 +61,9 @@ public class AuctionController {
       /*request.setAttribute("recordTotalCount", list.size()); // 전체개수 */
         request.setAttribute("list", list);
        request.setAttribute("navi", resultNavi);
+       
+       request.setAttribute("auctionActiveCount", adao.auctionActiveCount());            // 활성화된 경매  수
+	   request.setAttribute("totalCount", adao.auctionCount()+adao.directTradeCount()+adao.safeTradeCount());	// 총 거래량
        return "auction";
    }
 
@@ -144,6 +151,9 @@ public class AuctionController {
       /* request.setAttribute("recordTotalCount", list.size()); // 전체개수 */
       request.setAttribute("navi", resultNavi);
       request.setAttribute("list", list);
+      
+      request.setAttribute("auctionActiveCount", adao.auctionActiveCount());            // 활성화된 경매  수
+      request.setAttribute("totalCount", adao.auctionCount()+adao.directTradeCount()+adao.safeTradeCount());	// 총 거래량
 
       return "auction";
    }

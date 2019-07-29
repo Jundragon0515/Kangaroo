@@ -1,7 +1,5 @@
 package kh.spring.project;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,18 +10,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 
-import com.oreilly.servlet.MultipartRequest;
-import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
-
+import kh.spring.dao.AdminDAO;
 import kh.spring.dto.NoticeDTO;
 import kh.spring.service.BuyServiceNotice;
 
 @Controller
 public class NoticeController {
 
-
+	@Autowired
+	private AdminDAO adao;
+	
 	@Autowired
 	private BuyServiceNotice buySvc;
 	
@@ -56,6 +53,8 @@ public class NoticeController {
 		request.setAttribute("nav",buySvc.NoticeList(currentPage));
 		List<NoticeDTO> ndtos = (List<NoticeDTO>) request.getAttribute("arr");
 		request.setAttribute("dtos", ndtos);
+		request.setAttribute("auctionActiveCount", adao.auctionActiveCount());            // 활성화된 경매  수
+		request.setAttribute("totalCount", adao.auctionCount()+adao.directTradeCount()+adao.safeTradeCount());	// 총 거래량
 		return "notice_main";
 	}
 

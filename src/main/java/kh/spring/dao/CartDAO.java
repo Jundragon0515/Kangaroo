@@ -25,8 +25,8 @@ public class CartDAO {
 		return sst.selectList("CartDAO.auctionCart",email);
 	}
 
-	public int recordTotalCount() {
-		return sst.selectOne("CartDAO.recordTotalCount");
+	public int recordTotalCount(String email) {
+		return sst.selectOne("CartDAO.recordTotalCount",email);
 	}
 	public List<CartTradeDTO> selectList(int start, int end,String email){
 		HashMap<String, Object> param = new HashMap<>();
@@ -44,8 +44,8 @@ public class CartDAO {
 		return sst.delete("CartDAO.cartAuctionDelete",no);
 	}
 	
-	public String getNavi(int currentPage, int recordCountPerPage) {
-		int recordTotalCount = this.recordTotalCount(); //레코드 수
+	public String getNavi(int currentPage, int recordCountPerPage,String email) {
+		int recordTotalCount = this.recordTotalCount(email); //레코드 수
 		int naviCountPerPage = 5; // 한 페이지 네비 개수
 		int pageTotalCount=0;
 
@@ -111,8 +111,8 @@ public class CartDAO {
 		return sst.selectList("CartDAO.selectListA",param);
 	}
 
-	public String getNaviA(int currentPage1, int recordCountPerPage1) {
-		int recordTotalCountA = this.recordTotalCountA(); //레코드 수
+	public String getNaviA(int currentPage1, int recordCountPerPage1,String email) {
+		int recordTotalCountA = this.recordTotalCountA(email); //레코드 수
 		int naviCountPerPage = 5; // 한 페이지 네비 개수
 		int pageTotalCount=0;
 
@@ -169,8 +169,8 @@ public class CartDAO {
 		return sb.toString();
 	}
 
-	public int recordTotalCountA() {
-		return sst.selectOne("CartDAO.recordTotalCountA");
+	public int recordTotalCountA(String email) {
+		return sst.selectOne("CartDAO.recordTotalCountA",email);
 	}
 
 	public int stream(CartTradeDTO dto){

@@ -31,6 +31,12 @@ select point from members where id=#{value}
 <update id="setPoint"  > 
    UPDATE members SET point=${point} WHERE id=#{id}
 </update>
+<update id="addBlackList">
+	update members set blacklist='Y' where id=#{value}
+</update>
+<update id="releaseBlackList">
+	update members set blacklist='N' where id=#{value}
+</update>
 <select id="getPw" resultType="String">
 select pw from members where id=#{value}
 </select>
