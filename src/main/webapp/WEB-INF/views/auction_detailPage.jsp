@@ -190,7 +190,6 @@ body {
 </style>
 <script>
 $(function(){
-
    var socket = new SockJS("/gettime"); //불특정 다수의 브라우저일 경우를 위해 endpoint url 넣어야 한다
    var client = Stomp.over(socket);//연결 이후의 작업 지원 
    client.connect({}, function(resp) {
@@ -234,6 +233,7 @@ $(function(){
                      }
       });
    })
+
    setInterval(function() {//시간 보내 달라는 요청
       var list = new Array();
       list.push("${dto.end_date}");
@@ -256,7 +256,6 @@ $(function(){
         $('html, body').animate({scrollTop: 0}, duration);
         return false;
     })
-
 
 $("#logout_na").on("click", function() {
           $.ajax({

@@ -131,7 +131,7 @@ public class DetailPageController {
 	@RequestMapping("/used_detailPage")								// 중고 거래_상세 페이지
 	public String used_detailPage(HttpServletRequest request) {
 		int no = Integer.parseInt(request.getParameter("no"));
-		Used_transaction_img_boardDTO i_dto = dao.u_i_selectByNo(no);	
+		Used_transaction_img_boardDTO i_dto = dao.u_i_selectByNo(no);
 		Used_transaction_boardDTO dto = dao.u_selectByNo(no);
 		//조회수 올리기
 		gtdao.viewCountUpdate(no);
@@ -169,7 +169,6 @@ public class DetailPageController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 		request.setAttribute("i_dto", i_dto);
 		request.setAttribute("dto", dto);
 		return "used_detailPage";
