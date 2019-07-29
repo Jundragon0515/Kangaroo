@@ -583,7 +583,7 @@ a{
                                     </td>
                                     <td>
                                     <c:choose>
-                                    <c:when test="${i.onGoing=='y' && trade_type=='안전거래' }">
+                                    <c:when test="${i.onGoing=='y' && trade_type=='안전거래'}">
                                    	판매 진행 중
                                     </c:when>
                                     <c:otherwise>
