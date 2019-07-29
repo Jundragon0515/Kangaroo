@@ -661,14 +661,11 @@
 				});
 
 		
-<<<<<<< HEAD
-=======
 		$("#image").on("click",function(){
 			$("#middle").remove();
         	$("#imgTitle").val().remove();
 		})
 
->>>>>>> 14142d8e3e049b241370c33bbb8d6f94789ff56c
 		$("#image").on("input",function() {
 							var formData = new FormData();
 							formData.append("formData", $(this)[0].files[0]);
