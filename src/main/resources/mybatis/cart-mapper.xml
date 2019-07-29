@@ -7,7 +7,7 @@
    </select>
 
 <select id="recordTotalCount" resultType="int">
-      select count(*) from trade_cart
+      select count(*) from trade_cart where id=#{value}
 </select>
 
 <select id="selectListA" parameterType="map" resultType="kh.spring.dto.CartAuctionDTO">
@@ -15,7 +15,7 @@
    </select>
 
 <select id="recordTotalCountA" resultType="int">
-      select count(*) from auction_cart
+      select count(*) from auction_cart where id=#{value}
 </select>
 
 <insert id="stream">
