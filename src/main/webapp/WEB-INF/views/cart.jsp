@@ -269,10 +269,7 @@ function viewCount(){
          var text_search =  $("#text-search").val();
          $(location).attr("href", "auctionOption?search="+text_search);
       });
-      
-      /* 페이지 정렬 개수 */
-//       $("select option[value=" + '${view}' + "]").attr("selected", true);
-      
+
       /* 페이지 정렬 개수 컨트롤  */
 /*       $("#viewCount").on("click", function(){
          var view = $(this).val();
