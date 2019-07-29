@@ -15,8 +15,8 @@ import org.springframework.stereotype.Component;
 public class MailDAO {
 	public String sendEmail(String to) {
 		String host     = "smtp.naver.com";
-		final String user   = "cwg94";
-		final String password  = "1q2w3e4r%T";
+		final String user   = "chjysm2";
+		final String password  = "asdf1020!!";
 		Properties props = new Properties();
 		props.put("mail.smtp.host", host);
 		props.put("mail.smtp.auth", "true");
@@ -62,8 +62,8 @@ public class MailDAO {
 	}
 	public void send_confirme(String to,String title) {
 		String host     = "smtp.naver.com";
-		final String user   = "cwg94";
-		final String password  = "1q2w3e4r%T";
+		final String user   = "chjysm2";
+		final String password  = "asdf1020!!";
 		Properties props = new Properties();
 		props.put("mail.smtp.host", host);
 		props.put("mail.smtp.auth", "true");
