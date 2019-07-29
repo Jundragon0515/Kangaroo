@@ -230,7 +230,6 @@
 position:relative;
 	top:10%;
 	text-align:center;
->>>>>>> f5ac47c307626585a93715a9fe3db152f37b2db1
 }
 
 .back-to-top {text-decoration: none; display: none; color:#fe912b;}
@@ -373,7 +372,7 @@ position:relative;
 							<!-- 							<li class="nav-item active"><a class="nav-link" href="/">Home</a></li> -->
 									<li class="nav-item"><a class="nav-link" href="/trade">중고
 											직거래</a></li>
-									<li class="nav-item"><a class="nav-link" href="/trade_safe">중고
+									<li class="nav-item active"><a class="nav-link" href="/trade_safe">중고
 											안전거래</a></li>
 									<li class="nav-item"><a class="nav-link" href="/auction">중고
 											경매</a></li>
@@ -454,8 +453,8 @@ position:relative;
          class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
          <div class="col-first">
             <h1>중고안전거래</h1>
-            <nav class="d-flex align-items-center"> <a href="index.html"><span
-               class="lnr lnr-arrow-right">Home</span></a> <a href="#"><span
+            <nav class="d-flex align-items-center"> <a href="/"><span
+               class="lnr lnr-arrow-right">Home</span></a> <a href="trade_safe"><span
                class="lnr lnr-arrow-right">Shop</span></a> </nav>
          </div>
       </div>
@@ -556,8 +555,7 @@ position:relative;
             <div class="single-product-slider">
             <!-- Start boardInfo  -->
                <div class="row list-nav">
-                  <div class="col-sm-12 col-md-11 col-lg-8 atag-category mt-2"><span style=font-size:25px>${selectCategory }</span>
-                  </div>
+                  <div class="col-sm-12 col-md-11 col-lg-8 atag-category mt-2"></div>
                   <div class="d-none d-lg-block col-sm-6 col-md-4 col-lg-2 col-xl-1 p-0">
                         <a class="nav-link p-0 mt-2 mr-0" href="tradeOption?price=low"><span class="atag-text">낮은가격순</span></a> 
                    </div>

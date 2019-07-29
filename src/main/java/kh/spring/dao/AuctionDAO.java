@@ -302,7 +302,6 @@ public class AuctionDAO {
 	   param.put("end", "8");
 	   return sst.selectList("AuctionDAO.mainAuctionList", param);
    }
-
  //상세페이지 경매리스트
    public List<Auction_boardDTO> d_main_Auction_List(){
 	   HashMap<String, Object> param = new HashMap<>();
@@ -310,7 +309,6 @@ public class AuctionDAO {
 	   param.put("end", "6");
 	   return sst.selectList("AuctionDAO.mainAuctionList", param);
    }
-
    
    
 }

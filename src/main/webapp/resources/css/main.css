@@ -1206,12 +1206,13 @@ h1, h2, h3, h4, h5, h6 {
 /* banner area css
 ============================================================================================ */
 .banner-area {
-  background: url(../img/banner/banner-bg.jpg) center no-repeat;
+  background: url(../img/banner/banner-bg.png) center no-repeat;
   background-size: cover;
   position: relative; }
-  @media (max-width: 768px) {
-    .banner-area .fullscreen {
-      height: 650px !important; } }
+  
+  @media (max-width: 660px) {
+    .banner-area .fullscreen2 {
+      height: 660px !important; } }
   .banner-area .active-banner-slider .owl-nav {
     position: absolute;
     right: 0;
@@ -1282,7 +1283,7 @@ h1, h2, h3, h4, h5, h6 {
     color: #222222; }
 
 .organic-breadcrumb {
-  background: url(../img/banner/common-banner.jpg) center no-repeat;
+  background: url(../img/banner/banner-bg.png) center no-repeat;
   background-size: cover;
   padding-top: 130px; }
   @media (max-width: 991px) {

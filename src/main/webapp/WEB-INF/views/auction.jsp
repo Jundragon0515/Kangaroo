@@ -194,7 +194,6 @@ pageEncoding="UTF-8"%>
 }
 
 /* 판매완료 이미지  */
->>>>>>> f5ac47c307626585a93715a9fe3db152f37b2db1
 .onging-img {
     position: absolute;
     width: 100%;
@@ -413,7 +412,7 @@ position:relative;
 											직거래</a></li>
 									<li class="nav-item"><a class="nav-link" href="/trade_safe">중고
 											안전거래</a></li>
-									<li class="nav-item"><a class="nav-link" href="/auction">중고
+									<li class="nav-item active"><a class="nav-link" href="/auction">중고
 											경매</a></li>
 							<li class="nav-item "><a class="nav-link" href="notice_main">공지사항</a></li>
 							<c:choose>
@@ -485,14 +484,14 @@ position:relative;
 	</header>
    <!-- End Header Area -->
 
+
    <!-- Start Banner Area -->
-   
    <section class="banner-area organic-breadcrumb">
    <div class="container">
       <div
          class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
          <div class="col-first">
-            <h1>중고경매</h1>
+            <h1>중고 직거래</h1>
             <nav class="d-flex align-items-center"> <a href="index.html"><span
                class="lnr lnr-arrow-right">Home</span></a> <a href="#"><span
                class="lnr lnr-arrow-right">Shop</span></a> </nav>
@@ -502,7 +501,6 @@ position:relative;
    </section>
    <!-- End Banner Area -->
 
-   <!-- start banner Area -->
    <div class="container-fluid">
       <div class="row">
 
@@ -592,8 +590,7 @@ position:relative;
             <div class="single-product-slider">
             <!-- Start boardInfo  -->
                <div class="row list-nav">
-                  <div class="col-sm-12 col-md-11 col-lg-8 atag-category mt-2"><span style=font-size:25px>${selectCategory }</span>
-                  </div>
+                  <div class="col-sm-12 col-md-11 col-lg-8 atag-category mt-2"></div>
                   <div class="d-none d-lg-block col-sm-6 col-md-4 col-lg-2 col-xl-1 p-0">
                         <a class="nav-link p-0 mt-2 mr-0" href="auctionOption?price=low"><span class="atag-text">낮은가격순</span></a> 
                    </div>

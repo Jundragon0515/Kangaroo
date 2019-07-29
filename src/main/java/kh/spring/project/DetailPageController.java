@@ -131,7 +131,7 @@ public class DetailPageController {
 	@RequestMapping("/used_detailPage")								// 중고 거래_상세 페이지
 	public String used_detailPage(HttpServletRequest request) {
 		int no = Integer.parseInt(request.getParameter("no"));
-		Used_transaction_img_boardDTO i_dto = dao.u_i_selectByNo(no);	
+		Used_transaction_img_boardDTO i_dto = dao.u_i_selectByNo(no);
 		Used_transaction_boardDTO dto = dao.u_selectByNo(no);
 		//조회수 올리기
 		gtdao.viewCountUpdate(no);
@@ -169,7 +169,6 @@ public class DetailPageController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 		request.setAttribute("i_dto", i_dto);
 		request.setAttribute("dto", dto);
 		return "used_detailPage";
@@ -200,7 +199,6 @@ public class DetailPageController {
 	      int boardNum = no;
 	      try {
 	         List<CommentDTO> result = mdao.commentList2(currentPage, boardNum);
-
 	         try {
 	         currentMoney = mdao.currentMoney(no);
 	         System.out.println(currentMoney);
@@ -415,16 +413,12 @@ public class DetailPageController {
 			System.out.println(result);
 
 			if (result>0) {
-				try {
-					sdao.tender(dto, boardNum);
-				} catch (Exception e) {
-					System.out.println("입찰 오류");
-					e.printStackTrace();
-				}
-				;
-
-				List<TenderDTO> rank = mdao.rank(boardNum);
-				return new Gson().toJson(rank);
+					if(sdao.tender(dto, boardNum)>0) {
+						List<TenderDTO> rank = mdao.rank(boardNum);
+						return new Gson().toJson(rank);
+					}else {
+						return null;
+					}
 			} else {
 				return null;
 			}

@@ -90,7 +90,6 @@ public class MyPageController {
 	
 	@RequestMapping("/confirme")
 	public String confirme(int seq) {
-		System.out.println("asdssssssssssssssssssssssssssss");
 		mps.confirme(seq);
 		int or_currentPage=(int)se.getAttribute("or_currentPage");
 		int te_currentPage=(int)se.getAttribute("te_currentPage");

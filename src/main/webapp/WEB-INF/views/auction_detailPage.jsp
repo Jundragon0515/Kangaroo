@@ -1240,7 +1240,7 @@ $("#logout_na").on("click", function() {
 											<img alt="" src="/resources/img/플래.PNG" class="level">
 											</c:when>
 											<c:when test="${arr.member_class=='다이아몬드' }">
-											<img alt="" src="/resources/img/골드.PNG" class="level">
+											<img alt="" src="/resources/img/다이아.PNG" class="level">
 											</c:when>
 											<c:when test="${arr.member_class=='마스터' }">
 											<img alt="" src="/resources/img/마스터.png" class="level">
@@ -1286,7 +1286,7 @@ $("#logout_na").on("click", function() {
 								<textarea class="form-control mb-10" rows="5" id="message"
 									name="message" placeholder="메세지를 입력해 주세요."
 									onfocus="this.placeholder = ''"
-									onblur="this.placeholder = '메세지를 입력해 주세요.'" required=""></textarea>
+									onblur="this.placeholder = '메세지를 입력해 주세요.'" required="" onKeyUp="javascript:fnChkByte(this,'110')"></textarea>
 							</div>
 							<input type="button" class="genric-btn success circle"
 								id="commentGo" value="글 쓰기" />
@@ -1300,6 +1300,52 @@ $("#logout_na").on("click", function() {
 	<!-- 댓글 스크 -->
 
 	<script>
+	
+	function fnChkByte(obj, maxByte)
+	{
+	    var str = obj.value;
+	    var str_len = str.length;
+
+
+	    var rbyte = 0;
+	    var rlen = 0;
+	    var one_char = "";
+	    var str2 = "";
+
+
+	    for(var i=0; i<str_len; i++)
+	    {
+	        one_char = str.charAt(i);
+	        if(escape(one_char).length > 4)
+	        {
+	            rbyte += 2;                                         //한글2Byte
+	        }
+	        else
+	        {
+	            rbyte++;                                            //영문 등 나머지 1Byte
+	        }
+
+
+	        if(rbyte <= maxByte)
+	        {
+	            rlen = i+1;                                          //return할 문자열 갯수
+	        }
+	     }
+
+
+	     if(rbyte > maxByte)
+	     {
+	  // alert("한글 "+(maxByte/2)+"자 / 영문 "+maxByte+"자를 초과 입력할 수 없습니다.");
+	  alert("댓글은 최대 100글자를 초과할 수 없습니다.")
+	  str2 = str.substr(0,rlen);                                  //문자열 자르기
+	  obj.value = str2;
+	  fnChkByte(obj, maxByte);
+	     }
+	     else
+	     {
+	        document.getElementById('byteInfo').innerText = rbyte;
+	     }
+	}
 	
 	$("#cancle").on("click",function(){
 		   var result = confirm("정말로 삭제하시겠습니까?");
@@ -1409,7 +1455,7 @@ $("#logout_na").on("click", function() {
               	<c:forEach var="arr" items="${d_list }">
                   <div class="col-lg-4 col-md-4 col-sm-6 mb-3" style="">
                      <div class="single-related-product d-flex">
-                        <a href="/auction_detailPage?no=${arr.no}"><img id="f_img" src="../resources/img/title/${arr.title_img}" alt="" style="width: 130px;display: inline;"></a>
+                        <a href="/auction_detailPage?no=${arr.no}"><img id="f_img" src="../resources/img/title/${arr.title_img}" alt="" style="width: 130px;height:100px;display: inline;"></a>
                         <div class="desc">
                            <a href="/auction_detailPage?no=${arr.no}" class="title">${arr.title }</a>
                            <div class="price">

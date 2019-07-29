@@ -108,7 +108,7 @@ select pw from members where id=#{value}
 <!-- 	댓글 최근 5 -->
 
 	<select id="commentTop5" resultType="kh.spring.dto.CommentDTO">
-		select * from (select row_number() over (order by seq desc)rank,seq, id, contents,time,ipaddress,boardNum,member_class from comments where boardNum=#{value}) where rank between 1 and 5 
+	select * from (select row_number() over (order by seq desc)rank,seq, id, contents,time,ipaddress,boardNum,member_class from comments where boardNum=#{value}) where rank between 1 and 5 
 	</select>
 	
 	<insert id="commentInsert2">

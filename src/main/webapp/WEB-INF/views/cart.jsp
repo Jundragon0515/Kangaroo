@@ -211,7 +211,7 @@
 }
 </style>
 
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script>
 
 function viewCount(){
@@ -224,7 +224,12 @@ function viewCount(){
 
 
    $(function(){
-      
+	   <c:choose>
+		<c:when test="${logintype==null}">
+		alert("로그인후 이용 가능합니다");
+		$(location).attr("href", "/login_main");
+		</c:when>
+		</c:choose>
 /*       $("#category").on("click", function(){
          var category = $(this).text();
          console.log(category);
@@ -266,7 +271,7 @@ function viewCount(){
       });
       
       /* 페이지 정렬 개수 */
-      $("select option[value=" + '${view}' + "]").attr("selected", true);
+//       $("select option[value=" + '${view}' + "]").attr("selected", true);
       
       /* 페이지 정렬 개수 컨트롤  */
 /*       $("#viewCount").on("click", function(){
@@ -422,7 +427,7 @@ function viewCount(){
          class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
          <div class="col-first">
             <h1>찜 목록</h1>
-            <nav class="d-flex align-items-center"> <a href="index.html">
+            <nav class="d-flex align-items-center"> <a href="/#">
             <span class="lnr lnr-arrow-right">Home</span></a> <a href="#">
                <span class="lnr lnr-arrow-right">찜목록</span></a> </nav>
          </div>

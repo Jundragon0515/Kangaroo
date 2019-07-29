@@ -73,7 +73,6 @@ public class HomeController {
 	@ResponseBody
 	@Transactional("txManager")
 	public int level() { 	
-
 		String id = (String)se.getAttribute("email");
 		int b1 = dao.count1(id);
 		int b2 = dao.count2(id);
@@ -81,72 +80,72 @@ public class HomeController {
 		int c1 = dao.countComment1(id);
 		int c2 = dao.countComment2(id);
 		int c = c1+c2;
-
+		
 		String level = dao.level(id);
 		System.out.println("레벨 테스트 " + b + " : " +c);
-
+		
 		try {
-			if(level.equals("브론즈")) {
-				visitCount++;
-				if(b>=100 & c>=100) {
-					dao.levelUp(id, "마스터");
-					return 6;
-				}else if(b>=50 & c>=50){
-					dao.levelUp(id, "다이아몬드");
-					return 5;
-				}else if(b>=10 & c>=10) {
-					dao.levelUp(id, "플래티넘");
-					return 4;
-				}else if(b>=5 & c>=5) {
-					dao.levelUp(id, "골드");
-					return 3;
-				}else if(b>=1 & c>=1) {
-					dao.levelUp(id, "실버");
-					return 2;
-				}
-			}else if(level.equals("실버")) {
-				visitCount++;
-				if(b>=100 & c>=100) {
-					dao.levelUp(id, "마스터");
-					return 6;
-				}else if(b>=50 & c>=50){
-					dao.levelUp(id, "다이아몬드");
-					return 5;
-				}else if(b>=10 & c>=10) {
-					dao.levelUp(id, "플래티넘");
-					return 4;
-				}else if(b>=5 & c>=5) {
-					dao.levelUp(id, "골드");
-					return 3;
-				}
-			}else if(level.equals("골드")) {
-				visitCount++;
-				if(b>=100 & c>=100) {
-					dao.levelUp(id, "마스터");
-					return 6;
-				}else if(b>=50 & c>=50){
-					dao.levelUp(id, "다이아몬드");
-					return 5;
-				}else if(b>=10 & c>=10) {
-					dao.levelUp(id, "플래티넘");
-					return 4;
-				}
-			}else if(level.equals("플래티넘")) {
-				visitCount++;
-				if(b>=100 & c>=100) {
-					dao.levelUp(id, "마스터");
-					return 6;
-				}else if(b>=50 & c>=50){
-					dao.levelUp(id, "다이아몬드");
-					return 5;
-				}
-			}else if(level.equals("다이아몬드")) {
-				visitCount++;
-				if(b>=100 & c>=100) {
-					dao.levelUp(id, "마스터");
-					return 6;
-				}
+		if(level.equals("브론즈")) {
+			visitCount++;
+			if(b>=100 & c>=100) {
+				dao.levelUp(id, "마스터");
+				return 6;
+			}else if(b>=50 & c>=50){
+				dao.levelUp(id, "다이아몬드");
+				return 5;
+			}else if(b>=10 & c>=10) {
+				dao.levelUp(id, "플래티넘");
+				return 4;
+			}else if(b>=5 & c>=5) {
+				dao.levelUp(id, "골드");
+				return 3;
+			}else if(b>=1 & c>=1) {
+				dao.levelUp(id, "실버");
+				return 2;
 			}
+		}else if(level.equals("실버")) {
+			visitCount++;
+			if(b>=100 & c>=100) {
+				dao.levelUp(id, "마스터");
+				return 6;
+			}else if(b>=50 & c>=50){
+				dao.levelUp(id, "다이아몬드");
+				return 5;
+			}else if(b>=10 & c>=10) {
+				dao.levelUp(id, "플래티넘");
+				return 4;
+			}else if(b>=5 & c>=5) {
+				dao.levelUp(id, "골드");
+				return 3;
+			}
+		}else if(level.equals("골드")) {
+			visitCount++;
+			if(b>=100 & c>=100) {
+				dao.levelUp(id, "마스터");
+				return 6;
+			}else if(b>=50 & c>=50){
+				dao.levelUp(id, "다이아몬드");
+				return 5;
+			}else if(b>=10 & c>=10) {
+				dao.levelUp(id, "플래티넘");
+				return 4;
+			}
+		}else if(level.equals("플래티넘")) {
+			visitCount++;
+			if(b>=100 & c>=100) {
+				dao.levelUp(id, "마스터");
+				return 6;
+			}else if(b>=50 & c>=50){
+				dao.levelUp(id, "다이아몬드");
+				return 5;
+			}
+		}else if(level.equals("다이아몬드")) {
+			visitCount++;
+			if(b>=100 & c>=100) {
+				dao.levelUp(id, "마스터");
+				return 6;
+			}
+		}
 		}catch(Exception e) {
 			e.printStackTrace();
 		}

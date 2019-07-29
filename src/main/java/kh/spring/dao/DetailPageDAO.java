@@ -57,11 +57,9 @@ public class DetailPageDAO {
 	public int soldOut_Auction(int boardNum) {
 		return sst.update("DetailPageDAO.soldOut_auction", boardNum);
 	}
-
 	public int soldOut_Tender(int boardNum) {
 		return sst.update("DetailPageDAO.soldOut_tender", boardNum);
 	}
-
 	public int pointUsing(OrderDTO dto) {
 		return sst.insert("DetailPageDAO.pointUsing", dto);
 	}

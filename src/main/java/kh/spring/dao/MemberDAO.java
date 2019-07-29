@@ -5,6 +5,7 @@ import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -19,6 +20,7 @@ import org.springframework.stereotype.Component;
 
 import kh.spring.dto.CommentDTO;
 import kh.spring.dto.MemberDTO;
+import kh.spring.dto.OrderDTO;
 import kh.spring.dto.TenderDTO;
 
 @Component
@@ -211,7 +213,6 @@ while (rs.next()) {
 	String ipaddress = rs.getString(6);
 	int board_Num = rs.getInt(7);
 	String level = rs.getString(8);
-
 
 	CommentDTO dto = new CommentDTO();
 	dto.setSeq(seq);
@@ -421,7 +422,6 @@ sb.append("<li class=\"page-item\"><a class=\"page-link\" href=\"auction_detailP
 
 return sb.toString();
 }
-
 public int withdrawal(String id) {
 	return sst.delete("MemberDAO.withdrawal",id);
 }

@@ -32,7 +32,6 @@ select count(*) from used_transaction_board where id=#{value}
 <select id = "selectById_us" parameterType="Map" resultType="kh.spring.dto.Used_transaction_boardDTO">
 select * from (select row_number()over(order by no desc) as rown, used_transaction_board.* from used_transaction_board) where (rown between #{startNum} and #{endNum})and id=#{id}
 </select>
-
 </mapper>
 
 
