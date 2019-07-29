@@ -65,28 +65,52 @@ public class MemberService {
 	@Transactional("txManager")
 	public int tender(TenderDTO dto, int Board_num) {
 		
-		if(dto.getPoint() <= me.currentMoney(Board_num)) {
+		try{
+			dto.getPoint();
 			
-			return -1;
+			if(dto.getPoint() <= me.currentMoney(Board_num)) {
+				
+				return -1;
+				
+			}else {
+			me.minus(dto);
+			me.tender(dto);
+			try {
+			me.plus(me.moneyBack(Board_num));
+			}catch(Exception e) {
+				System.out.println("첫번째 입찰 발생");
+			}
 			
-		}else {
-		me.minus(dto);
-		me.tender(dto);
-		try {
-		me.plus(me.moneyBack(Board_num));
+			System.out.println(dto.getPoint());
+			System.out.println(Board_num);
+			
+			Auction_boardDTO a_dto = new Auction_boardDTO();
+			a_dto.setPresent_price(dto.getPoint());
+			a_dto.setNo(Board_num);
+			ddao.a_updatePrice(a_dto);
+			
+			return 1;
+			}
 		}catch(Exception e) {
-			System.out.println("첫번째 입찰 발생");
-		}
-		
-		System.out.println(dto.getPoint());
-		System.out.println(Board_num);
-		
-		Auction_boardDTO a_dto = new Auction_boardDTO();
-		a_dto.setPresent_price(dto.getPoint());
-		a_dto.setNo(Board_num);
-		ddao.a_updatePrice(a_dto);
-		
-		return 1;
+			
+			me.minus(dto);
+			me.tender(dto);
+			try {
+			me.plus(me.moneyBack(Board_num));
+			}catch(Exception e2) {
+				System.out.println("첫번째 입찰 발생");
+			}
+			
+			System.out.println(dto.getPoint());
+			System.out.println(Board_num);
+			
+			Auction_boardDTO a_dto = new Auction_boardDTO();
+			a_dto.setPresent_price(dto.getPoint());
+			a_dto.setNo(Board_num);
+			ddao.a_updatePrice(a_dto);
+			
+			return 1;
+			
 		}
 	}
 	public String loginProc(String id , String pw) { //로그인 
