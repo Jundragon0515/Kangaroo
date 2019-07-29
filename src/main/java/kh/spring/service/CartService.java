@@ -34,11 +34,11 @@ public class CartService {
 	}
 	
 	//일반 화면 게시판 네비
-	public String tradeNavi(int currentPage, int recordCountPerPage) {
-	   return dao.getNavi(currentPage, recordCountPerPage);
+	public String tradeNavi(int currentPage, int recordCountPerPage,String email) {
+	   return dao.getNavi(currentPage, recordCountPerPage,email);
 	}
-	public String auctionNavi(int currentPage1, int recordCountPerPage1) {
-		return dao.getNaviA(currentPage1, recordCountPerPage1);
+	public String auctionNavi(int currentPage1, int recordCountPerPage1,String email) {
+		return dao.getNaviA(currentPage1, recordCountPerPage1,email);
 	}
 	
 	public int streaming(CartTradeDTO dto) {
