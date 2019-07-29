@@ -590,7 +590,7 @@ $("#logout_na").on("click", function() {
                      <c:when test="${dto.id==email}">
                      </c:when>
                      <c:otherwise>
-                     <form class="form-inline" id="tender">
+                     <form class="form-inline" id="tender" onsubmit="return false;">
                         <input type="text" class="form-control mb-2 mr-sm-2" id="money"
                            onchange="getNumber(this);" onkeyup="getNumber(this);"
                            placeholder="입찰금액을 입력해주세요."> <input type="button"
@@ -643,7 +643,7 @@ $("#logout_na").on("click", function() {
 
 
    <script>
-   
+
       var lastPrice = 0;
          var current = ${currentMoney};
 
@@ -988,7 +988,7 @@ $("#logout_na").on("click", function() {
             <li class="nav-item"><a class="nav-link" id="review-tab"
                data-toggle="tab" href="#review" role="tab" aria-controls="review"
                aria-selected="false" onclick="fnMove()">문의 및 댓글</a></li>
-               <input type="button" id="report" class="genric-btn danger radius" value="신고" onclick="showPopup();"/>
+               <input type="button" id="report" class="genric-btn danger radius" value="신고">
          </ul>
          <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade active show" id="home" role="tabpanel"
@@ -1503,18 +1503,7 @@ $("#logout_na").on("click", function() {
 						&emsp;&emsp; : <fmt:formatNumber value="${totalCount }" pattern="#,###"/> 건 
 					</div>
 				</div>
-				<div class="col-lg-2 col-md-6 col-sm-6">
-					<div class="single-footer-widget">
-						<h6>Follow Us</h6>
-						<p>Let us be social</p>
-						<div class="footer-social d-flex align-items-center">
-							<a href="#"><i class="fa fa-facebook"></i></a>
-							<a href="#"><i class="fa fa-twitter"></i></a>
-							<a href="#"><i class="fa fa-dribbble"></i></a>
-							<a href="#"><i class="fa fa-behance"></i></a>
-						</div>
-					</div>
-				</div>
+				
 			</div>
 			<div class="footer-bottom d-flex justify-content-center align-items-center flex-wrap">
 				<p class="footer-text m-0">
