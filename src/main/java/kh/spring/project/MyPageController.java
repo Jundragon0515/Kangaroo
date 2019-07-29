@@ -127,6 +127,12 @@ public class MyPageController {
 		mps.comp(seq);
 		return "good";
 	}
+	@RequestMapping("/comp2")
+	@ResponseBody
+	public String comp2(int seq) {
+		mps.comp2(seq);
+		return "good";
+	}
 	@RequestMapping("/refund_comp")
 	@ResponseBody
 	public String refund_comp(int seq) {

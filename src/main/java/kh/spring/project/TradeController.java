@@ -60,7 +60,6 @@ public class TradeController {
       	request.setAttribute("viewCategory", "전체보기");
         request.setAttribute("list", list);
         request.setAttribute("navi", resultNavi);
-        
         request.setAttribute("auctionActiveCount", adao.auctionActiveCount());            // 활성화된 경매  수
 		request.setAttribute("totalCount", adao.auctionCount()+adao.directTradeCount()+adao.safeTradeCount());	// 총 거래량
        return "trade";

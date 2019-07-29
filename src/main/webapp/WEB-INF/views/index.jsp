@@ -100,6 +100,12 @@
 	font-color: white;
 }
 
+.nav-link{
+	font-size:30px;
+}
+.back-to-top {text-decoration: none; display: none; color:#fe912b;}
+
+
 .back-to-top {
 	text-decoration: none;
 	display: none;
