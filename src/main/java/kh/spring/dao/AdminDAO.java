@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kh.spring.dto.AdminDTO;
+import kh.spring.dto.ReportDTO;
 import kh.spring.project.HomeController;
 
 @Repository
@@ -66,5 +67,6 @@ public class AdminDAO {
 	public int cartAuctionDelete(String no) {
 		return sst.delete("AdminDAO.deleteCartAuction",no);
 	}
+
 }
 
