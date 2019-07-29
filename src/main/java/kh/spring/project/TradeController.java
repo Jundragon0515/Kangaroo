@@ -9,9 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import kh.spring.dto.Used_transaction_boardDTO;
-import org.springframework.web.servlet.ModelAndView;
-
+import kh.spring.dao.AdminDAO;
 import kh.spring.dto.Used_transaction_boardDTO;
 import kh.spring.service.GoodsTradeService;
 
@@ -24,6 +22,9 @@ public class TradeController {
 
    @Autowired
    private HttpSession session;
+   
+	@Autowired
+	private AdminDAO adao;
 
    //직거래 게시판 처음
    @RequestMapping("/trade")
@@ -59,6 +60,9 @@ public class TradeController {
       	request.setAttribute("viewCategory", "전체보기");
         request.setAttribute("list", list);
         request.setAttribute("navi", resultNavi);
+        
+        request.setAttribute("auctionActiveCount", adao.auctionActiveCount());            // 활성화된 경매  수
+		request.setAttribute("totalCount", adao.auctionCount()+adao.directTradeCount()+adao.safeTradeCount());	// 총 거래량
        return "trade";
    }
    
@@ -148,6 +152,9 @@ public class TradeController {
 	  request.setAttribute("viewCategory", selectCategory);
       request.setAttribute("navi", resultNavi);
       request.setAttribute("list", list);
+      
+      request.setAttribute("auctionActiveCount", adao.auctionActiveCount());            // 활성화된 경매  수
+      request.setAttribute("totalCount", adao.auctionCount()+adao.directTradeCount()+adao.safeTradeCount());	// 총 거래량
 
       return "trade";
    }
@@ -186,6 +193,9 @@ public class TradeController {
       /*request.setAttribute("recordTotalCount", list.size()); // 전체개수 */
         request.setAttribute("list", list);
        request.setAttribute("navi", resultNavi);
+       
+       request.setAttribute("auctionActiveCount", adao.auctionActiveCount());            // 활성화된 경매  수
+       request.setAttribute("totalCount", adao.auctionCount()+adao.directTradeCount()+adao.safeTradeCount());	// 총 거래량
        return "trade_safe";
    }
    
@@ -276,12 +286,17 @@ public class TradeController {
 	  request.setAttribute("viewCategory", selectCategory);
       request.setAttribute("navi", resultNavi);
       request.setAttribute("list", list);
+      
+      request.setAttribute("auctionActiveCount", adao.auctionActiveCount());            // 활성화된 경매  수
+      request.setAttribute("totalCount", adao.auctionCount()+adao.directTradeCount()+adao.safeTradeCount());	// 총 거래량
 
       return "trade_safe";
    }
 
    @RequestMapping("/goodsTradeWrite")
-   public String goodsTradeWrite() {
+   public String goodsTradeWrite(HttpServletRequest request) {
+      request.setAttribute("auctionActiveCount", adao.auctionActiveCount());            // 활성화된 경매  수
+      request.setAttribute("totalCount", adao.auctionCount()+adao.directTradeCount()+adao.safeTradeCount());	// 총 거래량
       return "goodsTradeWrite";
    }
    

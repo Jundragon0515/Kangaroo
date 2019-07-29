@@ -179,10 +179,21 @@
         {
         	var cause = this.cause.text;
         	var title = this.title.value;
+<<<<<<< HEAD
+        	var writer = this.writer.value;
+=======
+>>>>>>> 14142d8e3e049b241370c33bbb8d6f94789ff56c
         	var contents = this.contents.value;
 
          		var params = "cause="+cause;
          			params += " title="+title;
+<<<<<<< HEAD
+         			params += " writer="+writer;
+         			params += " contents="+contents;
+
+        	console.log(cause+title+writer+contents);
+=======
+>>>>>>> 14142d8e3e049b241370c33bbb8d6f94789ff56c
          			params += " contents="+contents;
 
 

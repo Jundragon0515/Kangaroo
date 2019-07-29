@@ -17,18 +17,21 @@ public class ScheduleTask {
 
 	private SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
 	
-	// return, 인자 값을 다룰 수 없음.
+	//return, 인자 값을 다룰 수 없음.
 	//@Scheduled(fixedRate=5000)	// 첫 번째 동작이 안 끝나도 설정된 초가 지나면 실행됨.	
 	//@Scheduled(fixedDelay=5000)	// 첫 번째 동작이 안 끝나면 설정된 초가 지나도 실행이 안 됨.
+	//@Scheduled(cron="0 */2 * * * *")		// "/" : 매 타임 마다    "A,B" : A와 B에 	"A-B" : A~B까지
 	
-	// @Scheduled(cron="30 59 23 * * * *")	
-	@Scheduled(cron="0 */2 * * * *")		// "/" : 매 타임 마다    "A,B" : A와 B에 	"A-B" : A~B까지
+	@Scheduled(cron="30 59 23 * * *")			// 매일 밤 23시 59분 30초마다
 	public void everyMidNight() {
 		dao.insertVisitCount();
+		System.out.println(sdf.format(System.currentTimeMillis()) + 
+				" : 방문자 수 초기화 전 " + HomeController.visitCount + "명");
+		
 		HomeController.visitCount = 0;
 		
 		System.out.println(sdf.format(System.currentTimeMillis()) + 
-				" : 방문자 수 초기화 확인 " + HomeController.visitCount + "명");
+				" : 방문자 수 초기화 후 " + HomeController.visitCount + "명");
 	}
 	
 }

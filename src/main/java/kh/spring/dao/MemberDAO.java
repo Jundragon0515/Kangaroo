@@ -135,6 +135,13 @@ public class MemberDAO {
  	public String getPw(String id) {
  		return sst.selectOne("MemberDAO.getPw", id);
  	}
+
+ 	public int addBlackList(String id) {
+ 		return sst.update("MemberDAO.addBlackList", id);
+ 	}
+ 	public int releaseBlackList(String id) {
+ 		return sst.update("MemberDAO.releaseBlackList", id);
+ 	}
 	
 public int tender(TenderDTO dto) {
 return sst.insert("MemberDAO.tender", dto);
@@ -341,7 +348,6 @@ while (rs.next()) {
 	dto.setBoardNum(board_Num);
 	dto.setMember_class(level);
 	result.add(dto);
-	
 }
 
 return result;

@@ -43,6 +43,10 @@ public class ReportController {
 		PlatformData pdata = req.getData();
 		VariableList params = pdata.getVariableList();
 		dto.setTitle(params.getString("title"));
+		dto.setSender(params.getString("writer"));
+		dto.setReason(params.getString("cause"));
+		dto.setContents(params.getString("contents"));
+
 		dto.setReason(params.getString("cause"));
 		dto.setContents(params.getString("contents"));
 		System.out.println(dto.getNo());
