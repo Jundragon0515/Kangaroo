@@ -3,71 +3,71 @@
 <mapper namespace="AdminDAO">
 
 <insert id="insertVisitCount">
-	insert into admin values(admin_seq.nextval, default,#{value})
+   insert into admin values(admin_seq.nextval, default,#{value})
 </insert>
 
 <select id="visitForWeek" resultType="kh.spring.dto.AdminDTO">
-	select visitDate, visitCount from (select substr(visitDate,1,8) visitDate, sum(visitCount) visitCount from admin group by substr(visitDate,1,8) order by 1 desc) where 7 >= rownum
+   select visitDate, visitCount from (select substr(visitDate,1,8) visitDate, sum(visitCount) visitCount from admin group by substr(visitDate,1,8) order by 1 desc) where 7 >= rownum
 </select>
 
 <select id="visitForGraph" resultType="kh.spring.dto.AdminDTO">
-	select visitDate, floor(visitCount*100/(select max(visitCount) from (select substr(visitDate,1,8) visitDate, sum(visitCount) visitCount from admin group by substr(visitDate,1,8) order by 1 desc) where 7 >= rownum)) visitCount from (select substr(visitDate,1,8) visitDate, sum(visitCount) visitCount from admin group by substr(visitDate,1,8) order by 1 desc) where 7 >= rownum order by 1 desc
+   select visitDate, floor(visitCount*100/(select max(visitCount) from (select substr(visitDate,1,8) visitDate, sum(visitCount) visitCount from admin group by substr(visitDate,1,8) order by 1 desc) where 7 >= rownum)) visitCount from (select substr(visitDate,1,8) visitDate, sum(visitCount) visitCount from admin group by substr(visitDate,1,8) order by 1 desc) where 7 >= rownum order by 1 desc
 </select>
 
 <select id="visitForYear" resultType="kh.spring.dto.AdminDTO">
-	select visitDate, visitCount from (select substr(visitDate,1,5) visitDate, sum(visitCount) visitCount from admin group by substr(visitDate,1,5) order by 1 desc) where 13 >= rownum order by 1
+   select visitDate, visitCount from (select substr(visitDate,1,5) visitDate, sum(visitCount) visitCount from admin group by substr(visitDate,1,5) order by 1 desc) where 13 >= rownum order by 1
 </select>
 
 <select id="safeTradeCount" resultType="_int">
-	select count(*) from USED_TRANSACTION_BOARD where trade_type='안전거래' and ongoing='n'
+   select count(*) from USED_TRANSACTION_BOARD where trade_type='안전거래'
 </select>
 
 <select id="directTradeCount" resultType="_int">
-	select count(*) from USED_TRANSACTION_BOARD where trade_type='직거래' and ongoing='n'
+   select count(*) from USED_TRANSACTION_BOARD where trade_type='직거래'
 </select>
-	
+   
 <select id="auctionCount" resultType="_int">
-	select count(*) from auction_board where ongoing='n'
+   select count(*) from auction_board
 </select>
 
 <select id="auctionActiveCount" resultType="_int">
-	select count(*) from auction_board where ongoing='y'
+   select count(*) from auction_board where ongoing='y'
 </select>
 
 <select id="memberCount" resultType="_int">
-	select nvl(count(*),0) from members
+   select nvl(count(*),0) from members
 </select>
 
 <select id="chargingPoint" resultType="_int">
-	select nvl(sum(money),0) from point_charging
+   select nvl(sum(money),0) from point_charging
 </select>
 
 <select id="emailCheck" resultType="_int">
-	select count(*) from members where id=#{value}
+   select count(*) from members where id=#{value}
 </select>
 
 <delete id="boardWriteDelete">
-	delete from used_transaction_board where no=#{value}
+   delete from used_transaction_board where no=#{value}
 </delete>
 
 <delete id="boardImgDelete">
-	delete from used_transaction_img_board where no=#{value}
+   delete from used_transaction_img_board where no=#{value}
 </delete>
 
 <delete id="auctionBoardDelete">
-	delete from auction_board where no=#{value}
+   delete from auction_board where no=#{value}
 </delete>
 
 <delete id="auctionBoardImgDelete">
-	delete from auction_img_board where no=#{value}
+   delete from auction_img_board where no=#{value}
 </delete>
 
 <delete id="deleteCart">
-	delete from trade_cart where no=#{value}
+   delete from trade_cart where no=#{value}
 </delete>
 
 <delete id="deleteCartAuction">
-	delete from auction_cart where no=#{value}
+   delete from auction_cart where no=#{value}
 </delete>
 
 </mapper>

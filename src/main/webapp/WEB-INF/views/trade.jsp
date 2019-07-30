@@ -455,17 +455,15 @@ position:relative;
    <!-- Start Banner Area -->
 <section class="banner-area organic-breadcrumb">
       <div class="container">
-         <div
-            class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
-            <div class="col-first">
-               <h1>판매 조회</h1>
-               <nav class="d-flex align-items-center">
-                  <a href="/">메인페이지<span class="lnr lnr-arrow-right"></span></a> <a
-                     href="/goMyPage">마이페이지<span class="lnr lnr-arrow-right"></span></a>
-                  <a href="/goMyPage_sold?or2_currentPage=1&used_currentPage=1&auc_currentPage=1">판매 조회<span class="lnr"></span></a>
-                  </nav>
-            </div>
+      <div
+         class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+         <div class="col-first">
+            <h1>중고 직거래</h1>
+<!--             <nav class="d-flex align-items-center"> <a href="/"><span
+               class="lnr lnr-arrow-right">Home</span></a> <a href="trade"><span
+               class="lnr lnr-arrow-right">Shop</span></a> </nav> -->
          </div>
+      </div>
       </div>
    </section>
    <!-- End Banner Area -->

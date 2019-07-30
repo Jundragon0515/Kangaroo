@@ -680,12 +680,16 @@
 										data : formData
 									})
 									.done(function(resp) {
-												//var time = new Date().getTime();
-												$("#image").attr("disabled",true);
-												$("#titleImg")
-														.append("<img src='/img/title/"+resp+"' id='middle'>");
-												$("#imgTitle").val(resp);		
-												
+										if(resp=="사이즈가 너무 큽니다."){
+											alert(resp);
+											$("#image").val("");
+										}else if(resp =="jpg,png확장자만 업로드 가능합니다."){
+											alert(resp);
+											$("#image").val("");
+										}else{
+											$("#titleImg").append("<img src='/img/title/"+resp+"' id='middle'>");
+											$("#imgTitle").val(resp);		
+										}
 											})
 						})//메인 이미지 바로 띄우는 것
 

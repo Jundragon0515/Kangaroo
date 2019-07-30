@@ -23,11 +23,15 @@ public class PerfCheckBlackList {
 	@After("execution(* kh.spring.project.*.*(..))")
 	public void perfCheck() {		// 매개변수를 상속받은 조인 포인트	
 		String id = (String)session.getAttribute("email");	
-		if(id!=null) {
-			if(dao.selectById(id).getBlacklist().equals("Y")) {
+		try{
+			if(!id.equals("")) {
+				if(dao.selectById(id).getBlacklist().equals("Y")) {
 				session.invalidate();
+				} 
 			} 
-		}  	
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 }
 

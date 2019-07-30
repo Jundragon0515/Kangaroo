@@ -26,8 +26,8 @@ public class AuctionController {
    @Autowired
    private HttpSession session;
    
-	@Autowired
-	private AdminDAO adao;
+   @Autowired
+   private AdminDAO adao;
 
    @RequestMapping("/auction")
    public String index(HttpServletRequest request) {
@@ -42,11 +42,13 @@ public class AuctionController {
       List<Auction_boardDTO> list = null;
 
       String currentPageResult = request.getParameter("currentPage");
-
-      if (currentPageResult != null) {
+      
+      if (currentPageResult!=null ) {
          currentPage = Integer.parseInt(currentPageResult);
+         session.setAttribute("auction_currentpage", currentPageResult);
       } else {
          currentPage = 1;
+         session.setAttribute("auction_currentpage", currentPage);
       }
       int end = currentPage * recordCountPerPage;
       int start = end - (recordCountPerPage - 1);
@@ -63,7 +65,7 @@ public class AuctionController {
        request.setAttribute("navi", resultNavi);
        
        request.setAttribute("auctionActiveCount", adao.auctionActiveCount());            // 활성화된 경매  수
-	   request.setAttribute("totalCount", adao.auctionCount()+adao.directTradeCount()+adao.safeTradeCount());	// 총 거래량
+      request.setAttribute("totalCount", adao.auctionCount()+adao.directTradeCount()+adao.safeTradeCount());   // 총 거래량
        return "auction";
    }
 
@@ -93,9 +95,9 @@ public class AuctionController {
          session.setAttribute("selectView", view);
       }
       if(search!=null) {
-    	  System.out.println("검색어 :" +search);
-    	  session.setAttribute("selectSearch", "where title like" + "'%" + search + "%'");
-    	  String searchtext = (String)session.getAttribute("selectSearch");
+         System.out.println("검색어 :" +search);
+         session.setAttribute("selectSearch", "where title like" + "'%" + search + "%'");
+         String searchtext = (String)session.getAttribute("selectSearch");
       }
       
       if(selectCategory==null) {
@@ -126,8 +128,10 @@ public class AuctionController {
       
       if (currentPageResult != null) {
          currentPage = Integer.parseInt(currentPageResult);
+         session.setAttribute("auc_currentpage", currentPageResult);
       } else {
          currentPage = 1;
+         session.setAttribute("auc_currentpage", currentPage);
       }
       int end = currentPage * recordCountPerPage;
       int start = end - (recordCountPerPage - 1);
@@ -136,24 +140,24 @@ public class AuctionController {
       System.out.println("컨트롤 end" + end);
       
 
-		if(search!=null) {
-			list = auctionService.auctionList_search(session, start, end);
-			resultNavi = auctionService.auctionBoardNavi_search(session, currentPage, recordCountPerPage);
-			int listSize = list.size();
-			
-			if(listSize==0) {
-				request.setAttribute("rsearch_result_null", "검색결과가 없습니다.");
-			}
-		}else {
-			list = auctionService.auctionOption(session, start, end);
-			resultNavi = auctionService.auctionBoardNaviOption(session, currentPage, recordCountPerPage);
-		}
+      if(search!=null) {
+         list = auctionService.auctionList_search(session, start, end);
+         resultNavi = auctionService.auctionBoardNavi_search(session, currentPage, recordCountPerPage);
+         int listSize = list.size();
+         
+         if(listSize==0) {
+            request.setAttribute("rsearch_result_null", "검색결과가 없습니다.");
+         }
+      }else {
+         list = auctionService.auctionOption(session, start, end);
+         resultNavi = auctionService.auctionBoardNaviOption(session, currentPage, recordCountPerPage);
+      }
       /* request.setAttribute("recordTotalCount", list.size()); // 전체개수 */
       request.setAttribute("navi", resultNavi);
       request.setAttribute("list", list);
       
       request.setAttribute("auctionActiveCount", adao.auctionActiveCount());            // 활성화된 경매  수
-      request.setAttribute("totalCount", adao.auctionCount()+adao.directTradeCount()+adao.safeTradeCount());	// 총 거래량
+      request.setAttribute("totalCount", adao.auctionCount()+adao.directTradeCount()+adao.safeTradeCount());   // 총 거래량
 
       return "auction";
    }

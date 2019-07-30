@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import kh.spring.dao.AdminDAO;
 import kh.spring.dto.CartAuctionDTO;
 import kh.spring.dto.CartTradeDTO;
 import kh.spring.service.CartService;
@@ -30,7 +31,8 @@ public class CartController {
 	private TradeController tr; 
 	@Autowired
 	private AuctionController ar;
-
+	@Autowired
+	private AdminDAO adao;
 	@ResponseBody
 	@RequestMapping(value="/steamingTrade" , produces="application/String;charset=UTF-8")
 	public String streaming(CartTradeDTO dto) {
@@ -147,6 +149,8 @@ public class CartController {
 		int recordCountPerPage=3;
 		int recordCountPerPage1=3;
 		String currentPageResult = request.getParameter("currentPage");
+		request.setAttribute("auctionActiveCount", adao.auctionActiveCount());            // 활성화된 경매  수
+		request.setAttribute("totalCount", adao.auctionCount()+adao.directTradeCount()+adao.safeTradeCount());	// 총 거래량
 		if (currentPageResult != null) {
 			currentPage = Integer.parseInt(currentPageResult);
 		} else {
@@ -174,12 +178,13 @@ public class CartController {
 			request.setAttribute("navi1", auctionNavi);
 			session.setAttribute("tList", tList);
 			session.setAttribute("cList", cList);
+
+			return "cart";
 		}catch(Exception e) {
 			e.printStackTrace();
 			return "index";
 		}
 		/*request.setAttribute("recordTotalCount", list.size()); // 전체개수 */
 
-		return "cart";
 	}
 }

@@ -298,12 +298,8 @@ $("#logout_na").on("click", function() {
          <div
             class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
             <div class="col-first">
-               <h1>Product Details Page</h1>
-               <nav class="d-flex align-items-center">
-                  <a href="index.html">Home<span class="lnr lnr-arrow-right"></span></a>
-                  <a href="#">Shop<span class="lnr lnr-arrow-right"></span></a> <a
-                     href="single-product.html">product-details</a>
-               </nav>
+               <h1>중고 거래 상세 페이지</h1>
+              
             </div>
          </div>
       </div>
@@ -748,13 +744,13 @@ $("#logout_na").on("click", function() {
 											<img alt="" src="/resources/img/골드.PNG" class="level">
 											</c:when>
 											<c:when test="${arr.member_class=='플래티넘' }">
-											<img alt="" src="/resources/img/플래.PNG" class="level">
+											<img alt="" src="/resources/img/플래티넘.PNG" class="level">
 											</c:when>
 											<c:when test="${arr.member_class=='다이아몬드' }">
-											<img alt="" src="/resources/img/다이아.PNG" class="level">
+											<img alt="" src="/resources/img/다이아몬드.PNG" class="level">
 											</c:when>
 											<c:when test="${arr.member_class=='마스터' }">
-											<img alt="" src="/resources/img/마스터.png" class="level">
+											<img alt="" src="/resources/img/마스터.PNG" class="level">
 											</c:when>
 											</c:choose>
 												<h5 style="display: inline">

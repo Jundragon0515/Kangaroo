@@ -118,6 +118,7 @@ public class MemberService {
 			if(id.equals("admin@admin.com"))
 				se.setAttribute("admin", "y");
 			se.setAttribute("email", id);
+			System.out.println("아이디 : " + id);
 			MemberDTO m_info=me.selectById(id);
 			se.setAttribute("name",m_info.getName());
 			se.setAttribute("phone",m_info.getPhone());

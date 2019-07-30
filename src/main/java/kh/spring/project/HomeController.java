@@ -61,12 +61,16 @@ public class HomeController {
 
 		visitCount++;
 		ModelAndView mav =new ModelAndView();
+		Used_transaction_boardDTO mainTrade = mes.mainTrade(1);
+		Auction_boardDTO mainAuction = mes.mainAuction(1);
 		List<Used_transaction_boardDTO> mainDirectList = mes.directList();
 		List<Used_transaction_boardDTO> mainSafeList = mes.safeList();
 		List<Auction_boardDTO> mainAuctionList = mes.auctionList();
 		mav.addObject("mainDirectList",mainDirectList);
 		mav.addObject("mainSafeList",mainSafeList);
 		mav.addObject("auctionList", mainAuctionList);
+		mav.addObject("mainTrade", mainTrade);
+		mav.addObject("mainAuction", mainAuction);
 		mav.addObject("auctionActiveCount", adao.auctionActiveCount());            						// 활성화된 경매  수
 		mav.addObject("totalCount", adao.auctionCount()+adao.directTradeCount()+adao.safeTradeCount());	// 총 거래량
 		mav.setViewName("index");

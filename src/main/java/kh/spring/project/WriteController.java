@@ -3,6 +3,8 @@ package kh.spring.project;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -60,15 +62,23 @@ public class WriteController {
       System.out.println(uploadPath);
       String name = uploadPath+"/"+System.currentTimeMillis()+originFileName;
       String result=null;
-
-      try {
-         File newFile = new File(name);
-         formData.transferTo(newFile);
-         result=newFile.getName();
-      } catch (Exception e) {
-         e.printStackTrace();
+      Pattern p  =Pattern.compile(".png$");
+      Matcher m = p.matcher(originFileName);
+      Pattern p1  =Pattern.compile(".jpg$");
+      Matcher m1 = p1.matcher(originFileName);
+      if((m.find()) || (m1.find())) {
+    	  try {
+    	         File newFile = new File(name);
+    	         formData.transferTo(newFile);
+    	         result=newFile.getName();
+    	      } catch (Exception e) {
+    	         e.printStackTrace();
+    	      }
+    	      return result;
+      }else {
+    	  return "jpg,png확장자만 업로드 가능합니다.";
       }
-      return result;
+   
    } //타이틀이미지 ajax로 바로 띄어주는 것
 
    @RequestMapping("goodsRegister")

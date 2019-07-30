@@ -269,7 +269,7 @@ b, sup, sub, u, del {
 			<div class="col-first">
 				<h1>공지사항 메인</h1>
 				<nav class="d-flex align-items-center"> <a href="/">메인페이지<span
-					class="lnr lnr-arrow-right"></span></a> <a href="/login_main">공지사항
+					class="lnr lnr-arrow-right"></span></a> <a href="#">공지사항
 					메인<span class="lnr "></span>
 				</a> </nav>
 			</div>

@@ -643,8 +643,16 @@
 				contentType:false,
 				data:formData
 			}).done(function(resp){
-				$("#titleImg").append("<img src='/img/title/"+resp+"' id='middle'>");
-				$("#imgTitle").val(resp);
+				if(resp=="사이즈가 너무 큽니다."){
+					alert(resp);
+					$("#image").val("");
+				}else if(resp =="jpg,png확장자만 업로드 가능합니다."){
+					alert(resp);
+					$("#image").val("");
+				}else{
+					$("#titleImg").append("<img src='/img/title/"+resp+"' id='middle'>");
+					$("#imgTitle").val(resp);
+				}
 			})
 		})//메인 이미지 바로 띄우는 것
 			
@@ -709,7 +717,7 @@
                     fileNameExtensionIndex, fileName.length);
             if (!((fileNameExtension === 'jpg')
                     || (fileNameExtension === 'gif') || (fileNameExtension === 'png'))) {
-                alert('jpg, gif, png 확장자만 업로드 가능합니다.');
+                alert('jpg, png 확장자만 업로드 가능합니다.');
                 return true;
             } else {
                 return false;

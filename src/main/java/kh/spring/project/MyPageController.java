@@ -59,7 +59,7 @@ public class MyPageController {
 		return "myPage_f/myPage";
 	}
 	@RequestMapping("/goMyPage_delivery")
-	public ModelAndView goMyPage_delivery(int or_currentPage,int te_currentPage) { // 마이페이지 배송조회
+	public ModelAndView goMyPage_delivery(int or_currentPage,int te_currentPage,HttpServletRequest request) { // 마이페이지 배송조회
 		se.setAttribute("or_currentPage", or_currentPage);
 		se.setAttribute("te_currentPage", te_currentPage);
 		String email=(String)se.getAttribute("email");
@@ -70,6 +70,8 @@ public class MyPageController {
 				mav.setViewName("redirect:/");
 				return mav;
 			}
+		 request.setAttribute("auctionActiveCount", adao.auctionActiveCount());            // 활성화된 경매  수
+			request.setAttribute("totalCount", adao.auctionCount()+adao.directTradeCount()+adao.safeTradeCount());	// 총 거래량
 		mav.addObject("order_list", mps.selectByBuyer(or_currentPage, email));
 		mav.addObject("tender_list", mps.selectById(te_currentPage,  email));
 		mav.addObject("order_navi", mps.getNavi_or(or_currentPage, email));
@@ -146,7 +148,7 @@ public class MyPageController {
 		return "good";
 	}
 	@RequestMapping("/goMyPage_sold")
-	public ModelAndView goMyPage_sold(int or2_currentPage,int used_currentPage,int auc_currentPage) { // 마이페이지 배송조회
+	public ModelAndView goMyPage_sold(int or2_currentPage,int used_currentPage,int auc_currentPage,HttpServletRequest request) { // 마이페이지 배송조회
 		se.setAttribute("or2_currentPage", or2_currentPage);
 		se.setAttribute("used_currentPage", used_currentPage);
 		se.setAttribute("auc_currentPage", auc_currentPage);
@@ -158,6 +160,8 @@ public class MyPageController {
 			mav.setViewName("redirect:/");
 			return mav;
 		}
+		 request.setAttribute("auctionActiveCount", adao.auctionActiveCount());            // 활성화된 경매  수
+			request.setAttribute("totalCount", adao.auctionCount()+adao.directTradeCount()+adao.safeTradeCount());	// 총 거래량
 		mav.addObject("order_list", mps.selectBySeller(or2_currentPage, email));
 		mav.addObject("order_navi", mps.getNavi_or2(or2_currentPage, email));
 		mav.addObject("auction_list", mps.selectById_au(auc_currentPage, email));

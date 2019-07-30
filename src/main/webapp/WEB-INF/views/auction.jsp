@@ -269,7 +269,7 @@ position:relative;
 	   var socket = new SockJS("/gettime"); //불특정 다수의 브라우저일 경우를 위해 endpoint url 넣어야 한다
 		var client = Stomp.over(socket);//연결 이후의 작업 지원 
 		client.connect({}, function(resp) {
-			client.subscribe("/response", function(list) {
+			client.subscribe("/board_re${auction_currentpage}", function(list) {
 				var result = JSON.parse(list.body);
 				var z = 0;
 					 			<c:forEach var="i" items="${list}">
@@ -283,7 +283,7 @@ position:relative;
 						<c:forEach var="i" items="${list}">
 							list.push("${i.end_date}");
 						</c:forEach>
-			client.send("/app/time", {}, JSON.stringify({
+			client.send("/app/board${auction_currentpage}", {}, JSON.stringify({
 				end_dates : list
 			}));
 		}, 100);
@@ -497,10 +497,10 @@ position:relative;
       <div
          class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
          <div class="col-first">
-            <h1>중고 직거래</h1>
-            <nav class="d-flex align-items-center"> <a href="index.html"><span
+            <h1>중고 경매</h1>
+<!--             <nav class="d-flex align-items-center"> <a href="/"><span
                class="lnr lnr-arrow-right">Home</span></a> <a href="#"><span
-               class="lnr lnr-arrow-right">Shop</span></a> </nav>
+               class="lnr lnr-arrow-right">Shop</span></a> </nav> -->
          </div>
       </div>
    </div>
@@ -643,7 +643,7 @@ position:relative;
                                  	</c:when>
                                  	
                                  	<c:otherwise>
-                                 		<div class="col-lg-12">현재가격 : <fmt:formatNumber value="${temp.starting_price}" pattern="#,###" />원</div>
+                                 		<div class="col-lg-12">현재가격 : <fmt:formatNumber value="${temp.present_price}" pattern="#,###" />원</div>
                                  	</c:otherwise>
                                  </c:choose>
                                  </div>

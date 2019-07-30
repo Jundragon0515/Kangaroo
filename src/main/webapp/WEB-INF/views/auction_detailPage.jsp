@@ -44,12 +44,6 @@
 <link rel="stylesheet" href="../resources/css/nice-select.css">
 <link rel="stylesheet" href="../resources/css/nouislider.min.css">
 <link rel="stylesheet" href="../resources/css/ion.rangeSlider.css" />
-<link rel="stylesheet" href="../resources/css/ion.rangeSlider.skinFlat.css" />
-<link rel="stylesheet"
-   href="../resources/css/ion.rangeSlider.skinFlat.css" />
-<link rel="stylesheet" href="../resources/css/main.css">
-
-<style>
 <link rel="stylesheet"
    href="../resources/css/ion.rangeSlider.skinFlat.css" />
 <link rel="stylesheet" href="../resources/css/main.css">
@@ -205,7 +199,7 @@ $(function(){
 	var socket = new SockJS("/gettime"); //불특정 다수의 브라우저일 경우를 위해 endpoint url 넣어야 한다
 	var client = Stomp.over(socket);//연결 이후의 작업 지원 
 	client.connect({}, function(resp) {
-		client.subscribe("/response", function(list) {
+		client.subscribe("/response${dto.no}", function(list) {
 			var result = JSON.parse(list.body);
 							$(".time").text(result[0]);
 							console.log("${dto.onGoing}");
@@ -248,60 +242,11 @@ $(function(){
 	setInterval(function() {//시간 보내 달라는 요청
 		var list = new Array();
 		list.push("${dto.end_date}");
-		client.send("/app/time", {}, JSON.stringify({
+		client.send("/app/time${dto.no}", {}, JSON.stringify({
 			end_dates : list
 		}));
-	}, 900);
-   var socket = new SockJS("/gettime"); //불특정 다수의 브라우저일 경우를 위해 endpoint url 넣어야 한다
-   var client = Stomp.over(socket);//연결 이후의 작업 지원 
-   client.connect({}, function(resp) {
-      client.subscribe("/response", function(list) {
-         var result = JSON.parse(list.body);
-                     $(".time").text(result[0]);
-                     console.log("${dto.onGoing}");
-                     
-                     if($("#rt").text()=="종료"){
-                        
-                        if(${dto.onGoing=="n"}){
-                           
-                        }else{
-                        
-                        
-                           $.ajax({
-                           
-                           url:"/timeStop",
-                           data:{"boardNum":${dto.no }}
-                           
-                        }).done(function(resp){
-                           
-                           $.ajax({
-                              url:"/topTender",
-                              data:{"boardNum":"${dto.no }","seller":"${dto.id }"},
-                              
-                           })
-                           
-                           var result = Number(resp);
-                           console.log(Number(resp));
-                           
-                           if(result>0){
-                           
-                              alert("경매 시간이 종료되었습니다 !")
-                              location.reload();   
-                           }
-                           
-                        });
-                        
-                        }
-                     }
-      });
-   })
-   setInterval(function() {//시간 보내 달라는 요청
-      var list = new Array();
-      list.push("${dto.end_date}");
-      client.send("/app/time", {}, JSON.stringify({
-         end_dates : list
-      }));
-   }, 100);
+	}, 100);
+   
     var offset = 500;   // 수직으로 어느정도 움직여야 버튼이 나올까?
     var duration = 600;   // top으로 이동할때까지의 animate 시간 (밀리세컨드, default는 400. 예제의 기본은 500)
     $(window).scroll(function() {
@@ -456,12 +401,7 @@ $("#logout_na").on("click", function() {
          <div
             class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
             <div class="col-first">
-               <h1>Product Details Page</h1>
-               <nav class="d-flex align-items-center">
-                  <a href="index.html">Home<span class="lnr lnr-arrow-right"></span></a>
-                  <a href="#">Shop<span class="lnr lnr-arrow-right"></span></a> <a
-                     href="single-product.html">product-details</a>
-               </nav>
+               <h1>경매 상세 페이지</h1>
             </div>
          </div>
       </div>
@@ -659,7 +599,7 @@ $("#logout_na").on("click", function() {
       
       client.connect({},function(resp){
          
-         client.subscribe("/response2",function(msg){
+         client.subscribe("/ten${dto.no}",function(msg){
             var result=  JSON.parse(msg.body);
             var a ="";
                 
@@ -959,7 +899,7 @@ $("#logout_na").on("click", function() {
 //                      $("#tenderCount").html(resp);
                   });
                   
-                  client.send("/app/chat2",{}, JSON.stringify({boardNum:${dto.no }}));
+                  client.send("/app/chat${dto.no}",{}, JSON.stringify({boardNum:${dto.no }}));
                   
                }).fail(function(resp){
 
@@ -1243,13 +1183,13 @@ $("#logout_na").on("click", function() {
 											<img alt="" src="/resources/img/골드.PNG" class="level">
 											</c:when>
 											<c:when test="${arr.member_class=='플래티넘' }">
-											<img alt="" src="/resources/img/플래.PNG" class="level">
+											<img alt="" src="/resources/img/플래티넘.PNG" class="level">
 											</c:when>
 											<c:when test="${arr.member_class=='다이아몬드' }">
-											<img alt="" src="/resources/img/다이아.PNG" class="level">
+											<img alt="" src="/resources/img/다이아몬드.PNG" class="level">
 											</c:when>
 											<c:when test="${arr.member_class=='마스터' }">
-											<img alt="" src="/resources/img/마스터.png" class="level">
+											<img alt="" src="/resources/img/마스터.PNG" class="level">
 											</c:when>
 											</c:choose>
 												<h5 style="display: inline">
