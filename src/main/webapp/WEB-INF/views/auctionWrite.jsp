@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -133,7 +134,6 @@
     	color:#ffba00;
     	border : 1px solid #ffebb3;
     }
-
     #titleImg{
         border: 5px solid #ffebb3;
         border-radius: 30px 30px 30px 30px;
@@ -248,7 +248,7 @@
 	#register{
 		position:relative;
 		top:23px;
-		left:20px;
+		left: 13px;
 	}
 	#sel,#sel1,#sel2{
 		float:left;
@@ -307,6 +307,12 @@
 	.s_product_text .list li a span {
     width: 130px;
     display: inline-block;
+    
+    .footerTitle {
+	font-size: 20px;
+	text-align: center;
+	font-color: white;
+	}
 }
 </style>
 
@@ -416,9 +422,9 @@
 			<div class="col-first">
 				<h1>경매물품 글쓰기</h1>
 				<nav class="d-flex align-items-center"> <a href="/">메인페이지<span
-					class="lnr lnr-arrow-right"></span></a> <a href="/#">경매거래
+					class="lnr lnr-arrow-right"></span></a> <a href="/auction">경매거래
 					<span class="lnr lnr-arrow-right"></span>
-				</a> <a href="/auctionWrite">경매 물품 등록<span class="lnr "></span></a></nav>
+				</a> <a href="#">경매 물품 등록<span class="lnr "></span></a></nav>
 			</div>
 		</div>
 	</div>
@@ -442,7 +448,9 @@
 						<ul class="list">
                         <br>                        
 						    <li><a><span class="middleName">물품제목</span></a><input type="text" class="form-control goodsContents" id="goodsTitle" name="title" placeholder="물품제목을 입력하세요."></li><br>
-							<li><a><span class="middleName">시작가</span></a><input type="text" priceOnly  class="form-control goodsContents" id="goodsPrice" name="starting_price" placeholder="시작가 입력하세요." onkeydown="javascript: return event.keyCode == 69 ? false : true"></li><br>
+
+							<li><a><span class="middleName">시작가</span></a><input type="text" class="form-control goodsContents" id="goodsPrice" onchange="getNumber(this);" onkeyup="getNumber(this);" name="starting_price" placeholder="시작가 입력하세요."></li><br>
+
 							<li><a><span class="middleName">핸드폰번호</span></a><input type="text" phoneOnly  class="form-control goodsContents" id="phone" name="phone" placeholder="-없이 핸드폰 번호를 입력해주세요." onkeydown="javascript: return event.keyCode == 69 ? false : true"></li><br>
 							
 							
@@ -514,7 +522,6 @@
 							<div id="man" class="middleName">메인 이미지</div>
                             <input type="file" id="image" class="imgRegister1" accept=".jpg, .png">
 							<input type="hidden" id="imgTitle" name="title_img">
-							
                          
 				<div id="a">		  
 <br>
@@ -531,7 +538,7 @@
 												<input type="hidden" name="middle1_img" id="d">
 										</div>
 										<!-- 미리보기 영역 -->
-										<div id="preview" class="content"></div>
+										<div id="preview" class="content">상세 이미지 최소1장부터 최대 10장까지 넣을 수 있습니다.</div>
 										<!-- multipart 업로드시 영역 -->
 									</div>
 								</div>      
@@ -539,7 +546,8 @@
   
 
                           <div class="col-md-12 text-right">
-								<button type="button" id="register" class="primary-btn">등록하기</button>								
+								<button type="button" id="register" class="genric-btn primary radius">등록하기</button>								
+
 				        </div>                 
 						</ul>
 						<br>		
@@ -557,92 +565,57 @@
 
  
 
-	<!-- start footer Area -->
-	<footer class="footer-area section_gap">
-	<div class="container">
-		<div class="row">
-			<div class="col-lg-3  col-md-6 col-sm-6">
-				<div class="single-footer-widget">
-					<h6>About Us</h6>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-						sed do eiusmod tempor incididunt ut labore dolore magna aliqua.</p>
-				</div>
-			</div>
-			<div class="col-lg-4  col-md-6 col-sm-6">
-				<div class="single-footer-widget">
-					현재 활성화된 경매수
-					<!--                   <h6>Newsletter</h6> -->
-					<!--                   <p>Stay update with our latest</p> -->
-					<!--                   <div class="" id="mc_embed_signup"> -->
-
-					<!--                      <form target="_blank" novalidate="true" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01" -->
-					<!--                       method="get" class="form-inline"> -->
-
-					<!--                         <div class="d-flex flex-row"> -->
-
-					<!--                            <input class="form-control" name="EMAIL" placeholder="Enter Email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Email '" -->
-					<!--                             required="" type="email"> -->
-
-
-					<!--                            <button class="click-btn btn btn-default"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></button> -->
-					<!--                            <div style="position: absolute; left: -5000px;"> -->
-					<!--                               <input name="b_36c4fd991d266f23781ded980_aefe40901a" tabindex="-1" value="" type="text"> -->
-					<!--                            </div> -->
-
-					<!--                            <div class="col-lg-4 col-md-4"> -->
-					<!--                                     <button class="bb-btn btn"><span class="lnr lnr-arrow-right"></span></button> -->
-					<!--                                  </div>   -->
-					<!--                         </div> -->
-					<!--                         <div class="info"></div> -->
-					<!--                      </form> -->
-					<!--                   </div> -->
-				</div>
-			</div>
-			<div class="col-lg-3  col-md-6 col-sm-6">
-				<div class="single-footer-widget mail-chimp">
-					현재 총 거래 량
-					<!--                   <h6 class="mb-20">Instragram Feed</h6> -->
-					<!--                   <ul class="instafeed d-flex flex-wrap"> -->
-					<!--                      <li><img src="../resources/img/i1.jpg" alt=""></li> -->
-					<!--                      <li><img src="../resources/img/i2.jpg" alt=""></li> -->
-					<!--                      <li><img src="../resources/img/i3.jpg" alt=""></li> -->
-					<!--                      <li><img src="../resources/img/i4.jpg" alt=""></li> -->
-					<!--                      <li><img src="../resources/img/i5.jpg" alt=""></li> -->
-					<!--                      <li><img src="../resources/img/i6.jpg" alt=""></li> -->
-					<!--                      <li><img src="../resources/img/i7.jpg" alt=""></li> -->
-					<!--                      <li><img src="../resources/img/i8.jpg" alt=""></li> -->
-					<!--                   </ul> -->
-				</div>
-			</div>
-			<div class="col-lg-2 col-md-6 col-sm-6">
-				<div class="single-footer-widget">
-					<h6>Follow Us</h6>
-					<p>Let us be social</p>
-					<div class="footer-social d-flex align-items-center">
-						<a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i
-							class="fa fa-twitter"></i></a> <a href="#"><i
-							class="fa fa-dribbble"></i></a> <a href="#"><i
-							class="fa fa-behance"></i></a>
+			<!-- start footer Area -->
+		<footer class="footer-area section_gap">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+						<div class="">
+							<dl>
+								<dt>
+									<h6>(주) &nbsp;&nbsp;Kangaroo</h6>
+								</dt>
+								<dd>서울특별시 중구 남대문로 120 대일빌딩 3층 (04540)</dd>
+								<dd>대표이사: 홍길동 사업자등록번호 : 815-81-00000</dd>
+								<dd>Tel: 1599-0000 Fax: 02-894-0000</dd>
+								<dd>E-mail: custimerservice@aaaa.co.kr</dd>
+							</dl>
+						</div>
+					</div>
+					<div class="col-sm-4 col-md-4 col-lg-4 footerTitle">
+						<div class="single-footer-widget">
+							<h6><span>현재 활성화된 경매수</span></h6>
+							&emsp;&emsp; <br> <h6><span><fmt:formatNumber
+									value="${auctionActiveCount }" pattern="#,###" /> 건</span></h6>
+						</div>
+					</div>
+					<div class="col-sm-4 col-md-4 col-lg-4 footerTitle">
+						<div class="single-footer-widget mail-chimp">
+							<h6><span style="font-size=50px;">현재 총 거래 량</span></h6>
+							&emsp;&emsp; <br> <h6><span><fmt:formatNumber
+									value="${totalCount }" pattern="#,###" /> 건 </span></h6>
+						</div>
 					</div>
 				</div>
+				<!-- 저작권 -->
+				<div
+					class="footer-bottom d-flex justify-content-center align-items-center flex-wrap">
+					<p class="footer-text m-0">
+						<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+						Copyright &copy;
+						<script>
+						document.write(new Date().getFullYear());
+					</script>
+						All rights reserved | This template is made with <i
+							class="fa fa-heart-o" aria-hidden="true"></i> by <a
+							href="/" target="_blank">Colorlib</a>
+						<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+					</p>
+				</div>
 			</div>
-		</div>
-		<div
-			class="footer-bottom d-flex justify-content-center align-items-center flex-wrap">
-			<p class="footer-text m-0">
-				<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-				Copyright &copy;
-				<script>
-					document.write(new Date().getFullYear());
-				</script>
-				All rights reserved | This template is made with <i
-					class="fa fa-heart-o" aria-hidden="true"></i> by <a
-					href="https://colorlib.com" target="_blank">Colorlib</a>
-				<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-			</p>
-		</div>
+		</footer>
 	</div>
-	</footer>
+	<!-- End footer Area -->
 
 	<script>
 	
@@ -692,7 +665,11 @@
 							html + ' <span class="caret"></span>');
 				});
 
-		
+		$("#image").on("click",function(){
+			$("#middle").remove();
+        	$("#imgTitle").val().remove();
+		})
+
 		$("#image").on("input",function() {
 							var formData = new FormData();
 							formData.append("formData", $(this)[0].files[0]);
@@ -704,12 +681,16 @@
 										data : formData
 									})
 									.done(function(resp) {
-												//var time = new Date().getTime();
-												$("#image").attr("disabled",true);
-												$("#titleImg")
-														.append("<img src='/img/title/"+resp+"' id='middle'>");
-												$("#imgTitle").val(resp);		
-												
+										if(resp=="사이즈가 너무 큽니다."){
+											alert(resp);
+											$("#image").val("");
+										}else if(resp =="jpg,png확장자만 업로드 가능합니다."){
+											alert(resp);
+											$("#image").val("");
+										}else{
+											$("#titleImg").append("<img src='/img/title/"+resp+"' id='middle'>");
+											$("#imgTitle").val(resp);		
+										}
 											})
 						})//메인 이미지 바로 띄우는 것
 
@@ -908,25 +889,32 @@
 			var regContents = /^[가-힣 .,:;()!^?~0-9a-zA-Z\n]{1,150}$/g;	 //레직스 바꾸기		
 			var titleText = title;
 			var regTitle = /^[가-힣 .,:;()!^?~0-9a-zA-Z]{1,22}$/g;
-			var price = parseInt($("#goodsPrice").val());
+			var price = $("#goodsPrice").val();
+			price = price.replace(/,/ig,"");
 			var regPrice = /[1-9][0-9]{3,7}/g;
 			var phoneText = $("#phone").val();			
 			var regPhone = /(01[0|1|6|9|7])[-](\d{3}|\d{4})[-](\d{4}$)/g;	
 		
 			if(!regContents.test(contentsText)){
-				alert('한글,영문(1글자~150글자 사이 입력하세요.)');
+				alert('내용은 한글,영문(1글자~150글자 사이 입력하세요.)');
 			}else if(!regTitle.test(titleText)){
-				alert('한글,영문(1글자~22글자 사이 입력하세요.)');
+				alert('제목은 한글,영문(1글자~22글자 사이 입력하세요.)');
 			}else if(!regPhone.test(phoneText)){
 				alert('잘못된 휴대폰 번호입니다.');	
 			}else if(price !=0){
 				if(price<1000){
-					alert("1,000원~99,999,999원 사이 입력하세요.");
+					alert("물품 가격은 1,000원~99,999,999원 사이 입력하세요.");
 					}else if(price>99999999){
-						alert("1,000원~99,999,999원 사이 입력하세요.");
+						alert("물품 가격은 1,000원~99,999,999원 사이 입력하세요.");
 					}else if(!regPrice.test(price)){
-						alert("가격은 숫자만 입력할 수 있습니다.(1,000원~99,999,999원 사이)")
+						alert("물품 가격은 숫자만 입력할 수 있습니다.(1,000원~99,999,999원 사이)")
 					}else{
+						var result = confirm("등록하시겠습니까?");
+						if(result==false){
+							return false;
+						}
+						price = parseInt(price);
+						$("#goodsPrice").val(price);
 						$("#send").submit();
 				}
 			}
@@ -956,9 +944,28 @@
 	                location.reload(true);
 	             },1000);
 	          });
-		});	
-	
-	
+
+		});		
+		var rgx1 = /\D/g;  // /[^0-9]/g 와 같은 표현
+		var rgx2 = /(\d+)(\d{3})/; 
+
+		function getNumber(obj){
+		     var num01;
+		     var num02;
+		     num01 = obj.value;
+		     num02 = num01.replace(rgx1,"");
+		     num01 = setComma(num02);
+		     obj.value =  num01;
+		}
+		function setComma(inNum){
+		     var outNum;
+		     outNum = inNum; 
+		     while (rgx2.test(outNum)) {
+		          outNum = outNum.replace(rgx2, '$1' + ',' + '$2');
+		      }
+		     return outNum;
+		}
+		
 	</script>
  
 

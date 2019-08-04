@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 
+import kh.spring.dao.AdminDAO;
 import kh.spring.dao.AuctionDAO;
 import kh.spring.dao.DetailPageDAO;
 import kh.spring.dao.GoodsTradeDAO;
@@ -56,6 +57,9 @@ public class DetailPageController {
 	
 	@Autowired
 	private AuctionController ac;
+	
+	@Autowired
+	private AdminDAO adao;
 	
 	@RequestMapping("/topTender")
 	@ResponseBody
@@ -131,7 +135,7 @@ public class DetailPageController {
 	@RequestMapping("/used_detailPage")								// 중고 거래_상세 페이지
 	public String used_detailPage(HttpServletRequest request) {
 		int no = Integer.parseInt(request.getParameter("no"));
-		Used_transaction_img_boardDTO i_dto = dao.u_i_selectByNo(no);	
+		Used_transaction_img_boardDTO i_dto = dao.u_i_selectByNo(no);
 		Used_transaction_boardDTO dto = dao.u_selectByNo(no);
 		//조회수 올리기
 		gtdao.viewCountUpdate(no);
@@ -169,9 +173,10 @@ public class DetailPageController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 		request.setAttribute("i_dto", i_dto);
 		request.setAttribute("dto", dto);
+		request.setAttribute("auctionActiveCount", adao.auctionActiveCount());            // 활성화된 경매  수
+	    request.setAttribute("totalCount", adao.auctionCount()+adao.directTradeCount()+adao.safeTradeCount());	// 총 거래량
 		return "used_detailPage";
 	}
 
@@ -227,6 +232,8 @@ public class DetailPageController {
 	      System.out.println("사진 확인용" + i_dto.getTitle_img());
 	      request.setAttribute("i_dto", i_dto);
 	      request.setAttribute("dto", dto);
+	      request.setAttribute("auctionActiveCount", adao.auctionActiveCount());            // 활성화된 경매  수
+		  request.setAttribute("totalCount", adao.auctionCount()+adao.directTradeCount()+adao.safeTradeCount());	// 총 거래량
 	      return "auction_detailPage";
 	}
 

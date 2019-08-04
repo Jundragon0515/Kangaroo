@@ -84,5 +84,13 @@
 	<delete id="cancleTrade">
 		delete from used_transaction_board where no=#{value}
 	</delete>
+	
+	<select id="mainTrade" resultType="kh.spring.dto.Used_transaction_boardDTO">
+		select * from used_transaction_board where no=#{value}
+	</select>
+	
+	<select id="mainAuction" resultType="kh.spring.dto.Auction_boardDTO">
+		select * from auction_board where no=#{value}
+	</select>
 
 </mapper>

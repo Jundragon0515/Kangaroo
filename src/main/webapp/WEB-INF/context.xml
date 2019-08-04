@@ -32,7 +32,7 @@
 	</bean>
 	
 	<bean id ="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-		<property name = "maxUploadSize" value="10000000"></property>
+		<property name = "maxUploadSize" value="10000000000000000"></property>
 	</bean>
 	<context:component-scan base-package="kh.spring" />
 	<bean id = "dataSource" class="org.apache.commons.dbcp.BasicDataSource" >

@@ -4,6 +4,10 @@
 
 <insert id="reportInsert">
 	insert into report values(#{no},#{sender},#{type},default,#{ipaddress},#{title},#{reason},#{contents})
-
 </insert>
+
+<select id="selectReport" resultType="kh.spring.dto.ReportDTO">
+	select * from report order by 1 desc
+</select>
+
 </mapper>

@@ -1,5 +1,7 @@
 package kh.spring.dao;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -14,5 +16,8 @@ public class ReportDAO {
 	
 	public int ReportInsert(ReportDTO dto) {
 		return sst.insert("ReportDAO.reportInsert",dto);
+	}
+	public List<ReportDTO> selectReport(){
+		return sst.selectList("ReportDAO.selectReport");
 	}
 }

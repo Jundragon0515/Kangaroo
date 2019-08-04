@@ -11,6 +11,7 @@ import com.google.gson.JsonParser;
 
 import kh.spring.dao.BoardDAO;
 import kh.spring.dao.DeliveryDAO;
+import kh.spring.dao.DetailPageDAO;
 import kh.spring.dao.KakaoDAO;
 import kh.spring.dao.MailDAO;
 import kh.spring.dao.MemberDAO;
@@ -42,7 +43,8 @@ public class MyPageService {
 	NaverDAO na;
 	@Autowired
 	KakaoDAO ka;
-	
+	@Autowired
+	DetailPageDAO det;
 	public List<OrderDTO> selectByBuyer(int currentPage,String buyer){//구매 리스트
 		return or.selectByBuyer(currentPage, buyer);
 	}
@@ -85,6 +87,9 @@ public class MyPageService {
 	@Transactional
 	public void comp(int seq) {
 		or.update_situation(seq, "배송완료");
+	}
+	public void comp2(int seq) {
+		det.soldOut(seq);
 	}
 	@Transactional
 	public void refund_comp(int seq) {

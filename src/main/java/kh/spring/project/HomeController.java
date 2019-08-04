@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import kh.spring.dao.AdminDAO;
 import kh.spring.dao.MemberDAO;
 import kh.spring.dto.Auction_boardDTO;
 import kh.spring.dto.MemberDTO;
@@ -28,44 +29,59 @@ public class HomeController {
 	HttpSession se;
 	@Autowired
 	MemberService mes;
+	@Autowired
+	private AdminDAO adao; 
 	public static int visitCount = 0;
+
 	@RequestMapping("/")
 	public ModelAndView visit() { 	//홈
-		
 		ModelAndView mav =new ModelAndView();
 		List<Used_transaction_boardDTO> mainDirectList = mes.directList();
 		List<Used_transaction_boardDTO> mainSafeList = mes.safeList();
 		List<Auction_boardDTO> mainAuctionList = mes.auctionList();
+		Used_transaction_boardDTO mainTrade = mes.mainTrade(1);
+		Auction_boardDTO mainAuction = mes.mainAuction(1);
+		System.out.println(mainTrade.getContents());
+		System.out.println(mainAuction.getTitle_img());
 		mav.addObject("mainDirectList",mainDirectList);
 		mav.addObject("mainSafeList",mainSafeList);
 		mav.addObject("auctionList", mainAuctionList);
+		mav.addObject("mainTrade", mainTrade);
+		mav.addObject("mainAuction", mainAuction);
 		mav.setViewName("index");
-	
-		return mav;
+		mav.addObject("auctionActiveCount", adao.auctionActiveCount());            						// 활성화된 경매  수
+		mav.addObject("totalCount", adao.auctionCount()+adao.directTradeCount()+adao.safeTradeCount());	// 총 거래량
 		
-	   }
-	
+		return mav;
+
+	}
+
 	@RequestMapping("/start")
 	public ModelAndView home() { 	//첫방문
 
 		visitCount++;
 		ModelAndView mav =new ModelAndView();
+		Used_transaction_boardDTO mainTrade = mes.mainTrade(1);
+		Auction_boardDTO mainAuction = mes.mainAuction(1);
 		List<Used_transaction_boardDTO> mainDirectList = mes.directList();
 		List<Used_transaction_boardDTO> mainSafeList = mes.safeList();
 		List<Auction_boardDTO> mainAuctionList = mes.auctionList();
 		mav.addObject("mainDirectList",mainDirectList);
 		mav.addObject("mainSafeList",mainSafeList);
 		mav.addObject("auctionList", mainAuctionList);
+		mav.addObject("mainTrade", mainTrade);
+		mav.addObject("mainAuction", mainAuction);
+		mav.addObject("auctionActiveCount", adao.auctionActiveCount());            						// 활성화된 경매  수
+		mav.addObject("totalCount", adao.auctionCount()+adao.directTradeCount()+adao.safeTradeCount());	// 총 거래량
 		mav.setViewName("index");
-	
+
 		return mav;
 	}
-	
+
 	@RequestMapping("/level")
 	@ResponseBody
 	@Transactional("txManager")
 	public int level() { 	
-		
 		String id = (String)se.getAttribute("email");
 		int b1 = dao.count1(id);
 		int b2 = dao.count2(id);
@@ -143,15 +159,24 @@ public class HomeController {
 			e.printStackTrace();
 		}
 		return 0;
-		
+
 	}
 	@RequestMapping("/login_main")
-	public String login_main() { // 로그인 메인페이지
+	public String login_main(HttpServletRequest request) { // 로그인 메인페이지
+		request.setAttribute("auctionActiveCount", adao.auctionActiveCount());            // 활성화된 경매  수
+		request.setAttribute("totalCount", adao.auctionCount()+adao.directTradeCount()+adao.safeTradeCount());	// 총 거래량
 		return "login_main";
 	}
 	@RequestMapping("/login")
-	public String login() { // 일반 로그인 페이지
+	public String login(HttpServletRequest request) { // 일반 로그인 페이지
+		request.setAttribute("auctionActiveCount", adao.auctionActiveCount());            // 활성화된 경매  수
+		request.setAttribute("totalCount", adao.auctionCount()+adao.directTradeCount()+adao.safeTradeCount());	// 총 거래량
 		return "login";
+	}
+	@RequestMapping("/blackListCheck")
+	@ResponseBody
+	public String blackListCheck(String id) { 		// 블랙리스트 체크
+		return dao.selectById(id).getBlacklist();
 	}
 	@RequestMapping("/findIdOrPw")
 	public String findIdOrPw() { // 패스워드 찾기
@@ -160,10 +185,13 @@ public class HomeController {
 	@RequestMapping("/loginProc")
 	@ResponseBody
 	public String loginProc(String id,String pw) { // 로그인 기능
+		System.out.println("로그인 체크");
 		return mes.loginProc(id, pw);
 	}
 	@RequestMapping("/insert")
-	public String insert() { // 회원가입 페이지로 갈때
+	public String insert(HttpServletRequest request) { // 회원가입 페이지로 갈때
+        request.setAttribute("auctionActiveCount", adao.auctionActiveCount());            // 활성화된 경매  수
+	    request.setAttribute("totalCount", adao.auctionCount()+adao.directTradeCount()+adao.safeTradeCount());	// 총 거래량
 		return "insert";
 	}
 	@RequestMapping(value="/insertProc" , method=RequestMethod.POST,  produces="application/String;charset=UTF-8")

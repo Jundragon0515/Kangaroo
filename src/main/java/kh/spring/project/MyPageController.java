@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +14,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
+import kh.spring.dao.AdminDAO;
 import kh.spring.dto.DeliveryDTO;
 import kh.spring.dto.MemberDTO;
 import kh.spring.dto.TrackingDTO;
@@ -30,8 +31,10 @@ public class MyPageController {
 	MemberService mes;
 	@Autowired
 	MyPageService mps;
+	@Autowired
+	private AdminDAO adao;
 	@RequestMapping(value="updateProc" , produces="application/String;charset=UTF-8")
-	public String updateProc(MemberDTO dto) { //멤버 정보 업데이트
+	public String updateProc(MemberDTO dto, HttpServletRequest request) { //멤버 정보 업데이트
 		dto.setId(se.getAttribute("email").toString());
 		mes.updateProc(dto);
 		se.setAttribute("email", dto.getId());
@@ -41,18 +44,22 @@ public class MyPageController {
 		se.setAttribute("address1", dto.getAddress1());
 		se.setAttribute("address2", dto.getAddress2());
 		se.setAttribute("info",dto);
-
+		
+	    request.setAttribute("auctionActiveCount", adao.auctionActiveCount());            // 활성화된 경매  수
+		request.setAttribute("totalCount", adao.auctionCount()+adao.directTradeCount()+adao.safeTradeCount());	// 총 거래량
 		return "redirect:/goMyPage";
 	}
 	@RequestMapping("/goMyPage")
-	public String goMyPage() { // 마이페이지로
+	public String goMyPage(HttpServletRequest request) { // 마이페이지로
 		if(se.getAttribute("email")!=null) {
 	         mes.setPoint();
 	      }
+	    request.setAttribute("auctionActiveCount", adao.auctionActiveCount());            // 활성화된 경매  수
+		request.setAttribute("totalCount", adao.auctionCount()+adao.directTradeCount()+adao.safeTradeCount());	// 총 거래량
 		return "myPage_f/myPage";
 	}
 	@RequestMapping("/goMyPage_delivery")
-	public ModelAndView goMyPage_delivery(int or_currentPage,int te_currentPage) { // 마이페이지 배송조회
+	public ModelAndView goMyPage_delivery(int or_currentPage,int te_currentPage,HttpServletRequest request) { // 마이페이지 배송조회
 		se.setAttribute("or_currentPage", or_currentPage);
 		se.setAttribute("te_currentPage", te_currentPage);
 		String email=(String)se.getAttribute("email");
@@ -65,6 +72,8 @@ public class MyPageController {
 				return mav;
 			}
 
+		 request.setAttribute("auctionActiveCount", adao.auctionActiveCount());            // 활성화된 경매  수
+		 request.setAttribute("totalCount", adao.auctionCount()+adao.directTradeCount()+adao.safeTradeCount());	// 총 거래량
 		mav.addObject("order_list", mps.selectByBuyer(or_currentPage, email));
 		mav.addObject("tender_list", mps.selectById(te_currentPage,  email));
 		mav.addObject("order_navi", mps.getNavi_or(or_currentPage, email));
@@ -122,6 +131,12 @@ public class MyPageController {
 		mps.comp(seq);
 		return "good";
 	}
+	@RequestMapping("/comp2")
+	@ResponseBody
+	public String comp2(int seq) {
+		mps.comp2(seq);
+		return "good";
+	}
 	@RequestMapping("/refund_comp")
 	@ResponseBody
 	public String refund_comp(int seq) {
@@ -135,7 +150,7 @@ public class MyPageController {
 		return "good";
 	}
 	@RequestMapping("/goMyPage_sold")
-	public ModelAndView goMyPage_sold(int or2_currentPage,int used_currentPage,int auc_currentPage) { // 마이페이지 배송조회
+	public ModelAndView goMyPage_sold(int or2_currentPage,int used_currentPage,int auc_currentPage,HttpServletRequest request) { // 마이페이지 배송조회
 		se.setAttribute("or2_currentPage", or2_currentPage);
 		se.setAttribute("used_currentPage", used_currentPage);
 		se.setAttribute("auc_currentPage", auc_currentPage);
@@ -148,7 +163,8 @@ public class MyPageController {
 			mav.setViewName("redirect:/");
 			return mav;
 		}
-
+		 request.setAttribute("auctionActiveCount", adao.auctionActiveCount());            // 활성화된 경매  수
+		 request.setAttribute("totalCount", adao.auctionCount()+adao.directTradeCount()+adao.safeTradeCount());	// 총 거래량
 		mav.addObject("order_list", mps.selectBySeller(or2_currentPage, email));
 		mav.addObject("order_navi", mps.getNavi_or2(or2_currentPage, email));
 		mav.addObject("auction_list", mps.selectById_au(auc_currentPage, email));

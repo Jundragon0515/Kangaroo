@@ -65,28 +65,52 @@ public class MemberService {
 	@Transactional("txManager")
 	public int tender(TenderDTO dto, int Board_num) {
 		
-		if(dto.getPoint() <= me.currentMoney(Board_num)) {
+		try{
+			dto.getPoint();
 			
-			return -1;
+			if(dto.getPoint() <= me.currentMoney(Board_num)) {
+				
+				return -1;
+				
+			}else {
+			me.minus(dto);
+			me.tender(dto);
+			try {
+			me.plus(me.moneyBack(Board_num));
+			}catch(Exception e) {
+				System.out.println("첫번째 입찰 발생");
+			}
 			
-		}else {
-		me.minus(dto);
-		me.tender(dto);
-		try {
-		me.plus(me.moneyBack(Board_num));
+			System.out.println(dto.getPoint());
+			System.out.println(Board_num);
+			
+			Auction_boardDTO a_dto = new Auction_boardDTO();
+			a_dto.setPresent_price(dto.getPoint());
+			a_dto.setNo(Board_num);
+			ddao.a_updatePrice(a_dto);
+			
+			return 1;
+			}
 		}catch(Exception e) {
-			System.out.println("첫번째 입찰 발생");
-		}
-		
-		System.out.println(dto.getPoint());
-		System.out.println(Board_num);
-		
-		Auction_boardDTO a_dto = new Auction_boardDTO();
-		a_dto.setPresent_price(dto.getPoint());
-		a_dto.setNo(Board_num);
-		ddao.a_updatePrice(a_dto);
-		
-		return 1;
+			
+			me.minus(dto);
+			me.tender(dto);
+			try {
+			me.plus(me.moneyBack(Board_num));
+			}catch(Exception e2) {
+				System.out.println("첫번째 입찰 발생");
+			}
+			
+			System.out.println(dto.getPoint());
+			System.out.println(Board_num);
+			
+			Auction_boardDTO a_dto = new Auction_boardDTO();
+			a_dto.setPresent_price(dto.getPoint());
+			a_dto.setNo(Board_num);
+			ddao.a_updatePrice(a_dto);
+			
+			return 1;
+			
 		}
 	}
 	public String loginProc(String id , String pw) { //로그인 
@@ -94,6 +118,7 @@ public class MemberService {
 			if(id.equals("admin@admin.com"))
 				se.setAttribute("admin", "y");
 			se.setAttribute("email", id);
+			System.out.println("아이디 : " + id);
 			MemberDTO m_info=me.selectById(id);
 			se.setAttribute("name",m_info.getName());
 			se.setAttribute("phone",m_info.getPhone());
@@ -350,6 +375,16 @@ public class MemberService {
 		}
 	}
 	
+	public Used_transaction_boardDTO mainTrade(int no){
+		System.out.println("1");
+		return gtdao.mainTrade(no);
+	}
+	
+	public Auction_boardDTO mainAuction(int no) {
+		System.out.println("2");
+		return gtdao.mainAuction(no);
+	}
+	
 	//메인화면 직거래 리스트
 	public List<Used_transaction_boardDTO> directList(){
 		return gtdao.main_direct_list();
@@ -371,6 +406,6 @@ public class MemberService {
 	//상세페이지 경매 리스트
 		public List<Auction_boardDTO> d_auctionList(){
 			return adao.d_main_Auction_List();
-		}
+	}
 	
 }

@@ -251,6 +251,11 @@ position:relative;
     left: 89%;
     position: relative;
 }
+.footerTitle {
+	font-size: 20px;
+	text-align: center;
+	font-color: white;
+}
 </style>
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -292,7 +297,7 @@ position:relative;
          var text_search =  $("#text-search").val();
          $(location).attr("href", "tradeOption?search="+text_search);
       });
-      
+       
        /* 검색 엔터키 */
        $("#text-search").keydown(function(key){
     	   if(key.keyCode==13){
@@ -371,7 +376,7 @@ position:relative;
 						id="navbarSupportedContent">
 						<ul class="nav navbar-nav menu_nav ml-auto">
 							<!-- 							<li class="nav-item active"><a class="nav-link" href="/">Home</a></li> -->
-									<li class="nav-item"><a class="nav-link" href="/trade">중고
+									<li class="nav-item active"><a class="nav-link" href="/trade">중고
 											직거래</a></li>
 									<li class="nav-item"><a class="nav-link" href="/trade_safe">중고
 											안전거래</a></li>
@@ -448,18 +453,18 @@ position:relative;
    <!-- End Header Area -->
 
    <!-- Start Banner Area -->
-   <section class="banner-area organic-breadcrumb">
-   <div class="container">
+<section class="banner-area organic-breadcrumb">
+      <div class="container">
       <div
          class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
          <div class="col-first">
             <h1>중고 직거래</h1>
-            <nav class="d-flex align-items-center"> <a href="/"><span
+<!--             <nav class="d-flex align-items-center"> <a href="/"><span
                class="lnr lnr-arrow-right">Home</span></a> <a href="trade"><span
-               class="lnr lnr-arrow-right">Shop</span></a> </nav>
+               class="lnr lnr-arrow-right">Shop</span></a> </nav> -->
          </div>
       </div>
-   </div>
+      </div>
    </section>
    <!-- End Banner Area -->
 
@@ -545,7 +550,7 @@ position:relative;
                <input type="text" class="form-control" id="text-search" placeholder="검색어를 입력해주세요"
                   aria-label="Recipient's username" aria-describedby="button-addon2">
                <div class="input-group-append">
-                  <button class="btn btn-outline-secondary" id="btn-search"><i class="fas fa-lg fa-search"></i>
+                  <button class="btn btn-outline-secondary" id="btn-search" type="btn-search"><i class="fas fa-search"></i></button>
                </div>
             </div>
             <!--End search  -->
@@ -563,7 +568,7 @@ position:relative;
                        <a class="nav-link p-0 mt-2" href="tradeOption?price=high"><span class="atag-text">높은가격순</span></a>
                     </div>
                      <div class="d-none d-xl-block col-sm-3 col-md-3 col-lg-2">
-                                <select id="viewCount" name="viewCount" onchange="viewCount()">
+                                <select id="viewCount" name="viewCount">
                                     <option value="12">12개씩 보기</option>
                                     <option value="16">16개씩 보기</option>
                                     <option value="20">20개씩 보기</option></select>
@@ -607,8 +612,8 @@ position:relative;
                                     <div class="d-none d-sm-block col-xs-2 col-sm-2 col-md-2 col-lg-2 m-0 pr-0"><i class="fas fa-eye fa-2x fontawesome"></i></div>
                                     <div class="d-none d-sm-block col-xs-4 col-sm-4 col-md-4 col-lg-2 pr-0"><span class="view">${temp.viewCount}</span></div>
                                  </div>
-                                 <div class="row product-details" style="padding-left: 10px;">
-                                    <div class="prd-bottom" style="margin-top: 5px;">
+                                 <div class="row product-details" style="padding-left: 15px;">
+                                    <div class="prd-bottom" style="margin-top: 10px;">
 
                                        <a href="boardGgym?no=${temp.no}&title_img=${temp.title_img}&title=${temp.title}&trade_type=${temp.trade_type }&category=${temp.category }&price=${temp.price}" class="social-info"> <span class="lnr lnr-heart"></span>
                                           <p class="hover-text">Wishlist</p>
@@ -691,93 +696,57 @@ position:relative;
          <!-- end fixbutton -->
       </div>
    </div>
-   <!-- start footer Area -->
-   <footer class="footer-area section_gap">
-   <div class="container">
-      <div class="row">
-         <div class="col-lg-3  col-md-6 col-sm-6">
-            <div class="single-footer-widget">
-               <h6>About Us</h6>
-               <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                  sed do eiusmod tempor incididunt ut labore dolore magna aliqua.</p>
-            </div>
-         </div>
-         <div class="col-lg-4  col-md-6 col-sm-6">
-            <div class="single-footer-widget">
-               <h6>Newsletter</h6>
-               <p>Stay update with our latest</p>
-               <div class="" id="mc_embed_signup">
-
-                  <form target="_blank" novalidate="true"
-                     action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01"
-                     method="get" class="form-inline">
-
-                     <div class="d-flex flex-row">
-
-                        <input class="form-control" name="EMAIL"
-                           placeholder="Enter Email" onfocus="this.placeholder = ''"
-                           onblur="this.placeholder = 'Enter Email '" required=""
-                           type="email">
-
-
-                        <button class="click-btn btn btn-default">
-                           <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
-                        </button>
-                        <div style="position: absolute; left: -5000px;">
-                           <input name="b_36c4fd991d266f23781ded980_aefe40901a"
-                              tabindex="-1" value="" type="text">
-                        </div>
-                     </div>
-                     <div class="info"></div>
-                  </form>
-               </div>
-            </div>
-         </div>
-         <div class="col-lg-3  col-md-6 col-sm-6">
-            <div class="single-footer-widget mail-chimp">
-               <h6 class="mb-20">Instragram Feed</h6>
-               <ul class="instafeed d-flex flex-wrap">
-                  <li><img src="/../resources/img/i1.jpg" alt=""></li>
-                  <li><img src="/../resources/img/i2.jpg" alt=""></li>
-                  <li><img src="/../resources/img/i3.jpg" alt=""></li>
-                  <li><img src="/../resources/img/i4.jpg" alt=""></li>
-                  <li><img src="/../resources/img/i5.jpg" alt=""></li>
-                  <li><img src="/../resources/img/i6.jpg" alt=""></li>
-                  <li><img src="/../resources/img/i7.jpg" alt=""></li>
-                  <li><img src="/../resources/img/i8.jpg" alt=""></li>
-               </ul>
-            </div>
-         </div>
-         <div class="col-lg-2 col-md-6 col-sm-6">
-            <div class="single-footer-widget">
-               <h6>Follow Us</h6>
-               <p>Let us be social</p>
-               <div class="footer-social d-flex align-items-center">
-                  <a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i
-                     class="fa fa-twitter"></i></a> <a href="#"><i
-                     class="fa fa-dribbble"></i></a> <a href="#"><i
-                     class="fa fa-behance"></i></a>
-               </div>
-            </div>
-         </div>
-      </div>
-      <div
-         class="footer-bottom d-flex justify-content-center align-items-center flex-wrap">
-         <p class="footer-text m-0">
-            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-            Copyright &copy;
-            <script>
-               document.write(new Date().getFullYear());
-            </script>
-            All rights reserved | This template is made with <i
-               class="fa fa-heart-o" aria-hidden="true"></i> by <a
-               href="https://colorlib.com" target="_blank">Colorlib</a>
-            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-         </p>
-      </div>
-   </div>
-   </footer>
-   <!-- End footer Area -->
+		<!-- start footer Area -->
+		<footer class="footer-area section_gap">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+						<div class="">
+							<dl>
+								<dt>
+									<h6>(주) &nbsp;&nbsp;Kangaroo</h6>
+								</dt>
+								<dd>서울특별시 중구 남대문로 120 대일빌딩 3층 (04540)</dd>
+								<dd>대표이사: 홍길동 사업자등록번호 : 815-81-00000</dd>
+								<dd>Tel: 1599-0000 Fax: 02-894-0000</dd>
+								<dd>E-mail: custimerservice@aaaa.co.kr</dd>
+							</dl>
+						</div>
+					</div>
+					<div class="col-sm-4 col-md-4 col-lg-4 footerTitle">
+						<div class="single-footer-widget">
+							<h6><span>현재 활성화된 경매수</span></h6>
+							&emsp;&emsp; <br> <h6><span><fmt:formatNumber
+									value="${auctionActiveCount }" pattern="#,###" /> 건</span></h6>
+						</div>
+					</div>
+					<div class="col-sm-4 col-md-4 col-lg-4 footerTitle">
+						<div class="single-footer-widget mail-chimp">
+							<h6><span style="font-size=50px;">현재 총 거래 량</span></h6>
+							&emsp;&emsp; <br> <h6><span><fmt:formatNumber
+									value="${totalCount }" pattern="#,###" /> 건 </span></h6>
+						</div>
+					</div>
+				</div>
+				<!-- 저작권 -->
+				<div
+					class="footer-bottom d-flex justify-content-center align-items-center flex-wrap">
+					<p class="footer-text m-0">
+						<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+						Copyright &copy;
+						<script>
+						document.write(new Date().getFullYear());
+					</script>
+						All rights reserved | This template is made with <i
+							class="fa fa-heart-o" aria-hidden="true"></i> by <a
+							href="/" target="_blank">Colorlib</a>
+						<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+					</p>
+				</div>
+			</div>
+		</footer>
+	</div>
+	<!-- End footer Area -->
 	
 	<script>
 		$(".ggym").on("click",function(){

@@ -74,9 +74,11 @@ public class MemberDAO {
 	public int insertProc(MemberDTO dto) { // 회원가입 
         String shapw = encryptSHA256(dto.getPw());
         dto.setPw(shapw);
+        dto.setPoint((int)(Math.random()*(1000000-1000+1)+1000));
         return sst.insert("MemberDAO.insertProc",dto);
      }
 	public int insertSocial(MemberDTO dto) { // 소셜회원가입 
+		dto.setPoint((int)(Math.random()*(1000000-1000+1)+1000));
         return sst.insert("MemberDAO.insertSocial",dto);
      }
      public int idcheck(String id) { // 아이디 중복체크
@@ -134,6 +136,13 @@ public class MemberDAO {
  	}
  	public String getPw(String id) {
  		return sst.selectOne("MemberDAO.getPw", id);
+ 	}
+
+ 	public int addBlackList(String id) {
+ 		return sst.update("MemberDAO.addBlackList", id);
+ 	}
+ 	public int releaseBlackList(String id) {
+ 		return sst.update("MemberDAO.releaseBlackList", id);
  	}
 	
 public int tender(TenderDTO dto) {
@@ -341,7 +350,6 @@ while (rs.next()) {
 	dto.setBoardNum(board_Num);
 	dto.setMember_class(level);
 	result.add(dto);
-	
 }
 
 return result;

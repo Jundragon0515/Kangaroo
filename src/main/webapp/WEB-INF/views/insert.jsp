@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -131,6 +132,12 @@ select {
 
 .nav_ul * {
    text-align: center;
+}
+
+.footerTitle {
+	font-size: 20px;
+	text-align: center;
+	font-color: white;
 }
 </style>
 <script>
@@ -726,91 +733,57 @@ $(function() {
       </div>
    </form>
 
-  <footer class="footer-area section_gap">
-   <div class="container">
-      <div class="row">
-         <div class="col-lg-3  col-md-6 col-sm-6">
-            <div class="single-footer-widget">
-               <h6>About Us</h6>
-               <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                  sed do eiusmod tempor incididunt ut labore dolore magna aliqua.</p>
-            </div>
-         </div>
-         <div class="col-lg-4  col-md-6 col-sm-6">
-            <div class="single-footer-widget">
-               현재 활성화된 경매수
-               <!--                   <h6>Newsletter</h6> -->
-               <!--                   <p>Stay update with our latest</p> -->
-               <!--                   <div class="" id="mc_embed_signup"> -->
-
-               <!--                      <form target="_blank" novalidate="true" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01" -->
-               <!--                       method="get" class="form-inline"> -->
-
-               <!--                         <div class="d-flex flex-row"> -->
-
-               <!--                            <input class="form-control" name="EMAIL" placeholder="Enter Email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Email '" -->
-               <!--                             required="" type="email"> -->
-
-
-               <!--                            <button class="click-btn btn btn-default"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></button> -->
-               <!--                            <div style="position: absolute; left: -5000px;"> -->
-               <!--                               <input name="b_36c4fd991d266f23781ded980_aefe40901a" tabindex="-1" value="" type="text"> -->
-               <!--                            </div> -->
-
-               <!--                            <div class="col-lg-4 col-md-4"> -->
-               <!--                                     <button class="bb-btn btn"><span class="lnr lnr-arrow-right"></span></button> -->
-               <!--                                  </div>   -->
-               <!--                         </div> -->
-               <!--                         <div class="info"></div> -->
-               <!--                      </form> -->
-               <!--                   </div> -->
-            </div>
-         </div>
-         <div class="col-lg-3  col-md-6 col-sm-6">
-            <div class="single-footer-widget mail-chimp">
-               현재 총 거래 량
-               <!--                   <h6 class="mb-20">Instragram Feed</h6> -->
-               <!--                   <ul class="instafeed d-flex flex-wrap"> -->
-               <!--                      <li><img src="../resources/img/i1.jpg" alt=""></li> -->
-               <!--                      <li><img src="../resources/img/i2.jpg" alt=""></li> -->
-               <!--                      <li><img src="../resources/img/i3.jpg" alt=""></li> -->
-               <!--                      <li><img src="../resources/img/i4.jpg" alt=""></li> -->
-               <!--                      <li><img src="../resources/img/i5.jpg" alt=""></li> -->
-               <!--                      <li><img src="../resources/img/i6.jpg" alt=""></li> -->
-               <!--                      <li><img src="../resources/img/i7.jpg" alt=""></li> -->
-               <!--                      <li><img src="../resources/img/i8.jpg" alt=""></li> -->
-               <!--                   </ul> -->
-            </div>
-         </div>
-         <div class="col-lg-2 col-md-6 col-sm-6">
-            <div class="single-footer-widget">
-               <h6>Follow Us</h6>
-               <p>Let us be social</p>
-               <div class="footer-social d-flex align-items-center">
-                  <a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i
-                     class="fa fa-twitter"></i></a> <a href="#"><i
-                     class="fa fa-dribbble"></i></a> <a href="#"><i
-                     class="fa fa-behance"></i></a>
-               </div>
-            </div>
-         </div>
-      </div>
-      <div
-         class="footer-bottom d-flex justify-content-center align-items-center flex-wrap">
-         <p class="footer-text m-0">
-            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-            Copyright &copy;
-            <script>document.write(new Date().getFullYear());</script>
-            All rights reserved | This template is made with <i
-               class="fa fa-heart-o" aria-hidden="true"></i> by <a
-               href="https://colorlib.com" target="_blank">Colorlib</a>
-            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-         </p>
-      </div>
-   </div>
-   </footer>
-   <!-- End footer Area -->
-   <!-- End footer Area -->
+		<!-- start footer Area -->
+		<footer class="footer-area section_gap">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+						<div class="">
+							<dl>
+								<dt>
+									<h6>(주) &nbsp;&nbsp;Kangaroo</h6>
+								</dt>
+								<dd>서울특별시 중구 남대문로 120 대일빌딩 3층 (04540)</dd>
+								<dd>대표이사: 홍길동 사업자등록번호 : 815-81-00000</dd>
+								<dd>Tel: 1599-0000 Fax: 02-894-0000</dd>
+								<dd>E-mail: custimerservice@aaaa.co.kr</dd>
+							</dl>
+						</div>
+					</div>
+					<div class="col-sm-4 col-md-4 col-lg-4 footerTitle">
+						<div class="single-footer-widget">
+							<h6><span>현재 활성화된 경매수</span></h6>
+							&emsp;&emsp; <br> <h6><span><fmt:formatNumber
+									value="${auctionActiveCount }" pattern="#,###" /> 건</span></h6>
+						</div>
+					</div>
+					<div class="col-sm-4 col-md-4 col-lg-4 footerTitle">
+						<div class="single-footer-widget mail-chimp">
+							<h6><span style="font-size=50px;">현재 총 거래 량</span></h6>
+							&emsp;&emsp; <br> <h6><span><fmt:formatNumber
+									value="${totalCount }" pattern="#,###" /> 건 </span></h6>
+						</div>
+					</div>
+				</div>
+				<!-- 저작권 -->
+				<div
+					class="footer-bottom d-flex justify-content-center align-items-center flex-wrap">
+					<p class="footer-text m-0">
+						<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+						Copyright &copy;
+						<script>
+						document.write(new Date().getFullYear());
+					</script>
+						All rights reserved | This template is made with <i
+							class="fa fa-heart-o" aria-hidden="true"></i> by <a
+							href="/" target="_blank">Colorlib</a>
+						<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+					</p>
+				</div>
+			</div>
+		</footer>
+	</div>
+	<!-- End footer Area -->
 
    <script src="../resources/js/vendor/bootstrap.min.js"></script>
    <script src="../resources/js/jquery.ajaxchimp.min.js"></script>
