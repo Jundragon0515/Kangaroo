@@ -492,8 +492,8 @@ position:relative;
          class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
          <div class="col-first">
             <h1>중고경매</h1>
-            <nav class="d-flex align-items-center"> <a href="index.html"><span
-               class="lnr lnr-arrow-right">Home</span></a> <a href="#"><span
+            <nav class="d-flex align-items-center"> <a href="/"><span
+               class="lnr lnr-arrow-right">Home</span></a> <a href="auction"><span
                class="lnr lnr-arrow-right">Shop</span></a> </nav>
          </div>
       </div>

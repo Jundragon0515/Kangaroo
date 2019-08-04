@@ -312,7 +312,11 @@ public class GoodsTradeDAO {
 	   String search = (String)session.getAttribute("selectSearch");
 	   String startNum = Integer.toString(start);
 	   String endNum = Integer.toString(end);
-
+	   int size = search.length();
+	   if(size>=30) {
+		   search="sfsfsfsfsfssdfsf";
+	   }
+	   
 	   param.put("search", search);
 	   param.put("start", startNum);
 	   param.put("end", endNum);
