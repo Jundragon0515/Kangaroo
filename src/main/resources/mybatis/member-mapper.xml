@@ -129,5 +129,10 @@ select pw from members where id=#{value}
 
 	<select id="level" resultType="String">
 		select member_class from members where id = #{value}
-	</select>	
+	</select>
+	
+	<delete id="withdrawal">
+		delete from members where id=#{value}
+	</delete>
+		
 </mapper>

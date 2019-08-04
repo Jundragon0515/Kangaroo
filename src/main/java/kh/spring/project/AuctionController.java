@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import kh.spring.dto.Auction_boardDTO;
 import kh.spring.service.AuctionService;
 
-
 @Controller
 public class AuctionController {
 

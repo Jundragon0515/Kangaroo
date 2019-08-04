@@ -10,7 +10,7 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <!-- Favicon-->
-<link rel="shortcut icon" href="../resources/img/fav.png">
+<link rel="shortcut icon" href="../resources/img/logo.png">
 <!-- Author Meta -->
 <meta name="author" content="CodePixar">
 <!-- Meta Description -->
@@ -42,6 +42,8 @@
 <!-- 모든 브라우저 호완성을 위해 추가  -->
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+	<link rel="icon" type="image/png" sizes="32x32"
+	href="/favicon-32x32.png">
 </head>
 <style>
 .nav_b {
@@ -248,7 +250,7 @@ a{
 											안전거래</a></li>
 									<li class="nav-item"><a class="nav-link" href="/auction">중고
 											경매</a></li>
-							<li class="nav-item "><a class="nav-link" href="/">공지사항</a></li>
+							<li class="nav-item "><a class="nav-link" href="notice_main">공지사항</a></li>
 							<c:choose>
 								<c:when test="${logintype=='admin'}">
 									<li class="nav-item "><a class="nav-link" href="/admin">관리자페이지</a></li>
@@ -321,7 +323,7 @@ a{
 			<div
 				class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
 				<div class="col-first">
-					<h1>로그인</h1>
+					<h1>판매 조회</h1>
 					<nav class="d-flex align-items-center">
 						<a href="/">메인페이지<span class="lnr lnr-arrow-right"></span></a> <a
 							href="/goMyPage">마이페이지<span class="lnr lnr-arrow-right"></span></a>

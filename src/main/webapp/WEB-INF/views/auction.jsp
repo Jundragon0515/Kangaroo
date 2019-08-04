@@ -11,8 +11,7 @@ pageEncoding="UTF-8"%>
 <meta name="viewport"
    content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <!-- Favicon-->
-<link rel="shortcut icon" href="/../resources/img/fav.png">
-<!-- Author Meta -->
+<link rel="shortcut icon" href="../resources/img/logo.png"><!-- Author Meta -->
 <meta name="author" content="CodePixar">
 <!-- Meta Description -->
 <meta name="description" content="">
@@ -26,6 +25,8 @@ pageEncoding="UTF-8"%>
 <!--
       CSS
       ============================================= -->
+
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="stylesheet" href="../resources/css/linearicons.css">
 <link rel="stylesheet" href="../resources/css/font-awesome.min.css">
 <link rel="stylesheet" href="../resources/css/themify-icons.css">
@@ -411,9 +412,9 @@ position:relative;
 											직거래</a></li>
 									<li class="nav-item"><a class="nav-link" href="/trade_safe">중고
 											안전거래</a></li>
-									<li class="nav-item active"><a class="nav-link" href="/auction">중고
+									<li class="nav-item"><a class="nav-link" href="/auction">중고
 											경매</a></li>
-							<li class="nav-item "><a class="nav-link" href="/">공지사항</a></li>
+							<li class="nav-item "><a class="nav-link" href="notice_main">공지사항</a></li>
 							<c:choose>
 								<c:when test="${logintype=='admin'}">
 									<li class="nav-item "><a class="nav-link" href="/admin">관리자페이지</a></li>
@@ -590,8 +591,7 @@ position:relative;
             <div class="single-product-slider">
             <!-- Start boardInfo  -->
                <div class="row list-nav">
-                  <div class="col-sm-12 col-md-11 col-lg-8 atag-category mt-2"><span style=font-size:25px>${selectCategory }</span>
-                  </div>
+                  <div class="col-sm-12 col-md-11 col-lg-8 atag-category mt-2"></div>
                   <div class="d-none d-lg-block col-sm-6 col-md-4 col-lg-2 col-xl-1 p-0">
                         <a class="nav-link p-0 mt-2 mr-0" href="auctionOption?price=low"><span class="atag-text">낮은가격순</span></a> 
                    </div>

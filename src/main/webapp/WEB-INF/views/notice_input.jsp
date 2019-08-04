@@ -9,7 +9,11 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <!-- Favicon-->
+<<<<<<< HEAD
 <link rel="shortcut icon" href="../resources/img/fav.png">
+=======
+<link rel="shortcut icon" href="../resources/img/logo.png">
+>>>>>>> c938872d2f440fb7c185291352b16ebcdd0faa8b
 <!-- Author Meta -->
 <meta name="author" content="CodePixar">
 <!-- Meta Description -->
@@ -35,6 +39,8 @@
 <link rel="stylesheet" href="../resources/css/magnific-popup.css">
 <link rel="stylesheet" href="../resources/css/main.css">
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<link rel="icon" type="image/png" sizes="32x32"
+	href="/favicon-32x32.png">
 <style>
 #layer {
 	top: 0;
@@ -184,7 +190,7 @@ b, sup, sub, u, del {
 											안전거래</a></li>
 									<li class="nav-item"><a class="nav-link" href="/auction">중고
 											경매</a></li>
-							<li class="nav-item "><a class="nav-link" href="/">공지사항</a></li>
+									<li class="nav-item "><a class="nav-link" href="notice_main">공지사항</a></li>
 							<c:choose>
 								<c:when test="${logintype=='admin'}">
 									<li class="nav-item "><a class="nav-link" href="/admin">관리자페이지</a></li>
@@ -201,6 +207,8 @@ b, sup, sub, u, del {
 												href="/goMyPage">마이페이지</a></li>
 											<li class="nav-item "><a class="nav-link"
 												href="/toPoint">포인트충전</a></li>
+											<li class="nav-item "><a class="nav-link"
+												href="/toPoint_exc">포인트환급</a></li>
 											<li class="nav-item "><input type="button"
 												class="nav-link nav_b" id="logout_na" value="로그아웃"></li>
 										</ul></li>
@@ -214,8 +222,10 @@ b, sup, sub, u, del {
 											<li class="nav-item "><a class="nav-link" href="/goCart">찜목록</a></li>
 											<li class="nav-item "><a class="nav-link"
 												href="/goMyPage">마이페이지</a></li>
-											<li class="nav-item "><a class="nav-link"
+												<li class="nav-item "><a class="nav-link"
 												href="/toPoint">포인트충전</a></li>
+											<li class="nav-item "><a class="nav-link"
+												href="/toPoint_exc">포인트환급</a></li>
 											<li class="nav-item "><input type="button"
 												class="nav-link nav_b" id="logout_ka" value="로그아웃"></li>
 										</ul></li>
@@ -231,6 +241,8 @@ b, sup, sub, u, del {
 												href="/goMyPage">마이페이지</a></li>
 											<li class="nav-item "><a class="nav-link"
 												href="/toPoint">포인트충전</a></li>
+											<li class="nav-item "><a class="nav-link"
+												href="/toPoint_exc">포인트환급</a></li>
 											<li class="nav-item "><a class="nav-link" href="/logout">로그아웃</a></li>
 										</ul></li>
 								</c:when>

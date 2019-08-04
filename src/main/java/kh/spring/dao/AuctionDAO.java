@@ -15,7 +15,6 @@ import kh.spring.dto.Auction_boardDTO;
 
 @Repository
 public class AuctionDAO {
-
    @Autowired
    private HttpSession session;
 
@@ -308,5 +307,4 @@ public class AuctionDAO {
 	   param.put("end", "6");
 	   return sst.selectList("AuctionDAO.mainAuctionList", param);
    }
-    
 }

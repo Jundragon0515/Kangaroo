@@ -216,9 +216,10 @@ public class MemberService {
 		JsonParser parse= new JsonParser();
 		String code = request.getParameter("code");
 		String state = request.getParameter("state");
-		String res = na.getToken(code, state);
+		String res = na.getToken(code, state);	
 		String access_token=parse.parse(res.toString()).getAsJsonObject().get("access_token").getAsString();
 		String refresh_token=parse.parse(res.toString()).getAsJsonObject().get("refresh_token").getAsString();
+		System.out.println(refresh_token);
 		String info=na.getInfo(access_token);
 		String email=parse.parse(info).getAsJsonObject().get("id").getAsString();
 		MemberDTO dto = new MemberDTO();
@@ -248,6 +249,7 @@ public class MemberService {
 			se.setAttribute("info",m_info);
 			se.setAttribute("logintype", m_info.getLogintype());
 			se.setAttribute("member_class", m_info.getMember_class());
+			se.setAttribute("refresh_token", refresh_token);
 			mav.setViewName("redirect:/infoInsert");
 		}else {
 			MemberDTO m_info=me.selectById(email);
@@ -264,6 +266,7 @@ public class MemberService {
 				se.setAttribute("info",m_info);
 				se.setAttribute("logintype", m_info.getLogintype());
 				se.setAttribute("member_class", m_info.getMember_class());
+				se.setAttribute("refresh_token", refresh_token);
 				mav.setViewName("redirect:/");							
 			}
 		}
@@ -309,6 +312,7 @@ public class MemberService {
 			se.setAttribute("logintype", m_info.getLogintype());
 			se.setAttribute("point", m_info.getPoint());
 			se.setAttribute("member_class", m_info.getMember_class());
+			se.setAttribute("refresh_token", refresh_token);
 			mav.setViewName("redirect:/infoInsert");
 		}else {
 			MemberDTO m_info=me.selectById(email);
@@ -325,6 +329,7 @@ public class MemberService {
 				se.setAttribute("info",m_info);
 				se.setAttribute("logintype", m_info.getLogintype());
 				se.setAttribute("member_class", m_info.getMember_class());
+				se.setAttribute("refresh_token", refresh_token);
 				mav.setViewName("redirect:/");				
 			}
 		}

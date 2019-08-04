@@ -6,11 +6,15 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+import com.google.gson.Gson;
+import com.google.gson.JsonParser;
 
 import kh.spring.dao.BoardDAO;
 import kh.spring.dao.DeliveryDAO;
+import kh.spring.dao.KakaoDAO;
 import kh.spring.dao.MailDAO;
 import kh.spring.dao.MemberDAO;
+import kh.spring.dao.NaverDAO;
 import kh.spring.dao.OrderDAO;
 import kh.spring.dao.TenderDAO;
 import kh.spring.dto.Auction_boardDTO;
@@ -34,6 +38,11 @@ public class MyPageService {
 	MailDAO ma;
 	@Autowired
 	DeliveryDAO de;
+	@Autowired
+	NaverDAO na;
+	@Autowired
+	KakaoDAO ka;
+	
 	public List<OrderDTO> selectByBuyer(int currentPage,String buyer){//구매 리스트
 		return or.selectByBuyer(currentPage, buyer);
 	}
@@ -111,4 +120,27 @@ public class MyPageService {
 		DeliveryDTO dto=de.selectByNum(seq);
 		return de.lookup(Integer.toString(dto.getCompany_code()), Integer.toString(dto.getProduct_num()));
 	}
+
+	public int withdrawal(String id) {
+		return me.withdrawal(id);
+	}
+	@Transactional
+	public int withdrawal_na(String id ,String refresh_token) throws IOException {
+		String res=na.getAccessToken(refresh_token);
+		Gson g =new Gson();
+		JsonParser parse= new JsonParser();
+		String access_token=parse.parse(res).getAsJsonObject().get("access_token").getAsString();
+		na.delete(access_token);
+		return me.withdrawal(id);
+	}
+	@Transactional
+	public int withdrawal_ka(String id,String refresh_token) throws IOException {
+		String res=ka.getAccessToken(refresh_token);
+		Gson g =new Gson();
+		JsonParser parse= new JsonParser();
+		String access_token=parse.parse(res).getAsJsonObject().get("access_token").getAsString();
+		ka.remove(access_token);
+		return me.withdrawal(id);
+	}
+	
 }

@@ -10,7 +10,7 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <!-- Favicon-->
-<link rel="shortcut icon" href="../resources/img/fav.png">
+<link rel="shortcut icon" href="../resources/img/logo.png">
 <!-- Author Meta -->
 <meta name="author" content="CodePixar">
 <!-- Meta Description -->
@@ -44,6 +44,8 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
 <script
 	src="https://unpkg.com/popper.js"></script>
+	<link rel="icon" type="image/png" sizes="32x32"
+	href="/favicon-32x32.png">
 </head>
 <style>
 .nav_b {
@@ -131,7 +133,65 @@
 				}
 			})
 		});
-		
+		$("#withdrawal").on("click",function(){
+			var logintype="${logintype}";
+			if(logintype=="email"){
+				var pw=prompt("비밀번호를 입력해 주세요");
+				$.ajax({
+					url:"pwCk",
+					data:{
+						pw:pw
+					}
+				}).done(function(resp){
+					if(resp=='1'){
+						$.ajax({
+							url:"withdrawal"
+						}).done(function(resp2){
+							if(resp2=="fa"){
+								alert("탈퇴 실패");
+								location.reload();
+							}else{
+								alert("탈퇴가 완료되었습니다");
+								location.reload();
+							}
+						})
+					}else{
+						alert("pw가 틀렸습니다");
+					}
+				});
+			}else if(logintype=="naver"){
+				var ans=confirm("정말 탈퇴 하시겠습니까?");
+				if(ans==true){
+					$.ajax({
+						url:"withdrawal_na"
+					}).done(function(resp2){
+						if(resp2=="fa"){
+							alert("탈퇴 실패");
+							location.reload();
+						}else{
+							alert("탈퇴가 완료되었습니다");
+							location.reload();
+						}
+					})
+				}
+				
+			}else if(logintype=="kakao"){
+				var ans=confirm("정말 탈퇴 하시겠습니까?");
+				if(ans==true){
+					$.ajax({
+						url:"withdrawal_ka"
+					}).done(function(resp2){
+						if(resp2=="fa"){
+							alert("탈퇴 실패");
+							location.reload();
+						}else{
+							alert("탈퇴가 완료되었습니다");
+							location.reload();
+						}
+					})
+				}
+			}
+		});
 	});
 </script>
 </head>
@@ -162,7 +222,7 @@
 											안전거래</a></li>
 									<li class="nav-item"><a class="nav-link" href="/auction">중고
 											경매</a></li>
-							<li class="nav-item "><a class="nav-link" href="/">공지사항</a></li>
+							<li class="nav-item "><a class="nav-link" href="notice_main">공지사항</a></li>
 							<c:choose>
 								<c:when test="${logintype=='admin'}">
 									<li class="nav-item "><a class="nav-link" href="/admin">관리자페이지</a></li>
@@ -235,7 +295,7 @@
 			<div
 				class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
 				<div class="col-first">
-					<h1>로그인</h1>
+					<h1>내 정보</h1>
 					<nav class="d-flex align-items-center">
 						<a href="/">메인페이지<span class="lnr lnr-arrow-right"></span></a> <a
 							href="/goMyPage">마이페이지<span class="lnr lnr-arrow-right"></span></a>
@@ -304,7 +364,7 @@
 									<td colspan="2">${member_class}</td>
 								</tr>
 								<tr>
-									<th scope="row" colspan="3"><input type="button" id="infoInsert" class="genric-btn primary circle" value="정보 수정 하기"></th>
+									<th scope="row" colspan="3"><input type="button" id="infoInsert" class="genric-btn primary circle mr-3" value="정보 수정 하기">
 								</tr>
 							</tbody>
 						</table>

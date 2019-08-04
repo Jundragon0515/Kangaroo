@@ -37,10 +37,9 @@
 <link rel="stylesheet" href="../resources/css/nice-select.css">
 <link rel="stylesheet" href="../resources/css/nouislider.min.css">
 <link rel="stylesheet" href="../resources/css/ion.rangeSlider.css" />
-<link rel="stylesheet"
-	href="../resources/css/ion.rangeSlider.skinFlat.css" />
+<link rel="stylesheet" href="../resources/css/ion.rangeSlider.skinFlat.css" />
 <link rel="stylesheet" href="../resources/css/main.css">
-
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <style>
 .detail-info {
 	text-align: right;
@@ -125,7 +124,7 @@ $("#logout_na").on("click", function() {
 											안전거래</a></li>
 									<li class="nav-item"><a class="nav-link" href="/auction">중고
 											경매</a></li>
-							<li class="nav-item "><a class="nav-link" href="/">공지사항</a></li>
+									<li class="nav-item "><a class="nav-link" href="notice_main">공지사항</a></li>
 							<c:choose>
 								<c:when test="${logintype=='admin'}">
 									<li class="nav-item "><a class="nav-link" href="/admin">관리자페이지</a></li>

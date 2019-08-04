@@ -417,6 +417,9 @@ sb.append("<li class=\"page-item\"><a class=\"page-link\" href=\"auction_detailP
 return sb.toString();
 }
 
+public int withdrawal(String id) {
+	return sst.delete("MemberDAO.withdrawal",id);
+}
 
 
 }

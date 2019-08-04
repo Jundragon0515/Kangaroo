@@ -57,6 +57,14 @@ public class MyPageController {
 		se.setAttribute("te_currentPage", te_currentPage);
 		String email=(String)se.getAttribute("email");
 		ModelAndView mav = new ModelAndView();
+
+		try {
+			email.equals("");
+			}catch(Exception e) {
+				mav.setViewName("redirect:/");
+				return mav;
+			}
+
 		mav.addObject("order_list", mps.selectByBuyer(or_currentPage, email));
 		mav.addObject("tender_list", mps.selectById(te_currentPage,  email));
 		mav.addObject("order_navi", mps.getNavi_or(or_currentPage, email));
@@ -77,7 +85,6 @@ public class MyPageController {
 	
 	@RequestMapping("/confirme")
 	public String confirme(int seq) {
-		System.out.println("asdssssssssssssssssssssssssssss");
 		mps.confirme(seq);
 		int or_currentPage=(int)se.getAttribute("or_currentPage");
 		int te_currentPage=(int)se.getAttribute("te_currentPage");
@@ -134,6 +141,14 @@ public class MyPageController {
 		se.setAttribute("auc_currentPage", auc_currentPage);
 		String email=(String)se.getAttribute("email");
 		ModelAndView mav = new ModelAndView();
+
+		try {
+		email.equals("");
+		}catch(Exception e) {
+			mav.setViewName("redirect:/");
+			return mav;
+		}
+
 		mav.addObject("order_list", mps.selectBySeller(or2_currentPage, email));
 		mav.addObject("order_navi", mps.getNavi_or2(or2_currentPage, email));
 		mav.addObject("auction_list", mps.selectById_au(auc_currentPage, email));
@@ -202,4 +217,56 @@ public class MyPageController {
 		mav.setViewName("myPage_f/delivery_insert");
 		return mav;
 	}
+
+	@RequestMapping("/withdrawal")
+	@ResponseBody
+	public String withdrawal() {
+		String email=(String)se.getAttribute("email");
+		se.invalidate();
+		int flag=mps.withdrawal(email);
+		if(flag==0) {
+			return "fa";
+		}else {
+			return "su";
+		}
+	}
+	@RequestMapping("/withdrawal_na")
+	@ResponseBody
+	public String withdrawal_na() {
+		String email=(String)se.getAttribute("email");
+		String refresh_token=(String)se.getAttribute("refresh_token");
+		se.invalidate();
+		int flag=0;
+		try {
+			flag = mps.withdrawal_na(email,refresh_token);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(flag==0) {
+			return "fa";
+		}else {
+			return "su";
+		}
+	}
+	@RequestMapping("/withdrawal_ka")
+	@ResponseBody
+	public String withdrawal_ka() {
+		String email=(String)se.getAttribute("email");
+		String refresh_token=(String)se.getAttribute("refresh_token");
+		se.invalidate();
+		int flag=0;
+		try {
+			flag = mps.withdrawal_ka(email,refresh_token);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(flag==0) {
+			return "fa";
+		}else {
+			return "su";
+		}
+	}
+
 }

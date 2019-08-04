@@ -18,7 +18,7 @@
 <link href="../resources/admin/css/sb-admin-2.min.css" rel="stylesheet">       
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <!-- Favicon-->
-<link rel="shortcut icon" href="img/fav.png">
+<link rel="shortcut icon" href="../resources/img/logo.png">
 <!-- Author Meta -->
 <meta name="author" content="CodePixar">
 <!-- Meta Description -->
@@ -48,6 +48,8 @@
 <link rel="stylesheet" href="../resources/css/ion.rangeSlider.css" />
 <link rel="stylesheet" href="../resources/css/ion.rangeSlider.skinFlat.css" />
 <link rel="stylesheet" href="../resources/css/main.css">
+<link rel="icon" type="image/png" sizes="32x32"
+	href="/favicon-32x32.png">
 <style>
     @import
         url('https://fonts.googleapis.com/css?family=Audiowide|Comfortaa|Gothic+A1|Nanum+Gothic|Nanum+Gothic+Coding|Noto+Sans+KR|Poiret+One|Syncopate&display=swap');
@@ -234,7 +236,7 @@ $("#logout_ka").on("click", function() {
 											안전거래</a></li>
 									<li class="nav-item"><a class="nav-link" href="/auction">중고
 											경매</a></li>
-							<li class="nav-item "><a class="nav-link" href="/">공지사항</a></li>
+							<li class="nav-item "><a class="nav-link" href="notice_main">공지사항</a></li>
 							<c:choose>
 								<c:when test="${logintype=='admin'}">
 									<li class="nav-item "><a class="nav-link" href="/admin">관리자페이지</a></li>
