@@ -9,11 +9,7 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <!-- Favicon-->
-<<<<<<< HEAD
-<link rel="shortcut icon" href="../resources/img/fav.png">
-=======
 <link rel="shortcut icon" href="../resources/img/logo.png">
->>>>>>> c938872d2f440fb7c185291352b16ebcdd0faa8b
 <!-- Author Meta -->
 <meta name="author" content="CodePixar">
 <!-- Meta Description -->
